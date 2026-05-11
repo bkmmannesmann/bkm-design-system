@@ -22,12 +22,14 @@ typography:
     fontSize: 48px
     fontWeight: 900
     lineHeight: 1.25
+    letterSpacing: -1.5px
     textTransform: uppercase
   heading-1:
     fontFamily: Unbounded
     fontSize: 36px
     fontWeight: 900
     lineHeight: 1.25
+    letterSpacing: -1px
     textTransform: uppercase
   heading-2:
     fontFamily: Unbounded
@@ -67,6 +69,11 @@ typography:
     fontWeight: 900
     lineHeight: 1.25
     textTransform: uppercase
+  code-mono:
+    fontFamily: Geist Mono, Source Code Pro, monospace
+    fontSize: 14px
+    fontWeight: 400
+    lineHeight: 1.5
 
 rounded:
   none: 0px
@@ -113,7 +120,28 @@ components:
     backgroundColor: "{colors.surface}"
     rounded: "{rounded.md}"
     padding: "{spacing.lg}"
-    boxShadow: "0 4px 6px rgba(0,0,0,0.1)"
+    boxShadow: "rgba(0,0,0,0.08) 0px 0px 0px 1px, rgba(0,0,0,0.04) 0px 2px 2px"
+  card-featured:
+    backgroundColor: "{colors.surface}"
+    rounded: "{rounded.md}"
+    padding: "{spacing.lg}"
+    boxShadow: "rgba(0,0,0,0.08) 0px 0px 0px 1px, rgba(0,0,0,0.04) 0px 8px 8px -8px, #ffffff 0px 0px 0px 1px inset"
+  badge-pro:
+    backgroundColor: "{colors.primary-deep}"
+    textColor: "{colors.accent-lime}"
+    typography: "{typography.caption}"
+    rounded: "{rounded.sm}"
+    padding: "4px 8px"
+  badge-home:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.on-primary}"
+    typography: "{typography.caption}"
+    rounded: "{rounded.full}"
+    padding: "4px 12px"
+  comparison-table:
+    backgroundColor: "{colors.surface}"
+    border: "1px solid {colors.ink}"
+    typography: "{typography.body-sm}"
   info-box:
     backgroundColor: "{colors.primary-deep}"
     textColor: "{colors.on-dark}"
