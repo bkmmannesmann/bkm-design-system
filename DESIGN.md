@@ -1,8 +1,8 @@
 ---
-version: 1.2.0
+version: 1.3.0
 name: BKM Mannesmann
 description: |
-  BKM Mannesmann carries a dual-mode visual identity — deep forest green hero bands with bright lime-green CTAs for marketing surfaces, paired with warm sand-white documentation surfaces for technical content. The system is built around the MicroPorex ingredient brand and two distinct product lines: BKM Pro Line (angular, technical, 2px radius) and BKM Home Line (rounded, accessible, pill-shaped). The signature chevron pattern — a layered V-shape representing "Schutz" (protection) — appears as a subtle background motif. Typography uses Unbounded Black for display headlines with aggressive negative letter-spacing, Inter for body copy, and Geist Mono for technical specifications. The shadow-as-border technique replaces traditional CSS borders with multi-layer shadow stacks. Coverage spans corporate website, product pages, technical data sheets (TDS), processing instructions (VA), specialist company portals, e-commerce, social media, print applications, presentations, and Instagram carousel posts.
+  BKM Mannesmann is a building protection manufacturer (est. 1928) whose visual identity communicates protective authority through material contrast. The system operates in two modes: deep forest green surfaces for emotional/marketing contexts, and warm sand-white surfaces for technical/rational contexts. Two product lines — Pro Line (angular, professional) and Home Line (rounded, accessible) — are distinguished purely through geometry, not color. The proprietary MicroPorex® ingredient brand has its own typographic identity. The Keyvisual is a fixed branded composition (never generated or rebuilt in code) that is always placed as an image asset on the right edge, cropped.
 colors:
   # === Brand Core ===
   primary: "#4daf46"
@@ -278,12 +278,6 @@ typography:
     fontWeight: 400
     lineHeight: 1.50
     letterSpacing: 0
-  utility-xs:
-    fontFamily: "'Inter', system-ui, sans-serif"
-    fontSize: 11px
-    fontWeight: 400
-    lineHeight: 1.20
-    letterSpacing: 0
 spacing:
   xxs: 4px
   xs: 8px
@@ -303,7 +297,6 @@ breakpoints:
   desktop: 1024px
   desktop-lg: 1280px
   wide: 1440px
-  ultra: 1920px
 grid:
   columns-mobile: 4
   columns-tablet: 8
@@ -338,8 +331,6 @@ opacity:
   full: 1.00
   overlay-light: 0.60
   overlay-dark: 0.85
-  chevron-pattern: 0.05
-  chevron-pattern-hover: 0.08
 rounded:
   none: 0px
   xs: 2px
@@ -388,7 +379,7 @@ icons:
   grid: 24px
   padding: 2px
   corner-radius: 0px
-  style: "sharp-angular, no rounded line caps for Pro Line; rounded line caps for Home Line"
+  style: "sharp-angular for Pro Line; rounded line caps for Home Line"
 components:
   # === Buttons ===
   button-primary:
@@ -429,27 +420,6 @@ components:
     padding: "12px 24px"
     height: 48px
     transition: "{transitions.fast}"
-  button-secondary-hover:
-    backgroundColor: "{colors.brand-transition-green}"
-    textColor: "{colors.on-dark}"
-  button-secondary-active:
-    backgroundColor: "{colors.primary-pressed}"
-    transform: "scale(0.98)"
-  button-secondary-disabled:
-    backgroundColor: "{colors.hairline}"
-    textColor: "{colors.muted}"
-    opacity: "{opacity.disabled}"
-  button-dark:
-    backgroundColor: "{colors.brand-deep-green}"
-    textColor: "{colors.brand-lime}"
-    typography: "{typography.button-md}"
-    rounded: "{rounded.none}"
-    padding: "12px 24px"
-    height: 48px
-    transition: "{transitions.fast}"
-  button-dark-hover:
-    backgroundColor: "{colors.brand-deep-green-light}"
-    textColor: "{colors.brand-lime}"
   button-outline:
     backgroundColor: "transparent"
     textColor: "{colors.brand-deep-green}"
@@ -462,10 +432,6 @@ components:
   button-outline-hover:
     backgroundColor: "{colors.brand-deep-green}"
     textColor: "{colors.on-dark}"
-  button-outline-active:
-    backgroundColor: "{colors.brand-deep-green-light}"
-    textColor: "{colors.on-dark}"
-    transform: "scale(0.98)"
   button-outline-dark:
     backgroundColor: "transparent"
     textColor: "{colors.on-dark}"
@@ -476,7 +442,6 @@ components:
     border: "2px solid {colors.divider-dark}"
     transition: "{transitions.fast}"
   button-outline-dark-hover:
-    backgroundColor: "transparent"
     textColor: "{colors.brand-lime}"
     border: "2px solid {colors.brand-lime}"
   button-home-primary:
@@ -489,7 +454,6 @@ components:
     transition: "{transitions.fast}"
   button-home-primary-hover:
     backgroundColor: "{colors.brand-transition-green}"
-    textColor: "{colors.on-dark}"
   button-home-outline:
     backgroundColor: "transparent"
     textColor: "{colors.brand-pure-green}"
@@ -499,18 +463,6 @@ components:
     height: 48px
     border: "2px solid {colors.brand-pure-green}"
     transition: "{transitions.fast}"
-  button-home-outline-hover:
-    backgroundColor: "{colors.brand-pure-green}"
-    textColor: "{colors.on-dark}"
-  button-icon:
-    size: 40px
-    rounded: "{rounded.md}"
-    backgroundColor: "transparent"
-    iconColor: "{colors.steel}"
-    transition: "{transitions.fast}"
-  button-icon-hover:
-    backgroundColor: "{colors.surface}"
-    iconColor: "{colors.brand-deep-green}"
   # === Cards ===
   card-base:
     backgroundColor: "{colors.canvas}"
@@ -521,12 +473,6 @@ components:
   card-base-hover:
     shadow: "{shadows.featured}"
     transform: "translateY(-2px)"
-  card-featured:
-    backgroundColor: "{colors.canvas}"
-    rounded: "{rounded.lg}"
-    padding: "{spacing.xxl}"
-    shadow: "{shadows.featured}"
-    borderTop: "4px solid {colors.brand-lime}"
   card-pro:
     backgroundColor: "{colors.canvas}"
     rounded: "{rounded.xs}"
@@ -544,43 +490,6 @@ components:
     rounded: "{rounded.xs}"
     padding: "{spacing.xl}"
     borderLeft: "4px solid {colors.brand-lime}"
-  card-info-box:
-    backgroundColor: "{colors.surface-dark}"
-    textColor: "{colors.on-dark}"
-    rounded: "{rounded.none}"
-    padding: "{spacing.xl}"
-    borderLeft: "4px solid {colors.brand-lime}"
-  card-tds:
-    backgroundColor: "{colors.canvas}"
-    rounded: "{rounded.lg}"
-    padding: "{spacing.xxl}"
-    shadow: "{shadows.card}"
-  card-skeleton:
-    backgroundColor: "{colors.surface}"
-    rounded: "{rounded.lg}"
-    padding: "{spacing.xl}"
-    animation: "pulse 1.5s ease-in-out infinite"
-  # === Pricing ===
-  pricing-card:
-    backgroundColor: "{colors.canvas}"
-    rounded: "{rounded.lg}"
-    padding: "{spacing.xxl}"
-    shadow: "{shadows.subtle}"
-    border: "1px solid {colors.hairline}"
-  pricing-card-featured:
-    backgroundColor: "{colors.canvas}"
-    rounded: "{rounded.lg}"
-    padding: "{spacing.xxl}"
-    shadow: "{shadows.featured}"
-    borderTop: "4px solid {colors.brand-lime}"
-    scale: "1.02"
-  pricing-card-popular-badge:
-    position: "absolute top -12px left 50% transform -translate-x-50%"
-    backgroundColor: "{colors.brand-lime}"
-    textColor: "{colors.brand-deep-green}"
-    typography: "{typography.caption-bold}"
-    rounded: "{rounded.full}"
-    padding: "4px 16px"
   # === Badges ===
   badge-pro:
     backgroundColor: "{colors.pro-line-badge-bg}"
@@ -594,12 +503,6 @@ components:
     typography: "{typography.caption-bold}"
     rounded: "{rounded.full}"
     padding: "4px 12px"
-  badge-new:
-    backgroundColor: "{colors.brand-lime}"
-    textColor: "{colors.brand-deep-green}"
-    typography: "{typography.caption-bold}"
-    rounded: "{rounded.xs}"
-    padding: "4px 10px"
   badge-microporex:
     backgroundColor: "{colors.surface}"
     textColor: "{colors.stone-grey}"
@@ -607,57 +510,6 @@ components:
     rounded: "{rounded.sm}"
     padding: "4px 10px"
     shadow: "{shadows.ring}"
-  badge-certified:
-    backgroundColor: "{colors.brand-lime}"
-    textColor: "{colors.brand-deep-green}"
-    typography: "{typography.caption-bold}"
-    rounded: "{rounded.xs}"
-    padding: "4px 10px"
-    iconLeft: "shield-check"
-  badge-status-active:
-    backgroundColor: "{colors.success-soft}"
-    textColor: "{colors.success-deep}"
-    typography: "{typography.caption-bold}"
-    rounded: "{rounded.full}"
-    padding: "4px 10px"
-    dotColor: "{colors.success}"
-  badge-status-pending:
-    backgroundColor: "{colors.warning-soft}"
-    textColor: "{colors.warning-deep}"
-    typography: "{typography.caption-bold}"
-    rounded: "{rounded.full}"
-    padding: "4px 10px"
-    dotColor: "{colors.warning}"
-  badge-status-error:
-    backgroundColor: "{colors.error-soft}"
-    textColor: "{colors.error-deep}"
-    typography: "{typography.caption-bold}"
-    rounded: "{rounded.full}"
-    padding: "4px 10px"
-    dotColor: "{colors.error}"
-  # === Tabs ===
-  pill-tab:
-    backgroundColor: "transparent"
-    textColor: "{colors.steel}"
-    typography: "{typography.body-sm-medium}"
-    rounded: "{rounded.full}"
-    padding: "8px 16px"
-    border: "1px solid {colors.hairline}"
-    transition: "{transitions.fast}"
-  pill-tab-active:
-    backgroundColor: "{colors.brand-deep-green}"
-    textColor: "{colors.on-dark}"
-    border: "1px solid {colors.brand-deep-green}"
-  segmented-tab:
-    backgroundColor: "transparent"
-    textColor: "{colors.steel}"
-    typography: "{typography.body-sm-medium}"
-    padding: "12px 16px"
-    borderBottom: "2px solid transparent"
-    transition: "{transitions.color-only}"
-  segmented-tab-active:
-    textColor: "{colors.brand-deep-green}"
-    borderBottom: "2px solid {colors.brand-lime}"
   # === Form Elements ===
   text-input:
     backgroundColor: "{colors.canvas}"
@@ -668,365 +520,40 @@ components:
     height: 48px
     border: "1px solid {colors.hairline-strong}"
     transition: "{transitions.color-only}"
-  text-input-hover:
-    border: "1px solid {colors.steel}"
   text-input-focused:
     border: "2px solid {colors.brand-pure-green}"
     shadow: "{shadows.focus}"
   text-input-error:
     border: "2px solid {colors.error}"
     shadow: "{shadows.focus-error}"
-  text-input-disabled:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.muted}"
-    border: "1px solid {colors.hairline}"
-    cursor: "not-allowed"
-    opacity: "{opacity.disabled}"
-  textarea:
-    minHeight: 120px
-    resize: "vertical"
-  select:
-    backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
-    typography: "{typography.body-md}"
-    rounded: "{rounded.md}"
-    padding: "12px 16px"
-    height: 48px
-    border: "1px solid {colors.hairline-strong}"
-    iconRight: "chevron-down"
-  checkbox:
-    size: 20px
-    rounded: "{rounded.xs}"
-    border: "2px solid {colors.hairline-strong}"
-    checkedBackground: "{colors.brand-pure-green}"
-    checkedIcon: "{colors.on-dark}"
-    transition: "{transitions.fast}"
-  radio:
-    size: 20px
-    rounded: "{rounded.full}"
-    border: "2px solid {colors.hairline-strong}"
-    selectedBackground: "{colors.brand-pure-green}"
-    selectedDot: "{colors.on-dark}"
-    transition: "{transitions.fast}"
-  toggle:
-    width: 44px
-    height: 24px
-    rounded: "{rounded.full}"
-    offBackground: "{colors.hairline-strong}"
-    onBackground: "{colors.brand-pure-green}"
-    thumbColor: "{colors.on-dark}"
-    thumbSize: 18px
-    transition: "{transitions.fast}"
-  # === Overlays ===
-  tooltip:
+  # === Navigation ===
+  nav-bar:
     backgroundColor: "{colors.brand-deep-green}"
     textColor: "{colors.on-dark}"
-    typography: "{typography.body-sm}"
-    rounded: "{rounded.md}"
-    padding: "8px 12px"
-    shadow: "{shadows.tooltip}"
-    maxWidth: 240px
-    arrowSize: 6px
-  modal:
-    backgroundColor: "{colors.canvas}"
-    rounded: "{rounded.xl}"
-    padding: "{spacing.xxl}"
-    shadow: "{shadows.modal}"
-    maxWidth: 560px
-    backdropColor: "{colors.surface-overlay}"
-    animation: "{transitions.entrance}"
-  modal-header:
-    typography: "{typography.heading-3}"
-    padding: "0 0 {spacing.lg} 0"
-    borderBottom: "1px solid {colors.hairline}"
-  modal-footer:
-    padding: "{spacing.lg} 0 0 0"
-    borderTop: "1px solid {colors.hairline}"
-    justifyContent: "flex-end"
-    gap: "{spacing.sm}"
-  dropdown:
-    backgroundColor: "{colors.canvas}"
-    rounded: "{rounded.md}"
-    padding: "{spacing.xs} 0"
-    shadow: "{shadows.dropdown}"
-    minWidth: 180px
-    maxHeight: 320px
-    animation: "{transitions.entrance}"
-  dropdown-item:
-    padding: "{spacing.xs} {spacing.md}"
-    typography: "{typography.body-sm}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.sm}"
-    transition: "{transitions.fast}"
-  dropdown-item-hover:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.brand-deep-green}"
-  dropdown-item-active:
-    backgroundColor: "{colors.brand-lime-10}"
-    textColor: "{colors.brand-deep-green}"
-  toast-success:
-    backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.lg}"
-    padding: "{spacing.md} {spacing.lg}"
-    shadow: "{shadows.elevated}"
-    borderLeft: "4px solid {colors.success}"
-    iconColor: "{colors.success}"
-    animation: "slide-in-right 300ms ease"
-  toast-error:
-    backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.lg}"
-    padding: "{spacing.md} {spacing.lg}"
-    shadow: "{shadows.elevated}"
-    borderLeft: "4px solid {colors.error}"
-    iconColor: "{colors.error}"
-  toast-info:
-    backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.lg}"
-    padding: "{spacing.md} {spacing.lg}"
-    shadow: "{shadows.elevated}"
-    borderLeft: "4px solid {colors.info}"
-    iconColor: "{colors.info}"
-  # === Alerts ===
-  alert-success:
-    backgroundColor: "{colors.success-soft}"
-    textColor: "{colors.brand-deep-green}"
-    borderLeft: "4px solid {colors.success}"
-    rounded: "{rounded.md}"
-    padding: "{spacing.md} {spacing.lg}"
-    iconColor: "{colors.success}"
-  alert-warning:
-    backgroundColor: "{colors.warning-soft}"
-    textColor: "{colors.charcoal}"
-    borderLeft: "4px solid {colors.warning}"
-    rounded: "{rounded.md}"
-    padding: "{spacing.md} {spacing.lg}"
-    iconColor: "{colors.warning}"
-  alert-error:
-    backgroundColor: "{colors.error-soft}"
-    textColor: "{colors.error-deep}"
-    borderLeft: "4px solid {colors.error}"
-    rounded: "{rounded.md}"
-    padding: "{spacing.md} {spacing.lg}"
-    iconColor: "{colors.error}"
-  alert-info:
-    backgroundColor: "{colors.info-soft}"
-    textColor: "{colors.charcoal}"
-    borderLeft: "4px solid {colors.info}"
-    rounded: "{rounded.md}"
-    padding: "{spacing.md} {spacing.lg}"
-    iconColor: "{colors.info}"
+    height: 64px
+    position: "sticky"
+    zIndex: "{z-index.fixed-nav}"
+  nav-link:
+    textColor: "{colors.on-dark-muted}"
+    typography: "{typography.body-sm-medium}"
+    hoverColor: "{colors.brand-lime}"
+    transition: "{transitions.color-only}"
   # === Tables ===
+  spec-table:
+    labelTypography: "{typography.spec-label}"
+    valueTypography: "{typography.spec-value}"
+    rowPadding: "12px 0"
+    divider: "1px solid {colors.hairline-soft}"
   comparison-table:
     headerBackground: "{colors.brand-deep-green}"
     headerText: "{colors.brand-lime}"
     headerTypography: "{typography.caption-bold}"
     rowBackground: "{colors.canvas}"
     rowAltBackground: "{colors.surface-soft}"
-    cellPadding: "{spacing.md} {spacing.lg}"
     border: "1px solid {colors.hairline}"
     rounded: "{rounded.lg}"
     shadow: "{shadows.subtle}"
-  spec-table:
-    labelTypography: "{typography.spec-label}"
-    valueTypography: "{typography.spec-value}"
-    rowPadding: "12px 0"
-    divider: "1px solid {colors.hairline-soft}"
-  data-table:
-    headerBackground: "{colors.surface}"
-    headerTypography: "{typography.body-sm-medium}"
-    cellTypography: "{typography.body-sm}"
-    cellPadding: "{spacing.sm} {spacing.md}"
-    rowBorder: "1px solid {colors.hairline-soft}"
-    rowHover: "{colors.surface-soft}"
-    sortIconColor: "{colors.steel}"
-    sortIconActive: "{colors.brand-deep-green}"
-  # === Navigation ===
-  nav-bar:
-    backgroundColor: "{colors.brand-deep-green}"
-    textColor: "{colors.on-dark}"
-    height: 64px
-    shadow: "none"
-    backdropFilter: "blur(12px)"
-    position: "sticky"
-    zIndex: "{z-index.fixed-nav}"
-  nav-bar-scrolled:
-    backgroundColor: "{colors.brand-deep-green-90}"
-    shadow: "{shadows.elevated}"
-  nav-link:
-    textColor: "{colors.on-dark-muted}"
-    typography: "{typography.body-sm-medium}"
-    hoverColor: "{colors.brand-lime}"
-    activeColor: "{colors.brand-lime}"
-    transition: "{transitions.color-only}"
-  nav-link-active:
-    textColor: "{colors.brand-lime}"
-    borderBottom: "2px solid {colors.brand-lime}"
-  nav-cta:
-    backgroundColor: "{colors.brand-lime}"
-    textColor: "{colors.brand-deep-green}"
-    typography: "{typography.button-sm}"
-    rounded: "{rounded.none}"
-    padding: "8px 16px"
-  nav-mobile-drawer:
-    backgroundColor: "{colors.brand-deep-green}"
-    width: "100%"
-    height: "100vh"
-    padding: "{spacing.xl}"
-    zIndex: "{z-index.modal}"
-  breadcrumb:
-    typography: "{typography.body-sm}"
-    textColor: "{colors.steel}"
-    separatorColor: "{colors.ash}"
-    separator: "/"
-    activeColor: "{colors.ink}"
-    gap: "{spacing.xs}"
-  # === Signature Components ===
-  hero-band-dark:
-    backgroundColor: "{colors.brand-deep-green}"
-    textColor: "{colors.on-dark}"
-    rounded: "0"
-    padding: "{spacing.hero} 0"
-    minHeight: 560px
-  hero-band-light:
-    backgroundColor: "{colors.canvas-warm}"
-    textColor: "{colors.ink}"
-    rounded: "0"
-    padding: "{spacing.hero} 0"
-  cta-banner-dark:
-    backgroundColor: "{colors.brand-deep-green}"
-    textColor: "{colors.on-dark}"
-    rounded: "{rounded.lg}"
-    padding: "{spacing.section}"
-  footer-region:
-    backgroundColor: "{colors.brand-deep-green}"
-    textColor: "{colors.on-dark}"
-    padding: "{spacing.section-lg} 0 {spacing.xl} 0"
-  footer-link:
-    textColor: "{colors.on-dark-muted}"
-    typography: "{typography.body-sm}"
-    hoverColor: "{colors.brand-lime}"
-    transition: "{transitions.color-only}"
-  step-card:
-    backgroundColor: "{colors.canvas}"
-    rounded: "{rounded.lg}"
-    padding: "{spacing.xl}"
-    shadow: "{shadows.subtle}"
-    numberBackground: "{colors.brand-deep-green}"
-    numberColor: "{colors.brand-lime}"
-    numberSize: 40px
-    numberTypography: "{typography.heading-4}"
-  testimonial-card:
-    backgroundColor: "{colors.canvas}"
-    rounded: "{rounded.lg}"
-    padding: "{spacing.xxl}"
-    shadow: "{shadows.card}"
-    quoteColor: "{colors.brand-lime}"
-    quoteSize: 48px
-  logo-wall-item:
-    height: 40px
-    opacity: 0.60
-    hoverOpacity: 1.00
-    filter: "grayscale(100%)"
-    hoverFilter: "grayscale(0%)"
-    transition: "{transitions.normal}"
-  stat-card:
-    backgroundColor: "{colors.canvas}"
-    rounded: "{rounded.lg}"
-    padding: "{spacing.xl}"
-    shadow: "{shadows.subtle}"
-    valueTypography: "{typography.display-md}"
-    valueColor: "{colors.brand-deep-green}"
-    labelTypography: "{typography.body-sm}"
-    labelColor: "{colors.steel}"
-  faq-accordion:
-    backgroundColor: "{colors.canvas}"
-    rounded: "{rounded.lg}"
-    padding: "{spacing.lg} {spacing.xl}"
-    borderBottom: "1px solid {colors.hairline}"
-    questionTypography: "{typography.body-md-bold}"
-    answerTypography: "{typography.body-md}"
-    iconColor: "{colors.brand-deep-green}"
-    transition: "{transitions.normal}"
-  promo-banner:
-    backgroundColor: "{colors.brand-lime}"
-    textColor: "{colors.brand-deep-green}"
-    typography: "{typography.body-sm-medium}"
-    padding: "{spacing.xs} {spacing.md}"
-    textAlign: "center"
-    position: "sticky top-0"
-    zIndex: "{z-index.sticky}"
-  search-input:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.ink}"
-    typography: "{typography.body-md}"
-    rounded: "{rounded.full}"
-    padding: "12px 16px 12px 44px"
-    height: 48px
-    border: "none"
-    iconLeft: "search"
-    iconColor: "{colors.steel}"
-    transition: "{transitions.fast}"
-  search-input-focused:
-    backgroundColor: "{colors.canvas}"
-    shadow: "{shadows.focus}"
-    border: "2px solid {colors.brand-pure-green}"
-  # === Code ===
-  code-block:
-    backgroundColor: "{colors.surface-dark-deep}"
-    textColor: "{colors.on-dark}"
-    typography: "{typography.code-md}"
-    rounded: "{rounded.md}"
-    padding: "{spacing.lg}"
-    border: "1px solid {colors.hairline-dark}"
-  inline-code:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.brand-deep-green}"
-    typography: "{typography.code-sm}"
-    rounded: "{rounded.xs}"
-    padding: "2px 6px"
-  # === Loading & Empty States ===
-  skeleton-line:
-    backgroundColor: "{colors.surface}"
-    rounded: "{rounded.sm}"
-    height: 16px
-    animation: "pulse 1.5s ease-in-out infinite"
-  skeleton-circle:
-    backgroundColor: "{colors.surface}"
-    rounded: "{rounded.full}"
-    animation: "pulse 1.5s ease-in-out infinite"
-  skeleton-card:
-    backgroundColor: "{colors.surface}"
-    rounded: "{rounded.lg}"
-    height: 200px
-    animation: "pulse 1.5s ease-in-out infinite"
-  empty-state:
-    textAlign: "center"
-    padding: "{spacing.section}"
-    iconSize: "{icons.size-xxl}"
-    iconColor: "{colors.ash}"
-    headingTypography: "{typography.heading-4}"
-    headingColor: "{colors.ink}"
-    bodyTypography: "{typography.body-md}"
-    bodyColor: "{colors.steel}"
-  spinner:
-    size-sm: 16px
-    size-md: 24px
-    size-lg: 40px
-    color: "{colors.brand-pure-green}"
-    colorOnDark: "{colors.brand-lime}"
-    strokeWidth: 2px
-    animation: "spin 0.8s linear infinite"
-  progress-bar:
-    height: 8px
-    rounded: "{rounded.full}"
-    trackColor: "{colors.surface}"
-    fillColor: "{colors.brand-pure-green}"
-    transition: "width 300ms ease"
 animations:
-  duration-instant: 100ms
   duration-fast: 150ms
   duration-normal: 200ms
   duration-slow: 300ms
@@ -1037,408 +564,276 @@ animations:
   easing-entrance: "cubic-bezier(0, 0, 0.2, 1)"
   easing-exit: "cubic-bezier(0.4, 0, 1, 1)"
   easing-spring: "cubic-bezier(0.34, 1.56, 0.64, 1)"
-  easing-bounce: "cubic-bezier(0.68, -0.55, 0.265, 1.55)"
-  # Named Patterns
+  hover-lift:
+    transform: "translateY(-2px)"
+    shadow: "{shadows.featured}"
+    duration: "{animations.duration-normal}"
+  button-press:
+    transform: "scale(0.98)"
+    duration: "{animations.duration-fast}"
   fade-in:
     from: "opacity: 0"
     to: "opacity: 1"
     duration: "{animations.duration-entrance}"
     easing: "{animations.easing-entrance}"
-  fade-out:
-    from: "opacity: 1"
-    to: "opacity: 0"
-    duration: "{animations.duration-exit}"
-    easing: "{animations.easing-exit}"
   slide-up:
     from: "opacity: 0; transform: translateY(24px)"
     to: "opacity: 1; transform: translateY(0)"
     duration: "{animations.duration-entrance}"
     easing: "{animations.easing-entrance}"
-  slide-down:
-    from: "opacity: 0; transform: translateY(-16px)"
-    to: "opacity: 1; transform: translateY(0)"
-    duration: "{animations.duration-entrance}"
-    easing: "{animations.easing-entrance}"
-  slide-in-right:
-    from: "opacity: 0; transform: translateX(24px)"
-    to: "opacity: 1; transform: translateX(0)"
-    duration: "{animations.duration-slow}"
-    easing: "{animations.easing-entrance}"
-  scale-in:
-    from: "opacity: 0; transform: scale(0.95)"
-    to: "opacity: 1; transform: scale(1)"
-    duration: "{animations.duration-normal}"
-    easing: "{animations.easing-spring}"
-  hover-lift:
-    transform: "translateY(-2px)"
-    shadow: "{shadows.featured}"
-    duration: "{animations.duration-normal}"
-    easing: "{animations.easing-default}"
-  button-press:
-    transform: "scale(0.98)"
-    duration: "{animations.duration-fast}"
-    easing: "{animations.easing-default}"
   stagger-children:
     delay: 100ms
-    duration: "{animations.duration-entrance}"
-  accordion-expand:
-    from: "height: 0; opacity: 0"
-    to: "height: auto; opacity: 1"
-    duration: "{animations.duration-slow}"
-    easing: "{animations.easing-entrance}"
-  modal-enter:
-    from: "opacity: 0; transform: scale(0.95) translateY(8px)"
-    to: "opacity: 1; transform: scale(1) translateY(0)"
-    duration: "{animations.duration-slow}"
-    easing: "{animations.easing-spring}"
-  pulse:
-    keyframes: "0% { opacity: 1 } 50% { opacity: 0.5 } 100% { opacity: 1 }"
-    duration: "1.5s"
-    iteration: "infinite"
-  spin:
-    keyframes: "0% { transform: rotate(0deg) } 100% { transform: rotate(360deg) }"
-    duration: "0.8s"
-    iteration: "infinite"
-    timing: "linear"
+    maxItems: 5
 ---
 
-## 1. Visual Theme & Atmosphere
+## 1. Design Philosophy
 
-BKM Mannesmann's visual language is rooted in **industrial precision** and **protective authority**. The brand communicates through a dual-mode architecture: deep forest green surfaces for marketing and emotional storytelling, paired with warm sand-white surfaces for technical documentation and specifications. This duality mirrors the brand's core promise — combining professional-grade protection with accessible, understandable communication.
+BKM Mannesmann's visual identity is not decorative — it is structural. Every design decision traces back to the brand's core promise: **Schutz** (protection). The system communicates through material contrast, not ornamentation.
 
-The atmosphere shifts deliberately between surfaces. Marketing bands feel like standing inside a protected structure — dark, enveloping, confident. Documentation surfaces feel like a well-lit workshop — clean, organized, efficient. The transition between these modes is never gradual; it is a hard cut, reinforced by the angular chevron pattern at the boundary.
+### Why This System Looks the Way It Does
 
-### Design Principles
+The design language answers a specific question: *How does protection feel?* The answer is expressed through three principles:
 
-The system is governed by four non-negotiable principles that inform every design decision:
+**Massivität (Solidity)** — Thick headline type (Unbounded Black), dense negative letter-spacing, heavy 4px accent borders, 48px minimum touch targets. Nothing feels thin or fragile. This is a building protection company; the design must feel load-bearing.
 
-| Principle | Expression | Anti-Pattern |
-|-----------|-----------|--------------|
-| **Angular Authority** | Sharp corners (0–4px radius) on Pro Line, chevron patterns, diagonal cuts | Rounded blobs, organic shapes, soft gradients |
-| **Single-Accent Discipline** | Lime Green appears ONLY on interactive elements and key data points | Lime used decoratively, on large surfaces, or on body text |
-| **Dual-Mode Clarity** | Dark = marketing/emotional, Light = technical/rational | Mixing modes within a single viewport fold |
-| **Typographic Hierarchy** | Three voices: Unbounded announces, Inter explains, Geist Mono specifies | Using one typeface for everything, or introducing a fourth |
+**Materialkontrast (Material Contrast)** — Dark surfaces (deep green) sit next to light surfaces (sand white) with hard cuts, never gradients. This mirrors the physical product: a dark moisture barrier against a light wall structure. The contrast is the message.
 
-### Surface Modes
+**Präzision (Precision)** — Monospace values for technical data, exact spacing tokens, shadow-as-border technique (no fuzzy CSS borders). BKM products work because they are applied precisely. The design reflects this discipline.
 
-**Dark Mode (Marketing)** — Used for hero bands, CTAs, navigation, footer, and emotional storytelling sections. Background is `{colors.brand-deep-green}` or `{colors.surface-dark-deep}`. Text is `{colors.on-dark}`. The only color accent is `{colors.brand-lime}`, reserved for buttons and key highlights. Photography (if used) is dark, atmospheric, showing protected structures.
+### What This System Is NOT
 
-**Light Mode (Documentation)** — Used for technical data sheets, specifications, product comparisons, blog content, and e-commerce. Background is `{colors.canvas}` or `{colors.canvas-warm}`. Text is `{colors.ink}`. Cards use the shadow-as-border technique. Green appears only in links, badges, and interactive elements.
+This is not a generic SaaS interface. It is not a "clean modern website." It is a system that communicates the physical reality of building protection — heavy materials, precise measurements, protective barriers. If a design decision could belong to any brand, it is wrong for BKM.
 
-**Fachbetrieb Portal** — A sub-theme using `{colors.fachbetrieb-primary}` (Pure Green) instead of Deep Green, with `{colors.fachbetrieb-surface}` (cool white) as canvas. This differentiates the specialist company portal from the corporate brand while maintaining family resemblance.
+## 2. The Keyvisual — A Protected Asset
 
-## 2. Color Palette & Roles
+> **CRITICAL: The Keyvisual is a fixed branded composition. It must NEVER be recreated, approximated, or generated in code (no SVG patterns, no CSS shapes, no procedural generation). It is always placed as a pre-rendered image file.**
 
-### Primary Palette
+### What It Is
 
-| Token | Hex | Role | Usage Frequency |
-|-------|-----|------|----------------|
-| `{colors.brand-deep-green}` | #1c4b42 | Brand anchor, dark surfaces, nav | High — structural |
-| `{colors.brand-lime}` | #b4e717 | Interactive accent, CTAs, highlights | Medium — accent only |
-| `{colors.brand-pure-green}` | #4daf46 | Secondary actions, Home Line identity | Medium |
-| `{colors.brand-transition-green}` | #287d4b | Hover states, links, transitions | Low — state-only |
-| `{colors.canvas-warm}` | #f6f5f2 | Light surface background | High — structural |
+The Keyvisual is a layered arrow composition derived from the BKM logo signet. It consists of multiple V-shaped elements that become tighter, smaller, and darker from top to bottom — symbolizing increasing protection. It exists as a pre-produced image asset in multiple formats (SVG, PNG, WebP).
 
-### Color Application Rules
+### Placement Rules
 
-The color system follows a strict hierarchy. `{colors.brand-lime}` is the scarcest and most valuable color in the system — it signals "this is interactive" or "this is the key data point." If lime appears on a non-interactive element, it dilutes the entire system's clarity.
+| Rule | Specification |
+|------|--------------|
+| Position | Always on the **right edge**, always **cropped** (extends beyond the frame) |
+| Alignment | Top-right corner of the medium |
+| Width | Exactly **1/5 of the total width** of the medium |
+| Orientation | Never rotated, stretched, mirrored, or distorted |
+| Color | Only in the defined greens (Pure Green → Transition Green → Deep Green) |
+| Background | May appear on dark or light surfaces, but the asset itself is never recolored |
 
-On dark surfaces, the text hierarchy uses three opacity levels: `{colors.on-dark}` (100%) for headlines and primary content, `{colors.on-dark-muted}` (70%) for body text and secondary information, and `{colors.on-dark-subtle}` (50%) for captions and metadata. Never use a fourth level — three is the maximum for dark-surface legibility.
+### How to Use It in Code
 
-On light surfaces, the text hierarchy uses: `{colors.ink}` for headlines, `{colors.charcoal}` for body, `{colors.steel}` for secondary, and `{colors.muted}` for disabled/placeholder. The `{colors.stone-grey}` sits between charcoal and steel for emphasis without headline weight.
+```html
+<!-- CORRECT: Place as image, positioned right, cropped via overflow:hidden on parent -->
+<div class="relative overflow-hidden">
+  <img
+    src="/assets/keyvisual.svg"
+    alt=""
+    aria-hidden="true"
+    class="absolute top-0 right-0 h-full w-1/5 object-cover object-left"
+  />
+  <!-- Page content here -->
+</div>
+```
 
-### Semantic Colors
+```html
+<!-- WRONG: Never do this -->
+<svg class="chevron-pattern">...</svg>  <!-- NO: Don't rebuild it -->
+<div class="bg-[url('/chevron.svg')] bg-repeat"></div>  <!-- NO: Don't tile it -->
+<div style="clip-path: polygon(...)"></div>  <!-- NO: Don't approximate it -->
+```
 
-Semantic colors follow a consistent pattern: each state has a deep variant (for text/icons), a standard variant (for borders/indicators), and a soft variant (for backgrounds). This three-tier approach ensures accessible contrast ratios across all combinations.
+### Prohibitions
 
-### Data Visualization Palette
+- Never place it on the left or center
+- Never free-float it (it must always touch the right edge)
+- Never invert the color semantics (lime must be at top, deep green at bottom)
+- Never use it as a repeating background pattern
+- Never generate it procedurally — always reference the provided asset file
 
-Charts use a sequential green scale from `{colors.chart-1}` (darkest) through `{colors.chart-6}` (lightest). This maintains brand identity while providing sufficient differentiation between data series. For categorical data requiring more than 6 series, extend with `{colors.info}` and `{colors.warning}` as supplementary colors — never introduce off-brand hues.
+### When to Omit It
 
-## 3. Typography Rules
+The Keyvisual is not mandatory on every surface. It appears on:
+- Title pages of brochures and presentations
+- Hero bands on the corporate website (optional, right-aligned)
+- Print materials following the DIN-format rules
 
-### Font Stack
+It does NOT appear on:
+- Product cards, UI components, or small elements
+- Instagram carousel slides (too small to be effective)
+- Email templates
+- Technical data sheets (too dense, would compete with data)
 
-The system uses exactly three typefaces, each with a distinct communicative role:
+## 3. Surface Modes & Rhythm
 
-| Typeface | Role | Weights Used | Fallback |
-|----------|------|-------------|----------|
-| **Unbounded** | Display, headlines, buttons — announces and commands | 900 (Black) only | system-ui, sans-serif |
-| **Inter** | Body, UI, captions — explains and guides | 400, 500, 600, 700 | system-ui, sans-serif |
-| **Geist Mono** | Specs, code, technical values — specifies and quantifies | 400, 500 | Source Code Pro, JetBrains Mono, monospace |
+The page is composed of alternating bands — dark and light — that create a visual rhythm. This is not arbitrary; it maps to content intent.
 
-### Typographic Principles
+### Dark Surfaces (Marketing/Emotional)
 
-Unbounded is always uppercase and always at weight 900. There are no exceptions. The aggressive negative letter-spacing (-3.0px at 72px, scaling proportionally) creates the dense, industrial headline character. This tracking tightens as size increases — at body sizes, Unbounded would be illegible, which is why it is never used below 16px.
+Used for: hero bands, navigation, footer, CTA banners, testimonial sections, section dividers.
 
-Inter carries all readable content. Its neutral character disappears into the reading experience, letting the content speak. Weight 400 is the default; 500 adds subtle emphasis; 700 marks structural labels (like table headers or form labels). Weight 600 is reserved exclusively for the `{typography.eyebrow}` token.
+| Property | Value | Rationale |
+|----------|-------|-----------|
+| Background | `{colors.brand-deep-green}` | The brand's protective color — enveloping, authoritative |
+| Text hierarchy | 100% / 70% / 50% white | Three levels maximum for dark-surface legibility |
+| Accent | `{colors.brand-lime}` | ONLY for buttons and key highlights — never decorative |
+| Photography | Dark, atmospheric, showing protected structures | Reinforces the "inside the protection" feeling |
 
-Geist Mono appears whenever a value is precise and measurable: product dimensions, pH values, drying times, version numbers, prices, and code. It signals "this is a fact, not a description." The monospace rhythm also aids scanability in specification tables.
+### Light Surfaces (Technical/Rational)
 
-### Letter-Spacing Strategy
+Used for: product specs, comparison tables, blog content, e-commerce, documentation.
 
-| Size Range | Letter-Spacing | Rationale |
-|-----------|---------------|-----------|
-| 72px+ (hero) | -3.0px | Extreme density for impact |
-| 44–56px (display) | -1.5 to -2.0px | Tight but readable at distance |
-| 28–36px (headings) | -0.5 to -1.0px | Moderate tightening |
-| 18–22px (headings) | 0 to -0.3px | Minimal adjustment |
-| 13px (eyebrow) | +1.5px | Positive tracking for taxonomy signal |
-| Body sizes | 0 | Neutral for reading comfort |
+| Property | Value | Rationale |
+|----------|-------|-----------|
+| Background | `{colors.canvas-warm}` (#f6f5f2) | Warm, not clinical — this is craft, not laboratory |
+| Cards | White with `{shadows.subtle}` | Shadow-as-border: no hard edges, just material depth |
+| Text | `{colors.ink}` headlines, `{colors.stone-grey}` body | Warm greys, never blue-grey or pure black |
+| Accent | `{colors.brand-deep-green}` for links/badges | Green signals brand, not interaction (that's lime's job on dark) |
 
-### Responsive Typography Scale
+### The Hard Cut
+
+The transition between dark and light surfaces is always a hard horizontal cut — never a gradient, never a diagonal, never a wave. This is deliberate: the brand communicates through material contrast (barrier vs. wall), and the hard cut is the visual metaphor for that barrier.
+
+## 4. Color Decisions
+
+### Why Lime Green Is Restricted
+
+`{colors.brand-lime}` (#b4e717) is the system's most valuable color because it is the scarcest. It appears ONLY on interactive elements (buttons, active states, checkmarks) and key data highlights. This restriction is not aesthetic preference — it is functional:
+
+- If lime appears on a non-interactive element, users lose the ability to scan for "what can I click?"
+- If lime appears on large surfaces, it becomes noise instead of signal
+- If lime appears on body text, it fails WCAG contrast requirements
+
+**The rule: One lime CTA per viewport fold. Maximum.** If you need two actions, the second is `button-outline` or `button-secondary`.
+
+### Why No Pure Black
+
+The system never uses `#000000`. The darkest color is `{colors.brand-deep-green}` (#1c4b42) for surfaces and `{colors.ink}` (#1a1a1a) for text. Pure black feels digital and cold; the BKM palette is rooted in natural materials (forest, stone, sand). Even the darkest values carry warmth.
+
+### Why Warm Neutrals
+
+The neutral palette (`canvas-warm`, `surface`, `hairline`) has a yellow-warm undertone. This is intentional: BKM works with building materials — plaster, mortar, concrete. These are warm materials. A blue-grey neutral palette would feel like a tech company, not a building protection manufacturer.
+
+## 5. Typography Decisions
+
+### Why Unbounded
+
+Unbounded was chosen for its **mass**. At weight 900 with negative letter-spacing, it creates dense, heavy headline blocks that feel structural — like the headline itself is a protective barrier. The uppercase transform reinforces authority. This is not a friendly typeface; it is a commanding one.
+
+Unbounded is NEVER used below 16px (it becomes illegible) and NEVER at any weight other than 900 (lighter weights lose the structural character that justifies its selection).
+
+### Why Inter for Body
+
+Inter is deliberately invisible. Its job is to disappear into the reading experience so the content speaks. It was chosen for its exceptional legibility at small sizes, its large x-height, and its neutral character. It carries no personality of its own — which is exactly right for a system where the personality comes from Unbounded and the color palette.
+
+### Why Geist Mono for Specifications
+
+When a value is precise and measurable — 1,2 kg/m², pH 12,5, 24 h drying time — it renders in Geist Mono. The monospace rhythm signals "this is a fact, not a description." It also aids scanability in specification tables where values must align vertically.
+
+### The Three-Voice Rule
+
+Every text element belongs to exactly one voice:
+- **Unbounded announces** — headlines, buttons, section titles
+- **Inter explains** — body copy, descriptions, UI labels
+- **Geist Mono specifies** — measurements, article numbers, code, prices
+
+Introducing a fourth typeface is forbidden. If something doesn't fit these three, the content needs restructuring, not a new font.
+
+## 6. Geometry as Identity
+
+The most important visual differentiator between Pro Line and Home Line is **geometry** — specifically, border-radius.
+
+### Pro Line (Professional)
+
+| Property | Value | Rationale |
+|----------|-------|-----------|
+| Border-radius | 0–4px | Angular = technical precision, industrial authority |
+| Button shape | Sharp rectangle | Echoes the angular Keyvisual elements |
+| Card corners | 2px radius | Just enough to avoid pixel-sharp edges on screens |
+| Icon style | Sharp line caps | Matches the angular language |
+| Feeling | "This is a professional tool" | |
+
+### Home Line (DIY/Homeowner)
+
+| Property | Value | Rationale |
+|----------|-------|-----------|
+| Border-radius | 12px–9999px (pill) | Rounded = accessible, friendly, approachable |
+| Button shape | Pill (full radius) | Inviting, low-friction, "easy to use" |
+| Card corners | 16px radius | Soft, welcoming |
+| Icon style | Rounded line caps | Matches the rounded language |
+| Feeling | "You can do this yourself" | |
+
+### Brand-Neutral Components
+
+Components shared across both lines (navigation, footer, modals, form inputs) use `{rounded.md}` (8px) — a middle ground that belongs to neither line specifically.
+
+**The rule: Never mix geometries within a single component.** A Pro Line card with a pill-shaped button is a contradiction. A Home Line card with angular corners sends mixed signals.
+
+## 7. Shadow-as-Border
+
+Cards and containers in this system never use CSS `border`. Instead, they use multi-layer `box-shadow` stacks that create the appearance of a border while adding depth.
+
+### Why
+
+CSS borders are flat — they add visual weight without spatial information. Shadows communicate depth: "this element is lifted off the surface." For a building protection brand, the metaphor of layers and depth is more appropriate than flat outlines.
+
+### The Elevation Ladder
+
+| Level | Token | Use | Visual Effect |
+|-------|-------|-----|---------------|
+| 0 | (none) | Inline elements | Flat, part of the surface |
+| 1 | `{shadows.ring}` | Subtle containers, dividers | Barely visible edge definition |
+| 2 | `{shadows.subtle}` | Default cards, list items | Gentle lift, resting state |
+| 3 | `{shadows.card}` | Interactive cards, panels | Clear separation from surface |
+| 4 | `{shadows.featured}` | Highlighted cards, CTAs | Prominent lift + inner white ring |
+| 5 | `{shadows.elevated}` | Dropdowns, popovers | Floating above the page |
+| 6 | `{shadows.modal}` | Modals, dialogs | Maximum elevation, darkest shadow |
+
+**The rule: Maximum 3 elevation levels visible on a single viewport.** More creates visual noise.
+
+### On Dark Surfaces
+
+Shadows are invisible on dark backgrounds. Instead, use the surface-color ladder:
+- `{colors.surface-dark-deep}` (#132f2a) — recessed
+- `{colors.surface-dark}` (#1c4b42) — default
+- `{colors.surface-dark-elevated}` (#2a6b5e) — elevated
+
+## 8. Responsive Behavior
+
+### Breakpoints
+
+| Name | Width | Grid | Key Changes |
+|------|-------|------|-------------|
+| Mobile | <768px | 4 columns | Single column, stacked cards, hamburger nav |
+| Tablet | 768–1023px | 8 columns | 2-up cards, sidebar collapses |
+| Desktop | 1024–1279px | 12 columns | Full layout, 3-up cards, sticky nav |
+| Desktop LG | 1280–1439px | 12 columns | Wider gutters, 4-up product grids |
+| Wide | ≥1440px | 12 columns | Max container width, centered |
+
+### Typography Scaling
 
 | Token | Desktop | Tablet | Mobile |
 |-------|---------|--------|--------|
 | `{typography.hero-display}` | 72px | 56px | 40px |
 | `{typography.display-lg}` | 56px | 44px | 32px |
-| `{typography.display-md}` | 44px | 36px | 28px |
 | `{typography.heading-1}` | 36px | 28px | 24px |
-| `{typography.heading-2}` | 28px | 24px | 20px |
-| `{typography.heading-3}` | 22px | 20px | 18px |
-| `{typography.body-lg}` | 18px | 18px | 16px |
 | `{typography.body-md}` | 16px | 16px | 16px |
 
-## 4. Component Stylings
+**Body text never goes below 16px on any breakpoint.** This is non-negotiable.
 
-### Buttons
+### Collapsing Rules
 
-The button system encodes product line identity through geometry. Pro Line buttons are angular (`{rounded.none}`) with sharp corners that echo the chevron pattern. Home Line buttons are pill-shaped (`{rounded.full}`) with friendly, approachable curves. This geometric split is the single most important visual differentiator between the two product lines.
+- **Navigation**: Collapses to hamburger + full-screen drawer below 1024px
+- **Hero bands**: 2-column → stacked. Image below text on mobile.
+- **Card grids**: 4-up → 3-up → 2-up → 1-up
+- **Comparison tables**: Horizontally scrollable below 768px with sticky first column
+- **Footer**: 4-column → 2-column → accordion on mobile
 
-**`button-primary`** — The universal BKM CTA. Lime background on deep green text. Angular (Pro) or pill (Home). Every page has at most ONE primary button per viewport fold. If you need two CTAs, the second must be `button-outline` or `button-secondary`.
+## 9. Accessibility
 
-**`button-outline`** — The secondary action. Transparent with a 2px deep green border. On hover, it fills with deep green and inverts the text to white. On dark surfaces, use `button-outline-dark` which has a white border at 30% opacity.
-
-**`button-icon`** — A 40px square touch target for icon-only actions (close, menu, search). No background in default state; shows `{colors.surface}` on hover. Icons render at `{icons.size-md}` (20px).
-
-**State Coverage:** Every button has 6 documented states: default, hover, active/pressed, disabled, loading, and focus. The loading state replaces text with a spinner while maintaining button dimensions. The focus state uses a double-ring technique (`{shadows.focus}`) for WCAG 2.1 AA compliance.
-
-### Cards
-
-Cards in the BKM system never use CSS `border`. Instead, they use the shadow-as-border technique — a `box-shadow` with `0px 0px 0px 1px` spread creates a 1px "border" that renders sub-pixel-smooth and doesn't affect layout. This is the system's signature depth technique, inspired by Vercel's approach.
-
-**`card-pro`** — Angular (2px radius), left border accent in deep green. Used for Pro Line product cards, technical specifications, and professional content.
-
-**`card-home`** — Rounded (16px radius), no border accent. Used for Home Line product cards, DIY guides, and consumer-facing content.
-
-**`card-featured`** — Elevated with a lime top border. Used for highlighted content, "most popular" indicators, and editorial picks. Only ONE featured card per section.
-
-**`card-skeleton`** — The loading placeholder. Matches the dimensions of the target card with a pulsing animation. Background uses `{colors.surface}` with the `pulse` animation.
-
-### Badges
-
-Badges communicate product line, certification status, and content categorization. The geometry rule applies: Pro badges are angular (`{rounded.xs}`), Home badges are rounded (`{rounded.full}`).
-
-**`badge-microporex`** — The ingredient brand badge. Uses monospace typography and a ring shadow to feel "stamped" — like a quality seal on a technical document.
-
-**`badge-certified`** — Includes a shield-check icon to the left. Used for certified specialist companies and verified products.
-
-**`badge-status-*`** — Active/Pending/Error status indicators with a colored dot (8px circle) to the left of the label. Used in dashboards and order tracking.
-
-### Tables
-
-**`comparison-table`** — The product comparison table with a deep green header row and lime text. Alternating row backgrounds (`{colors.canvas}` / `{colors.surface-soft}`) aid scanability. Used for Pro vs. Home comparisons and pricing tiers.
-
-**`spec-table`** — A minimal key-value table for technical data sheets. Labels in Inter, values in Geist Mono. Rows separated by soft hairlines. No header row — the table IS the specification.
-
-**`data-table`** — A sortable data table with hover-highlight rows. Header row uses `{colors.surface}` background with medium-weight Inter. Sort indicators use chevron icons that turn `{colors.brand-deep-green}` when active.
-
-### Navigation
-
-**`nav-bar`** — Sticky deep green bar at 64px height. On scroll, gains `{colors.brand-deep-green-90}` (90% opacity) with backdrop blur for depth. The nav CTA (rightmost element) is always a lime button — the only lime element in the navigation.
-
-**`breadcrumb`** — A horizontal trail using "/" separators in `{colors.ash}`. The current (last) item renders in `{colors.ink}` without a link. Used on product pages, blog posts, and documentation.
-
-**`nav-mobile-drawer`** — Full-screen overlay on mobile. Deep green background, full viewport height. Links stack vertically with `{spacing.lg}` gaps. The CTA button sits at the bottom with `{spacing.xl}` top margin.
-
-### Overlays
-
-**`modal`** — Centered dialog with `{colors.surface-overlay}` (85% opacity deep green) backdrop. The modal itself uses `{rounded.xl}` (16px) — the largest radius in the system — to signal "this is floating above everything." Entry animation uses `modal-enter` (scale + translate + opacity).
-
-**`dropdown`** — Appears below its trigger with 4px gap. Uses `{shadows.dropdown}` for depth. Items highlight on hover with `{colors.surface}` background. The active/selected item shows `{colors.brand-lime-10}` background.
-
-**`toast-*`** — Slides in from the right edge. Auto-dismisses after 5 seconds. Left border color indicates severity. Close button (X icon) at top-right. Maximum 3 toasts visible simultaneously, stacked with `{spacing.sm}` gaps.
-
-### Loading & Empty States
-
-**`skeleton-*`** — Three skeleton variants (line, circle, card) that pulse between 100% and 50% opacity. Skeleton layouts should mirror the final content structure — same heights, same spacing, same grid positions.
-
-**`empty-state`** — Centered composition with a large muted icon (48px), a heading, body text, and an optional CTA button. Used when a list/grid has no items, a search returns no results, or a feature hasn't been configured yet.
-
-**`spinner`** — Three sizes (16/24/40px) with a 2px stroke. Uses `{colors.brand-pure-green}` on light backgrounds and `{colors.brand-lime}` on dark backgrounds. Spins at 0.8s per rotation.
-
-**`progress-bar`** — An 8px-tall rounded bar. Track is `{colors.surface}`, fill is `{colors.brand-pure-green}`. Width transitions smoothly over 300ms. Used for upload progress, form completion, and multi-step flows.
-
-## 5. Layout Principles
-
-### Grid System
-
-The layout grid uses a 12-column system on desktop, 8 columns on tablet, and 4 columns on mobile. Gutters scale with breakpoints: 32px desktop, 24px tablet, 16px mobile. Page margins follow the same scaling.
-
-| Breakpoint | Columns | Gutter | Margin | Container Max |
-|-----------|---------|--------|--------|---------------|
-| Mobile (<480px) | 4 | 16px | 16px | 100% |
-| Tablet (768px) | 8 | 24px | 32px | 100% |
-| Desktop (1024px) | 12 | 32px | 64px | 1280px |
-| Wide (1440px+) | 12 | 32px | auto | 1440px |
-
-### Whitespace Philosophy
-
-Whitespace in the BKM system is structural, not decorative. Sections separate by `{spacing.section}` (80px) on desktop — enough to signal "new topic" without scrolling past empty space. Within a section, content blocks use `{spacing.xl}` (32px) gaps. Within a component, elements use `{spacing.md}` (16px) or `{spacing.lg}` (24px).
-
-The dark canvas on marketing pages IS the whitespace. Deep green fills edge-to-edge; content sits in a centered column. There are no decorative gaps or padding tricks — the green surface continues uninterrupted from hero to footer, with content blocks creating rhythm through their own internal spacing.
-
-### Container Strategy
-
-Content containers use five width tokens depending on context:
-
-| Token | Width | Use Case |
-|-------|-------|----------|
-| `{grid.container-sm}` | 640px | Blog prose, single-column reading |
-| `{grid.container-md}` | 768px | Forms, narrow content |
-| `{grid.container-lg}` | 1024px | Product grids, comparison tables |
-| `{grid.container-xl}` | 1280px | Standard page content |
-| `{grid.container-max}` | 1440px | Full-width hero content |
-
-### Page Templates
-
-**Landing Page** — Hero band (dark, full-width) → Feature grid (light, 3-up cards) → Testimonials (light, carousel or 2-up) → CTA banner (dark, centered) → Footer (dark).
-
-**Product Detail Page** — Breadcrumb → Product hero (image left, specs right) → Tab navigation (Description / Specs / Downloads) → Related products (3-up card grid) → CTA banner → Footer.
-
-**Technical Data Sheet (TDS)** — Header with product name and badge → Spec table (key-value pairs) → Application areas (icon grid) → Processing instructions (step cards) → Downloads section → Footer.
-
-**Blog/Article** — Hero image (full-width, dark overlay with title) → Article body (640px container, Inter body-lg) → Author card → Related articles (3-up) → Newsletter CTA → Footer.
-
-**E-Commerce (Shop)** — Category nav (left sidebar or top pills) → Product grid (3-up or 4-up cards) → Filters (drawer on mobile) → Pagination → Footer.
-
-## 6. Depth & Elevation
-
-### Shadow Scale
-
-The shadow system creates depth without traditional borders. Each level adds visual weight progressively:
-
-| Level | Token | Treatment | Use |
-|-------|-------|-----------|-----|
-| 0 | — | No shadow | Flat text, hero content, footer body |
-| 1 | `{shadows.ring}` | 1px ring only | Subtle container boundary, hairline replacement |
-| 2 | `{shadows.subtle}` | Ring + 2px blur | Default cards, form inputs |
-| 3 | `{shadows.card}` | Ring + 4px blur | Emphasized cards, active states |
-| 4 | `{shadows.featured}` | Ring + 8px blur + inset highlight | Featured content, hover states |
-| 5 | `{shadows.elevated}` | Ring + 12px blur | Dropdowns, popovers, sticky elements |
-| 6 | `{shadows.elevated-lg}` | Ring + 20px blur | Large floating panels |
-| 7 | `{shadows.modal}` | Ring + 24px blur | Modals, dialogs, full overlays |
-
-### Elevation on Dark Surfaces
-
-On dark surfaces (`{colors.surface-dark}`), shadows are invisible. Depth is created through the **surface-color ladder**: `{colors.surface-dark-deep}` → `{colors.surface-dark}` → `{colors.surface-dark-elevated}`. Each step lighter reads as one step closer to the viewer. Hairlines use `{colors.hairline-dark-soft}` (white at 12% opacity) for subtle separation.
-
-### Decorative Depth
-
-The chevron pattern provides atmospheric depth on dark surfaces. It renders at `{opacity.chevron-pattern}` (5%) in the background, creating a subtle texture that prevents the dark green from feeling flat. On hover or interaction, specific regions can increase to `{opacity.chevron-pattern-hover}` (8%) for a responsive feel.
-
-Product photography (when used) sits in cards with `{shadows.elevated}` to create a "floating" effect. The product appears to rest on the surface rather than being printed onto it.
-
-## 7. Animation & Motion
-
-### Timing Principles
-
-Motion in the BKM system is purposeful and restrained. Every animation serves one of three functions: **feedback** (confirming an action), **orientation** (showing where something came from/went to), or **attention** (drawing focus to a change). Decorative animation is prohibited.
-
-| Duration | Token | Use |
-|----------|-------|-----|
-| 100ms | `{animations.duration-instant}` | Checkbox toggles, radio selections |
-| 150ms | `{animations.duration-fast}` | Button press, hover color changes |
-| 200ms | `{animations.duration-normal}` | Card hover lift, dropdown appear |
-| 300ms | `{animations.duration-slow}` | Accordion expand, toast slide-in |
-| 500ms | `{animations.duration-entrance}` | Page section fade-in, modal enter |
-
-### Easing Curves
-
-| Curve | Token | Character |
-|-------|-------|-----------|
-| `cubic-bezier(0.4, 0, 0.2, 1)` | `{animations.easing-default}` | Standard — starts fast, decelerates |
-| `cubic-bezier(0, 0, 0.2, 1)` | `{animations.easing-entrance}` | Enter — starts slow, accelerates in |
-| `cubic-bezier(0.4, 0, 1, 1)` | `{animations.easing-exit}` | Exit — starts fast, no deceleration |
-| `cubic-bezier(0.34, 1.56, 0.64, 1)` | `{animations.easing-spring}` | Spring — slight overshoot for playfulness |
-
-### Stagger Pattern
-
-When multiple elements enter simultaneously (card grids, list items, stat counters), they stagger by `{animations.duration-stagger}` (100ms) per item. Maximum stagger depth is 5 items — beyond that, remaining items appear simultaneously to avoid tedious wait times.
-
-### Scroll-Triggered Animations
-
-Page sections use `{animations.slide-up}` triggered on scroll intersection (threshold: 20% visible). Each section animates independently. The animation fires once and does not reverse on scroll-out. This creates a "revealing" effect as the user scrolls down the page.
-
-### Reduced Motion
-
-When `prefers-reduced-motion: reduce` is active, all animations collapse to instant state changes (0ms duration). The `hover-lift` transform is disabled. Skeleton pulse animations continue at reduced intensity (opacity range 0.8–1.0 instead of 0.5–1.0).
-
-## 8. Photography & Illustration
-
-### Photography Rules
-
-BKM uses photography sparingly and with strict compositional rules. Images serve documentation, not decoration.
-
-| Context | Aspect Ratio | Treatment | Subject |
-|---------|-------------|-----------|---------|
-| Hero banner | 16:9 or 21:9 | Dark overlay (60–85% opacity deep green) | Protected structures, basements, foundations |
-| Product shot | 1:1 or 4:3 | White or transparent background, no shadow | Product packaging, application tools |
-| Application photo | 4:3 or 16:9 | No overlay, natural lighting | Craftsman applying product, before/after |
-| Blog thumbnail | 16:9 | Subtle warm color grade | Context-appropriate scene |
-| Testimonial avatar | 1:1 | Circle crop (`{rounded.full}`) | Headshot, neutral background |
-
-### Photography Principles
-
-All photography must feel **documentary, not aspirational**. The brand shows real basements, real damage, real solutions — not lifestyle imagery. Color grading should be neutral-to-warm; never cold/blue (which contradicts the green brand palette). Product shots must show the actual packaging with readable labels.
-
-On dark hero bands, photography sits BEHIND a deep green overlay at 60–85% opacity. The image provides texture and context without competing with the headline. The overlay opacity depends on image brightness — darker images need less overlay.
-
-### Illustration & Iconography
-
-The BKM system does not use traditional illustration. Visual communication is handled through:
-
-**Icons** — Lucide icon set at `{icons.stroke-width}` (1.5px). Pro Line contexts use sharp line caps; Home Line contexts use rounded line caps. Icons are always functional (indicating actions or categories), never decorative.
-
-**Chevron Pattern** — The signature decorative element. A layered V-shape pattern rendered as SVG at 5% opacity on dark surfaces. The pattern scales proportionally and never tiles — it is positioned once per surface, typically anchored to the bottom-right corner.
-
-**Technical Diagrams** — Cross-section illustrations of wall structures, moisture barriers, and injection points. These use a flat, schematic style with the brand color palette: deep green for structural elements, lime for the BKM product layer, grey for surrounding materials.
-
-**Data Visualizations** — Charts use the `{colors.chart-*}` sequential palette. Bar charts are preferred over pie charts. Line charts use 2px stroke weight. All charts include axis labels in `{typography.body-xs}` and use `{colors.chart-grid}` for gridlines.
-
-## 9. Icon System
-
-### Specifications
-
-| Property | Value | Notes |
-|----------|-------|-------|
-| Library | Lucide Icons | Open-source, MIT licensed |
-| Default Size | 20px (`{icons.size-md}`) | Matches body text line height |
-| Stroke Width | 1.5px | Consistent across all sizes |
-| Grid | 24px | Icons designed on 24×24 grid with 2px padding |
-| Corner Radius | 0px (Pro) / contextual (Home) | Matches product line geometry |
-| Color | `{colors.steel}` default | Changes contextually |
-
-### Size Scale
-
-| Token | Size | Use |
-|-------|------|-----|
-| `{icons.size-xs}` | 14px | Inline with caption text, badge icons |
-| `{icons.size-sm}` | 16px | Inline with body-sm, button icons |
-| `{icons.size-md}` | 20px | Default standalone, nav icons, form icons |
-| `{icons.size-lg}` | 24px | Card header icons, list item icons |
-| `{icons.size-xl}` | 32px | Feature section icons, step indicators |
-| `{icons.size-xxl}` | 48px | Empty state illustrations, hero icons |
-
-### Color Rules
-
-Icons inherit their color from context. On light surfaces, the default is `{colors.steel}` (grey). On hover or active state, icons shift to `{colors.brand-deep-green}`. On dark surfaces, icons use `{colors.on-dark}` (white). The accent color `{colors.brand-lime}` is used ONLY for icons that indicate "active," "selected," or "success" states.
-
-## 10. Accessibility
-
-### Contrast Requirements
-
-All text must meet WCAG 2.1 AA contrast ratios (4.5:1 for body text, 3:1 for large text ≥18px bold or ≥24px regular). The BKM palette is pre-validated:
+### Contrast (Pre-validated)
 
 | Combination | Ratio | Pass |
 |-------------|-------|------|
@@ -1447,235 +842,175 @@ All text must meet WCAG 2.1 AA contrast ratios (4.5:1 for body text, 3:1 for lar
 | `{colors.brand-lime}` on `{colors.brand-deep-green}` | 7.2:1 | AAA |
 | `{colors.steel}` on `{colors.canvas}` | 4.6:1 | AA |
 | `{colors.on-dark-muted}` on `{colors.brand-deep-green}` | 6.9:1 | AA |
-| `{colors.muted}` on `{colors.canvas}` | 3.5:1 | AA Large |
 
-### Focus Management
+### Focus Indicators
 
-Every interactive element must show a visible focus indicator. The system uses a double-ring technique: a 2px white (or deep green) inner ring + a 2px brand-color outer ring, creating a 4px total focus indicator that is visible on any background.
-
-On light backgrounds: `{shadows.focus}` — white inner + pure green outer.
-On dark backgrounds: `{shadows.focus-dark}` — deep green inner + lime outer.
-On error states: `{shadows.focus-error}` — white inner + red outer.
+Double-ring technique: 2px white inner ring + 2px brand-color outer ring.
+- Light backgrounds: `{shadows.focus}` (white + pure green)
+- Dark backgrounds: `{shadows.focus-dark}` (deep green + lime)
 
 ### Touch Targets
 
-All interactive elements must have a minimum touch target of 44×44px on mobile. Buttons already meet this (48px height). Icon buttons (40px) receive invisible padding to reach 44px effective target. Form inputs (48px height) exceed the requirement. Links within body text rely on generous line-height (1.6) for vertical target space.
+All interactive elements: minimum 44×44px on mobile. Buttons (48px height) exceed this. Icon buttons (40px visible) receive invisible padding to reach 44px.
 
-### Screen Reader Considerations
+### Reduced Motion
 
-All decorative elements (chevron pattern, skeleton animations, hover effects) must be hidden from screen readers via `aria-hidden="true"`. Loading states must announce via `aria-live="polite"`. Modal focus must be trapped within the dialog. Toasts must use `role="alert"` for immediate announcement.
+All animations must respect `prefers-reduced-motion: reduce`. When active, collapse all transitions to 0ms duration. Content must remain accessible without motion.
 
-## 11. Responsive Behavior
-
-### Breakpoints
-
-| Name | Width | Key Changes |
-|------|-------|-------------|
-| Mobile SM | <320px | Emergency fallback — single column, no images |
-| Mobile | 320–479px | Single column, stacked cards, hamburger nav, hero at 40px |
-| Mobile LG | 480–767px | 2-up card grids, hero at 44px, pill tabs scroll horizontally |
-| Tablet | 768–1023px | 8-column grid, 2-up features, sidebar collapses to drawer |
-| Desktop | 1024–1279px | Full 12-column grid, 3-up cards, sticky nav, hero at 56px |
-| Desktop LG | 1280–1439px | Wider gutters, 4-up product grids, hero at 64px |
-| Wide | ≥1440px | Max container width reached, centered with auto margins, hero at 72px |
-
-### Collapsing Strategy
-
-**Navigation** — Below 1024px, horizontal nav collapses to hamburger icon + full-screen drawer. The nav CTA moves inside the drawer as the last item.
-
-**Hero Band** — 2-column hero (text + image) collapses to stacked at <1024px. Image renders below text on mobile. Hero padding reduces from `{spacing.hero}` (160px) to `{spacing.section}` (80px) on mobile.
-
-**Card Grids** — 4-up → 3-up (desktop) → 2-up (tablet) → 1-up (mobile). Cards maintain their internal padding at all breakpoints; only the grid gap reduces.
-
-**Comparison Tables** — Below 768px, tables become horizontally scrollable with a fade indicator on the right edge. Column headers become sticky (first column fixed).
-
-**Footer** — 4-column desktop → 2-column tablet → single-column accordion on mobile. Each column header becomes an expandable accordion trigger.
-
-**Typography** — See the Responsive Typography Scale in Section 3. Headlines scale down aggressively; body text remains at 16px across all breakpoints (never smaller).
-
-### Image Behavior
-
-Product images maintain aspect ratio and scale proportionally within their containers. On mobile, hero background images shift to `object-position: center` (desktop may use `object-position: right`). SVG icons and the chevron pattern remain crisp at all resolutions (vector-based).
-
-## 12. Brand Voice in UI
+## 10. Brand Voice in UI
 
 ### Tone
 
-BKM speaks with **technical confidence** and **protective authority**. The brand is the expert in the room — not arrogant, but assured. Copy is direct, specific, and action-oriented. Vague language ("innovative solutions") is replaced with concrete claims ("reduces drying time by 40%").
+BKM speaks with **technical confidence** — not arrogant, but assured. Copy is direct, specific, and action-oriented. Vague language is replaced with concrete claims.
 
-### Addressing the User
+| Instead of | Write |
+|-----------|-------|
+| "Innovative Lösungen" | "Reduziert Trocknungszeit um 40%" |
+| "Mehr erfahren" | "TECHNISCHE DATEN ANSEHEN" |
+| "Kontaktieren Sie uns" | "ANGEBOT ANFORDERN" |
+| "Hochwertige Produkte" | "Geprüft nach DIN 18533" |
+
+### Address Rules
 
 | Context | Address | Example |
 |---------|---------|---------|
-| Home Line (DIY) | Du-Ansprache (informal) | "Schütze dein Zuhause" |
-| Pro Line (Professional) | Sie-Ansprache (formal) | "Für Ihren Fachbetrieb" |
+| Home Line (DIY) | Du | "Schütze dein Zuhause" |
+| Pro Line (Professional) | Du | "Für deinen Fachbetrieb" |
 | Technical Documentation | Neutral/Passive | "Auftragsstärke: 2–3 mm" |
-| E-Commerce | Du (Home) / Sie (Pro) | "In deinen Warenkorb" / "Zur Anfrage" |
+| Legal/Business | Sie | "Wir freuen uns auf Ihre Anfrage" |
 
-### Claims & Headlines
+### Headline Rules
 
-Headlines follow the Unbounded uppercase pattern and are kept to 3–6 words maximum. They announce a benefit or state a fact — never ask a question (questions signal uncertainty).
+Headlines use Unbounded, uppercase, 3–6 words maximum. They announce a benefit or state a fact — never ask a question.
 
-**Strong:** "SCHUTZ DER HÄLT" / "ZERTIFIZIERTE QUALITÄT" / "SEIT 1928"
-**Weak:** "Warum BKM?" / "Entdecken Sie unsere Lösungen" / "Mehr erfahren"
+**Strong:** SCHUTZ DER HÄLT / ZERTIFIZIERTE QUALITÄT / SEIT 1928
+**Weak:** Warum BKM? / Entdecken Sie unsere Lösungen / Mehr erfahren
 
-### Microcopy
+## 11. MicroPorex® Ingredient Brand
 
-Button labels use imperative verbs: "JETZT KAUFEN" / "ANGEBOT ANFORDERN" / "HERUNTERLADEN". Error messages are specific and helpful: "Bitte gib eine gültige E-Mail-Adresse ein" (not "Ungültige Eingabe"). Success messages confirm the action: "Deine Anfrage wurde gesendet" (not "Erfolgreich").
-
-## 13. MicroPorex Ingredient Brand
-
-### Identity
-
-MicroPorex is BKM's proprietary ingredient brand — the technology inside the products. It has its own visual identity within the BKM system:
+MicroPorex® is BKM's proprietary technology brand. It has its own typographic identity:
 
 | Property | Value |
 |----------|-------|
-| Typography | Always in Geist Mono, always with ® symbol |
+| Typography | Always in Geist Mono |
 | Spelling | "MicroPorex" — capital M, capital P, no space |
-| Badge | `{components.badge-microporex}` — monospace, ring shadow |
+| Symbol | ® on first mention per page |
+| Badge | `{components.badge-microporex}` — monospace, ring shadow, surface background |
 | Color | `{colors.stone-grey}` on light, `{colors.on-dark-muted}` on dark |
-| Placement | After product name, in spec tables, on packaging |
 
-### Usage Rules
+MicroPorex® is an ingredient, not a product. It always appears in context of a BKM product, never standalone.
 
-MicroPorex is never used as a standalone brand — it always appears in context of BKM products. It is an ingredient, not a product. The ® symbol must always be present on first mention per page. In headlines, it renders in the same Unbounded typeface as surrounding text but at reduced weight (if the headline is 900, MicroPorex stays at 900 — the monospace badge handles differentiation elsewhere on the page).
-
-## 14. Multi-Surface Application
+## 12. Multi-Surface Application
 
 ### Presentations (Slides)
 
-Slides follow the dual-mode architecture. Title slides and section dividers use dark mode (deep green background, white/lime text). Content slides use light mode (white background, dark text). The chevron pattern appears at 5% opacity on dark slides only.
-
 | Element | Specification |
 |---------|--------------|
-| Title slide background | `{colors.brand-deep-green}` |
-| Title typography | `{typography.display-lg}` in `{colors.on-dark}` |
-| Subtitle | `{typography.subtitle}` in `{colors.on-dark-muted}` |
-| Content slide background | `{colors.canvas}` |
-| Content heading | `{typography.heading-2}` in `{colors.ink}` |
-| Body text | `{typography.body-md}` in `{colors.charcoal}` |
-| Accent elements | `{colors.brand-lime}` for highlights, dividers, icons |
+| Title slide | `{colors.brand-deep-green}` background, `{typography.display-lg}` white headline |
+| Content slides | `{colors.canvas}` background, `{typography.heading-2}` ink headline |
 | Data values | `{typography.spec-value}` in `{colors.brand-deep-green}` |
+| Accent | `{colors.brand-lime}` for dividers, icons, one highlight per slide |
+| Keyvisual | On title slide only, as image, right-aligned, 1/5 width |
 
-### Instagram Carousel Posts
-
-Instagram carousels use a 1:1 (1080×1080px) or 4:5 (1080×1350px) format. The dual-mode applies: first slide (cover) is always dark mode, content slides alternate. Text must be readable at mobile size — minimum 24px equivalent for body, 48px for headlines.
+### Instagram Carousel
 
 | Element | Specification |
 |---------|--------------|
-| Cover slide | Dark mode, `{typography.heading-1}` centered, chevron pattern |
+| Format | 1080×1080px or 1080×1350px |
+| Cover (slide 1) | Dark mode, `{typography.heading-1}` centered |
 | Content slides | Light mode, `{typography.heading-3}` + `{typography.body-lg}` |
-| CTA slide (last) | Dark mode, single CTA text + website URL |
-| Safe zone | 80px padding from all edges (Instagram UI overlap) |
-| Max text per slide | 40 words |
+| CTA (last slide) | Dark mode, single CTA + URL |
+| Safe zone | 80px from all edges |
+| Max text/slide | 40 words |
+| Keyvisual | NOT used (too small to be effective) |
 
-### Print Applications
+### Print
 
-Print uses CMYK equivalents of the digital palette. The chevron pattern prints at 5% tint of the deep green. Typography scales to print sizes: headlines at 24–36pt, body at 10–12pt. Bleed: 3mm on all sides. Safe zone: 5mm from trim edge.
-
-| Digital Token | Print CMYK Equivalent |
-|--------------|----------------------|
+| Digital Token | CMYK Equivalent |
+|--------------|-----------------|
 | `{colors.brand-deep-green}` | C85 M30 Y60 K40 |
 | `{colors.brand-lime}` | C30 M0 Y90 K0 |
 | `{colors.brand-pure-green}` | C65 M0 Y80 K0 |
 | `{colors.ink}` | C0 M0 Y0 K95 |
 | `{colors.canvas-warm}` | C2 M2 Y4 K0 |
 
-## 15. Do's and Don'ts
+Keyvisual on print: Right edge, 1/5 page width, cropped, top-right aligned.
+
+## 13. Do's and Don'ts
 
 ### Do
 
-- Use `{colors.brand-lime}` exclusively for interactive elements (buttons, links, active indicators) and key data highlights — it must always signal "actionable" or "important"
-- Apply `{rounded.none}` to `{rounded.sm}` for Pro Line components; `{rounded.lg}` to `{rounded.full}` for Home Line components — geometry IS the product line identity
-- Maintain the three-typeface rule: Unbounded announces, Inter explains, Geist Mono specifies — never introduce a fourth typeface
-- Use the shadow-as-border technique (`{shadows.ring}` or `{shadows.subtle}`) instead of CSS `border` on cards and containers
-- Keep dark surfaces (hero, nav, footer, CTA banners) at `{colors.brand-deep-green}` — never lighten to a mid-green
-- Place at most ONE `button-primary` per viewport fold — if two CTAs are needed, the second must be outline or secondary
-- Use `{typography.eyebrow}` (13px, 600 weight, +1.5px tracking, uppercase) for section labels and category markers
-- Stagger entrance animations by `{animations.duration-stagger}` (100ms) per item, maximum 5 items deep
-- Provide all 6 button states (default, hover, active, disabled, loading, focus) in implementations
-- Use `{colors.on-dark-muted}` (70%) for body text on dark surfaces — never use 100% white for long paragraphs
-- Include the ® symbol on first mention of MicroPorex per page
-- Test all color combinations against WCAG 2.1 AA contrast requirements before shipping
+- Use `{colors.brand-lime}` exclusively for interactive elements and key data highlights
+- Apply angular geometry (0–4px) for Pro Line, rounded (12px–pill) for Home Line
+- Maintain the three-typeface rule: Unbounded announces, Inter explains, Geist Mono specifies
+- Use shadow-as-border instead of CSS `border` on cards
+- Place the Keyvisual as a pre-rendered image asset, right-aligned, cropped
+- Keep dark/light surface transitions as hard horizontal cuts
+- Limit to ONE primary button per viewport fold
+- Stagger entrance animations by 100ms per item, max 5 items
+- Provide all states for interactive elements (default, hover, active, disabled, focus, loading)
+- Use 3-level text opacity on dark surfaces (100%/70%/50%)
 
 ### Don't
 
-- Don't use `{colors.brand-lime}` on body text, large surfaces, backgrounds, or non-interactive decorative elements — it loses its signal value
-- Don't mix Pro Line geometry (angular) and Home Line geometry (rounded) within the same component or card
-- Don't use Unbounded below 16px or at any weight other than 900 — it becomes illegible and loses its commanding character
-- Don't apply CSS `border` to cards when `{shadows.ring}` or `{shadows.subtle}` can achieve the same boundary — borders feel harsh in this system
-- Don't use gradients between brand colors — the system is color-block, not gradient-based
-- Don't animate elements purely for decoration — every animation must serve feedback, orientation, or attention
-- Don't reduce body text below 16px on any breakpoint — readability is non-negotiable
-- Don't use more than 3 shadow levels on a single page — excessive elevation creates visual noise
-- Don't place the chevron pattern on light surfaces — it is exclusively a dark-surface texture element
-- Don't use stock photography with cold/blue color grading — it contradicts the warm green palette
-- Don't center-align body text — left-align is the default; center is reserved for hero headlines and CTA banners only
-- Don't introduce additional accent colors beyond the defined palette — if you need differentiation, use opacity or weight variations of existing colors
+- Don't recreate or approximate the Keyvisual in CSS/SVG/code — use the provided asset
+- Don't use `{colors.brand-lime}` on body text, backgrounds, or non-interactive elements
+- Don't mix Pro Line geometry (angular) with Home Line geometry (rounded)
+- Don't use Unbounded below 16px or at any weight other than 900
+- Don't apply CSS `border` on cards — use the shadow system
+- Don't use gradients between brand colors — the system is color-block
+- Don't reduce body text below 16px on any breakpoint
+- Don't use pure black (#000000) — use `{colors.ink}` or `{colors.brand-deep-green}`
+- Don't center-align body text (left-align is default; center only for hero headlines and CTA banners)
+- Don't introduce additional accent colors beyond the defined palette
+- Don't use stock photography with cold/blue color grading
+- Don't place the Keyvisual on the left, center, or free-floating
 
-## 16. Iteration Guide
-
-### How to Use This Document
-
-This DESIGN.md is designed for consumption by AI agents, design tools, and human developers. Reference tokens directly using the `{token.path}` syntax. When implementing a component, pull its YAML entry and resolve every property against the token definitions above.
-
-### Adding New Components
-
-When introducing a new component to the system, follow this checklist:
-
-1. **Check existing components first.** Can the new element be expressed with existing card + badge + button vocabulary? The system's strength is constraint.
-2. **Define all states.** Every interactive component needs: default, hover, active, disabled, focus. Loading state if the component fetches data.
-3. **Assign product line geometry.** Is this Pro Line (angular) or Home Line (rounded)? Or is it brand-neutral (uses `{rounded.md}` or `{rounded.lg}`)?
-4. **Choose the correct typeface.** Headlines → Unbounded. Body → Inter. Data/specs → Geist Mono. Never mix within a single text block.
-5. **Validate contrast.** Every text-on-background combination must pass WCAG 2.1 AA.
-6. **Document in YAML.** Add the component to the `components:` section with all properties resolved to tokens.
+## 14. Iteration Guide
 
 ### Token Reference Syntax
 
-Tokens are referenced as `{category.token-name}`. Categories are: `colors`, `typography`, `spacing`, `rounded`, `shadows`, `transitions`, `animations`, `icons`, `z-index`, `opacity`, `grid`, `breakpoints`. Nested tokens (like `{typography.hero-display}`) resolve to the full object (fontFamily, fontSize, fontWeight, lineHeight, letterSpacing, textTransform).
+Tokens are referenced as `{category.token-name}`. Categories: `colors`, `typography`, `spacing`, `rounded`, `shadows`, `transitions`, `animations`, `icons`, `z-index`, `opacity`, `grid`, `breakpoints`.
+
+### Adding New Components
+
+1. Check if existing components can express the need (constraint is strength)
+2. Define all states: default, hover, active, disabled, focus, loading
+3. Assign product line geometry (Pro = angular, Home = rounded, Neutral = 8–12px)
+4. Choose correct typeface per role
+5. Validate contrast against WCAG 2.1 AA
+6. Document in YAML `components:` section
 
 ### Versioning
 
-This document follows semantic versioning. Minor versions (1.2.x) add new tokens or components without breaking existing references. Major versions (2.0.0) may rename or remove tokens. The `version` field in the YAML frontmatter tracks the current release.
+Semantic versioning. Minor (1.3.x) adds tokens/components. Major (2.0.0) may rename/remove.
 
-## 17. Agent Prompt Guide
+## 15. Agent Prompt Guide
 
-### Quick-Start Prompts
+### Website Landing Page
 
-Use these copy-paste-ready prompts to generate BKM-compliant outputs:
+> "Build a BKM Mannesmann landing page. Deep green hero band with Unbounded 72px uppercase headline (white, -3px tracking), lime CTA button (angular, no radius). Below: sand-white section with 3-up cards using shadow-as-border. Cards have 12px radius, subtle shadow, hover-lift. If the Keyvisual is needed, place it as an image on the right edge of the hero, cropped, at 1/5 width. Footer in deep green with 4-column links."
 
-**Website Landing Page:**
-> "Build a BKM Mannesmann landing page. Use `{colors.brand-deep-green}` hero band with Unbounded 72px uppercase headline in white, lime CTA button (angular, no radius). Below: sand-white section with 3-up card grid using shadow-as-border technique. Cards have 12px radius, subtle shadow, and hover-lift animation. Footer in deep green with 4-column link grid."
+### Product Detail Page
 
-**Product Detail Page:**
-> "Create a BKM Pro Line product page. Breadcrumb at top. Product image left (1:1, white background), specs right in a spec-table (Inter labels, Geist Mono values). Below: tabbed content (Description / Technical Data / Downloads) using segmented-tab with lime underline on active. Badge-pro (angular, dark green bg, lime text) next to product name. Badge-microporex (monospace, ring shadow) below."
+> "BKM Pro Line product page. Breadcrumb top. Product image left (1:1, white bg), specs right in spec-table (Inter labels, Geist Mono values). Tabbed content below (Description / Technical Data / Downloads) with segmented tabs and lime underline on active. Badge-pro (angular, dark green bg, lime text) next to product name."
 
-**Instagram Carousel:**
-> "Design a 5-slide BKM Instagram carousel at 1080×1080px. Slide 1: dark green cover with Unbounded heading (40px+), chevron pattern at 5% opacity. Slides 2–4: white background, heading-3 + body-lg, one key stat per slide in Geist Mono. Slide 5: dark green CTA with website URL. 80px safe zone on all edges."
+### Instagram Carousel
 
-**Presentation Slide Deck:**
-> "Create a BKM presentation. Title slide: deep green background, white Unbounded display-lg headline, lime accent line below. Content slides: white background, heading-2 in ink, body-md in charcoal, data values in Geist Mono spec-value. Use lime only for chart accents, dividers, and one key highlight per slide."
+> "5-slide BKM Instagram carousel, 1080×1080px. Slide 1: dark green cover, Unbounded heading (40px+), NO Keyvisual (too small). Slides 2–4: white background, heading-3 + body-lg, one key stat in Geist Mono per slide. Slide 5: dark green CTA with website URL. 80px safe zone all edges."
 
-**Technical Data Sheet:**
-> "Generate a BKM TDS layout. Header: product name in heading-1, badge-pro + badge-microporex. Body: spec-table with alternating rows (canvas/surface-soft). Values in Geist Mono. Application areas as icon grid (Lucide icons, 32px, steel color). Download button: button-dark (deep green bg, lime text, angular)."
+### Presentation
 
-**Fachbetrieb Portal Page:**
-> "Build a specialist company portal page. Use Pure Green (`{colors.fachbetrieb-primary}`) instead of Deep Green. Cool white canvas (`{colors.fachbetrieb-surface}`). Navigation uses Pure Green instead of Deep Green. Cards use `{rounded.lg}`. Badges use `{colors.fachbetrieb-accent}`. The page should feel related to BKM but clearly differentiated — it's the craftsman's tool, not the manufacturer's showcase."
+> "BKM presentation. Title slide: deep green background, white Unbounded display-lg headline, Keyvisual as image on right edge (1/5 width). Content slides: white background, heading-2 in ink, body-md in charcoal, data in Geist Mono. Lime only for chart accents, dividers, one highlight per slide."
 
-## 18. Known Gaps
+## 16. Known Gaps
 
-The following areas are documented as incomplete and represent the roadmap for future versions:
-
-| Gap | Priority | Target Version |
-|-----|----------|---------------|
-| Figma Variables export (JSON → Figma sync) | High | v1.3 |
-| Interactive Token Playground (browser-based) | High | v1.3 |
-| React component library (npm package) | Medium | v2.0 |
-| Dark mode for documentation surfaces | Medium | v1.4 |
-| Motion choreography for page transitions | Low | v2.0 |
-| Print-specific Oracal foil color codes | Low | v1.3 |
-| Detailed form validation patterns (multi-step) | Medium | v1.4 |
-| E-commerce checkout flow patterns | Medium | v1.4 |
+| Gap | Priority | Target |
+|-----|----------|--------|
+| Figma Variables export | High | v1.4 |
+| Interactive Token Playground | High | v1.4 |
+| React component library (npm) | Medium | v2.0 |
+| Dark mode for documentation | Medium | v1.5 |
+| E-commerce checkout patterns | Medium | v1.5 |
 | Email template tokens | Low | v2.0 |
-| Video overlay/thumbnail specifications | Low | v2.0 |
+| Video overlay specifications | Low | v2.0 |
