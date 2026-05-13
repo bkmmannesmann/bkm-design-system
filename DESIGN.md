@@ -379,6 +379,65 @@ The Keyvisual is a fixed branded composition (layered arrow shapes derived from 
 
 It appears on: title pages, hero bands (optional), print materials. It does NOT appear on: product cards, small components, Instagram posts, email templates, technical data sheets.
 
+## Brand Assets
+
+All brand assets live in the `assets/` directory. They are pre-rendered, color-correct files — never recreate them in code.
+
+### Keyvisual Variants
+
+The Keyvisual consists of three layered chevron shapes representing the drying process. Different background colors require different file variants:
+
+| File | Colors | Use on background |
+|------|--------|-------------------|
+| `assets/keyvisual/keyvisual-on-light.svg` | Pure Green + Transition Green + Deep Green | White (#ffffff), Sand White (#f6f5f2) |
+| `assets/keyvisual/keyvisual-on-dark.svg` | All White | Deep Green (#1c4b42), Transition Green (#287d4b), Stone Grey (#494949) |
+
+**FORBIDDEN:** Never place the Keyvisual on Pure Green (#4daf46) or Lime Green (#b4e717) backgrounds — one chevron element would visually disappear due to identical color.
+
+### Logo Variants
+
+The BKM Mannesmann logo consists of the wordmark "BKM" and the claim "Für eine lebenswerte Zukunft."
+
+| File | Wordmark color | Claim color | Use on background | Contrast (claim) |
+|------|---------------|-------------|-------------------|------------------|
+| `assets/logos/bkm-logo-on-light.svg` | Deep Green (#1c4b42) | Deep Green (#1c4b42) | White, Sand White | 9.84 PASS |
+| `assets/logos/bkm-logo-on-dark.svg` | White (#ffffff) | White (#ffffff) | Deep Green, Transition Green, Stone Grey | 9.84 PASS |
+| `assets/logos/bkm-logo-on-deep-green.svg` | White (#ffffff) | Lime Green (#b4e717) | Deep Green (#1c4b42) | 6.74 PASS |
+| `assets/logos/bkm-logo-fachbetrieb-on-light.svg` | Stone Grey (#494949) | Transition Green (#287d4b) | White, Sand White | 5.09 PASS |
+| `assets/logos/bkm-logo-black.svg` | Black (#000000) | Black (#000000) | White, Sand White (reserve/print) | 21.00 PASS |
+
+**Why Transition Green for the Fachbetrieb claim?** Pure Green (#4daf46) on White has only 2.79 contrast — insufficient for small text (WCAG AA requires 4.5). Transition Green (#287d4b) at 5.09 passes.
+
+### SVG Export Rules
+
+All SVGs must be exported from Adobe Illustrator with these settings:
+- CSS-Eigenschaften: **Präsentationsattribute** (ensures `fill="#hex"` on each path)
+- Responsiv: **Deaktiviert** (preserves width/height attributes)
+- Text: In Pfade umwandeln (prevents font dependency)
+
+If an SVG shows colors as CSS classes (`class="cls-1"`) instead of inline `fill` attributes, it was exported incorrectly and will render black in many contexts.
+
+## Contrast Matrix
+
+All color combinations used in this system have been validated against WCAG AA:
+
+| Foreground | Background | Ratio | Status | Use |
+|-----------|-----------|-------|--------|-----|
+| White | Deep Green (#1c4b42) | 9.84 | PASS | Text + UI |
+| White | Transition Green (#287d4b) | 5.09 | PASS | Text + UI |
+| White | Stone Grey (#494949) | 9.00 | PASS | Text + UI |
+| Lime (#b4e717) | Deep Green (#1c4b42) | 6.74 | PASS | Text + UI |
+| Lime (#b4e717) | Stone Grey (#494949) | 6.17 | PASS | Text + UI |
+| Lime (#b4e717) | Transition Green (#287d4b) | 3.49 | PASS | Large text only |
+| Deep Green | White (#ffffff) | 9.84 | PASS | Text + UI |
+| Deep Green | Sand White (#f6f5f2) | 9.02 | PASS | Text + UI |
+| Transition Green | White (#ffffff) | 5.09 | PASS | Text + UI |
+| Stone Grey | White (#ffffff) | 9.00 | PASS | Text + UI |
+| Pure Green (#4daf46) | White (#ffffff) | 2.79 | FAIL | Decorative only |
+| Lime (#b4e717) | White (#ffffff) | 1.46 | FAIL | Decorative only |
+
+**Key rule:** Pure Green and Lime Green must NEVER be used as text on light backgrounds. They only work as text on dark backgrounds (Deep Green, Stone Grey).
+
 ## Do's and Don'ts
 
 - Do use Lime Green (`secondary`) exclusively for interactive elements on dark surfaces
@@ -395,3 +454,7 @@ It appears on: title pages, hero bands (optional), print materials. It does NOT 
 - Don't use CSS `border` property on cards (shadows provide depth; borders flatten)
 - Do keep the same design structure for Fachbetrieb pages — only swap the color context
 - Don't create a visually separate "brand" for Fachbetriebe — it is the same system, different palette
+- Do use `keyvisual-on-light.svg` on white/sand-white backgrounds and `keyvisual-on-dark.svg` on dark backgrounds
+- Don't place the Keyvisual on Pure Green or Lime Green backgrounds (chevron disappears)
+- Do use `bkm-logo-fachbetrieb-on-light.svg` (Stone Grey + Transition Green) for Fachbetrieb on light backgrounds
+- Don't use Pure Green (#4daf46) as text on light backgrounds — contrast is only 2.79 (FAIL)
