@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kernthese</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ========================================
+       BKM SLIDE SYSTEM — BKM AG PRESET
+       ======================================== */
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    @font-face {
+      font-family: 'TT Norms Pro';
+      src: local('Arial');
+    }
+
+    :root {
+      --slide-bg-dark: #1c4b42;
+      --slide-bg-dark-alt: #2a6b5e;
+      --slide-bg-light: #ffffff;
+      --slide-bg-warm: #f6f5f2;
+
+      --slide-text-on-dark: #ffffff;
+      --slide-text-on-dark-muted: rgba(255,255,255,0.5);
+      --slide-text-on-light: #1a1a1a;
+      --slide-text-on-light-muted: #494949;
+
+      --slide-accent: #b4e717;
+      --slide-accent-on-dark: #b4e717;
+      --slide-accent-on-light: #1c4b42;
+
+      --slide-divider: rgba(255,255,255,0.15);
+
+      --slide-radius-sm: 4px;
+      --slide-radius-lg: 12px;
+
+      --font-display: 'Unbounded', system-ui, sans-serif;
+      --font-body: 'TT Norms Pro', system-ui, sans-serif;
+      --font-mono: 'TT Norms Pro', monospace;
+    }
+
+    /* Slide Container */
+    .slide-container {
+      width: 100vw;
+      height: 100vh;
+      min-height: 720px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      background-color: var(--slide-bg-dark);
+      color: var(--slide-text-on-dark);
+    }
+
+    /* Noise Overlay */
+    .noise::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px 256px;
+      mix-blend-mode: overlay;
+    }
+
+    /* Content */
+    .slide__content {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 5vh 5vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .slide__content--split {
+      flex-direction: row;
+      align-items: center;
+      gap: 6vw;
+    }
+
+    .slide__half {
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* Typography */
+    .headline-md {
+      font-family: var(--font-display);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 1.08;
+      font-size: clamp(28px, 3.5vw, 44px);
+    }
+
+    .body-md {
+      font-family: var(--font-body);
+      font-weight: 400;
+      line-height: 1.6;
+      font-size: clamp(14px, 1.2vw, 16px);
+    }
+
+    .label {
+      font-family: var(--font-body);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: clamp(10px, 0.9vw, 13px);
+    }
+
+    .mono-md {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: clamp(14px, 1.2vw, 16px);
+    }
+
+    /* Flywheel Diagram */
+    .flywheel {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5vh;
+      padding-left: 2vw;
+      border-left: 2px solid var(--slide-divider);
+    }
+
+    .flywheel-step {
+      display: flex;
+      align-items: center;
+      gap: 1.5vw;
+    }
+
+    .flywheel-number {
+      color: var(--slide-accent);
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: clamp(18px, 1.8vw, 24px);
+      width: 30px;
+    }
+
+    .flywheel-text {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: clamp(16px, 1.5vw, 20px);
+      color: var(--slide-text-on-dark);
+    }
+
+    .flywheel-arrow {
+      color: var(--slide-accent);
+      font-size: 20px;
+      margin-left: 45px;
+      opacity: 0.7;
+    }
+
+    .flywheel-parallel {
+      margin-top: 3vh;
+      padding: 2vh 2vw;
+      background-color: rgba(255,255,255,0.05);
+      border-left: 4px solid var(--slide-accent);
+    }
+
+    .flywheel-parallel-title {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: clamp(12px, 1vw, 14px);
+      color: var(--slide-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1vh;
+    }
+
+    .flywheel-parallel-text {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: clamp(14px, 1.2vw, 16px);
+      color: var(--slide-text-on-dark-muted);
+    }
+
+    /* Footer */
+    .slide__footer {
+      position: absolute;
+      bottom: 3vh;
+      left: 5vw;
+      right: 5vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 20;
+    }
+
+    .slide__footer-text {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: clamp(10px, 0.8vw, 12px);
+      opacity: 0.35;
+    }
+
+    .slide__page-number {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: clamp(10px, 0.8vw, 12px);
+      opacity: 0.35;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-container noise">
+    <div class="slide__content slide__content--split">
+
+      <!-- Left: Text Content -->
+      <div class="slide__half">
+        <span class="label" style="color: var(--slide-accent); display: block; margin-bottom: 2vh;">
+          04 — Kernthese
+        </span>
+
+        <h2 class="headline-md" style="max-width: 95%;">
+          Die größte Skalierungschance liegt im Plattform-Flywheel
+        </h2>
+
+        <p class="body-md" style="color: var(--slide-text-on-dark-muted); max-width: 90%; margin-top: 3vh;">
+          BKM ist kein reiner Produkthersteller — BKM ist eine Plattform. Das Flywheel funktioniert so: Mehr Fachbetriebe erzeugen mehr regionale Sichtbarkeit. Mehr Sichtbarkeit generiert mehr Kundenanfragen. Mehr Anfragen machen das Netzwerk attraktiver für neue Partner. Gleichzeitig fließen DIY-Kunden, die selbst nicht sanieren wollen, als Leads an Fachbetriebe weiter. Jeder Kanal stärkt den anderen. Das gebührenfreie Modell senkt die Eintrittsbarriere für neue Partner auf nahezu null — der entscheidende Hebel gegenüber ISOTEC.
+        </p>
+      </div>
+
+      <!-- Right: Flywheel -->
+      <div class="slide__half">
+        <div class="flywheel">
+          <div class="flywheel-step">
+            <span class="flywheel-number">01</span>
+            <span class="flywheel-text">Mehr Fachbetriebe</span>
+          </div>
+          <div class="flywheel-arrow">↓</div>
+          
+          <div class="flywheel-step">
+            <span class="flywheel-number">02</span>
+            <span class="flywheel-text">Mehr regionale Sichtbarkeit</span>
+          </div>
+          <div class="flywheel-arrow">↓</div>
+          
+          <div class="flywheel-step">
+            <span class="flywheel-number">03</span>
+            <span class="flywheel-text">Mehr Kundenanfragen</span>
+          </div>
+          <div class="flywheel-arrow">↓</div>
+          
+          <div class="flywheel-step">
+            <span class="flywheel-number">04</span>
+            <span class="flywheel-text">Mehr Umsatz pro Partner</span>
+          </div>
+          <div class="flywheel-arrow">↓</div>
+          
+          <div class="flywheel-step">
+            <span class="flywheel-number">05</span>
+            <span class="flywheel-text">Mehr Attraktivität für neue Partner</span>
+          </div>
+        </div>
+
+        <div class="flywheel-parallel">
+          <div class="flywheel-parallel-title">Parallel-Effekt</div>
+          <div class="flywheel-parallel-text">
+            DIY-Shop → Lead-Generierung → Fachbetrieb-Vermittlung
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="slide__footer">
+      <span class="slide__footer-text">BKM Mannesmann AG — Vertraulich</span>
+      <span class="slide__page-number">05</span>
+    </div>
+  </div>
+</body>
+</html>

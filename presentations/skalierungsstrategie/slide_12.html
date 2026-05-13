@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nächste Schritte</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ========================================
+       BKM SLIDE SYSTEM — BKM AG PRESET
+       ======================================== */
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    @font-face {
+      font-family: 'TT Norms Pro';
+      src: local('Arial');
+    }
+
+    :root {
+      --slide-bg-dark: #1c4b42;
+      --slide-bg-dark-alt: #2a6b5e;
+      --slide-bg-light: #ffffff;
+      --slide-bg-warm: #f6f5f2;
+
+      --slide-text-on-dark: #ffffff;
+      --slide-text-on-dark-muted: rgba(255,255,255,0.5);
+      --slide-text-on-light: #1a1a1a;
+      --slide-text-on-light-muted: #494949;
+
+      --slide-accent: #b4e717;
+      --slide-accent-on-dark: #b4e717;
+      --slide-accent-on-light: #1c4b42;
+
+      --slide-divider: rgba(255,255,255,0.15);
+
+      --slide-radius-sm: 4px;
+      --slide-radius-lg: 12px;
+
+      --font-display: 'Unbounded', system-ui, sans-serif;
+      --font-body: 'TT Norms Pro', system-ui, sans-serif;
+      --font-mono: 'TT Norms Pro', monospace;
+    }
+
+    /* Slide Container */
+    .slide-container {
+      width: 100vw;
+      height: 100vh;
+      min-height: 720px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      background-color: var(--slide-bg-dark);
+      color: var(--slide-text-on-dark);
+    }
+
+    /* Noise Overlay */
+    .noise::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px 256px;
+      mix-blend-mode: overlay;
+    }
+
+    /* Content */
+    .slide__content {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 5vh 5vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* Typography */
+    .headline-lg {
+      font-family: var(--font-display);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      font-size: clamp(36px, 4.5vw, 56px);
+    }
+
+    .body-lg {
+      font-family: var(--font-body);
+      font-weight: 400;
+      line-height: 1.7;
+      font-size: clamp(16px, 1.5vw, 20px);
+    }
+
+    .mono-md {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: clamp(14px, 1.2vw, 16px);
+    }
+
+    /* CTA Button (Static representation) */
+    .cta-button {
+      display: inline-block;
+      background-color: var(--slide-accent);
+      color: var(--slide-bg-dark);
+      font-family: var(--font-body);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: clamp(14px, 1.2vw, 16px);
+      padding: 2vh 3vw;
+      margin-top: 5vh;
+      margin-bottom: 3vh;
+    }
+
+    /* Footer */
+    .slide__footer {
+      position: absolute;
+      bottom: 3vh;
+      left: 5vw;
+      right: 5vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 20;
+    }
+
+    .slide__footer-text {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: clamp(10px, 0.8vw, 12px);
+      opacity: 0.35;
+    }
+
+    .slide__page-number {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: clamp(10px, 0.8vw, 12px);
+      opacity: 0.35;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-container noise">
+    <div class="slide__content">
+
+      <h2 class="headline-lg" style="max-width: 80%;">
+        Der Weg beginnt jetzt
+      </h2>
+
+      <p class="body-lg" style="margin-top: 4vh; color: var(--slide-text-on-dark-muted); max-width: 60%;">
+        Die Marktbedingungen waren nie günstiger. Die Technologie ist bereit. Das Modell ist bewiesen. Die Frage ist nicht ob BKM skalieren kann — sondern wie schnell.
+      </p>
+
+      <div class="cta-button">
+        Strategiegespräch vereinbaren
+      </div>
+
+      <div style="display: flex; gap: 2vw; align-items: center; margin-top: 2vh;">
+        <span class="mono-md" style="color: var(--slide-accent);">www.bkm-mannesmann.de</span>
+        <span style="color: var(--slide-divider);">|</span>
+        <span class="mono-md" style="color: var(--slide-accent);">kontakt@bkm-mannesmann.de</span>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="slide__footer">
+      <span class="slide__footer-text">BKM Mannesmann AG — Build. Keep. Maintain.</span>
+      <span class="slide__page-number">12</span>
+    </div>
+  </div>
+</body>
+</html>

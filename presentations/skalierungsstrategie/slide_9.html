@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skalierungshebel 4</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ========================================
+       BKM SLIDE SYSTEM — BKM AG PRESET
+       ======================================== */
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    @font-face {
+      font-family: 'TT Norms Pro';
+      src: local('Arial');
+    }
+
+    :root {
+      --slide-bg-dark: #1c4b42;
+      --slide-bg-dark-alt: #2a6b5e;
+      --slide-bg-light: #ffffff;
+      --slide-bg-warm: #f6f5f2;
+
+      --slide-text-on-dark: #ffffff;
+      --slide-text-on-dark-muted: rgba(255,255,255,0.5);
+      --slide-text-on-light: #1a1a1a;
+      --slide-text-on-light-muted: #494949;
+
+      --slide-accent: #b4e717;
+      --slide-accent-on-dark: #b4e717;
+      --slide-accent-on-light: #1c4b42;
+
+      --slide-divider: rgba(255,255,255,0.15);
+
+      --slide-radius-sm: 4px;
+      --slide-radius-lg: 12px;
+
+      --font-display: 'Unbounded', system-ui, sans-serif;
+      --font-body: 'TT Norms Pro', system-ui, sans-serif;
+      --font-mono: 'TT Norms Pro', monospace;
+    }
+
+    /* Slide Container */
+    .slide-container {
+      width: 100vw;
+      height: 100vh;
+      min-height: 720px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      background-color: var(--slide-bg-dark);
+      color: var(--slide-text-on-dark);
+    }
+
+    /* Noise Overlay */
+    .noise::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px 256px;
+      mix-blend-mode: overlay;
+    }
+
+    /* Content */
+    .slide__content {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 5vh 5vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .slide__content--split {
+      flex-direction: row;
+      align-items: center;
+      gap: 6vw;
+    }
+
+    .slide__half {
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* Typography */
+    .headline-md {
+      font-family: var(--font-display);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 1.08;
+      font-size: clamp(28px, 3.5vw, 44px);
+    }
+
+    .body-md {
+      font-family: var(--font-body);
+      font-weight: 400;
+      line-height: 1.6;
+      font-size: clamp(14px, 1.2vw, 16px);
+    }
+
+    .label {
+      font-family: var(--font-body);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: clamp(10px, 0.9vw, 13px);
+    }
+
+    /* Timeline */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      padding-left: 2vw;
+      border-left: 2px solid var(--slide-divider);
+      gap: 4vh;
+    }
+
+    .timeline-item {
+      position: relative;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: calc(-2vw - 7px);
+      top: 5px;
+      width: 12px;
+      height: 12px;
+      background-color: var(--slide-accent);
+      border-radius: 50%;
+    }
+
+    .timeline-phase {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: clamp(14px, 1.2vw, 16px);
+      color: var(--slide-accent);
+      margin-bottom: 0.5vh;
+    }
+
+    .timeline-content {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: clamp(18px, 1.8vw, 24px);
+      color: var(--slide-text-on-dark);
+    }
+
+    /* Footer */
+    .slide__footer {
+      position: absolute;
+      bottom: 3vh;
+      left: 5vw;
+      right: 5vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 20;
+    }
+
+    .slide__footer-text {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: clamp(10px, 0.8vw, 12px);
+      opacity: 0.35;
+    }
+
+    .slide__page-number {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: clamp(10px, 0.8vw, 12px);
+      opacity: 0.35;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-container noise">
+    <div class="slide__content slide__content--split">
+
+      <!-- Left: Text Content -->
+      <div class="slide__half">
+        <span class="label" style="color: var(--slide-accent); display: block; margin-bottom: 2vh;">
+          08 — Skalierungshebel
+        </span>
+
+        <h2 class="headline-md" style="max-width: 95%;">
+          Von Deutschland nach Europa — das Modell ist exportierbar
+        </h2>
+
+        <p class="body-md" style="color: var(--slide-text-on-dark-muted); max-width: 90%; margin-top: 3vh;">
+          BKM hat bereits Websites in Spanien, Englisch und Österreich. Der Klimawandel treibt Feuchtigkeitsprobleme europaweit — besonders in Südeuropa, wo Starkregen auf historisch schlecht abgedichtete Gebäude trifft.
+        </p>
+        
+        <p class="body-md" style="color: var(--slide-text-on-dark-muted); max-width: 90%; margin-top: 2vh;">
+          Das Partner-Netzwerk-Modell ist länderunabhängig skalierbar: lokale Handwerker werden zu BKM-Fachbetrieben geschult, der Online-Shop wird lokalisiert, die MicroPorex®-Technologie ist universell einsetzbar. Die Expansion nach Österreich, Schweiz, Frankreich, Italien und den Benelux-Staaten kann das Marktpotenzial vervielfachen.
+        </p>
+      </div>
+
+      <!-- Right: Timeline -->
+      <div class="slide__half">
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-phase">Phase 1 (2026–2027)</div>
+            <div class="timeline-content">Deutschland flächendeckend + Österreich + Schweiz</div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-phase">Phase 2 (2027–2028)</div>
+            <div class="timeline-content">Spanien intensivieren + Frankreich + Benelux</div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-phase">Phase 3 (2028–2030)</div>
+            <div class="timeline-content">Italien + Osteuropa + UK</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="slide__footer">
+      <span class="slide__footer-text">BKM Mannesmann AG — Vertraulich</span>
+      <span class="slide__page-number">09</span>
+    </div>
+  </div>
+</body>
+</html>

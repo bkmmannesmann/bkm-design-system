@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wettbewerbsanalyse</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ========================================
+       BKM SLIDE SYSTEM — BKM AG PRESET
+       ======================================== */
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    @font-face {
+      font-family: 'TT Norms Pro';
+      src: local('Arial');
+    }
+
+    :root {
+      --slide-bg-dark: #1c4b42;
+      --slide-bg-dark-alt: #2a6b5e;
+      --slide-bg-light: #ffffff;
+      --slide-bg-warm: #f6f5f2;
+
+      --slide-text-on-dark: #ffffff;
+      --slide-text-on-dark-muted: rgba(255,255,255,0.5);
+      --slide-text-on-light: #1a1a1a;
+      --slide-text-on-light-muted: #494949;
+
+      --slide-accent: #b4e717;
+      --slide-accent-on-dark: #b4e717;
+      --slide-accent-on-light: #1c4b42;
+
+      --slide-divider: rgba(255,255,255,0.15);
+      --slide-divider-light: #e8e6e1;
+
+      --slide-radius-sm: 4px;
+      --slide-radius-lg: 12px;
+
+      --font-display: 'Unbounded', system-ui, sans-serif;
+      --font-body: 'TT Norms Pro', system-ui, sans-serif;
+      --font-mono: 'TT Norms Pro', monospace;
+    }
+
+    /* Slide Container */
+    .slide-container {
+      width: 100vw;
+      height: 100vh;
+      min-height: 720px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      background-color: var(--slide-bg-light);
+      color: var(--slide-text-on-light);
+    }
+
+    /* Content */
+    .slide__content {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 5vh 5vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding-top: 10vh;
+    }
+
+    /* Typography */
+    .headline-md {
+      font-family: var(--font-display);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 1.08;
+      font-size: clamp(28px, 3.5vw, 44px);
+    }
+
+    .body-md {
+      font-family: var(--font-body);
+      font-weight: 400;
+      line-height: 1.6;
+      font-size: clamp(14px, 1.2vw, 16px);
+    }
+
+    .label {
+      font-family: var(--font-body);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: clamp(10px, 0.9vw, 13px);
+    }
+
+    /* Table */
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 5vh;
+      font-family: var(--font-body);
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 1.5vh 1vw;
+      text-align: left;
+      border-bottom: 1px solid var(--slide-divider-light);
+      font-size: clamp(14px, 1.2vw, 16px);
+    }
+
+    .comparison-table th {
+      font-weight: 700;
+      color: var(--slide-text-on-light);
+      border-bottom: 2px solid var(--slide-accent-on-light);
+      text-transform: uppercase;
+      font-size: clamp(12px, 1vw, 14px);
+      letter-spacing: 0.05em;
+    }
+
+    .comparison-table td:first-child {
+      font-weight: 700;
+      color: var(--slide-text-on-light);
+      width: 25%;
+    }
+
+    .comparison-table td:nth-child(2) {
+      color: var(--slide-accent-on-light);
+      font-weight: 700;
+      width: 37.5%;
+    }
+
+    .comparison-table td:nth-child(3) {
+      color: var(--slide-text-on-light-muted);
+      width: 37.5%;
+    }
+
+    /* Highlight Box */
+    .highlight-box {
+      margin-top: 4vh;
+      padding: 2vh 2vw;
+      background-color: var(--slide-bg-warm);
+      border-left: 4px solid var(--slide-accent-on-light);
+    }
+
+    /* Footer */
+    .slide__footer {
+      position: absolute;
+      bottom: 3vh;
+      left: 5vw;
+      right: 5vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 20;
+    }
+
+    .slide__footer-text {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: clamp(10px, 0.8vw, 12px);
+      opacity: 0.35;
+    }
+
+    .slide__page-number {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: clamp(10px, 0.8vw, 12px);
+      opacity: 0.35;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <div class="slide__content">
+
+      <span class="label" style="color: var(--slide-accent-on-light); display: block; margin-bottom: 2vh;">
+        03 — Wettbewerbsanalyse
+      </span>
+
+      <h2 class="headline-md" style="max-width: 90%;">
+        BKM hat den strukturellen Vorteil — ISOTEC die Reichweite
+      </h2>
+
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Kriterium</th>
+            <th>BKM Mannesmann</th>
+            <th>ISOTEC</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Modell</td>
+            <td>Lizenz-Netzwerk, keine Gebühren</td>
+            <td>Franchise mit Gebühren</td>
+          </tr>
+          <tr>
+            <td>Fachbetriebe</td>
+            <td>Wachsend (bundesweit)</td>
+            <td>85+ inhabergeführte Betriebe</td>
+          </tr>
+          <tr>
+            <td>Mitarbeiter</td>
+            <td>11–50 (AG)</td>
+            <td>1.200 (Gesamtsystem)</td>
+          </tr>
+          <tr>
+            <td>Sanierte Objekte</td>
+            <td>Wachsend</td>
+            <td>120.000+</td>
+          </tr>
+          <tr>
+            <td>Technologie</td>
+            <td>MicroPorex® (patentiert)</td>
+            <td>Eigene Systeme</td>
+          </tr>
+          <tr>
+            <td>DIY-Kanal</td>
+            <td>BKM Home Line + Online-Shop + Amazon</td>
+            <td>Kein DIY-Kanal</td>
+          </tr>
+          <tr>
+            <td>Franchise-Gebühren</td>
+            <td>Keine</td>
+            <td>Ja</td>
+          </tr>
+          <tr>
+            <td>Internationalisierung</td>
+            <td>DE, AT, ES, EN</td>
+            <td>DACH + ES</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="highlight-box">
+        <p class="body-md" style="color: var(--slide-text-on-light);">
+          <strong>Kernaussage:</strong> BKMs gebührenfreies Modell und der Dual-Channel-Ansatz (DIY + Profi) sind strukturelle Vorteile, die ISOTEC nicht replizieren kann, ohne ihr Franchise-Modell zu kannibalisieren.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="slide__footer">
+      <span class="slide__footer-text">BKM Mannesmann AG — Vertraulich</span>
+      <span class="slide__page-number">04</span>
+    </div>
+  </div>
+</body>
+</html>
