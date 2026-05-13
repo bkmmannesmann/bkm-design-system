@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BKM AG — Glasmorphismus Titelseite (Editorial Demo)</title>
+
+  <!-- Google Fonts: Unbounded -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ========================================
+       BKM SLIDE — GLASMORPHISMUS TITELSEITE
+       Kontext: BKM AG
+       Regeln: Foto-Hintergrund + Deep Green Overlay + Glass Card
+       ======================================== */
+
+    @font-face {
+      font-family: 'TT Norms Pro';
+      src: url('../../assets/fonts/TT_Norms_Pro_Compact_Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'TT Norms Pro';
+      src: url('../../assets/fonts/TT_Norms_Pro_Bold.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    :root {
+      --bg-dark: #1c4b42;
+      --text-white: #ffffff;
+      --text-muted: rgba(255,255,255,0.7);
+      --accent-lime: #b4e717;
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.12);
+      --glass-blur: 20px;
+      --font-display: 'Unbounded', system-ui, sans-serif;
+      --font-body: 'TT Norms Pro', system-ui, sans-serif;
+    }
+
+    /* ========================================
+       SLIDE CONTAINER
+       ======================================== */
+    .slide {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ========================================
+       BACKGROUND LAYER: Foto + Overlay
+       ======================================== */
+    .slide__bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .slide__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(28, 75, 66, 0.75) 0%,
+        rgba(28, 75, 66, 0.55) 50%,
+        rgba(28, 75, 66, 0.70) 100%
+      );
+    }
+
+    /* ========================================
+       LOGO
+       ======================================== */
+    .logo {
+      position: absolute;
+      top: 5%;
+      right: 5%;
+      z-index: 20;
+      height: 36px;
+      opacity: 0.9;
+    }
+
+    /* ========================================
+       VERTICAL LIME ACCENT LINE
+       ======================================== */
+    .accent-line {
+      position: absolute;
+      left: 7%;
+      top: 18%;
+      width: 4px;
+      height: 64%;
+      background: var(--accent-lime);
+      z-index: 20;
+      border-radius: 2px;
+    }
+
+    /* ========================================
+       GLASS CARD
+       ======================================== */
+    .glass-card {
+      position: absolute;
+      top: 50%;
+      left: 10%;
+      transform: translateY(-50%);
+      z-index: 20;
+      max-width: 580px;
+      
+      background: var(--glass-bg);
+      backdrop-filter: blur(var(--glass-blur));
+      -webkit-backdrop-filter: blur(var(--glass-blur));
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 56px 48px;
+    }
+
+    /* Subtle inner glow on glass */
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      background: linear-gradient(
+        160deg,
+        rgba(255, 255, 255, 0.04) 0%,
+        transparent 40%
+      );
+      pointer-events: none;
+    }
+
+    /* ========================================
+       TYPOGRAPHY
+       ======================================== */
+    .glass-card__label {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-lime);
+      margin-bottom: 20px;
+    }
+
+    .glass-card__headline {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-style: italic;
+      text-transform: uppercase;
+      color: var(--text-white);
+      font-size: clamp(36px, 4.5vw, 64px);
+      line-height: 1.0;
+      letter-spacing: -0.04em;
+    }
+
+    .glass-card__subtitle {
+      font-family: var(--font-body);
+      font-weight: 400;
+      color: var(--text-muted);
+      font-size: clamp(15px, 1.3vw, 18px);
+      line-height: 1.6;
+      margin-top: 20px;
+      max-width: 90%;
+    }
+
+    .glass-card__meta {
+      margin-top: 36px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .meta-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-lime);
+      flex-shrink: 0;
+    }
+
+    .meta-text {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-lime);
+    }
+
+    /* ========================================
+       BOTTOM RIGHT: Stats (optional)
+       ======================================== */
+    .stats-cluster {
+      position: absolute;
+      bottom: 8%;
+      right: 6%;
+      z-index: 20;
+      display: flex;
+      gap: 40px;
+    }
+
+    .stat {
+      text-align: right;
+    }
+
+    .stat__value {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 36px;
+      color: var(--text-white);
+      line-height: 1.0;
+    }
+
+    .stat__label {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <!-- Layer 1: Hintergrundfoto -->
+    <img class="slide__bg" 
+         src="assets/bg-glass-title.jpg" 
+         alt="" 
+         aria-hidden="true" />
+
+    <!-- Layer 2: Deep Green Overlay (55–75% Opacity) -->
+    <div class="slide__overlay"></div>
+
+    <!-- Layer 3: Vertikale Lime-Akzentlinie -->
+    <div class="accent-line"></div>
+
+    <!-- Layer 4: Logo oben rechts -->
+    <svg class="logo" viewBox="0 0 200 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <text x="0" y="28" font-family="'Unbounded', sans-serif" font-weight="900" font-size="24" fill="#ffffff">BKM</text>
+      <text x="70" y="28" font-family="sans-serif" font-weight="400" font-size="11" fill="rgba(255,255,255,0.6)">MANNESMANN AG</text>
+    </svg>
+
+    <!-- Layer 5: Glass Card mit Content -->
+    <div class="glass-card">
+      <span class="glass-card__label">Bauwerksabdichtung neu gedacht</span>
+      <h1 class="glass-card__headline">
+        Schutz beginnt<br/>im Fundament
+      </h1>
+      <p class="glass-card__subtitle">
+        MicroPorex® Technologie — die wissenschaftlich fundierte Lösung gegen aufsteigende Feuchtigkeit. Nachhaltig, zerstörungsfrei, dauerhaft.
+      </p>
+      <div class="glass-card__meta">
+        <div class="meta-dot"></div>
+        <span class="meta-text">BKM Mannesmann AG • Seit 1928</span>
+      </div>
+    </div>
+
+    <!-- Layer 6: Statistik-Cluster unten rechts -->
+    <div class="stats-cluster">
+      <div class="stat">
+        <div class="stat__value">96</div>
+        <div class="stat__label">Jahre Erfahrung</div>
+      </div>
+      <div class="stat">
+        <div class="stat__value">500+</div>
+        <div class="stat__label">Fachbetriebe</div>
+      </div>
+      <div class="stat">
+        <div class="stat__value">50k+</div>
+        <div class="stat__label">Sanierungen</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
