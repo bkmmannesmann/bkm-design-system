@@ -396,17 +396,24 @@ The Keyvisual consists of three layered chevron shapes representing the drying p
 
 ### Logo Variants
 
-The BKM Mannesmann logo consists of the wordmark "BKM" and the claim "Für eine lebenswerte Zukunft."
+The BKM Mannesmann logo consists of the wordmark **BKM MANNESMANN** and a characteristic **second M-element** (two diagonal strokes on the right side). In the colored variants, this M-element is always **Pure Green (#4daf46)** — never Deep Green, Transition Green, or any other color.
 
-| File | Wordmark color | Claim color | Use on background | Contrast (claim) |
-|------|---------------|-------------|-------------------|------------------|
-| `assets/logos/bkm-logo-on-light.svg` | Deep Green (#1c4b42) | Deep Green (#1c4b42) | White, Sand White | 9.84 PASS |
-| `assets/logos/bkm-logo-on-dark.svg` | White (#ffffff) | White (#ffffff) | Deep Green, Transition Green, Stone Grey | 9.84 PASS |
-| `assets/logos/bkm-logo-on-deep-green.svg` | White (#ffffff) | Lime Green (#b4e717) | Deep Green (#1c4b42) | 6.74 PASS |
-| `assets/logos/bkm-logo-fachbetrieb-on-light.svg` | Stone Grey (#494949) | Transition Green (#287d4b) | White, Sand White | 5.09 PASS |
-| `assets/logos/bkm-logo-black.svg` | Black (#000000) | Black (#000000) | White, Sand White (reserve/print) | 21.00 PASS |
+| File | Wordmark + MANNESMANN | M-Element | Context | Use on background |
+|------|----------------------|-----------|---------|-------------------|
+| `assets/logos/bkm-logo-stonegrey-puregreen` | Stone Grey (#494949) | Pure Green (#4daf46) | **Fachbetrieb** | White, Sand White |
+| `assets/logos/bkm-logo-white-puregreen` | White (#ffffff) | Pure Green (#4daf46) | **BKM AG** | Deep Green, Transition Green, Stone Grey |
+| `assets/logos/bkm-logo-white` | White (#ffffff) | White (#ffffff) | **BKM AG** | Deep Green, Transition Green, Pure Green, Stone Grey |
+| `assets/logos/bkm-logo-black` | Black (#000000) | Black (#000000) | **Reserve/Druck** | White, Sand White (selten verwenden) |
 
-**Why Transition Green for the Fachbetrieb claim?** Pure Green (#4daf46) on White has only 2.79 contrast — insufficient for small text (WCAG AA requires 4.5). Transition Green (#287d4b) at 5.09 passes.
+Each variant is available as `.svg` (vector) and `.png` (raster fallback).
+
+**Context assignment:**
+- Stone Grey + Pure Green M = **Fachbetrieb** on light backgrounds (primary logo for partner companies)
+- White + Pure Green M = **BKM AG** on dark backgrounds (primary logo for manufacturer context)
+- All White = **BKM AG** on colored backgrounds where Pure Green M would not be visible
+- All Black = Reserve for single-color print only (avoid in digital media)
+
+**Critical rule:** No logo variant exists with Deep Green or Transition Green coloring. The M-element is ALWAYS Pure Green in colored variants.
 
 ### SVG Export Rules
 
@@ -456,5 +463,9 @@ All color combinations used in this system have been validated against WCAG AA:
 - Don't create a visually separate "brand" for Fachbetriebe — it is the same system, different palette
 - Do use `keyvisual-on-light.svg` on white/sand-white backgrounds and `keyvisual-on-dark.svg` on dark backgrounds
 - Don't place the Keyvisual on Pure Green or Lime Green backgrounds (chevron disappears)
-- Do use `bkm-logo-fachbetrieb-on-light.svg` (Stone Grey + Transition Green) for Fachbetrieb on light backgrounds
+- Do use `bkm-logo-stonegrey-puregreen` (Stone Grey wordmark + Pure Green M-element) for Fachbetrieb on light backgrounds
+- Do use `bkm-logo-white-puregreen` (White wordmark + Pure Green M-element) for BKM AG on dark backgrounds
+- Do use `bkm-logo-white` (all white) for BKM AG on colored backgrounds (Pure Green, Deep Green)
+- Don't use `bkm-logo-black` in digital media — it is reserved for single-color print
+- Don't assume any logo variant has Deep Green or Transition Green coloring — only Pure Green exists as M-element color
 - Don't use Pure Green (#4daf46) as text on light backgrounds — contrast is only 2.79 (FAIL)
