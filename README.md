@@ -25,15 +25,40 @@ This repository contains the complete design system for BKM Mannesmann AG, a man
 | `docs/icon-system.md` | Icon specifications | |
 | `docs/referenzen.md` | External design system references (Vercel, MongoDB, NVIDIA, Mintlify, Supabase) | |
 | `docs/verbesserungsvorschlaege.md` | Improvement proposals based on reference analysis | |
+| `docs/bkm-slide-prompt.md` | Reusable slide prompt with exact CSS tokens (v3) | |
+| `skills/bkm-slides/SKILL.md` | Slide skill entry point — mandatory workflow for slide creation | |
+| `skills/bkm-slides/STYLE_PRESETS.md` | Exact CSS tokens for glassmorphism slides (both contexts) | |
+| `skills/bkm-slides/html-template.md` | Complete copy-paste HTML templates for all slide types | |
+| `skills/bkm-slides/PATTERN_CATALOG.md` | Allowed and forbidden patterns with exact CSS values | |
 
 ## Quick Start
 
 ### For AI Agents (Cursor, Copilot, Manus, etc.)
 
-Simply tell your agent:
+**For Websites, Landing Pages, Web Apps:**
 
 ```
-Read the DESIGN.md from https://github.com/bkmmannesmann/bkm-design-system and create [a landing page / slides / Instagram posts / etc.] following the BKM Mannesmann design.
+Read the DESIGN.md and AGENTS.md from https://github.com/bkmmannesmann/bkm-design-system
+and create [a landing page / web app / etc.] following the BKM Mannesmann design.
+```
+
+**For Slide Presentations (Glasmorphism Style):**
+
+```
+Read the following files from https://github.com/bkmmannesmann/bkm-design-system:
+1. skills/bkm-slides/SKILL.md (mandatory workflow)
+2. skills/bkm-slides/STYLE_PRESETS.md (exact CSS tokens)
+3. skills/bkm-slides/html-template.md (copy-paste HTML templates)
+Then create a presentation about [topic] in the [BKM AG / Fachbetrieb] context.
+```
+
+The slide skill includes a mandatory workflow: determine context → read exact CSS tokens → read HTML templates → generate background photos → upload assets → build slides → quality check.
+
+**For Other Formats (Instagram, Print, Social Media):**
+
+```
+Read the DESIGN.md from https://github.com/bkmmannesmann/bkm-design-system
+and create [Instagram posts / print materials / etc.] following the BKM Mannesmann design.
 ```
 
 The agent will parse the YAML tokens and prose documentation to produce brand-consistent output.
