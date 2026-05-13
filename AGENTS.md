@@ -9,9 +9,11 @@
 3. **Lime Green = interactive only (BKM AG context).** Never decorative. Never on text. Never on large surfaces. Never in Fachbetrieb context.
 4. **The greens tell a story.** Deep Green = moisture/problem. Pure Green = dry/solution. This is not arbitrary branding — it visualizes the drying process.
 5. **Max ONE primary button per viewport fold.**
-6. **No CSS `border` on cards.** Use shadow-as-border technique.
+6. **Cards: context-dependent technique.** Website = shadow-as-border. Slides/Print = 4px colored border-left (no shadow).
 7. **Unbounded: weight 900, uppercase, 18px minimum.** No exceptions.
 8. **Hard cuts between surface modes.** Never gradients, waves, or diagonals.
+9. **Slides are editorial, not web design.** No noise textures, no aurora gradients, no bento grids, no floating badges. Clean flat surfaces + photography + whitespace.
+10. **Glasmorphismus is allowed** in both contexts as an optional overlay technique on photo backgrounds. Use sparingly (max 1–2 elements per viewport).
 
 ## Quick Start
 
@@ -58,7 +60,7 @@ The design structure (typography, spacing, shadows, layout) is identical. Only t
 ```html
 <!-- CORRECT: Image asset, right edge, cropped -->
 <section class="relative overflow-hidden bg-[#1c4b42]">
-  <img src="/assets/brand/keyvisual.svg" alt="" aria-hidden="true"
+  <img src="/assets/keyvisual/keyvisual-on-dark.svg" alt="" aria-hidden="true"
        class="absolute top-0 right-0 h-full w-[20%] object-cover object-left pointer-events-none" />
   <div class="relative z-10"><!-- content --></div>
 </section>
@@ -178,6 +180,101 @@ Same structure, different palette:
 -->
 ```
 
+## Slide/Editorial Implementation Patterns
+
+These patterns apply when creating slides, pitch decks, brochures, or any print-adjacent HTML output. They differ from the website patterns above.
+
+### Title Slide with Vertical Lime Accent Line (BKM AG)
+
+```html
+<div class="slide" style="background: #1c4b42; position: relative; width: 100vw; height: 100vh; overflow: hidden;">
+  <!-- Vertical Lime accent line -->
+  <div style="position: absolute; left: 8%; top: 20%; width: 4px; height: 60%; background: #b4e717;"></div>
+  
+  <!-- Logo -->
+  <img src="assets/logos/bkm-logo-white-puregreen.svg" alt="BKM" 
+       style="position: absolute; top: 5%; right: 5%; height: 40px;" />
+  
+  <!-- Content block (aligned to accent line) -->
+  <div style="position: absolute; left: 10%; top: 25%; max-width: 70%;">
+    <h1 style="font-family: 'Unbounded'; font-weight: 900; font-style: italic; 
+               color: #ffffff; font-size: 72px; line-height: 1.0; letter-spacing: -0.04em;">
+      HEADLINE TEXT
+    </h1>
+    <p style="font-family: 'TT Norms Pro'; font-weight: 400; font-style: italic;
+              color: rgba(255,255,255,0.7); font-size: 20px; margin-top: 24px;">
+      Subtitle text here
+    </p>
+    <div style="margin-top: 32px; display: flex; align-items: center; gap: 12px;">
+      <span style="color: #b4e717; font-size: 14px;">●</span>
+      <span style="font-family: 'TT Norms Pro'; color: #b4e717; font-size: 14px;">Author • Date</span>
+    </div>
+  </div>
+</div>
+```
+
+### Content Slide with Cards + Footer Bar
+
+```html
+<div class="slide" style="background: #f5f0eb; position: relative; width: 100vw; height: 100vh; display: flex; flex-direction: column;">
+  <!-- Content area -->
+  <div style="flex: 1; padding: 60px 80px;">
+    <h2 style="font-family: 'Unbounded'; font-weight: 900; color: #4daf46; 
+               font-size: 44px; letter-spacing: -0.02em;">
+      Section Headline
+    </h2>
+    
+    <!-- Card grid -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px;">
+      <div style="background: #ffffff; border-left: 4px solid #1c4b42; 
+                  border-radius: 8px; padding: 24px;">
+        <h3 style="font-family: 'TT Norms Pro'; font-weight: 700; color: #1a1a1a; font-size: 18px;">
+          Card Title
+        </h3>
+        <p style="font-family: 'TT Norms Pro'; font-weight: 400; color: #494949; 
+                  font-size: 15px; margin-top: 8px; line-height: 1.5;">
+          Card body text with description.
+        </p>
+      </div>
+      <!-- More cards... -->
+    </div>
+  </div>
+  
+  <!-- Deep Green Footer Bar -->
+  <div style="background: #1c4b42; padding: 16px 80px; display: flex; align-items: center; gap: 12px;">
+    <span style="color: #b4e717; font-size: 18px;">✓</span>
+    <span style="font-family: 'TT Norms Pro'; color: #ffffff; font-size: 14px;">
+      Key takeaway or navigation text
+    </span>
+  </div>
+</div>
+```
+
+### Glasmorphismus Overlay on Photo Background
+
+```html
+<div class="slide" style="position: relative; width: 100vw; height: 100vh; overflow: hidden;">
+  <!-- Background photo -->
+  <img src="photo.jpg" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;" />
+  
+  <!-- Dark overlay for readability -->
+  <div style="position: absolute; inset: 0; background: rgba(28, 75, 66, 0.6);"></div>
+  
+  <!-- Glass card -->
+  <div style="position: absolute; top: 50%; left: 10%; transform: translateY(-50%); max-width: 500px;
+              background: rgba(255, 255, 255, 0.12); backdrop-filter: blur(16px);
+              -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.15);
+              border-radius: 12px; padding: 40px;">
+    <h2 style="font-family: 'Unbounded'; font-weight: 900; color: #ffffff; font-size: 36px;">
+      Glass Card Headline
+    </h2>
+    <p style="font-family: 'TT Norms Pro'; color: rgba(255,255,255,0.8); font-size: 16px; margin-top: 16px;">
+      Content text on glass surface.
+    </p>
+  </div>
+</div>
+```
+
 ## Tailwind v4 Theme
 
 ```css
@@ -231,17 +328,35 @@ npx @google/design.md export --format css-tailwind DESIGN.md
 
 ## Checklist Before Delivery
 
+### Universal (All Contexts)
+
 - [ ] Determined context: BKM AG or Fachbetrieb?
 - [ ] Keyvisual placed as image (if applicable) — not generated in code
 - [ ] Surface modes alternate with hard cuts (no gradients)
 - [ ] Lime used ONLY for interactive elements (BKM AG context only)
 - [ ] Pure Green used for Fachbetrieb accents (not Lime)
 - [ ] Fachbetrieb surfaces are WHITE/SAND WHITE — Stone Grey is text only, never a surface
-- [ ] Fachbetrieb nav uses Transition Green (#287d4b) — not Stone Grey
 - [ ] Unbounded: weight 900, 18px minimum. H1 uppercase, H2+ sentence case
 - [ ] TT Norms Pro self-hosted from assets/fonts/ (not Google Fonts)
 - [ ] Body text in TT Norms Pro Regular (400), emphasis in Bold (700)
-- [ ] Technical values in TT Norms Pro Regular (400)
-- [ ] Cards use shadow-as-border (no CSS border property)
 - [ ] Only ONE primary button per viewport fold
 - [ ] WCAG AA contrast ratios met (4.5:1 minimum)
+
+### Website/Digital Only
+
+- [ ] Cards use shadow-as-border (no CSS border property)
+- [ ] Fachbetrieb nav uses Transition Green (#287d4b) — not Stone Grey
+- [ ] Technical values in TT Norms Pro Regular (400)
+
+### Slides/Print/Editorial Only
+
+- [ ] Background is ONLY Deep Green or Sand/Beige (no third option)
+- [ ] Cards use 4px colored border-left (no shadow, no CSS border)
+- [ ] No noise textures, aurora gradients, or animated effects
+- [ ] Glasmorphismus used sparingly if at all (max 1–2 elements)
+- [ ] At least 40% of surface is photography or visual content
+- [ ] At least 25% whitespace maintained
+- [ ] Deep Green footer bar present on content slides
+- [ ] Vertical Lime accent line on BKM AG title slides
+- [ ] No bento grids, floating badges, or spotlight effects
+- [ ] Typography: only 3 levels (Unbounded Bold headline, TT Norms Pro Bold subtitle, TT Norms Pro Regular body)

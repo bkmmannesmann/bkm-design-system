@@ -355,7 +355,11 @@ Spacing tokens scale from `xs` (4px) for micro-adjustments to `hero` (160px) for
 
 ## Elevation & Depth
 
-Depth is achieved through the **shadow-as-border** technique rather than CSS borders. Every card and elevated surface uses a composite box-shadow that combines a 1px ring (simulating a border) with a soft spread shadow (simulating physical lift).
+Depth is achieved through two complementary techniques depending on context:
+
+### Shadow-as-Border (Website/Digital UI)
+
+For digital interfaces, cards and elevated surfaces use a composite box-shadow that combines a 1px ring (simulating a border) with a soft spread shadow (simulating physical lift).
 
 - **Ring only** — `rgba(0,0,0,0.08) 0px 0px 0px 1px`. Hairline definition without lift. Inactive containers.
 - **Subtle** — Ring + 2px blur. Default card state.
@@ -363,7 +367,32 @@ Depth is achieved through the **shadow-as-border** technique rather than CSS bor
 - **Elevated** — Ring + 12px blur. Dropdowns and popovers.
 - **Modal** — Ring + 24px blur. Modals and overlays.
 
-Why shadows over borders: CSS borders add to element dimensions, create hard edges that feel flat, and cannot express physical depth. Shadows simulate the real-world behavior of elevated materials — consistent with a brand that deals in physical building materials.
+### Colored Border-Left (Slides/Print/Editorial)
+
+For presentations, brochures, and editorial layouts, cards use a **4px solid left border** in a semantic color instead of shadow. This is the primary card differentiation technique in the real BKM corporate design (observed in all official PDFs and brochures).
+
+- **Deep Green border-left** — Standard content card on Sand/White backgrounds.
+- **Red border-left** — Warning or problem-state cards.
+- **Lime border-left** — Highlight or success-state cards (BKM AG context only).
+- **Pure Green border-left** — Fachbetrieb context cards.
+
+Cards in editorial context have minimal rounded corners (8px), white background on Sand surfaces, and NO box-shadow. The colored border-left provides all necessary visual differentiation.
+
+### Glasmorphismus (Both Contexts)
+
+Glasmorphismus (frosted glass effect) is available as an optional technique for both BKM AG and Fachbetrieb contexts. It works particularly well for overlays on photo backgrounds, floating UI panels, and cards that need to feel lightweight against complex backgrounds.
+
+```css
+.glass {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+}
+```
+
+Use sparingly — maximum 1–2 glass elements per viewport. Never use glass on elements that contain critical text at small sizes (readability concern).
 
 ## Shapes
 
@@ -387,9 +416,9 @@ All buttons use Unbounded at weight 900, uppercase, with slight letter-spacing. 
 
 ### Cards
 
-Cards never use CSS borders. They use the shadow-as-border technique exclusively. Cards lift on hover (translateY -2px + shadow escalation from subtle to featured).
+**Website/Digital context:** Cards use the shadow-as-border technique. Cards lift on hover (translateY -2px + shadow escalation from subtle to featured). Dark cards (on light surfaces) use Deep Green background with white text and a Lime accent border-left (4px solid). In Fachbetrieb context, the accent is Pure Green instead.
 
-Dark cards (on light surfaces) use Deep Green background with white text and a Lime accent border-left (4px solid). In Fachbetrieb context, the accent is Pure Green instead.
+**Slide/Print/Editorial context:** Cards use a **4px solid colored left border** as the primary visual differentiator — NO shadow, NO hover effects. White card on Sand/Beige background. Minimal rounded corners (8px). Icon + Title (TT Norms Pro Bold) + Body (TT Norms Pro Regular). The border color carries semantic meaning: Deep Green = standard, Red = warning/problem, Lime = highlight (BKM AG), Pure Green = highlight (Fachbetrieb).
 
 ### Navigation
 
@@ -486,8 +515,10 @@ All color combinations used in this system have been validated against WCAG AA:
 - Do use TT Norms Pro Regular for all measurable values (prices, dimensions, percentages, specs)
 - Do use TT Norms Pro Bold for emphasized information and important labels
 - Don't use more than ONE primary button per viewport fold
-- Do use shadow-as-border technique for all cards and elevated surfaces
-- Don't use CSS `border` property on cards (shadows provide depth; borders flatten)
+- Do use shadow-as-border technique for cards in digital/website context
+- Do use colored border-left (4px solid) for cards in slide/print/editorial context
+- Don't use CSS `border` property on website cards (shadows provide depth; borders flatten)
+- Don't use box-shadow on editorial/slide cards (colored border-left provides differentiation)
 - Do keep the same design structure for Fachbetrieb pages — only swap the color context
 - Don't create a visually separate "brand" for Fachbetriebe — it is the same system, different palette
 - Do use White/Sand White as the dominant surface in Fachbetrieb context — it must feel light and open
@@ -502,3 +533,114 @@ All color combinations used in this system have been validated against WCAG AA:
 - Don't use `bkm-logo-black` in digital media — it is reserved for single-color print
 - Don't assume any logo variant has Deep Green or Transition Green coloring — only Pure Green exists as M-element color
 - Don't use Pure Green (#4daf46) as text on light backgrounds — contrast is only 2.79 (FAIL)
+- Don't use noise textures on slides — real BKM slides use clean, flat surfaces
+- Don't use aurora gradients on slides — they are web-only decorative effects
+- Do use Glasmorphismus sparingly for overlays on photo backgrounds (both contexts)
+- Don't use bento grids, floating badges, or spotlight effects on slides — these are web UI patterns
+- Do use a vertical Lime accent line (4px wide, ~60% height) on BKM AG title slides
+- Do use a Deep Green full-width footer bar on editorial/slide content pages
+- Do ensure at least 40% of slide surface is photography or visual content
+- Do maintain at least 25% whitespace on every slide
+
+## Editorial & Print Design (Slides / Brochures)
+
+This section documents the design language observed in official BKM Mannesmann print materials, PDFs, and presentations. It differs significantly from the website/digital design language and must be followed when creating slides, brochures, pitch decks, or any print-adjacent output.
+
+### Core Principle: Corporate Editorial, Not Web Design
+
+BKM slides and brochures follow a **corporate editorial** aesthetic — closer to a premium magazine or annual report than to a SaaS landing page. The key differences from web design:
+
+- **Clean, flat surfaces** — no noise textures, no animated gradients, no aurora effects
+- **Photography-dominant** — large, emotional photos occupy 40–60% of the page
+- **Generous whitespace** — at least 25% of the surface remains empty
+- **Asymmetric, editorial layouts** — not symmetric dashboard grids
+- **Minimal decoration** — no floating badges, no bento grids, no spotlight effects
+- **Glasmorphismus** is permitted as an optional overlay technique on photo backgrounds
+
+### The Two Background Types (Slides Only)
+
+Every slide uses exactly ONE of these two background types:
+
+| Type | Color | Use for | Text color |
+|------|-------|---------|------------|
+| **Dark** | Deep Green (#1c4b42) | Title slides, CTA slides, quote slides | White |
+| **Light** | Sand/Beige (#f5f0eb – #f6f5f2) | Content slides, data slides | Deep Green or Black |
+
+There is no third option. No Stone Grey backgrounds. No Transition Green full-surface backgrounds (except sparingly in Fachbetrieb context, max 1–2 per deck). No white-on-white.
+
+### Title Slide Anatomy (BKM AG)
+
+```
+┌────────────────────────────────────────────────┐
+│  [Logo white]                              │
+│                                                │
+│  │ (Lime vertical line, 4px, ~60% height)     │
+│  │                                              │
+│  │  HEADLINE                                    │
+│  │  Unbounded Bold Italic, White, 72–100px      │
+│  │                                              │
+│  │  Subtitle                                    │
+│  │  TT Norms Pro Regular Italic, White 70%      │
+│  │                                              │
+│     Meta: Lime icons + Lime text (author, date) │
+│                                                │
+└────────────────────────────────────────────────┘
+Background: Deep Green (#1c4b42), completely flat
+```
+
+The **vertical Lime accent line** is a signature element of BKM AG title pages. It runs along the left side of the content area, 4px wide, approximately 60% of the slide height. It visually anchors the headline block.
+
+### Content Slide Anatomy
+
+```
+┌────────────────────────────────────────────────┐
+│                                                │
+│  Headline: Unbounded Bold, Pure Green, 48px    │
+│                                                │
+│  ┌───────────────┐  ┌───────────────┐  │
+│  │█ Card 1       │  │█ Card 2       │  │
+│  │  Title (Bold) │  │  Title (Bold) │  │
+│  │  Body (Reg.)  │  │  Body (Reg.)  │  │
+│  └───────────────┘  └───────────────┘  │
+│  (█ = 4px colored left border)                 │
+│                                                │
+│────────────────────────────────────────────────│
+│  [Deep Green Footer Bar: Icon + Text, White]    │
+└────────────────────────────────────────────────┘
+Background: Sand/Beige (#f5f0eb)
+```
+
+### Content Slide Components
+
+**Deep Green Footer Bar:** A full-width bar at the bottom of content slides. Deep Green background, 48–60px height, containing a Lime icon and white text (e.g., a key takeaway or navigation hint). This is a signature element of BKM editorial design.
+
+**Cards with Colored Border-Left:** White cards on Sand background. 4px solid left border in Deep Green (standard), Red (warning), or Lime/Pure Green (highlight). No shadow. Minimal border-radius (8px). Content structure: Icon (optional) + Title (TT Norms Pro Bold) + Body (TT Norms Pro Regular).
+
+**Accent Numbers:** Large numbers (Unbounded Bold, 48–96px) in Pure Green or Lime on light backgrounds. Used for statistics, KPIs, and proof points.
+
+**Lime Checkmarks and Arrows:** Lime-colored checkmarks (✓) and directional arrows as visual indicators. Always paired with TT Norms Pro Bold titles in Deep Green.
+
+### Photography Rules (Editorial)
+
+Photography is the PRIMARY visual element in BKM editorial design — not text, not icons, not decorative patterns.
+
+- At least 40% of slide/page surface should be photography or visual content
+- Use real, emotional photos: people, buildings, construction sites, before/after
+- Photos break out of the grid — they can bleed to edges, overlap with the Keyvisual
+- The Keyvisual chevrons overlap photos at the right edge (signature BKM composition)
+- Never use generic stock photos — prefer BKM-specific imagery or well-designed placeholders
+
+### What Does NOT Belong in BKM Editorial Design
+
+The following patterns are **web UI design** and must NOT appear in slides, brochures, or print materials:
+
+- Noise textures (SVG fractal noise overlays)
+- Aurora gradients (animated multi-color gradients)
+- Bento grids (equal-sized tile layouts)
+- Floating badges (positioned absolutely over content)
+- Spotlight/glow effects
+- Animated text effects
+- Dashboard-style symmetric grids
+- Multiple card shadows competing for attention
+
+These patterns remain valid for the **website/digital context** (see `skills/bkm-website/`) but are explicitly forbidden in editorial output.
