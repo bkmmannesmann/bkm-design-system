@@ -39,87 +39,110 @@ colors:
   error-container: "#fef2f2"
   on-error-container: "#991b1b"
 typography:
+  # === H1 — Unbounded 900 UPPERCASE (only H1 uses uppercase) ===
   headline-display:
     fontFamily: Unbounded
     fontSize: 72px
     fontWeight: 900
     lineHeight: 1.0
     letterSpacing: -0.04em
+    textTransform: uppercase
   headline-lg:
     fontFamily: Unbounded
     fontSize: 56px
     fontWeight: 900
     lineHeight: 1.05
     letterSpacing: -0.03em
+    textTransform: uppercase
+  # === H2–H6 — Unbounded 900, sentence case (NO uppercase) ===
   headline-md:
     fontFamily: Unbounded
     fontSize: 44px
     fontWeight: 900
     lineHeight: 1.08
     letterSpacing: -0.02em
+    textTransform: none
   headline-sm:
     fontFamily: Unbounded
     fontSize: 36px
     fontWeight: 900
     lineHeight: 1.15
     letterSpacing: -0.02em
+    textTransform: none
   title-lg:
     fontFamily: Unbounded
     fontSize: 28px
     fontWeight: 900
     lineHeight: 1.2
     letterSpacing: -0.01em
+    textTransform: none
   title-md:
     fontFamily: Unbounded
     fontSize: 22px
     fontWeight: 900
     lineHeight: 1.25
+    textTransform: none
   title-sm:
     fontFamily: Unbounded
     fontSize: 18px
     fontWeight: 900
     lineHeight: 1.3
+    textTransform: none
+  # === Body — TT Norms Pro Regular (400) ===
   body-lg:
-    fontFamily: Inter
+    fontFamily: TT Norms Pro
     fontSize: 18px
     fontWeight: 400
     lineHeight: 1.7
   body-md:
-    fontFamily: Inter
+    fontFamily: TT Norms Pro
     fontSize: 16px
     fontWeight: 400
     lineHeight: 1.6
   body-sm:
-    fontFamily: Inter
+    fontFamily: TT Norms Pro
     fontSize: 14px
     fontWeight: 400
     lineHeight: 1.5
-  label-lg:
-    fontFamily: Inter
+  # === Body Bold — TT Norms Pro Bold (700) for emphasis ===
+  body-lg-bold:
+    fontFamily: TT Norms Pro
+    fontSize: 18px
+    fontWeight: 700
+    lineHeight: 1.7
+  body-md-bold:
+    fontFamily: TT Norms Pro
     fontSize: 16px
-    fontWeight: 600
+    fontWeight: 700
+    lineHeight: 1.6
+  # === Labels — TT Norms Pro Bold (700) ===
+  label-lg:
+    fontFamily: TT Norms Pro
+    fontSize: 16px
+    fontWeight: 700
     lineHeight: 1.0
     letterSpacing: 0.02em
   label-md:
-    fontFamily: Inter
+    fontFamily: TT Norms Pro
     fontSize: 14px
-    fontWeight: 500
+    fontWeight: 700
     lineHeight: 1.0
   label-sm:
-    fontFamily: Inter
+    fontFamily: TT Norms Pro
     fontSize: 12px
     fontWeight: 700
     lineHeight: 1.0
     letterSpacing: 0.05em
+  # === Technical Values — TT Norms Pro Regular (400) ===
   code-md:
-    fontFamily: Geist Mono
+    fontFamily: TT Norms Pro
     fontSize: 14px
-    fontWeight: 500
+    fontWeight: 400
     lineHeight: 1.5
   code-sm:
-    fontFamily: Geist Mono
+    fontFamily: TT Norms Pro
     fontSize: 12px
-    fontWeight: 500
+    fontWeight: 400
     lineHeight: 1.4
 rounded:
   none: 0px
@@ -307,13 +330,15 @@ For the Fachbetrieb context: `fachbetrieb-primary` (#4daf46, Pure Green) replace
 
 ## Typography
 
-Three typefaces serve distinct communicative roles:
+Two typefaces serve distinct communicative roles:
 
-**Unbounded (weight 900, uppercase)** — Headlines and buttons only. Its extreme weight and geometric construction communicate mass and protection. Negative letter-spacing at display sizes creates visual density. Never used below 18px. Never at weights other than 900. Never in sentence case. This font makes the brand feel load-bearing.
+**Unbounded (weight 900)** — Headlines and buttons. Its extreme weight and geometric construction communicate mass and protection. Negative letter-spacing at display sizes creates visual density. Never used below 18px. Never at weights other than 900. **H1 headlines use uppercase. H2 and below use sentence case** — this creates a clear visual hierarchy where the primary headline dominates while sub-headlines feel more approachable. This font makes the brand feel load-bearing.
 
-**Inter (weights 400–700)** — Body text, labels, and UI elements. Chosen for its invisibility — it never competes with the message. The reader should focus on content, not letterforms.
+**TT Norms Pro (weights 400 + 700)** — Everything else. Body text, labels, UI elements, technical specifications, measurements, prices, and product data. TT Norms Pro is a proprietary font (not a Google Font) and must be self-hosted from `assets/fonts/`. Two weights are available: **Regular (400)** for body text, descriptions, and technical values; **Bold (700)** for emphasized information, important labels, and highlighted content. Its clean geometric construction provides excellent readability while maintaining a professional, engineered aesthetic.
 
-**Geist Mono (weight 500)** — Technical specifications, measurements, prices, and product data. Its monospace grid communicates precision and measurability. Every value that could be verified with a measuring instrument is set in Geist Mono: layer thickness (2.5 mm), drying time (24 h), consumption rate (1.2 kg/m²), pH values, prices.
+**Font files:**
+- `assets/fonts/TT_Norms_Pro_Compact_Regular.woff2` — Regular (400)
+- `assets/fonts/TT_Norms_Pro_Bold.woff2` — Bold (700)
 
 ## Layout
 
@@ -355,7 +380,7 @@ Primary buttons use Lime Green (`secondary`) on dark surfaces — the single hig
 
 In the Fachbetrieb context, primary buttons use Pure Green (`fachbetrieb-primary`) instead of Lime. The button shape and typography remain identical.
 
-All buttons use Unbounded at weight 900, uppercase, with slight letter-spacing. Height is fixed at 48px for consistent touch targets.
+All buttons use Unbounded at weight 900, uppercase, with slight letter-spacing. Height is fixed at 48px for consistent touch targets. Button text is always uppercase regardless of heading level.
 
 ### Cards
 
@@ -371,7 +396,7 @@ In Fachbetrieb context, the navigation uses Stone Grey (`fachbetrieb-secondary`)
 
 ### Technical Data (Spec Tables)
 
-All measurable values are displayed in Geist Mono. Labels in Inter. Rows are separated by hairline dividers (`outline-variant`). This pattern is identical in both BKM AG and Fachbetrieb contexts.
+All measurable values are displayed in TT Norms Pro Regular. Labels in TT Norms Pro Bold. Rows are separated by hairline dividers (`outline-variant`). This pattern is identical in both BKM AG and Fachbetrieb contexts.
 
 ### The Keyvisual
 
@@ -453,9 +478,10 @@ All color combinations used in this system have been validated against WCAG AA:
 - Don't use gradients, waves, diagonals, or any soft transition between surfaces
 - Do place the Keyvisual as a pre-rendered image asset (right edge, cropped)
 - Don't recreate the Keyvisual in code (no SVG, no CSS clip-path, no procedural patterns)
-- Do use Unbounded only at weight 900, only uppercase, only at 18px or larger
+- Do use Unbounded only at weight 900, only at 18px or larger. H1 in uppercase, H2+ in sentence case
 - Don't use pure black (#000000) — darkest value is Deep Green (#1c4b42) for surfaces
-- Do use Geist Mono for all measurable values (prices, dimensions, percentages, specs)
+- Do use TT Norms Pro Regular for all measurable values (prices, dimensions, percentages, specs)
+- Do use TT Norms Pro Bold for emphasized information and important labels
 - Don't use more than ONE primary button per viewport fold
 - Do use shadow-as-border technique for all cards and elevated surfaces
 - Don't use CSS `border` property on cards (shadows provide depth; borders flatten)

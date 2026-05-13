@@ -52,13 +52,13 @@ export function BkmHeroAurora() {
         transition={{ delay: 0.3, duration: 0.8, ease: "easeInOut" }}
         className="relative z-10 flex flex-col items-start max-w-[1280px] mx-auto px-8 md:px-16 py-40"
       >
-        <p className="font-['Inter'] text-[13px] font-semibold uppercase tracking-[1.5px] text-white/50 mb-6">
+        <p className="font-['TT_Norms_Pro'] text-[13px] font-semibold uppercase tracking-[1.5px] text-white/50 mb-6">
           Bauwerksabdichtung seit 1928
         </p>
         <h1 className="font-['Unbounded'] text-5xl md:text-7xl font-black uppercase text-white tracking-[-0.04em] leading-none max-w-[800px]">
           SCHUTZ DER HÄLT
         </h1>
-        <p className="font-['Inter'] text-xl text-white/70 mt-6 max-w-[640px] leading-relaxed">
+        <p className="font-['TT_Norms_Pro'] text-xl text-white/70 mt-6 max-w-[640px] leading-relaxed">
           Professionelle Bauwerksabdichtung mit MicroPorex® Technologie.
         </p>
         <button className="mt-10 bg-[#b4e717] text-[#1c4b42] font-['Unbounded'] text-sm font-black uppercase px-6 py-3 h-12 rounded-[4px] tracking-[0.02em] hover:bg-white transition-colors duration-150">

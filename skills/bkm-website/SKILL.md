@@ -97,7 +97,7 @@ Die BKM-Tokens müssen in die Tailwind-Konfiguration eingetragen werden:
 <!-- client/index.html -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@900&family=Inter:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@900&display=swap" rel="stylesheet" />
 ```
 
 ## Kritische Regeln
@@ -108,7 +108,7 @@ Die BKM-Tokens müssen in die Tailwind-Konfiguration eingetragen werden:
 4. **Harte Schnitte zwischen Flächen** — Keine Gradients als Übergang.
 5. **Shadow-as-Border** — Keine CSS `border` auf Cards.
 6. **Max. 1 Primary Button pro Viewport.**
-7. **Technische Werte in Geist Mono.**
+7. **Technische Werte in TT Norms Pro.**
 8. **Pure Green nie als Text auf hellem Hintergrund** (Kontrast 2.79).
 
 ## Sektions-Aufbau
@@ -119,9 +119,9 @@ Jede Sektion folgt dem Schema:
 ┌─────────────────────────────────────────────┐
 │  max-width: 1280px, mx-auto, px-8 md:px-16 │
 │                                             │
-│  [Label] Inter 700 uppercase 13px           │
+│  [Label] TT Norms Pro 700 uppercase 13px           │
 │  [Headline] Unbounded 900 UPPERCASE         │
-│  [Body] Inter 400 16–20px                   │
+│  [Body] TT Norms Pro 400 16–20px                   │
 │  [Content: Cards, Grid, etc.]               │
 │                                             │
 └─────────────────────────────────────────────┘

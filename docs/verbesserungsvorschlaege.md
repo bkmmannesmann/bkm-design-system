@@ -28,7 +28,7 @@ BKM nutzt bereits Unbounded Black für Headlines. Führende technische Systeme n
 
 **Vorschlag:**
 - Einführung von negativem Letter-Spacing für große Unbounded-Headlines (z.B. `-1.5px` bei 48px, `-1px` bei 36px). Dies verstärkt den geometrischen, industriellen Charakter der Schrift.
-- Einführung einer Monospace-Schrift (z.B. Geist Mono oder Source Code Pro) exklusiv für technische Spezifikationen, Artikelnummern und Mischungsverhältnisse in Datenblättern. Dies signalisiert sofort "technische Fakten" und trennt sie visuell vom Fließtext (TT Norms Pro).
+- Einführung einer Monospace-Schrift (z.B. TT Norms Pro oder Source Code Pro) exklusiv für technische Spezifikationen, Artikelnummern und Mischungsverhältnisse in Datenblättern. Dies signalisiert sofort "technische Fakten" und trennt sie visuell vom Fließtext (TT Norms Pro).
 
 ## 4. Hyper-angulare Geometrie vs. kontrollierte Rundungen
 

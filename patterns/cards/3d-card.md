@@ -68,7 +68,7 @@ export function Bkm3DCard({
         </CardItem>
         <CardItem translateZ="30" className="mt-4">
           <span
-            className="inline-flex font-['Inter'] text-xs font-bold uppercase tracking-[0.05em] px-2.5 py-1 rounded-[4px]"
+            className="inline-flex font-['TT_Norms_Pro'] text-xs font-bold uppercase tracking-[0.05em] px-2.5 py-1 rounded-[4px]"
             style={{ backgroundColor: badgeBg, color: badgeText }}
           >
             {badge}
@@ -80,7 +80,7 @@ export function Bkm3DCard({
           </h3>
         </CardItem>
         <CardItem translateZ="20" className="mt-2">
-          <p className="font-['Inter'] text-sm text-[#494949] leading-relaxed">
+          <p className="font-['TT_Norms_Pro'] text-sm text-[#494949] leading-relaxed">
             {description}
           </p>
         </CardItem>

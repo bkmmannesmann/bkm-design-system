@@ -71,7 +71,7 @@ export function FachbetriebAnimatedTitle() {
 
 ## Einschränkungen
 
-- **Nur für Unbounded-Headlines** — Nie für Inter-Body-Text oder Geist-Mono-Specs.
+- **Nur für Unbounded-Headlines** — Nie für TT Norms Pro-Body-Text oder TT-Norms-Pro-Specs.
 - **Maximal eine Animation pro Viewport** — Mehrere gleichzeitig erzeugen Chaos.
 - **Delay max. 0.05s pro Buchstabe** — Längere Delays wirken träge.
 - **`prefers-reduced-motion`:** Bei aktivierter Einstellung sofort alle Buchstaben zeigen.

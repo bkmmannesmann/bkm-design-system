@@ -88,4 +88,4 @@ Bevorzugtes Bildformat: WebP (Fallback: JPEG).
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@900&display=swap" rel="stylesheet">
 ```
 
-TT Norms ist keine Google Font und muss lokal eingebunden werden. Fallback: `'Inter', 'Roboto', sans-serif`.
+TT Norms ist keine Google Font und muss lokal eingebunden werden. Fallback: `'TT Norms Pro', 'Roboto', sans-serif`.

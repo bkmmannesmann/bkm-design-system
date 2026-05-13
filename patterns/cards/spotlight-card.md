@@ -22,7 +22,7 @@
 | Card-Shadow-Hover | `var(--bkm-shadow-featured)` | `var(--bkm-shadow-featured)` |
 | Badge-Farbe | Deep Green + Lime | Transition Green + Weiß |
 | Headline-Font | Unbounded 900 uppercase | Unbounded 900 uppercase |
-| Body-Font | Inter 400 | Inter 400 |
+| Body-Font | TT Norms Pro 400 | TT Norms Pro 400 |
 | Border-Radius | `12px` (rounded.lg) | `12px` (rounded.lg) |
 
 ## BKM-angepasster Code
@@ -88,16 +88,16 @@ export function BkmSpotlightCard({
 // BKM AG Kontext — Produkt-Showcase
 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
   <BkmSpotlightCard context="ag">
-    <span className="inline-flex bg-[#1c4b42] text-[#b4e717] font-['Inter'] text-xs font-bold uppercase tracking-[0.05em] px-2.5 py-1 rounded-[4px]">
+    <span className="inline-flex bg-[#1c4b42] text-[#b4e717] font-['TT_Norms_Pro'] text-xs font-bold uppercase tracking-[0.05em] px-2.5 py-1 rounded-[4px]">
       PRO LINE
     </span>
     <h3 className="font-['Unbounded'] text-lg font-black uppercase tracking-tight text-[#1a1a1a] mt-4">
       KELLERSCHUTZ PRO
     </h3>
-    <p className="font-['Inter'] text-base text-[#494949] mt-3 leading-relaxed">
+    <p className="font-['TT_Norms_Pro'] text-base text-[#494949] mt-3 leading-relaxed">
       Professionelle Horizontalsperre mit MicroPorex® Technologie.
     </p>
-    <span className="inline-block mt-4 font-['Geist_Mono'] text-sm font-medium text-[#1c4b42]">
+    <span className="inline-block mt-4 font-['TT_Norms_Pro'] text-sm font-medium text-[#1c4b42]">
       ab 89,90 €
     </span>
   </BkmSpotlightCard>
@@ -105,13 +105,13 @@ export function BkmSpotlightCard({
 
 // Fachbetrieb Kontext — Service-Übersicht
 <BkmSpotlightCard context="fachbetrieb">
-  <span className="inline-flex bg-[#287d4b] text-white font-['Inter'] text-xs font-bold uppercase tracking-[0.05em] px-2.5 py-1 rounded-[4px]">
+  <span className="inline-flex bg-[#287d4b] text-white font-['TT_Norms_Pro'] text-xs font-bold uppercase tracking-[0.05em] px-2.5 py-1 rounded-[4px]">
     ZERTIFIZIERT
   </span>
   <h3 className="font-['Unbounded'] text-lg font-black uppercase tracking-tight text-[#1a1a1a] mt-4">
     HORIZONTALSPERRE
   </h3>
-  <p className="font-['Inter'] text-base text-[#494949] mt-3 leading-relaxed">
+  <p className="font-['TT_Norms_Pro'] text-base text-[#494949] mt-3 leading-relaxed">
     Nachträgliche Horizontalsperre gegen aufsteigende Feuchtigkeit.
   </p>
 </BkmSpotlightCard>

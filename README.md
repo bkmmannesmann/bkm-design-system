@@ -57,7 +57,7 @@ The BKM system is built on five pillars:
 2. **Shadow-as-Border** — Multi-layer box-shadow stacks replace traditional CSS borders (inspired by Vercel)
 3. **Product-Line Geometry** — Angular (0–4px) for Pro Line, Rounded (pill) for Home Line
 4. **Single-Accent Strategy** — Lime Green (`#b4e717`) exclusively for interactive elements
-5. **Three-Voice Typography** — Unbounded (announce), Inter (read), Geist Mono (specify)
+5. **Two-Voice Typography** — Unbounded (announce), TT Norms Pro Regular + Bold (read + specify)
 
 ## Supported Output Formats
 

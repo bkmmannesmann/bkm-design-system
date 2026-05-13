@@ -86,7 +86,7 @@ Nach der Installation jeder Komponente müssen folgende Werte ersetzt werden:
 | Akzentfarbe | `#b4e717` (Lime) | `#4daf46` (Pure Green) |
 | Hintergrund dunkel | `#1c4b42` (Deep Green) | `#494949` (Stone Grey) |
 | Hintergrund hell | `#f6f5f2` (Sand White) | `#f6f5f2` (Sand White) |
-| Body-Font | `Inter` | `Inter` |
+| Body-Font | `TT Norms Pro` | `TT Norms Pro` |
 | Headline-Font | `Unbounded` (900, uppercase) | `Unbounded` (900, uppercase) |
 | Border-Radius Buttons | `4px` | `4px` |
 | Border-Radius Cards | `12px` | `12px` |

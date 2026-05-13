@@ -96,8 +96,8 @@ const kundenstimmen: BkmTestimonial[] = [
 
 ## Einschränkungen
 
-- **Zitate in Inter** — Nicht in Unbounded. Zitate sind Fließtext, keine Headlines.
-- **Name in Inter 600** — Hervorgehoben, aber nicht in Unbounded.
+- **Zitate in TT Norms Pro** — Nicht in Unbounded. Zitate sind Fließtext, keine Headlines.
+- **Name in TT Norms Pro 600** — Hervorgehoben, aber nicht in Unbounded.
 - **Rolle/Firma als Akzent** — Lime (BKM AG) oder Transition Green (Fachbetrieb auf hell).
 - **Autoplay: 5–8 Sekunden** — Genug Zeit zum Lesen.
 - **Mindestens 3 Testimonials** — Unter 3 wirkt es dünn.

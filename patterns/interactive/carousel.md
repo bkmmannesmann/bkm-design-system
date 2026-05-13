@@ -21,7 +21,7 @@
 | Card-Shadow-Active | `var(--bkm-shadow-elevated)` | `var(--bkm-shadow-elevated)` |
 | Kategorie-Badge | Deep Green + Lime | Transition Green + Weiß |
 | Titel-Font | Unbounded 900 uppercase | Unbounded 900 uppercase |
-| Body-Font | Inter 400 | Inter 400 |
+| Body-Font | TT Norms Pro 400 | TT Norms Pro 400 |
 | Overlay-Hintergrund | `#1c4b42` (Deep Green, 90%) | `#494949` (Stone Grey, 90%) |
 | Close-Button | `#b4e717` (Lime) | `#4daf46` (Pure Green) |
 | Card-Radius | `12px` (rounded.lg) | `12px` (rounded.lg) |
@@ -84,7 +84,7 @@ export function BkmProjectCarousel({
             />
             <div className="p-6">
               <span
-                className="inline-flex font-['Inter'] text-xs font-bold uppercase tracking-[0.05em] px-2.5 py-1 rounded-[4px]"
+                className="inline-flex font-['TT_Norms_Pro'] text-xs font-bold uppercase tracking-[0.05em] px-2.5 py-1 rounded-[4px]"
                 style={{ backgroundColor: badgeBg, color: badgeText }}
               >
                 {project.category}
@@ -109,17 +109,17 @@ function ProjectDetail({
 }) {
   return (
     <div className="p-8">
-      <p className="font-['Inter'] text-base text-[#494949] leading-relaxed">
+      <p className="font-['TT_Norms_Pro'] text-base text-[#494949] leading-relaxed">
         {project.description}
       </p>
       {project.specs && (
         <div className="mt-6 divide-y divide-[#e8e6e1]">
           {project.specs.map((spec, i) => (
             <div key={i} className="flex justify-between items-center py-3">
-              <span className="font-['Inter'] text-sm text-[#6b6b6b]">
+              <span className="font-['TT_Norms_Pro'] text-sm text-[#6b6b6b]">
                 {spec.label}
               </span>
-              <span className="font-['Geist_Mono'] text-sm font-medium text-[#1c4b42]">
+              <span className="font-['TT_Norms_Pro'] text-sm font-medium text-[#1c4b42]">
                 {spec.value}
               </span>
             </div>
@@ -158,7 +158,7 @@ const referenzen: BkmProject[] = [
 - **Mindestens 3 Karten** — Das Karussell wirkt erst ab 3 Elementen. Optimal: 4–8.
 - **Bilder:** Einheitliches Seitenverhältnis (16:10 empfohlen). Professionelle Fotografie.
 - **Expanded Content:** Die Detailansicht öffnet als Overlay. Auf Mobile wird sie fullscreen.
-- **Technische Werte in Geist Mono** — Auch in der Detailansicht gelten die Spec-Table-Regeln.
+- **Technische Werte in TT Norms Pro** — Auch in der Detailansicht gelten die Spec-Table-Regeln.
 
 ## Wann einsetzen
 

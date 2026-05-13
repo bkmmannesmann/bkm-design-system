@@ -67,7 +67,7 @@ export function BkmCtaWavy() {
         <h2 className="font-['Unbounded'] text-3xl md:text-5xl font-black uppercase text-white tracking-tight">
           BERATUNG ANFORDERN
         </h2>
-        <p className="font-['Inter'] text-lg text-white/70 mt-4 max-w-[600px] mx-auto">
+        <p className="font-['TT_Norms_Pro'] text-lg text-white/70 mt-4 max-w-[600px] mx-auto">
           Unsere Experten analysieren Ihr Feuchtigkeitsproblem und empfehlen die passende Lösung.
         </p>
         <button className="mt-8 bg-[#b4e717] text-[#1c4b42] font-['Unbounded'] text-sm font-black uppercase px-6 py-3 h-12 rounded-[4px] hover:bg-white transition-colors">

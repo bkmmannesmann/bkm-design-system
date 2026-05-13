@@ -19,7 +19,7 @@
 <!-- 1. Load fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@900&family=Inter:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<!-- This old URL was replaced by the @font-face block above -->
 ```
 
 ```css
@@ -78,13 +78,13 @@ When to skip the Keyvisual: Instagram posts, email templates, UI components, tec
 ```html
 <section class="relative overflow-hidden bg-[#1c4b42] min-h-[560px]">
   <div class="max-w-[1280px] mx-auto px-8 md:px-16 py-40">
-    <p class="font-['Inter'] text-[13px] font-semibold uppercase tracking-[1.5px] text-white/50 mb-6">
+    <p class="font-['TT_Norms_Pro'] text-[13px] font-semibold uppercase tracking-[1.5px] text-white/50 mb-6">
       Bauwerksabdichtung seit 1928
     </p>
     <h1 class="font-['Unbounded'] text-5xl md:text-7xl font-black uppercase text-white tracking-[-0.04em] leading-none max-w-[800px]">
       SCHUTZ DER HÄLT
     </h1>
-    <p class="font-['Inter'] text-xl text-white/70 mt-6 max-w-[640px] leading-relaxed">
+    <p class="font-['TT_Norms_Pro'] text-xl text-white/70 mt-6 max-w-[640px] leading-relaxed">
       Professionelle Bauwerksabdichtung mit MicroPorex® Technologie.
     </p>
     <button class="mt-10 bg-[#b4e717] text-[#1c4b42] font-['Unbounded'] text-sm font-black uppercase
@@ -103,16 +103,16 @@ When to skip the Keyvisual: Instagram posts, email templates, UI components, tec
             shadow-[rgba(0,0,0,0.08)_0px_0px_0px_1px,rgba(0,0,0,0.04)_0px_2px_4px]
             hover:shadow-[rgba(0,0,0,0.08)_0px_0px_0px_1px,rgba(0,0,0,0.06)_0px_8px_16px_-4px]
             hover:-translate-y-0.5 transition-all duration-200">
-  <span class="inline-flex bg-[#1c4b42] text-[#b4e717] font-['Inter'] text-xs font-bold uppercase tracking-[0.05em] px-2.5 py-1 rounded-[4px]">
+  <span class="inline-flex bg-[#1c4b42] text-[#b4e717] font-['TT_Norms_Pro'] text-xs font-bold uppercase tracking-[0.05em] px-2.5 py-1 rounded-[4px]">
     PRO LINE
   </span>
   <h3 class="font-['Unbounded'] text-lg font-black uppercase tracking-tight text-[#1a1a1a] mt-4">
     KELLERSCHUTZ PRO
   </h3>
-  <p class="font-['Inter'] text-base text-[#494949] mt-3 leading-relaxed">
+  <p class="font-['TT_Norms_Pro'] text-base text-[#494949] mt-3 leading-relaxed">
     Professionelle Horizontalsperre mit MicroPorex® Technologie.
   </p>
-  <span class="inline-block mt-4 font-['Geist_Mono'] text-sm font-medium text-[#1c4b42]">
+  <span class="inline-block mt-4 font-['TT_Norms_Pro'] text-sm font-medium text-[#1c4b42]">
     ab 89,90 €
   </span>
 </div>
@@ -123,16 +123,16 @@ When to skip the Keyvisual: Instagram posts, email templates, UI components, tec
 ```html
 <div class="divide-y divide-[#e8e6e1]">
   <div class="flex justify-between items-center py-3">
-    <span class="font-['Inter'] text-sm text-[#6b6b6b]">Schichtdicke</span>
-    <span class="font-['Geist_Mono'] text-sm font-medium text-[#1c4b42]">2,5 mm</span>
+    <span class="font-['TT_Norms_Pro'] text-sm text-[#6b6b6b]">Schichtdicke</span>
+    <span class="font-['TT_Norms_Pro'] text-sm font-medium text-[#1c4b42]">2,5 mm</span>
   </div>
   <div class="flex justify-between items-center py-3">
-    <span class="font-['Inter'] text-sm text-[#6b6b6b]">Verbrauch</span>
-    <span class="font-['Geist_Mono'] text-sm font-medium text-[#1c4b42]">1,2 kg/m²</span>
+    <span class="font-['TT_Norms_Pro'] text-sm text-[#6b6b6b]">Verbrauch</span>
+    <span class="font-['TT_Norms_Pro'] text-sm font-medium text-[#1c4b42]">1,2 kg/m²</span>
   </div>
   <div class="flex justify-between items-center py-3">
-    <span class="font-['Inter'] text-sm text-[#6b6b6b]">Trocknungszeit</span>
-    <span class="font-['Geist_Mono'] text-sm font-medium text-[#1c4b42]">24 h</span>
+    <span class="font-['TT_Norms_Pro'] text-sm text-[#6b6b6b]">Trocknungszeit</span>
+    <span class="font-['TT_Norms_Pro'] text-sm font-medium text-[#1c4b42]">24 h</span>
   </div>
 </div>
 ```
@@ -159,7 +159,7 @@ Same structure, different palette:
 </section>
 
 <!-- Fachbetrieb Badge: Pure Green instead of Lime -->
-<span class="inline-flex bg-[#287d4b] text-white font-['Inter'] text-xs font-bold uppercase px-2.5 py-1 rounded-[4px]">
+<span class="inline-flex bg-[#287d4b] text-white font-['TT_Norms_Pro'] text-xs font-bold uppercase px-2.5 py-1 rounded-[4px]">
   ZERTIFIZIERT
 </span>
 ```
@@ -181,8 +181,8 @@ Same structure, different palette:
   --color-bkm-error: #dc2626;
 
   --font-display: 'Unbounded', system-ui, sans-serif;
-  --font-body: 'Inter', system-ui, sans-serif;
-  --font-mono: 'Geist Mono', monospace;
+  --font-body: 'TT Norms Pro', system-ui, sans-serif;
+  --font-mono: 'TT Norms Pro', system-ui, sans-serif;
 
   --radius-sm: 4px;
   --radius-md: 8px;
@@ -222,8 +222,10 @@ npx @google/design.md export --format css-tailwind DESIGN.md
 - [ ] Surface modes alternate with hard cuts (no gradients)
 - [ ] Lime used ONLY for interactive elements (BKM AG context only)
 - [ ] Pure Green used for Fachbetrieb accents (not Lime)
-- [ ] Unbounded: weight 900, uppercase, 18px minimum
+- [ ] Unbounded: weight 900, 18px minimum. H1 uppercase, H2+ sentence case
+- [ ] TT Norms Pro self-hosted from assets/fonts/ (not Google Fonts)
+- [ ] Body text in TT Norms Pro Regular (400), emphasis in Bold (700)
+- [ ] Technical values in TT Norms Pro Regular (400)
 - [ ] Cards use shadow-as-border (no CSS border property)
-- [ ] Technical values in Geist Mono
 - [ ] Only ONE primary button per viewport fold
 - [ ] WCAG AA contrast ratios met (4.5:1 minimum)

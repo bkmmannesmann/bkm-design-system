@@ -15,7 +15,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@900&family=Inter:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@900&display=swap" rel="stylesheet" />
 
   <style>
     /* ========================================
@@ -66,8 +66,8 @@
 
       /* Fonts */
       --font-display: 'Unbounded', system-ui, sans-serif;
-      --font-body: 'Inter', system-ui, sans-serif;
-      --font-mono: 'Geist Mono', monospace;
+      --font-body: 'TT Norms Pro', system-ui, sans-serif;
+      --font-mono: 'TT Norms Pro', monospace;
     }
 
     /* ========================================
@@ -111,7 +111,7 @@
       font-size: clamp(22px, 2.8vw, 36px);
     }
 
-    /* Body — Inter */
+    /* Body — TT Norms Pro */
     .body-lg {
       font-family: var(--font-body);
       font-weight: 400;
@@ -126,7 +126,7 @@
       font-size: clamp(14px, 1.2vw, 16px);
     }
 
-    /* Labels — Inter Bold Uppercase */
+    /* Labels — TT Norms Pro Bold Uppercase */
     .label {
       font-family: var(--font-body);
       font-weight: 700;
@@ -135,7 +135,7 @@
       font-size: clamp(10px, 0.9vw, 13px);
     }
 
-    /* Mono — Geist Mono for specs */
+    /* Mono — TT Norms Pro for specs */
     .mono {
       font-family: var(--font-mono);
       font-weight: 500;

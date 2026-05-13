@@ -172,11 +172,11 @@ Gelten für **beide** Presets identisch:
 .slide-headline-sm { font-size: clamp(22px, 2.8vw, 36px); }
 ```
 
-### Body (Inter)
+### Body (TT Norms Pro)
 
 ```css
 .slide-body {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'TT Norms Pro', system-ui, sans-serif;
   font-weight: 400;
   line-height: 1.6;
 }
@@ -186,11 +186,11 @@ Gelten für **beide** Presets identisch:
 .slide-body-sm { font-size: clamp(12px, 1vw, 14px); }
 ```
 
-### Technische Werte (Geist Mono)
+### Technische Werte (TT Norms Pro)
 
 ```css
 .slide-mono {
-  font-family: 'Geist Mono', monospace;
+  font-family: 'TT Norms Pro', monospace;
   font-weight: 500;
   line-height: 1.4;
 }
@@ -199,11 +199,11 @@ Gelten für **beide** Presets identisch:
 .slide-mono-md { font-size: clamp(14px, 1.2vw, 16px); }
 ```
 
-### Labels (Inter, fett)
+### Labels (TT Norms Pro, fett)
 
 ```css
 .slide-label {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'TT Norms Pro', system-ui, sans-serif;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;

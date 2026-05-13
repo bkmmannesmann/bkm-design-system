@@ -28,7 +28,7 @@ Lies die Datei `STYLE_PRESETS.md` in diesem Ordner für die vollständigen Farbd
 Lies die Datei `html-template.md` in diesem Ordner für die HTML-Architektur. Jede Slide ist eine einzelne HTML-Datei mit:
 
 - Viewport-basiertem CSS (vw/vh Einheiten für responsive Skalierung)
-- Eingebetteten Google Fonts (Unbounded, Inter, Geist Mono)
+- Eingebetteten Google Fonts (Unbounded, TT Norms Pro, TT Norms Pro)
 - BKM-Farbvariablen als CSS Custom Properties
 - Keine externen Abhängigkeiten
 
@@ -48,7 +48,7 @@ Lies `PATTERN_CATALOG.md` für eine Übersicht, welche Patterns aus der `pattern
 4. **Harte Schnitte zwischen Flächen** — Keine Gradients, Wellen oder Diagonalen als Übergang.
 5. **Shadow-as-Border** — Keine CSS `border` auf Cards.
 6. **Max. 1 Primary Button pro Viewport** — Auch auf Slides.
-7. **Technische Werte in Geist Mono** — Preise, Maße, Prozente.
+7. **Technische Werte in TT Norms Pro** — Preise, Maße, Prozente.
 8. **Pure Green nie als Text auf hellem Hintergrund** — Kontrast nur 2.79.
 
 ## Dateistruktur

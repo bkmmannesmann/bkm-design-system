@@ -67,7 +67,7 @@ Für Statistik-Werte und Zahlen.
 }
 ```
 
-**Einsatz:** Große Zahlen (Geist Mono), Statistik-Blöcke, Icons.
+**Einsatz:** Große Zahlen (TT Norms Pro), Statistik-Blöcke, Icons.
 
 ---
 

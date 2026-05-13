@@ -41,7 +41,7 @@ Lies `../../DESIGN.md` für die vollständige Token-Referenz.
 │  Deep Green Hintergrund  │
 │  + Noise Texture         │
 │                          │
-│  [Label] Inter 700 13px  │
+│  [Label] TT Norms Pro 700 13px  │
 │  [Headline] Unbounded    │
 │  900 UPPERCASE           │
 │                          │
@@ -64,7 +64,7 @@ Lies `../../DESIGN.md` für die vollständige Token-Referenz.
 │                          │
 │  Stone Grey Band         │
 │  [Headline] Unbounded    │
-│  [Body] Inter            │
+│  [Body] TT Norms Pro            │
 │                          │
 │  [Badge] Transition      │
 │  Green + Weiß            │
@@ -82,11 +82,11 @@ Lies `../../DESIGN.md` für die vollständige Token-Referenz.
 │  + Noise Texture         │
 │                          │
 │  [Große Zahl]            │
-│  Geist Mono 500          │
+│  TT Norms Pro 500          │
 │  Akzentfarbe             │
 │                          │
 │  [Erklärung]             │
-│  Inter 400               │
+│  TT Norms Pro 400               │
 │                          │
 │  ── Logo ──              │
 └──────────────────────────┘
@@ -111,9 +111,9 @@ Aufgrund der kleineren Bildschirmgrößen gelten angepasste Mindestgrößen:
 | Element | Mindestgröße (1080px Breite) |
 |---------|------------------------------|
 | Headline (Unbounded 900 UPPERCASE) | 36px |
-| Body (Inter 400) | 24px |
-| Label (Inter 700 UPPERCASE) | 16px |
-| Technische Werte (Geist Mono 500) | 28px |
+| Body (TT Norms Pro 400) | 24px |
+| Label (TT Norms Pro 700 UPPERCASE) | 16px |
+| Technische Werte (TT Norms Pro 500) | 28px |
 | Logo | Min. 80px Breite |
 
 ### 6. Safe Zones
@@ -136,7 +136,7 @@ Social-Media-Plattformen beschneiden Bilder unterschiedlich. Halte kritische Inh
 
 1. **Lime Green nur im BKM AG Kontext** — Nie im Fachbetrieb.
 2. **Unbounded: weight 900, uppercase** — Auch auf Social Media.
-3. **Technische Werte in Geist Mono** — Preise, Maße, Prozente.
+3. **Technische Werte in TT Norms Pro** — Preise, Maße, Prozente.
 4. **Pure Green nie als Text auf hellem Hintergrund.**
 5. **Logo immer sichtbar** — Auf jeder Grafik, in der korrekten Variante.
 6. **Noise Texture auf dunklen Flächen** — Für Materialität.
