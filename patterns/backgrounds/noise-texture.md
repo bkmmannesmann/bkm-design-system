@@ -85,7 +85,7 @@ BKM handelt mit physischen Baustoffen — Mörtel, Injektionsharze, Abdichtungsm
 ## Wann einsetzen
 
 - Jede größere Farbfläche (Hero, CTA, Footer)
-- Dark-Mode-Sektionen (Deep Green, Stone Grey)
+- Dark-Mode-Sektionen (Deep Green, Transition Green)
 - Sand White Hintergründe für mehr Tiefe
 
 ## Wann NICHT einsetzen

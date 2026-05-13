@@ -121,5 +121,5 @@ export function BkmSpotlightCard({
 
 - **Keine CSS `border` verwenden** — Die Card nutzt ausschließlich shadow-as-border (DESIGN.md Regel).
 - **Spotlight-Opazität max. 15%** — Höhere Werte erzeugen zu starken Kontrast und lenken vom Inhalt ab.
-- **Nur auf hellen Hintergründen** — Auf dunklen Flächen (Deep Green, Stone Grey) ist der Spotlight-Effekt nicht sichtbar genug.
+- **Nur auf hellen Hintergründen** — Auf dunklen Flächen (Deep Green, Transition Green) ist der Spotlight-Effekt nicht sichtbar genug.
 - **Touch-Geräte:** Der Cursor-Tracking-Effekt funktioniert nicht auf Touch-Geräten. Die Card fällt dann auf den Standard-Hover-Effekt (Shadow-Escalation + translateY) zurück.

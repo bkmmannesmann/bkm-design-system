@@ -212,7 +212,7 @@ Subtile Bewegung der Noise-Textur für lebendige Hintergründe.
 }
 ```
 
-**Einsatz:** Auf dunklen Slides (Deep Green, Stone Grey) für subtile Lebendigkeit.
+**Einsatz:** Auf dunklen Slides (Deep Green, Transition Green) für subtile Lebendigkeit.
 
 ---
 

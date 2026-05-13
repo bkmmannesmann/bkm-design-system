@@ -17,7 +17,7 @@
 | Parameter | BKM AG (dunkler Hintergrund) | BKM AG (heller Hintergrund) | Fachbetrieb |
 |-----------|------------------------------|----------------------------|-------------|
 | Text-Stroke | `#b4e717` (Lime) | `#1c4b42` (Deep Green) | `#4daf46` (Pure Green) |
-| Text-Fill (nach Animation) | `#ffffff` (Weiß) | `#1c4b42` (Deep Green) | `#494949` (Stone Grey) |
+| Text-Fill (nach Animation) | `#ffffff` (Weiß) | `#1c4b42` (Deep Green) | `#287d4b` (Transition Green) |
 | Hintergrund | `#1c4b42` (Deep Green) | `#ffffff` / `#f6f5f2` | `#ffffff` / `#f6f5f2` |
 
 ## Installation
@@ -67,7 +67,7 @@ export function FachbetriebSectionTitle() {
         text="FACHBETRIEB"
         className="font-['Unbounded'] font-black uppercase"
         strokeColor="#4daf46"    // Pure Green Stroke
-        fillColor="#494949"       // Stone Grey Fill
+        fillColor="#287d4b"       // Transition Green Fill
       />
     </section>
   );

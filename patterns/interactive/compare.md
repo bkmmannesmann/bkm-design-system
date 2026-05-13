@@ -27,9 +27,9 @@ Dieses Pattern ist besonders wertvoll für BKM, weil es die **Kerngeschichte der
 | Parameter | BKM AG | Fachbetrieb |
 |-----------|--------|-------------|
 | Slider-Linie | `#b4e717` (Lime) | `#4daf46` (Pure Green) |
-| Slider-Handle | `#1c4b42` (Deep Green) | `#494949` (Stone Grey) |
-| Label "Vorher" | `#ffffff` auf halbtransparentem Deep Green | `#ffffff` auf halbtransparentem Stone Grey |
-| Label "Nachher" | `#b4e717` auf halbtransparentem Deep Green | `#4daf46` auf halbtransparentem Stone Grey |
+| Slider-Handle | `#1c4b42` (Deep Green) | `#287d4b` (Transition Green) |
+| Label "Vorher" | `#ffffff` auf halbtransparentem Deep Green | `#ffffff` auf halbtransparentem Transition Green |
+| Label "Nachher" | `#b4e717` auf halbtransparentem Deep Green | `#4daf46` auf halbtransparentem Transition Green |
 | Container-Shadow | `var(--bkm-shadow-featured)` | `var(--bkm-shadow-featured)` |
 | Container-Radius | `12px` (rounded.lg) | `12px` (rounded.lg) |
 

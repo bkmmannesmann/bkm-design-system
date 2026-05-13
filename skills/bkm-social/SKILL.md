@@ -62,7 +62,7 @@ Lies `../../DESIGN.md` für die vollständige Token-Referenz.
 │  [Vorher/Nachher Bild]   │
 │  (obere Hälfte)          │
 │                          │
-│  Stone Grey Band         │
+│  Transition Green Band    │
 │  [Headline] Unbounded    │
 │  [Body] TT Norms Pro            │
 │                          │

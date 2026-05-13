@@ -24,7 +24,7 @@ Jedes Pattern ist für einen oder beide Farbkontexte freigegeben:
 | Kontext | Primärfarbe | Akzent | Hintergrund |
 |---------|-------------|--------|-------------|
 | **BKM AG** | Deep Green (#1c4b42) | Lime (#b4e717) | Weiß / Sand White |
-| **Fachbetrieb** | Stone Grey (#494949) | Pure Green (#4daf46) | Weiß / Sand White |
+| **Fachbetrieb** | Transition Green (#287d4b) für Headlines/Bänder, Stone Grey (#494949) nur als Text | Pure Green (#4daf46) | Weiß / Sand White (dominiert!) |
 
 Lime Green erscheint **nie** im Fachbetrieb-Kontext. Pure Green erscheint **nie** als Text auf hellem Hintergrund (Kontrast 2.79 — FAIL).
 
@@ -82,10 +82,11 @@ Nach der Installation jeder Komponente müssen folgende Werte ersetzt werden:
 
 | Original (Bibliothek) | BKM AG Kontext | Fachbetrieb Kontext |
 |----------------------|----------------|---------------------|
-| Primärfarbe (meist Blau/Lila) | `#1c4b42` (Deep Green) | `#494949` (Stone Grey) |
+| Primärfarbe (meist Blau/Lila) | `#1c4b42` (Deep Green) | `#287d4b` (Transition Green) |
 | Akzentfarbe | `#b4e717` (Lime) | `#4daf46` (Pure Green) |
-| Hintergrund dunkel | `#1c4b42` (Deep Green) | `#494949` (Stone Grey) |
-| Hintergrund hell | `#f6f5f2` (Sand White) | `#f6f5f2` (Sand White) |
+| Hintergrund dunkel | `#1c4b42` (Deep Green) | `#287d4b` (Transition Green — sparsam!) |
+| Hintergrund hell | `#f6f5f2` (Sand White) | `#ffffff` (Weiß) oder `#f6f5f2` (Sand White) |
+| Textfarbe | `#1a1a1a` (Fast-Schwarz) | `#494949` (Stone Grey — nur als Text!) |
 | Body-Font | `TT Norms Pro` | `TT Norms Pro` |
 | Headline-Font | `Unbounded` (900, uppercase) | `Unbounded` (900, uppercase) |
 | Border-Radius Buttons | `4px` | `4px` |

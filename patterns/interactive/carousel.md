@@ -22,7 +22,7 @@
 | Kategorie-Badge | Deep Green + Lime | Transition Green + Weiß |
 | Titel-Font | Unbounded 900 uppercase | Unbounded 900 uppercase |
 | Body-Font | TT Norms Pro 400 | TT Norms Pro 400 |
-| Overlay-Hintergrund | `#1c4b42` (Deep Green, 90%) | `#494949` (Stone Grey, 90%) |
+| Overlay-Hintergrund | `#1c4b42` (Deep Green, 90%) | `#287d4b` (Transition Green, 90%) |
 | Close-Button | `#b4e717` (Lime) | `#4daf46` (Pure Green) |
 | Card-Radius | `12px` (rounded.lg) | `12px` (rounded.lg) |
 | Sektions-Hintergrund | `#f6f5f2` (Sand White) | `#f6f5f2` (Sand White) |

@@ -5,7 +5,8 @@ description: >
   Building protection manufacturer (est. 1928). Visual identity communicates
   protective authority through material contrast. One unified brand world with
   two color contexts: the BKM AG context (Deep Green, Lime, White) and the
-  Fachbetrieb context (Stone Grey, Pure Green, White). The green tones tell
+  Fachbetrieb context (White, Sand White, Pure Green, Transition Green,
+  with Stone Grey as text color only). The green tones tell
   the story of the drying process — Deep Green represents moisture/the problem,
   Pure Green represents the dry end state/the solution.
 colors:
@@ -273,8 +274,8 @@ components:
   nav-link-hover:
     textColor: "{colors.secondary}"
   nav-bar-fachbetrieb:
-    backgroundColor: "{colors.fachbetrieb-secondary}"
-    textColor: "{colors.on-fachbetrieb-secondary}"
+    backgroundColor: "{colors.fachbetrieb-primary-deep}"
+    textColor: "{colors.on-fachbetrieb-primary}"
     height: 64px
   # === Technical Data ===
   spec-row:
@@ -287,9 +288,11 @@ components:
     textColor: "{colors.on-primary}"
     padding: "{spacing.hero}"
   hero-fachbetrieb:
-    backgroundColor: "{colors.fachbetrieb-surface}"
+    backgroundColor: "{colors.surface}"
     textColor: "{colors.on-surface}"
     padding: "{spacing.hero}"
+    # NOTE: Fachbetrieb hero is light (White/Sand White), not dark.
+    # Use Transition Green accent bands sparingly, never Stone Grey as surface.
 ---
 
 ## Overview
@@ -302,7 +305,7 @@ The BKM world is unified — there are no separate "sub-brands" with different d
 
 **BKM AG Context** — The primary brand world. Used for the corporate website, product pages, the online shop, marketing materials, and all content where BKM Mannesmann AG speaks as the manufacturer. Colors: Deep Green, Lime Green, White, Sand White.
 
-**Fachbetrieb Context** — Used for landingpages, portals, and materials where certified specialist companies (Fachbetriebe) are the subject. These are independent craftsmen certified by BKM to apply Pro Line products at the customer's site. The design structure is identical, but the color palette shifts to the original BKM logo colors: Stone Grey, Pure Green, White, Sand White. This differentiation ensures customers understand that the Fachbetrieb is an independent, certified entity performing craft services — while BKM Mannesmann AG is the product manufacturer and certifier.
+**Fachbetrieb Context** — Used for landingpages, portals, and materials where certified specialist companies (Fachbetriebe) are the subject. These are independent craftsmen certified by BKM to apply Pro Line products at the customer's site. The design structure is identical, but the color palette shifts to lighter, more approachable tones: **White and Sand White dominate as surface colors**, Pure Green and Transition Green provide the identity accents, and Stone Grey serves as the primary text color. Unlike the BKM AG context (where Deep Green dominates as a heavy, dark surface), the Fachbetrieb context is deliberately light and open — Stone Grey is NEVER used as a dominant background surface because it makes designs feel heavy and oppressive. This lighter approach communicates approachability and solution-orientation: the Fachbetrieb delivers the dry, protected end state.
 
 ### The Story of Green
 
@@ -326,7 +329,7 @@ The palette communicates protection through depth and material contrast.
 - **Tertiary (#287d4b):** Transition Green — the process color. Used for links, secondary actions, and hover states on light surfaces.
 - **Neutral (#f6f5f2):** Sand White — warm foundation for documentation and technical surfaces.
 
-For the Fachbetrieb context: `fachbetrieb-primary` (#4daf46, Pure Green) replaces Deep Green as the identity color, and `fachbetrieb-secondary` (#494949, Stone Grey) provides the authoritative contrast. Lime Green does not appear.
+For the Fachbetrieb context: `fachbetrieb-primary` (#4daf46, Pure Green) is the identity and accent color. `fachbetrieb-primary-deep` (#287d4b, Transition Green) is used for headlines on light backgrounds, links, and header bands. `fachbetrieb-secondary` (#494949, Stone Grey) is the primary text color — it replaces Deep Green's role as text, NOT as surface. **Critical: Stone Grey must never be used as a dominant background surface in the Fachbetrieb context.** The dominant surfaces are White (#ffffff) and Sand White (#f6f5f2). If a dark accent band is needed, use Transition Green (#287d4b) sparingly — not Stone Grey. Lime Green does not appear.
 
 ## Typography
 
@@ -392,7 +395,7 @@ Dark cards (on light surfaces) use Deep Green background with white text and a L
 
 The navigation bar uses Deep Green (`primary`) at 64px height. Links are white, transitioning to Lime on hover. The single CTA button in the navigation is Lime.
 
-In Fachbetrieb context, the navigation uses Stone Grey (`fachbetrieb-secondary`) with white text, and links transition to Pure Green on hover.
+In Fachbetrieb context, the navigation uses Transition Green (`fachbetrieb-primary-deep`, #287d4b) with white text, and links transition to Pure Green on hover. Stone Grey may be used as a secondary navigation option (e.g., footer) but never as the primary navigation bar color — it makes the design feel too heavy.
 
 ### Technical Data (Spec Tables)
 
@@ -487,6 +490,10 @@ All color combinations used in this system have been validated against WCAG AA:
 - Don't use CSS `border` property on cards (shadows provide depth; borders flatten)
 - Do keep the same design structure for Fachbetrieb pages — only swap the color context
 - Don't create a visually separate "brand" for Fachbetriebe — it is the same system, different palette
+- Do use White/Sand White as the dominant surface in Fachbetrieb context — it must feel light and open
+- Don't use Stone Grey (#494949) as a dominant background surface in Fachbetrieb — it makes designs heavy and oppressive
+- Do use Transition Green (#287d4b) for header bands and accent surfaces in Fachbetrieb when a dark element is needed
+- Do use Stone Grey only as text color and for small structural elements (footer, dividers) in Fachbetrieb
 - Do use `keyvisual-on-light.svg` on white/sand-white backgrounds and `keyvisual-on-dark.svg` on dark backgrounds
 - Don't place the Keyvisual on Pure Green or Lime Green backgrounds (chevron disappears)
 - Do use `bkm-logo-stonegrey-puregreen` (Stone Grey wordmark + Pure Green M-element) for Fachbetrieb on light backgrounds

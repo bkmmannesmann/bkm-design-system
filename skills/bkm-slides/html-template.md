@@ -432,7 +432,7 @@
 | Platzhalter | Beschreibung |
 |-------------|-------------|
 | `{{CONTEXT}}` | "BKM AG" oder "Fachbetrieb" |
-| `{{BG_DARK}}` | Dunkle Hintergrundfarbe (#1c4b42 oder #494949) |
+| `{{BG_DARK}}` | Dunkle Hintergrundfarbe (#1c4b42 oder #287d4b) |
 | `{{BG_DARK_ALT}}` | Alternative dunkle Farbe (#2a6b5e oder #3a3a3a) |
 | `{{ACCENT}}` | Akzentfarbe (#b4e717 oder #4daf46) |
 | `{{ACCENT_ON_DARK}}` | Akzent auf dunklem Hintergrund |

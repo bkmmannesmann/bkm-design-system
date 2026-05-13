@@ -5,7 +5,7 @@
 ## Critical Rules
 
 1. **The Keyvisual is a pre-rendered image asset. NEVER recreate it in code.** No SVG generation, no CSS clip-paths, no procedural patterns. Place the provided image file, right-aligned, cropped.
-2. **One brand, two color contexts.** BKM AG uses Deep Green + Lime. Fachbetrieb uses Stone Grey + Pure Green. Same design structure, different palette.
+2. **One brand, two color contexts.** BKM AG uses Deep Green + Lime on dark surfaces. Fachbetrieb uses White/Sand White surfaces with Transition Green + Pure Green accents. Stone Grey is text color only in Fachbetrieb — never a dominant surface.
 3. **Lime Green = interactive only (BKM AG context).** Never decorative. Never on text. Never on large surfaces. Never in Fachbetrieb context.
 4. **The greens tell a story.** Deep Green = moisture/problem. Pure Green = dry/solution. This is not arbitrary branding — it visualizes the drying process.
 5. **Max ONE primary button per viewport fold.**
@@ -49,7 +49,7 @@ Before writing any code, determine which color context applies:
 | Context | When | Primary Color | Accent Color | Nav Background |
 |---------|------|---------------|--------------|----------------|
 | **BKM AG** | Corporate site, products, shop, marketing | Deep Green (#1c4b42) | Lime (#b4e717) | Deep Green |
-| **Fachbetrieb** | Specialist company pages, partner portal, certification | Pure Green (#4daf46) / Stone Grey (#494949) | Pure Green (#4daf46) | Stone Grey (#494949) |
+| **Fachbetrieb** | Specialist company pages, partner portal, certification | Transition Green (#287d4b) for headlines/bands, Stone Grey (#494949) for text only | Pure Green (#4daf46) | Transition Green (#287d4b) — NOT Stone Grey |
 
 The design structure (typography, spacing, shadows, layout) is identical. Only the color mapping changes.
 
@@ -142,26 +142,40 @@ When to skip the Keyvisual: Instagram posts, email templates, UI components, tec
 Same structure, different palette:
 
 ```html
-<!-- Fachbetrieb Navigation: Stone Grey instead of Deep Green -->
-<nav class="bg-[#494949] h-16 sticky top-0">
+<!-- Fachbetrieb Navigation: Transition Green (NOT Stone Grey — too heavy) -->
+<nav class="bg-[#287d4b] h-16 sticky top-0">
   <a class="text-white hover:text-[#4daf46] transition-colors">...</a>
 </nav>
 
-<!-- Fachbetrieb Hero: Light surface with Pure Green accents -->
-<section class="bg-[#f6f5f2] py-40">
-  <h1 class="font-['Unbounded'] text-5xl font-black uppercase text-[#1a1a1a]">
+<!-- Fachbetrieb Hero: Light surface — White/Sand White dominates -->
+<section class="bg-white py-40">
+  <h1 class="font-['Unbounded'] text-5xl font-black uppercase text-[#287d4b]">
     IHR ZERTIFIZIERTER FACHBETRIEB
   </h1>
+  <p class="font-['TT_Norms_Pro'] text-lg text-[#494949] mt-6">
+    Stone Grey is the text color, never the background.
+  </p>
   <button class="bg-[#287d4b] text-white font-['Unbounded'] text-sm font-black uppercase
-                 px-6 py-3 h-12 rounded-[4px] hover:bg-[#494949] transition-colors">
+                 px-6 py-3 h-12 rounded-[4px] hover:bg-[#4daf46] transition-colors">
     TERMIN VEREINBAREN
   </button>
 </section>
 
-<!-- Fachbetrieb Badge: Pure Green instead of Lime -->
+<!-- Fachbetrieb Badge: Transition Green (readable on white) -->
 <span class="inline-flex bg-[#287d4b] text-white font-['TT_Norms_Pro'] text-xs font-bold uppercase px-2.5 py-1 rounded-[4px]">
   ZERTIFIZIERT
 </span>
+
+<!--
+  CRITICAL: Stone Grey (#494949) in Fachbetrieb context:
+  ✓ Text color on light backgrounds
+  ✓ Footer text
+  ✓ Divider lines
+  ✗ Navigation background (use Transition Green)
+  ✗ Hero background (use White/Sand White)
+  ✗ Card background (use White)
+  ✗ Any dominant surface
+-->
 ```
 
 ## Tailwind v4 Theme
@@ -222,6 +236,8 @@ npx @google/design.md export --format css-tailwind DESIGN.md
 - [ ] Surface modes alternate with hard cuts (no gradients)
 - [ ] Lime used ONLY for interactive elements (BKM AG context only)
 - [ ] Pure Green used for Fachbetrieb accents (not Lime)
+- [ ] Fachbetrieb surfaces are WHITE/SAND WHITE — Stone Grey is text only, never a surface
+- [ ] Fachbetrieb nav uses Transition Green (#287d4b) — not Stone Grey
 - [ ] Unbounded: weight 900, 18px minimum. H1 uppercase, H2+ sentence case
 - [ ] TT Norms Pro self-hosted from assets/fonts/ (not Google Fonts)
 - [ ] Body text in TT Norms Pro Regular (400), emphasis in Bold (700)

@@ -17,7 +17,7 @@
 | Parameter | BKM AG | Fachbetrieb |
 |-----------|--------|-------------|
 | Card-Radius | `12px` (rounded.lg) | `12px` (rounded.lg) |
-| Overlay (inaktiv) | `rgba(28, 75, 66, 0.6)` (Deep Green 60%) | `rgba(73, 73, 73, 0.6)` (Stone Grey 60%) |
+| Overlay (inaktiv) | `rgba(28, 75, 66, 0.6)` (Deep Green 60%) | `rgba(40, 125, 75, 0.6)` (Transition Green 60%) |
 | Text auf Overlay | `#ffffff` | `#ffffff` |
 | Akzent-Label | `#b4e717` (Lime) | `#4daf46` (Pure Green) |
 | Sektions-Hintergrund | `#f6f5f2` (Sand White) | `#f6f5f2` (Sand White) |
@@ -48,7 +48,7 @@ export function BkmFocusCards({ items, context = "ag" }: BkmFocusCardsProps) {
   const overlayColor =
     context === "ag"
       ? "rgba(28, 75, 66, 0.6)"   // Deep Green 60%
-      : "rgba(73, 73, 73, 0.6)";  // Stone Grey 60%
+      : "rgba(40, 125, 75, 0.6)";  // Transition Green 60%
 
   const cards = items.map((item) => ({
     title: item.title,
@@ -71,5 +71,5 @@ export function BkmFocusCards({ items, context = "ag" }: BkmFocusCardsProps) {
 
 - **Mindestens 3 Karten** — Unter 3 wirkt der Fokus-Effekt nicht.
 - **Bilder gleicher Proportion** — Alle Bilder sollten dasselbe Seitenverhältnis haben.
-- **Overlay-Farbe kontextabhängig** — Deep Green für BKM AG, Stone Grey für Fachbetrieb.
+- **Overlay-Farbe kontextabhängig** — Deep Green für BKM AG, Transition Green für Fachbetrieb.
 - **Keine CSS `border`** — Shadow-as-border oder gar kein Rahmen (Bilder sind selbst-definierend).
