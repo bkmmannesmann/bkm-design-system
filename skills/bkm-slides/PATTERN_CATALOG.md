@@ -1,92 +1,251 @@
-# BKM Slides — Pattern-Katalog (Editorial)
+# BKM Slides — Pattern-Katalog (v3)
 
-> Übersicht welche Patterns in BKM-Slides erlaubt, eingeschränkt oder verboten sind. Basierend auf der Analyse echter BKM-Broschüren und PDFs. BKM-Slides folgen dem **Corporate Editorial**-Ansatz — nicht dem Web-Design-Ansatz.
+> Welche Patterns in BKM-Slides erlaubt, eingeschränkt oder verboten sind. Alle erlaubten Patterns enthalten **exakte CSS-Werte** — nicht interpretieren, sondern kopieren.
 
-## Erlaubte Patterns (Editorial)
+---
 
-| Pattern | Beschreibung | Einsatz |
-|---------|-------------|---------|
-| **Colored Border-Left Cards** | Weiße Cards mit 4px farbiger linker Borderlinie | Standard für alle Content-Cards |
-| **Deep Green Footer-Bar** | Volle Breite, Lime Icon + Weiß Text | Auf Content-Slides |
-| **Vertikale Lime-Linie** | 4px breit, ~60% Höhe, links vom Content | Titelseiten (BKM AG) |
-| **Glasmorphismus** | Frosted-Glass-Effekt auf Foto-Hintergründen | Optional, max 1–2 pro Slide |
-| **Split Layout (50/50)** | Text links, Foto rechts (oder umgekehrt) | Foto-Slides |
-| **Große Statistik-Zahlen** | TT Norms Pro Bold, 48–96px, Akzentfarbe | Daten-Slides |
-| **Checkmark-Listen** | Lime ✓ + TT Norms Pro Bold Titel | Zusammenfassungen |
-| **Zentriertes Zitat** | Große Anführungszeichen + Zitat + Attribution | Testimonials |
-| **Keyvisual-Überlappung** | Chevrons am rechten Rand über Fotos | Titelseiten |
-| **Subtile Entrance-Animationen** | fadeInUp, scaleIn, slideIn (CSS-only) | Optional für Präsentationsmodus |
+## Erlaubte Patterns
+
+### 1. Glasmorphismus-Card (Hauptelement)
+
+Das zentrale Gestaltungselement aller BKM-Slides. Funktioniert auf **zwei Hintergrund-Typen**: Foto mit Overlay ODER flache BKM-Farbe.
+
+**BKM AG (auf dunklem Hintergrund):**
+```css
+.glass-card {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 52px 48px;   /* Titel-Slide */
+  /* padding: 36px 40px; /* Content-Slide */
+}
+```
+
+**Fachbetrieb (auf hellem Hintergrund):**
+```css
+.glass-card {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 16px;
+  padding: 52px 48px;   /* Titel-Slide */
+  /* padding: 36px 40px; /* Content-Slide */
+}
+```
+
+### 2. Foto-Hintergrund mit Overlay
+
+Generierte Fotos als Hintergrund, abgedunkelt/aufgehellt mit Gradient-Overlay.
+
+**BKM AG:**
+```css
+.bg-overlay {
+  background: linear-gradient(140deg,
+    rgba(28, 75, 66, 0.80) 0%,
+    rgba(28, 75, 66, 0.60) 50%,
+    rgba(28, 75, 66, 0.75) 100%);
+}
+```
+
+**Fachbetrieb:**
+```css
+.bg-overlay {
+  background: linear-gradient(140deg,
+    rgba(246, 245, 242, 0.88) 0%,
+    rgba(246, 245, 242, 0.75) 50%,
+    rgba(246, 245, 242, 0.85) 100%);
+}
+```
+
+### 3. Flache BKM-Farbe als Hintergrund (Alternative zu Foto)
+
+Nicht jede Slide braucht ein Foto. Glasmorphismus hebt sich auch auf flachen Farben ab.
+
+```css
+/* BKM AG */
+.slide-container { background: #1c4b42; }
+
+/* Fachbetrieb */
+.slide-container { background: #f6f5f2; }
+```
+
+### 4. Vertikale Akzentlinie (Titelseiten)
+
+```css
+.accent-line {
+  position: absolute; left: 7%; top: 18%;
+  width: 4px; height: 60%;
+  background: #b4e717;   /* BKM AG: Lime */
+  /* background: #4daf46; /* Fachbetrieb: Pure Green */
+  border-radius: 2px; z-index: 10;
+}
+```
+
+### 5. Footer-Bar (Content-Slides)
+
+```css
+/* BKM AG */
+.footer-bar {
+  background: rgba(28, 75, 66, 0.95);
+  padding: 16px 80px;
+  display: flex; align-items: center; gap: 12px;
+}
+
+/* Fachbetrieb */
+.footer-bar {
+  background: rgba(40, 125, 75, 0.95);
+  padding: 16px 80px;
+  display: flex; align-items: center; gap: 12px;
+}
+
+.footer-icon { color: #b4e717; font-size: 16px; }  /* Lime in BEIDEN Kontexten */
+.footer-text { font-weight: 400; font-size: 14px; color: #ffffff; }
+```
+
+### 6. Status-Badge
+
+```css
+/* BKM AG */
+.status-badge {
+  background: rgba(180, 231, 23, 0.1);
+  border: 1px solid rgba(180, 231, 23, 0.25);
+  border-radius: 20px; padding: 5px 14px;
+  font-weight: 700; font-size: 10px;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: #b4e717;
+}
+
+/* Fachbetrieb */
+.status-badge {
+  background: rgba(77, 175, 70, 0.12);
+  border: 1px solid rgba(77, 175, 70, 0.35);
+  border-radius: 20px; padding: 6px 16px;
+  font-weight: 700; font-size: 11px;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: #287d4b;
+}
+```
+
+### 7. Checkmark-Listen
+
+```css
+.checklist { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+.checklist li { display: flex; align-items: center; gap: 14px; }
+.check-icon { color: #b4e717; font-size: 16px; flex-shrink: 0; }  /* BKM AG */
+/* .check-icon { color: #4daf46; }  /* Fachbetrieb */
+.check-text { font-weight: 400; font-size: 15px; line-height: 1.4; }
+```
+
+### 8. Icon-Circles (Feature-Listen)
+
+```css
+/* BKM AG */
+.feature-icon {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: rgba(180, 231, 23, 0.12);
+  display: flex; align-items: center; justify-content: center;
+}
+.feature-icon i { color: #b4e717; font-size: 14px; }
+
+/* Fachbetrieb */
+.feature-icon {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: rgba(77, 175, 70, 0.1);
+  display: flex; align-items: center; justify-content: center;
+}
+.feature-icon i { color: #4daf46; font-size: 14px; }
+```
+
+### 9. Prozess-Flow (CTA-Slides)
+
+```css
+.process-flow { display: flex; align-items: center; justify-content: center; gap: 12px; }
+.step-circle {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: rgba(77, 175, 70, 0.1);  /* Fachbetrieb */
+  /* background: rgba(180, 231, 23, 0.08); /* BKM AG */
+  border: 1px solid rgba(77, 175, 70, 0.25);
+  display: flex; align-items: center; justify-content: center;
+}
+.process-arrow { color: rgba(77, 175, 70, 0.45); font-size: 18px; }
+```
+
+### 10. Keyvisual-Überlappung (nur Titelseiten)
+
+```css
+.keyvisual {
+  position: absolute; top: 0; right: 0;
+  height: 100%; width: 22%;
+  object-fit: cover; object-position: left center;
+  opacity: 0.18;   /* BKM AG */
+  /* opacity: 0.15; /* Fachbetrieb */
+  z-index: 5;
+}
+```
+
+**Regeln:** Immer rechts, immer angeschnitten, nie links/mittig, nie gedreht/gespiegelt.
+
+### 11. Innerer Glass-Glow (optional, nur Titel-Slides)
+
+```css
+.glass-card::before {
+  content: ''; position: absolute; inset: 0; border-radius: 16px;
+  background: linear-gradient(160deg, rgba(255,255,255,0.04) 0%, transparent 40%);  /* BKM AG */
+  /* background: linear-gradient(160deg, rgba(255,255,255,0.3) 0%, transparent 40%); /* Fachbetrieb */
+  pointer-events: none;
+}
+```
+
+---
 
 ## Eingeschränkte Patterns
 
-| Pattern | Einschränkung | Wann erlaubt |
+| Pattern | Einschränkung | Exakte Werte |
 |---------|--------------|--------------|
-| **Colourful Text** (CSS Gradient) | Nur auf dunklen Hintergründen | Einzelne Akzent-Wörter in Headlines |
-| **Transition Green Fläche** | Max 1–2 Slides pro Deck | Fachbetrieb-Akzent-Slides |
-| **Foto-Overlay** | Nur mit Deep Green 55–70% Opacity | Emotionale Titel-Slides |
+| **Transition Green Fläche** | Max 1–2 Slides pro Deck, nur Fachbetrieb | `background: #287d4b` |
+| **Dual-Card-Layout** | Max 2 Cards nebeneinander | `gap: 28px`, `padding: 32px 32px 28px 32px` |
+| **Trends-Bar** (unterer Rand) | Nur auf Titelseiten | `padding: 16px 48px`, `gap: 40px` |
 
-## Verbotene Patterns (Web-Design — NICHT für Slides)
+---
 
-Diese Patterns gehören zum **Web/Digital-Kontext** und dürfen NICHT in Slides, Broschüren oder Print-Materialien verwendet werden:
+## Verbotene Patterns
+
+Diese Patterns dürfen NICHT in BKM-Slides verwendet werden:
 
 | Pattern | Warum verboten |
 |---------|---------------|
-| **Noise Texture** (SVG fractal noise) | Echte BKM-Slides haben saubere, flache Flächen |
-| **Aurora Gradient** (animierte Farbverläufe) | Web-Dekoration, nicht Corporate Editorial |
-| **Bento Grid** (gleichförmige Kacheln) | Dashboard-Ästhetik, nicht Magazin-Ästhetik |
-| **Floating Badges** (absolut positioniert) | Web-UI-Pattern, nicht Print |
-| **Spotlight/Glow Effects** | Cursor-basiert, nicht für statische Medien |
-| **3D Card Effect** | Braucht JS, zu verspielt für Corporate |
-| **Animated Text Effects** | Zu verspielt, lenkt von Inhalt ab |
-| **Wavy Background** | Verletzt die "harte Schnitte"-Regel |
-| **Shadow-as-Border auf Cards** | Nur für Website — Slides nutzen Border-Left |
-| **Multiple competing shadows** | Zu komplex, verwässert visuelle Hierarchie |
+| **Noise Texture** (SVG fractal noise) | BKM-Slides haben saubere Flächen |
+| **Aurora Gradient** (animierte Farbverläufe) | Web-Dekoration, nicht Corporate |
+| **Bento Grid** (gleichförmige Kacheln) | Dashboard-Ästhetik |
+| **Floating Badges** (absolut positioniert) | Web-UI-Pattern |
+| **Spotlight/Glow Effects** | Cursor-basiert |
+| **3D Card Effect** | Zu verspielt |
+| **Animated Text Effects** | Lenkt ab |
+| **Wavy Background** | Verletzt harte Schnitte |
+| **Box-Shadow auf Cards** | Nur Glasmorphismus-Effekt |
+| **Unbounded Italic** | Kein echter Italic-Schnitt, Faux-Italic sieht falsch aus |
+| **Border-Left auf Glass-Cards** | Glass-Cards nutzen den Frosted-Effekt als Differenzierung |
+| **Mehrere konkurrierende Shadows** | Verwässert visuelle Hierarchie |
 
-## Glasmorphismus — Implementierung für Slides
+---
 
-Glasmorphismus ist das EINZIGE dekorative Web-Pattern, das in BKM-Slides erlaubt ist. Es funktioniert besonders gut auf Foto-Hintergründen.
-
-```css
-/* Standard Glass Card */
-.glass {
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 12px;
-  padding: 40px;
-}
-
-/* Dunklere Variante (auf hellen Fotos) */
-.glass--dark {
-  background: rgba(28, 75, 66, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 40px;
-}
-```
-
-**Regeln für Glasmorphismus:**
-- Nur auf Foto-Hintergründen verwenden (nie auf flachen Farbflächen)
-- Maximum 1–2 Glass-Elemente pro Slide
-- Nie für kleine Text-Elemente (Lesbarkeit!)
-- Immer mit ausreichend Kontrast für Text (WCAG AA)
-- Foto muss mit dunklem Overlay (50–70%) abgedunkelt werden
-
-## Zusammenfassung: Die BKM-Slide-Ästhetik
+## Zusammenfassung
 
 ```
-ERLAUBT:                          VERBOTEN:
-─────────────────────────────     ─────────────────────────────
-✓ Saubere flache Flächen         ✗ Noise-Texturen
-✓ Große Fotos (40%+ Fläche)      ✗ Aurora-Gradients
-✓ Großzügiger Weißraum (25%+)    ✗ Bento-Grids
-✓ Cards mit Border-Left           ✗ Floating Badges
-✓ Deep Green Footer-Bar           ✗ Spotlight/Glow
-✓ Vertikale Lime-Linie            ✗ Animierte Hintergründe
-✓ Glasmorphismus (auf Fotos)      ✗ Dashboard-Grids
-✓ Asymmetrische Layouts           ✗ Box-Shadows auf Cards
-✓ Keyvisual-Überlappung           ✗ Wavy Backgrounds
+ERLAUBT:                              VERBOTEN:
+──────────────────────────────        ──────────────────────────────
+✓ Glasmorphismus-Cards                ✗ Noise-Texturen
+✓ Foto-Hintergründe mit Overlay       ✗ Aurora-Gradients
+✓ Flache BKM-Farben als Hintergrund   ✗ Bento-Grids
+✓ Vertikale Akzentlinie               ✗ Floating Badges
+✓ Footer-Bar                          ✗ Spotlight/Glow
+✓ Status-Badges                       ✗ Animierte Hintergründe
+✓ Checkmark-Listen                    ✗ Dashboard-Grids
+✓ Icon-Circles                        ✗ Box-Shadows auf Cards
+✓ Prozess-Flows                       ✗ Unbounded Italic
+✓ Keyvisual-Überlappung               ✗ Wavy Backgrounds
+✓ Innerer Glass-Glow                  ✗ Border-Left auf Glass-Cards
 ```

@@ -1,556 +1,452 @@
-# BKM Slides — HTML Template (Editorial)
+# BKM Slides — HTML Templates (v3)
 
-> Architektur für einzelne HTML-Slide-Dateien im **Corporate Editorial**-Stil. Jede Slide ist eine eigenständige HTML-Datei ohne externe Abhängigkeiten (außer Google Fonts CDN für Unbounded). Basierend auf echten BKM-Broschüren und PDFs.
+> Vollständige, kopierbare HTML-Templates für alle Slide-Typen. **Nicht interpretieren — 1:1 als Startpunkt verwenden** und nur Inhalte (Texte, Bilder, Icons) austauschen. Jede Slide ist eine eigenständige HTML-Datei.
 
-## Basis-Template
+---
+
+## Pflicht-Abhängigkeiten (in jedem Slide-Head)
+
+```html
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@900&display=swap" rel="stylesheet">
+```
+
+---
+
+## Template 1: Titel-Slide — BKM AG (Glasmorphismus)
+
+Vollständiges, kopierbares Template. Ersetze nur: Foto-URL, Logo-URL, Keyvisual-URL, Texte.
 
 ```html
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{SLIDE_TITLE}}</title>
-
-  <!-- Google Fonts: Unbounded -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@900&display=swap" rel="stylesheet" />
-
-  <style>
-    /* ========================================
-       BKM SLIDE SYSTEM — EDITORIAL
-       Kontext: {{CONTEXT}} (BKM AG oder Fachbetrieb)
-       ======================================== */
-
-    /* Self-hosted TT Norms Pro */
-    @font-face {
-      font-family: 'TT Norms Pro';
-      src: url('assets/fonts/TT_Norms_Pro_Compact_Regular.woff2') format('woff2');
-      font-weight: 400;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'TT Norms Pro';
-      src: url('assets/fonts/TT_Norms_Pro_Bold.woff2') format('woff2');
-      font-weight: 700;
-      font-style: normal;
-      font-display: swap;
-    }
-
-    /* Reset */
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    /* Viewport-Lock: 16:9 */
-    html, body {
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    /* ========================================
-       CSS VARIABLES
-       ======================================== */
-    :root {
-      /* Hintergründe (nur 2 Typen!) */
-      --slide-bg-dark: #1c4b42;
-      --slide-bg-light: #f5f0eb;
-      --slide-bg-card: #ffffff;
-
-      /* Text */
-      --slide-text-on-dark: #ffffff;
-      --slide-text-on-dark-muted: rgba(255,255,255,0.7);
-      --slide-text-on-light: #1a1a1a;
-      --slide-text-on-light-muted: #494949;
-      --slide-headline-on-light: #4daf46;
-
-      /* Akzent */
-      --slide-accent: #b4e717;
-      --slide-card-border: #1c4b42;
-      --slide-footer-bg: #1c4b42;
-
-      /* Formen */
-      --slide-radius-card: 8px;
-
-      /* Fonts */
-      --font-display: 'Unbounded', system-ui, sans-serif;
-      --font-body: 'TT Norms Pro', system-ui, sans-serif;
-    }
-
-    /* ========================================
-       SLIDE CONTAINER
-       ======================================== */
-    .slide {
-      width: 100vw;
-      height: 100vh;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* Dark surface (Titel, CTA, Zitate) */
-    .slide--dark {
-      background-color: var(--slide-bg-dark);
-      color: var(--slide-text-on-dark);
-    }
-
-    /* Light surface (Content, Daten) */
-    .slide--light {
-      background-color: var(--slide-bg-light);
-      color: var(--slide-text-on-light);
-    }
-
-    /* ========================================
-       CONTENT AREAS
-       ======================================== */
-    .slide__content {
-      position: relative;
-      z-index: 10;
-      flex: 1;
-      padding: 60px 80px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .slide__content--top {
-      justify-content: flex-start;
-      padding-top: 80px;
-    }
-
-    .slide__content--split {
-      flex-direction: row;
-      align-items: center;
-      gap: 60px;
-    }
-
-    .slide__half {
-      flex: 1;
-      min-width: 0;
-    }
-
-    /* ========================================
-       SIGNATURE ELEMENTS
-       ======================================== */
-
-    /* Vertikale Lime-Akzentlinie (nur Titelseiten, BKM AG) */
-    .accent-line {
-      position: absolute;
-      left: 7%;
-      top: 20%;
-      width: 4px;
-      height: 60%;
-      background-color: var(--slide-accent);
-    }
-
-    /* Deep Green Footer-Bar (Content-Slides) */
-    .footer-bar {
-      background-color: var(--slide-footer-bg);
-      padding: 16px 80px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      width: 100%;
-    }
-
-    .footer-bar__icon {
-      color: var(--slide-accent);
-      font-size: 18px;
-    }
-
-    .footer-bar__text {
-      font-family: var(--font-body);
-      font-weight: 400;
-      color: #ffffff;
-      font-size: 14px;
-    }
-
-    /* ========================================
-       TYPOGRAPHY (3 Stufen)
-       ======================================== */
-
-    /* Stufe 1: Headlines — Unbounded Bold 900 */
-    .headline-h1 {
-      font-family: var(--font-display);
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: -0.04em;
-      line-height: 1.0;
-      font-size: clamp(48px, 6vw, 100px);
-    }
-
-    .headline-h2 {
-      font-family: var(--font-display);
-      font-weight: 900;
-      text-transform: none;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-      font-size: clamp(32px, 4vw, 48px);
-    }
-
-    /* Stufe 2: Subtitles / Card-Titel — TT Norms Pro Bold */
-    .subtitle {
-      font-family: var(--font-body);
-      font-weight: 700;
-      line-height: 1.3;
-      font-size: clamp(16px, 1.5vw, 20px);
-    }
-
-    .stat-number {
-      font-family: var(--font-body);
-      font-weight: 700;
-      line-height: 1.0;
-      font-size: clamp(48px, 5vw, 96px);
-    }
-
-    /* Stufe 3: Body — TT Norms Pro Regular */
-    .body {
-      font-family: var(--font-body);
-      font-weight: 400;
-      line-height: 1.6;
-      font-size: clamp(14px, 1.2vw, 16px);
-    }
-
-    .body-lg {
-      font-family: var(--font-body);
-      font-weight: 400;
-      line-height: 1.7;
-      font-size: clamp(16px, 1.5vw, 20px);
-    }
-
-    .label {
-      font-family: var(--font-body);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-size: clamp(10px, 0.9vw, 13px);
-    }
-
-    /* ========================================
-       COMPONENTS
-       ======================================== */
-
-    /* Card mit Border-Left (Editorial) */
-    .card {
-      background: var(--slide-bg-card);
-      border-left: 4px solid var(--slide-card-border);
-      border-radius: var(--slide-radius-card);
-      padding: 24px;
-      /* KEIN box-shadow! */
-    }
-
-    .card--warning {
-      border-left-color: #dc2626;
-    }
-
-    .card--highlight {
-      border-left-color: var(--slide-accent);
-    }
-
-    .card__title {
-      font-family: var(--font-body);
-      font-weight: 700;
-      color: var(--slide-text-on-light);
-      font-size: 18px;
-    }
-
-    .card__body {
-      font-family: var(--font-body);
-      font-weight: 400;
-      color: var(--slide-text-on-light-muted);
-      font-size: 15px;
-      margin-top: 8px;
-      line-height: 1.5;
-    }
-
-    /* Glasmorphismus (optional, auf Foto-Hintergründen) */
-    .glass {
-      background: rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 12px;
-      padding: 40px;
-    }
-
-    /* Stat Block */
-    .stat {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .stat__value {
-      font-family: var(--font-body);
-      font-weight: 700;
-      font-size: clamp(48px, 5vw, 96px);
-      line-height: 1.0;
-      color: var(--slide-accent);
-    }
-
-    .stat__label {
-      font-family: var(--font-body);
-      font-weight: 400;
-      font-size: clamp(12px, 1vw, 14px);
-      opacity: 0.7;
-    }
-
-    /* Checkmark List */
-    .checklist {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .checklist__item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-    }
-
-    .checklist__icon {
-      color: var(--slide-accent);
-      font-size: 20px;
-      flex-shrink: 0;
-    }
-
-    .checklist__text {
-      font-family: var(--font-body);
-      font-weight: 700;
-      color: var(--slide-text-on-light);
-      font-size: 16px;
-    }
-
-    /* Page number */
-    .slide__page-number {
-      position: absolute;
-      bottom: 20px;
-      right: 40px;
-      font-family: var(--font-body);
-      font-weight: 400;
-      font-size: 12px;
-      opacity: 0.4;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@900&display=swap" rel="stylesheet">
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      .slide-container {
+        width: 1280px; min-height: 720px; position: relative;
+        overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      }
+      .bg-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      .bg-overlay {
+        position: absolute; inset: 0;
+        background: linear-gradient(140deg, rgba(28,75,66,0.80) 0%, rgba(28,75,66,0.60) 50%, rgba(28,75,66,0.75) 100%);
+      }
+      .accent-line {
+        position: absolute; left: 7%; top: 18%; width: 4px; height: 60%;
+        background: #b4e717; border-radius: 2px; z-index: 10;
+      }
+      .logo {
+        position: absolute; top: 36px; right: 48px; height: 38px;
+        z-index: 10; object-fit: contain;
+      }
+      .keyvisual {
+        position: absolute; top: 0; right: 0; height: 100%; width: 22%;
+        object-fit: cover; object-position: left center; opacity: 0.18; z-index: 5;
+      }
+      .glass-card {
+        position: absolute; top: 50%; left: 10%; transform: translateY(-50%);
+        z-index: 10; max-width: 600px;
+        background: rgba(255,255,255,0.07); backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 16px; padding: 52px 48px;
+      }
+      .glass-card::before {
+        content: ''; position: absolute; inset: 0; border-radius: 16px;
+        background: linear-gradient(160deg, rgba(255,255,255,0.04) 0%, transparent 40%);
+        pointer-events: none;
+      }
+      .glass-label {
+        font-weight: 700; font-size: 11px; text-transform: uppercase;
+        letter-spacing: 0.12em; color: #b4e717; margin-bottom: 16px;
+      }
+      .glass-headline {
+        font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 56px;
+        text-transform: uppercase; color: #ffffff; line-height: 1.0; letter-spacing: -0.04em;
+      }
+      .glass-subtitle {
+        font-weight: 400; font-size: 17px; color: rgba(255,255,255,0.7);
+        line-height: 1.6; margin-top: 18px; max-width: 90%;
+      }
+      .glass-tagline {
+        font-weight: 700; font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 12px;
+      }
+      .glass-meta {
+        margin-top: 28px; display: flex; align-items: center; gap: 10px;
+      }
+      .meta-dot { width: 8px; height: 8px; border-radius: 50%; background: #b4e717; }
+      .meta-text {
+        font-weight: 700; font-size: 11px; text-transform: uppercase;
+        letter-spacing: 0.06em; color: #b4e717;
+      }
+      .trends-bar {
+        position: absolute; bottom: 0; left: 0; right: 0;
+        background: rgba(28,75,66,0.9); backdrop-filter: blur(10px);
+        padding: 16px 48px; display: flex; align-items: center; gap: 40px; z-index: 10;
+      }
+      .trend-item { display: flex; align-items: center; gap: 10px; }
+      .trend-icon { color: #b4e717; font-size: 16px; }
+      .trend-text {
+        font-weight: 700; font-size: 12px; color: #ffffff;
+        text-transform: uppercase; letter-spacing: 0.03em;
+      }
+      .trend-sub {
+        font-weight: 400; font-size: 11px; color: rgba(255,255,255,0.6);
+        text-transform: none; letter-spacing: 0;
+      }
+    </style>
 </head>
 <body>
-  <div class="slide slide--dark">
-    <div class="slide__content">
-      <!-- SLIDE CONTENT HERE -->
+    <div class="slide-container">
+      <img class="bg-photo" src="{{PHOTO_URL}}" alt="">
+      <div class="bg-overlay"></div>
+      <img class="keyvisual" src="{{KEYVISUAL_URL}}" alt="">
+      <div class="accent-line"></div>
+      <img class="logo" src="{{LOGO_URL}}" alt="BKM Mannesmann">
+      <div class="glass-card">
+        <div class="glass-label">{{LABEL}}</div>
+        <h1 class="glass-headline">{{HEADLINE_LINE1}}<br>{{HEADLINE_LINE2}}</h1>
+        <p class="glass-subtitle">{{SUBTITLE}}</p>
+        <p class="glass-tagline">{{TAGLINE}}</p>
+        <div class="glass-meta">
+          <div class="meta-dot"></div>
+          <span class="meta-text">{{META_TEXT}}</span>
+        </div>
+      </div>
+      <!-- Optional: Trends-Bar am unteren Rand -->
+      <div class="trends-bar">
+        <div class="trend-item">
+          <i class="fas fa-handshake trend-icon"></i>
+          <div><div class="trend-text">{{TREND_1}}</div><div class="trend-sub">{{TREND_1_SUB}}</div></div>
+        </div>
+        <!-- Weitere Trend-Items nach Bedarf -->
+      </div>
     </div>
-  </div>
 </body>
 </html>
 ```
 
-## Slide-Typen
+---
 
-### 1. Titel-Slide (BKM AG — Deep Green + Lime-Linie)
+## Template 2: Titel-Slide — Fachbetrieb (Glasmorphismus)
 
-```html
-<div class="slide slide--dark">
-  <!-- Vertikale Lime-Akzentlinie -->
-  <div class="accent-line"></div>
-  
-  <!-- Logo oben rechts -->
-  <img src="assets/logos/bkm-logo-white-puregreen.svg" alt="BKM"
-       style="position: absolute; top: 5%; right: 5%; height: 40px;" />
-  
-  <div class="slide__content" style="padding-left: 10%;">
-    <h1 class="headline-h1" style="font-style: italic;">
-      {{PRESENTATION_TITLE}}
-    </h1>
-    <p class="body-lg" style="color: var(--slide-text-on-dark-muted); margin-top: 24px; max-width: 60%;">
-      {{SUBTITLE}}
-    </p>
-    <div style="margin-top: 32px; display: flex; align-items: center; gap: 12px;">
-      <span style="color: var(--slide-accent);">●</span>
-      <span class="label" style="color: var(--slide-accent);">{{AUTHOR}} • {{DATE}}</span>
-    </div>
-  </div>
-</div>
-```
-
-### 2. Content-Slide (Sand/Beige + Cards + Footer-Bar)
+Gleiche Struktur, andere Farben. Ersetze nur: Foto-URL, Logo-URL, Keyvisual-URL, Texte.
 
 ```html
-<div class="slide slide--light">
-  <div class="slide__content slide__content--top">
-    <h2 class="headline-h2" style="color: var(--slide-headline-on-light);">
-      {{HEADLINE}}
-    </h2>
-    
-    <!-- Card Grid -->
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px;">
-      <div class="card">
-        <h3 class="card__title">{{CARD_TITLE_1}}</h3>
-        <p class="card__body">{{CARD_BODY_1}}</p>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@900&display=swap" rel="stylesheet">
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      .slide-container {
+        width: 1280px; min-height: 720px; position: relative;
+        overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      }
+      .bg-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      .bg-overlay {
+        position: absolute; inset: 0;
+        background: linear-gradient(140deg, rgba(246,245,242,0.88) 0%, rgba(246,245,242,0.75) 50%, rgba(246,245,242,0.85) 100%);
+      }
+      .accent-line {
+        position: absolute; left: 7%; top: 18%; width: 4px; height: 60%;
+        background: #4daf46; border-radius: 2px; z-index: 10;
+      }
+      .logo {
+        position: absolute; top: 36px; right: 48px; height: 38px;
+        z-index: 10; object-fit: contain;
+      }
+      .keyvisual {
+        position: absolute; top: 0; right: 0; height: 100%; width: 22%;
+        object-fit: cover; object-position: left center; opacity: 0.15; z-index: 5;
+      }
+      .glass-card {
+        position: absolute; top: 50%; left: 10%; transform: translateY(-50%);
+        z-index: 10; max-width: 600px;
+        background: rgba(255,255,255,0.55); backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.7);
+        border-radius: 16px; padding: 52px 48px;
+      }
+      .glass-card::before {
+        content: ''; position: absolute; inset: 0; border-radius: 16px;
+        background: linear-gradient(160deg, rgba(255,255,255,0.3) 0%, transparent 40%);
+        pointer-events: none;
+      }
+      .glass-label {
+        font-weight: 700; font-size: 11px; text-transform: uppercase;
+        letter-spacing: 0.12em; color: #4daf46; margin-bottom: 16px;
+      }
+      .glass-headline {
+        font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 56px;
+        text-transform: uppercase; color: #1c4b42; line-height: 1.0; letter-spacing: -0.04em;
+      }
+      .glass-subtitle {
+        font-weight: 400; font-size: 17px; color: #494949;
+        line-height: 1.6; margin-top: 18px; max-width: 90%;
+      }
+      .glass-tagline {
+        font-weight: 700; font-size: 13px; color: rgba(73,73,73,0.6); margin-top: 12px;
+      }
+      .glass-meta {
+        margin-top: 28px; display: flex; align-items: center; gap: 10px;
+      }
+      .meta-dot { width: 8px; height: 8px; border-radius: 50%; background: #4daf46; }
+      .meta-text {
+        font-weight: 700; font-size: 11px; text-transform: uppercase;
+        letter-spacing: 0.06em; color: #287d4b;
+      }
+      .trends-bar {
+        position: absolute; bottom: 0; left: 0; right: 0;
+        background: rgba(40,125,75,0.95); backdrop-filter: blur(10px);
+        padding: 16px 48px; display: flex; align-items: center; gap: 40px; z-index: 10;
+      }
+      .trend-item { display: flex; align-items: center; gap: 10px; }
+      .trend-icon { color: #b4e717; font-size: 16px; }
+      .trend-text {
+        font-weight: 700; font-size: 12px; color: #ffffff;
+        text-transform: uppercase; letter-spacing: 0.03em;
+      }
+      .trend-sub {
+        font-weight: 400; font-size: 11px; color: rgba(255,255,255,0.7);
+        text-transform: none; letter-spacing: 0;
+      }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+      <img class="bg-photo" src="{{PHOTO_URL}}" alt="">
+      <div class="bg-overlay"></div>
+      <img class="keyvisual" src="{{KEYVISUAL_ON_LIGHT_URL}}" alt="">
+      <div class="accent-line"></div>
+      <img class="logo" src="{{LOGO_STONEGREY_PUREGREEN_URL}}" alt="BKM Mannesmann">
+      <div class="glass-card">
+        <div class="glass-label">{{LABEL}}</div>
+        <h1 class="glass-headline">{{HEADLINE_LINE1}}<br>{{HEADLINE_LINE2}}</h1>
+        <p class="glass-subtitle">{{SUBTITLE}}</p>
+        <p class="glass-tagline">{{TAGLINE}}</p>
+        <div class="glass-meta">
+          <div class="meta-dot"></div>
+          <span class="meta-text">{{META_TEXT}}</span>
+        </div>
       </div>
-      <div class="card">
-        <h3 class="card__title">{{CARD_TITLE_2}}</h3>
-        <p class="card__body">{{CARD_BODY_2}}</p>
+      <div class="trends-bar">
+        <div class="trend-item">
+          <i class="fas fa-handshake trend-icon"></i>
+          <div><div class="trend-text">{{TREND_1}}</div><div class="trend-sub">{{TREND_1_SUB}}</div></div>
+        </div>
       </div>
     </div>
-  </div>
-  
-  <!-- Footer-Bar -->
-  <div class="footer-bar">
-    <span class="footer-bar__icon">✓</span>
-    <span class="footer-bar__text">{{FOOTER_TEXT}}</span>
-  </div>
-  
-  <span class="slide__page-number">{{PAGE_NUMBER}}</span>
-</div>
+</body>
+</html>
 ```
 
-### 3. Foto-Slide (Split Layout — 50/50)
+---
+
+## Template 3: Content-Slide mit Checklist + Status-Card — BKM AG
 
 ```html
-<div class="slide slide--light">
-  <div class="slide__content slide__content--split">
-    <!-- Text-Hälfte -->
-    <div class="slide__half">
-      <span class="label" style="color: var(--slide-headline-on-light);">{{SECTION_LABEL}}</span>
-      <h2 class="headline-h2" style="color: var(--slide-headline-on-light); margin-top: 12px;">
-        {{HEADLINE}}
-      </h2>
-      <p class="body" style="color: var(--slide-text-on-light-muted); margin-top: 16px;">
-        {{BODY_TEXT}}
-      </p>
-    </div>
-    
-    <!-- Foto-Hälfte (mindestens 40% der Slide) -->
-    <div class="slide__half" style="height: 100%; position: relative;">
-      <img src="{{IMAGE_PATH}}" alt="{{IMAGE_ALT}}"
-           style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" />
-    </div>
-  </div>
-  
-  <span class="slide__page-number">{{PAGE_NUMBER}}</span>
-</div>
-```
-
-### 4. Daten-Slide (Große Zahlen)
-
-```html
-<div class="slide slide--light">
-  <div class="slide__content" style="align-items: center; text-align: center;">
-    <span class="label" style="color: var(--slide-headline-on-light);">{{SECTION_LABEL}}</span>
-    <h2 class="headline-h2" style="color: var(--slide-headline-on-light); margin-top: 12px;">
-      {{HEADLINE}}
-    </h2>
-    
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; margin-top: 60px;">
-      <div class="stat">
-        <span class="stat__value">{{VALUE_1}}</span>
-        <span class="stat__label">{{LABEL_1}}</span>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@900&display=swap" rel="stylesheet">
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      .slide-container {
+        width: 1280px; min-height: 720px; position: relative;
+        overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      }
+      .bg-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      .bg-overlay {
+        position: absolute; inset: 0;
+        background: linear-gradient(160deg, rgba(28,75,66,0.82) 0%, rgba(28,75,66,0.65) 60%, rgba(28,75,66,0.78) 100%);
+      }
+      .logo { position: absolute; top: 32px; right: 44px; height: 32px; z-index: 10; object-fit: contain; }
+      .content-wrapper { position: relative; z-index: 10; display: flex; flex-direction: column; height: 720px; }
+      .top-section { padding: 56px 80px 0 80px; }
+      .section-label {
+        font-weight: 700; font-size: 11px; text-transform: uppercase;
+        letter-spacing: 0.12em; color: #b4e717; margin-bottom: 12px;
+      }
+      .headline {
+        font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 48px;
+        text-transform: uppercase; color: #ffffff; line-height: 1.0; letter-spacing: -0.03em;
+      }
+      .subtitle { font-weight: 700; font-size: 18px; color: rgba(255,255,255,0.7); margin-top: 10px; }
+      .main-content { flex: 1; display: flex; align-items: center; padding: 30px 80px; gap: 40px; }
+      .glass-card {
+        background: rgba(255,255,255,0.07); backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 14px; padding: 36px 40px; flex: 1;
+      }
+      .checklist { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+      .checklist li { display: flex; align-items: center; gap: 14px; }
+      .check-icon { color: #b4e717; font-size: 16px; flex-shrink: 0; }
+      .check-text { font-weight: 400; font-size: 15px; color: rgba(255,255,255,0.85); line-height: 1.4; }
+      .status-card {
+        background: rgba(180,231,23,0.06); backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(180,231,23,0.15);
+        border-radius: 14px; padding: 32px 36px; width: 280px; text-align: center;
+      }
+      .status-badge {
+        display: inline-block; background: rgba(180,231,23,0.1);
+        border: 1px solid rgba(180,231,23,0.25); border-radius: 20px;
+        padding: 5px 14px; font-weight: 700; font-size: 10px;
+        text-transform: uppercase; letter-spacing: 0.08em; color: #b4e717; margin-bottom: 20px;
+      }
+      .status-icon { font-size: 48px; color: #b4e717; margin-bottom: 16px; }
+      .status-title {
+        font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 16px;
+        color: #ffffff; text-transform: uppercase; letter-spacing: -0.02em;
+      }
+      .footer-bar {
+        background: rgba(28,75,66,0.95); padding: 16px 80px;
+        display: flex; align-items: center; gap: 12px;
+      }
+      .footer-icon { color: #b4e717; font-size: 16px; }
+      .footer-text { font-weight: 400; font-size: 14px; color: #ffffff; }
+      .page-num {
+        position: absolute; bottom: 56px; right: 44px;
+        font-size: 11px; color: rgba(255,255,255,0.3); z-index: 10;
+      }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+      <img class="bg-photo" src="{{PHOTO_URL}}" alt="">
+      <div class="bg-overlay"></div>
+      <img class="logo" src="{{LOGO_URL}}" alt="BKM">
+      <div class="content-wrapper">
+        <div class="top-section">
+          <div class="section-label">{{SECTION_NUM}} — {{SECTION_NAME}}</div>
+          <h1 class="headline">{{HEADLINE}}</h1>
+          <p class="subtitle">{{SUBTITLE}}</p>
+        </div>
+        <div class="main-content">
+          <div class="glass-card">
+            <ul class="checklist">
+              <li><i class="fas fa-check check-icon"></i><span class="check-text">{{ITEM_1}}</span></li>
+              <li><i class="fas fa-check check-icon"></i><span class="check-text">{{ITEM_2}}</span></li>
+              <li><i class="fas fa-check check-icon"></i><span class="check-text">{{ITEM_3}}</span></li>
+              <li><i class="fas fa-check check-icon"></i><span class="check-text">{{ITEM_4}}</span></li>
+              <li><i class="fas fa-check check-icon"></i><span class="check-text">{{ITEM_5}}</span></li>
+            </ul>
+          </div>
+          <div class="status-card">
+            <div class="status-badge">{{STATUS}}</div>
+            <div class="status-icon"><i class="fas {{STATUS_ICON}}"></i></div>
+            <div class="status-title">{{STATUS_TITLE}}</div>
+          </div>
+        </div>
+        <div class="footer-bar">
+          <i class="fas fa-check-circle footer-icon"></i>
+          <span class="footer-text">{{FOOTER_TEXT}}</span>
+        </div>
       </div>
-      <div class="stat">
-        <span class="stat__value">{{VALUE_2}}</span>
-        <span class="stat__label">{{LABEL_2}}</span>
-      </div>
-      <div class="stat">
-        <span class="stat__value">{{VALUE_3}}</span>
-        <span class="stat__label">{{LABEL_3}}</span>
-      </div>
+      <span class="page-num">{{PAGE_NUM}}</span>
     </div>
-  </div>
-  
-  <!-- Footer-Bar -->
-  <div class="footer-bar">
-    <span class="footer-bar__icon">📊</span>
-    <span class="footer-bar__text">{{DATA_SOURCE}}</span>
-  </div>
-</div>
+</body>
+</html>
 ```
 
-### 5. Zitat-Slide (Deep Green + Zentriert)
+---
+
+## Template 4: Feature-Slide mit asymmetrischem Glass-Panel — BKM AG
 
 ```html
-<div class="slide slide--dark">
-  <div class="slide__content" style="align-items: center; text-align: center;">
-    <span style="font-size: 64px; color: var(--slide-accent); line-height: 1;">„</span>
-    <blockquote class="headline-h2" style="max-width: 70%; margin-top: 16px; font-style: italic;">
-      {{QUOTE_TEXT}}
-    </blockquote>
-    <p class="subtitle" style="color: var(--slide-text-on-dark-muted); margin-top: 24px;">
-      — {{AUTHOR_NAME}}, {{AUTHOR_ROLE}}
-    </p>
-  </div>
-</div>
+<!-- Gleiche Head-Struktur wie Template 3, nur der Body unterscheidet sich -->
+<!-- Overlay: asymmetrisch — links stark, rechts Foto sichtbar -->
+<!-- bg-overlay: linear-gradient(100deg, rgba(28,75,66,0.88) 0%, rgba(28,75,66,0.75) 55%, rgba(28,75,66,0.45) 100%) -->
+<!-- glass-panel: max-width 580px, padding 44px 48px -->
+<!-- Feature-Items: 32x32 icon-chips mit rgba(180,231,23,0.12) background -->
+<!-- Siehe STYLE_PRESETS.md für exakte Token -->
 ```
 
-### 6. CTA/Schluss-Slide (Deep Green + Kontakt)
+## Template 5: Dual-Card-Slide — BKM AG
 
 ```html
-<div class="slide slide--dark">
-  <!-- Logo oben rechts -->
-  <img src="assets/logos/bkm-logo-white-puregreen.svg" alt="BKM"
-       style="position: absolute; top: 5%; right: 5%; height: 40px;" />
-  
-  <div class="slide__content" style="align-items: center; text-align: center;">
-    <h2 class="headline-h1">{{CTA_HEADLINE}}</h2>
-    <p class="body-lg" style="color: var(--slide-text-on-dark-muted); margin-top: 16px; max-width: 60%;">
-      {{CTA_BODY}}
-    </p>
-    <div style="margin-top: 40px; display: flex; flex-direction: column; align-items: center; gap: 8px;">
-      <span class="subtitle" style="color: var(--slide-accent);">{{CONTACT_EMAIL}}</span>
-      <span class="body" style="color: var(--slide-text-on-dark-muted);">{{CONTACT_PHONE}}</span>
-    </div>
-  </div>
-</div>
+<!-- Gleiche Head-Struktur wie Template 3 -->
+<!-- Overlay: 150deg, rgba(28,75,66,0.85/0.68/0.80) -->
+<!-- cards-area: flex, padding 24px 80px 20px 80px, gap 28px -->
+<!-- Jede glass-card: flex: 1, padding 32px 32px 28px 32px -->
+<!-- Card-Titel: Unbounded 900, 17px, uppercase -->
+<!-- Siehe STYLE_PRESETS.md für exakte Token -->
 ```
 
-### 7. Glasmorphismus-Slide (Foto-Hintergrund + Glass Card)
+## Template 6: CTA/Closing-Slide mit Prozess-Flow — BKM AG
 
 ```html
-<div class="slide" style="position: relative;">
-  <!-- Vollbild-Foto -->
-  <img src="{{PHOTO_PATH}}" alt="" 
-       style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;" />
-  
-  <!-- Dunkles Overlay -->
-  <div style="position: absolute; inset: 0; background: rgba(28, 75, 66, 0.55);"></div>
-  
-  <!-- Glass Card -->
-  <div class="slide__content" style="align-items: flex-start;">
-    <div class="glass" style="max-width: 500px;">
-      <h2 class="headline-h2" style="color: #ffffff;">{{HEADLINE}}</h2>
-      <p class="body-lg" style="color: rgba(255,255,255,0.85); margin-top: 16px;">
-        {{BODY_TEXT}}
-      </p>
-    </div>
-  </div>
-</div>
+<!-- Gleiche Head-Struktur wie Template 3 -->
+<!-- glass-panel: zentriert, max-width 900px, padding 44px 56px -->
+<!-- Process-Flow: flex, gap 12px, step-circles 48x48 -->
+<!-- Footer-Bar: mit Chevrons (») und Footer-Logo -->
+<!-- Siehe STYLE_PRESETS.md für exakte Token -->
 ```
+
+---
+
+## Fachbetrieb-Varianten
+
+Für alle Content-Templates (3–6) gelten folgende Farbänderungen gegenüber BKM AG:
+
+| Element | BKM AG | Fachbetrieb |
+|---------|--------|-------------|
+| Overlay | `rgba(28,75,66, ...)` | `rgba(246,245,242, ...)` |
+| Glass-Card bg | `rgba(255,255,255,0.07)` | `rgba(255,255,255,0.55)` |
+| Glass-Card border | `rgba(255,255,255,0.12)` | `rgba(255,255,255,0.7)` |
+| Headlines | `#ffffff` | `#1c4b42` |
+| Body-Text | `rgba(255,255,255,0.85)` | `#494949` |
+| Muted Text | `rgba(255,255,255,0.7)` | `rgba(73,73,73,0.7)` |
+| Section-Label | `#b4e717` | `#4daf46` |
+| Checkmarks | `#b4e717` | `#4daf46` |
+| Status-Badge | Lime-getönt | Pure Green-getönt |
+| Icon-Circles bg | `rgba(180,231,23,0.12)` | `rgba(77,175,70,0.1)` |
+| Icon-Circles color | `#b4e717` | `#4daf46` |
+| Footer-Bar bg | `rgba(28,75,66,0.95)` | `rgba(40,125,75,0.95)` |
+| Footer-Icon | `#b4e717` | `#b4e717` (bleibt Lime!) |
+| Page-Num | `rgba(255,255,255,0.3)` | `rgba(73,73,73,0.3)` |
+| Logo | `bkm-logo-white-puregreen` | `bkm-logo-stonegrey-puregreen` |
+| Keyvisual | `keyvisual-on-dark.svg`, opacity 0.18 | `keyvisual-on-light.svg`, opacity 0.15 |
+
+---
 
 ## Platzhalter-Referenz
 
 | Platzhalter | Beschreibung |
 |-------------|-------------|
-| `{{CONTEXT}}` | "BKM AG" oder "Fachbetrieb" |
-| `{{SLIDE_TITLE}}` | HTML-Seitentitel |
-| `{{PRESENTATION_TITLE}}` | Präsentations-Haupttitel |
-| `{{SUBTITLE}}` | Untertitel |
-| `{{AUTHOR}}` | Autor-Name |
-| `{{DATE}}` | Datum |
-| `{{SECTION_LABEL}}` | Sektions-Label (z.B. "01 — Produkte") |
-| `{{HEADLINE}}` | Slide-Headline |
-| `{{BODY_TEXT}}` | Fließtext |
-| `{{CARD_TITLE_N}}` | Card-Titel |
-| `{{CARD_BODY_N}}` | Card-Body |
+| `{{PHOTO_URL}}` | CDN-URL des generierten Hintergrund-Fotos |
+| `{{LOGO_URL}}` | CDN-URL des BKM Logos (kontextabhängig) |
+| `{{KEYVISUAL_URL}}` | CDN-URL des Keyvisuals (kontextabhängig) |
+| `{{LABEL}}` | Oberer Label-Text (z.B. "Ein Blick hinter die Kulissen") |
+| `{{HEADLINE_LINE1}}` | Erste Zeile der Headline |
+| `{{HEADLINE_LINE2}}` | Zweite Zeile der Headline |
+| `{{SUBTITLE}}` | Untertitel-Text |
+| `{{TAGLINE}}` | Tagline unter dem Subtitle |
+| `{{META_TEXT}}` | Meta-Info (z.B. "BKM Mannesmann AG • 2026") |
+| `{{SECTION_NUM}}` | Sektionsnummer (z.B. "01") |
+| `{{SECTION_NAME}}` | Sektionsname (z.B. "Vertrauen") |
+| `{{ITEM_N}}` | Checklist-Item Text |
+| `{{STATUS}}` | Status-Badge Text (z.B. "Beta / In Test") |
+| `{{STATUS_ICON}}` | Font Awesome Icon-Klasse (z.B. "fa-handshake") |
+| `{{STATUS_TITLE}}` | Status-Card Titel |
 | `{{FOOTER_TEXT}}` | Footer-Bar Text |
-| `{{PAGE_NUMBER}}` | Seitenzahl (z.B. "03") |
-| `{{IMAGE_PATH}}` | Pfad zum Bild |
-| `{{VALUE_N}}` | Statistik-Wert |
-| `{{LABEL_N}}` | Statistik-Label |
-| `{{DATA_SOURCE}}` | Datenquelle |
+| `{{PAGE_NUM}}` | Seitenzahl (z.B. "02") |
+| `{{TREND_N}}` | Trend-Name |
+| `{{TREND_N_SUB}}` | Trend-Untertitel |
