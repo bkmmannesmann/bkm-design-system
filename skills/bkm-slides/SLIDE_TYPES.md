@@ -115,8 +115,8 @@
 - **Phase 2 — Vervollständigen in `bkm-glass-ag`:** ✅ **erledigt** — `s-chapter`, `s-subhead`, `s-closing`,
   `s-process`, `s-timeline`. `demo.html` deckt jetzt alle 14 Typen ab (= vollständige Vorlage).
 - **Phase 3 — Galerie & Doku:** ✅ **erledigt** — `templates/bkm-glass-ag/type-gallery.png` + Verweise in `SKILL.md`.
-- **Phase 4 — Portierung:** Typen in `bkm-glass-fachbetrieb`, `bkm-editorial`, `bkm-bold-poster`
-  (familienspezifische Tokens, kein Lime im Fachbetrieb).
+- **Phase 4 — Portierung:** 🔶 **läuft** — `bkm-glass-fachbetrieb` ✅ **erledigt** (14 Typen, helle
+  Sand-Texturen, kein Lime, helles Zebra, Galerie). Offen: `bkm-bold-poster`, `bkm-editorial`.
 
 **Akzeptanzkriterien je Typ:** rendert sauber auf 1920×1080, kein Überlauf; erbt Schriften/Logo/Textur;
 Hybrid-Casing korrekt; nur BKM-Farben; in `PATTERN_CATALOG` als erlaubt geführt.
