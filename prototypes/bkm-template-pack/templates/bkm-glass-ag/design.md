@@ -64,7 +64,8 @@ Farbkreise) oder ein Foto hinter die Cards legen — sonst ist der Effekt unsich
 
 ## Typografie
 
-- **Display:** Unbounded **900**, UPPERCASE, −0.04em, Zeilenhöhe ~0.94.
+- **Display:** Unbounded **900**, −0.04em, Zeilenhöhe ~0.94. Casing UPPERCASE (Standard)
+  oder Mixed-Case erlaubt; **nie kursiv**. Akzentwort über Lime-Farbe, nicht kursiv.
   Titel ~118px, Section ~78px.
 - **Body:** System-Sans (Echtbetrieb: TT Norms Pro), `rgba(255,255,255,.85)`.
 - **Eyebrow / Labels:** UPPERCASE, ≥0.12em Tracking; Eyebrow in Lime.

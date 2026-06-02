@@ -20,6 +20,8 @@ eine Grün-Akzentfarbe — sehr nah an unserem dunklen Track.
 **Bewusste Marken-Abweichungen (zum Diskutieren):**
 - Mint/Emerald der Referenz → **BKM Lime** `#b4e717`.
 - Kursive Akzentwörter → **Lime-Farbe** (Brand verbietet kursives Unbounded).
+  **Entscheidung:** Headlines dürfen UPPERCASE **oder** Mixed-Case sein (A & B);
+  kursiver/Fremd-Akzent (C) ist **verworfen**. Akzent immer über Farbe.
 - Dekorative Typo-Overlays mischen Unbounded 900 + 400 (Marketing-Ton); Headlines bleiben UPPERCASE.
 
 **Noch nicht übernommen (Kandidaten):** vertikaler Stepper + überlappende Fotos,

@@ -28,8 +28,10 @@ mit Paper/Lime-Inhalt. Kein vierter Farbton.
 
 ## Typografie
 
-- **Display:** Unbounded **900**, UPPERCASE, kein Italic, negatives Tracking
-  (−0.04em), enge Zeilenhöhe (0.90–0.95).
+- **Display:** Unbounded **900**, negatives Tracking (−0.04em), enge Zeilenhöhe (0.90–0.95).
+  **Casing: UPPERCASE (Standard) oder Mixed-Case erlaubt** — beide markenkonform.
+  **Nie kursiv, keine Fremd-Akzentschrift** (Entscheidung: Versionen A & B ja, C nein).
+  Akzentwörter werden über **Farbe** (Lime/Pure Green) gesetzt, nicht über Kursivschrift.
 - **Body/Chrome:** System-Sans (im Echtbetrieb TT Norms Pro). Labels/Eyebrows/Footlines
   immer **UPPERCASE** mit ≥0.10em Tracking.
 

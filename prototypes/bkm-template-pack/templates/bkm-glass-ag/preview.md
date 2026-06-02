@@ -11,7 +11,7 @@
 - **Frosted-Glass-Card** (Glassmorphism) trägt den Inhalt: halbtransparentes Weiß,
   `backdrop-filter: blur`, Highlight-Kanten oben/links, weicher Schatten + Inner-Glow,
   `border-radius: 24px`.
-- **Headline:** Unbounded 900 UPPERCASE, weiß, ein Wort in **Lime**.
+- **Headline:** Unbounded 900 (UPPERCASE oder Mixed-Case, nie kursiv), weiß, ein Wort in **Lime**.
 - **Eyebrow:** Lime, 18px, 0.18em Tracking.
 - **Button:** Lime-Fläche, Deep-Green-Text (einziges Signal als Fläche).
 - **Wortmarke** „BKM." oben links, Lime-Punkt.

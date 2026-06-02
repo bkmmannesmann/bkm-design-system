@@ -14,7 +14,7 @@
     "track_creative": "Expressiver Track für interne/Pitch/Vision-Decks. Mehr Layout-Freiheit, ABER weiterhin ausschließlich BKM-Farben (Deep Green, Lime, Sand, Pure Green, Stone Grey) und Unbounded. Keine fremden Paletten/Fonts.",
     "non_negotiable": [
       "Nur BKM-Farben aus DESIGN.md — keine fremden Akzentfarben.",
-      "Headlines immer Unbounded 900 UPPERCASE, kein Italic.",
+      "Headlines Unbounded 900 — UPPERCASE (Standard) oder Mixed-Case erlaubt; nie kursiv, keine Fremd-Akzentschrift.",
       "Lime nur als Signal/Akzent, nie als dekorative Vollfläche (außer Buttons/Marks).",
       "Lime erscheint NIE im Fachbetrieb-Kontext.",
       "Fixed-Stage 1920×1080, skaliert als Ganzes."
