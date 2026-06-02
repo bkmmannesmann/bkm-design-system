@@ -20,7 +20,7 @@
 - **Zweck:** Einstieg. **Slots:** Eyebrow, Headline, Lead, Meta (Datum/Ort/…), optional Button, Keyvisual.
 - **Layout:** Glas-Card links, Keyvisual rechts (nur hier!). **Casing:** UPPERCASE. **bg:** t1.
 
-### A2 · Agenda / Inhalt — `.s-agenda` 🔶
+### A2 · Agenda / Inhalt — `.s-agenda` ✅
 - **Zweck:** Programm/Überblick. **Slots:** Eyebrow, Headline, 3–6 Zeilen (Zeit · Thema · Sprecher/No),
   optional Status-Card („39 Fachbetriebe").
 - **Layout:** Glas-Panel, ggf. 2-spaltig mit Status-Card. **Casing:** Mixed. **bg:** t2.
@@ -42,7 +42,7 @@
 
 ## Ebene B · Inhalts-Bausteine
 
-### B6 · Großes Zitat — `.s-quote` ⬜ (Lücke)
+### B6 · Großes Zitat — `.s-quote` ✅
 - **Zweck:** Testimonial/Kernaussage. **Slots:** Eyebrow, Blockquote (Akzentwort Lime), Quelle (Name · Rolle · Ort).
 - **Layout:** großes „"-Zeichen (transition-green, niedrige Opacity) hinter dem Zitat, Quelle mit Lime-Strich.
 - **Casing:** Mixed (Zitat in Satzform). **bg:** t3.
@@ -52,20 +52,20 @@
   optional Fußzeile.
 - **Layout:** KPI-Reihe (Glas-Cards). **Casing:** Mixed. **bg:** t2.
 
-### B8 · Tabelle — `.s-table` ⬜ (Lücke)
+### B8 · Tabelle — `.s-table` ✅
 - **Zweck:** Daten/Specs/Preise/Matrix. **Slots:** Eyebrow, Headline, Header-Zeile, 3–8 Datenzeilen,
   optional Highlight-Spalte/Zeile (Lime-getönt).
 - **Layout:** Zebra über `rgba`-Trennlinien (kein harter Rahmen — Shadow-as-Border), Header in Unbounded 700,
   Zahlen tabellarisch (`font-variant-numeric:tabular-nums`). Max ~8 Zeilen × 5 Spalten lesbar.
 - **Casing:** Header-Labels UPPERCASE-Eyebrow-Stil, Headline Mixed. **bg:** t1 (dunkel-links für Lesbarkeit).
 
-### B9 · Vergleich — `.s-compare` ⬜ (Lücke)
+### B9 · Vergleich — `.s-compare` ✅
 - **Zweck:** 2-Spalten / Vorher-Nachher / Wir-vs-Markt. **Slots:** Headline, 2 Spalten je
   (Titel, Badge, Liste mit ✓/✗), optional Mittel-Divider „vs".
 - **Layout:** zwei Glas-Cards; „eigene" Seite Lime-akzentuiert, Gegenseite neutral. ✓ = Lime, ✗ = gedämpft.
 - **Casing:** Headline Mixed, Spaltentitel Display 700. **bg:** t4.
 
-### B10 · Diagramm / Chart — `.s-chart` ⬜ (Lücke)  · *zwei Varianten, siehe unten*
+### B10 · Diagramm / Chart — `.s-chart` ✅ (CSS/SVG · Chart.js-Variante offen)
 - **Zweck:** Balken/Linie/Donut + Aussage. **Slots:** Eyebrow, Headline, Chart, Legende, Caption/Quelle.
 - **Layout:** Chart links/zentriert, Kernaussage als kurzer Text daneben. **Casing:** Mixed. **bg:** t3.
 
@@ -107,7 +107,7 @@
 
 ## Umsetzungsplan (phasenweise, später)
 
-- **Phase 1 — Lücken zuerst** (höchster Nutzen): `s-quote`, `s-table`, `s-compare`, `s-chart` (CSS/SVG), `s-agenda`.
+- **Phase 1 — Lücken zuerst** ✅ **erledigt** (in `bkm-glass-ag/demo.html`): `s-quote`, `s-table`, `s-compare`, `s-chart` (CSS/SVG), `s-agenda`.
 - **Phase 2 — Vervollständigen in `bkm-glass-ag`:** `s-chapter`, `s-subhead`, `s-closing`, `s-process`,
   `s-timeline` formalisieren → `demo.html` deckt alle 14 Typen ab (= vollständige Vorlage).
 - **Phase 3 — Galerie & Doku:** gerenderte Typen-Galerie (PNG je Typ) + Verweise in `SKILL.md`/`README`.
