@@ -27,8 +27,9 @@ This repository contains the complete design system for BKM Mannesmann AG, a man
 | `docs/verbesserungsvorschlaege.md` | Improvement proposals based on reference analysis | |
 | `docs/bkm-slide-prompt.md` | Reusable slide prompt with exact CSS tokens (v3) | |
 | `skills/bkm-slides/SKILL.md` | Slide skill entry point — mandatory workflow for slide creation | |
+| `skills/bkm-slides/QUICKSTART.md` | **How to build an on-brand deck (start here)** — for Claude Code, Claude.ai & Manus | |
+| `skills/bkm-slides/templates/<family>/demo.html` | **Self-contained golden-reference decks** (embedded fonts, logo, textures) — the actual starting point | |
 | `skills/bkm-slides/STYLE_PRESETS.md` | Exact CSS tokens for glassmorphism slides (both contexts) | |
-| `skills/bkm-slides/html-template.md` | Complete copy-paste HTML templates for all slide types | |
 | `skills/bkm-slides/PATTERN_CATALOG.md` | Allowed and forbidden patterns with exact CSS values | |
 
 ## Quick Start
@@ -42,17 +43,29 @@ Read the DESIGN.md and AGENTS.md from https://github.com/bkmmannesmann/bkm-desig
 and create [a landing page / web app / etc.] following the BKM Mannesmann design.
 ```
 
-**For Slide Presentations (Glasmorphism Style):**
+**For Slide Presentations — read `skills/bkm-slides/QUICKSTART.md` first.**
 
+> ⚠️ The on-brand look depends on **embedded assets** (brand fonts, real logo, textured
+> backgrounds) that live **inside** the family template files. These **cannot be
+> reconstructed from the Markdown docs.** Always **start from a self-contained template and
+> replace only the content** — never "read the docs and generate from scratch" (that yields
+> a generic, off-brand deck).
+
+**A — Claude Code with the repo (recommended):**
 ```
-Read the following files from https://github.com/bkmmannesmann/bkm-design-system:
-1. skills/bkm-slides/SKILL.md (mandatory workflow)
-2. skills/bkm-slides/STYLE_PRESETS.md (exact CSS tokens)
-3. skills/bkm-slides/html-template.md (copy-paste HTML templates)
-Then create a presentation about [topic] in the [BKM AG / Fachbetrieb] context.
+Erstelle ein BKM-Deck zu [Thema] für [BKM AG / Fachbetrieb].
+Nutze die bkm-slides-Skill, baue auf templates/bkm-glass-ag/demo.html auf,
+ersetze nur den Inhalt und rendere zur Kontrolle.
 ```
 
-The slide skill includes a mandatory workflow: determine context → read exact CSS tokens → read HTML templates → generate background photos → upload assets → build slides → quality check.
+**B — Claude.ai or Manus (no repo): attach the template file.**
+Download `skills/bkm-slides/templates/bkm-glass-ag/demo.html` (self-contained — embedded
+fonts, logo, textured backgrounds, motion) and **attach it** to the chat, then:
+```
+Anbei die BKM-Folienvorlage. Dupliziere die Folien und ersetze NUR Text/Inhalt
+mit [Thema]. Lass CSS, Schriften, Logo, Hintergründe und Engine unverändert.
+Folge den Mustern in der Datei.
+```
 
 **For Other Formats (Instagram, Print, Social Media):**
 
