@@ -11,6 +11,8 @@
 - Bausteine sind **frei kombinierbar**, keine Pflichtreihenfolge. Hybrid-Casing & bg-Rotation
   (`t1…t4`) gelten überall (siehe `PATTERN_CATALOG.md` 13–14).
 - Status-Legende: ✅ in `bkm-glass-ag/demo.html` · 🔶 existiert in einem Deck (zu formalisieren) · ⬜ neu (Lücke).
+- **Zeilen-Zebra:** Auflistungen & Tabellen alternieren pro Zeile in leichter Nuance White ↔ Sand-White
+  (`rgba(255,255,255,.035)` / `rgba(245,240,235,.05)`) — gilt für `s-table`, `s-agenda`, `s-process`.
 
 ---
 
@@ -25,15 +27,15 @@
   optional Status-Card („39 Fachbetriebe").
 - **Layout:** Glas-Panel, ggf. 2-spaltig mit Status-Card. **Casing:** Mixed. **bg:** t2.
 
-### A3 · Kapitel-Trenner — `.s-chapter` 🔶
+### A3 · Kapitel-Trenner — `.s-chapter` ✅
 - **Zweck:** neues Kapitel. **Slots:** große Geister-Nummer (01/02), Eyebrow, kurze Headline.
 - **Layout:** links, große Nummer hinterlegt. **Casing:** UPPERCASE. **bg:** t4/t3.
 
-### A4 · Unterthema-Header — `.s-subhead` 🔶
+### A4 · Unterthema-Header — `.s-subhead` ✅
 - **Zweck:** Section innerhalb eines Kapitels. **Slots:** Eyebrow, Headline, optional Subline.
 - **Layout:** zentriert oder links oben. **Casing:** Mixed. **bg:** rotierend.
 
-### A5 · Abschluss / CTA / Kontakt — `.s-closing` 🔶
+### A5 · Abschluss / CTA / Kontakt — `.s-closing` ✅
 - **Zweck:** Wrap-Up, Handlungsaufruf, Kontakt. **Slots:** Icon, Headline, Subline, Fließtext,
   optional Prozess-Flow oder Checkliste, Footer (Kontakt/Termin).
 - **Layout:** zentriertes Glas-Panel. **Casing:** Mixed. **bg:** t1.
@@ -69,7 +71,7 @@
 - **Zweck:** Balken/Linie/Donut + Aussage. **Slots:** Eyebrow, Headline, Chart, Legende, Caption/Quelle.
 - **Layout:** Chart links/zentriert, Kernaussage als kurzer Text daneben. **Casing:** Mixed. **bg:** t3.
 
-### B11 · Prozess / Schritte — `.s-process` 🔶
+### B11 · Prozess / Schritte — `.s-process` ✅
 - **Zweck:** nummerierte Schritte / Ablauf / Flow. **Slots:** Eyebrow, Headline, 3–5 Schritte
   (Nummer/Icon + Titel + Text), optional Pfeile zwischen Schritten.
 - **Layout:** Liste (vertikal, Lime-Nummern) **oder** horizontaler Flow (Kreise + Pfeile). **Casing:** Mixed. **bg:** t2.
@@ -83,7 +85,7 @@
   Text/Bulletpoints, Figure (Bild + Caption).
 - **Layout:** Text eine Hälfte, `figure` die andere. **Casing:** Mixed. **bg:** t1 (Text-Seite dunkel).
 
-### B14 · Timeline / Roadmap — `.s-timeline` ⬜ (Lücke)
+### B14 · Timeline / Roadmap — `.s-timeline` ✅
 - **Zweck:** zeitlicher Verlauf / Meilensteine / Phasen. **Slots:** Eyebrow, Headline, 3–6 Punkte
   (Zeit/Phase + Titel + kurzer Text) entlang einer Achse.
 - **Layout:** horizontale Achse mit Lime-Knoten, abwechselnd ober-/unterhalb. **Casing:** Mixed. **bg:** t4.
@@ -108,8 +110,8 @@
 ## Umsetzungsplan (phasenweise, später)
 
 - **Phase 1 — Lücken zuerst** ✅ **erledigt** (in `bkm-glass-ag/demo.html`): `s-quote`, `s-table`, `s-compare`, `s-chart` (CSS/SVG), `s-agenda`.
-- **Phase 2 — Vervollständigen in `bkm-glass-ag`:** `s-chapter`, `s-subhead`, `s-closing`, `s-process`,
-  `s-timeline` formalisieren → `demo.html` deckt alle 14 Typen ab (= vollständige Vorlage).
+- **Phase 2 — Vervollständigen in `bkm-glass-ag`:** ✅ **erledigt** — `s-chapter`, `s-subhead`, `s-closing`,
+  `s-process`, `s-timeline`. `demo.html` deckt jetzt alle 14 Typen ab (= vollständige Vorlage).
 - **Phase 3 — Galerie & Doku:** gerenderte Typen-Galerie (PNG je Typ) + Verweise in `SKILL.md`/`README`.
 - **Phase 4 — Portierung:** Typen in `bkm-glass-fachbetrieb`, `bkm-editorial`, `bkm-bold-poster`
   (familienspezifische Tokens, kein Lime im Fachbetrieb).
