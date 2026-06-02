@@ -19,6 +19,9 @@ Alle wesentlichen Änderungen am BKM Mannesmann Design System werden hier dokume
   (P0/P1/P2 + 5-Dim-Selbstkritik), Anti-Slop-**Positivregeln** in `PATTERN_CATALOG.md`,
   Engine-Härtung in `ENGINE.md` (Capture-Keydown, Autofokus, localStorage-Position),
   Turn-1-Kurzbrief in `SKILL.md`. Ideen-Sammlung: `docs/inspiration-open-design.md`.
+- `skills/bkm-slides/tokens.css` — kanonische Design-Tokens (Single Source of Truth)
+  und `components.html` — gerendertes Komponenten-Schaufenster. Erstes vollständiges
+  v5-Beispiel-Deck `examples/bkm-ag-pitch.html`.
 
 ## [1.0.0] - 2026-05-11
 

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BKM Slides — Komponenten-Schaufenster</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<style>
+/* Tokens — Spiegel von tokens.css (inline, damit die Datei eigenständig rendert) */
+:root{
+  --deep-green:#1c4b42; --lime:#b4e717; --transition-green:#287d4b; --pure-green:#4daf46;
+  --sand:#f6f5f2; --stone-grey:#494949; --white:#fff; --on-secondary:#1c4b42;
+  --deep-green-2:#0f2620; --deep-green-1:#235a4f; --paper:#f5f0eb; --card-dark:#122e27;
+  --font-display:'Unbounded',sans-serif;
+  --font-body:'TT Norms Pro',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  --radius:8px; --radius-glass:24px; --radius-pill:999px; --ease:cubic-bezier(0.16,1,0.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--font-body);background:var(--sand);color:var(--deep-green);}
+
+.wrap{max-width:1240px;margin:0 auto;padding:64px 48px 100px;}
+.pagehead .eyebrow{font-weight:700;letter-spacing:0.16em;text-transform:uppercase;font-size:13px;color:var(--pure-green);margin-bottom:14px;}
+.pagehead h1{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:48px;letter-spacing:-0.03em;line-height:1;}
+.pagehead p{color:var(--stone-grey);font-size:17px;line-height:1.6;margin-top:16px;max-width:760px;}
+
+section{margin-top:64px;}
+.sechead{display:flex;align-items:baseline;gap:14px;border-bottom:2px solid var(--deep-green);padding-bottom:12px;margin-bottom:28px;}
+.sechead h2{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:24px;letter-spacing:-0.02em;}
+.sechead span{color:var(--stone-grey);font-size:14px;}
+
+/* Farb-Swatches */
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px;}
+.sw{border:1px solid rgba(28,75,66,0.12);border-radius:var(--radius);overflow:hidden;}
+.sw .chip{height:96px;}
+.sw .meta{padding:12px 14px;background:#fff;}
+.sw .meta b{font-size:14px;font-family:var(--font-display);font-weight:700;}
+.sw .meta code{display:block;font-size:12px;color:var(--stone-grey);margin-top:4px;}
+.sw .meta small{display:block;font-size:11px;color:var(--stone-grey);margin-top:6px;line-height:1.4;}
+
+/* Typo-Skala */
+.type-row{padding:16px 0;border-bottom:1px solid rgba(28,75,66,0.1);}
+.type-row .tag{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--pure-green);margin-bottom:8px;}
+.h1demo{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:64px;letter-spacing:-0.04em;line-height:0.95;}
+.h2demo{font-family:var(--font-display);font-weight:900;font-size:40px;letter-spacing:-0.03em;line-height:1.05;}
+.ebdemo{font-weight:700;letter-spacing:0.16em;text-transform:uppercase;font-size:16px;color:var(--pure-green);}
+.bodydemo{font-size:17px;line-height:1.6;color:var(--stone-grey);max-width:720px;}
+.bodydemo b{color:var(--deep-green);}
+
+/* Buttons */
+.row{display:flex;gap:18px;flex-wrap:wrap;align-items:center;}
+.btn{display:inline-flex;align-items:center;gap:11px;font-family:var(--font-body);font-weight:700;font-size:16px;
+  letter-spacing:0.03em;text-transform:uppercase;padding:15px 26px;border-radius:12px;border:none;cursor:pointer;}
+.btn-lime{background:var(--lime);color:var(--on-secondary);} .btn-lime i{color:var(--on-secondary);}
+.btn-deep{background:var(--deep-green);color:#fff;} .btn-deep i{color:var(--lime);}
+.btn-pure{background:var(--pure-green);color:#fff;} .btn-pure i{color:#fff;}
+.ondark{background:linear-gradient(135deg,#1c4b42,#0f2620);padding:30px;border-radius:var(--radius);}
+
+/* Cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;}
+.glass-dark-wrap{background:linear-gradient(135deg,#1c4b42,#0f2620);padding:34px;border-radius:var(--radius);}
+.glass{position:relative;overflow:hidden;border-radius:var(--radius-glass);padding:34px;}
+.glass::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.85),transparent);}
+.glass-dark{background:rgba(255,255,255,0.12);backdrop-filter:blur(22px);border:1px solid rgba(255,255,255,0.28);
+  box-shadow:0 8px 32px rgba(0,0,0,0.28),inset 0 1px 0 rgba(255,255,255,0.5),inset 0 0 60px 12px rgba(255,255,255,0.10);}
+.glass-dark h3{font-family:var(--font-display);font-weight:900;text-transform:uppercase;color:#fff;font-size:22px;letter-spacing:-0.02em;}
+.glass-dark p{color:rgba(255,255,255,0.82);font-size:15px;line-height:1.5;margin-top:10px;}
+.glass-light{background:rgba(255,255,255,0.55);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.85);
+  box-shadow:0 12px 40px rgba(28,75,66,0.10),inset 0 1px 0 rgba(255,255,255,0.9);}
+.glass-light h3{font-family:var(--font-display);font-weight:900;text-transform:uppercase;color:var(--transition-green);font-size:22px;letter-spacing:-0.02em;}
+.glass-light p{color:var(--stone-grey);font-size:15px;line-height:1.5;margin-top:10px;}
+
+/* Editorial-Card mit 4px Border-Left */
+.edcard{background:#fff;border-radius:var(--radius);padding:28px 30px;border-left:4px solid var(--deep-green);}
+.edcard.hl{border-left-color:var(--lime);} .edcard.fb{border-left-color:var(--pure-green);}
+.edcard h3{font-family:var(--font-display);font-weight:900;font-size:19px;color:var(--deep-green);letter-spacing:-0.01em;}
+.edcard p{color:var(--stone-grey);font-size:15px;line-height:1.5;margin-top:10px;}
+
+/* Icon-Tile, Tag, KPI */
+.tile{width:64px;height:64px;border-radius:16px;background:var(--lime);color:var(--deep-green);display:flex;align-items:center;justify-content:center;font-size:26px;}
+.tile.fb{background:var(--pure-green);color:#fff;}
+.tag{display:inline-flex;align-items:center;gap:8px;background:var(--deep-green);color:#fff;font-weight:700;font-size:13px;
+  letter-spacing:0.08em;text-transform:uppercase;padding:9px 16px;border-radius:var(--radius);}
+.tag.lime{background:var(--lime);color:var(--on-secondary);}
+.kpi{text-align:left;}
+.kpi .f{font-family:var(--font-display);font-weight:900;font-size:84px;line-height:0.9;letter-spacing:-0.04em;color:var(--deep-green);}
+.kpi .f .u{color:var(--pure-green);font-size:48px;}
+.kpi .c{font-weight:700;font-size:15px;letter-spacing:0.06em;text-transform:uppercase;color:var(--transition-green);margin-top:10px;}
+
+/* Typo-Bild-Karte (Referenz) */
+.refcard{border-radius:var(--radius-glass);overflow:hidden;border:1px solid rgba(28,75,66,0.12);max-width:340px;}
+.refcard .img{height:180px;position:relative;background:linear-gradient(150deg,#2f8a54,#287d4b 48%,#1c4b42);}
+.refcard .big{position:absolute;left:24px;bottom:18px;line-height:0.86;}
+.refcard .big .n{font-family:var(--font-display);font-weight:900;font-size:64px;color:#fff;letter-spacing:-0.04em;}
+.refcard .big .n .u{color:var(--lime);font-size:34px;}
+.refcard .big .s{display:block;font-family:var(--font-display);font-weight:400;font-size:20px;color:var(--lime);margin-top:4px;}
+.refcard .body{padding:18px 22px 22px;background:#fff;}
+.refcard .body .cs{font-weight:700;letter-spacing:0.1em;text-transform:uppercase;font-size:11px;color:var(--pure-green);}
+.refcard .body h4{font-family:var(--font-display);font-weight:700;font-size:17px;color:var(--transition-green);margin-top:8px;}
+
+.note{font-size:13px;color:var(--stone-grey);margin-top:14px;line-height:1.5;}
+.note code{background:#fff;padding:2px 7px;border-radius:5px;border:1px solid rgba(28,75,66,0.12);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="pagehead">
+    <div class="eyebrow">BKM Slides · v5</div>
+    <h1>Komponenten-Schaufenster</h1>
+    <p>Gerenderte Referenz aller Bausteine, gespeist aus den kanonischen Tokens
+    (<code>tokens.css</code>). Zwei Kontexte: <b>BKM AG</b> (dunkel, Lime-Signal) und
+    <b>Fachbetrieb</b> (hell, Pure/Transition Green, kein Lime).</p>
+  </div>
+
+  <!-- FARBEN -->
+  <section>
+    <div class="sechead"><h2>Farben</h2><span>DESIGN.md · Marken-Kern + abgeleitete Töne</span></div>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#1c4b42"></div><div class="meta"><b>Deep Green</b><code>#1c4b42</code><small>primary · Problem/Feuchte · dunkle Fläche</small></div></div>
+      <div class="sw"><div class="chip" style="background:#b4e717"></div><div class="meta"><b>Lime Green</b><code>#b4e717</code><small>secondary · Signal · NUR BKM AG</small></div></div>
+      <div class="sw"><div class="chip" style="background:#287d4b"></div><div class="meta"><b>Transition Green</b><code>#287d4b</code><small>tertiary · Prozess · Text/Headlines hell</small></div></div>
+      <div class="sw"><div class="chip" style="background:#4daf46"></div><div class="meta"><b>Pure Green</b><code>#4daf46</code><small>Fachbetrieb-Identität · Lösung</small></div></div>
+      <div class="sw"><div class="chip" style="background:#f6f5f2;border-bottom:1px solid #eee"></div><div class="meta"><b>Sand White</b><code>#f6f5f2</code><small>neutral · warme helle Fläche</small></div></div>
+      <div class="sw"><div class="chip" style="background:#494949"></div><div class="meta"><b>Stone Grey</b><code>#494949</code><small>Textfarbe · nie dominante Fläche</small></div></div>
+      <div class="sw"><div class="chip" style="background:#0f2620"></div><div class="meta"><b>Deep Green 2</b><code>#0f2620</code><small>DERIVED · Verlauf/Letterbox</small></div></div>
+      <div class="sw"><div class="chip" style="background:#f5f0eb;border-bottom:1px solid #eee"></div><div class="meta"><b>Paper</b><code>#f5f0eb</code><small>DERIVED · Editorial-Canvas</small></div></div>
+    </div>
+  </section>
+
+  <!-- TYPOGRAFIE -->
+  <section>
+    <div class="sechead"><h2>Typografie</h2><span>Unbounded 900 (Display) · TT Norms Pro (Body)</span></div>
+    <div class="type-row"><div class="tag">H1 · Unbounded 900 · UPPERCASE</div><div class="h1demo">Dicht. Von Grund auf</div></div>
+    <div class="type-row"><div class="tag">H2–H6 · Unbounded 900 · sentence case</div><div class="h2demo">Bauwerksschutz, der bleibt</div></div>
+    <div class="type-row"><div class="tag">Eyebrow · 700 · UPPERCASE · 0.16em</div><div class="ebdemo">Ihr Fachbetrieb vor Ort</div></div>
+    <div class="type-row"><div class="tag">Body · TT Norms Pro 400</div><div class="bodydemo">Feuchtigkeitssperren und Injektionsverfahren für dauerhaften Bautenschutz — entwickelt im eigenen Labor, <b>geprüft nach Norm</b>. Akzente entstehen über Farbe, nie über Kursivschrift.</div></div>
+  </section>
+
+  <!-- BUTTONS -->
+  <section>
+    <div class="sechead"><h2>Buttons</h2><span>Ein primärer Button pro Fold</span></div>
+    <div class="ondark row">
+      <button class="btn btn-lime"><i class="fas fa-arrow-right"></i> Primär (BKM AG)</button>
+      <span style="color:rgba(255,255,255,0.6);font-size:13px">Lime auf dunkler Fläche</span>
+    </div>
+    <div class="row" style="margin-top:18px">
+      <button class="btn btn-deep"><i class="fas fa-arrow-right"></i> Primär (hell)</button>
+      <button class="btn btn-pure"><i class="fas fa-arrow-right"></i> Primär (Fachbetrieb)</button>
+    </div>
+  </section>
+
+  <!-- GLAS-CARDS -->
+  <section>
+    <div class="sechead"><h2>Glas-Cards</h2><span>border-radius 24px · Licht-Kante oben</span></div>
+    <div class="cards">
+      <div class="glass-dark-wrap"><div class="glass glass-dark"><h3>BKM AG · Glas</h3><p>Frosted-Glass auf Deep Green. Weißer Text, Lime als Signal.</p></div></div>
+      <div class="glass glass-light"><h3>Fachbetrieb · Glas</h3><p>Helles Milchglas auf Sand. Transition-Green-Text, kein Lime.</p></div>
+    </div>
+  </section>
+
+  <!-- EDITORIAL-CARDS -->
+  <section>
+    <div class="sechead"><h2>Editorial-Cards</h2><span>4px Border-Left · 8px Radius · kein Schatten</span></div>
+    <div class="cards">
+      <div class="edcard"><h3>Standard</h3><p>Deep-Green-Border — Standard-Inhaltskarte.</p></div>
+      <div class="edcard hl"><h3>Highlight (AG)</h3><p>Lime-Border — Highlight/Success, nur BKM AG.</p></div>
+      <div class="edcard fb"><h3>Fachbetrieb</h3><p>Pure-Green-Border — Fachbetrieb-Kontext.</p></div>
+    </div>
+  </section>
+
+  <!-- KLEINTEILE -->
+  <section>
+    <div class="sechead"><h2>Kacheln · Tags · KPI · Referenz</h2><span>8px / 16px Radius</span></div>
+    <div class="row" style="align-items:flex-start;gap:40px">
+      <div><div class="tile"><i class="fas fa-shield-halved"></i></div><div class="note">Icon-Tile (AG)</div></div>
+      <div><div class="tile fb"><i class="fas fa-droplet-slash"></i></div><div class="note">Icon-Tile (FB)</div></div>
+      <div style="display:flex;flex-direction:column;gap:10px"><span class="tag lime"><i class="fas fa-bolt"></i> Signal</span><span class="tag">Rubrik</span></div>
+      <div class="kpi"><div class="f">0<span class="u">%</span></div><div class="c">Restfeuchte</div></div>
+      <div class="refcard">
+        <div class="img"><div class="big"><div class="n">1.200<span class="u">m²</span></div><span class="s">Fläche saniert</span></div></div>
+        <div class="body"><div class="cs">Case Study</div><h4>Tiefgarage dauerhaft trocken</h4></div>
+      </div>
+    </div>
+  </section>
+
+  <p class="note" style="margin-top:60px">Quelle der Werte: <code>../../DESIGN.md</code> · Token-Datei: <code>tokens.css</code> ·
+  Anti-Slop &amp; Casing-Regeln: <code>PATTERN_CATALOG.md</code>, <code>SKILL.md</code>.</p>
+
+</div>
+</body>
+</html>

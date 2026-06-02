@@ -21,6 +21,8 @@
 |-------|--------|
 | `../../DESIGN.md`, `../../AGENTS.md` | Verbindliche Marken-Token & -Regeln (Repo-Wurzel) |
 | `ENGINE.md` | Fixed-Stage-Engine (Shell-CSS/JS, 1:1 kopieren) |
+| `tokens.css` | **Kanonische Design-Tokens** (CSS-Variablen, Single Source of Truth) |
+| `components.html` | Gerendertes Komponenten-Schaufenster (lebende Referenz) |
 | `selection-index.json` | Kompakter Index aller Familien (Metadaten für die Auswahl) |
 | `templates/<slug>/preview.md` | Leichte Stilkarte je Familie (für Titel-Vorschau) |
 | `templates/<slug>/design.md` | **Vollständiges Design-Rezept** je Familie (vor dem Bau lesen) |
@@ -116,6 +118,8 @@ Erst wenn P0 vollständig grün **und** alle Kritik-Dimensionen ≥ 3/5 sind: au
 skills/bkm-slides/
 ├── SKILL.md                ← diese Datei (Einstieg + Workflow)
 ├── ENGINE.md               ← Fixed-Stage-Engine (Shell, PFLICHT-Basis)
+├── tokens.css              ← kanonische Design-Tokens (Single Source of Truth)
+├── components.html         ← gerendertes Komponenten-Schaufenster
 ├── selection-index.json    ← Familien-Index (Auswahl-Metadaten)
 ├── style-discovery.html    ← visuelle Auswahl-Galerie (4 Familien)
 ├── templates/

@@ -120,7 +120,9 @@ new Deck();
 - Elemente **absolut** positionieren (px), nicht per Flow umbrechen lassen.
 - `tot` (Folienzahl) liest die Engine automatisch aus der Anzahl `.slide`.
 - Navigation: Pfeile, Leertaste, PageUp/Down, Home/End, Ziffern 1–9, Touch-Swipe.
-- `--stage-bg` (Letterbox-Farbe) und `--ease` müssen im `:root` der Familie gesetzt sein.
+- `:root`-Token kommen aus der kanonischen **`tokens.css`** (Single Source of Truth) —
+  bei Deploy verlinken (`<link rel="stylesheet" href="../tokens.css">`), in eigenständigen
+  Decks den `:root`-Block inlinen. `--stage-bg` und `--ease` müssen gesetzt sein.
 
 ## Assets im Echtbetrieb
 
