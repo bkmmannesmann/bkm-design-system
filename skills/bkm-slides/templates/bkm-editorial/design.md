@@ -72,6 +72,25 @@ mit Paper/Lime-Inhalt. Kein vierter Farbton.
    zweifarbiger Zahl, 4px-Paper-Linie als Trenner, darunter Case-Study-Text.
    (Energma-Muster in editorial-flacher Sprache — Gegenstück zur Glas-Variante.)
 
+## Keyvisual (nur Deckblatt)
+
+Das M-Pfeil-**Keyvisual** erscheint **ausschließlich auf der Titelfolie/dem Deckblatt** —
+als ruhige Markensignatur an der rechten Kante.
+
+- **Position:** rechte Außenkante **bündig** mit dem Folienrand (`right:0`), **vertikal
+  zentriert**. **Vollständig sichtbar** — nicht angeschnitten, oben/unten frei.
+- **Größe:** Höhe ~560px (≈52 % der Folie), bewusst zurückhaltend.
+- **Variante je Hintergrund:** dunkel → **weiß** (`keyvisual-on-dark.png`), hell →
+  **grün** (`keyvisual-on-light.png`). Opacity ~0.85.
+- **Z-Ebene:** hinter Inhalts-Cards/Text, vor dem Hintergrund.
+- **Asset:** kompakte PNGs in `assets/keyvisual/` (~50 KB; Voll-Vektor: `.svg` daneben).
+  Im Prototyp als Data-URI eingebettet, im Skill per Pfad referenzieren.
+
+```css
+.keyvisual{position:absolute;right:0;top:50%;transform:translateY(-50%);
+  height:560px;width:auto;opacity:.85;pointer-events:none;z-index:0;}
+```
+
 ## Do / Don't
 
 **Do:** große Typo statt mehr Elemente; 4px-Linien als Rhythmus; ein Headline-Wort in

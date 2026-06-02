@@ -131,7 +131,11 @@ Im Generierungs-Fall Logos/Keyvisual **per Pfad** referenzieren (nicht einbetten
 | Asset | dunkel (Deep Green) | hell (Sand) |
 |-------|---------------------|-------------|
 | Logo | `assets/logos/bkm-logo-white-puregreen.png` | `assets/logos/bkm-logo-stonegrey-puregreen.png` |
-| Keyvisual | `assets/keyvisual/keyvisual-on-dark.svg` | `assets/keyvisual/keyvisual-on-light.svg` |
+| Keyvisual | `assets/keyvisual/keyvisual-on-dark.png` | `assets/keyvisual/keyvisual-on-light.png` |
+
+> **Keyvisual nur auf Deckblättern:** rechte Kante bündig mit dem Folienrand, vertikal
+> zentriert, vollständig sichtbar (Höhe ~560px, opacity ~0.85), Variante je Hintergrund.
+> Kompakte `.png` (~50 KB) zum Einbetten; `.svg` daneben als Voll-Vektor-Quelle.
 
 > In den mitgelieferten `demo.html` ist das Logo als Data-URI eingebettet, damit die
 > Referenz-Dateien eigenständig im Browser laufen. Generierte Decks nutzen Pfade.

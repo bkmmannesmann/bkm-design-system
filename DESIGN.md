@@ -432,7 +432,7 @@ All measurable values are displayed in TT Norms Pro Regular. Labels in TT Norms 
 
 ### The Keyvisual
 
-The Keyvisual is a fixed branded composition (layered arrow shapes derived from the logo signet). It must NEVER be recreated in code — no SVG patterns, no CSS shapes, no procedural generation. It is always placed as a pre-rendered image file, positioned on the right edge, cropped via overflow.
+The Keyvisual is a fixed branded composition (layered arrow shapes derived from the logo signet). It must NEVER be recreated in code — no SVG patterns, no CSS shapes, no procedural generation. It is always placed as a pre-rendered image file, with its **right edge flush against the right edge of the slide**, **vertically centered** and **fully visible (not cropped)**, at a restrained size (height ≈ 52% of the slide, opacity ≈ 0.85). It must not touch the top or bottom edge.
 
 It appears on: title pages, hero bands (optional), print materials. It does NOT appear on: product cards, small components, Instagram posts, email templates, technical data sheets.
 
@@ -448,6 +448,8 @@ The Keyvisual consists of three layered chevron shapes representing the drying p
 |------|--------|-------------------|
 | `assets/keyvisual/keyvisual-on-light.svg` | Pure Green + Transition Green + Deep Green | White (#ffffff), Sand White (#f6f5f2) |
 | `assets/keyvisual/keyvisual-on-dark.svg` | All White | Deep Green (#1c4b42), Transition Green (#287d4b), Stone Grey (#494949) |
+
+Compact pre-rendered PNGs (`keyvisual-on-dark.png` / `keyvisual-on-light.png`, ~50 KB, transparent) are available for embedded decks; the `.svg` files remain the full-vector source.
 
 **FORBIDDEN:** Never place the Keyvisual on Pure Green (#4daf46) or Lime Green (#b4e717) backgrounds — one chevron element would visually disappear due to identical color.
 

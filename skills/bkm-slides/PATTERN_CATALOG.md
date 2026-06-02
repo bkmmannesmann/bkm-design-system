@@ -175,20 +175,25 @@ Nicht jede Slide braucht ein Foto. Glasmorphismus hebt sich auch auf flachen Far
 .process-arrow { color: rgba(77, 175, 70, 0.45); font-size: 18px; }
 ```
 
-### 10. Keyvisual-Überlappung (nur Titelseiten)
+### 10. Keyvisual (nur Titelseiten)
 
 ```css
 .keyvisual {
-  position: absolute; top: 0; right: 0;
-  height: 100%; width: 22%;
-  object-fit: cover; object-position: left center;
-  opacity: 0.18;   /* BKM AG */
-  /* opacity: 0.15; /* Fachbetrieb */
-  z-index: 5;
+  position: absolute;
+  right: 0;                     /* bündig mit rechtem Folienrand */
+  top: 50%;
+  transform: translateY(-50%);  /* vertikal zentriert */
+  height: 560px;                /* ~52% der Folie, vollständig sichtbar */
+  width: auto;                  /* nicht angeschnitten */
+  opacity: 0.85;
+  pointer-events: none;
+  z-index: 0;                   /* hinter Inhalts-Cards/Text */
 }
 ```
 
-**Regeln:** Immer rechts, immer angeschnitten, nie links/mittig, nie gedreht/gespiegelt.
+**Regeln:** Rechte Kante bündig mit dem Folienrand, vertikal zentriert, **vollständig
+sichtbar** (nicht angeschnitten, oben/unten frei). Variante je Hintergrund: dunkel →
+weiß, hell → grün. Nie links/mittig, nie gedreht/gespiegelt.
 
 ### 11. Innerer Glass-Glow (optional, nur Titel-Slides)
 

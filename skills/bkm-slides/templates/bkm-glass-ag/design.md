@@ -80,12 +80,31 @@ Farbkreise) oder ein Foto hinter die Cards legen — sonst ist der Effekt unsich
 
 ## Slide-Typen (in `demo.html`)
 
-1. **Titel** — große Glas-Card mit Eyebrow/Headline/Text/Button + runder Frost-Chip (KPI).
+1. **Titel** — große Glas-Card mit Eyebrow/Headline/Text/Button; **Keyvisual rechts** (kein Chip).
 2. **Drei Karten** — drei Glas-Cards mit Lime-Icon-Kachel, Titel, Text.
 3. **Kennzahlen** — eine breite Glas-Panel mit 3 KPI-Spalten (Trennlinien aus Licht).
 4. **Referenzen** — Typo-Bild-Karten: Glas-Card mit Gradient-Bildfläche + großer
    zweifarbiger Zahl (weiß + Lime), darunter Case-Study-Text. (Muster aus der
    Energma-Studie, hier in Glas-Sprache.)
+
+## Keyvisual (nur Deckblatt)
+
+Das M-Pfeil-**Keyvisual** erscheint **ausschließlich auf der Titelfolie/dem Deckblatt** —
+als ruhige Markensignatur an der rechten Kante.
+
+- **Position:** rechte Außenkante **bündig** mit dem Folienrand (`right:0`), **vertikal
+  zentriert**. **Vollständig sichtbar** — nicht angeschnitten, oben/unten frei.
+- **Größe:** Höhe ~560px (≈52 % der Folie), bewusst zurückhaltend.
+- **Variante je Hintergrund:** dunkel → **weiß** (`keyvisual-on-dark.png`), hell →
+  **grün** (`keyvisual-on-light.png`). Opacity ~0.85.
+- **Z-Ebene:** hinter Inhalts-Cards/Text, vor dem Hintergrund.
+- **Asset:** kompakte PNGs in `assets/keyvisual/` (~50 KB; Voll-Vektor: `.svg` daneben).
+  Im Prototyp als Data-URI eingebettet, im Skill per Pfad referenzieren.
+
+```css
+.keyvisual{position:absolute;right:0;top:50%;transform:translateY(-50%);
+  height:560px;width:auto;opacity:.85;pointer-events:none;z-index:0;}
+```
 
 ## Do / Don't
 
