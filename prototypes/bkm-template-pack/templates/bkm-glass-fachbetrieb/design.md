@@ -65,8 +65,10 @@ Blobs (oder Foto) dahinter.
 1. **Titel** — große Milchglas-Card (Eyebrow/Headline/Text/Button) + runder KPI-Chip.
 2. **Drei Leistungen** — drei Glas-Cards mit Pure-Green-Icon-Kachel.
 3. **Kennzahlen** — breite Glas-Panel mit 3 KPI-Spalten (dezente Trennlinien).
-4. **Referenzen** — Typo-Bild-Karten: Sand-Gradient-Fläche + große Zahl
-   (Deep Green + Pure-Green-Einheit), darunter Case-Study-Text.
+4. **Referenzen** — Typo-Bild-Karten: **Transition-Green-Kopf** (Verlauf
+   Transition→Deep Green) mit **weißer Zahl** + Pure-Green-Einheit, darunter sauberer
+   **weißer Body** mit Case-Study-Text; Überschrift in **Transition Green**.
+   (Bewusst kräftiger Grün-Kopf statt heller Sand-Fläche — sauberer, nicht „schmutzig".)
 
 ## Do / Don't
 
