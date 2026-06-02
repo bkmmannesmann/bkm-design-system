@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BKM Infografik — Feuchteschutz (BKM AG) — Demo</title>
+
+<!-- Headline-Font: Unbounded 900 (Google Fonts CDN) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&display=swap" rel="stylesheet">
+<!-- Icons sind inline als SVG eingebettet (kein CDN, netzwerk-unabhängig) -->
+
+<style>
+  /* Body-Font: TT Norms Pro (lokale Repo-Assets) */
+  @font-face {
+    font-family: 'TT Norms Pro';
+    src: url('../assets/fonts/TT_Norms_Pro_Compact_Regular.woff2') format('woff2');
+    font-weight: 400; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: 'TT Norms Pro';
+    src: url('../assets/fonts/TT_Norms_Pro_Bold.woff2') format('woff2');
+    font-weight: 700; font-style: normal; font-display: swap;
+  }
+
+  :root {
+    --deep-green: #1c4b42;
+    --transition-green: #287d4b;
+    --pure-green: #4daf46;
+    --lime: #b4e717;
+    --white: #ffffff;
+    --white-70: rgba(255,255,255,0.7);
+    --white-50: rgba(255,255,255,0.5);
+    --white-30: rgba(255,255,255,0.3);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #2a2a2a;
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+    font-family: 'TT Norms Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  /* 4:5 Infografik-Format (1080 × 1350) — Instagram/LinkedIn-tauglich */
+  .infographic {
+    width: 1080px;
+    height: 1350px;
+    position: relative;
+    overflow: hidden;
+    background: var(--deep-green); /* flache BKM-Farbe (erlaubt) */
+    color: var(--white);
+  }
+
+  /* Keyvisual als pre-rendered Asset, rechter Rand, angeschnitten */
+  .keyvisual {
+    position: absolute;
+    top: 0; right: 0;
+    height: 100%;
+    width: 22%;
+    object-fit: cover;
+    object-position: left center;
+    opacity: 0.18;
+    z-index: 1;
+  }
+
+  /* Vertikale Akzentlinie (BKM AG: Lime) */
+  .accent-line {
+    position: absolute;
+    left: 64px; top: 150px;
+    width: 4px; height: 132px;
+    background: var(--lime);
+    border-radius: 2px;
+    z-index: 3;
+  }
+
+  .content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; }
+
+  /* ---- Header ---- */
+  .header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 56px 64px 0 64px;
+  }
+  .logo { height: 40px; object-fit: contain; }
+  .demo-label {
+    font-weight: 700; font-size: 16px; text-transform: uppercase;
+    letter-spacing: 0.14em; color: var(--white-50);
+  }
+
+  /* ---- Title block ---- */
+  .title-block { padding: 40px 64px 0 84px; }
+  .section-label {
+    font-weight: 700; font-size: 18px; text-transform: uppercase;
+    letter-spacing: 0.12em; color: var(--lime); margin-bottom: 18px;
+  }
+  .headline {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 900; text-transform: uppercase;
+    font-size: 64px; line-height: 1.0; letter-spacing: -0.03em;
+    color: var(--white);
+  }
+  .subtitle {
+    font-weight: 400; font-size: 22px; line-height: 1.6;
+    color: var(--white-70); margin-top: 22px; max-width: 720px;
+  }
+
+  /* ---- Stats row ---- */
+  .stats { display: flex; gap: 24px; padding: 48px 64px 0 64px; }
+  .stat-card {
+    flex: 1;
+    background: rgba(255,255,255,0.07);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 32px 28px;
+  }
+  .stat-number {
+    font-family: 'TT Norms Pro', sans-serif; font-weight: 700;
+    font-size: 58px; line-height: 1; color: var(--lime);
+    letter-spacing: -0.02em;
+  }
+  .stat-number .unit { font-size: 30px; }
+  .stat-text {
+    font-weight: 400; font-size: 17px; line-height: 1.45;
+    color: var(--white-70); margin-top: 14px;
+  }
+
+  /* ---- Process flow (Schutzaufbau, Chevron-Farbsemantik) ---- */
+  .flow-wrap { padding: 56px 64px 0 64px; }
+  .flow-title {
+    font-family: 'Unbounded', sans-serif; font-weight: 900;
+    text-transform: uppercase; font-size: 30px; letter-spacing: -0.02em;
+    color: var(--white); margin-bottom: 28px;
+  }
+  .flow { display: flex; align-items: stretch; gap: 0; }
+  .flow-step {
+    flex: 1; border-radius: 16px; padding: 30px 26px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .flow-step.s1 { background: rgba(28,75,66,0.55); }
+  .flow-step.s2 { background: rgba(40,125,75,0.45); }
+  .flow-step.s3 { background: rgba(77,175,70,0.30); }
+  .flow-arrow {
+    display: flex; align-items: center; justify-content: center;
+    width: 52px; color: var(--lime); flex: 0 0 52px;
+  }
+  .flow-arrow svg { width: 26px; height: 26px; }
+  .step-circle {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: rgba(180,231,23,0.08); border: 1px solid rgba(180,231,23,0.2);
+    display: flex; align-items: center; justify-content: center; margin-bottom: 18px;
+  }
+  .step-circle svg { width: 26px; height: 26px; color: var(--lime); }
+
+  /* Inline-Icons: erben Farbe via currentColor */
+  .icon { display: inline-block; vertical-align: middle; stroke: currentColor;
+          stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+  .step-phase {
+    font-weight: 700; font-size: 13px; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--white-50); margin-bottom: 8px;
+  }
+  .step-title {
+    font-family: 'Unbounded', sans-serif; font-weight: 900;
+    text-transform: uppercase; font-size: 19px; letter-spacing: -0.01em;
+    color: var(--white); margin-bottom: 12px; line-height: 1.15;
+  }
+  .step-body { font-weight: 400; font-size: 15px; line-height: 1.5; color: var(--white-70); }
+
+  /* ---- Footer bar ---- */
+  .footer-bar {
+    margin-top: auto;
+    background: rgba(28,75,66,0.95);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 22px 64px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .footer-bar svg { width: 20px; height: 20px; color: var(--lime); }
+  .footer-text { font-weight: 400; font-size: 17px; color: var(--white); }
+  .footer-text b { font-weight: 700; }
+</style>
+</head>
+<body>
+  <div class="infographic">
+    <!-- Keyvisual als Asset (NIE in Code nachgebaut) -->
+    <img class="keyvisual" src="../assets/keyvisual/keyvisual-on-dark.svg" alt="">
+
+    <span class="accent-line"></span>
+
+    <div class="content">
+      <!-- Header -->
+      <div class="header">
+        <img class="logo" src="../assets/logos/bkm-logo-white-puregreen.png" alt="BKM Mannesmann">
+        <span class="demo-label">Beispiel-Infografik</span>
+      </div>
+
+      <!-- Title -->
+      <div class="title-block">
+        <div class="section-label">Feuchteschutz im Mauerwerk</div>
+        <h1 class="headline">Vom feuchten<br>Problem zur<br>trockenen Lösung</h1>
+        <p class="subtitle">Aufsteigende Feuchtigkeit schädigt die Bausubstanz von innen. Der BKM-Schutzaufbau stoppt den Wassertransport im Mauerwerk — Schicht für Schicht.</p>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-number">3<span class="unit">&nbsp;Phasen</span></div>
+          <div class="stat-text">vom Problem über den Übergang zur dauerhaften Trockenheit</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">&lt;&nbsp;0,5<span class="unit">&nbsp;mm</span></div>
+          <div class="stat-text">Bohrlochabstand-Toleranz für eine lückenlose Horizontalsperre</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">100<span class="unit">&nbsp;%</span></div>
+          <div class="stat-text">mineralische Basis — diffusionsoffen und kapillaraktiv</div>
+        </div>
+      </div>
+
+      <!-- Process flow: Chevron-Farbsemantik (Deep → Transition → Pure) -->
+      <div class="flow-wrap">
+        <div class="flow-title">Der Schutzaufbau in 3 Phasen</div>
+        <div class="flow">
+          <div class="flow-step s1">
+            <div class="step-circle">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M12 2.5c3.5 4.5 6 7.5 6 11a6 6 0 0 1-12 0c0-3.5 2.5-6.5 6-11z"/></svg>
+            </div>
+            <div class="step-phase">Phase 01 — Problem</div>
+            <div class="step-title">Feuchtigkeit</div>
+            <div class="step-body">Wasser steigt kapillar im Mauerwerk auf und transportiert Salze in die Bausubstanz.</div>
+          </div>
+          <div class="flow-arrow">
+            <svg class="icon" viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+          </div>
+          <div class="flow-step s2">
+            <div class="step-circle">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M14 4l6 6M18 6l-9 9-3 4 4-3 9-9M9 11l4 4"/></svg>
+            </div>
+            <div class="step-phase">Phase 02 — Übergang</div>
+            <div class="step-title">Injektion</div>
+            <div class="step-body">Die Injektionstechnik bildet eine durchgehende Horizontalsperre und unterbricht den Wassertransport.</div>
+          </div>
+          <div class="flow-arrow">
+            <svg class="icon" viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+          </div>
+          <div class="flow-step s3">
+            <div class="step-circle">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><polyline points="9 12 11.5 14.5 15.5 9.5"/></svg>
+            </div>
+            <div class="step-phase">Phase 03 — Lösung</div>
+            <div class="step-title">Trockenheit</div>
+            <div class="step-body">Das Mauerwerk trocknet kontrolliert ab — die Bausubstanz bleibt dauerhaft geschützt.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="footer-bar">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><polyline points="9 12 11.5 14.5 15.5 9.5"/></svg>
+        <span class="footer-text"><b>BKM Mannesmann</b> — Bauwerksschutz mit System</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
