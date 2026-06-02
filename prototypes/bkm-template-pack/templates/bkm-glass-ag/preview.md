@@ -14,7 +14,7 @@
 - **Headline:** Unbounded 900 (UPPERCASE oder Mixed-Case, nie kursiv), weiß, ein Wort in **Lime**.
 - **Eyebrow:** Lime, 18px, 0.18em Tracking.
 - **Button:** Lime-Fläche, Deep-Green-Text (einziges Signal als Fläche).
-- **Wortmarke** „BKM." oben links, Lime-Punkt.
+- **Logo** (weißes Sekundärlogo) oben links.
 
 ## Stimmung
 

@@ -38,7 +38,7 @@ im Fachbetrieb-Kontext (Bold Poster ist AG-only).
 ## Form & Struktur
 
 - Canvas 1920×1080, Seitenabstand **130px**.
-- **Lime-Mark-Pill** oben links, **Wortmarke „BKM."** oben rechts, **Kicker** unten links,
+- **Lime-Mark-Pill** oben links, **Logo** (weißes Sekundärlogo, auf Deep Green) oben rechts, **Kicker** unten links,
   **Seitenzahl** (Lime) unten rechts.
 - Rundungen **8–12px** (Mark, Highlight-Block, CTA) — im Einklang mit der 8px-Regel.
 

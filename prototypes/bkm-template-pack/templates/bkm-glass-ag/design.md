@@ -75,7 +75,8 @@ Farbkreise) oder ein Foto hinter die Cards legen — sonst ist der Effekt unsich
 - Canvas 1920×1080, Seitenabstand **140px**.
 - Glas-Cards `border-radius: 24px`; kleine UI-Elemente (Icon-Kachel, Button) **8–16px**
   — im Einklang mit der 8px-Rundungsregel des Systems.
-- Wortmarke „BKM." oben links (Lime-Punkt), Rubrik oben rechts, Seitenzahl unten rechts (Lime).
+- **Logo** (weißes Sekundärlogo, white+pure-green-Signet) oben links, Rubrik oben rechts, Seitenzahl unten rechts (Lime).
+  Im Prototyp als Data-URI eingebettet; im Skill per Pfad referenzieren.
 
 ## Slide-Typen (in `demo.html`)
 
