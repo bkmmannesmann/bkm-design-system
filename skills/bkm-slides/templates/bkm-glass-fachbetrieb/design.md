@@ -25,6 +25,13 @@ corporate-dunkel. Akzent ist **Pure Green** — kein Lime.
 **Regeln:** **Kein Lime.** Akzent ist Pure Green (Wort, Icon-Kachel, KPI-Einheit, Page-Nr.),
 Transition Green für Sublabels. Button = Deep-Green-Fläche, weißer Text.
 
+## Hintergründe
+
+Sechs helle Sand-Texturen (`assets/backgrounds/bg-sand-texture-1…6.jpg`, im Deck `.bg.t1…t6`),
+rotierend über die Folien. **t5/t6** tragen zusätzlich einen weichen **Transition-Green**-Lichtverlauf
+(#287d4b) für mehr Variation — bleiben aber hell genug für dunklen Text und helles Glas.
+Grün-Varianten bevorzugt auf Folien mit Glas-Panels/Cards einsetzen.
+
 ## Das helle Glas-Rezept
 
 ```css
