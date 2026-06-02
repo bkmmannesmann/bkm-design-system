@@ -105,6 +105,26 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--stage-bg);font
 .s-stat .kpi .f .u{color:var(--lime);font-size:72px;}
 .s-stat .kpi .c{font-weight:700;font-size:20px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.82);margin-top:18px;}
 
+/* =========================== 4 · REFERENZEN (Typo-Bild-Karten) =========================== */
+.s-ref .sec{position:absolute;left:0;right:0;top:120px;text-align:center;}
+.s-ref .sec .eyebrow{margin-bottom:18px;}
+.s-ref .sec h2{font-size:62px;}
+.s-ref .grid{position:absolute;left:140px;right:140px;top:360px;display:grid;grid-template-columns:repeat(3,1fr);gap:36px;}
+.s-ref .gcard{border-radius:24px;overflow:hidden;}
+.s-ref .img{height:300px;position:relative;background:linear-gradient(135deg,#1c4b42,#0f2620);overflow:hidden;}
+.s-ref .img::after{content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 78% 22%,rgba(180,231,23,0.22),transparent 42%),
+             radial-gradient(circle at 20% 84%,rgba(77,175,70,0.30),transparent 46%);}
+.s-ref .big{position:absolute;left:34px;bottom:28px;z-index:2;line-height:0.86;}
+.s-ref .big .n{font-family:var(--font-display);font-weight:900;font-size:100px;color:#fff;letter-spacing:-0.04em;}
+.s-ref .big .n .u{color:var(--lime);font-size:56px;}
+.s-ref .big .s{display:block;font-family:var(--font-display);font-weight:400;font-size:32px;color:var(--lime);margin-top:8px;letter-spacing:-0.01em;}
+.s-ref .body{padding:24px 30px 30px;}
+.s-ref .body .cs{font-weight:700;letter-spacing:0.12em;text-transform:uppercase;font-size:13px;color:var(--lime);}
+.s-ref .body h3{font-family:var(--font-display);font-weight:700;font-size:22px;color:#fff;margin-top:12px;line-height:1.15;letter-spacing:-0.01em;}
+.s-ref .body p{font-size:15px;color:rgba(255,255,255,0.72);line-height:1.5;margin-top:14px;}
+.s-ref .body .more{display:inline-flex;align-items:center;gap:9px;color:var(--lime);font-weight:700;font-size:15px;margin-top:18px;}
+
 /* Controls */
 .deck-controls{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:1000;display:flex;align-items:center;gap:6px;
   background:rgba(10,28,23,0.85);border:1px solid rgba(255,255,255,0.18);border-radius:999px;padding:8px 10px;color:#fff;font-size:13px;font-weight:600;backdrop-filter:blur(10px);}
@@ -175,6 +195,32 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--stage-bg);font
         <div class="kpi"><div class="f">100<span class="u">%</span></div><div class="c">Eigene Rezeptur</div></div>
       </div>
       <div class="pg">03</div>
+    </section>
+
+    <!-- 4 · REFERENZEN (Typo-Bild-Karten) -->
+    <section class="slide s-ref">
+      <div class="bg"><div class="blob b-green"></div><div class="blob b-trans"></div><div class="blob b-lime"></div><div class="grain"></div></div>
+      <div class="brand">BKM<span>.</span></div>
+      <div class="tagtop">Referenzen</div>
+      <div class="sec">
+        <div class="eyebrow reveal d1">Echte Projekte</div>
+        <h2 class="h-d reveal d1">DAS HABEN WIR <span class="lime">DICHT GEMACHT</span></h2>
+      </div>
+      <div class="grid">
+        <div class="glass-card gcard reveal d1">
+          <div class="img"><div class="big"><div class="n">33<span class="u">%</span></div><span class="s">weniger Feuchte</span></div></div>
+          <div class="body"><div class="cs">Case Study</div><h3>Tiefgarage saniert, dauerhaft trocken</h3><p>Injektionssystem gegen drückendes Wasser — messbar trocken nach acht Wochen.</p><span class="more">Mehr lesen <i class="fas fa-arrow-right"></i></span></div>
+        </div>
+        <div class="glass-card gcard reveal d2">
+          <div class="img"><div class="big"><div class="n">0<span class="u">%</span></div><span class="s">Restfeuchte</span></div></div>
+          <div class="body"><div class="cs">Case Study</div><h3>Altbau-Keller wieder nutzbar</h3><p>Horizontalsperre nachträglich injiziert — kein Aufsteigen mehr im Mauerwerk.</p><span class="more">Mehr lesen <i class="fas fa-arrow-right"></i></span></div>
+        </div>
+        <div class="glass-card gcard reveal d3">
+          <div class="img"><div class="big"><div class="n">30<span class="u">+</span></div><span class="s">Jahre dicht</span></div></div>
+          <div class="body"><div class="cs">Case Study</div><h3>Flachdach mit Langzeitschutz</h3><p>Mehrschichtige Flächenabdichtung — geprüft, dokumentiert, garantiert.</p><span class="more">Mehr lesen <i class="fas fa-arrow-right"></i></span></div>
+        </div>
+      </div>
+      <div class="pg">04</div>
     </section>
 
   </main>

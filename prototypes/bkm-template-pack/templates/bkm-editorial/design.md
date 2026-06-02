@@ -66,6 +66,9 @@ mit Paper/Lime-Inhalt. Kein vierter Farbton.
 4. **Daten** — KPI-Liste links (4px-Linien) + Inverse-Chart-Karte rechts mit Lime/Paper-Balken.
 5. **Statement** — Vollflächiges Deep Green, Doppellinien-Ornament in Lime, Riesen-Headline.
 6. **Closing** — Linie, Headline, Kontaktblock + Inverse-CTA mit Lime-Pfeil.
+7. **Referenzen** (nur Dunkel-Demo) — Typo-Karten: flacher Deep2-Block mit großer
+   zweifarbiger Zahl, 4px-Paper-Linie als Trenner, darunter Case-Study-Text.
+   (Energma-Muster in editorial-flacher Sprache — Gegenstück zur Glas-Variante.)
 
 ## Do / Don't
 

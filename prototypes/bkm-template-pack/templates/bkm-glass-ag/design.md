@@ -81,6 +81,9 @@ Farbkreise) oder ein Foto hinter die Cards legen — sonst ist der Effekt unsich
 1. **Titel** — große Glas-Card mit Eyebrow/Headline/Text/Button + runder Frost-Chip (KPI).
 2. **Drei Karten** — drei Glas-Cards mit Lime-Icon-Kachel, Titel, Text.
 3. **Kennzahlen** — eine breite Glas-Panel mit 3 KPI-Spalten (Trennlinien aus Licht).
+4. **Referenzen** — Typo-Bild-Karten: Glas-Card mit Gradient-Bildfläche + großer
+   zweifarbiger Zahl (weiß + Lime), darunter Case-Study-Text. (Muster aus der
+   Energma-Studie, hier in Glas-Sprache.)
 
 ## Do / Don't
 
