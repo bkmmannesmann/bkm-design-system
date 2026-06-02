@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BKM Style Discovery — Wähle deinen Look</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<style>
+:root{
+  --deep-green:#1c4b42; --lime:#b4e717; --pure-green:#4daf46;
+  --transition-green:#287d4b; --sand:#f6f5f2; --sand-warm:#f5f0eb;
+  --stone-grey:#494949; --white:#fff;
+  --font-display:'Unbounded',sans-serif;
+  --font-body:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--font-body);background:var(--sand);color:var(--deep-green);padding:64px 56px 90px;}
+
+/* ---- Kopf ---- */
+.head{max-width:1180px;margin:0 auto 52px;}
+.head .eyebrow{font-weight:700;letter-spacing:0.16em;text-transform:uppercase;font-size:14px;color:var(--pure-green);margin-bottom:16px;}
+.head h1{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:54px;letter-spacing:-0.03em;line-height:1.0;}
+.head p{font-size:19px;line-height:1.6;color:var(--stone-grey);max-width:860px;margin-top:20px;}
+.head .flow{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px;}
+.head .step{display:flex;align-items:center;gap:9px;background:#fff;border:1px solid rgba(28,75,66,0.12);border-radius:999px;padding:9px 18px;font-size:13px;font-weight:700;}
+.head .step b{font-family:var(--font-display);color:var(--pure-green);}
+.head .step.on{background:var(--deep-green);color:#fff;border-color:var(--deep-green);}
+.head .step.on b{color:var(--lime);}
+
+/* ---- Grid der Stil-Karten ---- */
+.grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:34px;}
+.card{background:#fff;border:2px solid rgba(28,75,66,0.12);border-radius:18px;overflow:hidden;transition:transform .25s,box-shadow .25s,border-color .25s;}
+.card:hover{transform:translateY(-4px);box-shadow:0 18px 50px rgba(28,75,66,0.16);}
+.card.selected{border-color:var(--pure-green);box-shadow:0 18px 50px rgba(77,175,70,0.22);}
+
+/* Vorschau-Rahmen: skalierte 1920×1080-Bühne */
+.preview{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#000;}
+.mini{position:absolute;top:0;left:0;width:1920px;height:1080px;transform-origin:0 0;}
+/* Skalierung wird per JS gesetzt (Rahmenbreite/1920) für pixelgenaues Fit */
+
+/* ---- Karten-Meta ---- */
+.meta{padding:26px 28px 28px;}
+.meta .top{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.meta h2{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:24px;letter-spacing:-0.02em;}
+.track{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:6px 12px;border-radius:999px;}
+.track.standard{background:rgba(28,75,66,0.1);color:var(--deep-green);}
+.track.creative{background:rgba(180,231,23,0.18);color:var(--transition-green);}
+.meta .tagline{font-size:15px;color:var(--stone-grey);line-height:1.5;margin-top:12px;}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:16px;}
+.tag{font-size:12px;font-weight:600;background:var(--sand-warm);color:var(--transition-green);padding:5px 11px;border-radius:8px;}
+.best{font-size:13px;color:var(--stone-grey);line-height:1.5;margin-top:16px;}
+.best b{color:var(--deep-green);}
+.btn{margin-top:20px;width:100%;border:none;cursor:pointer;font-family:var(--font-body);font-weight:700;font-size:15px;
+  background:var(--deep-green);color:#fff;border-radius:12px;padding:14px;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .2s;}
+.btn:hover{background:#163a33;}
+.btn .check{display:none;}
+.card.selected .btn{background:var(--pure-green);}
+.card.selected .btn .label{display:none;}
+.card.selected .btn .check{display:flex;align-items:center;gap:10px;}
+
+.foot{max-width:1180px;margin:40px auto 0;font-size:14px;color:var(--stone-grey);line-height:1.6;text-align:center;}
+.foot b{color:var(--deep-green);}
+
+/* ============ MINI-SLIDE STYLES (1920×1080, werden skaliert) ============ */
+.mini .acc{position:absolute;}
+/* 1 — BKM AG Glas */
+.m-glass{background:linear-gradient(140deg,#1c4b42,#102e28);}
+.m-glass .line{position:absolute;left:130px;top:300px;width:10px;height:480px;background:var(--lime);border-radius:5px;}
+.m-glass .eb{position:absolute;left:210px;top:330px;color:var(--lime);font-weight:700;letter-spacing:0.18em;text-transform:uppercase;font-size:34px;}
+.m-glass h3{position:absolute;left:210px;top:400px;font-family:var(--font-display);font-weight:900;text-transform:uppercase;color:#fff;font-size:150px;letter-spacing:-0.04em;line-height:0.95;}
+.m-glass .card-g{position:absolute;left:210px;top:640px;width:980px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.14);border-radius:24px;padding:46px 52px;backdrop-filter:blur(20px);}
+.m-glass .card-g p{color:rgba(255,255,255,0.82);font-size:38px;line-height:1.45;}
+.m-glass .brand{position:absolute;top:70px;right:90px;font-family:var(--font-display);font-weight:900;color:#fff;font-size:40px;}
+.m-glass .brand span{color:var(--lime);}
+
+/* 2 — Fachbetrieb Glas */
+.m-fb{background:linear-gradient(140deg,#f6f5f2,#ece9e3);}
+.m-fb .line{position:absolute;left:130px;top:300px;width:10px;height:480px;background:var(--pure-green);border-radius:5px;}
+.m-fb .eb{position:absolute;left:210px;top:330px;color:var(--pure-green);font-weight:700;letter-spacing:0.18em;text-transform:uppercase;font-size:34px;}
+.m-fb h3{position:absolute;left:210px;top:400px;font-family:var(--font-display);font-weight:900;text-transform:uppercase;color:var(--deep-green);font-size:140px;letter-spacing:-0.04em;line-height:0.95;}
+.m-fb .card-g{position:absolute;left:210px;top:660px;width:1000px;background:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.8);border-radius:24px;padding:46px 52px;backdrop-filter:blur(20px);}
+.m-fb .card-g p{color:var(--stone-grey);font-size:38px;line-height:1.45;}
+.m-fb .brand{position:absolute;top:70px;right:90px;font-family:var(--font-display);font-weight:900;color:var(--deep-green);font-size:40px;}
+.m-fb .brand span{color:var(--pure-green);}
+
+/* 3 — Editorial */
+.m-edi{background:var(--sand-warm);}
+.m-edi .mast{position:absolute;left:140px;right:140px;top:90px;display:flex;justify-content:space-between;font-weight:700;font-size:30px;letter-spacing:0.1em;text-transform:uppercase;color:var(--deep-green);}
+.m-edi .rule{position:absolute;left:140px;right:140px;top:280px;height:7px;background:var(--deep-green);}
+.m-edi .eb{position:absolute;left:140px;top:320px;color:var(--pure-green);font-weight:700;letter-spacing:0.16em;text-transform:uppercase;font-size:32px;}
+.m-edi h3{position:absolute;left:135px;top:380px;font-family:var(--font-display);font-weight:900;text-transform:uppercase;color:var(--deep-green);font-size:230px;letter-spacing:-0.045em;line-height:0.9;}
+.m-edi h3 .g{color:var(--pure-green);}
+.m-edi .tiles{position:absolute;left:140px;right:140px;bottom:150px;display:grid;grid-template-columns:repeat(3,1fr);}
+.m-edi .t{padding:46px 40px;border-top:7px solid var(--deep-green);}
+.m-edi .t:nth-child(2){background:var(--deep-green);}
+.m-edi .t .f{font-family:var(--font-display);font-weight:900;font-size:120px;line-height:0.9;letter-spacing:-0.04em;color:var(--deep-green);}
+.m-edi .t:nth-child(2) .f{color:var(--lime);}
+.m-edi .t .c{font-weight:700;font-size:30px;letter-spacing:0.05em;text-transform:uppercase;margin-top:18px;color:var(--deep-green);}
+.m-edi .t:nth-child(2) .c{color:var(--sand-warm);}
+
+/* 4 — Bold Poster */
+.m-bold{background:var(--deep-green);}
+.m-bold .mark{position:absolute;top:90px;left:140px;background:var(--lime);color:var(--deep-green);font-weight:700;font-size:30px;letter-spacing:0.14em;text-transform:uppercase;padding:18px 34px;}
+.m-bold h3{position:absolute;left:130px;top:330px;font-family:var(--font-display);font-weight:900;text-transform:uppercase;color:#fff;font-size:340px;letter-spacing:-0.05em;line-height:0.82;}
+.m-bold h3 .l{color:var(--lime);}
+.m-bold .arrow{position:absolute;right:140px;bottom:150px;color:var(--lime);font-size:130px;}
+</style>
+</head>
+<body>
+
+<div class="head">
+  <div class="eyebrow">Slide-System 2.0 · Phase „Stil-Auswahl"</div>
+  <h1>Wähle deinen Look</h1>
+  <p>So funktioniert der neue <b>„Show don't tell"</b>-Workflow: Statt blind ein Template zu kopieren, siehst du <b>fertige, markenkonforme Stil-Vorschauen</b> und wählst aus. Ein AI-Agent legt je nach Anlass automatisch 3 passende Vorschläge vor — hier siehst du alle vier BKM-Familien. <b>Alle Stile bleiben 100&nbsp;% in BKM-Farben und Unbounded.</b></p>
+  <div class="flow">
+    <span class="step"><b>1</b> Inhalt &amp; Anlass</span>
+    <span class="step on"><b>2</b> Stil wählen</span>
+    <span class="step"><b>3</b> Deck generieren</span>
+    <span class="step"><b>4</b> Export / Deploy</span>
+  </div>
+</div>
+
+<div class="grid" id="grid">
+
+  <!-- KARTE 1 -->
+  <div class="card" data-name="BKM AG · Glas">
+    <div class="preview"><div class="mini m-glass">
+      <div class="brand">BKM<span>.</span></div>
+      <div class="line"></div>
+      <div class="eb">Bauwerksabdichtung</div>
+      <h3>DICHTUNGS&shy;TECHNIK</h3>
+      <div class="card-g"><p>Feuchtigkeitssperren &amp; Injektionsverfahren für dauerhaften Bautenschutz.</p></div>
+    </div></div>
+    <div class="meta">
+      <div class="top"><h2>BKM AG · Glas</h2><span class="track standard">Standard</span></div>
+      <div class="tagline">Frosted-Glass-Cards auf Deep Green oder Foto mit grünem Overlay.</div>
+      <div class="tags"><span class="tag">seriös</span><span class="tag">schützend</span><span class="tag">premium</span></div>
+      <div class="best"><b>Am besten für:</b> Corporate-, Produkt- und Investor-Decks der BKM AG. Der sichere Standard.</div>
+      <button class="btn" onclick="pick(this)"><span class="label"><i class="fas fa-eye"></i> Diesen Stil wählen</span><span class="check"><i class="fas fa-check"></i> Ausgewählt</span></button>
+    </div>
+  </div>
+
+  <!-- KARTE 2 -->
+  <div class="card" data-name="Fachbetrieb · Glas">
+    <div class="preview"><div class="mini m-fb">
+      <div class="brand">BKM<span>.</span></div>
+      <div class="line"></div>
+      <div class="eb">Ihr Fachbetrieb vor Ort</div>
+      <h3>ABDICHTUNG</h3>
+      <div class="card-g"><p>Geprüfte Systeme, zertifizierte Verarbeitung — partnerschaftlich umgesetzt.</p></div>
+    </div></div>
+    <div class="meta">
+      <div class="top"><h2>Fachbetrieb · Glas</h2><span class="track standard">Standard</span></div>
+      <div class="tagline">Helle Glas-Cards auf Sand, Pure-Green-Akzente, Stone-Grey-Text. Kein Lime.</div>
+      <div class="tags"><span class="tag">zugänglich</span><span class="tag">hell</span><span class="tag">vertrauensvoll</span></div>
+      <div class="best"><b>Am besten für:</b> Fachbetrieb-Seiten, Partner- und Kunden-Pitches.</div>
+      <button class="btn" onclick="pick(this)"><span class="label"><i class="fas fa-eye"></i> Diesen Stil wählen</span><span class="check"><i class="fas fa-check"></i> Ausgewählt</span></button>
+    </div>
+  </div>
+
+  <!-- KARTE 3 -->
+  <div class="card" data-name="BKM · Editorial">
+    <div class="preview"><div class="mini m-edi">
+      <div class="mast"><span>BKM Mannesmann</span><span>Strategie 2026</span></div>
+      <div class="rule"></div>
+      <div class="eb">Geschäftsbericht</div>
+      <h3>WACHSTUM<br>MIT <span class="g">SYSTEM</span></h3>
+      <div class="tiles">
+        <div class="t"><div class="f">30+</div><div class="c">Jahre</div></div>
+        <div class="t"><div class="f">100%</div><div class="c">Eigene Rezeptur</div></div>
+        <div class="t"><div class="f">DIN</div><div class="c">Geprüft</div></div>
+      </div>
+    </div></div>
+    <div class="meta">
+      <div class="top"><h2>BKM · Editorial</h2><span class="track creative">Kreativ-Track</span></div>
+      <div class="tagline">Magazin-Charakter: große Typo, 4px-Regelwerk-Linien, Kennzahlen-Kacheln.</div>
+      <div class="tags"><span class="tag">editorial</span><span class="tag">selbstbewusst</span><span class="tag">wertig</span></div>
+      <div class="best"><b>Am besten für:</b> Strategie, Quartalsreviews, Investor-Reports, datenreiche Decks.</div>
+      <button class="btn" onclick="pick(this)"><span class="label"><i class="fas fa-eye"></i> Diesen Stil wählen</span><span class="check"><i class="fas fa-check"></i> Ausgewählt</span></button>
+    </div>
+  </div>
+
+  <!-- KARTE 4 -->
+  <div class="card" data-name="BKM · Bold Poster">
+    <div class="preview"><div class="mini m-bold">
+      <div class="mark">Vision 2030</div>
+      <h3>DICHT.<br>FÜR <span class="l">IMMER.</span></h3>
+      <i class="fas fa-arrow-right arrow"></i>
+    </div></div>
+    <div class="meta">
+      <div class="top"><h2>BKM · Bold Poster</h2><span class="track creative">Kreativ-Track</span></div>
+      <div class="tagline">Übergroße Unbounded-Statements auf Deep Green mit scharfem Lime-Signal.</div>
+      <div class="tags"><span class="tag">mutig</span><span class="tag">plakativ</span><span class="tag">grafisch</span></div>
+      <div class="best"><b>Am besten für:</b> Pitches, Messen, Vision- &amp; Manifest-Momente.</div>
+      <button class="btn" onclick="pick(this)"><span class="label"><i class="fas fa-eye"></i> Diesen Stil wählen</span><span class="check"><i class="fas fa-check"></i> Ausgewählt</span></button>
+    </div>
+  </div>
+
+</div>
+
+<div class="foot" id="foot"><b>Prototyp:</b> Im echten Skill startet nach der Auswahl die Deck-Generierung mit genau dieser Stil-Familie — auf der Fixed-Stage-Engine, exportierbar als PDF/Link.</div>
+
+<script>
+/* Mini-Bühnen pixelgenau in ihren Rahmen skalieren (1920px → Rahmenbreite) */
+function scaleMinis(){
+  document.querySelectorAll('.preview').forEach(fr=>{
+    const mini=fr.querySelector('.mini');
+    mini.style.transform='scale('+(fr.clientWidth/1920)+')';
+  });
+}
+addEventListener('resize',scaleMinis); scaleMinis();
+
+/* Stil-Auswahl (Prototyp: markiert die Karte) */
+function pick(btn){
+  const card=btn.closest('.card');
+  const wasSel=card.classList.contains('selected');
+  document.querySelectorAll('.card').forEach(c=>c.classList.remove('selected'));
+  if(!wasSel){
+    card.classList.add('selected');
+    document.getElementById('foot').innerHTML='<b>Gewählt: '+card.dataset.name+'.</b> Im echten Skill würde jetzt das vollständige Deck in diesem Stil generiert — Fixed-Stage, markenkonform, exportierbar.';
+  } else {
+    document.getElementById('foot').innerHTML='<b>Prototyp:</b> Im echten Skill startet nach der Auswahl die Deck-Generierung mit genau dieser Stil-Familie.';
+  }
+}
+</script>
+</body>
+</html>
