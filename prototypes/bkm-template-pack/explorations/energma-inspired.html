@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BKM × Energma-inspirierte Muster — Studie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<style>
+/* =========================================================
+   STUDIE: Energma-Landingpage-Muster → auf BKM gemünzt
+   Keine eingefrorene Familie — Exploration zum Bewerten.
+   Akzent = BKM Lime (statt Mint). Akzentwort farbig statt kursiv.
+   ========================================================= */
+:root{
+  --black:#08140f; --deep-green:#1c4b42; --deep2:#0f2620; --card:#122e27;
+  --lime:#b4e717; --pure-green:#4daf46; --transition-green:#287d4b;
+  --paper:#f5f0eb; --stone-grey:#494949;
+  --font-display:'Unbounded',sans-serif;
+  --font-body:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --ease:cubic-bezier(0.16,1,0.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--black);font-family:var(--font-body);}
+.deck-viewport{position:fixed;inset:0;overflow:hidden;background:var(--black);}
+.deck-stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;overflow:hidden;}
+.slide{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;background:var(--black);color:#fff;
+  visibility:hidden;opacity:0;pointer-events:none;}
+.slide.visible{visibility:visible;opacity:1;pointer-events:auto;z-index:1;}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+.slide.visible .reveal{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.08s;} .d2{transition-delay:.20s;} .d3{transition-delay:.32s;} .d4{transition-delay:.44s;}
+
+.brand{position:absolute;top:58px;left:140px;font-family:var(--font-display);font-weight:900;font-size:32px;color:#fff;z-index:6;}
+.brand span{color:var(--lime);}
+.pg{position:absolute;bottom:56px;right:140px;font-family:var(--font-display);font-weight:900;font-size:18px;color:var(--lime);z-index:6;}
+
+/* zentriertes Section-Header-Muster (Statement + Akzentwort) */
+.sec{position:absolute;left:0;right:0;text-align:center;}
+.sec .eyebrow{font-weight:700;letter-spacing:0.18em;text-transform:uppercase;font-size:17px;color:var(--lime);margin-bottom:20px;}
+.sec h2{font-family:var(--font-display);font-weight:900;font-size:58px;text-transform:uppercase;letter-spacing:-0.03em;line-height:1.0;color:#fff;}
+.sec h2 .lime{color:var(--lime);}
+.sec p{font-size:21px;color:rgba(255,255,255,0.7);max-width:880px;margin:24px auto 0;line-height:1.55;}
+
+/* =========================== 1 · TYPO-BILD-KARTEN =========================== */
+.s-cards .sec{top:130px;}
+.s-cards .grid{position:absolute;left:140px;right:140px;top:392px;display:grid;grid-template-columns:repeat(3,1fr);gap:36px;}
+.s-cards .card{background:var(--card);border:1px solid rgba(255,255,255,0.08);border-radius:18px;overflow:hidden;}
+.s-cards .img{height:286px;position:relative;background:linear-gradient(135deg,#1c4b42,#0f2620);overflow:hidden;}
+.s-cards .img::after{content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 78% 22%,rgba(180,231,23,0.22),transparent 42%),
+             radial-gradient(circle at 20% 84%,rgba(77,175,70,0.28),transparent 46%);}
+.s-cards .big{position:absolute;left:34px;bottom:28px;z-index:2;line-height:0.86;}
+.s-cards .big .n{font-family:var(--font-display);font-weight:900;font-size:104px;color:#fff;letter-spacing:-0.04em;}
+.s-cards .big .n .u{color:var(--lime);font-size:58px;}
+.s-cards .big .s{display:block;font-family:var(--font-display);font-weight:400;font-size:34px;color:var(--lime);margin-top:8px;letter-spacing:-0.01em;}
+.s-cards .body{padding:24px 30px 30px;}
+.s-cards .body .cs{font-weight:700;letter-spacing:0.12em;text-transform:uppercase;font-size:13px;color:var(--pure-green);}
+.s-cards .body h3{font-family:var(--font-display);font-weight:700;font-size:22px;color:#fff;margin-top:12px;line-height:1.15;letter-spacing:-0.01em;}
+.s-cards .body p{font-size:15px;color:rgba(255,255,255,0.62);line-height:1.5;margin-top:14px;}
+.s-cards .body .more{display:inline-flex;align-items:center;gap:9px;color:var(--lime);font-weight:700;font-size:15px;margin-top:18px;}
+
+/* =========================== 2 · TESTIMONIAL =========================== */
+.s-quote .mark{position:absolute;left:120px;top:150px;font-family:var(--font-display);font-weight:900;font-size:420px;line-height:0.7;color:var(--transition-green);opacity:0.5;z-index:0;}
+.s-quote .wrap{position:absolute;left:200px;right:200px;top:340px;z-index:2;}
+.s-quote .eyebrow{font-weight:700;letter-spacing:0.16em;text-transform:uppercase;font-size:17px;color:var(--lime);margin-bottom:30px;}
+.s-quote blockquote{font-family:var(--font-display);font-weight:700;font-size:66px;line-height:1.15;color:#fff;letter-spacing:-0.02em;max-width:1360px;}
+.s-quote blockquote .lime{color:var(--lime);}
+.s-quote .who{margin-top:46px;display:flex;align-items:center;gap:18px;}
+.s-quote .who .ln{width:54px;height:3px;background:var(--lime);}
+.s-quote .who span{font-weight:700;font-size:20px;letter-spacing:0.04em;color:var(--pure-green);text-transform:uppercase;}
+
+/* =========================== 3 · GRÜNE CTA-KARTE =========================== */
+.s-cta{display:flex;align-items:center;justify-content:center;}
+.s-cta .card{position:relative;width:1480px;height:560px;border-radius:28px;overflow:hidden;
+  background:linear-gradient(120deg,var(--transition-green),var(--deep-green) 70%);padding:80px 90px;display:flex;flex-direction:column;justify-content:center;}
+.s-cta .card::after{content:'';position:absolute;right:-120px;top:-120px;width:560px;height:560px;border-radius:50%;
+  background:radial-gradient(circle,rgba(180,231,23,0.18),transparent 60%);}
+.s-cta .pill{display:inline-flex;align-items:center;gap:9px;background:var(--lime);color:var(--deep-green);
+  font-weight:700;font-size:14px;letter-spacing:0.1em;text-transform:uppercase;padding:9px 18px;border-radius:999px;align-self:flex-start;}
+.s-cta h2{font-family:var(--font-display);font-weight:900;font-size:74px;text-transform:uppercase;letter-spacing:-0.03em;line-height:0.98;color:#fff;margin-top:28px;}
+.s-cta h2 .lime{color:var(--lime);}
+.s-cta p{font-size:23px;color:rgba(255,255,255,0.85);max-width:720px;margin-top:24px;line-height:1.5;}
+.s-cta .form{display:flex;gap:14px;margin-top:44px;max-width:680px;z-index:2;}
+.s-cta .form input{flex:1;border:none;border-radius:14px;padding:20px 24px;font-size:18px;font-family:var(--font-body);
+  background:rgba(255,255,255,0.94);color:var(--deep-green);}
+.s-cta .form button{border:none;cursor:pointer;width:64px;border-radius:14px;background:var(--lime);color:var(--deep-green);font-size:24px;display:flex;align-items:center;justify-content:center;}
+
+.deck-controls{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:1000;display:flex;align-items:center;gap:6px;
+  background:rgba(8,20,15,0.9);border:1px solid rgba(255,255,255,0.16);border-radius:999px;padding:8px 10px;color:#fff;font-size:13px;font-weight:600;}
+.deck-controls button{all:unset;cursor:pointer;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.deck-controls button:hover{background:rgba(255,255,255,0.16);}
+.deck-controls .count{min-width:52px;text-align:center;font-variant-numeric:tabular-nums;}
+
+@media print{
+  html,body{width:1920px;height:auto;overflow:visible;}
+  .deck-viewport{position:static;overflow:visible;} .deck-stage{position:static;width:auto;height:auto;transform:none!important;}
+  .slide{position:relative;visibility:visible!important;opacity:1!important;break-after:page;page-break-after:always;}
+  .slide .reveal{opacity:1!important;transform:none!important;} .deck-controls{display:none!important;}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.2s!important;}}
+</style>
+</head>
+<body>
+<div class="deck-viewport">
+  <main class="deck-stage" id="deckStage">
+
+    <!-- 1 · TYPO-BILD-KARTEN -->
+    <section class="slide visible s-cards">
+      <div class="brand">BKM<span>.</span></div>
+      <div class="sec">
+        <div class="eyebrow reveal d1">Referenzen</div>
+        <h2 class="reveal d1">VERLASS DICH NICHT AUF UNS.<br>LIES <span class="lime">IHRE PROJEKTE.</span></h2>
+      </div>
+      <div class="grid">
+        <div class="card reveal d1">
+          <div class="img"><div class="big"><div class="n">33<span class="u">%</span></div><span class="s">weniger Feuchte</span></div></div>
+          <div class="body"><div class="cs">Case Study</div><h3>Tiefgarage saniert, dauerhaft trocken</h3><p>Injektionssystem gegen drückendes Wasser — messbar trocken nach acht Wochen.</p><span class="more">Mehr lesen <i class="fas fa-arrow-right"></i></span></div>
+        </div>
+        <div class="card reveal d2">
+          <div class="img"><div class="big"><div class="n">0<span class="u">%</span></div><span class="s">Restfeuchte</span></div></div>
+          <div class="body"><div class="cs">Case Study</div><h3>Altbau-Keller wieder nutzbar</h3><p>Horizontalsperre nachträglich injiziert — kein Aufsteigen mehr im Mauerwerk.</p><span class="more">Mehr lesen <i class="fas fa-arrow-right"></i></span></div>
+        </div>
+        <div class="card reveal d3">
+          <div class="img"><div class="big"><div class="n">30<span class="u">+</span></div><span class="s">Jahre dicht</span></div></div>
+          <div class="body"><div class="cs">Case Study</div><h3>Flachdach mit Langzeitschutz</h3><p>Mehrschichtige Flächenabdichtung — geprüft, dokumentiert, garantiert.</p><span class="more">Mehr lesen <i class="fas fa-arrow-right"></i></span></div>
+        </div>
+      </div>
+      <div class="pg">01</div>
+    </section>
+
+    <!-- 2 · TESTIMONIAL -->
+    <section class="slide s-quote">
+      <div class="brand">BKM<span>.</span></div>
+      <div class="mark">&ldquo;</div>
+      <div class="wrap">
+        <div class="eyebrow reveal d1">Das sagen Kunden</div>
+        <blockquote class="reveal d1">BKM hat unseren Keller in acht Wochen <span class="lime">dauerhaft trockengelegt</span> — sauber, termintreu und mit Garantie.</blockquote>
+        <div class="who reveal d2"><span class="ln"></span><span>M. Bauer · Eigentümer, Stuttgart</span></div>
+      </div>
+      <div class="pg">02</div>
+    </section>
+
+    <!-- 3 · GRÜNE CTA-KARTE -->
+    <section class="slide s-cta">
+      <div class="brand" style="z-index:7">BKM<span>.</span></div>
+      <div class="card reveal d1">
+        <span class="pill"><i class="fas fa-bolt"></i> Bald verfügbar</span>
+        <h2>SICHERN SIE SICH<br>IHREN <span class="lime">FEUCHTE-CHECK.</span></h2>
+        <p>Kostenlose Erstbewertung Ihres Bauwerks durch unsere Ingenieure — bald online buchbar.</p>
+        <div class="form"><input type="email" placeholder="E-Mail für Vormerkung"><button><i class="fas fa-paper-plane"></i></button></div>
+      </div>
+      <div class="pg">03</div>
+    </section>
+
+  </main>
+</div>
+
+<div class="deck-controls">
+  <button id="prev" aria-label="Zurück"><i class="fas fa-chevron-left"></i></button>
+  <span class="count"><span id="cur">1</span> / <span id="tot">3</span></span>
+  <button id="next" aria-label="Weiter"><i class="fas fa-chevron-right"></i></button>
+</div>
+
+<script>
+class Deck{
+  constructor(){
+    this.stage=document.getElementById('deckStage');
+    this.slides=[...this.stage.querySelectorAll('.slide')];
+    this.i=0; document.getElementById('tot').textContent=this.slides.length;
+    this.fit(); this.show(0);
+    addEventListener('resize',()=>this.fit());
+    addEventListener('keydown',e=>{
+      if(['ArrowRight',' ','PageDown'].includes(e.key)){this.go(this.i+1);e.preventDefault();}
+      else if(['ArrowLeft','PageUp'].includes(e.key)){this.go(this.i-1);e.preventDefault();}
+      else if(/^[1-9]$/.test(e.key))this.go(+e.key-1);
+    });
+    document.getElementById('next').onclick=()=>this.go(this.i+1);
+    document.getElementById('prev').onclick=()=>this.go(this.i-1);
+  }
+  fit(){const s=Math.min(innerWidth/1920,innerHeight/1080);
+    this.stage.style.transform=`translate(${(innerWidth-1920*s)/2}px,${(innerHeight-1080*s)/2}px) scale(${s})`;}
+  show(n){this.slides.forEach((sl,k)=>sl.classList.toggle('visible',k===n));document.getElementById('cur').textContent=n+1;}
+  go(n){this.i=Math.max(0,Math.min(this.slides.length-1,n));this.show(this.i);}
+}
+new Deck();
+</script>
+</body>
+</html>
