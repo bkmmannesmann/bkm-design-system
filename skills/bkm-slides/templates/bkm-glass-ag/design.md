@@ -86,6 +86,16 @@ Farbkreise) oder ein Foto hinter die Cards legen — sonst ist der Effekt unsich
 4. **Referenzen** — Typo-Bild-Karten: Glas-Card mit Gradient-Bildfläche + großer
    zweifarbiger Zahl (weiß + Lime), darunter Case-Study-Text. (Muster aus der
    Energma-Studie, hier in Glas-Sprache.)
+5. **Bild & Grafik** — Text-Block links, **gerahmtes Foto** rechts (`.figure`:
+   `object-fit:cover`, Glas-Kante, Bildunterschrift). Zeigt, wie Fotos/Diagramme
+   eingesetzt werden — siehe Pattern 12 in `PATTERN_CATALOG.md`.
+
+## Bilder & Grafiken
+
+Nicht jede Folie ist nur Text. Bilder per `.figure` (gerahmt, `object-fit:cover`,
+optionale `figcaption`), als vollflächiges Foto mit Overlay, oder im `.img`-Bereich
+einer Card. **Foto austauschen = nur `src` ersetzen** (im Skill per Pfad, im Demo als
+Data-URI). Fotos als **JPEG**, Grafiken mit Transparenz als **PNG**. Details: Pattern 12.
 
 ## Keyvisual (nur Deckblatt)
 

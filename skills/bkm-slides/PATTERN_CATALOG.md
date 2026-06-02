@@ -206,6 +206,40 @@ weiß, hell → grün. Nie links/mittig, nie gedreht/gespiegelt.
 }
 ```
 
+### 12. Bilder & Grafiken (Fotos, Diagramme)
+
+Folien dürfen Bilder zeigen — nicht nur Text. Drei Muster:
+
+**a) Gerahmtes Bild (Figure) — Text + Foto nebeneinander**
+
+```css
+.figure{position:relative;border-radius:24px;overflow:hidden;        /* Glas: 24px · Editorial/Bold: 8–16px */
+  border:1px solid rgba(255,255,255,0.28);
+  box-shadow:0 8px 32px rgba(0,0,0,0.28),inset 0 1px 0 rgba(255,255,255,0.4);}
+.figure img{display:block;width:100%;height:100%;object-fit:cover;}  /* randscharf, nie verzerren */
+.figure figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px 28px;color:#fff;font-size:18px;
+  background:linear-gradient(transparent,rgba(15,38,32,0.9));}
+```
+
+**b) Vollflächiges Foto + Overlay** (Hero/Kapitel; Glas/Text darüber)
+
+```css
+.bg-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
+.bg-photo + .overlay{position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(28,75,66,.78),rgba(15,38,32,.6));}
+/* Glas-Card / Text mit z-index > 0 darüber */
+```
+
+**c) Bild in Card** — den `.img`-Bereich einer Card mit `<img style="object-fit:cover">`
+füllen statt des Gradient-Platzhalters.
+
+**Regeln:**
+- Immer `object-fit: cover` (nie verzerren); Eckenradius der Familie folgen.
+- Foto unter Glas/Overlay legen, damit Text lesbar bleibt — Kontrast per Screenshot prüfen.
+- Bild austauschen = nur `src` ersetzen (im Skill **per Pfad**, im Standalone-Demo als Data-URI).
+- Format: **JPEG** für Fotos (klein halten), **PNG** nur für Grafiken mit Transparenz.
+- Das **Keyvisual ist kein Inhaltsbild** (eigene Regel, nur Deckblatt).
+
 ---
 
 ## Eingeschränkte Patterns
@@ -253,7 +287,8 @@ ERLAUBT:                              VERBOTEN:
 ✓ Checkmark-Listen                    ✗ Dashboard-Grids
 ✓ Icon-Circles                        ✗ Box-Shadows auf Cards
 ✓ Prozess-Flows                       ✗ Unbounded Italic
-✓ Keyvisual-Überlappung               ✗ Wavy Backgrounds
+✓ Keyvisual (nur Deckblatt)           ✗ Wavy Backgrounds
+✓ Bilder/Grafiken (Figure, Foto+Overlay)
 ✓ Innerer Glass-Glow                  ✗ Border-Left auf Glass-Cards
 ```
 
