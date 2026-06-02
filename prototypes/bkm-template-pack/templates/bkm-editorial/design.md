@@ -54,7 +54,9 @@ mit Paper/Lime-Inhalt. Kein vierter Farbton.
 - **4px-Linie** (`--rule`): Struktur-Standard. Über jeder Spalte/Listenzeile, als
   Trenner, als Ornament-Balken. Niemals 1px/2px für Struktur.
 - **Inverse-Kachel:** Deep-Green-Fläche mit Paper-Text und Lime-Zahl. Das „erhöhte" Element.
-- Alle Formen **rechteckig** (kein Border-Radius), außer Lime-Quadrat-Mark.
+- **Flächen-Elemente mit `border-radius: 8px`** abgerundet: Tags, Icon-Kacheln,
+  Chart-Karte, CTA-Buttons. Balken nur oben gerundet (`8px 8px 0 0`).
+  **Linien** (4px-Regelwerk, Trenner) bleiben Linien — nicht runden.
 
 ## Slide-Typen (in `demo.html`)
 
