@@ -84,7 +84,7 @@ keine fremden Farben/Fonts; nicht überladen (Headline + 3–4 Stützelemente pr
 
 | Variante | Datei | Canvas | Struktur-Linien | Eyebrow / Akzentwort | Logo |
 |----------|-------|--------|-----------------|----------------------|------|
-| **Hell** (Standard) | `demo.html` | Paper `#f5f0eb` | Deep-Green-Ink | Pure Green | Wortmarke + Lime-Quadrat |
+| **Hell** (Standard) | `demo.html` | Paper `#f5f0eb` | Deep-Green-Ink | Pure Green | Primärlogo (Stone-Grey + Pure-Green) |
 | **Dunkel** | `demo-dark.html` | Deep Green `#1c4b42` | Paper-Weiß | Lime | Sekundärlogo (weiß + Pure-Green-Signet) |
 
 **Regeln der dunklen Variante:**

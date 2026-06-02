@@ -1,0 +1,82 @@
+# Fachbetrieb · Glas — Design-Rezept (design.md)
+
+> Familie **Fachbetrieb · Glas** (Standard-Track, Marken-Lock). Helles Glassmorphism
+> auf Sand. Die nahbare Schwester von `bkm-glass-ag`. Engine: `frontend-slides` Fixed-Stage.
+> Demo: `demo.html`.
+> **Leitplanke:** nur BKM-Farben; **niemals Lime** (Fachbetrieb-Kontext); Headlines Unbounded 900.
+
+## Idee
+
+Der **helle, zugängliche** Marken-Look für den Fachbetrieb vor Ort: warmer Sand-Raum,
+in dem **helle Milchglas-Cards** schweben. Freundlich und vertrauensvoll statt
+corporate-dunkel. Akzent ist **Pure Green** — kein Lime.
+
+## Farben (nur BKM, kein Lime)
+
+| Rolle | Token | Wert |
+|------|-------|------|
+| Hintergrund-Verlauf | Sand → Sand2 | `#f7f6f3` → `#e9e5de` |
+| Blobs (Tiefe hinter Glas) | Pure Green / Transition / warmer Sand | `#4daf46` / `#287d4b` / `#d8cfbf` |
+| Headline / Ink | `--deep-green` | `#1c4b42` |
+| Akzentwort / Icon / KPI-Einheit / Page | `--pure-green` | `#4daf46` |
+| Eyebrow / Sublabels | `--transition-green` / `--pure-green` | `#287d4b` / `#4daf46` |
+| Body | `--stone-grey` | `#494949` |
+
+**Regeln:** **Kein Lime.** Akzent ist Pure Green (Wort, Icon-Kachel, KPI-Einheit, Page-Nr.),
+Transition Green für Sublabels. Button = Deep-Green-Fläche, weißer Text.
+
+## Das helle Glas-Rezept
+
+```css
+.glass-card{
+  background:rgba(255,255,255,0.55);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-radius:24px;border:1px solid rgba(255,255,255,0.85);
+  box-shadow:
+    0 12px 40px rgba(28,75,66,0.10),
+    inset 0 1px 0 rgba(255,255,255,0.9),
+    inset 0 0 60px 10px rgba(255,255,255,0.25);
+}
+.glass-card::before{ /* Licht-Linie oben */
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.95),transparent);}
+```
+
+Gegenüber `bkm-glass-ag`: helleres Milchglas (höhere Weiß-Deckung), **dunkler Text**,
+weicher **grüner** Schatten statt schwarzer. Damit Blur wirkt, immer Sand-Verlauf +
+Blobs (oder Foto) dahinter.
+
+## Typografie
+
+- **Display:** Unbounded **900**, −0.04em, Zeilenhöhe ~0.94. Casing UPPERCASE oder
+  Mixed-Case erlaubt, nie kursiv. Akzentwort über **Pure-Green-Farbe**.
+- **Body:** System-Sans (Echtbetrieb: TT Norms Pro), Stone Grey.
+- **Eyebrow/Labels:** UPPERCASE, ≥0.12em Tracking.
+
+## Form & Struktur
+
+- Canvas 1920×1080, Seitenabstand **140px**.
+- Glas-Cards `border-radius: 24px`; Icon-Kachel/Button **12–16px** (8px-Regel-konform).
+- **Primärlogo** (Stone-Grey + Pure-Green) oben links, Rubrik oben rechts, Seitenzahl
+  unten rechts (Pure Green). Im Prototyp als Data-URI eingebettet; im Skill per Pfad.
+
+## Slide-Typen (in `demo.html`)
+
+1. **Titel** — große Milchglas-Card (Eyebrow/Headline/Text/Button) + runder KPI-Chip.
+2. **Drei Leistungen** — drei Glas-Cards mit Pure-Green-Icon-Kachel.
+3. **Kennzahlen** — breite Glas-Panel mit 3 KPI-Spalten (dezente Trennlinien).
+4. **Referenzen** — Typo-Bild-Karten: Sand-Gradient-Fläche + große Zahl
+   (Deep Green + Pure-Green-Einheit), darunter Case-Study-Text.
+
+## Do / Don't
+
+**Do:** hell & luftig halten; Sand/Blobs hinter das Glas; Pure Green als einziger Akzent;
+dunkler Text auf hellem Glas; freundlicher, partnerschaftlicher Ton.
+
+**Don't:** **kein Lime**; keine dunklen Deep-Green-Vollflächen (das ist der AG-Look);
+kein Glas ohne Hintergrund; keine fremden Farben/Fonts.
+
+## Fixed-Stage-Policy
+
+1920×1080, als Ganzes skaliert, Letterbox statt Reflow. `backdrop-filter` GPU-lastig —
+beim PDF-Export Blur prüfen, zur Not auf flache Halbtransparenz zurückfallen.
