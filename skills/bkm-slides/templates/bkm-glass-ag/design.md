@@ -81,8 +81,9 @@ Farbkreise) oder ein Foto hinter die Cards legen — sonst ist der Effekt unsich
 ## Hintergründe & Motion
 
 **Texturierte Hintergründe (Standard):** Statt flacher Blob-Verläufe nutzt die Familie
-**vier texturierte Hintergründe** (weiches Fensterlicht auf Deep Green, BKM-Grün + Grain) —
-`assets/backgrounds/bg-green-texture-1…4.jpg`, im Deck als `.bg.t1 … .bg.t4`.
+**sechs texturierte Hintergründe** (weiches Fensterlicht auf Deep Green, BKM-Grün + Grain) —
+`assets/backgrounds/bg-green-texture-1…6.jpg`, im Deck als `.bg.t1 … .bg.t6`. **t5/t6** sind
+**Spotlight-Verläufe** (leuchtendes Mittelgrün, dunkle Ränder) — ideal für Cover & Statements.
 
 - Über die Folien **rotieren** (`t1, t2, t3, t4, t1, …`) — nie zweimal dieselbe nebeneinander.
   Bei langen Decks (30–50+ Folien) verhindert das Monotonie.
