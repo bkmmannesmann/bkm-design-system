@@ -72,15 +72,26 @@ class Deck{
   constructor(){
     this.stage=document.getElementById('deckStage');
     this.slides=[...this.stage.querySelectorAll('.slide')];
-    this.i=0; document.getElementById('tot').textContent=this.slides.length;
-    this.fit(); this.show(0);
+    this.key='bkm-deck:'+location.pathname;            // Positions-Merker je Deck
+    document.getElementById('tot').textContent=this.slides.length;
+    const saved=parseInt(localStorage.getItem(this.key),10);
+    this.i=Number.isInteger(saved)?Math.min(Math.max(saved,0),this.slides.length-1):0;
+    document.body.tabIndex=-1;                          // Body fokussierbar machen
+    this.fit(); this.show(this.i);
     addEventListener('resize',()=>this.fit());
-    addEventListener('keydown',e=>{
+    // Tasten zuverlaessig: Capture-Phase auf window UND document (iframe-Fokus-Quirks
+    // koennen sonst Pfeiltasten schlucken)
+    const onKey=e=>{
       if(['ArrowRight',' ','PageDown'].includes(e.key)){this.go(this.i+1);e.preventDefault();}
       else if(['ArrowLeft','PageUp'].includes(e.key)){this.go(this.i-1);e.preventDefault();}
       else if(e.key==='Home')this.go(0); else if(e.key==='End')this.go(this.slides.length-1);
       else if(/^[1-9]$/.test(e.key))this.go(+e.key-1);
-    });
+    };
+    window.addEventListener('keydown',onKey,true);
+    document.addEventListener('keydown',onKey,true);
+    // Body-Autofokus bei Load und Klick, damit Tasten ankommen
+    const focus=()=>document.body.focus&&document.body.focus();
+    addEventListener('load',focus); addEventListener('click',focus); focus();
     let x0=null;
     addEventListener('touchstart',e=>x0=e.touches[0].clientX,{passive:true});
     addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;
@@ -91,11 +102,17 @@ class Deck{
   fit(){const s=Math.min(innerWidth/1920,innerHeight/1080);
     this.stage.style.transform=`translate(${(innerWidth-1920*s)/2}px,${(innerHeight-1080*s)/2}px) scale(${s})`;}
   show(n){this.slides.forEach((sl,k)=>sl.classList.toggle('visible',k===n));
-    document.getElementById('cur').textContent=n+1;}
+    document.getElementById('cur').textContent=n+1;
+    try{localStorage.setItem(this.key,n);}catch(e){}}   // Position merken (Reload bleibt)
   go(n){this.i=Math.max(0,Math.min(this.slides.length-1,n));this.show(this.i);}
 }
 new Deck();
 ```
+
+> **Härtung gegenüber der Basis (aus Open Design adaptiert):** Capture-Phase-Keydown auf
+> `window` **und** `document`, Body-Autofokus bei Load/Klick, und `localStorage`-Positions-
+> Merker (beim Reload landet man auf derselben Folie). Die mitgelieferten `demo.html`
+> nutzen noch die schlanke Basis-Variante — neue Decks bekommen diese gehärtete Version.
 
 ## Regeln
 

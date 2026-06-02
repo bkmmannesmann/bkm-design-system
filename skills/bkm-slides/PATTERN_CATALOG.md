@@ -251,3 +251,23 @@ ERLAUBT:                              VERBOTEN:
 ✓ Keyvisual-Überlappung               ✗ Wavy Backgrounds
 ✓ Innerer Glass-Glow                  ✗ Border-Left auf Glass-Cards
 ```
+
+---
+
+## Positiv-Regeln (Anti-Slop)
+
+> Nicht nur „was verboten ist", sondern **wie man aktiv gut gestaltet**.
+> Idee adaptiert aus Open Design (nexu-io/open-design, Apache-2.0).
+
+1. **Ein Akzent, max. 2× pro Folie.** Lime (bzw. Pure Green im Fachbetrieb) ist ein
+   Signal, kein Dekor — pro Folie höchstens zweimal einsetzen, sonst verliert es Wirkung.
+2. **Display- und Body-Schrift nie dieselbe Familie.** BKM = Unbounded (Display) +
+   System-Sans/TT Norms Pro (Body). Headlines nie in der Body-Schrift, Fließtext nie in Unbounded.
+3. **Farben mit `oklch()` ableiten statt Hex erfinden.** Wenn eine Zwischenstufe nötig ist
+   (z. B. Hover, Verlauf), bestehende BKM-Token über `oklch()` aufhellen/abdunkeln —
+   **nie** einen neuen, freien Hex-Wert außerhalb der Palette einführen.
+4. **Hintergrund aus Marke/Domäne, nie generisch.** Deep-Green-/Sand-Flächen, Brand-Blobs,
+   echte Bautenschutz-Fotos. **Kein** beiger/peach/„cozy"-Default-Canvas, kein App-Chrome-Grau.
+5. **Eine dominante Aussage pro Folie.** Eine Headline + 3–4 Stützelemente. Kein
+   konkurrierender Doppel-Fokus, keine gleichförmigen Kachel-Teppiche.
+6. **Inhalte spezifisch.** Echte Zahlen/Projekte statt „Lorem"/generischer Stat-Slop.

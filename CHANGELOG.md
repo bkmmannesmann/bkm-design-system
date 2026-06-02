@@ -14,6 +14,12 @@ Alle wesentlichen Änderungen am BKM Mannesmann Design System werden hier dokume
   Flächen-Elemente; Fachbetrieb-Text in Transition Green.
 - v4-System (5 Templates) nach `skills/bkm-slides/legacy/` archiviert.
 
+### Hinzugefügt
+- Aus Open-Design-Analyse (Apache-2.0) übernommen: `skills/bkm-slides/checklist.md`
+  (P0/P1/P2 + 5-Dim-Selbstkritik), Anti-Slop-**Positivregeln** in `PATTERN_CATALOG.md`,
+  Engine-Härtung in `ENGINE.md` (Capture-Keydown, Autofokus, localStorage-Position),
+  Turn-1-Kurzbrief in `SKILL.md`. Ideen-Sammlung: `docs/inspiration-open-design.md`.
+
 ## [1.0.0] - 2026-05-11
 
 ### Hinzugefügt

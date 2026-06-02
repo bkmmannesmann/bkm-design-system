@@ -49,9 +49,20 @@
 
 ## Workflow (in dieser Reihenfolge)
 
-### 1 · Anlass & Inhalt klären
-Zweck, Kontext (AG/Fachbetrieb), Track (Standard/Kreativ), Dichte (Vortrag = wenig/groß,
-Lesen = strukturierte Grids), ungefähre Folienzahl.
+### 1 · Kurz-Brief einholen (Turn 1, **vor** dem Bauen)
+Bevor ein Pixel entsteht: **ein** kompaktes Frageformular (≤ 7 Fragen), dann stoppen und
+Antwort abwarten. Bereits Beantwortetes weglassen. Standard-Fragen:
+
+1. **Zweck/Anlass?** (Pitch, Kundentermin, Investor, Messe, internes Update …)
+2. **Kontext?** BKM AG (corporate) ODER Fachbetrieb (nahbar)
+3. **Track?** Standard (Marken-Lock) ODER Kreativ
+4. **Folienzahl?** (ungefähr)
+5. **Dichte?** Vortrag (wenig Text, groß) ODER Lesen (strukturierte Grids)
+6. **Speaker Notes?** ja/nein
+7. **Inhalt/Quelle?** (Stichpunkte, Dokument, Thema)
+
+> Ausnahme: Wenn der Nutzer „einfach bauen / keine Fragen" sagt, mit sinnvollen Defaults
+> (BKM AG · Standard · Vortragsdichte) starten.
 
 ### 2 · Kandidaten finden — `selection-index.json` lesen
 **Nur den Index** lesen und anhand der Metadaten (track, context, mood, best_for) 1–3
@@ -72,13 +83,13 @@ Nach der Wahl das vollständige Rezept **der gewählten Familie** lesen — erst
 4. Inhalte einsetzen; Dichte-Modus bewusst wählen.
 5. Logo/Keyvisual **per Pfad** referenzieren (siehe Tabelle in `ENGINE.md`).
 
-### 6 · Qualitätskontrolle (Screenshot)
-- [ ] Fixed-Stage-Shell unverändert (1920×1080, skaliert)?
-- [ ] **Kein Überlauf, keine Überlappung**, nichts unter Lesegröße?
-- [ ] Nur BKM-Farben? Headlines Unbounded 900 (UPPERCASE **oder** Mixed-Case, **nie kursiv**)?
-- [ ] Lime nur als Signal — **nie** Vollfläche, **nie** im Fachbetrieb-Kontext?
-- [ ] Richtiges Logo im Kontext (dunkel = white-puregreen, hell = stonegrey-puregreen)?
-- [ ] Verbotene Patterns vermieden (`PATTERN_CATALOG.md`)?
+### 6 · Self-Check + Selbstkritik (PFLICHT)
+1. **`checklist.md` durchgehen** (Screenshot ansehen!). **Jedes P0 muss bestehen** —
+   sonst nicht ausliefern, sondern korrigieren. P1 stark empfohlen.
+2. **5-Dimensionen-Selbstkritik** (Marke · Hierarchie · Ausführung · Spezifität · Zurückhaltung),
+   je 1–5. Alles < 3/5 nachbessern und neu bewerten. Zwei Durchläufe sind normal.
+
+Erst wenn P0 vollständig grün **und** alle Kritik-Dimensionen ≥ 3/5 sind: ausliefern.
 
 ---
 
@@ -112,8 +123,9 @@ skills/bkm-slides/
 │   ├── bkm-glass-fachbetrieb/ {preview.md, design.md, demo.html}
 │   ├── bkm-editorial/       {preview.md, design.md, demo.html, demo-dark.html}
 │   └── bkm-bold-poster/     {preview.md, design.md, demo.html}
+├── checklist.md            ← P0/P1/P2 Self-Check + 5-Dim-Selbstkritik (PFLICHT)
 ├── STYLE_PRESETS.md        ← exakte CSS-Token (Referenz)
-├── PATTERN_CATALOG.md      ← Anti-Slop (erlaubt/verboten)
+├── PATTERN_CATALOG.md      ← Anti-Slop (verboten + Positiv-Regeln)
 ├── animation-patterns.md   ← Reveal-/Animations-Referenz
 ├── assets/                 ← Hintergrund-Asset(s)
 └── legacy/                 ← v4-System (5-Templates) — abgelöst, nur Referenz
@@ -124,13 +136,13 @@ skills/bkm-slides/
 ## Zusammenfassung für Agents
 
 ```
-1. Anlass/Kontext/Track/Dichte klären
+1. Kurz-Brief per Frageformular einholen (≤7 Fragen), dann bauen
 2. selection-index.json lesen → 1–3 Familien eingrenzen (nur Metadaten)
 3. preview.md der Finalisten lesen → Stil wählen (Mensch: style-discovery.html zeigen)
 4. GENAU EINE design.md der gewählten Familie lesen
 5. Engine-Shell aus ENGINE.md kopieren → Folien im Familien-Stil bauen
 6. Logo/Keyvisual per Pfad; Marken-Leitplanken einhalten
-7. Screenshot-QA: kein Überlauf/keine Überlappung, Farben/Schrift korrekt
+7. checklist.md (P0 muss grün) + 5-Dim-Selbstkritik → erst dann ausliefern
 ```
 
 > **Hinweis:** Das alte v4-System (fünf Copy-Paste-Templates, „kopieren, nicht
