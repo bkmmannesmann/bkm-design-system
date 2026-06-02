@@ -8,3 +8,9 @@ Thumbs.db
 
 # Node modules (falls zukünftig Tooling hinzugefügt wird)
 node_modules/
+
+# Generierte Bilder (bkm-images Skill)
+skills/bkm-images/output/
+
+# Secrets
+.env

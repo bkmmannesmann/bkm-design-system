@@ -9,6 +9,7 @@
 | [bkm-slides](bkm-slides/SKILL.md) | Visuell ansprechende HTML-Präsentationen | Einzelne HTML-Dateien |
 | [bkm-website](bkm-website/SKILL.md) | React-Websites und Web-Apps | React + Tailwind Projekte |
 | [bkm-social](bkm-social/SKILL.md) | Social-Media-Grafiken und Vorlagen | PNG/JPG oder HTML-Vorlagen |
+| [bkm-images](bkm-images/SKILL.md) | Brand-konforme Bildgenerierung via OpenAI Images (`gpt-image-1`) | PNG-Bilder (Slide-Hintergründe, Social, Hero, Produkt) |
 
 ## Architektur
 
@@ -19,7 +20,10 @@ DESIGN.md + AGENTS.md (Source of Truth)
          ↓
     skills/ (Generierungs-Workflows)
          ↓
-    Output (Slides, Websites, Social)
+    Output (Slides, Websites, Social, Bilder)
+
+bkm-images speist die anderen Skills mit brand-konformen Foto-Assets:
+    bkm-images → bkm-slides (Hintergründe) / bkm-social (Post-Bilder) / bkm-website (Hero-Bilder)
 ```
 
 Jeder Skill **liest** aus dem Design System und der Pattern Library. Er verändert sie nicht.

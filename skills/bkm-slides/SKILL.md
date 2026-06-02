@@ -56,7 +56,18 @@
 - Nachhaltigkeit (Grüne Gebäude, Natur, moderne Architektur)
 - Business (Handshake, Tablet/Software, Teamwork)
 
-**Generierungs-Prompt-Muster:**
+**Empfohlener Weg:** Nutze den `bkm-images`-Skill — er baut den brand-konformen
+Prompt automatisch und ruft die OpenAI Image-API (`gpt-image-1`) auf:
+
+```bash
+node ../bkm-images/generate.mjs --usecase slide --context ag \
+  --motif "concrete basement wall with a horizontal moisture barrier line"
+```
+
+Siehe `skills/bkm-images/SKILL.md` für Kontext (AG/Fachbetrieb), Formate und
+die vollständige Bildsprache.
+
+**Manuelles Prompt-Muster** (falls ohne Skript generiert wird):
 ```
 Professional architectural photography of [MOTIV], dramatic natural lighting,
 high contrast, shot on medium format camera, editorial quality,

@@ -30,6 +30,9 @@ This repository contains the complete design system for BKM Mannesmann AG, a man
 | `skills/bkm-slides/STYLE_PRESETS.md` | Exact CSS tokens for glassmorphism slides (both contexts) | |
 | `skills/bkm-slides/html-template.md` | Complete copy-paste HTML templates for all slide types | |
 | `skills/bkm-slides/PATTERN_CATALOG.md` | Allowed and forbidden patterns with exact CSS values | |
+| `skills/bkm-images/SKILL.md` | Brand-conform image generation via OpenAI Images (`gpt-image-1`) | |
+| `skills/bkm-images/PROMPT_LIBRARY.md` | Brand prompt building blocks per use case + context | |
+| `skills/bkm-images/generate.mjs` | Runnable CLI that builds the brand prompt and calls the OpenAI Image API | |
 
 ## Quick Start
 
@@ -53,6 +56,21 @@ Then create a presentation about [topic] in the [BKM AG / Fachbetrieb] context.
 ```
 
 The slide skill includes a mandatory workflow: determine context → read exact CSS tokens → read HTML templates → generate background photos → upload assets → build slides → quality check.
+
+**For Brand-Conform Images (OpenAI Images / `gpt-image-1`):**
+
+```bash
+export OPENAI_API_KEY="sk-..."
+node skills/bkm-images/generate.mjs \
+  --usecase slide --context ag \
+  --motif "concrete basement wall with a horizontal moisture barrier line"
+```
+
+The `bkm-images` skill builds a BKM-brand-conform prompt (editorial photography,
+muted earth tones, green accents, no text/logos in the image) for slide
+backgrounds, social media, website heroes and product shots. Use `--dry-run` to
+print the prompt without calling the API. No npm install required (Node ≥ 18).
+See `skills/bkm-images/SKILL.md`.
 
 **For Other Formats (Instagram, Print, Social Media):**
 
