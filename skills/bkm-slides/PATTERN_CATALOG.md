@@ -240,6 +240,31 @@ füllen statt des Gradient-Platzhalters.
 - Format: **JPEG** für Fotos (klein halten), **PNG** nur für Grafiken mit Transparenz.
 - Das **Keyvisual ist kein Inhaltsbild** (eigene Regel, nur Deckblatt).
 
+### 13. Texturierte Hintergründe + Rhythmus
+
+Statt flacher Verläufe: **texturierte Hintergründe** (weiches Licht auf Deep Green,
+BKM-Grün + Grain) in `assets/backgrounds/bg-green-texture-1…4.jpg`, im Deck `.bg.t1…t4`.
+
+```css
+.bg{position:absolute;inset:0;background-size:cover;background-position:center;}
+.bg.t1{background:#0f2620 url(.../bg-green-texture-1.jpg) center/cover;}
+/* t2…t4 analog */
+```
+
+**Regeln:**
+- Varianten **rotieren** über die Folien (`t1,t2,t3,t4,t1,…`) — nie zweimal dieselbe nebeneinander.
+  Pflicht bei langen Decks (Anti-Monotonie über 30–50+ Folien).
+- Dunkel-links-Varianten (`t1`,`t4`) für links-bündigen Text; `t2`/`t3` für zentrierte Inhalte.
+- Glas-Cards/Text müssen lesbar bleiben — Kontrast per Screenshot prüfen.
+- Nur BKM-Grün; **kein** Lime-/Pure-Green-Vollflächen-Grund (Keyvisual-Verbot beachten).
+
+### 14. Motion (Reveal) + Headline-Casing (Hybrid)
+
+- **Reveal:** Inhaltselemente `reveal` + Stagger `d1…d5` (Fade + Hochgleiten beim Folienwechsel).
+  Print/PDF & `prefers-reduced-motion` zeigen alles ruhig (in der Engine bereits gelöst).
+- **Casing (Hybrid A+B):** Cover & Kapitel-Trenner **UPPERCASE**; Inhalts-/Section-Headlines
+  **Mixed-Case** via Klasse `.mixed` (`text-transform:none`). Akzentwort über Lime, nie kursiv.
+
 ---
 
 ## Eingeschränkte Patterns
@@ -289,6 +314,8 @@ ERLAUBT:                              VERBOTEN:
 ✓ Prozess-Flows                       ✗ Unbounded Italic
 ✓ Keyvisual (nur Deckblatt)           ✗ Wavy Backgrounds
 ✓ Bilder/Grafiken (Figure, Foto+Overlay)
+✓ Texturierte Hintergründe (rotierend)
+✓ Reveal-Motion + Hybrid-Casing
 ✓ Innerer Glass-Glow                  ✗ Border-Left auf Glass-Cards
 ```
 

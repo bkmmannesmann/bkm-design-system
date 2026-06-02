@@ -78,6 +78,28 @@ Farbkreise) oder ein Foto hinter die Cards legen — sonst ist der Effekt unsich
 - **Logo** (weißes Sekundärlogo, white+pure-green-Signet) oben links, Rubrik oben rechts, Seitenzahl unten rechts (Lime).
   Im Prototyp als Data-URI eingebettet; im Skill per Pfad referenzieren.
 
+## Hintergründe & Motion
+
+**Texturierte Hintergründe (Standard):** Statt flacher Blob-Verläufe nutzt die Familie
+**vier texturierte Hintergründe** (weiches Fensterlicht auf Deep Green, BKM-Grün + Grain) —
+`assets/backgrounds/bg-green-texture-1…4.jpg`, im Deck als `.bg.t1 … .bg.t4`.
+
+- Über die Folien **rotieren** (`t1, t2, t3, t4, t1, …`) — nie zweimal dieselbe nebeneinander.
+  Bei langen Decks (30–50+ Folien) verhindert das Monotonie.
+- Für **textlastige/links-bündige** Folien dunkel-links-Varianten (`t1`, `t4`); für zentrierte
+  Inhalte `t2`/`t3`. Kontrast immer per Screenshot prüfen.
+- Glas-Cards blurren die Textur dahinter → echter Frosted-Effekt.
+
+**Motion (Reveal):** Inhaltselemente tragen `reveal` + Stagger `d1 … d5`
+(Fade + Hochgleiten beim Folienwechsel). Print/PDF & `prefers-reduced-motion` zeigen alles ruhig.
+
+## Headline-Casing (Hybrid A+B)
+
+- **Cover & Kapitel-Trenner:** UPPERCASE (Wucht).
+- **Inhalts-/Section-Headlines:** **Mixed-Case** (Lesbarkeit, weniger Ermüdung) — Klasse `.mixed`
+  hebt das erzwungene `text-transform:uppercase` auf.
+- Akzentwort immer über **Lime-Farbe**, nie kursiv. (Eyebrows/Labels bleiben UPPERCASE.)
+
 ## Slide-Typen (in `demo.html`)
 
 1. **Titel** — große Glas-Card mit Eyebrow/Headline/Text/Button; **Keyvisual rechts** (kein Chip).
