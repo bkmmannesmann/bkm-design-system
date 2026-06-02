@@ -29,6 +29,8 @@
 | `templates/<slug>/demo.html` | Golden-Reference-Deck der Familie |
 | `STYLE_PRESETS.md` | Exakte CSS-Token (Referenz, v3) |
 | `PATTERN_CATALOG.md` | Erlaubte vs. verbotene Patterns (Anti-Slop) |
+| `SLIDE_TYPES.md` | **Folientyp-Taxonomie** (Rollen-Folien + Inhalts-Bausteine, Plan/Spec) |
+| `QUICKSTART.md` | Verlässlicher Weg zu stimmigen Decks (Claude Code, Claude.ai, Manus) |
 | `style-discovery.html` | Visuelle Auswahl-Galerie (4 Familien nebeneinander) |
 
 ---
