@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BKM · Editorial — Stil-Demo (poliert)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<style>
+/* =========================================================
+   BKM EDITORIAL — Design-Token (Kreativ-Track, on-brand)
+   Quelle: DESIGN.md · Engine: frontend-slides Fixed-Stage
+   ========================================================= */
+:root{
+  --deep-green:#1c4b42; --lime:#b4e717; --pure-green:#4daf46;
+  --transition-green:#287d4b; --sand:#f6f5f2; --paper:#f5f0eb;
+  --stone-grey:#494949; --white:#fff;
+  --ink:var(--deep-green);                 /* Editorial-Ink = Deep Green */
+  --font-display:'Unbounded',sans-serif;
+  --font-body:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --stage-bg:#dad6cd;                       /* Letterbox */
+  --ease:cubic-bezier(0.16,1,0.3,1);
+  --rule:4px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--stage-bg);font-family:var(--font-body);}
+
+/* Fixed-Stage (viewport-base.css) */
+.deck-viewport{position:fixed;inset:0;overflow:hidden;background:var(--stage-bg);}
+.deck-stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;overflow:hidden;}
+.slide{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;
+  visibility:hidden;opacity:0;pointer-events:none;background:var(--paper);}
+.slide.visible{visibility:visible;opacity:1;pointer-events:auto;z-index:1;}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+.slide.visible .reveal{opacity:1;transform:translateY(0);}
+.slide.visible .reveal:nth-child(1){transition-delay:.06s;}
+.slide.visible .reveal:nth-child(2){transition-delay:.14s;}
+.slide.visible .reveal:nth-child(3){transition-delay:.22s;}
+.slide.visible .reveal:nth-child(4){transition-delay:.30s;}
+.slide.visible .reveal:nth-child(5){transition-delay:.38s;}
+.slide.visible .reveal:nth-child(6){transition-delay:.46s;}
+.d2{transition-delay:.18s!important;} .d3{transition-delay:.30s!important;}
+.d4{transition-delay:.42s!important;} .d5{transition-delay:.54s!important;}
+
+/* ---- Gemeinsames Chrome ---- */
+.mast,.foot{position:absolute;left:140px;right:140px;display:flex;justify-content:space-between;align-items:center;
+  font-weight:700;font-size:17px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink);z-index:5;}
+.mast{top:64px;} .foot{bottom:60px;color:var(--transition-green);}
+.foot .pg{font-family:var(--font-display);font-weight:900;}
+.brandmark{display:flex;align-items:center;gap:10px;}
+.brandmark .dot{width:12px;height:12px;background:var(--lime);border-radius:2px;}
+.hr{height:var(--rule);background:var(--ink);width:100%;}
+.eyebrow{font-weight:700;letter-spacing:0.18em;text-transform:uppercase;font-size:19px;color:var(--pure-green);}
+.h-d{font-family:var(--font-display);font-weight:900;text-transform:uppercase;line-height:0.92;letter-spacing:-0.04em;color:var(--ink);}
+.body{font-size:25px;line-height:1.55;color:var(--stone-grey);}
+
+/* =========================== 1 · COVER =========================== */
+.cover{background:var(--paper);}
+.cover .frame{position:absolute;left:140px;right:140px;top:170px;}
+.cover .eyebrow{margin:34px 0 26px;}
+.cover h1{font-size:142px;}
+.cover h1 .g{color:var(--pure-green);}
+.cover .lead{font-size:27px;color:var(--stone-grey);max-width:980px;margin-top:38px;line-height:1.5;}
+.cover .meta{position:absolute;left:140px;right:140px;bottom:150px;display:flex;justify-content:space-between;align-items:flex-end;}
+.cover .meta .tag{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:var(--paper);
+  font-weight:700;font-size:16px;letter-spacing:0.1em;text-transform:uppercase;padding:12px 22px;}
+.cover .meta .tag i{color:var(--lime);}
+.cover .meta .date{font-weight:700;font-size:18px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink);}
+
+/* =========================== 2 · AGENDA =========================== */
+.agenda{background:var(--paper);}
+.agenda .head{position:absolute;left:140px;top:150px;}
+.agenda .head .eyebrow{margin-bottom:18px;}
+.agenda .head h2{font-size:96px;}
+.agenda .rows{position:absolute;left:140px;right:140px;top:430px;}
+.agenda .row{display:grid;grid-template-columns:150px 1fr 380px;align-items:center;
+  padding:30px 0;border-top:var(--rule) solid var(--ink);}
+.agenda .row:last-child{border-bottom:var(--rule) solid var(--ink);}
+.agenda .row .no{font-family:var(--font-display);font-weight:900;font-size:54px;color:var(--pure-green);letter-spacing:-0.03em;}
+.agenda .row .nm{font-family:var(--font-display);font-weight:900;font-size:46px;text-transform:uppercase;color:var(--ink);letter-spacing:-0.02em;}
+.agenda .row .kd{font-weight:700;font-size:18px;letter-spacing:0.1em;text-transform:uppercase;color:var(--stone-grey);text-align:right;}
+
+/* =========================== 3 · CONTENT (3 Spalten) =========================== */
+.cols{background:var(--paper);}
+.cols .head{position:absolute;left:140px;right:140px;top:150px;}
+.cols .head .eyebrow{margin-bottom:18px;}
+.cols .head h2{font-size:88px;}
+.cols .grid{position:absolute;left:140px;right:140px;top:430px;display:grid;grid-template-columns:repeat(3,1fr);gap:54px;}
+.cols .col{border-top:var(--rule) solid var(--ink);padding-top:28px;}
+.cols .col .ic{width:58px;height:58px;background:var(--ink);color:var(--lime);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:26px;}
+.cols .col h3{font-family:var(--font-display);font-weight:900;font-size:30px;text-transform:uppercase;color:var(--ink);letter-spacing:-0.02em;line-height:1.05;}
+.cols .col p{font-size:21px;line-height:1.55;color:var(--stone-grey);margin-top:18px;}
+
+/* =========================== 4 · DATEN (KPI + Chart) =========================== */
+.data{background:var(--paper);}
+.data .head{position:absolute;left:140px;top:150px;}
+.data .head .eyebrow{margin-bottom:18px;}
+.data .head h2{font-size:88px;}
+.data .kpis{position:absolute;left:140px;top:410px;width:760px;}
+.data .kpi{display:grid;grid-template-columns:1fr;border-top:var(--rule) solid var(--ink);padding:26px 0;}
+.data .kpi:last-child{border-bottom:var(--rule) solid var(--ink);}
+.data .kpi .f{font-family:var(--font-display);font-weight:900;font-size:88px;line-height:0.9;letter-spacing:-0.04em;color:var(--ink);}
+.data .kpi .f .u{color:var(--pure-green);font-size:54px;}
+.data .kpi .c{font-weight:700;font-size:19px;letter-spacing:0.06em;text-transform:uppercase;color:var(--stone-grey);margin-top:12px;}
+/* Chart-Karte (inverse) */
+.data .chart{position:absolute;right:140px;top:410px;width:840px;height:470px;background:var(--ink);padding:46px 50px 40px;}
+.data .chart .lbl{color:var(--paper);font-weight:700;font-size:18px;letter-spacing:0.1em;text-transform:uppercase;}
+.data .chart .bars{position:absolute;left:50px;right:50px;bottom:80px;top:120px;display:flex;align-items:flex-end;gap:34px;}
+.data .chart .bar{flex:1;background:var(--lime);position:relative;}
+.data .chart .bar:nth-child(odd){background:var(--paper);}
+.data .chart .bar .v{position:absolute;top:-44px;left:0;right:0;text-align:center;font-family:var(--font-display);font-weight:900;font-size:30px;color:var(--paper);}
+.data .chart .bar .x{position:absolute;bottom:-46px;left:0;right:0;text-align:center;font-weight:700;font-size:16px;letter-spacing:0.06em;color:rgba(245,240,235,0.7);}
+
+/* =========================== 5 · STATEMENT =========================== */
+.stmt{background:var(--ink);}
+.stmt .center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 200px;text-align:center;}
+.stmt .orn{display:flex;align-items:center;gap:30px;margin-bottom:48px;}
+.stmt .orn .l{width:120px;height:0;border-top:var(--rule) solid var(--lime);border-bottom:var(--rule) solid var(--lime);height:11px;}
+.stmt .orn .w{font-family:var(--font-display);font-weight:700;font-size:30px;letter-spacing:0.1em;text-transform:uppercase;color:var(--lime);}
+.stmt h2{font-family:var(--font-display);font-weight:900;font-size:128px;text-transform:uppercase;color:var(--paper);line-height:0.95;letter-spacing:-0.04em;}
+.stmt h2 .lime{color:var(--lime);}
+.stmt .who{margin-top:48px;font-weight:700;font-size:22px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(245,240,235,0.65);}
+
+/* =========================== 6 · CLOSING =========================== */
+.closing{background:var(--paper);}
+.closing .frame{position:absolute;left:140px;right:140px;top:230px;}
+.closing .eyebrow{margin-bottom:26px;}
+.closing h2{font-size:128px;}
+.closing h2 .g{color:var(--pure-green);}
+.closing .row{position:absolute;left:140px;right:140px;bottom:170px;border-top:var(--rule) solid var(--ink);padding-top:36px;display:flex;justify-content:space-between;align-items:flex-end;}
+.closing .row .c{font-size:22px;color:var(--stone-grey);line-height:1.6;}
+.closing .row .c b{color:var(--ink);font-size:24px;display:block;margin-bottom:6px;font-family:var(--font-display);font-weight:900;text-transform:uppercase;letter-spacing:-0.01em;}
+.closing .row .cta{display:inline-flex;align-items:center;gap:14px;background:var(--ink);color:var(--paper);
+  font-weight:700;font-size:20px;letter-spacing:0.06em;text-transform:uppercase;padding:18px 34px;}
+.closing .row .cta i{color:var(--lime);}
+
+/* Controls */
+.deck-controls{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:1000;display:flex;align-items:center;gap:6px;
+  background:rgba(28,75,66,0.92);border-radius:999px;padding:8px 10px;color:#fff;font-size:13px;font-weight:600;}
+.deck-controls button{all:unset;cursor:pointer;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.deck-controls button:hover{background:rgba(255,255,255,0.16);}
+.deck-controls .count{min-width:52px;text-align:center;font-variant-numeric:tabular-nums;}
+
+@media print{
+  html,body{width:1920px;height:auto;overflow:visible;background:#fff;}
+  .deck-viewport{position:static;overflow:visible;} .deck-stage{position:static;width:auto;height:auto;transform:none!important;}
+  .slide{position:relative;visibility:visible!important;opacity:1!important;break-after:page;page-break-after:always;}
+  .slide .reveal{opacity:1!important;transform:none!important;} .deck-controls{display:none!important;}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.2s!important;}}
+</style>
+</head>
+<body>
+<div class="deck-viewport">
+  <main class="deck-stage" id="deckStage">
+
+    <!-- 1 · COVER -->
+    <section class="slide visible cover">
+      <div class="mast reveal"><span class="brandmark"><span class="dot"></span>BKM Mannesmann</span><span>Bautenschutz · seit 1989</span></div>
+      <div class="frame">
+        <div class="hr reveal"></div>
+        <div class="eyebrow reveal">Geschäftsbericht 2026</div>
+        <h1 class="h-d reveal">BAUWERKS&shy;SCHUTZ,<br>DER <span class="g">BLEIBT</span></h1>
+        <p class="lead reveal">Feuchtigkeitssperren, Injektionstechnik und geprüfte Systeme — entwickelt im eigenen Labor, umgesetzt durch zertifizierte Fachbetriebe.</p>
+      </div>
+      <div class="meta">
+        <span class="tag reveal"><i class="fas fa-shield-halved"></i> Strategie &amp; Ausblick</span>
+        <span class="date reveal">Juni 2026</span>
+      </div>
+    </section>
+
+    <!-- 2 · AGENDA -->
+    <section class="slide agenda">
+      <div class="mast"><span class="brandmark"><span class="dot"></span>BKM Mannesmann</span><span>Agenda</span></div>
+      <div class="head">
+        <div class="eyebrow reveal">Überblick</div>
+        <h2 class="h-d reveal">AGENDA</h2>
+      </div>
+      <div class="rows">
+        <div class="row reveal"><span class="no">01</span><span class="nm">Marktposition</span><span class="kd">Wo wir stehen</span></div>
+        <div class="row reveal d2"><span class="no">02</span><span class="nm">Technologie</span><span class="kd">Labor &amp; Rezepturen</span></div>
+        <div class="row reveal d3"><span class="no">03</span><span class="nm">Fachbetriebe</span><span class="kd">Netzwerk &amp; Qualität</span></div>
+        <div class="row reveal d4"><span class="no">04</span><span class="nm">Wachstum</span><span class="kd">Plan bis 2030</span></div>
+      </div>
+      <div class="foot"><span>Editorial-Stil</span><span class="pg">02</span></div>
+    </section>
+
+    <!-- 3 · CONTENT (3 Spalten) -->
+    <section class="slide cols">
+      <div class="mast"><span class="brandmark"><span class="dot"></span>BKM Mannesmann</span><span>Technologie</span></div>
+      <div class="head">
+        <div class="eyebrow reveal">Was uns trägt</div>
+        <h2 class="h-d reveal">DREI SÄULEN</h2>
+      </div>
+      <div class="grid">
+        <div class="col reveal"><div class="ic"><i class="fas fa-flask"></i></div><h3>Eigene Rezeptur</h3><p>Entwicklung und Prüfung im eigenen Labor — abgestimmt auf reale Baustellen statt Katalogwerte.</p></div>
+        <div class="col reveal d2"><div class="ic"><i class="fas fa-certificate"></i></div><h3>Geprüfte Systeme</h3><p>Dokumentiert nach gültiger Normung. Nachvollziehbar, wiederholbar, garantiert.</p></div>
+        <div class="col reveal d3"><div class="ic"><i class="fas fa-user-shield"></i></div><h3>Fachbetriebe</h3><p>Zertifizierte Partner vor Ort sichern die Verarbeitungsqualität bis zum letzten Quadratmeter.</p></div>
+      </div>
+      <div class="foot"><span>Editorial-Stil</span><span class="pg">03</span></div>
+    </section>
+
+    <!-- 4 · DATEN -->
+    <section class="slide data">
+      <div class="mast"><span class="brandmark"><span class="dot"></span>BKM Mannesmann</span><span>Kennzahlen</span></div>
+      <div class="head">
+        <div class="eyebrow reveal">In Zahlen</div>
+        <h2 class="h-d reveal">WIRKUNG</h2>
+      </div>
+      <div class="kpis">
+        <div class="kpi reveal"><div class="f">30<span class="u">+</span></div><div class="c">Jahre Praxiserfahrung</div></div>
+        <div class="kpi reveal d2"><div class="f">0<span class="u">%</span></div><div class="c">Restfeuchte nach Sanierung</div></div>
+        <div class="kpi reveal d3"><div class="f">100<span class="u">%</span></div><div class="c">Eigene Materialentwicklung</div></div>
+      </div>
+      <div class="chart reveal d2">
+        <div class="lbl">Sanierte Objekte / Jahr</div>
+        <div class="bars">
+          <div class="bar" style="height:46%"><span class="v">1,2k</span><span class="x">2023</span></div>
+          <div class="bar" style="height:64%"><span class="v">1,7k</span><span class="x">2024</span></div>
+          <div class="bar" style="height:82%"><span class="v">2,2k</span><span class="x">2025</span></div>
+          <div class="bar" style="height:100%"><span class="v">2,7k</span><span class="x">2026</span></div>
+        </div>
+      </div>
+      <div class="foot"><span>Editorial-Stil</span><span class="pg">04</span></div>
+    </section>
+
+    <!-- 5 · STATEMENT -->
+    <section class="slide stmt">
+      <div class="center">
+        <div class="orn reveal"><span class="l"></span><span class="w">Unser Versprechen</span><span class="l"></span></div>
+        <h2 class="reveal d2">WO WASSER KEINE<br><span class="lime">CHANCE</span> BEKOMMT.</h2>
+        <div class="who reveal d3">BKM Mannesmann · Bautenschutz</div>
+      </div>
+    </section>
+
+    <!-- 6 · CLOSING -->
+    <section class="slide closing">
+      <div class="mast"><span class="brandmark"><span class="dot"></span>BKM Mannesmann</span><span>Kontakt</span></div>
+      <div class="frame">
+        <div class="hr reveal"></div>
+        <div class="eyebrow reveal">Sprechen wir</div>
+        <h2 class="h-d reveal">GEMEINSAM <span class="g">DICHT.</span></h2>
+      </div>
+      <div class="row reveal">
+        <div class="c"><b>BKM Mannesmann AG</b>info@bkm-mannesmann.de · +49 (0)…<br>www.bkm-mannesmann.de</div>
+        <span class="cta"><i class="fas fa-arrow-right"></i> Projekt anfragen</span>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<div class="deck-controls">
+  <button id="prev" aria-label="Zurück"><i class="fas fa-chevron-left"></i></button>
+  <span class="count"><span id="cur">1</span> / <span id="tot">6</span></span>
+  <button id="next" aria-label="Weiter"><i class="fas fa-chevron-right"></i></button>
+</div>
+
+<script>
+class Deck{
+  constructor(){
+    this.stage=document.getElementById('deckStage');
+    this.slides=[...this.stage.querySelectorAll('.slide')];
+    this.i=0; document.getElementById('tot').textContent=this.slides.length;
+    this.fit(); this.show(0);
+    addEventListener('resize',()=>this.fit());
+    addEventListener('keydown',e=>{
+      if(['ArrowRight',' ','PageDown'].includes(e.key)){this.go(this.i+1);e.preventDefault();}
+      else if(['ArrowLeft','PageUp'].includes(e.key)){this.go(this.i-1);e.preventDefault();}
+      else if(e.key==='Home')this.go(0); else if(e.key==='End')this.go(this.slides.length-1);
+      else if(/^[1-9]$/.test(e.key))this.go(+e.key-1);
+    });
+    let x0=null;
+    addEventListener('touchstart',e=>x0=e.touches[0].clientX,{passive:true});
+    addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>50)this.go(this.i+(dx<0?1:-1));x0=null;},{passive:true});
+    document.getElementById('next').onclick=()=>this.go(this.i+1);
+    document.getElementById('prev').onclick=()=>this.go(this.i-1);
+  }
+  fit(){const s=Math.min(innerWidth/1920,innerHeight/1080);
+    this.stage.style.transform=`translate(${(innerWidth-1920*s)/2}px,${(innerHeight-1080*s)/2}px) scale(${s})`;}
+  show(n){this.slides.forEach((sl,k)=>sl.classList.toggle('visible',k===n));document.getElementById('cur').textContent=n+1;}
+  go(n){this.i=Math.max(0,Math.min(this.slides.length-1,n));this.show(this.i);}
+}
+new Deck();
+</script>
+</body>
+</html>
