@@ -6,6 +6,8 @@
 
 ## Prinzip
 
+> **Galerie:** `templates/bkm-glass-ag/type-gallery.png` zeigt alle 14 Typen gerendert.
+
 - Jeder Typ = ein `<section class="slide s-<name>">`-Archetyp im `demo.html` der Familie.
 - Kanonische Klassennamen (unten) sind ein **Vertrag** — Decks und KI-Tools referenzieren sie.
 - Bausteine sind **frei kombinierbar**, keine Pflichtreihenfolge. Hybrid-Casing & bg-Rotation
@@ -112,7 +114,7 @@
 - **Phase 1 — Lücken zuerst** ✅ **erledigt** (in `bkm-glass-ag/demo.html`): `s-quote`, `s-table`, `s-compare`, `s-chart` (CSS/SVG), `s-agenda`.
 - **Phase 2 — Vervollständigen in `bkm-glass-ag`:** ✅ **erledigt** — `s-chapter`, `s-subhead`, `s-closing`,
   `s-process`, `s-timeline`. `demo.html` deckt jetzt alle 14 Typen ab (= vollständige Vorlage).
-- **Phase 3 — Galerie & Doku:** gerenderte Typen-Galerie (PNG je Typ) + Verweise in `SKILL.md`/`README`.
+- **Phase 3 — Galerie & Doku:** ✅ **erledigt** — `templates/bkm-glass-ag/type-gallery.png` + Verweise in `SKILL.md`.
 - **Phase 4 — Portierung:** Typen in `bkm-glass-fachbetrieb`, `bkm-editorial`, `bkm-bold-poster`
   (familienspezifische Tokens, kein Lime im Fachbetrieb).
 
