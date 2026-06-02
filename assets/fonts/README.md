@@ -4,8 +4,16 @@
 
 | Datei | Schrift | Gewicht | Rolle |
 |-------|---------|---------|-------|
+| `Unbounded_400.woff2` | Unbounded | Regular (400) | Display (selten) |
+| `Unbounded_700.woff2` | Unbounded | Bold (700) | Display |
+| `Unbounded_900.woff2` | Unbounded | Black (900) | **H1-Headlines, primäre Buttons** |
 | `TT_Norms_Pro_Compact_Regular.woff2` | TT Norms Pro Compact | Regular (400) | Body, Labels, technische Werte, UI-Elemente |
 | `TT_Norms_Pro_Bold.woff2` | TT Norms Pro | Bold (700) | Hervorgehobene Informationen, wichtige Labels |
+
+> **Unbounded ist selbst gehostet** (Latin-Subset inkl. Umlauten, von Google Fonts) —
+> **nicht** mehr per CDN laden. Beide Schriften per `@font-face` einbinden; in
+> eigenständigen/verschickten Decks als Base64 einbetten (`@font-face` für Unbounded
+> analog zu TT Norms unten).
 
 ## Einbindung (CSS @font-face)
 

@@ -124,6 +124,29 @@ new Deck();
   bei Deploy verlinken (`<link rel="stylesheet" href="../tokens.css">`), in eigenständigen
   Decks den `:root`-Block inlinen. `--stage-bg` und `--ease` müssen gesetzt sein.
 
+## Schriften (PFLICHT — sonst Fallback-Sans)
+
+Beide Marken-Schriften **müssen per `@font-face` geladen werden** — sonst fällt der
+Browser still auf System-Sans zurück. **Niemals nur auf das Google-CDN verlassen**
+(offline/Export/CDN-Block = kaputt). Schriften liegen in `assets/fonts/`:
+
+| Schrift | Rolle | Dateien |
+|---------|-------|---------|
+| **Unbounded** 400/700/900 | Headlines (`--font-display`) | `Unbounded_400/700/900.woff2` |
+| **TT Norms Pro** 400/700 | Body/Labels (`--font-body`) | `TT_Norms_Pro_Compact_Regular.woff2`, `TT_Norms_Pro_Bold.woff2` |
+
+```css
+/* Pfad-Variante (Deck wird aus dem Repo serviert) */
+@font-face{font-family:'Unbounded';font-weight:900;font-display:swap;src:url('../../../../assets/fonts/Unbounded_900.woff2') format('woff2');}
+/* ... 400 + 700 analog ... */
+@font-face{font-family:'TT Norms Pro';font-weight:400;font-display:swap;src:url('../../../../assets/fonts/TT_Norms_Pro_Compact_Regular.woff2') format('woff2');}
+@font-face{font-family:'TT Norms Pro';font-weight:700;font-display:swap;src:url('../../../../assets/fonts/TT_Norms_Pro_Bold.woff2') format('woff2');}
+```
+
+> **Eigenständige / verschickte Decks: Schriften als Base64-Data-URI einbetten**
+> (`src:url(data:font/woff2;base64,…)`), damit sie überall rendern (so machen es die
+> `demo.html` und `presentations/*`). `--font-body` **nie** auf System-Sans überschreiben.
+
 ## Assets im Echtbetrieb
 
 Im Generierungs-Fall Logos/Keyvisual **per Pfad** referenzieren (nicht einbetten):
