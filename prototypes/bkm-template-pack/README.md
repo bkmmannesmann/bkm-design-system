@@ -1,47 +1,29 @@
-# Prototyp: BKM Template-Pack + Style-Discovery
+# Prototyp: BKM Template-Pack + Style-Discovery → überführt nach v5
 
-> Zweiter Entscheidungs-Prototyp. Zeigt zwei Konzepte aus `frontend-slides`,
-> übersetzt auf BKM: das **auswählbare Template-Pack** und den
-> **„Show don't tell"-Workflow**. Entscheidung: **Marke + Kreativ-Track**.
+> **Status: überführt.** Die produktiven Teile dieses Prototyps (Familien, Auswahl-Index,
+> Style-Discovery) sind in den Skill **`skills/bkm-slides/` (v5)** gewandert. Dieser Ordner
+> bleibt als Entstehungs-Historie + Studien.
 
-## Dateien
+## Wohin alles gewandert ist
 
-| Datei | Was |
-|-------|-----|
-| `style-discovery.html` | **Im Browser öffnen.** Die Stil-Auswahl-Galerie: 4 markenkonforme Vorschauen, auswählbar. |
-| `selection-index.json` | Das Template-Pack-Manifest im `frontend-slides`-kompatiblen Metadaten-Format. |
-| `templates/` | (folgt) Pro Familie eine `preview.md` (Stilkarte) + `design.md` (Design-Rezept). |
+| Früher hier | Jetzt produktiv |
+|-------------|-----------------|
+| `selection-index.json` | `skills/bkm-slides/selection-index.json` |
+| `style-discovery.html` | `skills/bkm-slides/style-discovery.html` |
+| `templates/` (4 Familien) | `skills/bkm-slides/templates/` |
+| Fixed-Stage-Engine | `skills/bkm-slides/ENGINE.md` |
 
-## Die zwei Tracks (deine Entscheidung)
+**Für neue Decks:** dem Workflow in `skills/bkm-slides/SKILL.md` folgen.
 
-- **Standard** — Marken-Lock. `BKM AG · Glas`, `Fachbetrieb · Glas`. Default für
-  Kunden-/Produkt-/Print-nahe Decks.
-- **Kreativ** — mehr Design für interne/Pitch/Vision-Decks: `BKM · Editorial`,
-  `BKM · Bold Poster`. **Weiterhin ausschließlich BKM-Farben & Unbounded** —
-  nur die Layout-Freiheit ist größer.
+## Verbliebene Inhalte (Historie / Studien)
 
-## So funktioniert der Workflow
+- `explorations/` — Muster-Studien (Energma-Referenz, Headline-Behandlungen A/B/C).
+- Diese README als Wegweiser.
 
-1. **Inhalt & Anlass** abfragen (Zweck, Länge, Dichte: Lese- vs. Vortrags-Deck).
-2. **Stil wählen** — Agent legt je nach Anlass 3 passende Vorschauen vor
-   (1× sicher/Standard, 1–2× Kreativ), der Mensch wählt visuell. → `style-discovery.html`
-3. **Deck generieren** — genau in der gewählten Familie, Fixed-Stage 1920×1080.
-4. **Export/Deploy** — PDF, teilbarer Link, PPTX-Import.
+## Die zwei Tracks (Entscheidung aus dem Prototyp)
 
-## Anti-Slop-Regeln (BKM-Variante)
+- **Standard** (Marken-Lock): `bkm-glass-ag`, `bkm-glass-fachbetrieb`.
+- **Kreativ** (mehr Layout-Freiheit, weiterhin nur BKM-Farben & Unbounded):
+  `bkm-editorial`, `bkm-bold-poster`.
 
-Aus `frontend-slides` übernommen, an BKM angepasst — kommen in den Skill:
-
-- **Dichte-Modus** bewusst wählen (Vortrag = wenig Text/groß; Lesen = strukturierte Grids).
-- Kein Überlauf, keine Überlappung, kein Text unter Lesegröße → sonst Slide teilen.
-- Starke Hierarchie statt gleichförmiger Bento-Grids.
-- **BKM-Leitplanken bleiben hart:** nur BKM-Farben, Unbounded 900 für Headlines,
-  Lime nur als Signal und nie im Fachbetrieb-Kontext.
-
-## Nächste Schritte
-
-- `templates/*/preview.md` und `design.md` je Familie ausschreiben (wie im Upstream).
-- Pack + Engine in den produktiven `skills/bkm-slides/` überführen.
-- Skill zusätzlich als Claude-Code-Plugin verpacken (`.claude-plugin/`).
-
-> Prototyp/Sandbox — noch nicht der produktive Skill.
+> Prototyp/Sandbox — der produktive Skill ist `skills/bkm-slides/`.

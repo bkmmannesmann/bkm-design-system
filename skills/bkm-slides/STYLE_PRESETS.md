@@ -1,6 +1,9 @@
 # BKM Slides — Style Presets (v3)
 
-> Exakte CSS-Token für beide BKM-Kontexte. Alle Werte sind **verbindlich** — nicht interpretieren, sondern 1:1 kopieren. Basierend auf getesteten, freigegebenen Slides.
+> **Referenz (gültig in v5).** Exakte CSS-Token für beide BKM-Kontexte. Diese Glasmorphismus-
+> Token leben in v5 in den Familien `bkm-glass-ag` / `bkm-glass-fachbetrieb`
+> (`templates/<slug>/design.md`). Für ein neues Deck dem Workflow in `SKILL.md` folgen;
+> diese Datei dient als Token-Nachschlagewerk.
 
 ---
 

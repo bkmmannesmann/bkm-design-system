@@ -1,6 +1,8 @@
 # BKM Slides — Pattern-Katalog (v3)
 
-> Welche Patterns in BKM-Slides erlaubt, eingeschränkt oder verboten sind. Alle erlaubten Patterns enthalten **exakte CSS-Werte** — nicht interpretieren, sondern kopieren.
+> **Anti-Slop-Referenz (gültig in v5).** Welche Patterns erlaubt, eingeschränkt oder
+> verboten sind. Gilt weiterhin für alle Familien. Ergänzend in v5: bewusster Dichte-Modus,
+> Casing UPPERCASE **oder** Mixed-Case (nie kursiv), 8px-Rundung für Flächen-Elemente.
 
 ---
 
