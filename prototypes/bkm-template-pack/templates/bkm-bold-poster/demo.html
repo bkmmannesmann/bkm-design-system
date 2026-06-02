@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BKM · Bold Poster — Stil-Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<style>
+/* =========================================================
+   BKM · BOLD POSTER (Kreativ-Track) — laute Statements
+   Deep Green dominant · Lime = scharfes Signal · UPPERCASE
+   ========================================================= */
+:root{
+  --deep-green:#1c4b42; --deep2:#0f2620; --lime:#b4e717; --pure-green:#4daf46;
+  --transition-green:#287d4b; --paper:#f5f0eb;
+  --font-display:'Unbounded',sans-serif;
+  --font-body:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --stage-bg:#0a1c17; --ease:cubic-bezier(0.16,1,0.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--stage-bg);font-family:var(--font-body);}
+.deck-viewport{position:fixed;inset:0;overflow:hidden;background:var(--stage-bg);}
+.deck-stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;overflow:hidden;}
+.slide{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:var(--paper);
+  visibility:hidden;opacity:0;pointer-events:none;
+  background:radial-gradient(120% 120% at 80% 10%,#235a4f 0%,#1c4b42 38%,#0f2620 100%);}
+.slide.visible{visibility:visible;opacity:1;pointer-events:auto;z-index:1;}
+
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+.slide.visible .reveal{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.08s;} .d2{transition-delay:.22s;} .d3{transition-delay:.36s;} .d4{transition-delay:.50s;}
+
+/* Chrome */
+.mark{position:absolute;top:74px;left:130px;display:inline-flex;align-items:center;gap:10px;
+  background:var(--lime);color:var(--deep-green);font-weight:700;font-size:16px;letter-spacing:0.12em;text-transform:uppercase;padding:11px 20px;border-radius:8px;z-index:6;}
+.brand{position:absolute;top:80px;right:130px;font-family:var(--font-display);font-weight:900;font-size:32px;color:var(--paper);z-index:6;}
+.brand span{color:var(--lime);}
+.kicker{position:absolute;bottom:62px;left:130px;font-weight:700;font-size:15px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(245,240,235,0.55);z-index:6;}
+.pg{position:absolute;bottom:60px;right:130px;font-family:var(--font-display);font-weight:900;font-size:18px;color:var(--lime);z-index:6;}
+
+.h{font-family:var(--font-display);font-weight:900;text-transform:uppercase;letter-spacing:-0.05em;line-height:0.86;color:var(--paper);}
+.h .lime{color:var(--lime);}
+.eyebrow{font-weight:700;letter-spacing:0.2em;text-transform:uppercase;font-size:20px;color:var(--lime);}
+
+/* lime Highlight-Block (Signal hinter EINEM Wort) */
+.hl{background:var(--lime);color:var(--deep-green);padding:0 26px;border-radius:10px;display:inline-block;line-height:1.0;}
+
+/* 1 · MANIFEST */
+.s1 .block{position:absolute;left:130px;top:300px;}
+.s1 .eyebrow{margin-bottom:30px;}
+.s1 .h{font-size:168px;}
+.s1 .sub{position:absolute;left:134px;bottom:150px;display:flex;align-items:center;gap:22px;}
+.s1 .sub .ln{width:90px;height:5px;background:var(--lime);border-radius:3px;}
+.s1 .sub span{font-size:24px;color:rgba(245,240,235,0.82);letter-spacing:0.02em;}
+
+/* 2 · RIESEN-ZAHL */
+.s2{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+.s2 .eyebrow{margin-bottom:22px;}
+.s2 .num{font-family:var(--font-display);font-weight:900;font-size:500px;line-height:0.8;letter-spacing:-0.06em;color:var(--paper);}
+.s2 .num .u{color:var(--lime);}
+.s2 .lbl{font-family:var(--font-display);font-weight:900;font-size:70px;text-transform:uppercase;letter-spacing:0.02em;color:var(--paper);margin-top:18px;}
+.s2 .sub{font-size:24px;color:rgba(245,240,235,0.72);margin-top:24px;max-width:760px;line-height:1.5;}
+
+/* 3 · ZAHL + WORT */
+.s3 .block{position:absolute;left:130px;top:300px;}
+.s3 .big{font-family:var(--font-display);font-weight:900;font-size:360px;line-height:0.78;letter-spacing:-0.06em;color:var(--lime);}
+.s3 .h{font-size:150px;margin-top:10px;}
+
+/* 4 · HIGHLIGHT-STATEMENT */
+.s4 .block{position:absolute;left:130px;top:330px;}
+.s4 .h{font-size:150px;}
+.s4 .h .row{display:block;}
+.s4 .h .hl{margin:14px 0;}
+
+/* 5 · CLOSING-CTA */
+.s5 .block{position:absolute;left:130px;top:310px;}
+.s5 .h{font-size:172px;}
+.s5 .cta{position:absolute;left:134px;bottom:200px;display:inline-flex;align-items:center;gap:16px;
+  background:var(--lime);color:var(--deep-green);font-weight:700;font-size:24px;letter-spacing:0.04em;text-transform:uppercase;padding:22px 40px;border-radius:12px;}
+.s5 .contact{position:absolute;right:130px;bottom:210px;text-align:right;font-size:20px;line-height:1.7;color:rgba(245,240,235,0.8);}
+.s5 .contact b{color:var(--paper);font-family:var(--font-display);font-weight:900;font-size:22px;letter-spacing:-0.01em;}
+
+/* Controls */
+.deck-controls{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:1000;display:flex;align-items:center;gap:6px;
+  background:rgba(10,28,23,0.9);border:1px solid rgba(255,255,255,0.16);border-radius:999px;padding:8px 10px;color:#fff;font-size:13px;font-weight:600;}
+.deck-controls button{all:unset;cursor:pointer;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.deck-controls button:hover{background:rgba(255,255,255,0.16);}
+.deck-controls .count{min-width:52px;text-align:center;font-variant-numeric:tabular-nums;}
+
+@media print{
+  html,body{width:1920px;height:auto;overflow:visible;}
+  .deck-viewport{position:static;overflow:visible;} .deck-stage{position:static;width:auto;height:auto;transform:none!important;}
+  .slide{position:relative;visibility:visible!important;opacity:1!important;break-after:page;page-break-after:always;}
+  .slide .reveal{opacity:1!important;transform:none!important;} .deck-controls{display:none!important;}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.2s!important;}}
+</style>
+</head>
+<body>
+<div class="deck-viewport">
+  <main class="deck-stage" id="deckStage">
+
+    <!-- 1 · MANIFEST -->
+    <section class="slide visible s1">
+      <div class="mark"><i class="fas fa-bolt"></i> Vision 2030</div>
+      <div class="brand">BKM<span>.</span></div>
+      <div class="block">
+        <div class="eyebrow reveal d1">Unser Versprechen</div>
+        <h1 class="h reveal d1">WO WASSER<br><span class="lime">KEINE CHANCE</span><br>BEKOMMT.</h1>
+      </div>
+      <div class="sub reveal d3"><span class="ln"></span><span>Bautenschutz, der bleibt — seit über 30 Jahren.</span></div>
+      <div class="kicker">BKM Mannesmann · Bautenschutz</div>
+      <div class="pg">01</div>
+    </section>
+
+    <!-- 2 · RIESEN-ZAHL -->
+    <section class="slide s2">
+      <div class="brand">BKM<span>.</span></div>
+      <div class="eyebrow reveal d1">Nach der Sanierung</div>
+      <div class="num reveal d1">0<span class="u">%</span></div>
+      <div class="lbl reveal d2">RESTFEUCHTE</div>
+      <div class="sub reveal d3">Messbar trocken. Dokumentiert. Mit Garantie auf die Abdichtung.</div>
+      <div class="kicker">BKM Mannesmann · Bautenschutz</div>
+      <div class="pg">02</div>
+    </section>
+
+    <!-- 3 · ZAHL + WORT -->
+    <section class="slide s3">
+      <div class="brand">BKM<span>.</span></div>
+      <div class="block">
+        <div class="eyebrow reveal d1" style="margin-bottom:24px">Erfahrung, die hält</div>
+        <div class="big reveal d1">30+</div>
+        <h2 class="h reveal d2">JAHRE DICHT.</h2>
+      </div>
+      <div class="kicker">BKM Mannesmann · Bautenschutz</div>
+      <div class="pg">03</div>
+    </section>
+
+    <!-- 4 · HIGHLIGHT-STATEMENT -->
+    <section class="slide s4">
+      <div class="brand">BKM<span>.</span></div>
+      <div class="block">
+        <h2 class="h reveal d1">
+          <span class="row">WIR MACHEN</span>
+          <span class="row"><span class="hl">BAUWERKE</span></span>
+          <span class="row">TROCKEN.</span>
+        </h2>
+      </div>
+      <div class="kicker">BKM Mannesmann · Bautenschutz</div>
+      <div class="pg">04</div>
+    </section>
+
+    <!-- 5 · CLOSING-CTA -->
+    <section class="slide s5">
+      <div class="brand">BKM<span>.</span></div>
+      <div class="block">
+        <div class="eyebrow reveal d1" style="margin-bottom:28px">Sprechen wir</div>
+        <h2 class="h reveal d1">JETZT<br><span class="lime">ABDICHTEN.</span></h2>
+      </div>
+      <a class="cta reveal d2"><i class="fas fa-arrow-right"></i> Projekt anfragen</a>
+      <div class="contact reveal d3"><b>BKM Mannesmann AG</b>info@bkm-mannesmann.de<br>www.bkm-mannesmann.de</div>
+      <div class="pg">05</div>
+    </section>
+
+  </main>
+</div>
+
+<div class="deck-controls">
+  <button id="prev" aria-label="Zurück"><i class="fas fa-chevron-left"></i></button>
+  <span class="count"><span id="cur">1</span> / <span id="tot">5</span></span>
+  <button id="next" aria-label="Weiter"><i class="fas fa-chevron-right"></i></button>
+</div>
+
+<script>
+class Deck{
+  constructor(){
+    this.stage=document.getElementById('deckStage');
+    this.slides=[...this.stage.querySelectorAll('.slide')];
+    this.i=0; document.getElementById('tot').textContent=this.slides.length;
+    this.fit(); this.show(0);
+    addEventListener('resize',()=>this.fit());
+    addEventListener('keydown',e=>{
+      if(['ArrowRight',' ','PageDown'].includes(e.key)){this.go(this.i+1);e.preventDefault();}
+      else if(['ArrowLeft','PageUp'].includes(e.key)){this.go(this.i-1);e.preventDefault();}
+      else if(/^[1-9]$/.test(e.key))this.go(+e.key-1);
+    });
+    document.getElementById('next').onclick=()=>this.go(this.i+1);
+    document.getElementById('prev').onclick=()=>this.go(this.i-1);
+  }
+  fit(){const s=Math.min(innerWidth/1920,innerHeight/1080);
+    this.stage.style.transform=`translate(${(innerWidth-1920*s)/2}px,${(innerHeight-1080*s)/2}px) scale(${s})`;}
+  show(n){this.slides.forEach((sl,k)=>sl.classList.toggle('visible',k===n));document.getElementById('cur').textContent=n+1;}
+  go(n){this.i=Math.max(0,Math.min(this.slides.length-1,n));this.show(this.i);}
+}
+new Deck();
+</script>
+</body>
+</html>
