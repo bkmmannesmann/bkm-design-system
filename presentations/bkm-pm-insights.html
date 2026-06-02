@@ -618,5 +618,61 @@ function upd(){var s=cur();var n=s&&s.querySelector('.notes');nb.textContent=n?n
 document.addEventListener('keydown',function(e){if(e.key==='n'||e.key==='N'){panel.classList.toggle('on');upd();}});
 var o=new MutationObserver(upd);document.querySelectorAll('.slide').forEach(function(s){o.observe(s,{attributes:true,attributeFilter:['class']});});upd();})();
 </script>
+<script>
+/* Referentenansicht (Presenter-Modus) — Taste "S" oeffnet ein zweites Fenster.
+   Publikum sieht nur die Folien; Referent sieht Notizen, naechste Folie, Timer & Uhr. */
+(function(){
+  function openPresenter(){
+    var w=window.open('','bkmPresenter','width=1180,height=760');
+    if(!w){alert('Bitte Pop-ups fuer diese Seite erlauben, dann erneut „S“ druecken.');return;}
+    var slides=[].slice.call(document.querySelectorAll('.slide'));
+    function curIdx(){var i=slides.findIndex(function(s){return s.classList.contains('visible');});return i<0?0:i;}
+    function notesOf(i){var s=slides[i];var n=s&&s.querySelector('.notes');return n?n.textContent.trim():'— keine Notizen —';}
+    function titleOf(i){var s=slides[i];if(!s)return '';var h=s.querySelector('.h-d,h1,h2,blockquote');return h?h.textContent.replace(/\s+/g,' ').trim():('Folie '+(i+1));}
+    function go(dir){var b=document.getElementById(dir>0?'next':'prev');if(b){b.click();}else{document.dispatchEvent(new KeyboardEvent('keydown',{key:dir>0?'ArrowRight':'ArrowLeft'}));}setTimeout(render,60);}
+    var doc=w.document;doc.open();
+    doc.write('<!doctype html><html lang="de"><head><meta charset="utf-8"><title>BKM · Produktmanagement Insights</title>'+
+    '<style>*{margin:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif}'+
+    'body{background:#0a1c17;color:#fff;height:100vh;display:flex;flex-direction:column;overflow:hidden}'+
+    '.bar{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;border-bottom:2px solid #b4e717;background:rgba(28,75,66,.55)}'+
+    '.timer{font-size:30px;font-weight:800;color:#b4e717;font-variant-numeric:tabular-nums;line-height:1}'+
+    '.clock{font-size:14px;color:rgba(255,255,255,.65);margin-top:3px}'+
+    '.pos{font-size:15px;color:rgba(255,255,255,.7);font-variant-numeric:tabular-nums}'+
+    '.bar button{all:unset;cursor:pointer;background:#b4e717;color:#0f2620;font-weight:700;border-radius:8px;padding:10px 16px;margin-left:8px;font-size:14px}'+
+    '.bar .ghost{background:rgba(255,255,255,.12);color:#fff}'+
+    '.main{flex:1;display:grid;grid-template-columns:1.6fr 1fr;overflow:hidden}'+
+    '.now{padding:24px 28px;overflow:auto;border-right:1px solid rgba(255,255,255,.12)}'+
+    '.lbl{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#b4e717;font-weight:700;margin-bottom:12px}'+
+    '.now h2{font-size:27px;font-weight:800;margin-bottom:18px;line-height:1.15}'+
+    '#nown{font-size:20px;line-height:1.6;color:rgba(255,255,255,.92);white-space:pre-wrap}'+
+    '.nxt{padding:24px 28px;overflow:auto;background:rgba(255,255,255,.03)}'+
+    '.nxt h3{font-size:21px;font-weight:800;margin-bottom:12px;line-height:1.2}'+
+    '#nextn{font-size:15px;line-height:1.5;color:rgba(255,255,255,.6);white-space:pre-wrap}'+
+    '</style></head><body>'+
+    '<div class="bar"><div><div class="timer" id="t">00:00</div><div class="clock" id="c"></div></div>'+
+    '<div class="pos" id="p"></div>'+
+    '<div><button class="ghost" id="pv">◀</button><button id="nx">▶ Weiter</button><button class="ghost" id="rs">⟳ Timer</button></div></div>'+
+    '<div class="main"><div class="now"><div class="lbl">Aktuelle Folie · Notizen</div><h2 id="nowt"></h2><div id="nown"></div></div>'+
+    '<div class="nxt"><div class="lbl">Als Nächstes</div><h3 id="nextt"></h3><div id="nextn"></div></div></div>'+
+    '</body></html>');
+    doc.close();
+    var start=Date.now();function two(n){return (n<10?'0':'')+n;}
+    function tick(){var s=Math.floor((Date.now()-start)/1000);var T=doc.getElementById('t');if(!T)return;T.textContent=two(Math.floor(s/60))+':'+two(s%60);var d=new Date();doc.getElementById('c').textContent='Uhrzeit '+two(d.getHours())+':'+two(d.getMinutes());}
+    function render(){if(doc.body==null)return;var i=curIdx(),n=slides.length;
+      doc.getElementById('p').textContent='Folie '+(i+1)+' / '+n;
+      doc.getElementById('nowt').textContent=titleOf(i);
+      doc.getElementById('nown').textContent=notesOf(i);
+      var has=i+1<n;
+      doc.getElementById('nextt').textContent=has?titleOf(i+1):'— Ende —';
+      doc.getElementById('nextn').textContent=has?notesOf(i+1):'';}
+    doc.getElementById('nx').onclick=function(){go(1);};
+    doc.getElementById('pv').onclick=function(){go(-1);};
+    doc.getElementById('rs').onclick=function(){start=Date.now();tick();};
+    doc.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key===' '){go(1);}else if(e.key==='ArrowLeft'){go(-1);}});
+    render();tick();setInterval(tick,1000);setInterval(render,400);w.focus();
+  }
+  document.addEventListener('keydown',function(e){if((e.key==='s'||e.key==='S')&&!e.metaKey&&!e.ctrlKey){openPresenter();}});
+})();
+</script>
 </body>
 </html>
