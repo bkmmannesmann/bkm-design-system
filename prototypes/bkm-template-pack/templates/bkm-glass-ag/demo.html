@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BKM AG · Glas — Stil-Demo (Glassmorphism)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<style>
+/* =========================================================
+   BKM AG · GLAS — Glassmorphism (Standard-Track, on-brand)
+   Basis: hype4academy Glass-Recipe → auf BKM-Farben gemünzt
+   ========================================================= */
+:root{
+  --deep-green:#1c4b42; --deep2:#0f2620; --lime:#b4e717; --pure-green:#4daf46;
+  --transition-green:#287d4b; --sand:#f6f5f2; --paper:#f5f0eb; --stone-grey:#494949;
+  --font-display:'Unbounded',sans-serif;
+  --font-body:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --stage-bg:#0a1c17; --ease:cubic-bezier(0.16,1,0.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--stage-bg);font-family:var(--font-body);}
+.deck-viewport{position:fixed;inset:0;overflow:hidden;background:var(--stage-bg);}
+.deck-stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;overflow:hidden;}
+.slide{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;visibility:hidden;opacity:0;pointer-events:none;}
+.slide.visible{visibility:visible;opacity:1;pointer-events:auto;z-index:1;}
+
+/* ---- Brand-Hintergrund (damit der Blur etwas zu greifen hat) ---- */
+.bg{position:absolute;inset:0;background:linear-gradient(135deg,#1c4b42 0%,#0f2620 100%);overflow:hidden;}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);}
+.b-green{width:760px;height:760px;background:var(--pure-green);opacity:0.42;top:-180px;left:-120px;}
+.b-trans{width:680px;height:680px;background:var(--transition-green);opacity:0.5;bottom:-220px;right:-100px;}
+.b-lime{width:340px;height:340px;background:var(--lime);opacity:0.22;top:46%;left:54%;}
+.grain{position:absolute;inset:0;opacity:0.5;
+  background:radial-gradient(circle at 20% 30%,rgba(255,255,255,0.05),transparent 40%),
+             radial-gradient(circle at 80% 70%,rgba(255,255,255,0.04),transparent 45%);}
+
+/* ============ GLAS-REZEPT (adaptiert) ============ */
+.glass-card{
+  background:rgba(255,255,255,0.12);
+  backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+  border-radius:24px;border:1px solid rgba(255,255,255,0.28);
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.28),
+    inset 0 1px 0 rgba(255,255,255,0.5),
+    inset 0 -1px 0 rgba(255,255,255,0.08),
+    inset 0 0 60px 12px rgba(255,255,255,0.10);
+  position:relative;overflow:hidden;
+}
+.glass-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.85),transparent);}
+.glass-card::after{content:'';position:absolute;top:0;left:0;width:1px;height:100%;
+  background:linear-gradient(180deg,rgba(255,255,255,0.85),transparent,rgba(255,255,255,0.25));}
+/* helle „Milchglas"-Variante für Foto/Akzent-Flächen */
+.glass-card.frost{background:rgba(255,255,255,0.4);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);}
+
+/* ---- Reveal ---- */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+.slide.visible .reveal{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.08s;} .d2{transition-delay:.20s;} .d3{transition-delay:.32s;} .d4{transition-delay:.44s;} .d5{transition-delay:.56s;}
+
+/* ---- Chrome ---- */
+.brand{position:absolute;top:62px;left:140px;font-family:var(--font-display);font-weight:900;font-size:34px;color:#fff;z-index:6;letter-spacing:-0.01em;}
+.brand span{color:var(--lime);}
+.tagtop{position:absolute;top:74px;right:140px;font-weight:700;font-size:16px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.75);z-index:6;}
+.pg{position:absolute;bottom:60px;right:140px;font-family:var(--font-display);font-weight:900;font-size:18px;color:var(--lime);z-index:6;}
+
+.eyebrow{font-weight:700;letter-spacing:0.18em;text-transform:uppercase;font-size:18px;color:var(--lime);}
+.h-d{font-family:var(--font-display);font-weight:900;text-transform:uppercase;line-height:0.94;letter-spacing:-0.04em;color:#fff;}
+.h-d .lime{color:var(--lime);}
+.btn{display:inline-flex;align-items:center;gap:13px;background:var(--lime);color:var(--deep-green);
+  font-weight:700;font-size:19px;letter-spacing:0.04em;text-transform:uppercase;padding:18px 32px;border-radius:12px;}
+.btn i{color:var(--deep-green);}
+
+/* =========================== 1 · TITEL =========================== */
+.s-title .card{position:absolute;left:140px;top:210px;width:1240px;height:700px;padding:84px 88px;display:flex;flex-direction:column;justify-content:center;}
+.s-title .eyebrow{margin-bottom:26px;}
+.s-title h1{font-size:118px;}
+.s-title p{font-size:27px;line-height:1.55;color:rgba(255,255,255,0.85);max-width:880px;margin-top:34px;}
+.s-title .btn{margin-top:54px;align-self:flex-start;}
+.s-title .chip{position:absolute;right:150px;top:330px;width:300px;height:300px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+.s-title .chip .f{font-family:var(--font-display);font-weight:900;font-size:96px;color:#fff;line-height:0.9;}
+.s-title .chip .c{font-weight:700;font-size:16px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.8);margin-top:12px;}
+
+/* =========================== 2 · DREI KARTEN =========================== */
+.s-three .head{position:absolute;left:140px;top:150px;}
+.s-three .eyebrow{margin-bottom:18px;}
+.s-three h2{font-size:78px;}
+.s-three .grid{position:absolute;left:140px;right:140px;top:380px;display:grid;grid-template-columns:repeat(3,1fr);gap:40px;}
+.s-three .card{padding:54px 46px;min-height:520px;}
+.s-three .card .ic{width:74px;height:74px;border-radius:16px;background:rgba(180,231,23,0.92);color:var(--deep-green);display:flex;align-items:center;justify-content:center;font-size:30px;margin-bottom:34px;}
+.s-three .card h3{font-family:var(--font-display);font-weight:900;font-size:30px;text-transform:uppercase;color:#fff;letter-spacing:-0.02em;line-height:1.05;}
+.s-three .card p{font-size:21px;line-height:1.55;color:rgba(255,255,255,0.82);margin-top:20px;}
+
+/* =========================== 3 · KENNZAHLEN =========================== */
+.s-stat .head{position:absolute;left:140px;top:150px;}
+.s-stat .eyebrow{margin-bottom:18px;}
+.s-stat h2{font-size:78px;}
+.s-stat .panel{position:absolute;left:140px;right:140px;top:400px;height:470px;padding:0;display:grid;grid-template-columns:repeat(3,1fr);align-items:center;}
+.s-stat .kpi{padding:0 60px;text-align:center;position:relative;}
+.s-stat .kpi+.kpi::before{content:'';position:absolute;left:0;top:18%;height:64%;width:1px;background:rgba(255,255,255,0.22);}
+.s-stat .kpi .f{font-family:var(--font-display);font-weight:900;font-size:124px;line-height:0.9;letter-spacing:-0.04em;color:#fff;}
+.s-stat .kpi .f .u{color:var(--lime);font-size:72px;}
+.s-stat .kpi .c{font-weight:700;font-size:20px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.82);margin-top:18px;}
+
+/* Controls */
+.deck-controls{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:1000;display:flex;align-items:center;gap:6px;
+  background:rgba(10,28,23,0.85);border:1px solid rgba(255,255,255,0.18);border-radius:999px;padding:8px 10px;color:#fff;font-size:13px;font-weight:600;backdrop-filter:blur(10px);}
+.deck-controls button{all:unset;cursor:pointer;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.deck-controls button:hover{background:rgba(255,255,255,0.16);}
+.deck-controls .count{min-width:52px;text-align:center;font-variant-numeric:tabular-nums;}
+
+@media print{
+  html,body{width:1920px;height:auto;overflow:visible;}
+  .deck-viewport{position:static;overflow:visible;} .deck-stage{position:static;width:auto;height:auto;transform:none!important;}
+  .slide{position:relative;visibility:visible!important;opacity:1!important;break-after:page;page-break-after:always;}
+  .slide .reveal{opacity:1!important;transform:none!important;} .deck-controls{display:none!important;}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.2s!important;}}
+</style>
+</head>
+<body>
+<div class="deck-viewport">
+  <main class="deck-stage" id="deckStage">
+
+    <!-- 1 · TITEL -->
+    <section class="slide visible s-title">
+      <div class="bg"><div class="blob b-green"></div><div class="blob b-trans"></div><div class="blob b-lime"></div><div class="grain"></div></div>
+      <div class="brand">BKM<span>.</span></div>
+      <div class="tagtop">Bautenschutz · AG</div>
+      <div class="glass-card card reveal d1">
+        <div class="eyebrow">Bauwerksabdichtung</div>
+        <h1 class="h-d">DICHTUNGS&shy;<span class="lime">TECHNIK</span></h1>
+        <p>Feuchtigkeitssperren und Injektionsverfahren für dauerhaften Bautenschutz — entwickelt im eigenen Labor, geprüft nach Norm.</p>
+        <a class="btn"><i class="fas fa-arrow-right"></i> Systeme entdecken</a>
+      </div>
+      <div class="glass-card frost chip reveal d3">
+        <div class="f" style="color:var(--deep-green)">30+</div>
+        <div class="c" style="color:var(--deep-green)">Jahre Schutz</div>
+      </div>
+      <div class="pg">01</div>
+    </section>
+
+    <!-- 2 · DREI KARTEN -->
+    <section class="slide s-three">
+      <div class="bg"><div class="blob b-green"></div><div class="blob b-trans"></div><div class="blob b-lime"></div><div class="grain"></div></div>
+      <div class="brand">BKM<span>.</span></div>
+      <div class="tagtop">Leistungen</div>
+      <div class="head">
+        <div class="eyebrow reveal d1">Was wir abdichten</div>
+        <h2 class="h-d reveal d1">DREI SYSTEME</h2>
+      </div>
+      <div class="grid">
+        <div class="glass-card card reveal d1"><div class="ic"><i class="fas fa-droplet-slash"></i></div><h3>Horizontal&shy;sperre</h3><p>Nachträgliche Injektion gegen aufsteigende Feuchtigkeit im Mauerwerk — sauber, druckfest, dokumentiert.</p></div>
+        <div class="glass-card card reveal d2"><div class="ic"><i class="fas fa-layer-group"></i></div><h3>Flächen&shy;abdichtung</h3><p>Mehrschichtige Systeme für Keller, Wand und Boden — abgestimmt auf reale Lastfälle.</p></div>
+        <div class="glass-card card reveal d3"><div class="ic"><i class="fas fa-shield-halved"></i></div><h3>Bauwerks&shy;schutz</h3><p>Langzeitschutz mit geprüften Materialien und zertifizierter Verarbeitung vor Ort.</p></div>
+      </div>
+      <div class="pg">02</div>
+    </section>
+
+    <!-- 3 · KENNZAHLEN -->
+    <section class="slide s-stat">
+      <div class="bg"><div class="blob b-green"></div><div class="blob b-trans"></div><div class="blob b-lime"></div><div class="grain"></div></div>
+      <div class="brand">BKM<span>.</span></div>
+      <div class="tagtop">In Zahlen</div>
+      <div class="head">
+        <div class="eyebrow reveal d1">Warum BKM</div>
+        <h2 class="h-d reveal d1">WIRKUNG</h2>
+      </div>
+      <div class="glass-card panel reveal d2">
+        <div class="kpi"><div class="f">30<span class="u">+</span></div><div class="c">Jahre Erfahrung</div></div>
+        <div class="kpi"><div class="f">0<span class="u">%</span></div><div class="c">Restfeuchte</div></div>
+        <div class="kpi"><div class="f">100<span class="u">%</span></div><div class="c">Eigene Rezeptur</div></div>
+      </div>
+      <div class="pg">03</div>
+    </section>
+
+  </main>
+</div>
+
+<div class="deck-controls">
+  <button id="prev" aria-label="Zurück"><i class="fas fa-chevron-left"></i></button>
+  <span class="count"><span id="cur">1</span> / <span id="tot">3</span></span>
+  <button id="next" aria-label="Weiter"><i class="fas fa-chevron-right"></i></button>
+</div>
+
+<script>
+class Deck{
+  constructor(){
+    this.stage=document.getElementById('deckStage');
+    this.slides=[...this.stage.querySelectorAll('.slide')];
+    this.i=0; document.getElementById('tot').textContent=this.slides.length;
+    this.fit(); this.show(0);
+    addEventListener('resize',()=>this.fit());
+    addEventListener('keydown',e=>{
+      if(['ArrowRight',' ','PageDown'].includes(e.key)){this.go(this.i+1);e.preventDefault();}
+      else if(['ArrowLeft','PageUp'].includes(e.key)){this.go(this.i-1);e.preventDefault();}
+      else if(e.key==='Home')this.go(0); else if(e.key==='End')this.go(this.slides.length-1);
+      else if(/^[1-9]$/.test(e.key))this.go(+e.key-1);
+    });
+    document.getElementById('next').onclick=()=>this.go(this.i+1);
+    document.getElementById('prev').onclick=()=>this.go(this.i-1);
+  }
+  fit(){const s=Math.min(innerWidth/1920,innerHeight/1080);
+    this.stage.style.transform=`translate(${(innerWidth-1920*s)/2}px,${(innerHeight-1080*s)/2}px) scale(${s})`;}
+  show(n){this.slides.forEach((sl,k)=>sl.classList.toggle('visible',k===n));document.getElementById('cur').textContent=n+1;}
+  go(n){this.i=Math.max(0,Math.min(this.slides.length-1,n));this.show(this.i);}
+}
+new Deck();
+</script>
+</body>
+</html>
