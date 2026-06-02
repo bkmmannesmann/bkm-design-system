@@ -17,9 +17,9 @@ corporate-dunkel. Akzent ist **Pure Green** — kein Lime.
 |------|-------|------|
 | Hintergrund-Verlauf | Sand → Sand2 | `#f7f6f3` → `#e9e5de` |
 | Blobs (Tiefe hinter Glas) | Pure Green / Transition / warmer Sand | `#4daf46` / `#287d4b` / `#d8cfbf` |
-| Headline / Ink | `--deep-green` | `#1c4b42` |
+| **Text / Ink** (Headlines, KPI-Zahlen, Eyebrow) | `--transition-green` | `#287d4b` |
+| Flächen/Tiefe (Button-Fill, Karten-Kopf-Verlauf, Schatten) | `--deep-green` | `#1c4b42` |
 | Akzentwort / Icon / KPI-Einheit / Page | `--pure-green` | `#4daf46` |
-| Eyebrow / Sublabels | `--transition-green` / `--pure-green` | `#287d4b` / `#4daf46` |
 | Body | `--stone-grey` | `#494949` |
 
 **Regeln:** **Kein Lime.** Akzent ist Pure Green (Wort, Icon-Kachel, KPI-Einheit, Page-Nr.),
@@ -49,7 +49,9 @@ Blobs (oder Foto) dahinter.
 ## Typografie
 
 - **Display:** Unbounded **900**, −0.04em, Zeilenhöhe ~0.94. Casing UPPERCASE oder
-  Mixed-Case erlaubt, nie kursiv. Akzentwort über **Pure-Green-Farbe**.
+  Mixed-Case erlaubt, nie kursiv. **Textfarbe Transition Green** (`#287d4b`) —
+  weicher/freundlicher als Deep Green; Akzentwort über **Pure-Green-Farbe**.
+  Deep Green nur noch für Flächen (Button, Karten-Kopf).
 - **Body:** System-Sans (Echtbetrieb: TT Norms Pro), Stone Grey.
 - **Eyebrow/Labels:** UPPERCASE, ≥0.12em Tracking.
 
