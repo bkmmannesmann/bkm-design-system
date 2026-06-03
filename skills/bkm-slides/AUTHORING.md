@@ -21,7 +21,7 @@ python3 tools/deck_builder.py meine-folien.json -o mein-deck.html [--strict]
 ```
 
 - bringt **Schriften, Logo, texturierte Hintergründe** selbst mit (eingebettet),
-- erzwingt **automatisch**: Hintergrund-Rotation (nie 2× gleich nebeneinander),
+- erzwingt **automatisch**: Hintergrund-Rotation über **16 Hintergründe** (4 Konzepte × 4 Spiegel/Dreh-Varianten) (nie 2× gleich nebeneinander),
   Hybrid-Casing, Zeilen-Zebra, Reveal-Motion, Presenter-Modus (Taste „S") + Notizen („N"),
 - prüft den **Mix-Rhythmus** und meldet Monotonie (`--strict` = Build bricht ab).
 

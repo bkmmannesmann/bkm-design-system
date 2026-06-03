@@ -11,7 +11,7 @@ Marke   : nur BKM-Farben, Unbounded + TT Norms (aus glass-ag/demo.html eingebett
 
 Aufruf  : python3 tools/deck_builder.py <spec.json> -o <out.html> [--strict]
 """
-import re, json, sys, base64, html, argparse, os
+import re, json, sys, base64, html, argparse, os, glob
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 AGDEMO = os.path.join(ROOT, 'skills/bkm-slides/templates/bkm-glass-ag/demo.html')
@@ -21,9 +21,14 @@ def load_assets():
     s = open(AGDEMO, encoding='utf-8').read()
     fonts = re.search(r'<style id="bkm-fonts">.*?</style>', s, flags=re.S).group(0)
     logo  = re.search(r'<img class="brand"[^>]*>', s).group(0)
+    # Hintergründe direkt aus assets/backgrounds/ laden (bg-ag-01..NN.jpg) — 16 Konzept-Varianten
     tex = {}
-    for m in re.finditer(r'\.bg\.t([1-4])\{background:#0f2620 url\((data:image/jpeg;base64,[^)]+)\)', s):
-        tex[int(m.group(1))] = m.group(2)
+    files = sorted(glob.glob(os.path.join(ROOT, 'assets/backgrounds/bg-ag-*.jpg')))
+    for i, f in enumerate(files, start=1):
+        tex[i] = 'data:image/jpeg;base64,' + base64.b64encode(open(f, 'rb').read()).decode()
+    if not tex:  # Fallback: alte Texturen aus der demo.html
+        for m in re.finditer(r'\.bg\.t([1-4])\{background:#0f2620 url\((data:image/jpeg;base64,[^)]+)\)', s):
+            tex[int(m.group(1))] = m.group(2)
     return fonts, logo, tex
 
 FONTS, LOGO, TEX = load_assets()
@@ -807,13 +812,14 @@ def lint(slides, strict=False):
 
 # Hintergrund-Rotation (nie zweimal gleich nebeneinander) — chapter bevorzugt t4
 def bg_rotation(slides):
+    n = max(len(TEX), 1)
     order = []; prev = 0
     for s in slides:
-        if s.get('type') == 'cover': t = 1
-        elif s.get('type') in ('chapter','closing','statement'): t = 4 if prev != 4 else 3
+        if s.get('type') == 'cover':
+            t = 1
         else:
-            t = prev % 4 + 1
-            if t == prev: t = t % 4 + 1
+            t = prev % n + 1            # zyklisch 1..n -> nie zweimal gleich nebeneinander
+            if t == prev: t = t % n + 1
         order.append(t); prev = t
     return order
 
