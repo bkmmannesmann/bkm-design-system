@@ -11,3 +11,7 @@ node_modules/
 
 # Decks mit echten Inhalten (Foto/interne Daten) — nicht ins Repo
 presentations/bkm-pm-insights.html
+
+# Python bytecode cache
+__pycache__/
+*.pyc
