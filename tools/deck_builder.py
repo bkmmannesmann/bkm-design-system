@@ -17,10 +17,20 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 AGDEMO = os.path.join(ROOT, 'skills/bkm-slides/templates/bkm-glass-ag/demo.html')
 
 # ---- Marken-Assets aus der Glas-AG-Familie ziehen (Schriften, Logo, Texturen) ----
+FBDEMO = os.path.join(ROOT, 'skills/bkm-slides/templates/bkm-glass-fachbetrieb/demo.html')
+
 def load_assets():
     s = open(AGDEMO, encoding='utf-8').read()
     fonts = re.search(r'<style id="bkm-fonts">.*?</style>', s, flags=re.S).group(0)
-    logo  = re.search(r'<img class="brand"[^>]*>', s).group(0)
+    logo  = re.search(r'<img class="brand"[^>]*>', s).group(0)   # weiß (dunkle Familien)
+    # grau-grünes Logo aus der Fachbetrieb-Familie (helle Familien)
+    logo_dark = logo
+    try:
+        fb = open(FBDEMO, encoding='utf-8').read()
+        src = re.search(r'src="(data:[^"]+)"', re.search(r'<img class="logo"[^>]*>', fb).group(0)).group(1)
+        logo_dark = '<img class="brand" src="%s" alt="BKM Mannesmann">' % src
+    except Exception:
+        pass
     # Hintergründe direkt aus assets/backgrounds/ laden (bg-ag-01..NN.jpg) — 16 Konzept-Varianten
     tex = {}
     files = sorted(glob.glob(os.path.join(ROOT, 'assets/backgrounds/bg-ag-*.jpg')))
@@ -29,9 +39,9 @@ def load_assets():
     if not tex:  # Fallback: alte Texturen aus der demo.html
         for m in re.finditer(r'\.bg\.t([1-4])\{background:#0f2620 url\((data:image/jpeg;base64,[^)]+)\)', s):
             tex[int(m.group(1))] = m.group(2)
-    return fonts, logo, tex
+    return fonts, logo, logo_dark, tex
 
-FONTS, LOGO, TEX = load_assets()
+FONTS, LOGO, LOGO_DARK, TEX = load_assets()
 
 def esc(x): return html.escape(str(x), quote=True)
 
@@ -945,13 +955,15 @@ def build(spec, strict=False):
 
 def chrome_html(fam, st, sl, tagtop):
     rub = esc(sl.get('rubric', tagtop))
+    # helle Familien -> grau-grünes Logo; dunkle -> weißes Logo
+    logo = LOGO_DARK if FAM[fam].get('body') in ('fam-fachbetrieb', 'fam-editorial') else LOGO
     if FAM[fam]['chrome'] == 'bold':
         mark = esc(sl.get('mark', tagtop or 'BKM'))
         return ('<div class="gen-mark">%s %s</div>%s'
-                '<div class="gen-kicker">BKM Mannesmann · Bautenschutz</div>' % (icon('bolt'), mark, LOGO))
+                '<div class="gen-kicker">BKM Mannesmann · Bautenschutz</div>' % (icon('bolt'), mark, logo))
     # ag
     tt = ('<div class="tagtop">%s</div>' % rub) if rub else ''
-    return LOGO + tt
+    return logo + tt
 
 if __name__ == '__main__':
     ap = argparse.ArgumentParser()
