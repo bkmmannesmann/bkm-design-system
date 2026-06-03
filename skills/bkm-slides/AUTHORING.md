@@ -36,7 +36,7 @@ python3 tools/deck_builder.py meine-folien.json -o mein-deck.html [--strict]
 ```
 
 **Konventionen in Texten:** `{{Wort}}` = Akzent in Lime · `<br>` = Zeilenumbruch ·
-`&shy;` = weiches Trennzeichen. Jede Folie kann `"notes": "…"` (Sprechernotizen) tragen.
+``&shy;` = weiches Trennzeichen.shy;` = weiches Trennzeichen. Normales ``&shy;` = weiches Trennzeichen.` einfach als ``&shy;` = weiches Trennzeichen.` schreiben (nicht `&amp;`). Jede Folie kann `"notes": "…"` (Sprechernotizen) tragen.
 
 ### Folientypen & Felder
 | `type` | Felder |
@@ -56,6 +56,12 @@ python3 tools/deck_builder.py meine-folien.json -o mein-deck.html [--strict]
 | `process` | `eyebrow, title, steps:[{h,p}]` |
 | `timeline` | `eyebrow, title, points:[{yr,h,p}]` |
 | `closing` | `eyebrow, title, chips:[…], punch` |
+| `funnel` | `eyebrow, title, tiers:[{value,label,width}]` (TAM/SAM/SOM) |
+| `donut` | `eyebrow, title, center:{value,label}, segments:[{label,value}]` |
+| `bigstat` | `eyebrow, value, sub, stats:[{value,label}]` (Mega-Kennzahl) |
+| `bubbles` | `eyebrow, title, bubbles:[{value,size,label}]` (`size`=Zahl fürs Skalieren) |
+| `team` | `eyebrow, title, members:[{name,role,image}]` (Porträt-Raster) |
+| `twocol` | `eyebrow, title, columns:[{h,p,items:[…]}] (2)` (Zwei-Spalten-Text) |
 
 `icon` = Font-Awesome-Name (z. B. `shield-halved`). `image` = Pfad relativ zur Spec
 (sonst Platzhalter-Textur). Vollständiges Beispiel: **`tools/sample-deck.json`**.

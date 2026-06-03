@@ -199,6 +199,51 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--stage-bg);font
 .gen-tl-wrap .yr{font-family:var(--font-display);font-weight:900;font-size:26px;color:var(--lime);}
 .gen-tl-wrap .item h3{font-family:var(--font-display);font-weight:700;font-size:19px;color:#fff;margin-top:8px;}
 .gen-tl-wrap .item p{font-size:14px;color:rgba(255,255,255,0.65);margin-top:7px;line-height:1.4;}
+/* ===== Batch 1: neue Archetypen (Referenz-inspiriert, BKM-nativ) ===== */
+/* funnel — TAM/SAM/SOM */
+.gen-funnel{position:absolute;left:140px;right:140px;top:336px;display:flex;flex-direction:column;align-items:center;gap:20px;z-index:2;}
+.gen-funnel .tier{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.14);border-radius:14px;padding:26px 40px;display:flex;justify-content:space-between;align-items:center;}
+.gen-funnel .tier .v{font-family:var(--font-display);font-weight:900;font-size:44px;color:var(--lime);line-height:1;}
+.gen-funnel .tier .l{font-size:18px;color:rgba(255,255,255,0.8);text-align:right;max-width:60%;}
+/* donut */
+.gen-donut-wrap{position:absolute;left:140px;right:140px;top:340px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;z-index:2;}
+.gen-donut{width:420px;height:420px;border-radius:50%;position:relative;margin:0 auto;}
+.gen-donut::after{content:'';position:absolute;inset:27%;border-radius:50%;background:#0f2620;}
+.gen-donut .center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2;}
+.gen-donut .center .v{font-family:var(--font-display);font-weight:900;font-size:58px;color:#fff;line-height:1;}
+.gen-donut .center .l{font-size:13px;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:0.12em;margin-top:6px;}
+.gen-legend{display:flex;flex-direction:column;gap:18px;}
+.gen-legend .row{display:flex;align-items:center;gap:14px;font-size:20px;color:rgba(255,255,255,0.85);}
+.gen-legend .dot{width:16px;height:16px;border-radius:5px;flex:0 0 auto;}
+.gen-legend .pct{margin-left:auto;font-family:var(--font-display);font-weight:900;color:#fff;}
+/* bigstat — Mega-Kennzahl */
+.gen-bigstat{position:absolute;left:140px;right:140px;top:300px;z-index:2;}
+.gen-bigstat .gen-eyebrow{margin-bottom:22px;}
+.gen-bigstat .huge{font-family:var(--font-display);font-weight:900;font-size:200px;line-height:0.84;color:#fff;letter-spacing:-0.05em;}
+.gen-bigstat .huge .g{color:var(--lime);}
+.gen-bigstat .sub{font-size:24px;color:rgba(255,255,255,0.8);margin-top:14px;}
+.gen-bigstat .row{display:flex;gap:64px;margin-top:54px;}
+.gen-bigstat .s .n{font-family:var(--font-display);font-weight:900;font-size:46px;color:var(--lime);}
+.gen-bigstat .s .l{font-size:17px;color:rgba(255,255,255,0.7);margin-top:6px;}
+/* bubbles — überlappende Metriken */
+.gen-bubbles{position:absolute;left:140px;right:140px;top:320px;height:580px;z-index:2;}
+.gen-bubble{position:absolute;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:14px;}
+.gen-bubble .v{font-family:var(--font-display);font-weight:900;line-height:1;}
+.gen-bubble .l{font-size:14px;margin-top:8px;opacity:0.85;}
+/* team — Porträt-Raster */
+.gen-team{position:absolute;left:140px;right:140px;top:340px;display:grid;grid-template-columns:repeat(3,1fr);gap:34px 40px;z-index:2;}
+.gen-team .m{display:flex;flex-direction:column;align-items:center;text-align:center;}
+.gen-team .av{width:140px;height:140px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:900;font-size:44px;color:var(--lime);background:rgba(255,255,255,0.1);border:2px solid rgba(180,231,23,0.3);}
+.gen-team .av img{width:100%;height:100%;object-fit:cover;}
+.gen-team .nm{font-family:var(--font-display);font-weight:700;font-size:21px;color:#fff;margin-top:16px;}
+.gen-team .ro{font-size:16px;color:rgba(255,255,255,0.65);margin-top:4px;}
+/* twocol — Zwei-Spalten-Text */
+.gen-twocol{position:absolute;left:140px;right:140px;top:330px;display:grid;grid-template-columns:1fr 1fr;gap:64px;z-index:2;}
+.gen-twocol .col h3{font-family:var(--font-display);font-weight:700;font-size:25px;color:var(--lime);margin-bottom:16px;}
+.gen-twocol .col p{font-size:20px;color:rgba(255,255,255,0.82);line-height:1.55;}
+.gen-twocol .col ul{list-style:none;display:flex;flex-direction:column;gap:14px;margin-top:10px;}
+.gen-twocol .col li{display:flex;gap:12px;font-size:18px;color:rgba(255,255,255,0.82);line-height:1.45;}
+.gen-twocol .col li i{color:var(--lime);margin-top:4px;flex:0 0 auto;}
 /* Controls + Notes */
 .deck-controls{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:1000;display:flex;align-items:center;gap:6px;background:rgba(8,22,18,0.9);border:1px solid rgba(255,255,255,0.16);border-radius:999px;padding:8px 12px;color:#fff;font-size:13px;font-weight:600;}
 .deck-controls button{all:unset;cursor:pointer;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
@@ -428,10 +473,89 @@ def r_closing(d, fam):
             ('<div class="gen-chips reveal d3">%s</div>' % chips) if chips else '',
             ('<p class="gen-punch reveal d3">%s</p>' % acc(d['punch'])) if d.get('punch') else ''))
 
+def _initials(name):
+    parts = [p for p in re.split(r'\s+', (name or '').strip()) if p]
+    return esc(''.join(p[0] for p in parts[:2]).upper() or '·')
+
+# ---- Batch 1: neue Archetypen ----
+def r_funnel(d, fam):
+    tiers = d.get('tiers', []); widths = [100, 74, 50, 34, 24]
+    rows = ''
+    for i, t in enumerate(tiers):
+        w = t.get('width', widths[min(i, 4)])
+        rows += ('<div class="tier reveal d%d" style="width:%s%%"><div class="v">%s</div>'
+                 '<div class="l">%s</div></div>' % (min(i+1,5), w, acc(t.get('value','')), acc(t.get('label',''))))
+    return head_block(d,'funnel',fam) + '<div class="gen-funnel">%s</div>' % rows
+
+def r_donut(d, fam):
+    segs = d.get('segments', []); total = sum(float(s.get('value',0) or 0) for s in segs) or 1
+    cols = ['var(--lime)','var(--pure-green)','var(--transition-green)','rgba(255,255,255,0.25)']
+    stops, leg, cum = [], '', 0.0
+    for i, s in enumerate(segs):
+        pct = float(s.get('value',0) or 0)/total*100; c = cols[i % len(cols)]
+        stops.append('%s %.2f%% %.2f%%' % (c, cum, cum+pct))
+        leg += ('<div class="row"><span class="dot" style="background:%s"></span>%s'
+                '<span class="pct">%d%%</span></div>' % (c, esc(s.get('label','')), round(pct)))
+        cum += pct
+    ctr = d.get('center', {})
+    return head_block(d,'donut',fam) + (
+        '<div class="gen-donut-wrap"><div class="gen-donut reveal d2" style="background:conic-gradient(%s)">'
+        '<div class="center"><div class="v">%s</div><div class="l">%s</div></div></div>'
+        '<div class="gen-legend reveal d3">%s</div></div>' % (
+        ','.join(stops), esc(ctr.get('value','')), esc(ctr.get('label','')), leg))
+
+def r_bigstat(d, fam):
+    ss = ''.join('<div class="s"><div class="n">%s</div><div class="l">%s</div></div>' %
+                 (acc(x.get('value','')), acc(x.get('label',''))) for x in d.get('stats', []))
+    return ('<div class="gen-bigstat"><div class="gen-eyebrow reveal d1">%s</div>'
+            '<div class="huge reveal d2">%s</div>%s%s</div>' % (
+            esc(d.get('eyebrow','')), acc(d.get('value','')),
+            ('<div class="sub reveal d2">%s</div>' % acc(d['sub'])) if d.get('sub') else '',
+            ('<div class="row reveal d3">%s</div>' % ss) if ss else ''))
+
+def r_bubbles(d, fam):
+    bs = d.get('bubbles', [])[:4]
+    def _num(b):
+        try: return float(b.get('size', 50))
+        except (TypeError, ValueError): return 50.0
+    mx = max([_num(b) for b in bs] + [1])
+    pos = [(20,'top:120px'), (430,'top:280px'), (820,'top:70px'), (1190,'top:260px')]
+    cols = ['rgba(180,231,23,0.92)','rgba(77,175,70,0.9)','rgba(40,125,75,0.92)','rgba(255,255,255,0.14)']
+    txt = ['#0f2620','#0f2620','#fff','#fff']
+    out = ''
+    for i, b in enumerate(bs):
+        sz = int(210 + _num(b)/mx*220)
+        out += ('<div class="gen-bubble reveal d%d" style="width:%dpx;height:%dpx;left:%dpx;%s;background:%s;color:%s">'
+                '<div class="v" style="font-size:%dpx">%s</div><div class="l">%s</div></div>' % (
+                min(i+1,5), sz, sz, pos[i][0], pos[i][1], cols[i], txt[i], max(30, sz//6),
+                acc(b.get('value','')), acc(b.get('label',''))))
+    return head_block(d,'bubbles',fam) + '<div class="gen-bubbles">%s</div>' % out
+
+def r_team(d, fam):
+    ms = ''
+    for m in d.get('members', []):
+        img = m.get('image')
+        av = ('<img src="%s" alt="">' % embed_img(img)) if img else _initials(m.get('name',''))
+        ms += ('<div class="m reveal"><div class="av">%s</div><div class="nm">%s</div>'
+               '<div class="ro">%s</div></div>' % (av, esc(m.get('name','')), esc(m.get('role',''))))
+    return head_block(d,'team',fam) + '<div class="gen-team">%s</div>' % ms
+
+def r_twocol(d, fam):
+    cols = ''
+    for c in d.get('columns', [])[:2]:
+        items = ''.join('<li>%s<span>%s</span></li>' % (icon('arrow-right'), acc(x)) for x in c.get('items', []))
+        cols += ('<div class="col reveal">%s%s%s</div>' % (
+                 ('<h3>%s</h3>' % acc(c['h'])) if c.get('h') else '',
+                 ('<p>%s</p>' % acc(c['p'])) if c.get('p') else '',
+                 ('<ul>%s</ul>' % items) if items else ''))
+    return head_block(d,'twocol',fam) + '<div class="gen-twocol">%s</div>' % cols
+
 RENDER = {'cover':r_cover,'cards':r_cards,'kpi':r_kpi,'split':r_split,'quote':r_quote,
           'table':r_table,'compare':r_compare,'chart':r_chart,'chapter':r_chapter,
           'subhead':r_subhead,'statement':r_statement,'process':r_process,'agenda':r_agenda,
-          'timeline':r_timeline,'closing':r_closing}
+          'timeline':r_timeline,'closing':r_closing,
+          'funnel':r_funnel,'donut':r_donut,'bigstat':r_bigstat,'bubbles':r_bubbles,
+          'team':r_team,'twocol':r_twocol}
 
 # Bild einbetten (Pfad relativ zum Spec) — fallback: Textur als Platzhalter
 SPEC_DIR = '.'

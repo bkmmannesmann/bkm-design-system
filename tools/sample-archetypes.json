@@ -1,0 +1,19 @@
+{ "family":"bkm-glass-ag", "meta":{"title":"Neue Archetypen — Batch 1","tagtop":"BKM AG"},
+  "slides":[
+    {"type":"cover","eyebrow":"Validierung","title":"NEUE FOLIEN-<br>{{VARIATIONEN}}","lead":"Sechs neue Archetypen aus Referenz-Decks — BKM-nativ.","meta":[{"k":"Batch","v":"1 von 3"},{"k":"Familie","v":"Glas-AG"}]},
+    {"type":"funnel","eyebrow":"Marktgröße","title":"TAM · SAM · {{SOM}}","tiers":[
+      {"value":"4,3 Mrd. €","label":"TAM — Gesamtmarkt","width":100},
+      {"value":"172 Mio. €","label":"SAM — erreichbar","width":70},
+      {"value":"22 Mio. €","label":"SOM — realistisch","width":44}]},
+    {"type":"donut","eyebrow":"Mittelverwendung","title":"Wohin die {{5 Mio. €}} fließen","center":{"value":"5 Mio. €","label":"Finanzierung"},
+      "segments":[{"label":"Produktion & Anlagen","value":40},{"label":"Vertrieb & Marketing","value":25},{"label":"Team","value":20},{"label":"Reserve","value":15}]},
+    {"type":"bigstat","eyebrow":"Umsatz 2025","value":"{{1,53}} Mio. €","sub":"+32,8 % gegenüber Vorjahr","stats":[{"value":"8.289 €","label":"Ø Auftrag"},{"value":"137 T€","label":"Q4"},{"value":"24 %","label":"Marge"}]},
+    {"type":"bubbles","eyebrow":"Reichweite","title":"Nutzer nach {{Segment}}","bubbles":[
+      {"value":"2,5 Mio.","size":2500,"label":"Aktive Nutzer"},{"value":"1,8 Mio.","size":1800,"label":"Free"},{"value":"732 Tsd.","size":732,"label":"Pro"}]},
+    {"type":"team","eyebrow":"Wer dahinter steht","title":"Unser {{Team}}","members":[
+      {"name":"Zane Richardson","role":"Geschäftsführung"},{"name":"Jesse Robins","role":"Technik & Anlagen"},{"name":"Lana Newman","role":"Produktmanagement"},
+      {"name":"Luke Elliott","role":"Vertrieb"},{"name":"Cecile Kay","role":"Qualität"},{"name":"Marvin Howell","role":"Anwendungstechnik"}]},
+    {"type":"twocol","eyebrow":"Warum mit uns","title":"Hintergrund & {{Herausforderung}}","columns":[
+      {"h":"Hintergrund","p":"Über 30 Jahre Erfahrung in der Bauwerksabdichtung — geprüfte Systeme, dokumentiert und nachweisbar."},
+      {"h":"Herausforderung","items":["Feuchte dauerhaft stoppen, nicht verschieben","Unterlagen, die der Fachbetrieb wirklich nutzen kann","Belastbare Aussagen statt Vermutungen"]}]}
+  ]}
