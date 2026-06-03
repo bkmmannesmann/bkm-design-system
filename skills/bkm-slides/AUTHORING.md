@@ -35,6 +35,14 @@ python3 tools/deck_builder.py meine-folien.json -o mein-deck.html [--strict]
 }
 ```
 
+**Event-Chrome (optional, familienübergreifend):** sind `meta.event` und/oder `meta.tagline`
+gesetzt, schaltet die Kopf-/Fußzeile auf das Event-Layout — **Logo oben links** (wie AG-Glas),
+**`event` oben rechts**, **`tagline` unten links in Unbounded Black**. Das ersetzt auf allen
+Folien die Standard-Marke (Bold: Lime-Badge + Kicker). `tagline` versteht `{{…}}` (Lime-Akzent).
+```json
+"meta": { "title": "…", "event": "Fachtagung 2026", "tagline": "Build. Keep. Maintain." }
+```
+
 **Konventionen in Texten:** `{{Wort}}` = Akzent in Lime · `<br>` = Zeilenumbruch ·
 `&shy;` = weiches Trennzeichen. Ein normales Und-Zeichen einfach als `&` schreiben (nicht als HTML-Entity). Jede Folie kann `"notes": "…"` (Sprechernotizen) tragen.
 

@@ -70,6 +70,11 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--stage-bg);font
 .gen-mark{position:absolute;top:74px;left:130px;display:inline-flex;align-items:center;gap:10px;background:var(--lime);color:var(--deep-green);font-weight:700;font-size:16px;letter-spacing:0.12em;text-transform:uppercase;padding:11px 20px;border-radius:8px;z-index:6;}
 .gen-kicker{position:absolute;bottom:62px;left:130px;font-weight:700;font-size:15px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(245,240,235,0.55);z-index:6;}
 .fam-glass .gen-mark,.fam-glass .gen-kicker{display:none;}
+/* Event-Chrome: Logo links, Event-Label rechts, Tagline unten links (Unbounded Black) */
+.ev .brand{left:130px;right:auto;top:64px;}
+.gen-event{position:absolute;top:74px;right:130px;font-weight:700;font-size:16px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(245,240,235,0.78);z-index:6;}
+.gen-tagline{position:absolute;bottom:56px;left:130px;font-family:var(--font-display);font-weight:900;font-size:21px;letter-spacing:0.005em;color:rgba(245,240,235,0.92);z-index:6;}
+.gen-tagline .g{color:var(--lime);}
 /* Headlines / Akzent */
 .gen-h,.gen-h1{font-family:var(--font-display);font-weight:900;text-transform:uppercase;letter-spacing:-0.04em;line-height:0.94;color:#fff;}
 .gen-h.mx,.gen-h1.mx{text-transform:none;}
@@ -387,6 +392,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--stage-bg);font
 .fam-fachbetrieb .gen-eyebrow,.fam-fachbetrieb .g{color:var(--pure-green);}
 .fam-fachbetrieb .gen-lead,.fam-fachbetrieb p,.fam-fachbetrieb .gen-li p,.fam-fachbetrieb .gen-sub,.fam-fachbetrieb .gen-bigstat .sub,.fam-fachbetrieb .gen-note p,.fam-fachbetrieb .gen-foot,.fam-fachbetrieb .gen-punch{color:var(--stone-grey);}
 .fam-fachbetrieb .tagtop{color:var(--transition-green);}.fam-fachbetrieb .pg{color:var(--pure-green);}
+.fam-fachbetrieb .gen-event{color:var(--transition-green);}.fam-fachbetrieb .gen-tagline{color:var(--deep-green);}.fam-fachbetrieb .gen-tagline .g{color:var(--pure-green);}
 .fam-fachbetrieb .gen-card,.fam-fachbetrieb .gen-panel,.fam-fachbetrieb .gen-pricing .plan,.fam-fachbetrieb .gen-flow .step,.fam-fachbetrieb .gen-bento .cell,.fam-fachbetrieb .gen-funnel .tier{background:rgba(255,255,255,0.55);border-color:rgba(28,75,66,0.12);backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:0 12px 40px rgba(28,75,66,0.08);}
 .fam-fachbetrieb .ic,.fam-fachbetrieb .gen-li .ic{background:var(--pure-green);color:#fff;}
 .fam-fachbetrieb .gen-btn,.fam-fachbetrieb .badge,.fam-fachbetrieb .gen-pricing .badge{background:var(--pure-green);color:#fff;}
@@ -928,7 +934,10 @@ def build(spec, strict=False):
     BGS = load_bgs(prefix)
     bgs = bg_rotation(slides, len(BGS)) if BGS else [0] * len(slides)
     fambody = FAM[fam]['body']
-    tagtop = esc(spec.get('meta',{}).get('tagtop',''))
+    meta = spec.get('meta',{})
+    tagtop = esc(meta.get('tagtop',''))
+    event = esc(meta.get('event',''))
+    tagline = acc(meta.get('tagline','')) if meta.get('tagline') else ''
     secs = []
     notes_js_data = []
     for i, sl in enumerate(slides):
@@ -937,7 +946,7 @@ def build(spec, strict=False):
             print('  ! Unbekannter Typ übersprungen:', st); continue
         inner = RENDER[st](sl, fam)
         vis = ' visible' if i == 0 else ''
-        chrome = chrome_html(fam, st, sl, tagtop)
+        chrome = chrome_html(fam, st, sl, tagtop, event, tagline)
         notes = esc(sl.get('notes','')).replace('\n','&#10;')
         bgdiv = ('<div class="bg t%d"></div>' % bgs[i]) if BGS else ''
         secs.append(
@@ -959,10 +968,15 @@ def build(spec, strict=False):
            .replace('@@PRESENTER@@', PRESENTER))
     return out
 
-def chrome_html(fam, st, sl, tagtop):
+def chrome_html(fam, st, sl, tagtop, event='', tagline=''):
     rub = esc(sl.get('rubric', tagtop))
     # helle Familien -> grau-grünes Logo; dunkle -> weißes Logo
     logo = LOGO_DARK if FAM[fam].get('body') == 'fam-fachbetrieb' else LOGO
+    # Event-Chrome (familienübergreifend): Logo links, Event-Label rechts, Tagline unten links
+    if event or tagline:
+        ev = ('<div class="gen-event">%s</div>' % event) if event else ''
+        tg = ('<div class="gen-tagline">%s</div>' % tagline) if tagline else ''
+        return '<div class="ev">%s</div>%s%s' % (logo, ev, tg)
     if FAM[fam]['chrome'] == 'bold':
         mark = esc(sl.get('mark', tagtop or 'BKM'))
         return ('<div class="gen-mark">%s %s</div>%s'
