@@ -36,7 +36,7 @@ python3 tools/deck_builder.py meine-folien.json -o mein-deck.html [--strict]
 ```
 
 **Konventionen in Texten:** `{{Wort}}` = Akzent in Lime · `<br>` = Zeilenumbruch ·
-``&shy;` = weiches Trennzeichen.shy;` = weiches Trennzeichen. Normales ``&shy;` = weiches Trennzeichen.` einfach als ``&shy;` = weiches Trennzeichen.` schreiben (nicht `&amp;`). Jede Folie kann `"notes": "…"` (Sprechernotizen) tragen.
+`&shy;` = weiches Trennzeichen. Ein normales Und-Zeichen einfach als `&` schreiben (nicht als HTML-Entity). Jede Folie kann `"notes": "…"` (Sprechernotizen) tragen.
 
 ### Folientypen & Felder
 | `type` | Felder |
