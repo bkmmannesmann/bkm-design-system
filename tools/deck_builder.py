@@ -301,6 +301,48 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--stage-bg);font
 .gen-bento .cell .ic{width:54px;height:54px;border-radius:13px;background:var(--lime);color:var(--deep-green);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:auto;}
 .gen-bento .cell h3{font-family:var(--font-display);font-weight:700;font-size:22px;color:#fff;margin-top:14px;}
 .gen-bento .cell p{font-size:16px;color:rgba(255,255,255,0.72);line-height:1.45;margin-top:8px;}
+/* ===== Batch 3: Rest-Archetypen ===== */
+/* statcluster */
+.gen-cluster{position:absolute;left:140px;right:140px;top:316px;height:600px;z-index:2;}
+.gen-cluster .node{position:absolute;display:flex;flex-direction:column;align-items:center;text-align:center;}
+.gen-cluster .node .circle{border-radius:50%;overflow:hidden;background:rgba(180,231,23,0.14);border:2px solid rgba(180,231,23,0.35);}
+.gen-cluster .node .circle img{width:100%;height:100%;object-fit:cover;}
+.gen-cluster .node .v{font-family:var(--font-display);font-weight:900;font-size:40px;color:var(--lime);margin-top:14px;line-height:1;}
+.gen-cluster .node .l{font-size:15px;color:rgba(255,255,255,0.75);margin-top:8px;max-width:230px;}
+/* numlist */
+.gen-numlist{position:absolute;left:140px;right:140px;top:316px;z-index:2;}
+.gen-numlist .row{display:grid;grid-template-columns:96px 1fr auto;align-items:center;gap:30px;padding:24px 12px;border-bottom:1px solid rgba(255,255,255,0.12);}
+.gen-numlist .row:last-child{border-bottom:0;}
+.gen-numlist .no{font-family:var(--font-display);font-weight:900;font-size:42px;color:var(--lime);}
+.gen-numlist .tx{font-size:21px;color:rgba(255,255,255,0.88);line-height:1.4;}
+.gen-numlist .tg{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--lime);border:1px solid rgba(180,231,23,0.4);border-radius:999px;padding:8px 16px;white-space:nowrap;}
+/* gallery */
+.gen-gallery{position:absolute;left:140px;right:140px;top:330px;display:grid;gap:22px;z-index:2;}
+.gen-gallery.g2{grid-template-columns:repeat(2,1fr);}.gen-gallery.g3{grid-template-columns:repeat(3,1fr);}.gen-gallery.g4{grid-template-columns:repeat(4,1fr);}
+.gen-gallery figure{position:relative;border-radius:16px;overflow:hidden;height:500px;}
+.gen-gallery.g3 figure,.gen-gallery.g4 figure{height:460px;}
+.gen-gallery img{width:100%;height:100%;object-fit:cover;display:block;}
+.gen-gallery figcaption{position:absolute;left:0;right:0;bottom:0;padding:14px 18px;font-size:14px;color:#fff;background:linear-gradient(transparent,rgba(15,38,32,0.85));}
+/* contact */
+.gen-contact{position:absolute;left:140px;top:280px;width:1000px;z-index:2;}
+.gen-contact .gen-eyebrow{margin-bottom:16px;}
+.gen-contact .gen-h{font-size:60px;}
+.gen-contact .blocks{display:grid;grid-template-columns:1fr 1fr;gap:32px 50px;margin-top:42px;}
+.gen-contact .b .k{font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:var(--lime);font-weight:700;}
+.gen-contact .b .v{font-size:23px;color:#fff;margin-top:8px;font-weight:600;}
+.gen-contact-photo{position:absolute;right:140px;top:230px;width:540px;height:620px;border-radius:20px;overflow:hidden;z-index:2;}
+.gen-contact-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+/* imagesplit (50/50) */
+.gen-imgsplit{position:absolute;inset:0;}
+.gen-imgsplit .photo{position:absolute;top:0;bottom:0;width:50%;z-index:1;}
+.gen-imgsplit.right .photo{right:0;}.gen-imgsplit.left .photo{left:0;}
+.gen-imgsplit .photo img{width:100%;height:100%;object-fit:cover;display:block;}
+.gen-imgsplit .txt{position:absolute;top:50%;transform:translateY(-50%);width:46%;z-index:2;}
+.gen-imgsplit.right .txt{left:140px;}.gen-imgsplit.left .txt{right:140px;}
+.gen-imgsplit .gen-eyebrow{margin-bottom:18px;}
+.gen-imgsplit .gen-h{font-size:58px;}
+.gen-imgsplit p{font-size:21px;color:rgba(255,255,255,0.82);line-height:1.55;margin-top:24px;}
+.gen-imgsplit .gen-li{margin-top:16px;}
 /* Controls + Notes */
 .deck-controls{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:1000;display:flex;align-items:center;gap:6px;background:rgba(8,22,18,0.9);border:1px solid rgba(255,255,255,0.16);border-radius:999px;padding:8px 12px;color:#fff;font-size:13px;font-weight:600;}
 .deck-controls button{all:unset;cursor:pointer;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
@@ -668,6 +710,56 @@ def r_bento(d, fam):
             cls, ic, acc(it.get('h','')), ('<p>%s</p>' % acc(it['p'])) if it.get('p') else '')
     return head_block(d,'bento',fam) + '<div class="gen-bento">%s</div>' % cs
 
+# ---- Batch 3: Rest-Archetypen ----
+def r_statcluster(d, fam):
+    items = d.get('items', [])[:5]
+    pos = [(20,20,240),(430,200,180),(770,30,270),(1150,210,190),(880,420,160)]
+    out = ''
+    for i, it in enumerate(items):
+        l, t, sz = pos[i]; img = it.get('image')
+        inner = ('<img src="%s" alt="">' % embed_img(img)) if img else ''
+        out += ('<div class="node reveal" style="left:%dpx;top:%dpx"><div class="circle" style="width:%dpx;height:%dpx">%s</div>'
+                '<div class="v">%s</div><div class="l">%s</div></div>' % (
+                l, t, sz, sz, inner, acc(it.get('value','')), acc(it.get('label',''))))
+    return head_block(d,'statcluster',fam) + '<div class="gen-cluster">%s</div>' % out
+
+def r_numlist(d, fam):
+    rows = ''
+    for i, it in enumerate(d.get('items', [])):
+        no = esc(it.get('no', '%02d' % (i+1)))
+        tag = ('<div class="tg">%s</div>' % esc(it['tag'])) if it.get('tag') else '<div></div>'
+        rows += '<div class="row reveal d%d"><div class="no">%s</div><div class="tx">%s</div>%s</div>' % (
+                min(i+1,5), no, acc(it.get('text','')), tag)
+    return head_block(d,'numlist',fam) + '<div class="gen-numlist">%s</div>' % rows
+
+def r_gallery(d, fam):
+    figs = ''
+    for im in d.get('images', []):
+        cap = ('<figcaption>%s</figcaption>' % esc(im['caption'])) if im.get('caption') else ''
+        figs += '<figure><img src="%s" alt="">%s</figure>' % (embed_img(im.get('src')), cap)
+    n = len(d.get('images', []))
+    return head_block(d,'gallery',fam) + '<div class="gen-gallery g%d reveal d2">%s</div>' % (min(max(n,2),4), figs)
+
+def r_contact(d, fam):
+    blocks = ''.join('<div class="b"><div class="k">%s</div><div class="v">%s</div></div>' %
+                     (esc(b.get('k','')), acc(b.get('v',''))) for b in d.get('blocks', []))
+    img = d.get('image')
+    photo = ('<figure class="gen-contact-photo"><img src="%s" alt=""></figure>' % embed_img(img)) if img else ''
+    return ('<div class="gen-contact"><div class="gen-eyebrow reveal d1">%s</div>%s'
+            '<div class="blocks reveal d2">%s</div></div>%s' % (
+            esc(d.get('eyebrow','')), headline(d.get('title',''),'contact',fam), blocks, photo))
+
+def r_imagesplit(d, fam):
+    side = 'left' if d.get('side') == 'left' else 'right'
+    img = d.get('image')
+    photo = ('<div class="photo"><img src="%s" alt=""></div>' % embed_img(img)) if img else ''
+    pts = ''.join('<div class="gen-li reveal d%d"><div class="ic">%s</div><p>%s</p></div>' %
+                  (min(i+2,5), icon('check'), acc(p)) for i, p in enumerate(d.get('points', [])))
+    body = ('<p class="reveal d3">%s</p>' % acc(d['lead'])) if d.get('lead') else ''
+    txt = ('<div class="txt"><div class="gen-eyebrow reveal d1">%s</div>%s%s%s</div>' %
+           (esc(d.get('eyebrow','')), headline(d.get('title',''),'imagesplit',fam), body, pts))
+    return '<div class="gen-imgsplit %s">%s%s</div>' % (side, photo, txt)
+
 RENDER = {'cover':r_cover,'cards':r_cards,'kpi':r_kpi,'split':r_split,'quote':r_quote,
           'table':r_table,'compare':r_compare,'chart':r_chart,'chapter':r_chapter,
           'subhead':r_subhead,'statement':r_statement,'process':r_process,'agenda':r_agenda,
@@ -675,7 +767,9 @@ RENDER = {'cover':r_cover,'cards':r_cards,'kpi':r_kpi,'split':r_split,'quote':r_
           'funnel':r_funnel,'donut':r_donut,'bigstat':r_bigstat,'bubbles':r_bubbles,
           'team':r_team,'twocol':r_twocol,
           'pricing':r_pricing,'flow':r_flow,'gauge':r_gauge,'pictograph':r_pictograph,
-          'imagecover':r_imagecover,'bento':r_bento}
+          'imagecover':r_imagecover,'bento':r_bento,
+          'statcluster':r_statcluster,'numlist':r_numlist,'gallery':r_gallery,
+          'contact':r_contact,'imagesplit':r_imagesplit}
 
 # Bild einbetten (Pfad relativ zum Spec) — fallback: Textur als Platzhalter
 SPEC_DIR = '.'

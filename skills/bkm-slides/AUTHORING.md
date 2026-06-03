@@ -68,6 +68,11 @@ python3 tools/deck_builder.py meine-folien.json -o mein-deck.html [--strict]
 | `pictograph` | `eyebrow, title, groups:[{value,filled,total,icon,label}]` (Icon-Array) |
 | `imagecover` | `eyebrow, title, sub, image` (Vollbild-Foto-Titel mit Overlay) |
 | `bento` | `eyebrow, title, items:[{icon,h,p,wide,tall,accent}]` (gemischtes Raster) |
+| `statcluster` | `eyebrow, title, items:[{value,label,image}]` (organischer Kennzahl-/Bild-Cluster) |
+| `numlist` | `eyebrow, title, items:[{no,text,tag}]` (nummerierte Liste mit Tag) |
+| `gallery` | `eyebrow, title, images:[{src,caption}]` (Bild-Raster) |
+| `contact` | `eyebrow, title, blocks:[{k,v}], image` (Kontakt-Folie) |
+| `imagesplit` | `eyebrow, title, lead, points:[…], image, side:"left"/"right"` (50/50 Bild) |
 
 `icon` = Font-Awesome-Name (z. B. `shield-halved`). `image` = Pfad relativ zur Spec
 (sonst Platzhalter-Textur). Vollständiges Beispiel: **`tools/sample-deck.json`**.
