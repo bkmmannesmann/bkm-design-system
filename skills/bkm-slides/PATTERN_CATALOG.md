@@ -1,6 +1,8 @@
 # BKM Slides — Pattern-Katalog (v3)
 
-> Welche Patterns in BKM-Slides erlaubt, eingeschränkt oder verboten sind. Alle erlaubten Patterns enthalten **exakte CSS-Werte** — nicht interpretieren, sondern kopieren.
+> **Anti-Slop-Referenz (gültig in v5).** Welche Patterns erlaubt, eingeschränkt oder
+> verboten sind. Gilt weiterhin für alle Familien. Ergänzend in v5: bewusster Dichte-Modus,
+> Casing UPPERCASE **oder** Mixed-Case (nie kursiv), 8px-Rundung für Flächen-Elemente.
 
 ---
 
@@ -173,20 +175,25 @@ Nicht jede Slide braucht ein Foto. Glasmorphismus hebt sich auch auf flachen Far
 .process-arrow { color: rgba(77, 175, 70, 0.45); font-size: 18px; }
 ```
 
-### 10. Keyvisual-Überlappung (nur Titelseiten)
+### 10. Keyvisual (nur Titelseiten)
 
 ```css
 .keyvisual {
-  position: absolute; top: 0; right: 0;
-  height: 100%; width: 22%;
-  object-fit: cover; object-position: left center;
-  opacity: 0.18;   /* BKM AG */
-  /* opacity: 0.15; /* Fachbetrieb */
-  z-index: 5;
+  position: absolute;
+  right: 0;                     /* bündig mit rechtem Folienrand */
+  top: 50%;
+  transform: translateY(-50%);  /* vertikal zentriert */
+  height: 560px;                /* ~52% der Folie, vollständig sichtbar */
+  width: auto;                  /* nicht angeschnitten */
+  opacity: 0.85;
+  pointer-events: none;
+  z-index: 0;                   /* hinter Inhalts-Cards/Text */
 }
 ```
 
-**Regeln:** Immer rechts, immer angeschnitten, nie links/mittig, nie gedreht/gespiegelt.
+**Regeln:** Rechte Kante bündig mit dem Folienrand, vertikal zentriert, **vollständig
+sichtbar** (nicht angeschnitten, oben/unten frei). Variante je Hintergrund: dunkel →
+weiß, hell → grün. Nie links/mittig, nie gedreht/gespiegelt.
 
 ### 11. Innerer Glass-Glow (optional, nur Titel-Slides)
 
@@ -198,6 +205,65 @@ Nicht jede Slide braucht ein Foto. Glasmorphismus hebt sich auch auf flachen Far
   pointer-events: none;
 }
 ```
+
+### 12. Bilder & Grafiken (Fotos, Diagramme)
+
+Folien dürfen Bilder zeigen — nicht nur Text. Drei Muster:
+
+**a) Gerahmtes Bild (Figure) — Text + Foto nebeneinander**
+
+```css
+.figure{position:relative;border-radius:24px;overflow:hidden;        /* Glas: 24px · Editorial/Bold: 8–16px */
+  border:1px solid rgba(255,255,255,0.28);
+  box-shadow:0 8px 32px rgba(0,0,0,0.28),inset 0 1px 0 rgba(255,255,255,0.4);}
+.figure img{display:block;width:100%;height:100%;object-fit:cover;}  /* randscharf, nie verzerren */
+.figure figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px 28px;color:#fff;font-size:18px;
+  background:linear-gradient(transparent,rgba(15,38,32,0.9));}
+```
+
+**b) Vollflächiges Foto + Overlay** (Hero/Kapitel; Glas/Text darüber)
+
+```css
+.bg-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
+.bg-photo + .overlay{position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(28,75,66,.78),rgba(15,38,32,.6));}
+/* Glas-Card / Text mit z-index > 0 darüber */
+```
+
+**c) Bild in Card** — den `.img`-Bereich einer Card mit `<img style="object-fit:cover">`
+füllen statt des Gradient-Platzhalters.
+
+**Regeln:**
+- Immer `object-fit: cover` (nie verzerren); Eckenradius der Familie folgen.
+- Foto unter Glas/Overlay legen, damit Text lesbar bleibt — Kontrast per Screenshot prüfen.
+- Bild austauschen = nur `src` ersetzen (im Skill **per Pfad**, im Standalone-Demo als Data-URI).
+- Format: **JPEG** für Fotos (klein halten), **PNG** nur für Grafiken mit Transparenz.
+- Das **Keyvisual ist kein Inhaltsbild** (eigene Regel, nur Deckblatt).
+
+### 13. Texturierte Hintergründe + Rhythmus
+
+Statt flacher Verläufe: **texturierte Hintergründe** (weiches Licht auf Deep Green,
+BKM-Grün + Grain) in `assets/backgrounds/bg-green-texture-1…4.jpg`, im Deck `.bg.t1…t4`.
+
+```css
+.bg{position:absolute;inset:0;background-size:cover;background-position:center;}
+.bg.t1{background:#0f2620 url(.../bg-green-texture-1.jpg) center/cover;}
+/* t2…t4 analog */
+```
+
+**Regeln:**
+- Varianten **rotieren** über die Folien (`t1,t2,t3,t4,t1,…`) — nie zweimal dieselbe nebeneinander.
+  Pflicht bei langen Decks (Anti-Monotonie über 30–50+ Folien).
+- Dunkel-links-Varianten (`t1`,`t4`) für links-bündigen Text; `t2`/`t3` für zentrierte Inhalte.
+- Glas-Cards/Text müssen lesbar bleiben — Kontrast per Screenshot prüfen.
+- Nur BKM-Grün; **kein** Lime-/Pure-Green-Vollflächen-Grund (Keyvisual-Verbot beachten).
+
+### 14. Motion (Reveal) + Headline-Casing (Hybrid)
+
+- **Reveal:** Inhaltselemente `reveal` + Stagger `d1…d5` (Fade + Hochgleiten beim Folienwechsel).
+  Print/PDF & `prefers-reduced-motion` zeigen alles ruhig (in der Engine bereits gelöst).
+- **Casing (Hybrid A+B):** Cover & Kapitel-Trenner **UPPERCASE**; Inhalts-/Section-Headlines
+  **Mixed-Case** via Klasse `.mixed` (`text-transform:none`). Akzentwort über Lime, nie kursiv.
 
 ---
 
@@ -246,6 +312,29 @@ ERLAUBT:                              VERBOTEN:
 ✓ Checkmark-Listen                    ✗ Dashboard-Grids
 ✓ Icon-Circles                        ✗ Box-Shadows auf Cards
 ✓ Prozess-Flows                       ✗ Unbounded Italic
-✓ Keyvisual-Überlappung               ✗ Wavy Backgrounds
+✓ Keyvisual (nur Deckblatt)           ✗ Wavy Backgrounds
+✓ Bilder/Grafiken (Figure, Foto+Overlay)
+✓ Texturierte Hintergründe (rotierend)
+✓ Reveal-Motion + Hybrid-Casing
 ✓ Innerer Glass-Glow                  ✗ Border-Left auf Glass-Cards
 ```
+
+---
+
+## Positiv-Regeln (Anti-Slop)
+
+> Nicht nur „was verboten ist", sondern **wie man aktiv gut gestaltet**.
+> Idee adaptiert aus Open Design (nexu-io/open-design, Apache-2.0).
+
+1. **Ein Akzent, max. 2× pro Folie.** Lime (bzw. Pure Green im Fachbetrieb) ist ein
+   Signal, kein Dekor — pro Folie höchstens zweimal einsetzen, sonst verliert es Wirkung.
+2. **Display- und Body-Schrift nie dieselbe Familie.** BKM = Unbounded (Display) +
+   System-Sans/TT Norms Pro (Body). Headlines nie in der Body-Schrift, Fließtext nie in Unbounded.
+3. **Farben mit `oklch()` ableiten statt Hex erfinden.** Wenn eine Zwischenstufe nötig ist
+   (z. B. Hover, Verlauf), bestehende BKM-Token über `oklch()` aufhellen/abdunkeln —
+   **nie** einen neuen, freien Hex-Wert außerhalb der Palette einführen.
+4. **Hintergrund aus Marke/Domäne, nie generisch.** Deep-Green-/Sand-Flächen, Brand-Blobs,
+   echte Bautenschutz-Fotos. **Kein** beiger/peach/„cozy"-Default-Canvas, kein App-Chrome-Grau.
+5. **Eine dominante Aussage pro Folie.** Eine Headline + 3–4 Stützelemente. Kein
+   konkurrierender Doppel-Fokus, keine gleichförmigen Kachel-Teppiche.
+6. **Inhalte spezifisch.** Echte Zahlen/Projekte statt „Lorem"/generischer Stat-Slop.

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BKM Slides 2.0 — Prototyp: 3 Design-Stufen auf der Fixed-Stage-Engine</title>
+
+<!-- Headline-Schrift: Unbounded (BKM-Marke). Body: TT Norms Pro im Echtbetrieb,
+     hier system-ui als brand-konformer Web-Fallback (siehe STYLE_PRESETS.md). -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+<style>
+/* ===========================================
+   BKM DESIGN TOKENS (Source: DESIGN.md)
+   =========================================== */
+:root {
+  --deep-green: #1c4b42;
+  --lime: #b4e717;
+  --pure-green: #4daf46;
+  --transition-green: #287d4b;
+  --sand: #f6f5f2;
+  --sand-warm: #f5f0eb;
+  --stone-grey: #494949;
+  --white: #ffffff;
+
+  --font-display: 'Unbounded', sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --stage-bg: #0d2520;   /* Letterbox-Bereich außerhalb der Bühne */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ===========================================
+   FIXED 16:9 STAGE — aus viewport-base.css (frontend-slides)
+   Slides werden bei 1920×1080 gebaut und als Ganzes skaliert.
+   =========================================== */
+html, body {
+  width: 100%; height: 100%; margin: 0;
+  overflow: hidden;
+  background: var(--stage-bg);
+  font-family: var(--font-body);
+}
+.deck-viewport { position: fixed; inset: 0; overflow: hidden; background: var(--stage-bg); }
+.deck-stage {
+  position: absolute; left: 0; top: 0;
+  width: 1920px; height: 1080px;
+  overflow: hidden; transform-origin: 0 0;
+  background: #000;
+}
+.slide {
+  position: absolute; inset: 0;
+  width: 1920px; height: 1080px;
+  overflow: hidden; display: block;
+  visibility: hidden; opacity: 0; pointer-events: none;
+}
+.slide.active, .slide.visible {
+  visibility: visible; opacity: 1; pointer-events: auto; z-index: 1;
+}
+img, video, svg { max-width: 100%; max-height: 100%; }
+
+/* ===========================================
+   REVEAL-ANIMATION (gestaffelt beim Slide-Wechsel)
+   =========================================== */
+.reveal {
+  opacity: 0; transform: translateY(34px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.slide.visible .reveal { opacity: 1; transform: translateY(0); }
+.slide.visible .reveal:nth-child(1) { transition-delay: 0.08s; }
+.slide.visible .reveal:nth-child(2) { transition-delay: 0.18s; }
+.slide.visible .reveal:nth-child(3) { transition-delay: 0.28s; }
+.slide.visible .reveal:nth-child(4) { transition-delay: 0.38s; }
+.slide.visible .reveal:nth-child(5) { transition-delay: 0.48s; }
+.slide.visible .reveal:nth-child(6) { transition-delay: 0.58s; }
+.r-d2 { transition-delay: 0.2s; }
+.r-d3 { transition-delay: 0.32s; }
+.r-d4 { transition-delay: 0.44s; }
+.r-d5 { transition-delay: 0.56s; }
+.r-d6 { transition-delay: 0.68s; }
+
+/* Headline-Grundregeln (BKM): Unbounded 900, UPPERCASE, kein Italic */
+.h-display {
+  font-family: var(--font-display); font-weight: 900;
+  text-transform: uppercase; line-height: 0.98; letter-spacing: -0.035em;
+}
+.eyebrow {
+  font-family: var(--font-body); font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.18em; font-size: 20px;
+}
+.body-lg { font-size: 30px; line-height: 1.55; font-weight: 400; }
+
+/* Stufen-Badge oben links auf Demo-Slides */
+.level-tag {
+  position: absolute; top: 48px; left: 80px; z-index: 20;
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: var(--font-body); font-weight: 700;
+  font-size: 15px; letter-spacing: 0.16em; text-transform: uppercase;
+}
+.level-tag .dot { width: 10px; height: 10px; border-radius: 50%; }
+
+/* Seitenzahl */
+.page-num {
+  position: absolute; bottom: 52px; right: 64px; z-index: 20;
+  font-size: 16px; font-weight: 700; letter-spacing: 0.1em;
+}
+
+/* ============================================================
+   SLIDE 1 — COVER (Erklärung)  · BKM AG dunkel
+   ============================================================ */
+.s-cover { background: radial-gradient(120% 130% at 12% 8%, #235c50 0%, var(--deep-green) 45%, #14392f 100%); }
+.s-cover .accent {
+  position: absolute; left: 80px; top: 200px; width: 6px; height: 460px;
+  background: var(--lime); border-radius: 3px;
+}
+.s-cover .wrap { position: absolute; left: 128px; top: 180px; right: 120px; }
+.s-cover .kicker { color: var(--lime); margin-bottom: 28px; }
+.s-cover h1 { color: var(--white); font-size: 124px; }
+.s-cover h1 .lime { color: var(--lime); }
+.s-cover .sub { color: rgba(255,255,255,0.78); font-size: 32px; max-width: 1180px; margin-top: 40px; line-height: 1.5; }
+.s-cover .legend { display: flex; gap: 26px; margin-top: 64px; }
+.s-cover .legend .chip {
+  display: flex; align-items: center; gap: 14px;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 14px; padding: 18px 26px; color: #fff; font-weight: 700; font-size: 19px;
+  backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+}
+.s-cover .legend .num {
+  font-family: var(--font-display); font-weight: 900; font-size: 26px; color: var(--lime); line-height: 1;
+}
+.s-cover .brand { position: absolute; top: 56px; right: 72px; color: #fff; font-family: var(--font-display); font-weight: 900; font-size: 26px; letter-spacing: -0.02em; }
+.s-cover .brand span { color: var(--lime); }
+
+/* ============================================================
+   STUFE 1 — GLAS (heutiger BKM-Stil)  · BKM AG dunkel
+   ============================================================ */
+.s-glass { background: linear-gradient(140deg, #1c4b42 0%, #18443c 55%, #102e28 100%); }
+.s-glass::after {                       /* angedeutetes Foto-Korn / Tiefe */
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(80% 90% at 85% 20%, rgba(180,231,23,0.10), transparent 60%);
+  pointer-events:none;
+}
+.s-glass .accent { position: absolute; left: 7%; top: 20%; width: 5px; height: 58%; background: var(--lime); border-radius: 3px; z-index: 6; }
+.glass-card {
+  background: rgba(255,255,255,0.07);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.12); border-radius: 18px;
+}
+.s-glass .title-wrap { position: absolute; left: 12%; top: 220px; right: 120px; }
+.s-glass .eyebrow { color: var(--lime); margin-bottom: 26px; }
+.s-glass h2 { color: #fff; font-size: 92px; }
+.s-glass .lead { color: rgba(255,255,255,0.8); font-size: 30px; max-width: 1080px; margin-top: 34px; line-height: 1.5; }
+.s-glass .checks { margin-top: 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px 56px; max-width: 1320px; }
+.s-glass .check { display: flex; align-items: center; gap: 20px; color: #fff; font-size: 23px; }
+.s-glass .check .ic {
+  width: 46px; height: 46px; border-radius: 12px; flex-shrink: 0;
+  background: rgba(180,231,23,0.12); display:flex; align-items:center; justify-content:center;
+  color: var(--lime); font-size: 18px;
+}
+.s-glass .footer-bar {
+  position:absolute; left:0; right:0; bottom:0; height:74px;
+  background: rgba(28,75,66,0.95); display:flex; align-items:center; gap:16px; padding: 0 80px;
+}
+.s-glass .footer-bar i { color: var(--lime); font-size: 20px; }
+.s-glass .footer-bar span { color:#fff; font-size: 18px; }
+
+/* ============================================================
+   STUFE 2 — EDITORIAL  · Sand hell, Regelwerk-Linien, große Type
+   ============================================================ */
+.s-edi { background: var(--sand-warm); color: var(--deep-green); }
+.s-edi .masthead, .s-edi .footline {
+  position: absolute; left: 80px; right: 80px; display:flex; justify-content: space-between;
+  font-family: var(--font-body); font-weight: 700; font-size: 17px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--deep-green);
+}
+.s-edi .masthead { top: 52px; }
+.s-edi .footline { bottom: 52px; color: var(--transition-green); }
+.s-edi .rule { height: 4px; background: var(--deep-green); }
+.s-edi .wrap { position: absolute; left: 80px; right: 80px; top: 150px; }
+.s-edi .eyebrow { color: var(--pure-green); margin: 30px 0 22px; }
+.s-edi h2 { font-size: 118px; color: var(--deep-green); }
+.s-edi h2 .grn { color: var(--pure-green); }
+.s-edi .lead { font-size: 30px; color: var(--stone-grey); max-width: 1000px; margin-top: 30px; line-height: 1.5; }
+.s-edi .tiles { position:absolute; left:80px; right:80px; bottom: 150px; display:grid; grid-template-columns: repeat(3,1fr); gap: 0; }
+.s-edi .tile { padding: 38px 44px 30px; border-top: 4px solid var(--deep-green); }
+.s-edi .tile:nth-child(2){ background: var(--deep-green); color: var(--sand-warm); }
+.s-edi .tile .fig { font-family: var(--font-display); font-weight: 900; font-size: 96px; line-height: 0.92; letter-spacing: -0.04em; }
+.s-edi .tile:nth-child(2) .fig { color: var(--lime); }
+.s-edi .tile .cap { font-weight: 700; font-size: 18px; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 18px; }
+.s-edi .tile .desc { font-size: 19px; line-height: 1.5; margin-top: 12px; opacity: 0.85; }
+
+/* ============================================================
+   STUFE 3 — BOLD POSTER  · Deep Green, Übergröße, Lime-Signal
+   ============================================================ */
+.s-bold { background: var(--deep-green); color: #fff; }
+.s-bold .grid-lines { position:absolute; inset:0; background:
+  linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px) 0 0/100% 180px; pointer-events:none; }
+.s-bold .mark {
+  position:absolute; top: 56px; left: 80px; display:inline-block;
+  background: var(--lime); color: var(--deep-green); font-family: var(--font-body);
+  font-weight: 700; font-size: 16px; letter-spacing: 0.14em; text-transform: uppercase; padding: 10px 20px;
+}
+.s-bold .poster { position:absolute; left: 76px; right: 76px; top: 210px; }
+.s-bold h2 { font-size: 236px; line-height: 0.82; color: #fff; letter-spacing: -0.05em; }
+.s-bold h2 .lime { color: var(--lime); }
+.s-bold .kick { font-size: 30px; font-weight: 700; letter-spacing: 0.06em; color: rgba(255,255,255,0.7); margin-top: 56px; max-width: 1100px; line-height: 1.4; text-transform: none; }
+.s-bold .arrow { position:absolute; right: 80px; bottom: 90px; color: var(--lime); font-size: 64px; }
+
+/* Bold-Statement (Zahl) */
+.s-stat { background: var(--deep-green); color:#fff; }
+.s-stat .mark { position:absolute; top:56px; left:80px; background:var(--lime); color:var(--deep-green); font-weight:700; font-size:16px; letter-spacing:0.14em; text-transform:uppercase; padding:10px 20px; }
+.s-stat .center { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding: 0 120px; text-align:center; }
+.s-stat .fig { font-family: var(--font-display); font-weight: 900; font-size: 420px; line-height: 0.82; color: var(--lime); letter-spacing: -0.05em; }
+.s-stat .label { font-size: 40px; font-weight: 700; max-width: 1200px; margin-top: 30px; line-height: 1.25; }
+.s-stat .sub { font-size: 24px; color: rgba(255,255,255,0.6); margin-top: 26px; letter-spacing: 0.04em; }
+
+/* ============================================================
+   SLIDE FINAL — Vergleich / Engine-Vorteile
+   ============================================================ */
+.s-final { background: var(--sand); color: var(--deep-green); }
+.s-final .wrap { position:absolute; left: 80px; right: 80px; top: 110px; }
+.s-final .eyebrow { color: var(--pure-green); margin-bottom: 20px; }
+.s-final h2 { font-size: 88px; color: var(--deep-green); }
+.s-final .cards { display:grid; grid-template-columns: repeat(3,1fr); gap: 28px; margin-top: 60px; }
+.s-final .card { border-radius: 16px; padding: 40px 38px; border: 2px solid rgba(28,75,66,0.14); background:#fff; }
+.s-final .card h3 { font-family: var(--font-display); font-weight: 900; text-transform: uppercase; font-size: 30px; letter-spacing: -0.02em; }
+.s-final .card .lv { font-weight:700; font-size:15px; letter-spacing:0.14em; text-transform:uppercase; color: var(--pure-green); margin-bottom: 14px; }
+.s-final .card p { font-size: 20px; line-height: 1.5; color: var(--stone-grey); margin-top: 14px; }
+.s-final .engine { position:absolute; left:80px; right:80px; bottom: 88px; display:flex; gap: 16px; flex-wrap:wrap; }
+.s-final .engine .e {
+  display:flex; align-items:center; gap:12px; background: var(--deep-green); color:#fff;
+  border-radius: 999px; padding: 14px 26px; font-weight:700; font-size: 18px;
+}
+.s-final .engine .e i { color: var(--lime); }
+
+/* ===========================================
+   DECK-CONTROLS (außerhalb der Bühne)
+   =========================================== */
+.deck-controls {
+  position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 1000;
+  display:flex; align-items:center; gap: 6px; background: rgba(0,0,0,0.7);
+  border-radius: 999px; padding: 8px 10px; color:#fff; font-size: 13px; font-weight:600;
+  backdrop-filter: blur(10px); user-select:none;
+}
+.deck-controls button { all: unset; cursor:pointer; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+.deck-controls button:hover { background: rgba(255,255,255,0.15); }
+.deck-controls .count { min-width: 54px; text-align:center; font-variant-numeric: tabular-nums; }
+
+/* ===========================================
+   PRINT — eine Folie pro Seite (für PDF-Export)
+   =========================================== */
+@media print {
+  html, body { width: 1920px; height: auto; overflow: visible; background:#fff; }
+  .deck-viewport { position: static; overflow: visible; }
+  .deck-stage { position: static; width:auto; height:auto; transform:none !important; }
+  .slide { position: relative; visibility: visible !important; opacity:1 !important;
+           width:1920px; height:1080px; break-after: page; page-break-after: always; }
+  .slide .reveal { opacity:1 !important; transform:none !important; }
+  .deck-controls { display:none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.2s !important; }
+}
+</style>
+</head>
+<body>
+<div class="deck-viewport">
+  <main class="deck-stage" id="deckStage">
+
+    <!-- ===== SLIDE 1 — COVER ===== -->
+    <section class="slide active s-cover">
+      <div class="brand">BKM<span>.</span></div>
+      <div class="accent reveal"></div>
+      <div class="wrap">
+        <div class="eyebrow kicker reveal">Prototyp · Slide-System 2.0</div>
+        <h1 class="h-display reveal">EIN INHALT,<br>DREI <span class="lime">DESIGN-STUFEN</span></h1>
+        <p class="sub reveal">Dieselbe BKM-Botschaft, gerendert auf der neuen Fixed-Stage-Engine — skaliert auf jedes Gerät, exportierbar als PDF, teilbar als Link. Alle drei Stufen bleiben 100&nbsp;% in BKM-Farben und -Schriften.</p>
+        <div class="legend reveal">
+          <div class="chip"><span class="num">01</span> Glas — heutiger Stil</div>
+          <div class="chip"><span class="num">02</span> Editorial — mehr Design</div>
+          <div class="chip"><span class="num">03</span> Bold Poster — maximal</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SLIDE 2 — STUFE 1: GLAS (Titel) ===== -->
+    <section class="slide s-glass">
+      <div class="level-tag" style="color:var(--lime)"><span class="dot" style="background:var(--lime)"></span>Stufe 01 · Glas</div>
+      <div class="accent reveal"></div>
+      <div class="title-wrap">
+        <div class="eyebrow reveal">Bauwerksabdichtung</div>
+        <h2 class="h-display reveal">DICHTUNGS&shy;TECHNIK</h2>
+        <p class="lead reveal">Feuchtigkeitssperren und Injektionsverfahren für dauerhaften Bautenschutz — vom Fundament bis zur Fassade.</p>
+      </div>
+      <div class="footer-bar"><i class="fas fa-shield-halved"></i><span>BKM Mannesmann AG · Gebäudeschutz seit 1989</span></div>
+    </section>
+
+    <!-- ===== SLIDE 3 — STUFE 1: GLAS (Content / Checklist) ===== -->
+    <section class="slide s-glass">
+      <div class="level-tag" style="color:var(--lime)"><span class="dot" style="background:var(--lime)"></span>Stufe 01 · Glas</div>
+      <div class="title-wrap" style="top:150px;">
+        <div class="eyebrow reveal">Leistungsversprechen</div>
+        <h2 class="h-display reveal" style="font-size:74px;">WAS UNS AUSZEICHNET</h2>
+        <div class="checks">
+          <div class="check reveal"><span class="ic"><i class="fas fa-check"></i></span>Geprüfte Systeme nach DIN-Norm</div>
+          <div class="check reveal"><span class="ic"><i class="fas fa-flask"></i></span>Eigene Materialentwicklung im Labor</div>
+          <div class="check reveal"><span class="ic"><i class="fas fa-user-shield"></i></span>Zertifizierte Fachbetriebe vor Ort</div>
+          <div class="check reveal"><span class="ic"><i class="fas fa-leaf"></i></span>Nachhaltige, emissionsarme Rezepturen</div>
+          <div class="check reveal"><span class="ic"><i class="fas fa-clock"></i></span>Über 30 Jahre Praxiserfahrung</div>
+          <div class="check reveal"><span class="ic"><i class="fas fa-certificate"></i></span>Garantierte Verarbeitungsqualität</div>
+        </div>
+      </div>
+      <div class="footer-bar"><i class="fas fa-shield-halved"></i><span>BKM Mannesmann AG · Gebäudeschutz seit 1989</span></div>
+    </section>
+
+    <!-- ===== SLIDE 4 — STUFE 2: EDITORIAL (Titel) ===== -->
+    <section class="slide s-edi">
+      <div class="masthead reveal"><span>BKM Mannesmann</span><span>Bauwerksabdichtung</span></div>
+      <div class="wrap">
+        <div class="rule reveal"></div>
+        <div class="eyebrow reveal">Bauwerksabdichtung</div>
+        <h2 class="h-display reveal">DICHTUNGS&shy;<span class="grn">TECHNIK</span></h2>
+        <p class="lead reveal">Feuchtigkeitssperren und Injektionsverfahren für dauerhaften Bautenschutz — vom Fundament bis zur Fassade.</p>
+      </div>
+      <div class="tiles">
+        <div class="tile reveal"><div class="fig">30+</div><div class="cap">Jahre Erfahrung</div><div class="desc">Bewährte Verfahren im Bestand und Neubau.</div></div>
+        <div class="tile reveal r-d3"><div class="fig">DIN</div><div class="cap">Geprüft</div><div class="desc">Systeme nach gültiger Normung, dokumentiert.</div></div>
+        <div class="tile reveal r-d4"><div class="fig">100%</div><div class="cap">Eigene Rezeptur</div><div class="desc">Entwicklung und Prüfung im eigenen Labor.</div></div>
+      </div>
+      <div class="footline reveal"><span>Mehr Design · gleiche Marke</span><span>02</span></div>
+    </section>
+
+    <!-- ===== SLIDE 5 — STUFE 3: BOLD POSTER (Titel) ===== -->
+    <section class="slide s-bold">
+      <div class="grid-lines"></div>
+      <div class="mark reveal">Bauwerksabdichtung</div>
+      <div class="poster">
+        <h2 class="h-display reveal">DICHT.<br>FÜR <span class="lime">IMMER.</span></h2>
+        <p class="kick reveal">Wenn Wasser keine Chance bekommt — Injektionstechnik, die Substanz dauerhaft schützt.</p>
+      </div>
+      <i class="fas fa-arrow-right arrow reveal"></i>
+    </section>
+
+    <!-- ===== SLIDE 6 — STUFE 3: BOLD STATEMENT (Zahl) ===== -->
+    <section class="slide s-stat">
+      <div class="mark reveal">Wirkung in Zahlen</div>
+      <div class="center">
+        <div class="fig reveal">0%</div>
+        <div class="label h-display reveal" style="letter-spacing:-0.02em;">RESTFEUCHTE NACH SANIERUNG</div>
+        <div class="sub reveal">Messbar trockene Wände — geprüft, dokumentiert, garantiert.</div>
+      </div>
+    </section>
+
+    <!-- ===== SLIDE 7 — FINAL: Vergleich + Engine-Vorteile ===== -->
+    <section class="slide s-final">
+      <div class="wrap">
+        <div class="eyebrow reveal">Deine Entscheidung</div>
+        <h2 class="h-display reveal">WELCHE STUFE FÜR WELCHEN ANLASS?</h2>
+        <div class="cards">
+          <div class="card reveal">
+            <div class="lv">Stufe 01</div>
+            <h3>Glas</h3>
+            <p>Der heutige BKM-Stil. Ruhig, seriös, foto-fähig. Ideal für Produkt- und Kunden-Präsentationen, Datenblätter, Standard-Decks.</p>
+          </div>
+          <div class="card reveal r-d3">
+            <div class="lv">Stufe 02</div>
+            <h3>Editorial</h3>
+            <p>Mehr Design, gleiche Marke. Große Typo, Regelwerk-Linien, Kennzahlen-Kacheln. Für Strategie, Investor-Updates, Magazin-Charakter.</p>
+          </div>
+          <div class="card reveal r-d4">
+            <div class="lv">Stufe 03</div>
+            <h3>Bold Poster</h3>
+            <p>Maximale Signalwirkung. Übergröße + Lime-Akzent. Für Pitches, Messen, Vision &amp; Manifest — wenn ein Satz wirken muss.</p>
+          </div>
+        </div>
+      </div>
+      <div class="engine">
+        <div class="e reveal"><i class="fas fa-expand"></i> Skaliert auf jedes Gerät</div>
+        <div class="e reveal r-d2"><i class="fas fa-file-pdf"></i> PDF-Export</div>
+        <div class="e reveal r-d3"><i class="fas fa-link"></i> Teilbarer Live-Link</div>
+        <div class="e reveal r-d4"><i class="fas fa-file-powerpoint"></i> PPTX-Import</div>
+        <div class="e reveal r-d5"><i class="fas fa-keyboard"></i> Tastatur &amp; Touch</div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- Navigations-Chrome (außerhalb der Bühne) -->
+<div class="deck-controls" id="controls">
+  <button id="prev" aria-label="Zurück"><i class="fas fa-chevron-left"></i></button>
+  <span class="count"><span id="cur">1</span> / <span id="tot">7</span></span>
+  <button id="next" aria-label="Weiter"><i class="fas fa-chevron-right"></i></button>
+</div>
+
+<script>
+/* ===========================================
+   FIXED-STAGE CONTROLLER (frontend-slides Modell)
+   - skaliert 1920×1080 als Ganzes in den Viewport (Letterbox)
+   - Tastatur (←/→/Space/Home/End/Ziffern), Touch-Swipe, Klick
+   =========================================== */
+class Deck {
+  constructor() {
+    this.stage = document.getElementById('deckStage');
+    this.slides = Array.from(this.stage.querySelectorAll('.slide'));
+    this.i = 0;
+    document.getElementById('tot').textContent = this.slides.length;
+    this.fit(); this.show(0);
+    addEventListener('resize', () => this.fit());
+    this.keys(); this.touch();
+    document.getElementById('next').onclick = () => this.go(this.i + 1);
+    document.getElementById('prev').onclick = () => this.go(this.i - 1);
+  }
+  fit() {
+    const s = Math.min(innerWidth / 1920, innerHeight / 1080);
+    const x = (innerWidth - 1920 * s) / 2;
+    const y = (innerHeight - 1080 * s) / 2;
+    this.stage.style.transform = `translate(${x}px, ${y}px) scale(${s})`;
+  }
+  show(n) {
+    this.slides.forEach((sl, k) => {
+      sl.classList.toggle('active', k === n);
+      sl.classList.toggle('visible', k === n);
+    });
+    document.getElementById('cur').textContent = n + 1;
+  }
+  go(n) { this.i = Math.max(0, Math.min(this.slides.length - 1, n)); this.show(this.i); }
+  keys() {
+    addEventListener('keydown', e => {
+      if (['ArrowRight',' ','PageDown'].includes(e.key)) { this.go(this.i + 1); e.preventDefault(); }
+      else if (['ArrowLeft','PageUp'].includes(e.key)) { this.go(this.i - 1); e.preventDefault(); }
+      else if (e.key === 'Home') this.go(0);
+      else if (e.key === 'End') this.go(this.slides.length - 1);
+      else if (/^[1-9]$/.test(e.key)) this.go(parseInt(e.key,10) - 1);
+    });
+  }
+  touch() {
+    let x0 = null;
+    addEventListener('touchstart', e => x0 = e.touches[0].clientX, {passive:true});
+    addEventListener('touchend', e => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 50) this.go(this.i + (dx < 0 ? 1 : -1));
+      x0 = null;
+    }, {passive:true});
+  }
+}
+new Deck();
+</script>
+</body>
+</html>

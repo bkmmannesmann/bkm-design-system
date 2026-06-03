@@ -6,7 +6,7 @@
 
 | Skill | Beschreibung | Output |
 |-------|-------------|--------|
-| [bkm-slides](bkm-slides/SKILL.md) | Visuell ansprechende HTML-Präsentationen | Einzelne HTML-Dateien |
+| [bkm-slides](bkm-slides/SKILL.md) | Visuell ansprechende HTML-Präsentationen (v5: 4 Stil-Familien, Fixed-Stage, Auswahl-Workflow) | Einzelne HTML-Dateien |
 | [bkm-website](bkm-website/SKILL.md) | React-Websites und Web-Apps | React + Tailwind Projekte |
 | [bkm-social](bkm-social/SKILL.md) | Social-Media-Grafiken und Vorlagen | PNG/JPG oder HTML-Vorlagen |
 

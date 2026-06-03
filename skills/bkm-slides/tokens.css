@@ -1,0 +1,66 @@
+/* =============================================================================
+ * BKM Slides — Kanonische Design-Tokens
+ * Single Source of Truth für alle Familien. Werte stammen aus ../../DESIGN.md.
+ * Familien (templates/<slug>/) und neue Decks binden diese Variablen, statt
+ * :root je Datei zu duplizieren.
+ *
+ * NUTZUNG:
+ *  - Im Repo / bei Deploy:  <link rel="stylesheet" href="../tokens.css">
+ *  - Self-contained Deck (SendUserFile/Export): diesen :root-Block in die
+ *    Deck-Datei inlinen (Decks müssen eigenständig rendern).
+ *  - Abgeleitete Töne sind als „DERIVED" markiert (nicht in DESIGN.md, via
+ *    Abdunkeln/Aufhellen von Marken-Tönen entstanden — erlaubt lt. Anti-Slop).
+ * ========================================================================== */
+
+:root {
+  /* ---- Marken-Kernfarben (DESIGN.md) ------------------------------------ */
+  --deep-green: #1c4b42;        /* primary · Feuchte/Problem · dunkle Leitfarbe */
+  --lime: #b4e717;              /* secondary · High-Contrast-Signal · NUR BKM AG */
+  --transition-green: #287d4b;  /* tertiary · Prozess · Links/Headlines hell */
+  --pure-green: #4daf46;        /* Fachbetrieb-Identität · Lösung/Endzustand */
+  --sand: #f6f5f2;              /* neutral · Sand White · warme helle Fläche */
+  --stone-grey: #494949;        /* Textfarbe (nie dominante Fläche!) */
+  --white: #ffffff;
+
+  /* on-color (Textfarbe auf der jeweiligen Fläche) */
+  --on-secondary: #1c4b42;      /* Deep Green auf Lime (z. B. Button-Text) */
+
+  /* ---- Abgeleitete Töne (DERIVED, nicht in DESIGN.md) ------------------- */
+  --deep-green-2: #0f2620;      /* DERIVED: abgedunkeltes Deep Green — Verlauf/Letterbox */
+  --deep-green-1: #235a4f;      /* DERIVED: aufgehelltes Deep Green — Radial-Start */
+  --paper: #f5f0eb;             /* DERIVED: wärmere Sand-Variante (Editorial-Canvas) */
+  --card-dark: #122e27;         /* DERIVED: dunkle Karten-Fläche auf Deep Green */
+
+  /* ---- Semantische Rollen ---------------------------------------------- */
+  /* Dunkel (BKM AG):  Fläche Deep Green, Signal Lime, Text Weiß
+   * Hell (Fachbetrieb): Fläche Sand/Weiß, Akzent Pure/Transition Green,
+   *                     Text Transition Green/Stone Grey, KEIN Lime         */
+  --stage-bg: var(--deep-green-2);     /* Letterbox hinter der skalierten Bühne */
+
+  /* ---- Typografie (DESIGN.md) ------------------------------------------ */
+  --font-display: 'Unbounded', sans-serif;
+  --font-body: 'TT Norms Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --weight-display: 900;     /* Headlines IMMER Unbounded 900 */
+  --weight-bold: 700;        /* Body-Bold / Labels */
+  --weight-body: 400;
+  /* Casing-Regel: H1 UPPERCASE, H2–H6 sentence case (oder UPPERCASE erlaubt) —
+   * NIE kursiv, keine Fremd-Akzentschrift. Akzent über Farbe. */
+  --tracking-display: -0.04em;   /* enges Tracking für große Unbounded */
+  --tracking-label: 0.14em;      /* UPPERCASE-Labels/Eyebrows */
+
+  /* ---- Radius (8px-Regel) ---------------------------------------------- */
+  --radius: 8px;             /* Standard-Flächen (Tags, Kacheln, Buttons) */
+  --radius-glass: 24px;      /* große Glas-Cards */
+  --radius-pill: 999px;      /* Pills/Controls */
+
+  /* ---- Bewegung -------------------------------------------------------- */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-fast: .2s;
+  --motion: .7s;
+
+  /* ---- Fixed-Stage (ENGINE.md) ---------------------------------------- */
+  --stage-w: 1920px;
+  --stage-h: 1080px;
+  --pad-x: 140px;            /* Standard-Seitenabstand der Inhalte */
+}

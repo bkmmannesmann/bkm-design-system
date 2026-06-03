@@ -1,6 +1,9 @@
 # BKM Slides — Style Presets (v3)
 
-> Exakte CSS-Token für beide BKM-Kontexte. Alle Werte sind **verbindlich** — nicht interpretieren, sondern 1:1 kopieren. Basierend auf getesteten, freigegebenen Slides.
+> **Referenz (gültig in v5).** Exakte CSS-Token für beide BKM-Kontexte. Diese Glasmorphismus-
+> Token leben in v5 in den Familien `bkm-glass-ag` / `bkm-glass-fachbetrieb`
+> (`templates/<slug>/design.md`). Für ein neues Deck dem Workflow in `SKILL.md` folgen;
+> diese Datei dient als Token-Nachschlagewerk.
 
 ---
 
@@ -398,15 +401,14 @@ Nur 3 Stufen. Keine Ausnahmen. Kein TT Norms Pro im Repo nötig — `system-ui` 
 ```css
 .keyvisual {
   position: absolute;
-  top: 0;
-  right: 0;
-  height: 100%;
-  width: 22%;                 /* Exakt 1/5 der Breite + etwas Bleed */
-  object-fit: cover;
-  object-position: left center;
-  opacity: 0.18;              /* BKM AG auf dunkel */
-  /* opacity: 0.15;            /* Fachbetrieb auf hell */
-  z-index: 5;
+  right: 0;                    /* bündig mit rechtem Folienrand */
+  top: 50%;
+  transform: translateY(-50%); /* vertikal zentriert */
+  height: 560px;               /* ~52% der Folie, vollständig sichtbar */
+  width: auto;                 /* nicht angeschnitten, oben/unten frei */
+  opacity: 0.85;
+  pointer-events: none;
+  z-index: 0;                  /* hinter Inhalts-Cards/Text */
 }
 ```
 
@@ -581,16 +583,20 @@ Nur 3 Stufen. Keine Ausnahmen. Kein TT Norms Pro im Repo nötig — `system-ui` 
 
 ### Keyvisual-Verwendung
 
-| Kontext | Hintergrund | Keyvisual-Datei |
-|---------|-------------|-----------------|
-| BKM AG | Dunkel | `keyvisual-on-dark.svg` |
-| Fachbetrieb | Hell | `keyvisual-on-light.svg` |
+Variante **nach Hintergrund** wählen (nicht nach Familie):
+
+| Hintergrund | Keyvisual-Datei |
+|-------------|-----------------|
+| Dunkel (Deep Green o. ä.) | `keyvisual-on-dark.png` (weiß) |
+| Hell (Sand / Paper) | `keyvisual-on-light.png` (grün) |
+
+> Kompakte PNGs (~50 KB) zum Einbetten; `.svg` daneben als Voll-Vektor-Quelle.
 
 **Keyvisual-Regeln:**
-- Immer am **rechten Rand**, immer **angeschnitten**
-- Breite: **22%** der Slide-Breite (≈ 1/5)
-- Opacity: **0.18** (BKM AG) / **0.15** (Fachbetrieb)
-- Nur auf **Titelseiten** verwenden
+- Rechte Kante **bündig** mit dem Folienrand, **vertikal zentriert**
+- **Vollständig sichtbar** — nicht angeschnitten, oben/unten frei
+- Höhe ~**560px** (≈52 % der Folie), Opacity ~**0.85**
+- Nur auf **Titelseiten/Deckblättern** verwenden
 - Nie links, nie mittig, nie gedreht, nie gespiegelt
 
 ---

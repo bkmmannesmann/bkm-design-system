@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "pack_name": "BKM Mannesmann — Slide Template Pack",
+  "source_design_system": "bkmmannesmann/bkm-design-system",
+  "engine": "frontend-slides (zarazhangrui/frontend-slides)",
+  "usage": {
+    "selection": "Diesen kompakten Index zuerst lesen, um Kandidaten anhand der Metadaten zu finden.",
+    "previews": "Für Titel-Slide-Vorschauen nur die preview_md der engeren Auswahl lesen.",
+    "final_generation": "Nach der Stil-Wahl genau eine design_md vor dem Bau des vollen Decks lesen.",
+    "never": "Niemals alle design_md gleichzeitig lesen."
+  },
+  "brand_policy": {
+    "track_standard": "Marken-Lock. Nur freigegebene Familien, strikte BKM-Token. Default für Kunden/Produkt/Print-nahe Decks.",
+    "track_creative": "Expressiver Track für interne/Pitch/Vision-Decks. Mehr Layout-Freiheit, ABER weiterhin ausschließlich BKM-Farben (Deep Green, Lime, Sand, Pure Green, Stone Grey) und Unbounded. Keine fremden Paletten/Fonts.",
+    "non_negotiable": [
+      "Nur BKM-Farben aus DESIGN.md — keine fremden Akzentfarben.",
+      "Headlines Unbounded 900 — UPPERCASE (Standard) oder Mixed-Case erlaubt; nie kursiv, keine Fremd-Akzentschrift.",
+      "Lime nur als Signal/Akzent, nie als dekorative Vollfläche (außer Buttons/Marks).",
+      "Lime erscheint NIE im Fachbetrieb-Kontext.",
+      "Fixed-Stage 1920×1080, skaliert als Ganzes."
+    ]
+  },
+  "frontend_slides_policy": {
+    "layout_model": "fixed-stage",
+    "canvas_width": 1920,
+    "canvas_height": 1080,
+    "scaling": "scale-stage-to-viewport",
+    "mobile_behavior": "16:9-Bühne erhalten; letterboxen statt Inhalt umbrechen"
+  },
+  "templates": [
+    {
+      "slug": "bkm-glass-ag",
+      "name": "BKM AG · Glas",
+      "track": "standard",
+      "tagline": "Frosted-Glass-Cards auf Deep Green oder Foto-Hintergrund mit grünem Overlay.",
+      "mood": ["seriös", "schützend", "premium", "technisch-ruhig"],
+      "tone": ["vertrauenswürdig", "corporate", "klar"],
+      "formality": "medium-high",
+      "density": "medium",
+      "scheme": "dark",
+      "context": "BKM AG",
+      "accent": "#b4e717",
+      "best_for": "Corporate-, Produkt-, Marketing- und Investor-Decks der BKM Mannesmann AG. Der sichere Standard, wenn Seriosität und Markenwiedererkennung zählen.",
+      "avoid_for": "Fachbetrieb-Kontext (dort kein Lime, heller Grund). Sehr datendichte Tabellen-Slides.",
+      "preview_md": "templates/bkm-glass-ag/preview.md",
+      "design_md": "templates/bkm-glass-ag/design.md"
+    },
+    {
+      "slug": "bkm-glass-fachbetrieb",
+      "name": "Fachbetrieb · Glas",
+      "track": "standard",
+      "tagline": "Helle Frosted-Glass-Cards auf Sand/Foto, Pure-Green-Akzente, Stone-Grey-Text.",
+      "mood": ["zugänglich", "handwerklich-seriös", "hell", "vertrauensvoll"],
+      "tone": ["partnerschaftlich", "klar", "bodenständig"],
+      "formality": "medium",
+      "density": "medium",
+      "scheme": "light",
+      "context": "Fachbetrieb",
+      "accent": "#4daf46",
+      "best_for": "Fachbetrieb-Seiten, Partner- und Kunden-Pitches. Heller, nahbarer Auftritt mit Sand-Dominanz.",
+      "avoid_for": "Niemals Lime verwenden. Nicht für reine BKM-AG-Corporate-Kommunikation.",
+      "preview_md": "templates/bkm-glass-fachbetrieb/preview.md",
+      "design_md": "templates/bkm-glass-fachbetrieb/design.md"
+    },
+    {
+      "slug": "bkm-editorial",
+      "name": "BKM · Editorial",
+      "track": "creative",
+      "tagline": "Magazin-Charakter: große Unbounded-Headlines, 4px-Regelwerk-Linien, Kennzahlen-Kacheln auf Sand.",
+      "mood": ["editorial", "selbstbewusst", "strukturiert", "wertig"],
+      "tone": ["redaktionell", "klar", "modern"],
+      "formality": "medium-high",
+      "density": "medium-high",
+      "scheme": "light",
+      "context": "Beide",
+      "accent": "#4daf46",
+      "best_for": "Strategie-Updates, Quartalsreviews, Investor-Reports, datenreiche Decks mit Kennzahlen, die wertig und redaktionell wirken sollen.",
+      "avoid_for": "Sehr knappe, einzeilige Aussage-Slides (dafür Bold Poster nutzen).",
+      "preview_md": "templates/bkm-editorial/preview.md",
+      "design_md": "templates/bkm-editorial/design.md"
+    },
+    {
+      "slug": "bkm-bold-poster",
+      "name": "BKM · Bold Poster",
+      "track": "creative",
+      "tagline": "Übergroße Unbounded-Statements auf Deep Green mit scharfem Lime-Signal.",
+      "mood": ["mutig", "laut", "selbstbewusst", "plakativ"],
+      "tone": ["dramatisch", "grafisch", "pointiert"],
+      "formality": "medium",
+      "density": "low",
+      "scheme": "dark",
+      "context": "BKM AG",
+      "accent": "#b4e717",
+      "best_for": "Pitches, Messen, Titel-Folien, Vision- und Manifest-Momente — wenn ein einzelner Satz oder eine Zahl maximal wirken muss.",
+      "avoid_for": "Datendichte Inhalte, viele Aufzählungen, Fachbetrieb-Kontext (kein Lime).",
+      "preview_md": "templates/bkm-bold-poster/preview.md",
+      "design_md": "templates/bkm-bold-poster/design.md"
+    }
+  ]
+}
