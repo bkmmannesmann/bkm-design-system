@@ -52,7 +52,7 @@ python3 tools/deck_builder.py meine-folien.json -o mein-deck.html [--strict]
 | `quote` | `eyebrow, text, source` |
 | `table` | `eyebrow, title, columns:[…], rows:[[…]], highlight:<spaltenindex>` |
 | `compare` | `eyebrow, title, columns:[{badge,title,win,items:[…]}] (2), foot` |
-| `chart` | `eyebrow, title, bars:[{label,value,display,hi}], note:{h,p,cap}` |
+| `chart` | `eyebrow, title, bars:[{label,value,display,hi}]` **oder** `line:[{label,value,display,hi}]` (Linien-/Kurvendiagramm), `note:{h,p,cap}` |
 | `process` | `eyebrow, title, steps:[{h,p}]` |
 | `timeline` | `eyebrow, title, points:[{yr,h,p}]` |
 | `closing` | `eyebrow, title, chips:[…], punch` |

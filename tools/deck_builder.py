@@ -165,6 +165,19 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--stage-bg);font
 .gen-note h3 .g{color:var(--lime);}
 .gen-note p{font-size:18px;color:rgba(255,255,255,0.72);margin-top:16px;line-height:1.5;}
 .gen-note .cap{font-size:13px;color:rgba(255,255,255,0.5);margin-top:24px;text-transform:uppercase;letter-spacing:0.08em;}
+/* Liniendiagramm (Trends-Kurve) */
+.gen-line{position:relative;height:392px;border-bottom:2px solid rgba(255,255,255,0.18);}
+.gen-line svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;}
+.gen-line .dot{position:absolute;width:13px;height:13px;border-radius:50%;background:var(--lime);border:2px solid var(--deep2);transform:translate(-50%,-50%);z-index:2;}
+.gen-line .dot.hi{width:18px;height:18px;box-shadow:0 0 0 6px rgba(180,231,23,0.16);}
+.gen-line .dot .cv{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);font-family:var(--font-display);font-weight:900;font-size:21px;color:var(--lime);white-space:nowrap;}
+.gen-chart-wrap .lbls{position:relative;height:22px;margin-top:10px;}
+.gen-chart-wrap .lbls span{position:absolute;transform:translateX(-50%);font-size:13px;color:rgba(255,255,255,0.6);white-space:nowrap;}
+.fam-fachbetrieb .gen-line{border-bottom-color:rgba(28,75,66,0.18);}
+.fam-fachbetrieb .gen-line polyline{stroke:var(--pure-green);}
+.fam-fachbetrieb .gen-line .dot{background:var(--pure-green);border-color:#f1ede6;}
+.fam-fachbetrieb .gen-line .dot .cv{color:var(--transition-green);}
+.fam-fachbetrieb .gen-chart-wrap .lbls span{color:var(--stone-grey);}
 /* Kapitel-Trenner */
 .gen-chapter{position:absolute;left:140px;top:50%;transform:translateY(-50%);z-index:2;}
 .gen-chapter .big{font-family:var(--font-display);font-weight:900;font-size:300px;line-height:0.78;color:rgba(255,255,255,0.12);letter-spacing:-0.04em;}
@@ -571,6 +584,31 @@ def r_compare(d, fam):
     return head_block(d,'compare',fam) + '<div class="gen-grid g2 cmp">%s</div>%s' % (cards, foot)
 
 def r_chart(d, fam):
+    note = d.get('note', {})
+    nb = ('<div class="gen-note reveal d3"><h3>%s</h3>%s%s</div>' % (
+          acc(note.get('h','')),
+          ('<p>%s</p>' % acc(note['p'])) if note.get('p') else '',
+          ('<div class="cap">%s</div>' % esc(note['cap'])) if note.get('cap') else '')) if note else ''
+    line = d.get('line')
+    if line:  # Liniendiagramm (z. B. Trends-Kurve)
+        n = len(line); mx = max([float(p.get('value',0) or 0) for p in line] + [1])
+        coords = [((i/(n-1)*100) if n > 1 else 0, 100 - float(p.get('value',0) or 0)/mx*100) for i, p in enumerate(line)]
+        poly = ' '.join('%.2f,%.2f' % c for c in coords)
+        area = 'M0,100 L ' + ' L '.join('%.2f,%.2f' % c for c in coords) + ' L 100,100 Z'
+        dots = ''; labels = ''
+        for i, p in enumerate(line):
+            x, top = coords[i]
+            cv = ('<span class="cv">%s</span>' % esc(p['display'])) if p.get('display') else ''
+            dots += '<div class="dot%s" style="left:%.2f%%;top:%.2f%%">%s</div>' % (' hi' if p.get('hi') else '', x, top, cv)
+            if p.get('label'): labels += '<span style="left:%.2f%%">%s</span>' % (x, esc(p['label']))
+        svg = ('<svg viewBox="0 0 100 100" preserveAspectRatio="none"><defs>'
+               '<linearGradient id="lg" x1="0" y1="0" x2="0" y2="1">'
+               '<stop offset="0" stop-color="var(--lime)" stop-opacity="0.32"/>'
+               '<stop offset="1" stop-color="var(--lime)" stop-opacity="0"/></linearGradient></defs>'
+               '<path d="%s" fill="url(#lg)"/><polyline points="%s" fill="none" stroke="var(--lime)" '
+               'stroke-width="2.5" vector-effect="non-scaling-stroke" stroke-linejoin="round" stroke-linecap="round"/></svg>' % (area, poly))
+        cell = '<div class="reveal d2"><div class="gen-line">%s%s</div><div class="lbls">%s</div></div>' % (svg, dots, labels)
+        return head_block(d,'chart',fam) + '<div class="gen-chart-wrap">%s%s</div>' % (cell, nb)
     bars = d.get('bars', []); mx = max([float(b.get('value',0) or 0) for b in bars] + [1])
     bs = ''
     for b in bars:
@@ -578,11 +616,6 @@ def r_chart(d, fam):
         hi = ' hi' if b.get('hi') else ''
         bs += ('<div class="bar%s"><div class="val">%s</div><div class="col" style="height:%d%%"></div>'
                '<div class="lbl">%s</div></div>' % (hi, esc(b.get('display', b.get('value',''))), h, esc(b.get('label',''))))
-    note = d.get('note', {})
-    nb = ('<div class="gen-note reveal d3"><h3>%s</h3>%s%s</div>' % (
-          acc(note.get('h','')),
-          ('<p>%s</p>' % acc(note['p'])) if note.get('p') else '',
-          ('<div class="cap">%s</div>' % esc(note['cap'])) if note.get('cap') else '')) if note else ''
     return head_block(d,'chart',fam) + '<div class="gen-chart-wrap"><div class="gen-chart reveal d2">%s</div>%s</div>' % (bs, nb)
 
 def r_chapter(d, fam):
@@ -837,11 +870,13 @@ RENDER = {'cover':r_cover,'cards':r_cards,'kpi':r_kpi,'split':r_split,'quote':r_
 
 # Bild einbetten (Pfad relativ zum Spec) — fallback: Textur als Platzhalter
 SPEC_DIR = '.'
+_MIME = {'jpg':'jpeg','jpeg':'jpeg','png':'png','webp':'webp','gif':'gif','svg':'svg+xml','avif':'avif','bmp':'bmp'}
 def embed_img(path):
     p = path if os.path.isabs(path) else os.path.join(SPEC_DIR, path)
     if os.path.exists(p):
-        ext = 'jpeg' if p.lower().endswith(('.jpg','.jpeg')) else 'png'
-        return 'data:image/%s;base64,%s' % (ext, base64.b64encode(open(p,'rb').read()).decode())
+        ext = p.lower().rsplit('.', 1)[-1]
+        mime = _MIME.get(ext, 'png')
+        return 'data:image/%s;base64,%s' % (mime, base64.b64encode(open(p, 'rb').read()).decode())
     return TEX[2]
 
 # ======================= Komposition / Auto-Mix =======================
