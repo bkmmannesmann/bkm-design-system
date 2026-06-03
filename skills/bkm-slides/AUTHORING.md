@@ -29,7 +29,7 @@ python3 tools/deck_builder.py meine-folien.json -o mein-deck.html [--strict]
 
 ```json
 {
-  "family": "bkm-glass-ag",          // oder "bkm-bold-poster" (beide = BKM AG)
+  "family": "bkm-glass-ag", // bkm-glass-ag | bkm-bold-poster | bkm-glass-fachbetrieb | bkm-editorial
   "meta": { "title": "…", "tagtop": "BKM AG" },
   "slides": [ { "type": "cover", … }, … ]
 }
@@ -96,7 +96,7 @@ Kundenstimme→`quote` · Kernaussage→`statement`.
 > Schema in `skills/bkm-slides/AUTHORING.md` um. Wähle pro Folie den **passenden `type`**,
 > sorge für **abwechslungsreiche Typen** (nicht 3× derselbe in Folge; alle ~6–8 Folien ein
 > `chapter`/`subhead`), nutze `{{…}}` für **ein** Akzentwort je Headline. `family`:
-> `bkm-glass-ag` (Standard) oder `bkm-bold-poster` (laute Statements). **Gib NUR gültiges
+> `bkm-glass-ag`/`bkm-bold-poster` (BKM AG) oder `bkm-glass-fachbetrieb` (hell)/`bkm-editorial` (Paper). **Gib NUR gültiges
 > JSON aus — kein HTML, kein CSS.** Das Rendering macht `tools/deck_builder.py`.
 
 So bleibt das Ergebnis konsistent — der Agent trifft nur Inhalts-/Struktur-Entscheidungen,

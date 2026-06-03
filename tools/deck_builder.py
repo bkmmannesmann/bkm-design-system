@@ -357,6 +357,72 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--stage-bg);font
 .notes-panel.on{display:block;}
 .notes-panel .nh{font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--lime);font-weight:700;margin-bottom:10px;}
 .notes-panel .nb{font-size:17px;line-height:1.6;white-space:pre-wrap;}
+/* ===== Fachbetrieb-Theme (hell, Sand, kein Lime; additiv) ===== */
+.fam-fachbetrieb{color:var(--stone-grey);}.fam-fachbetrieb .deck-viewport{background:#dad6cd;}
+.fam-fachbetrieb .gen-h,.fam-fachbetrieb .gen-h1{color:var(--transition-green);}
+.fam-fachbetrieb h3{color:var(--deep-green);}
+.fam-fachbetrieb .gen-eyebrow,.fam-fachbetrieb .g{color:var(--pure-green);}
+.fam-fachbetrieb .gen-lead,.fam-fachbetrieb p,.fam-fachbetrieb .gen-li p,.fam-fachbetrieb .gen-sub,.fam-fachbetrieb .gen-bigstat .sub,.fam-fachbetrieb .gen-note p,.fam-fachbetrieb .gen-foot,.fam-fachbetrieb .gen-punch{color:var(--stone-grey);}
+.fam-fachbetrieb .tagtop{color:var(--transition-green);}.fam-fachbetrieb .pg{color:var(--pure-green);}
+.fam-fachbetrieb .gen-card,.fam-fachbetrieb .gen-panel,.fam-fachbetrieb .gen-pricing .plan,.fam-fachbetrieb .gen-flow .step,.fam-fachbetrieb .gen-bento .cell,.fam-fachbetrieb .gen-funnel .tier{background:rgba(255,255,255,0.55);border-color:rgba(28,75,66,0.12);backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:0 12px 40px rgba(28,75,66,0.08);}
+.fam-fachbetrieb .ic,.fam-fachbetrieb .gen-li .ic{background:var(--pure-green);color:#fff;}
+.fam-fachbetrieb .gen-btn,.fam-fachbetrieb .badge,.fam-fachbetrieb .gen-pricing .badge{background:var(--pure-green);color:#fff;}
+.fam-fachbetrieb .gen-chips .v{border-color:rgba(77,175,70,0.5);color:var(--transition-green);}
+.fam-fachbetrieb .gen-grid.kpis .n,.fam-fachbetrieb .gen-bigstat .huge,.fam-fachbetrieb .gen-donut .center .v,.fam-fachbetrieb .gen-gauge .center .v{color:var(--transition-green);}
+.fam-fachbetrieb .gen-numlist .no,.fam-fachbetrieb .gen-process .no,.fam-fachbetrieb .gen-agenda .time,.fam-fachbetrieb .gen-funnel .tier .v,.fam-fachbetrieb .gen-cluster .node .v,.fam-fachbetrieb .gen-tl-wrap .yr,.fam-fachbetrieb .gen-picto .grp .v{color:var(--pure-green);}
+.fam-fachbetrieb .gen-bigstat .huge .g{color:var(--pure-green);}
+.fam-fachbetrieb .gen-table .tr.head .c,.fam-fachbetrieb .gen-table .tr .c.hi{color:var(--pure-green);}
+.fam-fachbetrieb .gen-table .tr .c{color:var(--stone-grey);}.fam-fachbetrieb .gen-table .tr .c:first-child{color:var(--deep-green);}
+.fam-fachbetrieb .gen-table .tr{border-bottom-color:rgba(28,75,66,0.1);}.fam-fachbetrieb .gen-table .tr.head{border-bottom-color:rgba(77,175,70,0.45);}
+.fam-fachbetrieb .gen-table .tr:not(.head):nth-of-type(2n){background:rgba(255,255,255,0.55);}.fam-fachbetrieb .gen-table .tr:not(.head):nth-of-type(2n+1){background:rgba(232,229,227,0.6);}
+.fam-fachbetrieb .gen-agenda .row,.fam-fachbetrieb .gen-process .row,.fam-fachbetrieb .gen-numlist .row{border-bottom-color:rgba(28,75,66,0.1);}
+.fam-fachbetrieb .gen-agenda .row:nth-child(odd),.fam-fachbetrieb .gen-process .row:nth-child(odd){background:rgba(232,229,227,0.55);}.fam-fachbetrieb .gen-agenda .row:nth-child(even),.fam-fachbetrieb .gen-process .row:nth-child(even){background:rgba(255,255,255,0.55);}
+.fam-fachbetrieb .gen-agenda .topic,.fam-fachbetrieb .gen-process h3,.fam-fachbetrieb .gen-grid .gen-card h3,.fam-fachbetrieb .gen-bento .cell h3,.fam-fachbetrieb .gen-flow .step h3,.fam-fachbetrieb .gen-pricing .nm,.fam-fachbetrieb .gen-tl-wrap .item h3,.fam-fachbetrieb .gen-team .nm,.fam-fachbetrieb .gen-grid.cmp h3,.fam-fachbetrieb .gen-contact .b .v,.fam-fachbetrieb .gen-numlist .tx{color:var(--deep-green);}
+.fam-fachbetrieb .gen-agenda .topic small,.fam-fachbetrieb .gen-agenda .spk,.fam-fachbetrieb .gen-process p,.fam-fachbetrieb .gen-grid .gen-card p,.fam-fachbetrieb .gen-bento .cell p,.fam-fachbetrieb .gen-flow .step p,.fam-fachbetrieb .gen-pricing li,.fam-fachbetrieb .gen-pricing .per,.fam-fachbetrieb .gen-grid.cmp li,.fam-fachbetrieb .gen-tl-wrap .item p,.fam-fachbetrieb .gen-team .ro,.fam-fachbetrieb .gen-cluster .node .l,.fam-fachbetrieb .gen-picto .grp .l{color:var(--stone-grey);}
+.fam-fachbetrieb .gen-agenda .no{color:rgba(28,75,66,0.3);}
+.fam-fachbetrieb .gen-chart{border-bottom-color:rgba(28,75,66,0.18);}.fam-fachbetrieb .gen-chart .col{background:rgba(28,75,66,0.14);}.fam-fachbetrieb .gen-chart .bar.hi .col{background:var(--pure-green);}.fam-fachbetrieb .gen-chart .val{color:var(--transition-green);}.fam-fachbetrieb .gen-chart .bar.hi .val{color:var(--pure-green);}.fam-fachbetrieb .gen-chart .lbl{color:var(--stone-grey);}
+.fam-fachbetrieb .gen-note h3,.fam-fachbetrieb .gen-gauge-note h3{color:var(--transition-green);}.fam-fachbetrieb .gen-note h3 .g,.fam-fachbetrieb .gen-gauge-note h3 .g{color:var(--pure-green);}.fam-fachbetrieb .gen-note .cap{color:var(--transition-green);}.fam-fachbetrieb .gen-gauge-note p{color:var(--stone-grey);}
+.fam-fachbetrieb .gen-donut::after,.fam-fachbetrieb .gen-gauge::after{background:#f1ede6;}.fam-fachbetrieb .gen-donut .center .l,.fam-fachbetrieb .gen-gauge .center .l{color:var(--stone-grey);}.fam-fachbetrieb .gen-legend .row,.fam-fachbetrieb .gen-legend .pct{color:var(--deep-green);}
+.fam-fachbetrieb .gen-grid.cmp .gen-card.win{border-color:rgba(77,175,70,0.45);}.fam-fachbetrieb .gen-grid.cmp .badge{background:rgba(28,75,66,0.08);color:var(--stone-grey);}.fam-fachbetrieb .gen-grid.cmp .win .badge{background:rgba(77,175,70,0.16);color:var(--transition-green);}.fam-fachbetrieb .gen-grid.cmp li.yes i{color:var(--pure-green);}.fam-fachbetrieb .gen-grid.cmp li.no i{color:rgba(73,73,73,0.4);}
+.fam-fachbetrieb .g-quote .gen-quote-mark{color:var(--pure-green);opacity:0.2;}.fam-fachbetrieb .g-quote blockquote{color:var(--transition-green);}.fam-fachbetrieb .g-quote blockquote .g{color:var(--pure-green);}.fam-fachbetrieb .g-quote .gen-who .ln{background:var(--pure-green);}.fam-fachbetrieb .g-quote .gen-who span{color:var(--pure-green);}
+.fam-fachbetrieb .gen-team .av{background:rgba(28,75,66,0.08);color:var(--pure-green);border-color:rgba(77,175,70,0.3);}
+.fam-fachbetrieb .gen-cluster .node .circle{background:rgba(77,175,70,0.14);border-color:rgba(77,175,70,0.35);}
+.fam-fachbetrieb .gen-numlist .tg{color:var(--pure-green);border-color:rgba(77,175,70,0.4);}
+.fam-fachbetrieb .gen-tl-wrap .line{background:rgba(28,75,66,0.18);}.fam-fachbetrieb .gen-tl-wrap .pt{background:var(--pure-green);box-shadow:0 0 0 7px rgba(77,175,70,0.14);}
+.fam-fachbetrieb .gen-pricing .plan.hi{border-color:rgba(77,175,70,0.5);background:rgba(77,175,70,0.07);}.fam-fachbetrieb .gen-pricing .price{color:var(--pure-green);}.fam-fachbetrieb .gen-pricing li i{color:var(--pure-green);}
+.fam-fachbetrieb .gen-bento .cell.accent{background:rgba(77,175,70,0.12);border-color:rgba(77,175,70,0.4);}
+.fam-fachbetrieb .gen-flow .arr{color:var(--pure-green);}.fam-fachbetrieb .gen-picto .grp .icons i{color:rgba(28,75,66,0.18);}.fam-fachbetrieb .gen-picto .grp .icons i.on{color:var(--pure-green);}
+.fam-fachbetrieb .g-cover .gen-meta .k{color:rgba(73,73,73,0.6);}.fam-fachbetrieb .g-cover .gen-meta .v{color:var(--deep-green);}
+.fam-fachbetrieb .gen-funnel .tier .l{color:var(--stone-grey);}
+
+/* ===== Editorial-Theme (Paper/Ink, flach, Lime nur Signal; additiv) ===== */
+.fam-editorial{color:var(--stone-grey);}.fam-editorial .slide{background:var(--paper);}.fam-editorial .deck-viewport{background:#dad6cd;}
+.fam-editorial .gen-h,.fam-editorial .gen-h1,.fam-editorial h3{color:var(--deep-green);}
+.fam-editorial .gen-eyebrow,.fam-editorial .g{color:var(--pure-green);}
+.fam-editorial .gen-lead,.fam-editorial p,.fam-editorial .gen-li p,.fam-editorial .gen-sub,.fam-editorial .gen-foot,.fam-editorial .gen-punch,.fam-editorial .gen-bigstat .sub{color:var(--stone-grey);}
+.fam-editorial .tagtop{color:var(--transition-green);}.fam-editorial .pg{color:var(--pure-green);}
+.fam-editorial .gen-card,.fam-editorial .gen-panel,.fam-editorial .gen-pricing .plan,.fam-editorial .gen-flow .step,.fam-editorial .gen-bento .cell,.fam-editorial .gen-funnel .tier{background:#fff;border:1px solid rgba(28,75,66,0.12);backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none;}
+.fam-editorial .ic,.fam-editorial .gen-li .ic{background:var(--deep-green);color:var(--lime);}
+.fam-editorial .gen-grid.kpis .n,.fam-editorial .gen-bigstat .huge,.fam-editorial .gen-numlist .no,.fam-editorial .gen-process .no,.fam-editorial .gen-agenda .time,.fam-editorial .gen-funnel .tier .v,.fam-editorial .gen-cluster .node .v,.fam-editorial .gen-tl-wrap .yr,.fam-editorial .gen-picto .grp .v,.fam-editorial .gen-pricing .price{color:var(--pure-green);}
+.fam-editorial .gen-bigstat .huge .g{color:var(--pure-green);}
+.fam-editorial .gen-donut .center .v,.fam-editorial .gen-gauge .center .v{color:var(--deep-green);}.fam-editorial .gen-donut::after,.fam-editorial .gen-gauge::after{background:var(--paper);}.fam-editorial .gen-donut .center .l,.fam-editorial .gen-gauge .center .l{color:var(--stone-grey);}.fam-editorial .gen-legend .row,.fam-editorial .gen-legend .pct{color:var(--deep-green);}.fam-editorial .gen-gauge-note h3{color:var(--deep-green);}.fam-editorial .gen-gauge-note p{color:var(--stone-grey);}
+.fam-editorial .gen-table .tr.head .c,.fam-editorial .gen-table .tr .c.hi{color:var(--pure-green);}.fam-editorial .gen-table .tr .c{color:var(--stone-grey);}.fam-editorial .gen-table .tr .c:first-child{color:var(--deep-green);}.fam-editorial .gen-table .tr{border-bottom-color:rgba(28,75,66,0.1);}.fam-editorial .gen-table .tr.head{border-bottom-color:rgba(28,75,66,0.5);}.fam-editorial .gen-table .tr:not(.head):nth-of-type(2n){background:rgba(255,255,255,0.6);}.fam-editorial .gen-table .tr:not(.head):nth-of-type(2n+1){background:transparent;}
+.fam-editorial .gen-chart{border-bottom-color:rgba(28,75,66,0.18);}.fam-editorial .gen-chart .col{background:rgba(28,75,66,0.14);}.fam-editorial .gen-chart .bar.hi .col{background:var(--lime);}.fam-editorial .gen-chart .val{color:var(--deep-green);}.fam-editorial .gen-chart .lbl{color:var(--stone-grey);}
+.fam-editorial .gen-note h3{color:var(--deep-green);}.fam-editorial .gen-note h3 .g{color:var(--pure-green);}.fam-editorial .gen-note p{color:var(--stone-grey);}.fam-editorial .gen-note .cap{color:var(--transition-green);}
+.fam-editorial .badge,.fam-editorial .gen-pricing .badge{background:var(--deep-green);color:var(--paper);}.fam-editorial .gen-btn{background:var(--deep-green);color:var(--paper);}.fam-editorial .gen-btn i{color:var(--lime);}.fam-editorial .gen-chips .v{border-color:rgba(77,175,70,0.5);color:var(--transition-green);}
+.fam-editorial .g-quote blockquote{color:var(--deep-green);}.fam-editorial .g-quote blockquote .g{color:var(--pure-green);}.fam-editorial .g-quote .gen-quote-mark{color:var(--transition-green);opacity:0.35;}.fam-editorial .g-quote .gen-who span{color:var(--pure-green);}.fam-editorial .g-quote .gen-who .ln{background:var(--pure-green);}
+.fam-editorial .gen-agenda .row:nth-child(even),.fam-editorial .gen-process .row:nth-child(even){background:rgba(255,255,255,0.6);}.fam-editorial .gen-agenda .row:nth-child(odd),.fam-editorial .gen-process .row:nth-child(odd){background:transparent;}.fam-editorial .gen-agenda .row,.fam-editorial .gen-process .row,.fam-editorial .gen-numlist .row{border-bottom-color:rgba(28,75,66,0.12);}
+.fam-editorial .gen-agenda .topic,.fam-editorial .gen-grid .gen-card h3,.fam-editorial .gen-bento .cell h3,.fam-editorial .gen-flow .step h3,.fam-editorial .gen-pricing .nm,.fam-editorial .gen-tl-wrap .item h3,.fam-editorial .gen-team .nm,.fam-editorial .gen-grid.cmp h3,.fam-editorial .gen-contact .b .v,.fam-editorial .gen-numlist .tx{color:var(--deep-green);}
+.fam-editorial .gen-agenda .topic small,.fam-editorial .gen-agenda .spk,.fam-editorial .gen-agenda .no,.fam-editorial .gen-process p,.fam-editorial .gen-grid .gen-card p,.fam-editorial .gen-bento .cell p,.fam-editorial .gen-flow .step p,.fam-editorial .gen-pricing li,.fam-editorial .gen-pricing .per,.fam-editorial .gen-grid.cmp li,.fam-editorial .gen-tl-wrap .item p,.fam-editorial .gen-team .ro,.fam-editorial .gen-cluster .node .l,.fam-editorial .gen-picto .grp .l{color:var(--stone-grey);}
+.fam-editorial .gen-pricing li i,.fam-editorial .gen-flow .arr,.fam-editorial .gen-grid.cmp li.yes i{color:var(--pure-green);}
+.fam-editorial .gen-tl-wrap .pt{background:var(--lime);}.fam-editorial .gen-tl-wrap .line{background:rgba(28,75,66,0.2);}
+.fam-editorial .gen-team .av{background:rgba(28,75,66,0.08);color:var(--pure-green);border-color:rgba(77,175,70,0.3);}.fam-editorial .gen-cluster .node .circle{background:rgba(77,175,70,0.14);border-color:rgba(77,175,70,0.35);}
+.fam-editorial .gen-numlist .tg{color:var(--pure-green);border-color:rgba(77,175,70,0.4);}.fam-editorial .gen-pricing .plan.hi{border-color:rgba(28,75,66,0.4);}.fam-editorial .gen-bento .cell.accent{background:rgba(77,175,70,0.1);border-color:rgba(77,175,70,0.4);}
+.fam-editorial .gen-grid.cmp .gen-card.win{border-color:rgba(28,75,66,0.4);}.fam-editorial .gen-grid.cmp .badge{background:rgba(28,75,66,0.08);color:var(--transition-green);}
+.fam-editorial .g-cover .gen-meta .v{color:var(--deep-green);}.fam-editorial .g-cover .gen-meta .k{color:rgba(73,73,73,0.6);}
+.fam-editorial .gen-picto .grp .icons i{color:rgba(28,75,66,0.18);}.fam-editorial .gen-picto .grp .icons i.on{color:var(--pure-green);}
+.fam-editorial .gen-funnel .tier .v{color:var(--pure-green);}.fam-editorial .gen-funnel .tier .l{color:var(--stone-grey);}
+
 @media print{html,body{width:1920px;height:auto;overflow:visible;}.deck-viewport{position:static;}.deck-stage{position:static;width:auto;height:auto;transform:none!important;}.slide{position:relative;visibility:visible!important;opacity:1!important;break-after:page;}.slide .reveal{opacity:1!important;transform:none!important;}.deck-controls,.notes-panel{display:none!important;}}
 """
 
@@ -423,9 +489,21 @@ def icon(name):
 
 # ======================= Familien-Konfiguration =======================
 FAM = {
-  'bkm-glass-ag':   {'caps_all': False, 'panel': 'glass', 'chrome': 'ag'},
-  'bkm-bold-poster':{'caps_all': True,  'panel': 'bold',  'chrome': 'bold'},
+  'bkm-glass-ag':         {'caps_all': False, 'chrome': 'ag',   'body': 'fam-glass'},
+  'bkm-bold-poster':      {'caps_all': True,  'chrome': 'bold', 'body': 'fam-bold'},
+  'bkm-glass-fachbetrieb':{'caps_all': False, 'chrome': 'ag',   'body': 'fam-fachbetrieb'},
+  'bkm-editorial':        {'caps_all': False, 'chrome': 'ag',   'body': 'fam-editorial'},
 }
+# Hintergrund-Set + Grundfarbe je Familie
+BGSET = {'bkm-glass-ag':('bg-ag','#0f2620'), 'bkm-bold-poster':('bg-ag','#0f2620'),
+         'bkm-glass-fachbetrieb':('bg-fb','#f1ede6'), 'bkm-editorial':(None,'#f5f0eb')}
+
+def load_bgs(prefix):
+    d = {}
+    if not prefix: return d
+    for i, f in enumerate(sorted(glob.glob(os.path.join(ROOT, 'assets/backgrounds/%s-*.jpg' % prefix))), start=1):
+        d[i] = 'data:image/jpeg;base64,' + base64.b64encode(open(f, 'rb').read()).decode()
+    return d
 
 # Welche Typen sind "laut" (immer UPPERCASE, auch bei Hybrid-Casing)?
 CAPS_TYPES = {'cover', 'chapter', 'statement', 'closing'}
@@ -811,8 +889,8 @@ def lint(slides, strict=False):
     return warn
 
 # Hintergrund-Rotation (nie zweimal gleich nebeneinander) — chapter bevorzugt t4
-def bg_rotation(slides):
-    n = max(len(TEX), 1)
+def bg_rotation(slides, n):
+    n = max(n, 1)
     order = []; prev = 0
     for s in slides:
         if s.get('type') == 'cover':
@@ -830,8 +908,10 @@ def build(spec, strict=False):
     slides = spec.get('slides', [])
     print('Deck:', spec.get('meta',{}).get('title','(ohne Titel)'), '| family:', fam, '| Folien:', len(slides))
     lint(slides, strict)
-    bgs = bg_rotation(slides)
-    fambody = 'fam-bold' if FAM[fam]['caps_all'] else 'fam-glass'
+    prefix, bgbase = BGSET.get(fam, ('bg-ag', '#0f2620'))
+    BGS = load_bgs(prefix)
+    bgs = bg_rotation(slides, len(BGS)) if BGS else [0] * len(slides)
+    fambody = FAM[fam]['body']
     tagtop = esc(spec.get('meta',{}).get('tagtop',''))
     secs = []
     notes_js_data = []
@@ -843,12 +923,13 @@ def build(spec, strict=False):
         vis = ' visible' if i == 0 else ''
         chrome = chrome_html(fam, st, sl, tagtop)
         notes = esc(sl.get('notes','')).replace('\n','&#10;')
+        bgdiv = ('<div class="bg t%d"></div>' % bgs[i]) if BGS else ''
         secs.append(
           '<section class="slide gen g-%s%s">'
-          '<div class="bg t%d"></div>%s%s'
+          '%s%s%s'
           '<div class="pg">%02d</div>'
-          '<aside class="notes">%s</aside></section>' % (st, vis, bgs[i], chrome, inner, i+1, notes))
-    bg_css = ''.join('.bg.t%d{background:#0f2620 url(%s) center/cover;}' % (k, v) for k, v in TEX.items())
+          '<aside class="notes">%s</aside></section>' % (st, vis, bgdiv, chrome, inner, i+1, notes))
+    bg_css = ''.join('.bg.t%d{background:%s url(%s) center/cover;}' % (k, bgbase, v) for k, v in BGS.items())
     title = esc(spec.get('meta',{}).get('title','BKM Deck'))
     total = str(len([s for s in slides if s.get('type') in RENDER]))
     out = (SHELL
