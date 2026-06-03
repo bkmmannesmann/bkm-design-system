@@ -244,6 +244,63 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--stage-bg);font
 .gen-twocol .col ul{list-style:none;display:flex;flex-direction:column;gap:14px;margin-top:10px;}
 .gen-twocol .col li{display:flex;gap:12px;font-size:18px;color:rgba(255,255,255,0.82);line-height:1.45;}
 .gen-twocol .col li i{color:var(--lime);margin-top:4px;flex:0 0 auto;}
+/* ===== Batch 2: weitere Archetypen ===== */
+/* pricing */
+.gen-pricing{position:absolute;left:140px;right:140px;top:332px;display:grid;gap:28px;z-index:2;}
+.gen-pricing.g2{grid-template-columns:repeat(2,1fr);}.gen-pricing.g3{grid-template-columns:repeat(3,1fr);}.gen-pricing.g4{grid-template-columns:repeat(4,1fr);}
+.gen-pricing .plan{padding:38px 34px;border-radius:18px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);display:flex;flex-direction:column;}
+.fam-bold .gen-pricing .plan{background:rgba(255,255,255,0.045);}
+.gen-pricing .plan.hi{border-color:rgba(180,231,23,0.5);background:rgba(180,231,23,0.07);}
+.gen-pricing .badge{align-self:flex-start;background:var(--lime);color:var(--deep-green);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:0.06em;padding:6px 14px;border-radius:999px;margin-bottom:14px;}
+.gen-pricing .nm{font-family:var(--font-display);font-weight:700;font-size:23px;color:#fff;}
+.gen-pricing .price{font-family:var(--font-display);font-weight:900;font-size:50px;color:var(--lime);margin-top:12px;line-height:1;}
+.gen-pricing .per{font-size:15px;color:rgba(255,255,255,0.6);margin-top:6px;}
+.gen-pricing ul{list-style:none;margin-top:22px;display:flex;flex-direction:column;gap:12px;}
+.gen-pricing li{display:flex;gap:11px;font-size:17px;color:rgba(255,255,255,0.82);}
+.gen-pricing li i{color:var(--lime);margin-top:4px;font-size:14px;flex:0 0 auto;}
+/* flow */
+.gen-flow{position:absolute;left:140px;right:140px;top:360px;display:flex;align-items:stretch;z-index:2;}
+.gen-flow .step{flex:1;padding:30px 26px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:16px;}
+.fam-bold .gen-flow .step{background:rgba(255,255,255,0.045);}
+.gen-flow .step .ic{width:50px;height:50px;border-radius:12px;background:var(--lime);color:var(--deep-green);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:16px;}
+.gen-flow .step h3{font-family:var(--font-display);font-weight:700;font-size:20px;color:#fff;}
+.gen-flow .step p{font-size:16px;color:rgba(255,255,255,0.72);line-height:1.45;margin-top:10px;}
+.gen-flow .arr{flex:0 0 auto;width:56px;display:flex;align-items:center;justify-content:center;color:var(--lime);font-size:26px;}
+/* gauge */
+.gen-gauge-wrap{position:absolute;left:140px;right:140px;top:340px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;z-index:2;}
+.gen-gauge{width:380px;height:380px;border-radius:50%;position:relative;margin:0 auto;}
+.gen-gauge::after{content:'';position:absolute;inset:15%;border-radius:50%;background:#0f2620;}
+.gen-gauge .center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2;}
+.gen-gauge .center .v{font-family:var(--font-display);font-weight:900;font-size:64px;color:#fff;line-height:1;}
+.gen-gauge .center .l{font-size:14px;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:0.1em;margin-top:6px;}
+.gen-gauge-note h3{font-family:var(--font-display);font-weight:700;font-size:32px;color:#fff;line-height:1.2;}
+.gen-gauge-note h3 .g{color:var(--lime);}
+.gen-gauge-note p{font-size:19px;color:rgba(255,255,255,0.75);margin-top:16px;line-height:1.5;}
+/* pictograph */
+.gen-picto{position:absolute;left:140px;right:140px;top:340px;display:grid;gap:50px;z-index:2;}
+.gen-picto.g1{grid-template-columns:1fr;}.gen-picto.g2{grid-template-columns:repeat(2,1fr);}.gen-picto.g3{grid-template-columns:repeat(3,1fr);}
+.gen-picto .grp .v{font-family:var(--font-display);font-weight:900;font-size:60px;color:var(--lime);line-height:1;}
+.gen-picto .grp .icons{display:flex;flex-wrap:wrap;gap:9px;margin:18px 0;max-width:340px;}
+.gen-picto .grp .icons i{font-size:26px;color:rgba(255,255,255,0.18);}
+.gen-picto .grp .icons i.on{color:var(--lime);}
+.gen-picto .grp .l{font-size:18px;color:rgba(255,255,255,0.78);}
+/* imagecover */
+.g-imagecover .photo{position:absolute;inset:0;z-index:1;}
+.g-imagecover .photo img{width:100%;height:100%;object-fit:cover;display:block;}
+.g-imagecover .ov{position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(15,38,32,0.88),rgba(15,38,32,0.35) 70%,rgba(15,38,32,0.2));}
+.g-imagecover .txt{position:absolute;left:140px;right:560px;bottom:150px;z-index:3;}
+.g-imagecover .gen-eyebrow{margin-bottom:20px;}
+.g-imagecover .gen-h1{font-size:104px;}
+.g-imagecover .sub{font-size:24px;color:rgba(255,255,255,0.85);margin-top:24px;}
+/* bento */
+.gen-bento{position:absolute;left:140px;right:140px;top:330px;display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:228px;gap:24px;z-index:2;}
+.gen-bento .cell{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:18px;padding:28px 30px;display:flex;flex-direction:column;justify-content:flex-end;}
+.fam-bold .gen-bento .cell{background:rgba(255,255,255,0.045);}
+.gen-bento .cell.wide{grid-column:span 2;}.gen-bento .cell.tall{grid-row:span 2;}
+.gen-bento .cell.accent{background:rgba(180,231,23,0.12);border-color:rgba(180,231,23,0.4);}
+.gen-bento .cell .ic{width:54px;height:54px;border-radius:13px;background:var(--lime);color:var(--deep-green);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:auto;}
+.gen-bento .cell h3{font-family:var(--font-display);font-weight:700;font-size:22px;color:#fff;margin-top:14px;}
+.gen-bento .cell p{font-size:16px;color:rgba(255,255,255,0.72);line-height:1.45;margin-top:8px;}
 /* Controls + Notes */
 .deck-controls{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:1000;display:flex;align-items:center;gap:6px;background:rgba(8,22,18,0.9);border:1px solid rgba(255,255,255,0.16);border-radius:999px;padding:8px 12px;color:#fff;font-size:13px;font-weight:600;}
 .deck-controls button{all:unset;cursor:pointer;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
@@ -309,6 +366,7 @@ def acc(t):
     # erlaubte Marken-Auszeichnung wieder zulassen: Zeilenumbruch + weiches Trennzeichen
     t = t.replace('&lt;br&gt;', '<br>').replace('&lt;br/&gt;', '<br>').replace('&lt;br /&gt;', '<br>')
     t = t.replace('&amp;shy;', '&shy;')
+    t = t.replace('&amp;amp;', '&amp;')  # falls Autor/LLM bereits `&amp;` schrieb -> nicht doppelt escapen
     return re.sub(r'\{\{(.+?)\}\}', r'<span class="g">\1</span>', t)
 
 def icon(name):
@@ -550,12 +608,74 @@ def r_twocol(d, fam):
                  ('<ul>%s</ul>' % items) if items else ''))
     return head_block(d,'twocol',fam) + '<div class="gen-twocol">%s</div>' % cols
 
+# ---- Batch 2: weitere Archetypen ----
+def r_pricing(d, fam):
+    plans = d.get('plans', [])
+    cs = ''
+    for p in plans:
+        feats = ''.join('<li>%s<span>%s</span></li>' % (icon('check'), acc(x)) for x in p.get('features', []))
+        cs += ('<div class="plan%s reveal">%s<div class="nm">%s</div><div class="price">%s</div>'
+               '<div class="per">%s</div><ul>%s</ul></div>' % (
+               ' hi' if p.get('highlight') else '',
+               ('<span class="badge">%s</span>' % esc(p['badge'])) if p.get('badge') else '',
+               esc(p.get('name','')), acc(p.get('price','')), esc(p.get('period','')), feats))
+    return head_block(d,'pricing',fam) + '<div class="gen-pricing g%d">%s</div>' % (min(max(len(plans),2),4), cs)
+
+def r_flow(d, fam):
+    parts = []
+    for i, s in enumerate(d.get('steps', [])):
+        parts.append('<div class="step reveal d%d"><div class="ic">%s</div><h3>%s</h3>%s</div>' % (
+            min(i+1,5), icon(s.get('icon','arrow-right')), acc(s.get('h','')),
+            ('<p>%s</p>' % acc(s['p'])) if s.get('p') else ''))
+    joined = ('<div class="arr">' + icon('arrow-right') + '</div>').join(parts)
+    return head_block(d,'flow',fam) + '<div class="gen-flow">%s</div>' % joined
+
+def r_gauge(d, fam):
+    v = max(0.0, min(100.0, float(d.get('value',0) or 0))); note = d.get('note', {})
+    ring = 'conic-gradient(var(--lime) 0 %.2f%%, rgba(255,255,255,0.12) %.2f%% 100%%)' % (v, v)
+    return head_block(d,'gauge',fam) + (
+        '<div class="gen-gauge-wrap"><div class="gen-gauge reveal d2" style="background:%s">'
+        '<div class="center"><div class="v">%s</div><div class="l">%s</div></div></div>'
+        '<div class="gen-gauge-note reveal d3"><h3>%s</h3>%s</div></div>' % (
+        ring, esc(d.get('display', '%d%%' % round(v))), esc(d.get('label','')),
+        acc(note.get('h','')), ('<p>%s</p>' % acc(note['p'])) if note.get('p') else ''))
+
+def r_pictograph(d, fam):
+    grps = d.get('groups', [])
+    out = ''
+    for g in grps:
+        total = int(g.get('total', 10)); filled = int(g.get('filled', 0))
+        ic = g.get('icon', 'user'); ic = ic if ic.startswith('fa-') else 'fa-' + ic
+        icons = ''.join('<i class="fas %s%s"></i>' % (ic, (' on' if k < filled else '')) for k in range(total))
+        out += ('<div class="grp reveal"><div class="v">%s</div><div class="icons">%s</div>'
+                '<div class="l">%s</div></div>' % (acc(g.get('value','')), icons, acc(g.get('label',''))))
+    return head_block(d,'pictograph',fam) + '<div class="gen-picto g%d">%s</div>' % (min(max(len(grps),1),3), out)
+
+def r_imagecover(d, fam):
+    img = d.get('image')
+    photo = ('<div class="photo"><img src="%s" alt=""></div><div class="ov"></div>' % embed_img(img)) if img else ''
+    return ('%s<div class="txt"><div class="gen-eyebrow reveal d1">%s</div>'
+            '<h1 class="gen-h1 reveal d2">%s</h1>%s</div>' % (
+            photo, esc(d.get('eyebrow','')), acc(d.get('title','')),
+            ('<div class="sub reveal d3">%s</div>' % acc(d['sub'])) if d.get('sub') else ''))
+
+def r_bento(d, fam):
+    cs = ''
+    for it in d.get('items', []):
+        cls = 'cell' + (' wide' if it.get('wide') else '') + (' tall' if it.get('tall') else '') + (' accent' if it.get('accent') else '')
+        ic = ('<div class="ic">%s</div>' % icon(it.get('icon'))) if it.get('icon') else ''
+        cs += '<div class="%s reveal">%s<h3>%s</h3>%s</div>' % (
+            cls, ic, acc(it.get('h','')), ('<p>%s</p>' % acc(it['p'])) if it.get('p') else '')
+    return head_block(d,'bento',fam) + '<div class="gen-bento">%s</div>' % cs
+
 RENDER = {'cover':r_cover,'cards':r_cards,'kpi':r_kpi,'split':r_split,'quote':r_quote,
           'table':r_table,'compare':r_compare,'chart':r_chart,'chapter':r_chapter,
           'subhead':r_subhead,'statement':r_statement,'process':r_process,'agenda':r_agenda,
           'timeline':r_timeline,'closing':r_closing,
           'funnel':r_funnel,'donut':r_donut,'bigstat':r_bigstat,'bubbles':r_bubbles,
-          'team':r_team,'twocol':r_twocol}
+          'team':r_team,'twocol':r_twocol,
+          'pricing':r_pricing,'flow':r_flow,'gauge':r_gauge,'pictograph':r_pictograph,
+          'imagecover':r_imagecover,'bento':r_bento}
 
 # Bild einbetten (Pfad relativ zum Spec) — fallback: Textur als Platzhalter
 SPEC_DIR = '.'

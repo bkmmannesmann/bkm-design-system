@@ -62,6 +62,12 @@ python3 tools/deck_builder.py meine-folien.json -o mein-deck.html [--strict]
 | `bubbles` | `eyebrow, title, bubbles:[{value,size,label}]` (`size`=Zahl fürs Skalieren) |
 | `team` | `eyebrow, title, members:[{name,role,image}]` (Porträt-Raster) |
 | `twocol` | `eyebrow, title, columns:[{h,p,items:[…]}] (2)` (Zwei-Spalten-Text) |
+| `pricing` | `eyebrow, title, plans:[{name,price,period,badge,highlight,features:[…]}]` |
+| `flow` | `eyebrow, title, steps:[{icon,h,p}]` (horizontaler Ablauf mit Pfeilen) |
+| `gauge` | `eyebrow, value(0–100), display, label, note:{h,p}` (Kreis-Fortschritt) |
+| `pictograph` | `eyebrow, title, groups:[{value,filled,total,icon,label}]` (Icon-Array) |
+| `imagecover` | `eyebrow, title, sub, image` (Vollbild-Foto-Titel mit Overlay) |
+| `bento` | `eyebrow, title, items:[{icon,h,p,wide,tall,accent}]` (gemischtes Raster) |
 
 `icon` = Font-Awesome-Name (z. B. `shield-halved`). `image` = Pfad relativ zur Spec
 (sonst Platzhalter-Textur). Vollständiges Beispiel: **`tools/sample-deck.json`**.
