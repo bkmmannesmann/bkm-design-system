@@ -405,34 +405,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--stage-bg);font
 .fam-fachbetrieb .g-cover .gen-meta .k{color:rgba(73,73,73,0.6);}.fam-fachbetrieb .g-cover .gen-meta .v{color:var(--deep-green);}
 .fam-fachbetrieb .gen-funnel .tier .l{color:var(--stone-grey);}
 
-/* ===== Editorial-Theme (Paper/Ink, flach, Lime nur Signal; additiv) ===== */
-.fam-editorial{color:var(--stone-grey);}.fam-editorial .slide{background:var(--paper);}.fam-editorial .deck-viewport{background:#dad6cd;}
-.fam-editorial .gen-h,.fam-editorial .gen-h1,.fam-editorial h3{color:var(--deep-green);}
-.fam-editorial .gen-eyebrow,.fam-editorial .g{color:var(--pure-green);}
-.fam-editorial .gen-lead,.fam-editorial p,.fam-editorial .gen-li p,.fam-editorial .gen-sub,.fam-editorial .gen-foot,.fam-editorial .gen-punch,.fam-editorial .gen-bigstat .sub{color:var(--stone-grey);}
-.fam-editorial .tagtop{color:var(--transition-green);}.fam-editorial .pg{color:var(--pure-green);}
-.fam-editorial .gen-card,.fam-editorial .gen-panel,.fam-editorial .gen-pricing .plan,.fam-editorial .gen-flow .step,.fam-editorial .gen-bento .cell,.fam-editorial .gen-funnel .tier{background:#fff;border:1px solid rgba(28,75,66,0.12);backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none;}
-.fam-editorial .ic,.fam-editorial .gen-li .ic{background:var(--deep-green);color:var(--lime);}
-.fam-editorial .gen-grid.kpis .n,.fam-editorial .gen-bigstat .huge,.fam-editorial .gen-numlist .no,.fam-editorial .gen-process .no,.fam-editorial .gen-agenda .time,.fam-editorial .gen-funnel .tier .v,.fam-editorial .gen-cluster .node .v,.fam-editorial .gen-tl-wrap .yr,.fam-editorial .gen-picto .grp .v,.fam-editorial .gen-pricing .price{color:var(--pure-green);}
-.fam-editorial .gen-bigstat .huge .g{color:var(--pure-green);}
-.fam-editorial .gen-donut .center .v,.fam-editorial .gen-gauge .center .v{color:var(--deep-green);}.fam-editorial .gen-donut::after,.fam-editorial .gen-gauge::after{background:var(--paper);}.fam-editorial .gen-donut .center .l,.fam-editorial .gen-gauge .center .l{color:var(--stone-grey);}.fam-editorial .gen-legend .row,.fam-editorial .gen-legend .pct{color:var(--deep-green);}.fam-editorial .gen-gauge-note h3{color:var(--deep-green);}.fam-editorial .gen-gauge-note p{color:var(--stone-grey);}
-.fam-editorial .gen-table .tr.head .c,.fam-editorial .gen-table .tr .c.hi{color:var(--pure-green);}.fam-editorial .gen-table .tr .c{color:var(--stone-grey);}.fam-editorial .gen-table .tr .c:first-child{color:var(--deep-green);}.fam-editorial .gen-table .tr{border-bottom-color:rgba(28,75,66,0.1);}.fam-editorial .gen-table .tr.head{border-bottom-color:rgba(28,75,66,0.5);}.fam-editorial .gen-table .tr:not(.head):nth-of-type(2n){background:rgba(255,255,255,0.6);}.fam-editorial .gen-table .tr:not(.head):nth-of-type(2n+1){background:transparent;}
-.fam-editorial .gen-chart{border-bottom-color:rgba(28,75,66,0.18);}.fam-editorial .gen-chart .col{background:rgba(28,75,66,0.14);}.fam-editorial .gen-chart .bar.hi .col{background:var(--lime);}.fam-editorial .gen-chart .val{color:var(--deep-green);}.fam-editorial .gen-chart .lbl{color:var(--stone-grey);}
-.fam-editorial .gen-note h3{color:var(--deep-green);}.fam-editorial .gen-note h3 .g{color:var(--pure-green);}.fam-editorial .gen-note p{color:var(--stone-grey);}.fam-editorial .gen-note .cap{color:var(--transition-green);}
-.fam-editorial .badge,.fam-editorial .gen-pricing .badge{background:var(--deep-green);color:var(--paper);}.fam-editorial .gen-btn{background:var(--deep-green);color:var(--paper);}.fam-editorial .gen-btn i{color:var(--lime);}.fam-editorial .gen-chips .v{border-color:rgba(77,175,70,0.5);color:var(--transition-green);}
-.fam-editorial .g-quote blockquote{color:var(--deep-green);}.fam-editorial .g-quote blockquote .g{color:var(--pure-green);}.fam-editorial .g-quote .gen-quote-mark{color:var(--transition-green);opacity:0.35;}.fam-editorial .g-quote .gen-who span{color:var(--pure-green);}.fam-editorial .g-quote .gen-who .ln{background:var(--pure-green);}
-.fam-editorial .gen-agenda .row:nth-child(even),.fam-editorial .gen-process .row:nth-child(even){background:rgba(255,255,255,0.6);}.fam-editorial .gen-agenda .row:nth-child(odd),.fam-editorial .gen-process .row:nth-child(odd){background:transparent;}.fam-editorial .gen-agenda .row,.fam-editorial .gen-process .row,.fam-editorial .gen-numlist .row{border-bottom-color:rgba(28,75,66,0.12);}
-.fam-editorial .gen-agenda .topic,.fam-editorial .gen-grid .gen-card h3,.fam-editorial .gen-bento .cell h3,.fam-editorial .gen-flow .step h3,.fam-editorial .gen-pricing .nm,.fam-editorial .gen-tl-wrap .item h3,.fam-editorial .gen-team .nm,.fam-editorial .gen-grid.cmp h3,.fam-editorial .gen-contact .b .v,.fam-editorial .gen-numlist .tx{color:var(--deep-green);}
-.fam-editorial .gen-agenda .topic small,.fam-editorial .gen-agenda .spk,.fam-editorial .gen-agenda .no,.fam-editorial .gen-process p,.fam-editorial .gen-grid .gen-card p,.fam-editorial .gen-bento .cell p,.fam-editorial .gen-flow .step p,.fam-editorial .gen-pricing li,.fam-editorial .gen-pricing .per,.fam-editorial .gen-grid.cmp li,.fam-editorial .gen-tl-wrap .item p,.fam-editorial .gen-team .ro,.fam-editorial .gen-cluster .node .l,.fam-editorial .gen-picto .grp .l{color:var(--stone-grey);}
-.fam-editorial .gen-pricing li i,.fam-editorial .gen-flow .arr,.fam-editorial .gen-grid.cmp li.yes i{color:var(--pure-green);}
-.fam-editorial .gen-tl-wrap .pt{background:var(--lime);}.fam-editorial .gen-tl-wrap .line{background:rgba(28,75,66,0.2);}
-.fam-editorial .gen-team .av{background:rgba(28,75,66,0.08);color:var(--pure-green);border-color:rgba(77,175,70,0.3);}.fam-editorial .gen-cluster .node .circle{background:rgba(77,175,70,0.14);border-color:rgba(77,175,70,0.35);}
-.fam-editorial .gen-numlist .tg{color:var(--pure-green);border-color:rgba(77,175,70,0.4);}.fam-editorial .gen-pricing .plan.hi{border-color:rgba(28,75,66,0.4);}.fam-editorial .gen-bento .cell.accent{background:rgba(77,175,70,0.1);border-color:rgba(77,175,70,0.4);}
-.fam-editorial .gen-grid.cmp .gen-card.win{border-color:rgba(28,75,66,0.4);}.fam-editorial .gen-grid.cmp .badge{background:rgba(28,75,66,0.08);color:var(--transition-green);}
-.fam-editorial .g-cover .gen-meta .v{color:var(--deep-green);}.fam-editorial .g-cover .gen-meta .k{color:rgba(73,73,73,0.6);}
-.fam-editorial .gen-picto .grp .icons i{color:rgba(28,75,66,0.18);}.fam-editorial .gen-picto .grp .icons i.on{color:var(--pure-green);}
-.fam-editorial .gen-funnel .tier .v{color:var(--pure-green);}.fam-editorial .gen-funnel .tier .l{color:var(--stone-grey);}
-
 @media print{html,body{width:1920px;height:auto;overflow:visible;}.deck-viewport{position:static;}.deck-stage{position:static;width:auto;height:auto;transform:none!important;}.slide{position:relative;visibility:visible!important;opacity:1!important;break-after:page;}.slide .reveal{opacity:1!important;transform:none!important;}.deck-controls,.notes-panel{display:none!important;}}
 """
 
@@ -502,11 +474,10 @@ FAM = {
   'bkm-glass-ag':         {'caps_all': False, 'chrome': 'ag',   'body': 'fam-glass'},
   'bkm-bold-poster':      {'caps_all': True,  'chrome': 'bold', 'body': 'fam-bold'},
   'bkm-glass-fachbetrieb':{'caps_all': False, 'chrome': 'ag',   'body': 'fam-fachbetrieb'},
-  'bkm-editorial':        {'caps_all': False, 'chrome': 'ag',   'body': 'fam-editorial'},
 }
 # Hintergrund-Set + Grundfarbe je Familie
 BGSET = {'bkm-glass-ag':('bg-ag','#0f2620'), 'bkm-bold-poster':('bg-ag','#0f2620'),
-         'bkm-glass-fachbetrieb':('bg-fb','#f1ede6'), 'bkm-editorial':(None,'#f5f0eb')}
+         'bkm-glass-fachbetrieb':('bg-fb','#f1ede6')}
 
 def load_bgs(prefix):
     d = {}
@@ -956,7 +927,7 @@ def build(spec, strict=False):
 def chrome_html(fam, st, sl, tagtop):
     rub = esc(sl.get('rubric', tagtop))
     # helle Familien -> grau-grünes Logo; dunkle -> weißes Logo
-    logo = LOGO_DARK if FAM[fam].get('body') in ('fam-fachbetrieb', 'fam-editorial') else LOGO
+    logo = LOGO_DARK if FAM[fam].get('body') == 'fam-fachbetrieb' else LOGO
     if FAM[fam]['chrome'] == 'bold':
         mark = esc(sl.get('mark', tagtop or 'BKM'))
         return ('<div class="gen-mark">%s %s</div>%s'

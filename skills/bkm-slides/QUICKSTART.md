@@ -36,7 +36,6 @@ eigenständig** (Assets eingebettet, einfach im Browser öffnen).
 |---|---|---|
 | **`bkm-glass-ag`** | Glasmorphismus auf Deep Green, Lime-Signal | **BKM AG** (corporate) — Default |
 | **`bkm-glass-fachbetrieb`** | helles Milchglas auf Sand, **kein Lime** | Fachbetrieb (nahbar) |
-| **`bkm-editorial`** | flaches Ink, 4px-Linien | beide / kreativ |
 | **`bkm-bold-poster`** | übergroße Statements | BKM AG / Pitch |
 
 Im Zweifel: **`bkm-glass-ag`**.

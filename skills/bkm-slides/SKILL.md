@@ -2,7 +2,7 @@
 
 > Generiert visuell ansprechende, marken­konforme HTML-Präsentationen im BKM Mannesmann
 > Design System. v5 ist **familien-basiert**: statt fünf starrer Templates wählst du
-> (oder der Nutzer per „Show don't tell") aus **vier Stil-Familien** und baust das Deck
+> (oder der Nutzer per „Show don't tell") aus **drei Stil-Familien** und baust das Deck
 > auf einer gemeinsamen **Fixed-Stage-Engine**.
 
 ---
@@ -33,17 +33,16 @@
 | `QUICKSTART.md` | Verlässlicher Weg zu stimmigen Decks (Claude Code, Claude.ai, Manus) |
 | `AUTHORING.md` | **Deterministischer Generator** (JSON → Deck) + Spec/Prompt — agenten-unabhängig konsistent |
 | `../../tools/deck_builder.py` | Daten→Deck-Renderer (Layout im Code); `tools/sample-deck.json` = Beispiel |
-| `style-discovery.html` | Visuelle Auswahl-Galerie (4 Familien nebeneinander) |
+| `style-discovery.html` | Visuelle Auswahl-Galerie (Familien nebeneinander) |
 
 ---
 
-## Die vier Familien
+## Die drei Familien
 
 | Familie (`slug`) | Track | Look | Kontext |
 |------------------|-------|------|---------|
 | **`bkm-glass-ag`** | Standard | Glasmorphismus auf Deep Green, Lime-Signal | BKM AG |
 | **`bkm-glass-fachbetrieb`** | Standard | helles Milchglas auf Sand, Pure/Transition Green, **kein Lime** | Fachbetrieb |
-| **`bkm-editorial`** | Kreativ | flaches Ink, 4px-Linien-Regelwerk, Inverse-Kacheln (hell **und** dunkel) | beide |
 | **`bkm-bold-poster`** | Kreativ | übergroße Statements auf Deep Green, Lime-Signal | BKM AG |
 
 **Zwei Tracks:**
@@ -76,7 +75,7 @@ passende Familien eingrenzen. **Nie alle `design.md` gleichzeitig laden.**
 
 ### 3 · Stil wählen — „Show don't tell"
 Für die engere Auswahl die `preview.md` lesen. Wenn ein Mensch entscheidet: die
-`style-discovery.html` zeigen (Galerie der 4 Familien). Faustregel des Vorschlags:
+`style-discovery.html` zeigen (Galerie der Familien). Faustregel des Vorschlags:
 1× sicher (Standard) + 1–2× Kreativ, je nach Anlass.
 
 ### 4 · Genau **eine** `design.md` lesen
@@ -125,11 +124,10 @@ skills/bkm-slides/
 ├── tokens.css              ← kanonische Design-Tokens (Single Source of Truth)
 ├── components.html         ← gerendertes Komponenten-Schaufenster
 ├── selection-index.json    ← Familien-Index (Auswahl-Metadaten)
-├── style-discovery.html    ← visuelle Auswahl-Galerie (4 Familien)
+├── style-discovery.html    ← visuelle Auswahl-Galerie (Familien)
 ├── templates/
 │   ├── bkm-glass-ag/        {preview.md, design.md, demo.html}
 │   ├── bkm-glass-fachbetrieb/ {preview.md, design.md, demo.html}
-│   ├── bkm-editorial/       {preview.md, design.md, demo.html, demo-dark.html}
 │   └── bkm-bold-poster/     {preview.md, design.md, demo.html}
 ├── checklist.md            ← P0/P1/P2 Self-Check + 5-Dim-Selbstkritik (PFLICHT)
 ├── STYLE_PRESETS.md        ← exakte CSS-Token (Referenz)
@@ -154,5 +152,5 @@ skills/bkm-slides/
 ```
 
 > **Hinweis:** Das alte v4-System (fünf Copy-Paste-Templates) wurde entfernt und ist durch
-> die vier Familien abgelöst. Token- und Anti-Slop-Wissen (`STYLE_PRESETS.md`,
+> die drei Familien abgelöst. Token- und Anti-Slop-Wissen (`STYLE_PRESETS.md`,
 > `PATTERN_CATALOG.md`) bleibt gültig.

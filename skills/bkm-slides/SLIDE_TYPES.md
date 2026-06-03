@@ -115,7 +115,7 @@
 - **Phase 2 — Vervollständigen in `bkm-glass-ag`:** ✅ **erledigt** — `s-chapter`, `s-subhead`, `s-closing`,
   `s-process`, `s-timeline`. `demo.html` deckt jetzt alle 14 Typen ab (= vollständige Vorlage).
 - **Phase 3 — Galerie & Doku:** ✅ **erledigt** — `templates/bkm-glass-ag/type-gallery.png` + Verweise in `SKILL.md`.
-- **Phase 4 — Portierung:** ✅ **erledigt** — `bkm-glass-fachbetrieb`, `bkm-bold-poster`, `bkm-editorial`
+- **Phase 4 — Portierung:** ✅ **erledigt** — `bkm-glass-fachbetrieb`, `bkm-bold-poster`
   je 14 Typen familiengerecht portiert (eigene Tokens, Galerie). **Alle 4 Familien decken die Library ab.**
 
 **Akzeptanzkriterien je Typ:** rendert sauber auf 1920×1080, kein Überlauf; erbt Schriften/Logo/Textur;

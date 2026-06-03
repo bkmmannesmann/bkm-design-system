@@ -74,7 +74,7 @@ als ruhige Markensignatur an der rechten Kante.
 **Do:** eine Idee pro Folie; riesig + viel Luft; Lime gezielt auf das Schlüsselwort;
 kurze, harte Aussagen.
 
-**Don't:** kein Fließtext/Listen/Tabellen (dafür Editorial); kein vollflächiges Lime;
+**Don't:** kein Fließtext/Listen/Tabellen (dafür Glas-AG/Fachbetrieb); kein vollflächiges Lime;
 keine fremden Farben/Fonts; nicht zwei Lime-Signale konkurrieren lassen (ein Fokus pro Folie).
 
 ## Fixed-Stage-Policy

@@ -63,23 +63,6 @@
       "design_md": "templates/bkm-glass-fachbetrieb/design.md"
     },
     {
-      "slug": "bkm-editorial",
-      "name": "BKM · Editorial",
-      "track": "creative",
-      "tagline": "Magazin-Charakter: große Unbounded-Headlines, 4px-Regelwerk-Linien, Kennzahlen-Kacheln auf Sand.",
-      "mood": ["editorial", "selbstbewusst", "strukturiert", "wertig"],
-      "tone": ["redaktionell", "klar", "modern"],
-      "formality": "medium-high",
-      "density": "medium-high",
-      "scheme": "light",
-      "context": "Beide",
-      "accent": "#4daf46",
-      "best_for": "Strategie-Updates, Quartalsreviews, Investor-Reports, datenreiche Decks mit Kennzahlen, die wertig und redaktionell wirken sollen.",
-      "avoid_for": "Sehr knappe, einzeilige Aussage-Slides (dafür Bold Poster nutzen).",
-      "preview_md": "templates/bkm-editorial/preview.md",
-      "design_md": "templates/bkm-editorial/design.md"
-    },
-    {
       "slug": "bkm-bold-poster",
       "name": "BKM · Bold Poster",
       "track": "creative",
