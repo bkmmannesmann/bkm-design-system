@@ -1,0 +1,539 @@
+# -*- coding: utf-8 -*-
+"""
+BKM Deck Builder — deterministischer Daten->Deck-Generator.
+
+Eingabe : JSON-Spec (family + slides[]).  Ausgabe: eigenstaendiges HTML-Deck.
+Prinzip : Der Renderer (dieser Code) besitzt das Layout. Das LLM/der Autor liefert nur
+          strukturierten Inhalt -> identisches Ergebnis ueber alle Agenten hinweg.
+Marke   : nur BKM-Farben, Unbounded + TT Norms (aus glass-ag/demo.html eingebettet),
+          texturierte Hintergruende (Auto-Rotation), Hybrid-Casing, Reveal, Zebra,
+          Presenter-Modus ("S") + Notizen ("N").  Familien: bkm-glass-ag | bkm-bold-poster.
+
+Aufruf  : python3 tools/deck_builder.py <spec.json> -o <out.html> [--strict]
+"""
+import re, json, sys, base64, html, argparse, os
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+AGDEMO = os.path.join(ROOT, 'skills/bkm-slides/templates/bkm-glass-ag/demo.html')
+
+# ---- Marken-Assets aus der Glas-AG-Familie ziehen (Schriften, Logo, Texturen) ----
+def load_assets():
+    s = open(AGDEMO, encoding='utf-8').read()
+    fonts = re.search(r'<style id="bkm-fonts">.*?</style>', s, flags=re.S).group(0)
+    logo  = re.search(r'<img class="brand"[^>]*>', s).group(0)
+    tex = {}
+    for m in re.finditer(r'\.bg\.t([1-4])\{background:#0f2620 url\((data:image/jpeg;base64,[^)]+)\)', s):
+        tex[int(m.group(1))] = m.group(2)
+    return fonts, logo, tex
+
+FONTS, LOGO, TEX = load_assets()
+
+def esc(x): return html.escape(str(x), quote=True)
+
+# ======================= Kanonische Layout-CSS (Renderer besitzt das Layout) =======================
+GEN_CSS = r"""
+:root{--deep-green:#1c4b42;--deep2:#0f2620;--lime:#b4e717;--pure-green:#4daf46;
+--transition-green:#287d4b;--paper:#f5f0eb;--stone-grey:#494949;
+--font-display:'Unbounded',sans-serif;--font-body:'TT Norms Pro',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+--stage-bg:#0a1c17;--ease:cubic-bezier(0.16,1,0.3,1);}
+*{margin:0;box-sizing:border-box;}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--stage-bg);font-family:var(--font-body);}
+.deck-viewport{position:fixed;inset:0;overflow:hidden;background:var(--stage-bg);}
+.deck-stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;}
+.slide{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#fff;visibility:hidden;opacity:0;pointer-events:none;}
+.slide.visible{visibility:visible;opacity:1;pointer-events:auto;z-index:1;}
+.bg{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center;}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+.slide.visible .reveal{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.08s;}.d2{transition-delay:.20s;}.d3{transition-delay:.32s;}.d4{transition-delay:.44s;}.d5{transition-delay:.56s;}
+/* Chrome */
+.brand{position:absolute;top:58px;left:140px;height:40px;width:auto;z-index:6;}
+.tagtop{position:absolute;top:74px;right:140px;font-weight:700;font-size:16px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.75);z-index:6;}
+.pg{position:absolute;bottom:60px;right:140px;font-family:var(--font-display);font-weight:900;font-size:18px;color:var(--lime);z-index:6;}
+.fam-bold .brand{left:auto;right:130px;top:74px;}
+.fam-bold .tagtop{display:none;}
+.gen-mark{position:absolute;top:74px;left:130px;display:inline-flex;align-items:center;gap:10px;background:var(--lime);color:var(--deep-green);font-weight:700;font-size:16px;letter-spacing:0.12em;text-transform:uppercase;padding:11px 20px;border-radius:8px;z-index:6;}
+.gen-kicker{position:absolute;bottom:62px;left:130px;font-weight:700;font-size:15px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(245,240,235,0.55);z-index:6;}
+.fam-glass .gen-mark,.fam-glass .gen-kicker{display:none;}
+/* Headlines / Akzent */
+.gen-h,.gen-h1{font-family:var(--font-display);font-weight:900;text-transform:uppercase;letter-spacing:-0.04em;line-height:0.94;color:#fff;}
+.gen-h.mx,.gen-h1.mx{text-transform:none;}
+.g{color:var(--lime);}
+.gen-eyebrow{font-weight:700;letter-spacing:0.18em;text-transform:uppercase;font-size:18px;color:var(--lime);}
+.gen-lead{font-size:24px;line-height:1.5;color:rgba(255,255,255,0.85);}
+.gen-li{display:flex;gap:16px;align-items:flex-start;}
+.gen-li .ic{flex:0 0 auto;width:38px;height:38px;border-radius:10px;background:var(--lime);color:var(--deep-green);display:flex;align-items:center;justify-content:center;font-size:15px;margin-top:2px;}
+.gen-li p{font-size:19px;color:rgba(255,255,255,0.85);line-height:1.45;}
+/* Panel/Card — glass vs flat (Familie) */
+.gen-card,.gen-panel{position:relative;border-radius:18px;}
+.fam-glass .gen-card,.fam-glass .gen-panel{background:rgba(255,255,255,0.10);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.18);box-shadow:0 8px 32px rgba(0,0,0,0.25);}
+.fam-bold .gen-card,.fam-bold .gen-panel{background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.10);}
+/* zentrierter Section-Header */
+.gen-head{position:absolute;left:140px;right:140px;top:118px;text-align:center;z-index:2;}
+.gen-head .gen-eyebrow{margin-bottom:14px;}
+.gen-head .gen-h{font-size:56px;}
+.fam-bold .gen-head .gen-h{font-size:62px;}
+.gen-sub{font-size:21px;color:rgba(255,255,255,0.72);margin-top:14px;}
+/* Cover */
+.g-cover .gen-left{position:absolute;left:140px;top:300px;right:520px;z-index:2;}
+.g-cover .gen-eyebrow{margin-bottom:24px;}
+.g-cover .gen-h1{font-size:92px;}
+.fam-bold .g-cover .gen-h1{font-size:120px;}
+.g-cover .gen-lead{margin-top:28px;max-width:760px;}
+.g-cover .gen-meta{display:flex;gap:46px;margin-top:40px;}
+.g-cover .gen-meta .m{display:flex;flex-direction:column;gap:6px;}
+.g-cover .gen-meta .k{font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.55);}
+.g-cover .gen-meta .v{font-family:var(--font-display);font-weight:700;font-size:23px;color:#fff;}
+.gen-btn{display:inline-flex;align-items:center;gap:12px;background:var(--lime);color:var(--deep-green);font-weight:700;font-size:18px;padding:18px 30px;border-radius:12px;margin-top:38px;}
+.gen-btn i{font-size:15px;}
+/* Grids */
+.gen-grid{position:absolute;left:140px;right:140px;top:330px;display:grid;gap:30px;z-index:2;}
+.gen-grid.g2{grid-template-columns:1fr 1fr;}.gen-grid.g3{grid-template-columns:repeat(3,1fr);}.gen-grid.g4{grid-template-columns:repeat(4,1fr);}
+.gen-card.c,.gen-grid .gen-card{padding:38px 34px;}
+.gen-grid .gen-card .ic{width:60px;height:60px;border-radius:14px;background:var(--lime);color:var(--deep-green);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:22px;}
+.gen-grid .gen-card h3{font-family:var(--font-display);font-weight:700;font-size:24px;color:#fff;letter-spacing:-0.01em;}
+.gen-grid .gen-card p{font-size:17px;color:rgba(255,255,255,0.74);line-height:1.5;margin-top:12px;}
+/* KPI */
+.gen-grid.kpis .kpi{text-align:left;}
+.gen-grid.kpis .n{font-family:var(--font-display);font-weight:900;font-size:92px;line-height:0.88;color:#fff;letter-spacing:-0.04em;}
+.gen-grid.kpis .n .g{color:var(--lime);}
+.gen-grid.kpis .c{font-size:19px;color:rgba(255,255,255,0.78);margin-top:16px;line-height:1.4;}
+/* Split */
+.g-split .gen-split-txt{position:absolute;left:140px;top:270px;width:760px;z-index:2;}
+.g-split .gen-eyebrow{margin-bottom:18px;}
+.g-split .gen-h{font-size:60px;margin-bottom:24px;}
+.g-split .gen-li{margin-top:16px;}
+.g-split .gen-figure{position:absolute;right:140px;top:230px;width:780px;height:620px;border-radius:20px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,0.4);z-index:2;}
+.g-split .gen-figure img{width:100%;height:100%;object-fit:cover;display:block;}
+.g-split .gen-figure figcaption{position:absolute;left:0;right:0;bottom:0;padding:16px 22px;font-size:14px;color:#fff;background:linear-gradient(transparent,rgba(15,38,32,0.85));}
+/* Quote */
+.g-quote .gen-quote-mark{position:absolute;left:108px;top:120px;font-family:var(--font-display);font-weight:900;font-size:440px;line-height:0.62;color:var(--transition-green);opacity:0.45;z-index:0;}
+.g-quote .gen-quote-wrap{position:absolute;left:180px;right:200px;top:330px;z-index:2;}
+.g-quote .gen-eyebrow{margin-bottom:28px;}
+.g-quote blockquote{font-family:var(--font-display);font-weight:700;font-size:60px;line-height:1.12;color:#fff;letter-spacing:-0.02em;}
+.fam-bold .g-quote blockquote{text-transform:uppercase;}
+.g-quote .gen-who{margin-top:44px;display:flex;align-items:center;gap:18px;}
+.g-quote .gen-who .ln{width:54px;height:3px;background:var(--lime);}
+.g-quote .gen-who span{font-weight:700;font-size:20px;letter-spacing:0.04em;color:var(--lime);text-transform:uppercase;}
+/* Tabelle + Zebra */
+.gen-table{position:absolute;left:140px;right:140px;top:300px;padding:6px 44px;z-index:2;}
+.gen-table .tr{display:grid;gap:24px;align-items:center;padding:18px 16px;border-bottom:1px solid rgba(255,255,255,0.1);border-radius:8px;}
+.gen-table .tr.head{border-bottom:1px solid rgba(180,231,23,0.45);}
+.gen-table .tr.head .c{font-weight:700;letter-spacing:0.1em;text-transform:uppercase;font-size:14px;color:var(--lime);}
+.gen-table .tr .c{font-size:18px;color:rgba(255,255,255,0.82);font-variant-numeric:tabular-nums;}
+.gen-table .tr .c:first-child{color:#fff;font-weight:600;}
+.gen-table .tr .c.hi{color:var(--lime);font-weight:700;}
+.gen-table .tr:not(.head):nth-of-type(2n){background:rgba(255,255,255,0.035);}
+.gen-table .tr:not(.head):nth-of-type(2n+1){background:rgba(245,240,235,0.05);}
+/* Vergleich */
+.gen-grid.cmp{top:316px;}
+.gen-grid.cmp .gen-card{padding:38px 42px;}
+.gen-grid.cmp .gen-card.win{border-color:rgba(180,231,23,0.45);}
+.gen-grid.cmp .badge{display:inline-block;border-radius:999px;padding:6px 16px;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:16px;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);}
+.gen-grid.cmp .win .badge{background:rgba(180,231,23,0.16);border:1px solid rgba(180,231,23,0.4);color:var(--lime);}
+.gen-grid.cmp h3{font-family:var(--font-display);font-weight:800;font-size:26px;color:#fff;}
+.gen-grid.cmp ul{list-style:none;margin-top:22px;display:flex;flex-direction:column;gap:15px;}
+.gen-grid.cmp li{display:flex;gap:13px;font-size:18px;color:rgba(255,255,255,0.82);line-height:1.4;}
+.gen-grid.cmp li i{margin-top:3px;flex:0 0 auto;}
+.gen-grid.cmp li.yes i{color:var(--lime);}.gen-grid.cmp li.no i{color:rgba(255,255,255,0.4);}
+.gen-foot{position:absolute;left:140px;right:140px;bottom:104px;text-align:center;font-size:18px;color:rgba(255,255,255,0.72);z-index:2;}
+/* Diagramm */
+.gen-chart-wrap{position:absolute;left:140px;right:140px;top:330px;display:grid;grid-template-columns:1.25fr 1fr;gap:60px;align-items:center;z-index:2;}
+.gen-chart{height:430px;display:flex;align-items:flex-end;gap:28px;padding:0 8px 40px;position:relative;border-bottom:2px solid rgba(255,255,255,0.18);}
+.gen-chart .bar{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:12px;position:relative;}
+.gen-chart .col{width:100%;border-radius:10px 10px 0 0;background:rgba(255,255,255,0.16);}
+.gen-chart .bar.hi .col{background:var(--lime);}
+.gen-chart .val{font-family:var(--font-display);font-weight:900;font-size:22px;color:#fff;}
+.gen-chart .bar.hi .val{color:var(--lime);}
+.gen-chart .lbl{position:absolute;bottom:-32px;left:0;right:0;text-align:center;font-size:14px;color:rgba(255,255,255,0.6);}
+.gen-note h3{font-family:var(--font-display);font-weight:700;font-size:30px;color:#fff;line-height:1.2;}
+.gen-note h3 .g{color:var(--lime);}
+.gen-note p{font-size:18px;color:rgba(255,255,255,0.72);margin-top:16px;line-height:1.5;}
+.gen-note .cap{font-size:13px;color:rgba(255,255,255,0.5);margin-top:24px;text-transform:uppercase;letter-spacing:0.08em;}
+/* Kapitel-Trenner */
+.gen-chapter{position:absolute;left:140px;top:50%;transform:translateY(-50%);z-index:2;}
+.gen-chapter .big{font-family:var(--font-display);font-weight:900;font-size:300px;line-height:0.78;color:rgba(255,255,255,0.12);letter-spacing:-0.04em;}
+.gen-chapter .t{margin-top:-26px;}
+.gen-chapter .t .gen-eyebrow{margin-bottom:18px;}
+.gen-chapter .t .gen-h{font-size:90px;}
+.fam-bold .gen-chapter .t .gen-h{font-size:118px;}
+/* Unterthema / Statement / Closing (zentriert/links groß) */
+.gen-subhead{position:absolute;left:140px;right:140px;top:50%;transform:translateY(-50%);text-align:center;z-index:2;}
+.gen-subhead .gen-eyebrow{margin-bottom:18px;}.gen-subhead .gen-h{font-size:76px;}
+.gen-subhead .gen-sub{margin:24px auto 0;max-width:1040px;}
+.gen-statement,.gen-closing{position:absolute;left:140px;right:140px;top:50%;transform:translateY(-50%);z-index:2;}
+.gen-statement .gen-eyebrow,.gen-closing .gen-eyebrow{margin-bottom:24px;}
+.gen-statement .gen-h1{font-size:104px;max-width:1500px;}
+.fam-bold .gen-statement .gen-h1{font-size:128px;}
+.gen-statement .gen-lead{margin-top:34px;max-width:1100px;font-size:26px;}
+.gen-closing .gen-h1{font-size:100px;max-width:1500px;}
+.fam-bold .gen-closing .gen-h1{font-size:150px;}
+.gen-chips{display:flex;gap:14px;margin-top:38px;flex-wrap:wrap;}
+.gen-chips .v{border:1.5px solid rgba(180,231,23,0.5);color:var(--lime);border-radius:999px;padding:12px 26px;font-family:var(--font-display);font-weight:700;font-size:20px;}
+.gen-punch{font-size:24px;color:rgba(255,255,255,0.9);margin-top:36px;max-width:1100px;line-height:1.5;}
+.gen-punch .g{color:var(--lime);}
+/* Prozess */
+.gen-process{position:absolute;left:140px;right:140px;top:300px;padding:8px 46px;z-index:2;}
+.gen-process .row{display:grid;grid-template-columns:92px 1fr;align-items:baseline;gap:30px;padding:22px 12px;border-bottom:1px solid rgba(255,255,255,0.1);border-radius:8px;}
+.gen-process .row:last-child{border-bottom:0;}
+.gen-process .row:nth-child(odd){background:rgba(245,240,235,0.05);}.gen-process .row:nth-child(even){background:rgba(255,255,255,0.035);}
+.gen-process .no{font-family:var(--font-display);font-weight:900;font-size:38px;color:var(--lime);line-height:1;}
+.gen-process h3{font-family:var(--font-display);font-weight:700;font-size:24px;color:#fff;}
+.gen-process p{font-size:18px;color:rgba(255,255,255,0.72);margin-top:6px;line-height:1.45;}
+/* Agenda */
+.gen-agenda{position:absolute;left:140px;right:140px;top:296px;padding:10px 46px;z-index:2;}
+.gen-agenda .row{display:grid;grid-template-columns:128px 1fr 300px 48px;align-items:center;gap:24px;padding:21px 14px;border-bottom:1px solid rgba(255,255,255,0.12);border-radius:8px;}
+.gen-agenda .row:last-child{border-bottom:0;}
+.gen-agenda .row:nth-child(odd){background:rgba(245,240,235,0.05);}.gen-agenda .row:nth-child(even){background:rgba(255,255,255,0.035);}
+.gen-agenda .time{font-family:var(--font-display);font-weight:900;font-size:24px;color:var(--lime);}
+.gen-agenda .topic{font-size:23px;font-weight:600;color:#fff;}
+.gen-agenda .topic small{display:block;font-size:15px;font-weight:400;color:rgba(255,255,255,0.6);margin-top:5px;}
+.gen-agenda .spk{font-size:17px;color:rgba(255,255,255,0.75);}
+.gen-agenda .no{font-family:var(--font-display);font-weight:900;font-size:20px;color:rgba(255,255,255,0.3);text-align:right;}
+/* Timeline */
+.gen-tl-wrap{position:absolute;left:200px;right:200px;top:50%;transform:translateY(-50%);z-index:2;}
+.gen-tl-wrap .line{position:relative;height:4px;background:rgba(255,255,255,0.16);border-radius:2px;}
+.gen-tl-wrap .pt{position:absolute;top:50%;transform:translate(-50%,-50%);width:18px;height:18px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 7px rgba(180,231,23,0.14);}
+.gen-tl-wrap .item{position:absolute;width:260px;transform:translateX(-50%);text-align:center;}
+.gen-tl-wrap .item.up{bottom:46px;}.gen-tl-wrap .item.down{top:46px;}
+.gen-tl-wrap .yr{font-family:var(--font-display);font-weight:900;font-size:26px;color:var(--lime);}
+.gen-tl-wrap .item h3{font-family:var(--font-display);font-weight:700;font-size:19px;color:#fff;margin-top:8px;}
+.gen-tl-wrap .item p{font-size:14px;color:rgba(255,255,255,0.65);margin-top:7px;line-height:1.4;}
+/* Controls + Notes */
+.deck-controls{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:1000;display:flex;align-items:center;gap:6px;background:rgba(8,22,18,0.9);border:1px solid rgba(255,255,255,0.16);border-radius:999px;padding:8px 12px;color:#fff;font-size:13px;font-weight:600;}
+.deck-controls button{all:unset;cursor:pointer;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.deck-controls .count{min-width:60px;text-align:center;font-variant-numeric:tabular-nums;}
+.notes{display:none;}
+.notes-panel{position:fixed;left:0;right:0;bottom:0;z-index:2000;display:none;background:rgba(8,22,18,0.97);border-top:2px solid var(--lime);color:#fff;padding:20px 44px 26px;max-height:42vh;overflow:auto;}
+.notes-panel.on{display:block;}
+.notes-panel .nh{font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--lime);font-weight:700;margin-bottom:10px;}
+.notes-panel .nb{font-size:17px;line-height:1.6;white-space:pre-wrap;}
+@media print{html,body{width:1920px;height:auto;overflow:visible;}.deck-viewport{position:static;}.deck-stage{position:static;width:auto;height:auto;transform:none!important;}.slide{position:relative;visibility:visible!important;opacity:1!important;break-after:page;}.slide .reveal{opacity:1!important;transform:none!important;}.deck-controls,.notes-panel{display:none!important;}}
+"""
+
+SHELL = r"""<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8">
+<title>@@TITLE@@</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+@@FONTS@@
+<style>@@GENCSS@@
+@@BGCSS@@</style></head>
+<body class="@@FAMBODY@@">
+<div class="deck-viewport"><main class="deck-stage" id="deckStage">
+@@SECTIONS@@
+</main></div>
+<div class="deck-controls"><button id="prev" aria-label="Zurück">&#8249;</button><span class="count"><span id="cur">1</span> / @@TOTAL@@</span><button id="next" aria-label="Weiter">&#8250;</button></div>
+<script>
+(function(){var st=document.getElementById('deckStage'),sl=[].slice.call(st.querySelectorAll('.slide')),i=0;
+function fit(){var s=Math.min(innerWidth/1920,innerHeight/1080);st.style.transform='translate('+(innerWidth-1920*s)/2+'px,'+(innerHeight-1080*s)/2+'px) scale('+s+')';}
+function show(n){i=Math.max(0,Math.min(sl.length-1,n));sl.forEach(function(x,k){x.classList.toggle('visible',k===i);});var c=document.getElementById('cur');if(c)c.textContent=i+1;}
+addEventListener('resize',fit);fit();show(0);
+document.getElementById('next').onclick=function(){show(i+1);};
+document.getElementById('prev').onclick=function(){show(i-1);};
+addEventListener('keydown',function(e){if(['ArrowRight',' ','PageDown'].indexOf(e.key)>=0){show(i+1);e.preventDefault();}else if(['ArrowLeft','PageUp'].indexOf(e.key)>=0){show(i-1);e.preventDefault();}});
+/* Notizen ("N") */
+var panel=document.createElement('div');panel.className='notes-panel';panel.innerHTML='<div class="nh">Speaker Notes — Taste „N“</div><div class="nb"></div>';document.body.appendChild(panel);var nb=panel.querySelector('.nb');
+function curN(){var s=sl[i];var n=s&&s.querySelector('.notes');return n?n.textContent.trim():'—';}
+function updN(){nb.textContent=curN();}
+addEventListener('keydown',function(e){if(e.key==='n'||e.key==='N'){panel.classList.toggle('on');updN();}});
+})();
+</script>
+@@PRESENTER@@
+</body></html>"""
+
+# Presenter-Modus ("S") — Referentenansicht in zweitem Fenster
+PRESENTER = r"""<script>
+(function(){function openP(){var w=window.open('','bkmPresenter','width=1180,height=760');if(!w){alert('Bitte Pop-ups erlauben, dann erneut „S“.');return;}
+var slides=[].slice.call(document.querySelectorAll('.slide'));
+function cur(){var i=slides.findIndex(function(s){return s.classList.contains('visible');});return i<0?0:i;}
+function notesOf(i){var s=slides[i];var n=s&&s.querySelector('.notes');return n?n.textContent.trim():'— keine Notizen —';}
+function titleOf(i){var s=slides[i];if(!s)return '';var h=s.querySelector('.gen-h,.gen-h1,blockquote');return h?h.textContent.replace(/\s+/g,' ').trim():('Folie '+(i+1));}
+function go(d){var b=document.getElementById(d>0?'next':'prev');if(b)b.click();setTimeout(render,60);}
+var doc=w.document;doc.open();doc.write('<!doctype html><meta charset=utf-8><title>Referentenansicht — BKM</title><style>*{margin:0;box-sizing:border-box;font-family:-apple-system,Segoe UI,sans-serif}body{background:#0a1c17;color:#fff;height:100vh;display:flex;flex-direction:column;overflow:hidden}.bar{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;border-bottom:2px solid #b4e717;background:rgba(28,75,66,.55)}.timer{font-size:30px;font-weight:800;color:#b4e717}.clock{font-size:14px;color:rgba(255,255,255,.65);margin-top:3px}.pos{font-size:15px;color:rgba(255,255,255,.7)}.bar button{all:unset;cursor:pointer;background:#b4e717;color:#0f2620;font-weight:700;border-radius:8px;padding:10px 16px;margin-left:8px;font-size:14px}.bar .ghost{background:rgba(255,255,255,.12);color:#fff}.main{flex:1;display:grid;grid-template-columns:1.6fr 1fr;overflow:hidden}.now{padding:24px 28px;overflow:auto;border-right:1px solid rgba(255,255,255,.12)}.lbl{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#b4e717;font-weight:700;margin-bottom:12px}.now h2{font-size:27px;font-weight:800;margin-bottom:18px}#nown{font-size:20px;line-height:1.6;white-space:pre-wrap;color:rgba(255,255,255,.92)}.nxt{padding:24px 28px;overflow:auto;background:rgba(255,255,255,.03)}.nxt h3{font-size:21px;font-weight:800;margin-bottom:12px}#nextn{font-size:15px;line-height:1.5;color:rgba(255,255,255,.6);white-space:pre-wrap}</style><body><div class=bar><div><div class=timer id=t>00:00</div><div class=clock id=c></div></div><div class=pos id=p></div><div><button class=ghost id=pv>◀</button><button id=nx>▶ Weiter</button><button class=ghost id=rs>⟳ Timer</button></div></div><div class=main><div class=now><div class=lbl>Aktuelle Folie · Notizen</div><h2 id=nowt></h2><div id=nown></div></div><div class=nxt><div class=lbl>Als Nächstes</div><h3 id=nextt></h3><div id=nextn></div></div></div>');doc.close();
+var start=Date.now();function tw(n){return(n<10?'0':'')+n;}
+function tick(){var T=doc.getElementById('t');if(!T)return;var s=Math.floor((Date.now()-start)/1000);T.textContent=tw(Math.floor(s/60))+':'+tw(s%60);var d=new Date();doc.getElementById('c').textContent='Uhrzeit '+tw(d.getHours())+':'+tw(d.getMinutes());}
+function render(){if(!doc.body)return;var i=cur(),n=slides.length;doc.getElementById('p').textContent='Folie '+(i+1)+' / '+n;doc.getElementById('nowt').textContent=titleOf(i);doc.getElementById('nown').textContent=notesOf(i);var h=i+1<n;doc.getElementById('nextt').textContent=h?titleOf(i+1):'— Ende —';doc.getElementById('nextn').textContent=h?notesOf(i+1):'';}
+doc.getElementById('nx').onclick=function(){go(1);};doc.getElementById('pv').onclick=function(){go(-1);};doc.getElementById('rs').onclick=function(){start=Date.now();tick();};
+doc.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key===' ')go(1);else if(e.key==='ArrowLeft')go(-1);});
+render();tick();setInterval(tick,1000);setInterval(render,400);w.focus();}
+document.addEventListener('keydown',function(e){if((e.key==='s'||e.key==='S')&&!e.metaKey&&!e.ctrlKey)openP();});})();
+</script>"""
+
+# Akzentwort-Markup: "Wort {{Akzent}} Wort" -> <span class=g>Akzent</span>
+def acc(t):
+    t = esc(t)
+    # erlaubte Marken-Auszeichnung wieder zulassen: Zeilenumbruch + weiches Trennzeichen
+    t = t.replace('&lt;br&gt;', '<br>').replace('&lt;br/&gt;', '<br>').replace('&lt;br /&gt;', '<br>')
+    t = t.replace('&amp;shy;', '&shy;')
+    return re.sub(r'\{\{(.+?)\}\}', r'<span class="g">\1</span>', t)
+
+def icon(name):
+    name = (name or 'fa-check').strip()
+    if not name.startswith('fa-'): name = 'fa-' + name
+    return '<i class="fas %s"></i>' % esc(name)
+
+# ======================= Familien-Konfiguration =======================
+FAM = {
+  'bkm-glass-ag':   {'caps_all': False, 'panel': 'glass', 'chrome': 'ag'},
+  'bkm-bold-poster':{'caps_all': True,  'panel': 'bold',  'chrome': 'bold'},
+}
+
+# Welche Typen sind "laut" (immer UPPERCASE, auch bei Hybrid-Casing)?
+CAPS_TYPES = {'cover', 'chapter', 'statement', 'closing'}
+
+def headline(text, stype, fam):
+    """Headline mit korrektem Casing (Hybrid bei glass-ag, durchgehend UPPERCASE bei bold)."""
+    caps = FAM[fam]['caps_all'] or stype in CAPS_TYPES
+    cls = 'gen-h' if caps else 'gen-h mx'
+    return '<h2 class="%s reveal d2">%s</h2>' % (cls, acc(text))
+
+# ======================= Slide-Renderer pro Typ =======================
+def r_cover(d, fam):
+    meta = ''.join('<div class="m"><span class="k">%s</span><span class="v">%s</span></div>' %
+                   (esc(x.get('k','')), esc(x.get('v',''))) for x in d.get('meta', []))
+    btn = ('<a class="gen-btn reveal d4">%s %s</a>' % (icon('arrow-right'), esc(d['button']))) if d.get('button') else ''
+    return ('<div class="gen-left">'
+            '<div class="gen-eyebrow reveal d1">%s</div>'
+            '<h1 class="gen-h1 reveal d1">%s</h1>'
+            '%s%s%s</div>' % (
+            esc(d.get('eyebrow','')), acc(d.get('title','')),
+            ('<p class="gen-lead reveal d3">%s</p>' % acc(d['lead'])) if d.get('lead') else '',
+            ('<div class="gen-meta reveal d4">%s</div>' % meta) if meta else '', btn))
+
+def head_block(d, stype, fam):
+    sub = ('<div class="gen-sub reveal d2">%s</div>' % acc(d['sub'])) if d.get('sub') else ''
+    return ('<div class="gen-head"><div class="gen-eyebrow reveal d1">%s</div>%s%s</div>' %
+            (esc(d.get('eyebrow','')), headline(d.get('title',''), stype, fam), sub))
+
+def r_cards(d, fam):
+    cs = ''
+    for i, it in enumerate(d.get('items', [])[:4]):
+        cs += ('<div class="gen-card reveal d%d"><div class="ic">%s</div>'
+               '<h3>%s</h3><p>%s</p></div>' % (min(i+1,5), icon(it.get('icon')), acc(it.get('h','')), acc(it.get('p',''))))
+    n = len(d.get('items', [])[:4])
+    return head_block(d,'cards',fam) + '<div class="gen-grid g%d">%s</div>' % (n, cs)
+
+def r_kpi(d, fam):
+    ks = ''
+    for i, it in enumerate(d.get('items', [])[:3]):
+        ks += ('<div class="gen-card kpi reveal d%d"><div class="n">%s</div><div class="c">%s</div></div>'
+               % (i+1, acc(it.get('value','')), acc(it.get('label',''))))
+    return head_block(d,'kpi',fam) + '<div class="gen-grid g3 kpis">%s</div>' % ks
+
+def r_split(d, fam):
+    pts = ''.join('<div class="gen-li reveal d%d"><div class="ic">%s</div><p>%s</p></div>' %
+                  (min(i+2,5), icon('check'), acc(p)) for i, p in enumerate(d.get('points', [])))
+    img = d.get('image', '')
+    src = embed_img(img) if img else TEX[2]
+    cap = ('<figcaption>%s</figcaption>' % esc(d['caption'])) if d.get('caption') else ''
+    return ('<div class="gen-split-txt"><div class="gen-eyebrow reveal d1">%s</div>%s%s</div>'
+            '<figure class="gen-figure reveal d2"><img src="%s" alt="">%s</figure>' % (
+            esc(d.get('eyebrow','')), headline(d.get('title',''),'split',fam), pts, src, cap))
+
+def r_quote(d, fam):
+    return ('<div class="gen-quote-mark">&ldquo;</div>'
+            '<div class="gen-quote-wrap"><div class="gen-eyebrow reveal d1">%s</div>'
+            '<blockquote class="reveal d2">%s</blockquote>'
+            '<div class="gen-who reveal d3"><span class="ln"></span><span>%s</span></div></div>' % (
+            esc(d.get('eyebrow','Das sagen Kunden')), acc(d.get('text','')), esc(d.get('source',''))))
+
+def r_table(d, fam):
+    cols = d.get('columns', []); hi = d.get('highlight', None)
+    def cell(v, j, head=False):
+        c = 'c hi' if (hi is not None and j == hi) else 'c'
+        return '<div class="%s">%s</div>' % (c, esc(v))
+    th = '<div class="tr head">' + ''.join(cell(c, j, True) for j, c in enumerate(cols)) + '</div>'
+    trs = ''
+    for row in d.get('rows', []):
+        trs += '<div class="tr">' + ''.join(cell(v, j) for j, v in enumerate(row)) + '</div>'
+    cols_css = 'grid-template-columns:1.7fr' + ' 1fr'*(max(len(cols)-1,1)) + ';'
+    return head_block(d,'table',fam) + '<div class="gen-panel gen-table reveal d3" style="%s">%s%s</div>' % (cols_css, th, trs)
+
+def r_compare(d, fam):
+    cards = ''
+    for k, col in enumerate(d.get('columns', [])[:2]):
+        win = ' win' if col.get('win') else ''
+        items = ''.join('<li class="%s">%s<span>%s</span></li>' %
+                        (('yes' if col.get('win') else 'no'),
+                         icon('check' if col.get('win') else 'xmark'), acc(x))
+                        for x in col.get('items', []))
+        cards += ('<div class="gen-card cmp%s reveal d%d"><span class="badge">%s</span>'
+                  '<h3>%s</h3><ul>%s</ul></div>' % (win, k+1, esc(col.get('badge','')), acc(col.get('title','')), items))
+    foot = ('<div class="gen-foot reveal d3">%s</div>' % acc(d['foot'])) if d.get('foot') else ''
+    return head_block(d,'compare',fam) + '<div class="gen-grid g2 cmp">%s</div>%s' % (cards, foot)
+
+def r_chart(d, fam):
+    bars = d.get('bars', []); mx = max([float(b.get('value',0) or 0) for b in bars] + [1])
+    bs = ''
+    for b in bars:
+        v = float(b.get('value',0) or 0); h = max(4, round(v/mx*100))
+        hi = ' hi' if b.get('hi') else ''
+        bs += ('<div class="bar%s"><div class="val">%s</div><div class="col" style="height:%d%%"></div>'
+               '<div class="lbl">%s</div></div>' % (hi, esc(b.get('display', b.get('value',''))), h, esc(b.get('label',''))))
+    note = d.get('note', {})
+    nb = ('<div class="gen-note reveal d3"><h3>%s</h3>%s%s</div>' % (
+          acc(note.get('h','')),
+          ('<p>%s</p>' % acc(note['p'])) if note.get('p') else '',
+          ('<div class="cap">%s</div>' % esc(note['cap'])) if note.get('cap') else '')) if note else ''
+    return head_block(d,'chart',fam) + '<div class="gen-chart-wrap"><div class="gen-chart reveal d2">%s</div>%s</div>' % (bs, nb)
+
+def r_chapter(d, fam):
+    return ('<div class="gen-chapter"><div class="big reveal d1">%s</div>'
+            '<div class="t"><div class="gen-eyebrow reveal d2">%s</div>'
+            '<h2 class="gen-h reveal d3">%s</h2></div></div>' % (
+            esc(d.get('no','01')), esc(d.get('eyebrow','')), acc(d.get('title',''))))
+
+def r_subhead(d, fam):
+    sub = ('<div class="gen-sub reveal d3">%s</div>' % acc(d['sub'])) if d.get('sub') else ''
+    return ('<div class="gen-subhead"><div class="gen-eyebrow reveal d1">%s</div>%s%s</div>' %
+            (esc(d.get('eyebrow','')), headline(d.get('title',''),'subhead',fam), sub))
+
+def r_statement(d, fam):
+    return ('<div class="gen-statement"><div class="gen-eyebrow reveal d1">%s</div>'
+            '<h1 class="gen-h1 reveal d2">%s</h1>%s</div>' % (
+            esc(d.get('eyebrow','')), acc(d.get('title','')),
+            ('<p class="gen-lead reveal d3">%s</p>' % acc(d['lead'])) if d.get('lead') else ''))
+
+def r_process(d, fam):
+    rows = ''
+    for i, st in enumerate(d.get('steps', [])):
+        rows += ('<div class="row reveal d%d"><div class="no">%02d</div><div><h3>%s</h3>%s</div></div>' %
+                 (min(i+1,5), i+1, acc(st.get('h','')), ('<p>%s</p>' % acc(st['p'])) if st.get('p') else ''))
+    return head_block(d,'process',fam) + '<div class="gen-panel gen-process reveal d2">%s</div>' % rows
+
+def r_agenda(d, fam):
+    rows = ''
+    for i, r in enumerate(d.get('rows', [])):
+        rows += ('<div class="row reveal d%d"><div class="time">%s</div>'
+                 '<div class="topic">%s%s</div><div class="spk">%s</div><div class="no">%02d</div></div>' % (
+                 min(i+1,5), esc(r.get('time','')), acc(r.get('topic','')),
+                 ('<small>%s</small>' % acc(r['sub'])) if r.get('sub') else '', esc(r.get('spk','')), i+1))
+    return head_block(d,'agenda',fam) + '<div class="gen-panel gen-agenda reveal d2">%s</div>' % rows
+
+def r_timeline(d, fam):
+    pts = d.get('points', []); n = max(len(pts),1)
+    items = ''
+    for i, p in enumerate(pts):
+        left = round((i + 0.5) / n * 100, 2); ud = 'up' if i % 2 == 0 else 'down'
+        items += ('<div class="pt" style="left:%s%%"></div>'
+                  '<div class="item %s" style="left:%s%%"><div class="yr">%s</div><h3>%s</h3>%s</div>' % (
+                  left, ud, left, esc(p.get('yr','')), acc(p.get('h','')),
+                  ('<p>%s</p>' % acc(p['p'])) if p.get('p') else ''))
+    return head_block(d,'timeline',fam) + '<div class="gen-tl-wrap reveal d2"><div class="line">%s</div></div>' % items
+
+def r_closing(d, fam):
+    chips = ''.join('<span class="v">%s</span>' % esc(v) for v in d.get('chips', []))
+    return ('<div class="gen-closing"><div class="gen-eyebrow reveal d1">%s</div>'
+            '<h1 class="gen-h1 reveal d2">%s</h1>%s%s</div>' % (
+            esc(d.get('eyebrow','')), acc(d.get('title','')),
+            ('<div class="gen-chips reveal d3">%s</div>' % chips) if chips else '',
+            ('<p class="gen-punch reveal d3">%s</p>' % acc(d['punch'])) if d.get('punch') else ''))
+
+RENDER = {'cover':r_cover,'cards':r_cards,'kpi':r_kpi,'split':r_split,'quote':r_quote,
+          'table':r_table,'compare':r_compare,'chart':r_chart,'chapter':r_chapter,
+          'subhead':r_subhead,'statement':r_statement,'process':r_process,'agenda':r_agenda,
+          'timeline':r_timeline,'closing':r_closing}
+
+# Bild einbetten (Pfad relativ zum Spec) — fallback: Textur als Platzhalter
+SPEC_DIR = '.'
+def embed_img(path):
+    p = path if os.path.isabs(path) else os.path.join(SPEC_DIR, path)
+    if os.path.exists(p):
+        ext = 'jpeg' if p.lower().endswith(('.jpg','.jpeg')) else 'png'
+        return 'data:image/%s;base64,%s' % (ext, base64.b64encode(open(p,'rb').read()).decode())
+    return TEX[2]
+
+# ======================= Komposition / Auto-Mix =======================
+DIVIDERS = {'chapter','subhead'}
+def lint(slides, strict=False):
+    types = [s.get('type') for s in slides]
+    warn = []
+    run = 1
+    for i in range(1, len(types)):
+        if types[i] == types[i-1] and types[i] not in ('cover','closing'):
+            run += 1
+            if run >= 3: warn.append('Folie %d: %d× „%s“ in Folge — Typ variieren.' % (i+1, run, types[i]))
+        else: run = 1
+    since = 0
+    for i, t in enumerate(types):
+        since = 0 if t in DIVIDERS or t == 'cover' else since + 1
+        if since > 8: warn.append('Folie %d: >8 Folien ohne Kapitel-Trenner/Unterthema — Gliederung einstreuen.' % (i+1))
+    from collections import Counter
+    dist = Counter(types)
+    print('  Typen-Verteilung:', dict(dist))
+    if warn:
+        print('  ⚠ Mix-Hinweise:'); [print('   -', w) for w in warn]
+        if strict: raise SystemExit('Strict: Mix-Regeln verletzt.')
+    else:
+        print('  ✓ Mix-Rhythmus ok.')
+    return warn
+
+# Hintergrund-Rotation (nie zweimal gleich nebeneinander) — chapter bevorzugt t4
+def bg_rotation(slides):
+    order = []; prev = 0
+    for s in slides:
+        if s.get('type') == 'cover': t = 1
+        elif s.get('type') in ('chapter','closing','statement'): t = 4 if prev != 4 else 3
+        else:
+            t = prev % 4 + 1
+            if t == prev: t = t % 4 + 1
+        order.append(t); prev = t
+    return order
+
+# ======================= HTML-Shell =======================
+def build(spec, strict=False):
+    fam = spec.get('family', 'bkm-glass-ag')
+    if fam not in FAM: raise SystemExit('Unbekannte family: %s' % fam)
+    slides = spec.get('slides', [])
+    print('Deck:', spec.get('meta',{}).get('title','(ohne Titel)'), '| family:', fam, '| Folien:', len(slides))
+    lint(slides, strict)
+    bgs = bg_rotation(slides)
+    fambody = 'fam-bold' if FAM[fam]['caps_all'] else 'fam-glass'
+    tagtop = esc(spec.get('meta',{}).get('tagtop',''))
+    secs = []
+    notes_js_data = []
+    for i, sl in enumerate(slides):
+        st = sl.get('type')
+        if st not in RENDER:
+            print('  ! Unbekannter Typ übersprungen:', st); continue
+        inner = RENDER[st](sl, fam)
+        vis = ' visible' if i == 0 else ''
+        chrome = chrome_html(fam, st, sl, tagtop)
+        notes = esc(sl.get('notes','')).replace('\n','&#10;')
+        secs.append(
+          '<section class="slide gen g-%s%s">'
+          '<div class="bg t%d"></div>%s%s'
+          '<div class="pg">%02d</div>'
+          '<aside class="notes">%s</aside></section>' % (st, vis, bgs[i], chrome, inner, i+1, notes))
+    bg_css = ''.join('.bg.t%d{background:#0f2620 url(%s) center/cover;}' % (k, v) for k, v in TEX.items())
+    title = esc(spec.get('meta',{}).get('title','BKM Deck'))
+    total = str(len([s for s in slides if s.get('type') in RENDER]))
+    out = (SHELL
+           .replace('@@TITLE@@', title)
+           .replace('@@FONTS@@', FONTS)
+           .replace('@@GENCSS@@', GEN_CSS)
+           .replace('@@BGCSS@@', bg_css)
+           .replace('@@FAMBODY@@', fambody)
+           .replace('@@SECTIONS@@', '\n'.join(secs))
+           .replace('@@TOTAL@@', total)
+           .replace('@@PRESENTER@@', PRESENTER))
+    return out
+
+def chrome_html(fam, st, sl, tagtop):
+    rub = esc(sl.get('rubric', tagtop))
+    if FAM[fam]['chrome'] == 'bold':
+        mark = esc(sl.get('mark', tagtop or 'BKM'))
+        return ('<div class="gen-mark">%s %s</div>%s'
+                '<div class="gen-kicker">BKM Mannesmann · Bautenschutz</div>' % (icon('bolt'), mark, LOGO))
+    # ag
+    tt = ('<div class="tagtop">%s</div>' % rub) if rub else ''
+    return LOGO + tt
+
+if __name__ == '__main__':
+    ap = argparse.ArgumentParser()
+    ap.add_argument('spec'); ap.add_argument('-o','--out', required=True); ap.add_argument('--strict', action='store_true')
+    a = ap.parse_args()
+    SPEC_DIR = os.path.dirname(os.path.abspath(a.spec))
+    spec = json.load(open(a.spec, encoding='utf-8'))
+    html_out = build(spec, a.strict)
+    open(a.out,'w',encoding='utf-8').write(html_out)
+    print('→ geschrieben:', a.out, '(%d KB)' % (len(html_out)//1024))

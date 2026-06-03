@@ -31,6 +31,8 @@
 | `PATTERN_CATALOG.md` | Erlaubte vs. verbotene Patterns (Anti-Slop) |
 | `SLIDE_TYPES.md` | **Folientyp-Taxonomie** (Rollen-Folien + Inhalts-Bausteine, Plan/Spec) |
 | `QUICKSTART.md` | Verlässlicher Weg zu stimmigen Decks (Claude Code, Claude.ai, Manus) |
+| `AUTHORING.md` | **Deterministischer Generator** (JSON → Deck) + Spec/Prompt — agenten-unabhängig konsistent |
+| `../../tools/deck_builder.py` | Daten→Deck-Renderer (Layout im Code); `tools/sample-deck.json` = Beispiel |
 | `style-discovery.html` | Visuelle Auswahl-Galerie (4 Familien nebeneinander) |
 
 ---

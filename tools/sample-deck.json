@@ -1,0 +1,71 @@
+{
+  "family": "bkm-glass-ag",
+  "meta": { "title": "BKM · Bauwerksabdichtung — Überblick", "tagtop": "BKM AG" },
+  "slides": [
+    { "type": "cover", "eyebrow": "BKM Mannesmann AG", "title": "BAUWERKS&shy;SCHUTZ,<br>DER {{BLEIBT}}",
+      "lead": "Geprüfte Systeme, klare Unterlagen und Fachbetriebe vor Ort — für dauerhaft dichte Bauwerke.",
+      "button": "Überblick", "meta": [ {"k":"Kontext","v":"BKM AG"}, {"k":"Thema","v":"Fachbetriebe"}, {"k":"Stand","v":"2026"} ],
+      "notes": "Begrüßung. Worum geht es: BKM AG, Bauwerksabdichtung für Fachbetriebe." },
+
+    { "type": "agenda", "eyebrow": "Überblick", "title": "Agenda {{im Überblick}}",
+      "rows": [
+        {"time":"1","topic":"Marktposition","sub":"Wo wir stehen","spk":"BKM AG"},
+        {"time":"2","topic":"Systeme & Technik","sub":"Geprüfte Abdichtung","spk":"Produktmanagement"},
+        {"time":"3","topic":"Fachbetriebe","sub":"Netzwerk & Qualität","spk":"Vertrieb"},
+        {"time":"4","topic":"Ausblick","sub":"Plan 2026","spk":"BKM AG"} ] },
+
+    { "type": "chapter", "no": "01", "eyebrow": "Das Verfahren", "title": "FEUCHTE<br>{{STOPPEN}}" },
+
+    { "type": "cards", "eyebrow": "Was wir abdichten", "title": "Drei {{Systeme}}",
+      "items": [
+        {"icon":"droplet-slash","h":"Horizontalsperre","p":"Injektion gegen aufsteigende Feuchtigkeit — druckfest, dokumentiert."},
+        {"icon":"layer-group","h":"Flächenabdichtung","p":"Mehrschichtige Systeme für Keller, Wand und Boden."},
+        {"icon":"shield-halved","h":"Bauwerksschutz","p":"Langzeitschutz mit geprüften Materialien."} ] },
+
+    { "type": "kpi", "eyebrow": "In Zahlen", "title": "Worauf Sie sich {{verlassen}}",
+      "items": [
+        {"value":"30{{+}}","label":"Jahre Erfahrung"},
+        {"value":"8 {{Wo.}}","label":"bis messbar trocken"},
+        {"value":"10 {{J.}}","label":"Garantie auf Systeme"} ] },
+
+    { "type": "split", "eyebrow": "Aus der Praxis", "title": "Keller wieder {{nutzbar}}",
+      "points": ["Nachträgliche Horizontalsperre im Altbau","Kein Aufsteigen mehr im Mauerwerk","Dokumentiert per Feuchtemessung"],
+      "caption": "Projekt · Ort · 2025" },
+
+    { "type": "quote", "eyebrow": "Das sagen Kunden",
+      "text": "In acht Wochen {{dauerhaft trocken}} — sauber, termintreu und mit Garantie.",
+      "source": "M. Bauer · Eigentümer · Stuttgart" },
+
+    { "type": "table", "eyebrow": "Systeme im Detail", "title": "Leistung, die {{nachweisbar}} ist",
+      "columns": ["Kriterium","Standard","Wettbewerb","BKM"], "highlight": 3,
+      "rows": [ ["Trocken nach","16 Wochen","12 Wochen","8 Wochen"],
+                ["Garantie","2 Jahre","5 Jahre","10 Jahre"],
+                ["Restfeuchte","< 8 %","< 5 %","< 2 %"],
+                ["Normgeprüft","nein","ja","ja"] ] },
+
+    { "type": "compare", "eyebrow": "Der Unterschied", "title": "Mit oder ohne {{System}}",
+      "columns": [
+        {"badge":"Ohne BKM","title":"Risiko","items":["Ursache bleibt unklar","Einzelprodukte ohne System","Keine Dokumentation"]},
+        {"badge":"Mit BKM","title":"Sicherheit","win":true,"items":["Ursachenanalyse zuerst","Geprüfte Systeme","Lückenlos dokumentiert"]} ],
+      "foot": "Ergebnis: {{mehr Sicherheit}} und bessere Übertragbarkeit auf die Baustelle." },
+
+    { "type": "chart", "eyebrow": "Messbarer Erfolg", "title": "Restfeuchte {{über die Zeit}}",
+      "bars": [ {"label":"Wo 0","value":100,"display":"100%"}, {"label":"Wo 2","value":68,"display":"68%"},
+                {"label":"Wo 4","value":41,"display":"41%"}, {"label":"Wo 6","value":22,"display":"22%"},
+                {"label":"Wo 8","value":8,"display":"8%","hi":true} ],
+      "note": {"h":"Von 100 % auf {{unter 10 %}} in acht Wochen.","p":"Injektionssystem, dokumentiert an fünf Messpunkten.","cap":"Tiefgarage · 2025"} },
+
+    { "type": "process", "eyebrow": "So arbeiten wir", "title": "In vier {{Schritten}}",
+      "steps": [ {"h":"Analyse vor Ort","p":"Messung statt Vermutung."}, {"h":"Systemauswahl","p":"Abgestimmt auf den Lastfall."},
+                 {"h":"Ausführung","p":"Saubere, normgerechte Verarbeitung."}, {"h":"Dokumentation","p":"Grundlage für Garantie."} ] },
+
+    { "type": "timeline", "eyebrow": "Unser Weg", "title": "Meilensteine {{2024–2026}}",
+      "points": [ {"yr":"2024","h":"Systembaukasten","p":"Vereinheitlicht."}, {"yr":"2025","h":"Technik","p":"Schulungen."},
+                  {"yr":"2026","h":"Digital","p":"Neue Tools."}, {"yr":"Ziel","h":"Vertrauen","p":"Bundesweit dicht."} ] },
+
+    { "type": "closing", "eyebrow": "Unser Anspruch", "title": "STARKE PRODUKTE<br>ENTSTEHEN NICHT {{ZUFÄLLIG.}}",
+      "chips": ["prüfen","absichern","weiterdenken"],
+      "punch": "BKM verkauft nicht nur Produkte, {{sondern denkt sie aktiv weiter.}}",
+      "notes": "Abschluss-Statement. Anspruch von BKM zusammenfassen." }
+  ]
+}
