@@ -25,7 +25,7 @@ This repository contains the complete design system for BKM Mannesmann AG, a man
 | `docs/icon-system.md` | Icon specifications | |
 | `docs/referenzen.md` | External design system references (Vercel, MongoDB, NVIDIA, Mintlify, Supabase) | |
 | `docs/verbesserungsvorschlaege.md` | Improvement proposals based on reference analysis | |
-| `docs/bkm-slide-prompt.md` | Reusable slide prompt with exact CSS tokens (v3) | |
+| `docs/bkm-slide-prompt.md` | Legacy v3 slide prompt — superseded by `skills/bkm-slides/QUICKSTART.md` | |
 | `skills/bkm-slides/SKILL.md` | Slide skill entry point — mandatory workflow for slide creation | |
 | `skills/bkm-slides/QUICKSTART.md` | **How to build an on-brand deck (start here)** — for Claude Code, Claude.ai & Manus | |
 | `skills/bkm-slides/templates/<family>/demo.html` | **Self-contained golden-reference decks** (embedded fonts, logo, textures) — the actual starting point | |

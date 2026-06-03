@@ -133,8 +133,8 @@ skills/bkm-slides/
 ├── STYLE_PRESETS.md        ← exakte CSS-Token (Referenz)
 ├── PATTERN_CATALOG.md      ← Anti-Slop (verboten + Positiv-Regeln)
 ├── animation-patterns.md   ← Reveal-/Animations-Referenz
-├── assets/                 ← Hintergrund-Asset(s)
-└── legacy/                 ← v4-System (5-Templates) — abgelöst, nur Referenz
+├── SLIDE_TYPES.md          ← Folientyp-Taxonomie (14 Typen)
+└── QUICKSTART.md           ← Anleitung: stimmige Decks bauen (Claude Code / Claude.ai / Manus)
 ```
 
 ---
@@ -151,6 +151,6 @@ skills/bkm-slides/
 7. checklist.md (P0 muss grün) + 5-Dim-Selbstkritik → erst dann ausliefern
 ```
 
-> **Hinweis:** Das alte v4-System (fünf Copy-Paste-Templates, „kopieren, nicht
-> interpretieren") liegt in `legacy/` und ist durch die Familien abgelöst. Token- und
-> Anti-Slop-Wissen (`STYLE_PRESETS.md`, `PATTERN_CATALOG.md`) bleibt gültig.
+> **Hinweis:** Das alte v4-System (fünf Copy-Paste-Templates) wurde entfernt und ist durch
+> die vier Familien abgelöst. Token- und Anti-Slop-Wissen (`STYLE_PRESETS.md`,
+> `PATTERN_CATALOG.md`) bleibt gültig.
