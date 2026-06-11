@@ -255,6 +255,17 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--stage-bg);font
 .s-timeline .item h3{font-family:var(--font-display);font-weight:900;font-size:19px;text-transform:uppercase;color:var(--paper);margin-top:8px;letter-spacing:-0.01em;}
 .s-timeline .item p{font-size:14px;color:rgba(245,240,235,0.65);margin-top:7px;line-height:1.4;}
 </style>
+<style id="bkm-team-standard">
+/* BKM TEAM-STANDARD — verbindlich (nicht entfernen). Siehe SKILL.md / checklist.md (P0). */
+/* Bilder ohne Rahmen/Kasten, im Original-Seitenverhältnis, keine Caption */
+.s-split .figure,.figure{border-radius:0;border:none;box-shadow:none;overflow:visible;background:transparent!important;}
+.s-split .figure img,.figure img{object-fit:contain!important;}
+figcaption{display:none!important;}
+/* Split-Textblock vertikal zentriert (Flexbox, kein transform-Konflikt mit .reveal) */
+.s-split .txt{top:0;bottom:0;height:auto;display:flex;flex-direction:column;justify-content:center;}
+/* Kapitelfolien (dunkel): erste Zeile (Eyebrow) weiß, Akzentwort bleibt lime */
+.s-chapter .t .eyebrow{color:var(--paper)!important;}
+</style>
 </head>
 <body>
 <div class="deck-viewport">

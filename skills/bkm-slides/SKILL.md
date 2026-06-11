@@ -17,9 +17,11 @@
 
 ## Verbindliche Team-Regeln (immer anwenden)
 
-Diese Regeln sind im Template (`templates/bkm-glass-ag/demo.html` → `<style id="bkm-team-standard">`)
+Diese Regeln sind in **jeder Familie** (`templates/<slug>/demo.html` → `<style id="bkm-team-standard">`)
 und im Generator (`tools/deck_builder.py` → `GEN_CSS`) verankert. Beim Bauen **nie** überschreiben,
-beim Review (`checklist.md` P0) prüfen:
+beim Review (`checklist.md` P0) prüfen. **Ausnahme:** In der hellen Familie `bkm-glass-fachbetrieb`
+gilt Regel 5 (Kapitel-Eyebrow weiß) nicht — auf hellem Grund bleibt die erste Zeile in der dunklen
+Textfarbe, das Akzentwort in Pure/Transition Green.
 
 1. **Lesbarkeit:** Fließtext/Karten/Prozess-Text groß genug für (kleine) Tagungsbildschirme
    (Media-Text ~34px; nicht unter ~24px). Headlines unverändert.
