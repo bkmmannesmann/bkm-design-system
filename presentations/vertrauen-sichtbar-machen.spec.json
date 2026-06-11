@@ -10,478 +10,601 @@
       "keyvisual": true,
       "eyebrow": "BKM Mannesmann · Fachtagung",
       "title": "Vertrauen sichtbar {{machen}}",
-      "lead": "Wie BKM Fachbetriebe digital stärker, lokaler und glaubwürdiger wahrnehmbar macht.",
+      "lead": "Wie gute Arbeit heute Kunden gewinnt.",
       "meta": [
         {"k": "Format", "v": "45 Minuten"},
         {"k": "Referenten", "v": "Selhorst · Grumptmann"}
       ],
-      "notes": "Ruhig starten. Nicht mit Tools beginnen, sondern mit dem großen Gedanken: Qualität ist vorhanden. Die Aufgabe ist, diese Qualität an den richtigen Stellen sichtbar zu machen."
+      "notes": "Wenn ihr morgens auf die Baustelle fahrt, wisst ihr genau, was ihr tut. Ihr erkennt die Ursache, ihr kennt die Systeme, ihr wisst, wie man Feuchtigkeit dauerhaft in den Griff bekommt. Aber der Kunde, der euch noch nicht kennt, sieht zuerst nur sein Problem: eine feuchte Wand, Schimmel, Unsicherheit, Sorge um sein Haus.\n\nHeute geht es darum, wie wir diese Qualität, die in euren Betrieben längst vorhanden ist, sichtbarer machen. So sichtbar, dass der Kunde schneller Vertrauen fasst — bevor er überhaupt zum Hörer greift."
     },
     {
       "type": "statement",
       "rubric": "Einstieg",
-      "eyebrow": "Anschluss",
-      "title": "Aus Leistung wird {{Wahrnehmung}}",
-      "lead": "Wir haben heute gesehen, was BKM stark macht. Jetzt geht es darum, wie diese Stärke beim Kunden ankommt.",
-      "notes": "Sauber an die Vorträge davor anschließen. Nicht wiederholen. Der eigene Teil ist die Übersetzung nach außen: Wie wird aus Leistung Wahrnehmung? Wie wird aus Qualität Vertrauen?"
+      "eyebrow": "Einstieg",
+      "title": "Google ist der neue {{Nachbar}}",
+      "lead": "Früher fragte man den Nachbarn. Heute heißt der Google oder ChatGPT — mit 12 Websites, 40 Bewertungen und drei Anbietern auf einmal.",
+      "notes": "Früher war es einfach: feuchter Keller, Nachbarn gefragt, der kannte immer jemanden. Heute fragt man immer noch den Nachbarn — nur heißt der jetzt Google. Oder ChatGPT. Und der hat nicht nur eine Meinung, sondern direkt 12 Websites, 40 Bewertungen, drei Anbieter in der Nähe und meist noch einen Ratgeberartikel.\n\nDie Frage ist also nicht mehr nur: Wer kann das Problem lösen? Sondern: Wer wird in diesem Moment als vertrauenswürdig wahrgenommen?"
+    },
+    {
+      "type": "statement",
+      "rubric": "Einstieg",
+      "eyebrow": "Der neue Entscheidungsmoment",
+      "title": "Nicht der lauteste Anbieter {{gewinnt}}",
+      "lead": "Sondern der, der schneller Vertrauen auslöst.",
+      "notes": "Kunden entscheiden heute oft schon, bevor sie mit einem Betrieb gesprochen haben: Google, Websites, Bewertungen, erster Eindruck. Das ist keine schlechte Entwicklung, sondern eine Chance: Wenn gute Arbeit sichtbar wird, kann Vertrauen früher entstehen."
     },
     {
       "type": "subhead",
       "rubric": "Einstieg",
-      "eyebrow": "Der Kern",
-      "title": "Gute Arbeit gewinnt nicht {{automatisch}}",
-      "sub": "Gute Arbeit muss gefunden, verstanden und geglaubt werden.",
-      "notes": "Einer der zentralen Sätze. Der Fachbetrieb kann handwerklich stark sein — wenn der Kunde ihn online nicht findet oder kein Vertrauen fasst, entsteht keine Anfrage."
+      "eyebrow": "Die eigentliche Kundenfrage",
+      "title": "„Wem kann ich mein Haus {{anvertrauen}}?“",
+      "sub": "Der Kunde fragt nicht zuerst: „Welche Technik brauche ich?“",
+      "notes": "Bei Feuchtigkeit, Schimmel oder Wasser im Keller geht es nicht nur um eine technische Maßnahme — es geht um das Zuhause, den Immobilienwert, das Sicherheitsgefühl. Der Kunde ist nicht kompliziert, er ist verständlicherweise vorsichtig. Er sucht nicht nur eine Lösung, sondern einen Anbieter, dem er diese Lösung zutraut."
     },
     {
       "type": "statement",
       "rubric": "Einstieg",
-      "eyebrow": "Der Kunde entscheidet früher",
-      "title": "Der erste {{Eindruck}} entsteht vorher",
-      "lead": "Oft, bevor der Kunde mit uns spricht — in der Google-Suche, in KI-Antworten, auf der Website, über Bewertungen und Social Media.",
-      "notes": "Das sind heute die ersten Kontaktpunkte. Vertrauen beginnt oft ohne direkten Kontakt."
-    },
-    {
-      "type": "statement",
-      "rubric": "Einstieg",
-      "eyebrow": "Der Satz, der alles verbindet",
+      "eyebrow": "Der einfache Kern",
       "title": "Der Kunde kauft {{Sicherheit}}",
-      "lead": "Er kauft keine Maßnahme. Feuchteschäden sind Unsicherheit: Was ist die Ursache? Wird es teuer? Wer ist seriös? Wer löst es dauerhaft?",
-      "notes": "Aus der alten Präsentation übernehmen, aber stärker machen. Der Kern: nicht Technik verkaufen, sondern Sicherheit."
+      "lead": "Er kauft keine Maßnahme. Er muss spüren: Die verstehen mein Problem, sind seriös, sind in der Nähe und lösen es dauerhaft.",
+      "notes": "Am Ende steht eine technische Lösung. Aber bevor der Kunde sie versteht, muss er Vertrauen fassen: Die verstehen mein Problem. Die sind seriös. Die sind in meiner Nähe. Die können das dauerhaft lösen. Genau dieses Sicherheitsgefühl müssen wir früher sichtbar machen."
     },
     {
-      "type": "cards",
+      "type": "kpi",
       "rubric": "Einstieg",
-      "eyebrow": "Drei Ebenen",
-      "title": "Was {{Vertrauen}} bedeutet",
+      "eyebrow": "Der Vertrauensbeweis",
+      "title": "Kunden prüfen Vertrauen {{digital}}",
       "items": [
-        {"icon": "magnifying-glass", "h": "Ich verstehe das Problem", "p": "Der Kunde erkennt: Mein Fall ist gemeint."},
-        {"icon": "building", "h": "Ich erkenne den Anbieter", "p": "Marke und Betrieb wirken vertraut und seriös."},
-        {"icon": "shield-halved", "h": "Ich glaube an die Lösung", "p": "Die Sanierung wirkt machbar und dauerhaft."}
+        {"value": "87{{%}}", "label": "nutzen Google, um lokale Unternehmen zu vergleichen"},
+        {"value": "97{{%}}", "label": "lesen Online-Bewertungen vor einer Entscheidung"},
+        {"value": "88{{%}}", "label": "bevorzugen Unternehmen mit guten Bewertungen"}
       ],
-      "notes": "Diese drei Ebenen führen durch die gesamte Präsentation: Verstehen, Wiedererkennen, Glauben. Alle späteren Maßnahmen zahlen darauf ein."
+      "notes": "Diese Zahlen sollen nicht erschrecken, sondern eine Chance zeigen: Kunden suchen aktiv nach Vertrauenssignalen. Wenn sie online nach Vertrauen suchen, können wir dieses Vertrauen dort sichtbar machen — nicht künstlich, sondern auf Basis echter Arbeit, echter Erfahrung und echter Kundenergebnisse."
+    },
+    {
+      "type": "statement",
+      "rubric": "Einstieg",
+      "eyebrow": "Die gute Nachricht",
+      "title": "Die Qualität ist schon {{da}}",
+      "lead": "Jetzt machen wir sie sichtbarer.",
+      "notes": "Wir müssen BKM Fachbetriebe nicht neu erfinden und nichts vortäuschen. Die Qualität ist da: Erfahrung, Nähe, echte Baustellen, echte Ergebnisse, echte Kundenbeziehungen. Unsere Aufgabe ist, diese Stärke an den digitalen Kontaktpunkten klarer zu zeigen."
+    },
+    {
+      "type": "process",
+      "rubric": "Einstieg",
+      "eyebrow": "Der grüne Faden",
+      "title": "Die {{Vertrauenskette}}",
+      "steps": [
+        {"h": "Sichtbarkeit", "p": "erzeugt Aufmerksamkeit."},
+        {"h": "Einheitlichkeit", "p": "erzeugt Vertrauen."},
+        {"h": "Vertrauen", "p": "erzeugt Entscheidung."}
+      ],
+      "notes": "Das ist der grüne Faden für die gesamte Präsentation. Alles, was jetzt kommt — Rebranding, Key Visual, Landingpages, Blogbeiträge, digitale Assets, Partner-Shop, SEO, SEA und Google-Rezensionen — zahlt auf diese Kette ein. Es geht nicht um Einzelmaßnahmen, sondern um ein System, das Vertrauen sichtbar macht."
     },
     {
       "type": "chapter",
       "no": "01",
       "eyebrow": "Kapitel 01",
-      "title": "Der Markt hat sich {{verändert}}",
-      "notes": "Jetzt die Dringlichkeit aufbauen. Nicht dramatisieren, aber klar machen: Der Weg zur Anfrage ist anspruchsvoller geworden."
+      "title": "Wiedererkennung schafft {{Vertrauen}}",
+      "notes": "Wir starten mit dem neuen BKM Mannesmann Auftritt — aber nicht als Design-Thema, sondern als Antwort auf die Frage: Wie erkennt der Kunde schneller, dass er bei einem professionellen Anbieter ist?"
     },
     {
-      "type": "subhead",
-      "rubric": "Der Markt",
-      "eyebrow": "Der Markt ist nicht weg",
-      "title": "Der Bedarf bleibt — der {{Weg}} wird länger",
-      "sub": "Kunden recherchieren länger, vergleichen mehr und entscheiden vorsichtiger.",
-      "notes": "Nicht sagen: „Der Markt ist schlecht.“ Besser: Der Bedarf bleibt, aber die Kundenreise ist komplexer geworden. Der Kunde springt nicht mehr sofort zur Anfrage."
-    },
-    {
-      "type": "compare",
-      "rubric": "Der Markt",
-      "eyebrow": "Zwei Suchsituationen",
-      "title": "Wonach Kunden {{suchen}}",
-      "columns": [
-        {"badge": "Neues Bad", "title": "Klarer Weg", "win": true, "items": ["Kunde kennt das Gewerk", "Sucht direkt den Badbauer", "Schnell zur Anfrage"]},
-        {"badge": "Feuchte Wand", "title": "Suche nach Orientierung", "win": true, "items": ["Ursache, Schimmel, Keller?", "Gutachter, Maler, Versicherung?", "Spezialist kommt erst spät"]}
+      "type": "cards",
+      "rubric": "Die Marke",
+      "eyebrow": "Build · Keep · Maintain",
+      "title": "Was {{BKM}} bedeutet",
+      "items": [
+        {"icon": "hammer", "h": "Build", "p": "Struktur aufbauen."},
+        {"icon": "shield-halved", "h": "Keep", "p": "Werte schützen."},
+        {"icon": "arrows-rotate", "h": "Maintain", "p": "Substanz erhalten."}
       ],
-      "notes": "Sehr greifbar erklären: Bei „neues Bad“ sucht man den Badbauer. Bei „feuchte Wand“ sucht man erst Orientierung — Ursache, Schimmel, Keller, Gutachter. Erst später kommt der Spezialist ins Spiel."
-    },
-    {
-      "type": "statement",
-      "rubric": "Der Markt",
-      "eyebrow": "Das eigentliche Problem",
-      "title": "Nicht nur Feuchtigkeit — {{Unsicherheit}}",
-      "lead": "Der Fachbetrieb löst technisch Feuchtigkeit. Kommunikativ löst er Unsicherheit im Kopf des Kunden.",
-      "notes": "Starker Speaker-Moment. Genau dafür braucht es Vertrauen."
+      "notes": "BKM ist mehr als ein Name. Aus den drei Buchstaben werden drei Versprechen: Build — wir schaffen Struktur. Keep — wir schützen, was besteht. Maintain — wir erhalten Werte. Das ist kein Slogan für die Wand, sondern die Haltung hinter der Marke. Genau die müssen Kunden schneller sehen und wiedererkennen."
     },
     {
       "type": "subhead",
-      "rubric": "Der Markt",
-      "eyebrow": "Wettbewerb",
-      "title": "Der Wettbewerb beginnt vor dem {{Lead}}",
-      "sub": "Nicht erst beim Angebot — in der Vorabrecherche. Wer dort nicht sichtbar ist, kommt oft gar nicht in die Auswahl.",
-      "notes": "Den Gedanken zuspitzen: Die Vorauswahl passiert digital, lange bevor der erste Kontakt entsteht."
+      "rubric": "Die Marke",
+      "eyebrow": "Warum Rebranding?",
+      "title": "Klarer {{erkennbar}} werden",
+      "sub": "Rebranding heißt nicht: Wir sehen anders aus. Es heißt: Wir werden klarer erkennbar. Und was man schneller versteht, dem vertraut man leichter.",
+      "notes": "Vielleicht denkt jemand: Neues Logo, neue Farben — muss das sein? Ehrliche Antwort: Ja, wenn wir draußen klarer erkannt werden wollen. Ein einheitlicher Auftritt ist kein Selbstzweck, er hilft Kunden, BKM schneller einzuordnen."
     },
     {
       "type": "statement",
-      "rubric": "Der Markt",
-      "eyebrow": "Sichtbarkeit reicht nicht",
-      "title": "Sichtbarkeit ist nicht {{Vertrauen}}",
-      "lead": "Sichtbarkeit erzeugt Aufmerksamkeit. Vertrauen erzeugt die Entscheidung.",
-      "notes": "Reichweite ist nur der erste Schritt. Entscheidend ist, ob die Sichtbarkeit auch Vertrauen auslöst."
+      "rubric": "Die Marke",
+      "eyebrow": "Rebranding ist Vertrauensarbeit",
+      "title": "Nicht schöner — {{klarer}}",
+      "lead": "Wer ein Feuchtigkeitsproblem hat, sucht zuerst Orientierung und Sicherheit, kein Produkt.",
+      "notes": "Wer ein Feuchtigkeitsproblem hat, sucht kein Produkt, sondern Orientierung: Was ist mein Problem? Welche Lösung passt? Kann ich diesem Anbieter vertrauen? Hier entscheidet sich Vertrauen oft schon vor dem ersten Gespräch. Das neue Erscheinungsbild übersetzt Kompetenz in sichtbare Orientierung."
+    },
+    {
+      "type": "statement",
+      "rubric": "Die Marke",
+      "eyebrow": "Restaurant-Beispiel",
+      "title": "Einheitlichkeit ist ein {{Vertrauenssignal}}",
+      "lead": "Speisekarte vom Italiener, Kellner vom Griechen, Schild „Steakhouse“ — da wird man vorsichtig. Bei Marken ist es genauso.",
+      "notes": "Stellt euch ein Restaurant vor: Speisekarte wie vom Italiener, Kellner im T-Shirt vom Griechen, Schild „Steakhouse“. Da wird man kurz vorsichtig. Genauso funktioniert Wahrnehmung bei Marken. Wenn Website, Broschüre, Social Media, Landingpage und Partner-Shop unterschiedlich wirken, entsteht kein klares Bild. Ein einheitlicher Auftritt sagt: Hier arbeiten Profis mit System."
+    },
+    {
+      "type": "cards",
+      "rubric": "Die Marke",
+      "eyebrow": "Drei Wirkungen",
+      "title": "Worauf die Marke {{steht}}",
+      "items": [
+        {"icon": "bullseye", "h": "Klarheit", "p": "Der Kunde versteht schneller, wofür BKM steht."},
+        {"icon": "layer-group", "h": "Konsistenz", "p": "BKM sieht an allen Kontaktpunkten nach BKM aus."},
+        {"icon": "award", "h": "Professionalität", "p": "Schon der erste Eindruck vermittelt Kompetenz."}
+      ],
+      "notes": "Das neue BKM Mannesmann steht auf drei Wirkungen: Klarheit — der Kunde versteht schneller, wofür BKM steht. Konsistenz — BKM sieht überall nach BKM aus. Professionalität — schon der erste Eindruck vermittelt Kompetenz. Das macht den Unterschied, bevor überhaupt ein Beratungsgespräch stattfand."
+    },
+    {
+      "type": "cards",
+      "rubric": "Die Marke",
+      "eyebrow": "Klarheit für den Kunden",
+      "title": "Der Kunde versteht {{schneller}}",
+      "items": [
+        {"icon": "droplet", "h": "Hier geht es um Feuchtigkeit", "p": ""},
+        {"icon": "house", "h": "Hier geht es um mein Haus", "p": ""},
+        {"icon": "circle-check", "h": "Hier gibt es eine Lösung", "p": ""}
+      ],
+      "notes": "Klarheit ist kein Marketingbegriff, sondern Entscheidungshilfe. Ein Kunde mit feuchtem Keller hat keine Geduld für komplizierte Kommunikation. Er will schnell verstehen: Bin ich hier richtig? Wird mein Problem verstanden? Gibt es einen nächsten Schritt?"
+    },
+    {
+      "type": "subhead",
+      "rubric": "Die Marke",
+      "eyebrow": "Konsistenz über alle Kontaktpunkte",
+      "title": "Was der Kunde wiedererkennt, wirkt {{vertrauter}}",
+      "sub": "Website, Landingpage, Social Media, WhatsApp, Partner-Shop, Google — wenn alles zusammenpasst, entsteht ein professionelles Gesamtbild.",
+      "notes": "Vertrauen entsteht selten durch einen einzelnen Kontaktpunkt, sondern durch Wiederholung. Wenn alle Kanäle zusammenpassen, entsteht ein professionelles Gesamtbild. Der Kunde sieht nicht jedes Detail bewusst — aber er spürt: Das wirkt stimmig, organisiert, verlässlich."
+    },
+    {
+      "type": "split",
+      "rubric": "Die Marke",
+      "eyebrow": "Das Key Visual",
+      "title": "Der grüne {{Faden}}",
+      "points": ["Wiedererkennung auf den ersten Blick", "Auf Website, Social, Landingpage, Shop und Print", "Das ist BKM — das kenne ich"],
+      "placeholder": "Key Visual im Einsatz",
+      "notes": "Deshalb haben wir das Key Visual entwickelt — keine Deko, sondern unser grüner Faden. Egal ob Website, Social Media, Landingpage, WhatsApp-Status, Partner-Shop oder Print: Der Kunde soll schneller erkennen — das ist BKM, das kenne ich, das wirkt professionell, dem kann ich vertrauen."
+    },
+    {
+      "type": "subhead",
+      "rubric": "Die Marke",
+      "eyebrow": "Was das Key Visual zeigt",
+      "title": "Von feucht zu {{trocken}}",
+      "sub": "Wände, Schichten, Konstruktion — eine schließende Struktur. Build, Keep, Maintain auf einen Blick.",
+      "notes": "Das Key Visual macht die Haltung sichtbar: Es erinnert an Wände, Schichten und Konstruktion, wirkt wie eine schließende Struktur und zeigt den Weg von offen zu geschlossen, von instabil zu stabil, von feucht zu trocken. Der Kern von BKM auf einen Blick: Struktur aufbauen, Schutz sichern, Werte erhalten."
+    },
+    {
+      "type": "subhead",
+      "rubric": "Die Marke",
+      "eyebrow": "Vom Problem zur Lösung",
+      "title": "Die Farbwelt erzählt unseren {{Auftrag}}",
+      "sub": "Dunklere Töne stehen für das Problem, das klare BKM-Grün für den Zielzustand.",
+      "notes": "Auch die Farbwelt ist nicht zufällig. Die Grüntöne erzählen den Weg von Feuchtigkeit hin zur trockenen, sicheren Wand. Dunklere Töne = Problem, klares BKM-Grün = Zielzustand. Selbst die Gestaltung unterstützt die Geschichte, die BKM jeden Tag löst."
+    },
+    {
+      "type": "statement",
+      "rubric": "Die Marke",
+      "eyebrow": "Nutzen für Fachbetriebe",
+      "title": "Die Marke macht Qualität {{sichtbarer}}",
+      "lead": "Ein starker Auftritt macht Fachbetriebe nicht kleiner — er gibt ihrer Qualität Rückenwind.",
+      "notes": "Wichtig: Einheitlichkeit bedeutet nicht, dass lokale Identität verschwindet — im Gegenteil. Die Marke gibt dem Fachbetrieb Rückenwind, überträgt Professionalität und Vertrauen auf den Betrieb vor Ort. Die lokale Stärke bleibt — sie wird nur klarer, einheitlicher und glaubwürdiger sichtbar."
     },
     {
       "type": "chapter",
       "no": "02",
       "eyebrow": "Kapitel 02",
-      "title": "BKM als {{Vertrauenssystem}}",
-      "notes": "Vom Marktproblem zur Lösung führen: BKM baut kein loses Maßnahmenpaket, sondern ein System aus Marke, Content, Landingpages, Partnerstruktur und Bewertungen."
+      "title": "Der erste Eindruck entsteht {{früher}}",
+      "notes": "Jetzt schauen wir auf die Kundenreise. Denn der erste Eindruck entsteht heute oft lange, bevor jemand anruft oder ein Formular ausfüllt."
     },
     {
       "type": "subhead",
-      "rubric": "Rebranding",
-      "eyebrow": "Rebranding",
-      "title": "Nicht anders aussehen — klarer {{erkennbar}}",
-      "sub": "Kein Marketing-Kosmetik: Es geht um Wiedererkennung, Orientierung und Vertrauen.",
-      "notes": "Wichtig: Fachbetriebe dürfen es nicht als „Marketingkosmetik“ wahrnehmen."
-    },
-    {
-      "type": "cards",
-      "rubric": "Rebranding",
-      "eyebrow": "Drei Wirkungen",
-      "title": "Was die Marke {{leistet}}",
-      "items": [
-        {"icon": "bullseye", "h": "Klarheit", "p": "Der Kunde versteht sofort, wofür BKM steht."},
-        {"icon": "layer-group", "h": "Konsistenz", "p": "Was mehrfach wiedererkannt wird, wirkt vertrauter."},
-        {"icon": "award", "h": "Professionalität", "p": "Ein Vertrauenssignal schon vor dem ersten Gespräch."}
-      ],
-      "notes": "Diese drei Begriffe beibehalten — einfach und verständlich. Kurz erklären: Kunde versteht schneller, erkennt wieder, nimmt professioneller wahr."
-    },
-    {
-      "type": "split",
-      "rubric": "Rebranding",
-      "eyebrow": "Visueller Anker",
-      "title": "Das {{Key Visual}}",
-      "points": ["Der visuelle Anker des neuen Auftritts", "Verbindet BKM über alle Kanäle", "Aus der Wortmarke entwickelt — identitätsbildend"],
-      "placeholder": "Key Visual / Markenauftritt",
-      "notes": "Nicht technisch erklären. Es ist das wiederkehrende Element, das BKM über alle Kanäle verbindet — und aus der Marke abgeleitet, nicht dekoratives Beiwerk."
-    },
-    {
-      "type": "subhead",
-      "rubric": "Rebranding",
-      "eyebrow": "Farbwelt",
-      "title": "Von feucht zu {{trocken}}",
-      "sub": "Deep Green als Problemzustand, Pure Green als Lösung — die Farbwelt erzählt unseren Auftrag.",
-      "notes": "Einfach sagen: Selbst die Farbwelt unterstützt die Story, die wir jeden Tag lösen — vom Problem zur Lösung."
+      "rubric": "Die Kundenreise",
+      "eyebrow": "Bewusstere Kunden",
+      "title": "Kunden informieren sich {{gründlicher}}",
+      "sub": "Bevor sie Kontakt aufnehmen. In dieser frühen Phase müssen wir sichtbar, verständlich und glaubwürdig sein.",
+      "notes": "Das ist positiv: Ein gut informierter Kunde ist oft besser vorbereitet. Aber wir müssen in dieser frühen Informationsphase sichtbar, verständlich und glaubwürdig sein. Der Kunde will sich sicherer fühlen, bevor er den nächsten Schritt geht — genau dort müssen wir präsent sein."
     },
     {
       "type": "statement",
-      "rubric": "Rebranding",
-      "eyebrow": "Für Fachbetriebe",
-      "title": "Die Marke macht Qualität {{sichtbarer}}",
-      "lead": "Ein starker Auftritt macht den Fachbetrieb nicht kleiner — er gibt seiner Qualität Rückenwind.",
-      "notes": "Mögliche Sorge direkt auflösen: Einheitlichkeit bedeutet nicht Verlust von Individualität, sondern mehr Rückenwind durch die Marke."
+      "rubric": "Die Kundenreise",
+      "eyebrow": "Die Kundenreise bei feuchten Wänden",
+      "title": "Zuerst sucht der Kunde {{Orientierung}}",
+      "lead": "Schimmel? Aufsteigende Feuchtigkeit? Lüftung? Abdichtung? Maler, Gutachter oder Spezialist? Genau hier geben wir Orientierung.",
+      "notes": "Fällt die Haustür zu und der Schlüssel steckt innen, weiß der Kunde sofort: Schlüsseldienst. Bei einer feuchten Wand ist das anders — Schimmel? Aufsteigende Feuchtigkeit? Lüftungsproblem? Abdichtung? Maler, Gutachter, Maurer oder Spezialist? Genau in dieser Unsicherheit können wir Orientierung geben."
+    },
+    {
+      "type": "statement",
+      "rubric": "Die Kundenreise",
+      "eyebrow": "Wer Orientierung gibt",
+      "title": "Orientierung gewinnt {{Vertrauen}}",
+      "lead": "Nicht lauter sein — früher hilfreich sein.",
+      "notes": "Es geht nicht darum, lauter zu sein, sondern früher hilfreich. Wer dem Kunden in der Recherchephase verständlich hilft, wird schneller als kompetenter Ansprechpartner wahrgenommen — und hat im späteren Gespräch einen klaren Vorteil."
+    },
+    {
+      "type": "subhead",
+      "rubric": "Die Kundenreise",
+      "eyebrow": "Vor dem ersten Anruf",
+      "title": "Die Entscheidung beginnt vor dem {{Anruf}}",
+      "sub": "Gesucht, verglichen, Bewertungen gelesen, vielleicht eine KI-Antwort gesehen. Der Lead beginnt im Vertrauen — nicht im Kontaktformular.",
+      "notes": "Wenn jemand anruft, ist im Kopf schon viel passiert: gesucht, verglichen, Bewertungen gelesen, vielleicht eine KI-Antwort gesehen, ein erster Eindruck gebildet. Der Lead beginnt nicht im Kontaktformular, sondern im Vertrauen."
+    },
+    {
+      "type": "statement",
+      "rubric": "Die Kundenreise",
+      "eyebrow": "Sichtbarkeit ist nicht Vertrauen",
+      "title": "Sichtbarkeit ist nicht {{Vertrauen}}",
+      "lead": "Sichtbarkeit erzeugt Aufmerksamkeit. Vertrauen erzeugt die Entscheidung. Jeder Kontaktpunkt muss sagen: Hier bin ich richtig.",
+      "notes": "Gefunden zu werden ist wichtig, reicht aber nicht. Die Frage ist: Löst diese Sichtbarkeit Vertrauen aus? Google-Ergebnis, Landingpage, Ratgeberartikel, Bewertung — alle müssen dem Kunden das Gefühl geben: Hier bin ich richtig."
     },
     {
       "type": "chapter",
       "no": "03",
       "eyebrow": "Kapitel 03",
-      "title": "Vertrauen muss {{lokal}} werden",
-      "notes": "Brücke: Marke allein reicht nicht. Der Kunde will wissen, wer vor Ort hilft."
+      "title": "Marke gibt Sicherheit, Betrieb gibt {{Nähe}}",
+      "notes": "Jetzt wird es lokal. Vertrauen entsteht nicht nur durch eine starke Marke, sondern auch durch die Frage: Wer ist bei mir vor Ort?"
     },
     {
-      "type": "split",
+      "type": "subhead",
       "rubric": "Lokal",
       "eyebrow": "Lokale Suche",
-      "title": "Der Kunde sucht {{lokal}}",
-      "points": ["„feuchter Keller Bottrop“", "„Firma in meiner Nähe“", "Hilfe in der Region"],
-      "placeholder": "Lokale Google-Suche (Screenshots folgen)",
-      "notes": "Hier passen später die Screenshots. Beispiel: „feuchter Keller Bottrop“, „BKM Düsseldorf“, „Firma in meiner Nähe“."
+      "title": "Hilfe in der {{Nähe}}",
+      "sub": "Ob Düsseldorf, Bottrop oder Kaiserslautern — Kunden suchen nicht irgendwo Hilfe, sondern in erreichbarer Nähe.",
+      "notes": "Ob Düsseldorf, Bottrop oder Kaiserslautern: Der Kunde will wissen, wer wirklich vor Ort helfen kann. Er sucht nicht nur eine Lösung, sondern eine Lösung in erreichbarer Nähe. Diese lokale Nähe ist ein entscheidender Vertrauensfaktor."
     },
     {
       "type": "statement",
       "rubric": "Lokal",
-      "eyebrow": "Die beste Kombination",
-      "title": "Marke gibt Sicherheit, Betrieb gibt {{Nähe}}",
-      "lead": "Die Hauptmarke darf nicht anonym wirken — der lokale Betrieb nicht isoliert. Zusammen entsteht Vertrauen.",
-      "notes": "Eine Kernformel. BKM darf nicht anonym wirken, der lokale Betrieb nicht isoliert. Zusammen entsteht Vertrauen."
+      "eyebrow": "Größe und Nähe",
+      "title": "Größe + {{Nähe}}",
+      "lead": "Größe schafft Sicherheit, Nähe schafft Vertrauen. Große Marke im Rücken, lokaler Experte beim Kunden.",
+      "notes": "Die Hauptmarke gibt Sicherheit: Erfahrung, System, Qualität, starkes Netzwerk. Der Fachbetrieb vor Ort gibt Nähe: ein Gesicht, eine Region, einen Ansprechpartner. Genau diese Kombination ist stark: große Marke im Rücken, lokaler Experte beim Kunden."
     },
     {
       "type": "split",
       "rubric": "Lokal",
-      "eyebrow": "bkm-mannesmann.de/ort",
-      "title": "Die {{Brücke}}",
-      "points": ["Markenstärke der Hauptdomain", "Lokale Nähe über den Ortsbezug", "Ein Ansprechpartner in der Region"],
+      "eyebrow": "Lokale Brücke",
+      "title": "Aus Marke wird lokale {{Orientierung}}",
+      "points": ["bkm-mannesmann.de/ort", "Starker Markenrahmen + lokaler Ansprechpartner", "Markenstärke und Nähe zugleich"],
       "placeholder": "Lokale Landingpage /ort",
-      "notes": "Wenn Marke und lokaler Betrieb getrennt wirken, entsteht Reibung — der Kunde landet woanders, sieht anderes Design. Die /ort-Brücke verbindet Größe und Verlässlichkeit mit dem Ortsbezug."
+      "notes": "Der Kunde bleibt in einem starken Markenrahmen und sieht gleichzeitig: Hier gibt es einen Ansprechpartner in meiner Region. Das verbindet das Beste aus beiden Welten — nicht entweder große Marke oder lokaler Betrieb, sondern beides zusammen."
     },
     {
-      "type": "split",
+      "type": "process",
       "rubric": "Lokal",
-      "eyebrow": "Vertrauen braucht Gesichter",
-      "title": "Der lokale {{Experte}}",
-      "points": ["Teamfoto & Ansprechpartner", "Region, Leistungen, Referenzen", "Schneller, klarer Kontaktweg"],
-      "placeholder": "Team & Standort vor Ort",
-      "notes": "Der Kunde muss spüren: Das ist nicht anonym. Gesichter, Orte und klare Kontaktwege schaffen Nähe."
+      "eyebrow": "Lokale Vertrauenssignale",
+      "title": "Fünf klare {{Signale}}",
+      "steps": [
+        {"h": "Ort", "p": "Bin ich in der richtigen Region?"},
+        {"h": "Gesicht", "p": "Wer kommt zu mir?"},
+        {"h": "Leistung", "p": "Was wird gelöst?"},
+        {"h": "Bewertungen", "p": "Was sagen andere Kunden?"},
+        {"h": "Kontaktweg", "p": "Wie kann ich einfach anfragen?"}
+      ],
+      "notes": "Der Kunde braucht keine komplizierte Navigation, sondern klare Signale: Bin ich in der richtigen Region? Wer kommt zu mir? Was wird gelöst? Was sagen andere Kunden? Wie kann ich einfach anfragen? Wenn diese Signale klar sind, wird aus der starken Marke ein greifbarer Ansprechpartner."
     },
     {
       "type": "chapter",
       "no": "04",
       "eyebrow": "Kapitel 04",
-      "title": "Aus Besuchern werden {{Anfragen}}",
-      "notes": "Jetzt Landingpages und Funnel. Ziel: nicht nur mehr Traffic, sondern bessere Anfragen."
-    },
-    {
-      "type": "subhead",
-      "rubric": "Landingpages",
-      "eyebrow": "Landingpage",
-      "title": "Kein digitaler {{Flyer}}",
-      "sub": "Eine gute Landingpage führt den Kunden vom Problem zur Anfrage — wie ein gutes Beratungsgespräch.",
-      "notes": "Der Kunde will nicht stöbern. Er hat ein Problem. Die Seite muss wie ein gutes Beratungsgespräch funktionieren."
-    },
-    {
-      "type": "statement",
-      "rubric": "Landingpages",
-      "eyebrow": "Der Einstieg",
-      "title": "Es beginnt mit einem {{Symptom}}",
-      "lead": "Nasse Wand. Muffiger Geruch. Schimmel. Feuchter Keller. So beginnt die Suche — nicht mit einem Produktnamen.",
-      "notes": "Der Kunde denkt in Symptomen, nicht in technischen Lösungen. Nicht mit Produktnamen anfangen."
-    },
-    {
-      "type": "cards",
-      "rubric": "Landingpages",
-      "eyebrow": "Drei Fragen in Sekunden",
-      "title": "Was der Nutzer {{wissen will}}",
-      "items": [
-        {"icon": "location-dot", "h": "Bin ich hier richtig?", "p": "Sofort erkennbar: ja."},
-        {"icon": "comments", "h": "Versteht ihr mein Problem?", "p": "Das Symptom wird aufgegriffen."},
-        {"icon": "handshake", "h": "Hilft mir jemand vor Ort?", "p": "Nähe und Ansprechpartner sichtbar."}
-      ],
-      "notes": "Das sind die drei unbewussten Fragen des Nutzers. Wenn die Seite sie nicht schnell beantwortet, ist der Nutzer weg."
+      "title": "Was ihr von uns {{bekommt}}",
+      "notes": "Jetzt wird es praktisch — konkrete Werkzeuge für den Alltag. Nicht als Zusatzaufgabe, sondern als Entlastung."
     },
     {
       "type": "process",
-      "rubric": "Landingpages",
-      "eyebrow": "Der Funnel als Gespräch",
-      "title": "Geführt, nicht {{archiviert}}",
+      "rubric": "Werkzeugkasten",
+      "eyebrow": "Der Werkzeugkasten",
+      "title": "Werkzeuge, die euch Arbeit {{abnehmen}}",
       "steps": [
-        {"h": "Problem erkennen", "p": "Das Symptom des Kunden aufgreifen."},
-        {"h": "Sicherheit aufbauen", "p": "Kompetenz und Seriosität zeigen."},
-        {"h": "Lösung zeigen", "p": "Verständlich, ohne Technik-Overload."},
-        {"h": "Anfrage erleichtern", "p": "Der nächste Schritt muss einfach sein."}
+        {"h": "Landingpages", "p": ""},
+        {"h": "Blogbeiträge", "p": ""},
+        {"h": "Digitale Assets", "p": ""},
+        {"h": "Partner-Shop", "p": ""},
+        {"h": "Hybride Strategie", "p": ""},
+        {"h": "Google-Rezensionen", "p": ""}
       ],
-      "notes": "Sehr einfach halten. Eine Landingpage ist ein geführtes Gespräch, kein Textarchiv."
+      "notes": "Ihr sollt nicht abends noch Designer, Texter oder Online-Marketing-Experte werden. Ihr sollt euch auf das konzentrieren, was ihr am besten könnt: Kunden beraten, Schäden analysieren, Probleme lösen. Wir schaffen die digitale Infrastruktur im Hintergrund."
+    },
+    {
+      "type": "subhead",
+      "rubric": "Werkzeugkasten",
+      "eyebrow": "Baustein 1 · Landingpages",
+      "title": "Mehr qualifizierte {{Anfragen}}",
+      "sub": "Eine Landingpage ist keine Unterseite und kein Prospekt — sie führt den Kunden vom Problem zur Anfrage.",
+      "notes": "Eine Landingpage hat eine klare Aufgabe: Sie nimmt den Kunden an die Hand und führt ihn vom Problem zur Anfrage. Der Kunde kommt mit einem konkreten Thema — feuchte Wand, nasser Keller, Schimmel — und die Seite zeigt: Wir verstehen das, wir können helfen, hier ist dein nächster Schritt."
     },
     {
       "type": "statement",
-      "rubric": "Landingpages",
-      "eyebrow": "Weniger Hürde",
-      "title": "Der nächste Schritt muss {{einfach}} sein",
-      "lead": "Kurzes Formular, Schadensanalyse, Rückruf oder Konfigurator — Hürde senken und die Anfrage zugleich qualifizieren.",
-      "notes": "Es geht darum, die Kontaktbarriere zu senken und gleichzeitig die Anfrage zu qualifizieren."
+      "rubric": "Werkzeugkasten",
+      "eyebrow": "Landingpage als Erstberater",
+      "title": "Ein digitaler {{Erstberater}}",
+      "lead": "Kein Schaufenster: zuhören, einordnen, Sicherheit geben, den nächsten Schritt erklären.",
+      "notes": "Ein Kunde mit feuchtem Keller bekommt von euch nicht einfach einen Produktkatalog. Ihr hört zu, ordnet ein, gebt Sicherheit, erklärt den nächsten Schritt. Genau das muss eine gute Landingpage auch tun."
     },
     {
       "type": "cards",
-      "rubric": "Landingpages",
-      "eyebrow": "Der Nutzen",
-      "title": "Was Fachbetriebe {{gewinnen}}",
+      "rubric": "Werkzeugkasten",
+      "eyebrow": "Die drei Kundenfragen",
+      "title": "Was die Seite schnell {{beantwortet}}",
       "items": [
-        {"icon": "filter", "h": "Mehr relevante Anfragen", "p": "Die passenden Kunden melden sich."},
-        {"icon": "crosshairs", "h": "Weniger Streuverlust", "p": "Weniger unpassende Anfragen."},
-        {"icon": "clipboard-check", "h": "Bessere Vorbereitung", "p": "Besserer Erstkontakt und Gespräch."}
+        {"icon": "location-dot", "h": "Bin ich hier richtig?", "p": ""},
+        {"icon": "comments", "h": "Versteht ihr mein Problem?", "p": ""},
+        {"icon": "handshake", "h": "Hilft mir jemand vor Ort?", "p": ""}
       ],
-      "notes": "Ganz konkret werden: Es geht nicht um schöne Seiten, sondern um bessere Gespräche, bessere Planung und bessere Abschlusschancen."
+      "notes": "Diese drei Fragen muss eine Landingpage schnell beantworten. Schafft sie das, bleibt der Kunde. Wenn nicht, sucht er weiter. Deshalb bauen wir die Seiten aus Kundensicht, nicht aus Unternehmenssicht."
+    },
+    {
+      "type": "process",
+      "rubric": "Werkzeugkasten",
+      "eyebrow": "Funnel einfach erklärt",
+      "title": "Ein gutes Gespräch in der richtigen {{Reihenfolge}}",
+      "steps": [
+        {"h": "Problem erkennen", "p": "Das Symptom des Kunden aufgreifen."},
+        {"h": "Vertrauen aufbauen", "p": "Sicherheit und Kompetenz zeigen."},
+        {"h": "Lösung zeigen", "p": "Verständlich erklären."},
+        {"h": "Anfrage erleichtern", "p": "Den Kontakt leicht machen."}
+      ],
+      "notes": "Funnel-Strategie in einfacher Sprache: kein kompliziertes Marketingmodell, sondern ein gutes Gespräch in der richtigen Reihenfolge. Erst das Problem verstehen, dann Sicherheit geben, dann die Lösung erklären, dann den Kontakt leicht machen."
+    },
+    {
+      "type": "process",
+      "rubric": "Werkzeugkasten",
+      "eyebrow": "Fünf Fragen, fünf Antworten",
+      "title": "Was eine gute Landingpage {{beantwortet}}",
+      "steps": [
+        {"h": "Habe ich ein Problem?", "p": ""},
+        {"h": "Warum sollte ich handeln?", "p": ""},
+        {"h": "Kann das gelöst werden?", "p": ""},
+        {"h": "Warum BKM?", "p": ""},
+        {"h": "Was ist mein nächster Schritt?", "p": ""}
+      ],
+      "notes": "Eine gute Landingpage beantwortet die wichtigsten Fragen des Besuchers: Sie macht das Problem verständlich, zeigt warum Handeln sinnvoll ist, erklärt den Weg zur Lösung, baut Vertrauen in BKM auf und macht die Anfrage einfach. Darum erzeugt sie nicht nur mehr Klicks, sondern bessere Anfragen."
+    },
+    {
+      "type": "cards",
+      "rubric": "Werkzeugkasten",
+      "eyebrow": "Nutzen der Landingpages",
+      "title": "Bessere {{Anfragen}}",
+      "items": [
+        {"icon": "filter", "h": "Mehr relevante Anfragen", "p": "Passende Kunden melden sich."},
+        {"icon": "clipboard-check", "h": "Besser vorbereitete Kunden", "p": "Mit klarerer Erwartung."},
+        {"icon": "comments", "h": "Einfachere Erstgespräche", "p": "Wertvollere Beratung."}
+      ],
+      "notes": "Das Ziel sind nicht mehr Besucher, sondern bessere Anfragen: Kunden, die ihr Problem besser einordnen, schneller Vertrauen fassen und mit klarerer Erwartung ins Erstgespräch gehen. Das spart Zeit und macht Beratungsgespräche wertvoller."
+    },
+    {
+      "type": "subhead",
+      "rubric": "Werkzeugkasten",
+      "eyebrow": "Baustein 2 · Blogbeiträge",
+      "title": "Antworten, die {{gefunden}} werden",
+      "sub": "Was tun bei feuchtem Keller? Woher kommt Schimmel? Was kostet eine Sanierung? Genau dort beginnt Vertrauen.",
+      "notes": "Nicht jeder Kunde ist sofort anfragebereit — viele suchen zuerst Antworten: Was tun bei feuchtem Keller? Woher kommt Schimmel? Ist aufsteigende Feuchtigkeit gefährlich? Was kostet eine Sanierung? Genau dort beginnt Vertrauen — bei der ersten hilfreichen Antwort."
+    },
+    {
+      "type": "statement",
+      "rubric": "Werkzeugkasten",
+      "eyebrow": "Der BKM Ratgeber",
+      "title": "Digitale Beratung vor dem {{Gespräch}}",
+      "lead": "Ein guter Beitrag verkauft nicht — er erklärt. Und wer gut erklärt, wirkt kompetent.",
+      "notes": "Ein guter Beitrag verkauft nicht plump, er erklärt — und wer gut erklärt, wirkt kompetent. Blogbeiträge sind heute nicht einfach Texte für Google, sondern digitale Beratung: Sie helfen Kunden, ihr Problem zu verstehen, und zeigen: BKM kennt diese Probleme und kann sie lösen."
+    },
+    {
+      "type": "compare",
+      "rubric": "Werkzeugkasten",
+      "eyebrow": "Einfach erklärt",
+      "title": "SEO und {{AEO}}",
+      "columns": [
+        {"badge": "SEO", "title": "Auffindbar", "win": true, "items": ["Über Suchmaschinen gefunden werden", "Rankings in der Suche"]},
+        {"badge": "AEO", "title": "Verständlich", "win": true, "items": ["Antworten klar strukturieren", "Für Suchmaschinen & KI-Systeme"]}
+      ],
+      "notes": "SEO heißt: Wir werden über Suchmaschinen gefunden. AEO heißt: Wir strukturieren Inhalte so, dass Suchmaschinen und KI-Systeme verstehen, wofür BKM die passende Antwort liefert. Wir wollen dort auftauchen, wo Kunden Orientierung suchen — bei Google und zunehmend in KI-Antworten."
+    },
+    {
+      "type": "statement",
+      "rubric": "Werkzeugkasten",
+      "eyebrow": "KI-Sichtbarkeit",
+      "title": "KI ist ein neuer Weg zur {{Empfehlung}}",
+      "lead": "„Welche Firma in meiner Nähe saniert einen feuchten Keller?“ — dort sollten BKM und seine Fachbetriebe als verlässliche Antwort erscheinen.",
+      "notes": "Immer mehr Menschen fragen nicht nur Google, sondern auch KI-Systeme. Das verändert nicht unsere Leistung, aber wie Kunden Orientierung finden. Bei Fragen wie „Was hilft gegen aufsteigende Feuchtigkeit?“ sollten BKM und seine Fachbetriebe als verlässliche Antwort sichtbar werden."
+    },
+    {
+      "type": "statement",
+      "rubric": "Werkzeugkasten",
+      "eyebrow": "Nutzen der Inhalte",
+      "title": "Sichtbarkeit, die Vertrauen {{vorbereitet}}",
+      "lead": "Ihr müsst keine Content-Produzenten werden. Wer über hilfreiche Inhalte zu euch findet, kommt mit Vertrauensvorsprung ins Gespräch.",
+      "notes": "Ihr müsst nicht selbst zu Content-Produzenten werden. BKM schafft Inhalte, die das Netzwerk stärken, Kunden früher erreichen und Vertrauen vorbereiten. Wer über hilfreiche Inhalte zu euch findet, kommt besser informiert ins Gespräch — mit Vertrauensvorsprung statt bei null."
+    },
+    {
+      "type": "subhead",
+      "rubric": "Werkzeugkasten",
+      "eyebrow": "Baustein 3 · Digitale Assets",
+      "title": "Professionell aussehen, ohne Zeit zu {{verlieren}}",
+      "sub": "Fertige Bilder, Texte, saisonale Motive und WhatsApp-Status im neuen BKM-Auftritt — direkt nutzbar.",
+      "notes": "Wir wissen, dass ihr nach einem langen Tag nicht noch Social-Media-Postings gestalten wollt. Deshalb bereiten wir direkt nutzbare Materialien vor: fertige Bilder, Texte, saisonale Motive und WhatsApp-Status im neuen BKM-Auftritt. Einfach nutzen, sichtbar bleiben, professionell wirken."
+    },
+    {
+      "type": "cards",
+      "rubric": "Werkzeugkasten",
+      "eyebrow": "Social Media & WhatsApp",
+      "title": "Sichtbarkeit muss nicht {{kompliziert}} sein",
+      "items": [
+        {"icon": "share-nodes", "h": "Fertige Postings", "p": "Im neuen BKM-Auftritt."},
+        {"icon": "comment-dots", "h": "WhatsApp-Status", "p": "Nah an den Menschen."},
+        {"icon": "calendar-days", "h": "Saisonale Motive", "p": "Einfacher Kanal, schnelle Wirkung."}
+      ],
+      "notes": "Nicht jeder Betrieb muss auf jeder Plattform aktiv sein. Aber ein professioneller WhatsApp-Status, ein saisonaler Hinweis oder ein sauberer Social-Media-Post bewirken viel. Gerade WhatsApp ist nah an den Menschen: einfacher Kanal, schnelle Wirkung. Sichtbarkeit muss nicht kompliziert sein."
+    },
+    {
+      "type": "subhead",
+      "rubric": "Werkzeugkasten",
+      "eyebrow": "Baustein 4 · Partner-Shop",
+      "title": "Weniger Büro. Mehr {{Baustelle}}.",
+      "sub": "Material schneller finden, Datenblätter griffbereit, Bestellungen einfacher — jede gesparte Bürostunde ist besser investiert.",
+      "notes": "Der Partner-Shop ist kein Show-Thema, sondern Alltagsthema. Material schneller finden, Datenblätter griffbereit, einfachere Bestellungen — das spart Zeit. Und jede Stunde, die nicht im Büro verloren geht, ist besser investiert: auf der Baustelle, beim Kunden, im eigenen Betrieb."
+    },
+    {
+      "type": "cards",
+      "rubric": "Werkzeugkasten",
+      "eyebrow": "Partner-Shop Nutzen",
+      "title": "Weniger Suchen, mehr {{Zeit}}",
+      "items": [
+        {"icon": "magnifying-glass", "h": "Einfacher finden", "p": "Übersichtliche Kategorien, schnelle Navigation."},
+        {"icon": "bolt", "h": "Schneller bestellen", "p": "Auch mobil, fernab vom Schreibtisch."},
+        {"icon": "clipboard-check", "h": "Besser vorbereitet", "p": "Technische Datenblätter direkt am Produkt."}
+      ],
+      "notes": "Der neue Partner-Shop schafft Orientierung: übersichtlichere Kategorien, schnellere Navigation, bessere Produktinformationen, Datenblätter direkt am Produkt, mobile Nutzung. Das Ziel: weniger Suchen, weniger Reibung, mehr Zeit für die eigentliche Arbeit."
     },
     {
       "type": "chapter",
       "no": "05",
-      "eyebrow": "Kapitel 05",
-      "title": "Antworten schaffen {{Sichtbarkeit}}",
-      "notes": "Jetzt Blogbeiträge, SEO, AEO und KI. Logik: Nicht jeder Kunde ist sofort anfragebereit. Viele suchen erst Antworten."
-    },
-    {
-      "type": "subhead",
-      "rubric": "Blog & AEO",
-      "eyebrow": "Antworten zuerst",
-      "title": "Erst Antworten, dann {{Anbieter}}",
-      "sub": "Wer die Fragen des Kunden beantwortet, kommt früher in seine Auswahl.",
-      "notes": "Der Kunde fragt: Was tun bei feuchtem Keller? Ist Schimmel gefährlich? Was kostet eine Sanierung? Welche Ursache steckt dahinter?"
-    },
-    {
-      "type": "statement",
-      "rubric": "Blog & AEO",
-      "eyebrow": "Digitale Beratung",
-      "title": "Der Beitrag berät vor dem {{Anruf}}",
-      "lead": "Ein guter Blogbeitrag ist Vorberatung, Vertrauensaufbau und Suchmaschinenfutter zugleich.",
-      "notes": "Das ist kein Blog im klassischen Sinne. Es ist Vorberatung und Vertrauensaufbau."
-    },
-    {
-      "type": "compare",
-      "rubric": "Blog & AEO",
-      "eyebrow": "Einfach erklärt",
-      "title": "SEO und {{AEO}}",
-      "columns": [
-        {"badge": "SEO", "title": "Auffindbar", "win": true, "items": ["Macht uns sichtbar", "Rankings in der Suche"]},
-        {"badge": "AEO", "title": "Verständlich", "win": true, "items": ["Macht Antworten verständlich", "Für Suchmaschinen & KI-Antworten"]}
-      ],
-      "notes": "AEO nicht kompliziert machen. Answer Engine Optimization heißt: Inhalte so strukturieren, dass Suchmaschinen und KI-Antwortsysteme sie als hilfreiche Antwort erkennen."
-    },
-    {
-      "type": "statement",
-      "rubric": "Blog & AEO",
-      "eyebrow": "KI verändert die Vorentscheidung",
-      "title": "KI empfiehlt den {{Verständlichsten}}",
-      "lead": "Nicht den lautesten Anbieter — sondern verständliche, vertrauenswürdige Inhalte.",
-      "notes": "Keine Panik erzeugen. Wenn sich Suchverhalten verändert, müssen wir Inhalte so aufbereiten, dass BKM auch dort als kompetente Quelle auftaucht."
-    },
-    {
-      "type": "cards",
-      "rubric": "Blog & AEO",
-      "eyebrow": "Reale Einstiege",
-      "title": "Was Kunden wirklich {{suchen}}",
-      "items": [
-        {"icon": "droplet", "h": "Feuchter Keller — was tun?", "p": ""},
-        {"icon": "cloud", "h": "Schimmel — welche Ursache?", "p": ""},
-        {"icon": "arrow-up", "h": "Aufsteigende Feuchtigkeit erkennen", "p": ""},
-        {"icon": "shield-halved", "h": "Kellerabdichtung — welche Lösung?", "p": ""}
-      ],
-      "notes": "Das sind nicht nur Content-Themen. Das sind reale Einstiege in die Kundenreise."
-    },
-    {
-      "type": "chapter",
-      "no": "06",
-      "eyebrow": "Kapitel 06",
-      "title": "Sichtbar bleiben ohne {{Mehraufwand}}",
-      "notes": "Jetzt digitale Assets und Partner-Shop. Hier geht es um praktische Entlastung."
-    },
-    {
-      "type": "statement",
-      "rubric": "Assets & Shop",
-      "eyebrow": "Digitale Assets",
-      "title": "Sichtbar bleiben — ohne selbst zu {{gestalten}}",
-      "lead": "Fachbetriebe haben keine Zeit für tägliches Marketing. BKM liefert direkt nutzbare Vorlagen.",
-      "notes": "Fachbetriebe haben keine Zeit für tägliches Marketing. BKM liefert Vorlagen, die direkt nutzbar sind."
-    },
-    {
-      "type": "split",
-      "rubric": "Assets & Shop",
-      "eyebrow": "Nah am Alltag",
-      "title": "Social Media & {{WhatsApp}}",
-      "points": ["Fertige Postings", "WhatsApp-Status für den Alltag", "Einfache, regelmäßige Präsenz"],
-      "placeholder": "Social-/WhatsApp-Vorlagen",
-      "notes": "WhatsApp ist besonders nah am Alltag vieler Betriebe. Kein Influencer-Marketing, sondern einfache, regelmäßige Präsenz. Jeder Post zahlt auf Wiedererkennung ein."
-    },
-    {
-      "type": "split",
-      "rubric": "Assets & Shop",
-      "eyebrow": "Partner-Shop",
-      "title": "Einfacher finden, schneller {{bestellen}}",
-      "points": ["Bessere Kategorien, weniger Klicks", "Bessere Informationen", "Mobil nutzbar"],
-      "placeholder": "Partner-Shop (Screenshots folgen)",
-      "notes": "Partner-Shop nicht zu groß aufblasen — es geht um Nutzerfreundlichkeit. Und: Ein klarer Prozess stärkt die professionelle Wahrnehmung. Vertrauen entsteht auch in der Zusammenarbeit mit BKM."
-    },
-    {
-      "type": "subhead",
-      "rubric": "Übergabe",
-      "eyebrow": "Übergabe an Michael Grumptmann",
-      "title": "Aus Sichtbarkeit wird {{Strategie}}",
-      "sub": "Damit Marke, lokale Seiten, Inhalte und digitale Werkzeuge im Suchmarkt sauber zusammenspielen.",
-      "notes": "Übergang: „Wir haben gesehen, wie Marke, lokale Seiten, Inhalte und digitale Werkzeuge Vertrauen sichtbar machen. Damit das sauber zusammenspielt, übernimmt Michael den strategischen Blick auf SEO und SEA.“"
-    },
-    {
-      "type": "chapter",
-      "no": "07",
-      "eyebrow": "Kapitel 07 · Michael Grumptmann",
+      "eyebrow": "Baustein 05 · Michael Grumptmann",
       "title": "Hybride Strategie: {{SEO & SEA}}",
-      "notes": "Michael steigt ruhig und strategisch ein. Ziel: Fachbetriebe sollen verstehen, dass die Systeme nicht gegeneinander arbeiten dürfen."
+      "notes": "Robin: Wir haben gesehen, wie Marke, lokale Seiten, Inhalte, digitale Assets und der Partner-Shop Vertrauen sichtbar machen. Damit diese Sichtbarkeit im Suchmarkt sauber funktioniert, übernimmt Michael Grumptmann den strategischen Blick auf SEO und SEA. Denn Sichtbarkeit braucht nicht nur gute Inhalte, sondern auch klare Rollen im Hintergrund."
     },
     {
       "type": "statement",
       "rubric": "SEO & SEA",
-      "eyebrow": "Klare Rollen",
-      "title": "SEO und SEA sind keine {{Gegner}}",
-      "lead": "Sie müssen nur sauber geführt werden — nicht gegeneinander.",
-      "notes": "Die Systeme dürfen nicht gegeneinander arbeiten. Klare Rollen statt interner Konkurrenz."
+      "eyebrow": "SEO und SEA",
+      "title": "Keine {{Gegenspieler}}",
+      "lead": "Organische und bezahlte Sichtbarkeit erfüllen verschiedene Aufgaben — sauber getrennt ergänzen sie sich.",
+      "notes": "Michael: Organische und bezahlte Sichtbarkeit erfüllen unterschiedliche Aufgaben. Sauber getrennt und abgestimmt, ergänzen sie sich, statt sich im Weg zu stehen. Das Ziel ist nicht, dass alle überall auf dasselbe bieten, sondern ein System, in dem jeder Kanal seine Stärke ausspielt."
     },
     {
-      "type": "compare",
+      "type": "split",
       "rubric": "SEO & SEA",
-      "eyebrow": "Zwei Domains, zwei Rollen",
-      "title": "Wer macht {{was}}",
-      "columns": [
-        {"badge": "bkm-mannesmann.de/ort", "title": "Informieren & ranken", "win": true, "items": ["Autorität & Markenstärke", "Langfristige organische Rankings", "Ausführliche Inhalte"]},
-        {"badge": "bkm-ort.de", "title": "Aktivieren & konvertieren", "win": true, "items": ["Schnelle lokale Kampagnen", "Performance & Partnerautonomie", "Gezielte Anzeigen"]}
-      ],
-      "notes": "Die einfache Merkhilfe: Hauptdomain informieren und ranken, lokale Domain aktivieren und konvertieren. Nicht zu technisch werden."
+      "eyebrow": "Die Hauptdomain",
+      "title": "Langfristige organische {{Sichtbarkeit}}",
+      "points": ["bkm-mannesmann.de/ort", "Autorität & Markenstärke", "Lokale Unterseiten, starke Inhalte, klare Struktur"],
+      "placeholder": "Hauptdomain /ort",
+      "notes": "Michael: Die Hauptdomain baut Autorität auf — ausführlich, informativ, stärkt die Marke langfristig in der Suche. Hier entsteht die organische Sichtbarkeit: lokale Unterseiten, starke Inhalte, klare Struktur, die Google und KI-Systeme verstehen. Die Hauptdomain ist unser langfristiges Fundament."
     },
     {
-      "type": "statement",
+      "type": "split",
       "rubric": "SEO & SEA",
-      "eyebrow": "Die goldene Regel",
-      "title": "Keine interne {{Konkurrenz}}",
-      "lead": "Klare technische und strategische Trennung: Anzeigen-Seiten müssen nicht organisch mit der Hauptdomain konkurrieren.",
-      "notes": "NoIndex einfach erklären: Seiten für Anzeigen müssen nicht gleichzeitig organisch mit der Hauptdomain konkurrieren. Risiko Kannibalisierung: gleiche Begriffe = gegeneinander bieten. Lösung: klare Keyword- und Budgetabsprachen."
-    },
-    {
-      "type": "cards",
-      "rubric": "SEO & SEA",
-      "eyebrow": "Das Ziel",
-      "title": "Mehr Präsenz, weniger {{Reibung}}",
-      "items": [
-        {"icon": "signal", "h": "Mehr Präsenz", "p": "Stärker sichtbar im Suchmarkt."},
-        {"icon": "compress", "h": "Weniger Reibung", "p": "Klare Rollen statt Konflikt."},
-        {"icon": "handshake", "h": "Keine interne Konkurrenz", "p": "Partner behalten lokale Möglichkeiten."}
-      ],
-      "notes": "Michael abschließen lassen mit dem Sicherheitsversprechen: Die Fachbetriebe behalten lokale Möglichkeiten, während die Hauptmarke langfristig stärker wird."
-    },
-    {
-      "type": "subhead",
-      "rubric": "Übergabe",
-      "eyebrow": "Zurück zu Robin",
-      "title": "Sichtbarkeit ist der {{Anfang}}",
-      "sub": "Michael hat gezeigt, wie wir gefunden werden. Jetzt: warum der Kunde sich für euch entscheidet.",
-      "notes": "Übergang: „Michael hat gezeigt, wie wir gefunden werden. Jetzt geht es darum, warum der Kunde sich dann wirklich für euch entscheidet.“ Vertrauen braucht Beweise."
-    },
-    {
-      "type": "chapter",
-      "no": "08",
-      "eyebrow": "Kapitel 08",
-      "title": "Google-{{Rezensionen}}",
-      "notes": "Sehr klar sagen: Viele Kunden lesen Bewertungen, bevor sie Kontakt aufnehmen. Eine gute Bewertung ist ein digitaler Vertrauensbeweis."
-    },
-    {
-      "type": "statement",
-      "rubric": "Rezensionen",
-      "eyebrow": "Vor dem ersten Anruf",
-      "title": "Bewertungen sind {{Vertrauen}}",
-      "lead": "Viele Kunden lesen Bewertungen, bevor sie Kontakt aufnehmen — ein digitaler Vertrauensbeweis.",
-      "notes": "Rezensionen sind nicht nur nett. Lokale Sichtbarkeit wird stärker, wenn echte Kunden Vertrauen bestätigen — der größte lokale Hebel. Nach erfolgreichen Terminen aktiv, aber nicht aufdringlich um Rezensionen bitten."
-    },
-    {
-      "type": "cards",
-      "rubric": "Rezensionen",
-      "eyebrow": "Was eine gute Rezension zeigt",
-      "title": "Genau das, was Kunden {{wissen wollen}}",
-      "items": [
-        {"icon": "truck-fast", "h": "Der Betrieb war da", "p": "Zuverlässig und vor Ort."},
-        {"icon": "comments", "h": "Das Problem wurde verstanden", "p": "Verständlich erklärt."},
-        {"icon": "circle-check", "h": "Die Lösung hat überzeugt", "p": "Das Ergebnis stimmt."}
-      ],
-      "notes": "Gute Rezensionen erzählen genau das, was neue Kunden wissen wollen: War der Betrieb zuverlässig? Wurde verständlich erklärt? Ist das Ergebnis gut?"
+      "eyebrow": "Die lokale Domain",
+      "title": "Gezielte lokale {{Kampagnen}}",
+      "points": ["bkm-ort.de", "Ortsbezug signalisiert Nähe", "Landebahn für Anfragen aus der Region"],
+      "placeholder": "Lokale Domain · Google Ads",
+      "notes": "Michael: Lokale Domains funktionieren sehr gut für Google Ads, weil sie Nähe signalisieren. Eine URL mit Ortsbezug fühlt sich direkt regional an — gerade bei bezahlten Kampagnen stark. Die lokale Domain wird zur gezielten Landebahn für Anfragen aus der Region."
     },
     {
       "type": "process",
-      "rubric": "Rezensionen",
-      "eyebrow": "Das System",
-      "title": "Rezensionen schließen den {{Kreis}}",
+      "rubric": "SEO & SEA",
+      "eyebrow": "Klare Trennung",
+      "title": "Ergänzen statt {{blockieren}}",
       "steps": [
-        {"h": "Marke macht sichtbar", "p": "Wiedererkennung über alle Kanäle."},
-        {"h": "Content erklärt", "p": "Antworten schaffen Vertrauen."},
-        {"h": "Landingpages führen", "p": "Vom Problem zur Anfrage."},
-        {"h": "Rezensionen beweisen", "p": "Echte Kunden bestätigen die Qualität."}
+        {"h": "Organisch stärken", "p": "Die Hauptdomain baut langfristig auf."},
+        {"h": "Bezahlt aktivieren", "p": "Lokale Kampagnen erzeugen gezielt Nachfrage."},
+        {"h": "Keine interne Konkurrenz", "p": "Klare technische und inhaltliche Trennung."}
       ],
-      "notes": "Hier alle Bausteine zusammenführen. Rezensionen sind nicht isoliert, sondern der Beweis im System."
+      "notes": "Michael: Die Hauptdomain stärkt langfristig die organische Sichtbarkeit, lokale Kampagnen aktivieren gezielt Nachfrage. Mit klarer technischer und inhaltlicher Trennung vermeiden wir interne Konkurrenz — die Systeme blockieren sich nicht, sondern ergänzen sich. Das ist der Kern der hybriden Strategie."
     },
     {
-      "type": "compare",
-      "rubric": "Abschluss",
-      "eyebrow": "Die Rollenverteilung",
-      "title": "BKM und {{Fachbetrieb}}",
-      "columns": [
-        {"badge": "Das übernimmt BKM", "title": "Struktur & System", "win": true, "items": ["Marke und Auftritt", "Inhalte & Landingpages", "Digitale Werkzeuge"]},
-        {"badge": "Das gewinnt der Fachbetrieb", "title": "Mehr von dem, was zählt", "win": true, "items": ["Mehr Orientierung für Kunden", "Mehr Vertrauen vor dem Gespräch", "Mehr qualifizierte Anfragen"]}
+      "type": "cards",
+      "rubric": "SEO & SEA",
+      "eyebrow": "Die Umsetzung",
+      "title": "Ein System, klare {{Rollen}}",
+      "items": [
+        {"icon": "sitemap", "h": "Pro Standort eine Unterseite", "p": "Hochwertig auf der Hauptdomain."},
+        {"icon": "bullhorn", "h": "Lokale Domains für Ads", "p": "Gezielte regionale Kampagnen."},
+        {"icon": "handshake", "h": "Abgestimmt", "p": "Zentrale und Betrieb ziehen zusammen."}
       ],
-      "notes": "BKM nimmt den Fachbetrieben nicht ihre Rolle, sondern stärkt sie. Die Fachbetriebe konzentrieren sich auf Beratung, Analyse und Umsetzung."
+      "notes": "Michael: Pro Standort eine hochwertige Unterseite auf der Hauptdomain. Lokale Domains gezielt für Ads. Inhalte und Kampagnen so abgestimmt, dass Zentrale und Fachbetrieb nicht gegeneinander arbeiten. Ergebnis: langfristige Markenstärke und gleichzeitig lokale Aktivierung — mehr Präsenz ohne Gegeneinander."
+    },
+    {
+      "type": "statement",
+      "rubric": "SEO & SEA",
+      "eyebrow": "Rückgabe an Robin",
+      "title": "Vertrauen braucht {{Beweise}}",
+      "lead": "Sichtbarkeit bringt Aufmerksamkeit. Der letzte, stärkste Vertrauenspunkt: Was sagen andere Kunden?",
+      "notes": "Michael: Damit gebe ich zurück an Robin. Denn wenn der Kunde uns gefunden hat, kommt der letzte und vielleicht stärkste Vertrauenspunkt: Was sagen andere Kunden?"
+    },
+    {
+      "type": "statement",
+      "rubric": "Rezensionen",
+      "eyebrow": "Baustein 6 · Google-Rezensionen",
+      "title": "Der digitale {{Handschlag}}",
+      "lead": "Eine Rezension ist oft der erste Handschlag, bevor ihr den Kunden trefft. Was andere sagen, wirkt stärker als jede eigene Behauptung.",
+      "notes": "Robin: Eine Google-Rezension ist oft der erste Handschlag, bevor ihr den Kunden überhaupt trefft. Was andere über euch sagen, wirkt stärker als jede eigene Behauptung. Eine gute Bewertung zeigt: Dieser Betrieb war zuverlässig, das Problem wurde verstanden, die Lösung hat überzeugt."
+    },
+    {
+      "type": "subhead",
+      "rubric": "Rezensionen",
+      "eyebrow": "Warum Bewertungen wirken",
+      "title": "Vertrauen vor dem ersten {{Anruf}}",
+      "sub": "War der Betrieb pünktlich? Wurde verständlich erklärt? War die Arbeit sauber? Eine gute Rezension beantwortet genau das.",
+      "notes": "Viele Kunden lesen Bewertungen, bevor sie Kontakt aufnehmen. Sie suchen echte Erfahrungen: War der Betrieb pünktlich? Wurde verständlich erklärt? War die Arbeit sauber? Hat sich der Kunde gut aufgehoben gefühlt? Eine gute Rezension beantwortet genau diese Fragen."
+    },
+    {
+      "type": "statement",
+      "rubric": "Rezensionen",
+      "eyebrow": "Jede Baustelle zählt",
+      "title": "Jede gute Baustelle ein {{Vertrauenssignal}}",
+      "lead": "Gute Arbeit endet nicht mit dem Auftrag — sie hilft danach vielen neuen Kunden bei der Entscheidung.",
+      "notes": "Gute Arbeit endet nicht mit dem abgeschlossenen Auftrag. Sie kann danach vielen neuen Kunden helfen, sich richtig zu entscheiden. Wenn ein Kunde zufrieden ist, ist genau das der richtige Moment, freundlich um eine Bewertung zu bitten — nicht aufdringlich, sondern als natürlicher Abschluss guter Arbeit."
+    },
+    {
+      "type": "cards",
+      "rubric": "Rezensionen",
+      "eyebrow": "Was eine gute Rezension leistet",
+      "title": "Mehr als nur {{Sterne}}",
+      "items": [
+        {"icon": "clock", "h": "Zuverlässigkeit", "p": "Pünktlich und verlässlich."},
+        {"icon": "comments", "h": "Verständnis", "p": "Der Kunde fühlte sich ernst genommen."},
+        {"icon": "circle-check", "h": "Lösungskompetenz", "p": "Die Lösung hat überzeugt."}
+      ],
+      "notes": "Eine starke Rezension zeigt nicht nur Sterne, sondern wie der Betrieb gearbeitet hat, ob der Kunde sich ernst genommen fühlte und ob die Lösung überzeugt hat. So wird aus einer einzelnen guten Baustelle ein Vertrauenssignal für viele zukünftige Kunden."
+    },
+    {
+      "type": "process",
+      "rubric": "Abschluss",
+      "eyebrow": "Das System auf einen Blick",
+      "title": "Alles greift {{ineinander}}",
+      "steps": [
+        {"h": "Marke macht sichtbar", "p": "Rebranding sorgt für Wiedererkennung."},
+        {"h": "Content erklärt", "p": "Blogbeiträge beantworten Fragen."},
+        {"h": "Landingpages führen", "p": "Vom Problem zur Anfrage."},
+        {"h": "SEO & SEA bringen Reichweite", "p": "Struktur im Suchmarkt."},
+        {"h": "Rezensionen beweisen", "p": "Vertrauen wird beweisbar."}
+      ],
+      "notes": "Jetzt schließen wir den Kreis. Jeder Baustein hat eine Aufgabe: Rebranding = Wiedererkennung, Landingpages führen zur Anfrage, Blogbeiträge beantworten Fragen, digitale Assets halten sichtbar, Partner-Shop entlastet, SEO und SEA bringen Struktur in den Suchmarkt, Rezensionen machen Vertrauen beweisbar."
+    },
+    {
+      "type": "statement",
+      "rubric": "Abschluss",
+      "eyebrow": "Was BKM übernimmt",
+      "title": "Marke, Struktur, Inhalte, {{Werkzeuge}}",
+      "lead": "Damit ihr euch auf das konzentrieren könnt, was ihr am besten könnt: analysieren, beraten, sauber sanieren.",
+      "notes": "Nicht, damit ihr Marketingabteilungen werden müsst, sondern damit ihr euch auf eure Stärke konzentrieren könnt: analysieren, beraten, sauber sanieren. BKM kümmert sich um Rahmen, Materialien, Sichtbarkeit und digitale Infrastruktur. Ihr bringt die Qualität auf die Baustelle."
+    },
+    {
+      "type": "cards",
+      "rubric": "Abschluss",
+      "eyebrow": "Was Fachbetriebe gewinnen",
+      "title": "Der konkrete {{Nutzen}}",
+      "items": [
+        {"icon": "shield-halved", "h": "Mehr Vertrauen", "p": "Schon vor dem Erstgespräch."},
+        {"icon": "compass", "h": "Mehr Orientierung", "p": "Kunden verstehen BKM schneller."},
+        {"icon": "filter", "h": "Mehr qualifizierte Anfragen", "p": "Passende Kunden, bereit für den nächsten Schritt."}
+      ],
+      "notes": "Der konkrete Nutzen: Mehr Vertrauen vor dem Gespräch — der Kunde kommt mit besserem Gefühl. Mehr Orientierung — er versteht schneller, warum BKM passt. Mehr qualifizierte Anfragen — ihr sprecht häufiger mit Kunden, die wirklich ein passendes Problem haben und bereit sind weiterzugehen."
+    },
+    {
+      "type": "statement",
+      "rubric": "Abschluss",
+      "eyebrow": "Finaler Gedanke",
+      "title": "Sichtbar wird es {{gemeinsam}}",
+      "lead": "Keine Website dichtet einen Keller ab — das macht ihr. Wir halten euch den Rücken frei und machen eure Qualität sichtbar.",
+      "notes": "Am Ende dichtet keine Website einen Keller ab. Das macht ihr. Ihr seid die Experten, ihr gebt dem Kunden Sicherheit zurück. Unsere Aufgabe ist, euch den Rücken freizuhalten und eure Qualität nach außen sichtbar zu machen."
     },
     {
       "type": "closing",
       "rubric": "Abschluss",
-      "eyebrow": "Vertrauen sichtbar machen",
+      "eyebrow": "Vertrauen ist da",
       "title": "Hier bin ich {{richtig}}",
       "punch": "Es geht nicht darum, lauter zu werden — sondern dass Kunden schneller erkennen: Hier bin ich richtig.",
-      "chips": ["Vertrauen ist da", "Jetzt machen wir es sichtbar"],
-      "notes": "Langsam sprechen. Danach kurze Pause. Das ist der Kern der gesamten Präsentation. Dann Dank und Übergang zum nächsten Programmpunkt."
+      "chips": ["Vertrauen ist da", "Gemeinsam machen wir es sichtbar"],
+      "notes": "Alles zusammengenommen entsteht ein klares System: Marke, Inhalte, lokale Sichtbarkeit, Landingpages, Suchstrategie und Rezensionen greifen ineinander. Es geht nicht darum, lauter zu werden. Es geht darum, dass Kunden schneller erkennen: Hier bin ich richtig. [Langsam sprechen, kurze Pause.]"
     }
   ]
 }
