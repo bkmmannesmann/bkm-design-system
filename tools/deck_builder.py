@@ -209,6 +209,30 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--stage-bg);font
 .notes-panel .nh{font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--lime);font-weight:700;margin-bottom:10px;}
 .notes-panel .nb{font-size:17px;line-height:1.6;white-space:pre-wrap;}
 @media print{html,body{width:1920px;height:auto;overflow:visible;}.deck-viewport{position:static;}.deck-stage{position:static;width:auto;height:auto;transform:none!important;}.slide{position:relative;visibility:visible!important;opacity:1!important;break-after:page;}.slide .reveal{opacity:1!important;transform:none!important;}.deck-controls,.notes-panel{display:none!important;}}
+
+/* =====================================================================
+   BKM TEAM-STANDARD — verbindliche Regeln (nicht entfernen).
+   1) Fliesstext gross genug fuer (kleine) Tagungsbildschirme
+   2) Split-Textblock vertikal zentriert (Flexbox, kein transform-Konflikt)
+   3) Bilder ohne Rahmen/Kasten, Original-Seitenverhaeltnis (object-fit:contain)
+   4) Keine Bildunterschriften
+   5) Kapitelfolien: erste Zeile (Eyebrow) weiss, Akzentwort lime
+   ===================================================================== */
+.g-split .gen-split-txt{top:0;bottom:0;height:auto;display:flex;flex-direction:column;justify-content:center;}
+.gen-lead{font-size:30px;line-height:1.45;}
+.gen-sub{font-size:26px;}
+.gen-li p{font-size:26px;line-height:1.4;}
+.gen-grid .gen-card p{font-size:24px;line-height:1.45;}
+.gen-grid.kpis .c{font-size:26px;}
+.gen-grid.cmp li{font-size:26px;line-height:1.4;}
+.gen-table .tr .c{font-size:24px;}
+.gen-note p{font-size:24px;line-height:1.45;}
+.gen-foot{font-size:22px;}
+.gen-eyebrow{font-size:20px;}
+.g-split .gen-figure,.gen-figure{border-radius:0;box-shadow:none;overflow:visible;background:transparent!important;}
+.gen-figure img{object-fit:contain!important;}
+.gen-figure figcaption{display:none!important;}
+.gen-chapter .gen-eyebrow{color:#fff;}
 """
 
 SHELL = r"""<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8">
