@@ -8,6 +8,3 @@ Thumbs.db
 
 # Node modules (falls zukünftig Tooling hinzugefügt wird)
 node_modules/
-
-# Decks mit echten Inhalten (Foto/interne Daten) — nicht ins Repo
-presentations/bkm-pm-insights.html

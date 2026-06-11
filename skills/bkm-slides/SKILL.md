@@ -15,6 +15,25 @@
 
 ---
 
+## Verbindliche Team-Regeln (immer anwenden)
+
+Diese Regeln sind in **jeder Familie** (`templates/<slug>/demo.html` → `<style id="bkm-team-standard">`)
+und im Generator (`tools/deck_builder.py` → `GEN_CSS`) verankert. Beim Bauen **nie** überschreiben,
+beim Review (`checklist.md` P0) prüfen. **Ausnahme:** In der hellen Familie `bkm-glass-fachbetrieb`
+gilt Regel 5 (Kapitel-Eyebrow weiß) nicht — auf hellem Grund bleibt die erste Zeile in der dunklen
+Textfarbe, das Akzentwort in Pure/Transition Green.
+
+1. **Lesbarkeit:** Fließtext/Karten/Prozess-Text groß genug für (kleine) Tagungsbildschirme
+   (Media-Text ~34px; nicht unter ~24px). Headlines unverändert.
+2. **Media-Textblock vertikal zentriert** per Flexbox (`top:0;bottom:0;justify-content:center`) —
+   **nie** fixes `top`, da das mit der `.reveal`-Animation (`transform`) kollidiert und Text aus der Folie schiebt.
+3. **Bilder ohne Rahmen/Kasten**, immer im **Original-Seitenverhältnis** (`object-fit:contain`,
+   nie beschnitten); kein `border-radius`/Rand/Schatten, kein Box-Hintergrund.
+4. **Keine Bildunterschriften** (figcaptions aus).
+5. **Kapitelfolien:** erste Zeile (Eyebrow) **weiß**, großes Akzentwort **lime**.
+
+---
+
 ## Source of Truth (zuerst lesen, wenn unklar)
 
 | Datei | Inhalt |

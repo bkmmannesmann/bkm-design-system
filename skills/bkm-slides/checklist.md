@@ -17,6 +17,14 @@
 - [ ] **Kein Überlauf, keine Überlappung**, kein Text unter Lesegröße (Screenshot prüfen).
 - [ ] **Richtiges Logo im Kontext** (dunkel = white-puregreen, hell = stonegrey-puregreen),
       nicht umgefärbt/verzerrt.
+- [ ] **Fließtext groß genug für Tagungsbildschirme** — Media-/Karten-/Prozess-Text **nicht**
+      unter ~24–34px (kleinste Schirme, hintere Reihen müssen lesen können).
+- [ ] **Media-Textblock vertikal zentriert** (Flexbox, **nicht** fixes `top`) — gleiche Achse
+      wie das Bild; kein Block, der unten aus der Folie läuft. (`#bkm-team-standard` im Template).
+- [ ] **Bilder ohne Rahmen/Kasten** — kein `border-radius`/Rand/Schatten, **kein** weißer/dunkler
+      Box-Hintergrund; Bilder immer im **Original-Seitenverhältnis** (`object-fit:contain`, **nie** beschnitten).
+- [ ] **Keine Bildunterschriften** (figcaptions aus).
+- [ ] **Kapitelfolien**: erste Zeile (Eyebrow) **weiß**, das große Akzentwort **lime**.
 
 ## P1 — wichtig (stark empfohlen)
 

@@ -120,6 +120,10 @@ new Deck();
 - Elemente **absolut** positionieren (px), nicht per Flow umbrechen lassen.
 - `tot` (Folienzahl) liest die Engine automatisch aus der Anzahl `.slide`.
 - Navigation: Pfeile, Leertaste, PageUp/Down, Home/End, Ziffern 1–9, Touch-Swipe.
+- **Fernbedienung (Standard):** Jedes Deck ist per Funk-Presenter/Clicker bedienbar —
+  Pfeil hoch/runter/links/rechts, Bild auf/ab, Leertaste zum Blättern; **Black-Screen** auf
+  `B`/`.` (die „Bildschirm-aus"-Taste der Fernbedienung). Im Generator (`tools/deck_builder.py`)
+  fest verankert, damit jedes neue Deck es automatisch hat.
 - `:root`-Token kommen aus der kanonischen **`tokens.css`** (Single Source of Truth) —
   bei Deploy verlinken (`<link rel="stylesheet" href="../tokens.css">`), in eigenständigen
   Decks den `:root`-Block inlinen. `--stage-bg` und `--ease` müssen gesetzt sein.
