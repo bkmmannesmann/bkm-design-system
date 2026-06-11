@@ -8,6 +8,9 @@ Prinzip : Der Renderer (dieser Code) besitzt das Layout. Das LLM/der Autor liefe
 Marke   : nur BKM-Farben, Unbounded + TT Norms (aus glass-ag/demo.html eingebettet),
           texturierte Hintergruende (Auto-Rotation), Hybrid-Casing, Reveal, Zebra,
           Presenter-Modus ("S") + Notizen ("N").  Familien: bkm-glass-ag | bkm-bold-poster.
+Remote  : Jedes Deck ist standardmaessig per Funk-Fernbedienung/Presenter-Clicker steuerbar
+          (Pfeil hoch/runter/links/rechts, Bild auf/ab, Leertaste) inkl. Black-Screen-Taste
+          (B oder Punkt). Zusaetzlich F=Vollbild, Home/End, Ziffern 1-9.
 
 Aufruf  : python3 tools/deck_builder.py <spec.json> -o <out.html> [--strict]
 """
@@ -232,6 +235,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--stage-bg);font
 .deck-controls{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:1000;display:flex;align-items:center;gap:6px;background:rgba(8,22,18,0.9);border:1px solid rgba(255,255,255,0.16);border-radius:999px;padding:8px 12px;color:#fff;font-size:13px;font-weight:600;}
 .deck-controls button{all:unset;cursor:pointer;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
 .deck-controls .count{min-width:60px;text-align:center;font-variant-numeric:tabular-nums;}
+.deck-black{position:fixed;inset:0;background:#000;z-index:3000;display:none;cursor:none;}
+.deck-black.on{display:block;}
 .notes{display:none;}
 .notes-panel{position:fixed;left:0;right:0;bottom:0;z-index:2000;display:none;background:rgba(8,22,18,0.97);border-top:2px solid var(--lime);color:#fff;padding:20px 44px 26px;max-height:42vh;overflow:auto;}
 .notes-panel.on{display:block;}
@@ -284,7 +289,19 @@ addEventListener('resize',fit);fit();show(0);
 document.getElementById('next').onclick=function(){show(i+1);};
 document.getElementById('prev').onclick=function(){show(i-1);};
 var fsb=document.getElementById('fs');if(fsb)fsb.onclick=toggleFs;
-addEventListener('keydown',function(e){if(['ArrowRight',' ','PageDown'].indexOf(e.key)>=0){show(i+1);e.preventDefault();}else if(['ArrowLeft','PageUp'].indexOf(e.key)>=0){show(i-1);e.preventDefault();}else if(e.key==='Home'){show(0);}else if(e.key==='End'){show(sl.length-1);}else if(e.key==='f'||e.key==='F'){toggleFs();}else if(/^[1-9]$/.test(e.key)){show(+e.key-1);}});
+/* Funk-Fernbedienung / Presenter-Clicker: senden Pfeil-/Bild-Tasten; Black-Screen-Taste = B oder Punkt */
+var blk=document.createElement('div');blk.className='deck-black';document.body.appendChild(blk);
+function black(force){blk.classList.toggle('on',force===undefined?!blk.classList.contains('on'):force);}
+blk.addEventListener('click',function(){black(false);});
+function nav(d){if(blk.classList.contains('on')){black(false);return;}show(i+d);}
+addEventListener('keydown',function(e){var k=e.key;
+if(['ArrowRight','ArrowDown',' ','PageDown'].indexOf(k)>=0){nav(1);e.preventDefault();}
+else if(['ArrowLeft','ArrowUp','PageUp'].indexOf(k)>=0){nav(-1);e.preventDefault();}
+else if(k==='Home'){black(false);show(0);}
+else if(k==='End'){black(false);show(sl.length-1);}
+else if(k==='f'||k==='F'){toggleFs();}
+else if(k==='b'||k==='B'||k==='.'){black();e.preventDefault();}
+else if(/^[1-9]$/.test(k)){black(false);show(+k-1);}});
 /* Notizen ("N") */
 var panel=document.createElement('div');panel.className='notes-panel';panel.innerHTML='<div class="nh">Speaker Notes — Taste „N“</div><div class="nb"></div>';document.body.appendChild(panel);var nb=panel.querySelector('.nb');
 function curN(){var s=sl[i];var n=s&&s.querySelector('.notes');return n?n.textContent.trim():'—';}
