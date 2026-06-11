@@ -28,7 +28,35 @@ def load_assets():
 
 FONTS, LOGO, TEX = load_assets()
 
+def load_keyvisual():
+    """M-Pfeil-Keyvisual (weiss, fuer dunklen Grund) — nur fuer Deckblaetter."""
+    p = os.path.join(ROOT, 'assets/keyvisual/keyvisual-on-dark.png')
+    if os.path.exists(p):
+        return 'data:image/png;base64,' + base64.b64encode(open(p, 'rb').read()).decode()
+    return ''
+
+KV = load_keyvisual()
+
 def esc(x): return html.escape(str(x), quote=True)
+
+# Sauberer Bild-Platzhalter (on-brand, transparenter Grund) — fuer noch fehlende Fotos.
+# Wird mit object-fit:contain gezeigt; die gestrichelte Kante ist Teil des Platzhalters,
+# nicht des spaeteren Fotos (Foto = nur src ersetzen).
+def placeholder_svg(label):
+    label = esc(label or 'Foto folgt')
+    svg = (
+      "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 780 620'>"
+      "<rect x='7' y='7' width='766' height='606' rx='22' fill='rgba(255,255,255,0.045)' "
+      "stroke='#b4e717' stroke-width='3' stroke-dasharray='16 13'/>"
+      "<g fill='none' stroke='#b4e717' stroke-width='6' stroke-linejoin='round' "
+      "stroke-linecap='round' transform='translate(330,205)'>"
+      "<rect x='0' y='34' width='120' height='84' rx='13'/>"
+      "<path d='M30 34 l15 -22 h30 l15 22'/><circle cx='60' cy='78' r='25'/></g>"
+      "<text x='390' y='400' text-anchor='middle' font-family='Arial,Helvetica,sans-serif' "
+      "font-weight='900' font-size='44' fill='#ffffff' letter-spacing='3'>FOTO FOLGT</text>"
+      "<text x='390' y='446' text-anchor='middle' font-family='Arial,Helvetica,sans-serif' "
+      "font-size='25' fill='#b4e717'>%s</text></svg>" % label)
+    return 'data:image/svg+xml;base64,' + base64.b64encode(svg.encode('utf-8')).decode()
 
 # ======================= Kanonische Layout-CSS (Renderer besitzt das Layout) =======================
 GEN_CSS = r"""
@@ -75,6 +103,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--stage-bg);font
 .fam-bold .gen-head .gen-h{font-size:62px;}
 .gen-sub{font-size:21px;color:rgba(255,255,255,0.72);margin-top:14px;}
 /* Cover */
+.g-cover .keyvisual{position:absolute;right:0;top:50%;transform:translateY(-50%);height:560px;width:auto;opacity:0.85;pointer-events:none;z-index:1;}
 .g-cover .gen-left{position:absolute;left:140px;top:300px;right:520px;z-index:2;}
 .g-cover .gen-eyebrow{margin-bottom:24px;}
 .g-cover .gen-h1{font-size:92px;}
@@ -245,15 +274,17 @@ SHELL = r"""<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8">
 <div class="deck-viewport"><main class="deck-stage" id="deckStage">
 @@SECTIONS@@
 </main></div>
-<div class="deck-controls"><button id="prev" aria-label="Zurück">&#8249;</button><span class="count"><span id="cur">1</span> / @@TOTAL@@</span><button id="next" aria-label="Weiter">&#8250;</button></div>
+<div class="deck-controls"><button id="prev" aria-label="Zurück" title="Zurück (←)">&#8249;</button><span class="count"><span id="cur">1</span> / @@TOTAL@@</span><button id="next" aria-label="Weiter" title="Weiter (→)">&#8250;</button><button id="present" aria-label="Referentenansicht" title="Referentenansicht im 2. Fenster (S)">&#9707;</button><button id="fs" aria-label="Vollbild" title="Vollbild (F)">&#9974;</button></div>
 <script>
 (function(){var st=document.getElementById('deckStage'),sl=[].slice.call(st.querySelectorAll('.slide')),i=0;
 function fit(){var s=Math.min(innerWidth/1920,innerHeight/1080);st.style.transform='translate('+(innerWidth-1920*s)/2+'px,'+(innerHeight-1080*s)/2+'px) scale('+s+')';}
 function show(n){i=Math.max(0,Math.min(sl.length-1,n));sl.forEach(function(x,k){x.classList.toggle('visible',k===i);});var c=document.getElementById('cur');if(c)c.textContent=i+1;}
+function toggleFs(){if(!document.fullscreenElement){var el=document.documentElement;if(el.requestFullscreen)el.requestFullscreen();}else{if(document.exitFullscreen)document.exitFullscreen();}}
 addEventListener('resize',fit);fit();show(0);
 document.getElementById('next').onclick=function(){show(i+1);};
 document.getElementById('prev').onclick=function(){show(i-1);};
-addEventListener('keydown',function(e){if(['ArrowRight',' ','PageDown'].indexOf(e.key)>=0){show(i+1);e.preventDefault();}else if(['ArrowLeft','PageUp'].indexOf(e.key)>=0){show(i-1);e.preventDefault();}});
+var fsb=document.getElementById('fs');if(fsb)fsb.onclick=toggleFs;
+addEventListener('keydown',function(e){if(['ArrowRight',' ','PageDown'].indexOf(e.key)>=0){show(i+1);e.preventDefault();}else if(['ArrowLeft','PageUp'].indexOf(e.key)>=0){show(i-1);e.preventDefault();}else if(e.key==='Home'){show(0);}else if(e.key==='End'){show(sl.length-1);}else if(e.key==='f'||e.key==='F'){toggleFs();}else if(/^[1-9]$/.test(e.key)){show(+e.key-1);}});
 /* Notizen ("N") */
 var panel=document.createElement('div');panel.className='notes-panel';panel.innerHTML='<div class="nh">Speaker Notes — Taste „N“</div><div class="nb"></div>';document.body.appendChild(panel);var nb=panel.querySelector('.nb');
 function curN(){var s=sl[i];var n=s&&s.querySelector('.notes');return n?n.textContent.trim():'—';}
@@ -279,7 +310,8 @@ function render(){if(!doc.body)return;var i=cur(),n=slides.length;doc.getElement
 doc.getElementById('nx').onclick=function(){go(1);};doc.getElementById('pv').onclick=function(){go(-1);};doc.getElementById('rs').onclick=function(){start=Date.now();tick();};
 doc.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key===' ')go(1);else if(e.key==='ArrowLeft')go(-1);});
 render();tick();setInterval(tick,1000);setInterval(render,400);w.focus();}
-document.addEventListener('keydown',function(e){if((e.key==='s'||e.key==='S')&&!e.metaKey&&!e.ctrlKey)openP();});})();
+document.addEventListener('keydown',function(e){if((e.key==='s'||e.key==='S')&&!e.metaKey&&!e.ctrlKey)openP();});
+var pbtn=document.getElementById('present');if(pbtn)pbtn.addEventListener('click',openP);})();
 </script>"""
 
 # Akzentwort-Markup: "Wort {{Akzent}} Wort" -> <span class=g>Akzent</span>
@@ -315,11 +347,12 @@ def r_cover(d, fam):
     meta = ''.join('<div class="m"><span class="k">%s</span><span class="v">%s</span></div>' %
                    (esc(x.get('k','')), esc(x.get('v',''))) for x in d.get('meta', []))
     btn = ('<a class="gen-btn reveal d4">%s %s</a>' % (icon('arrow-right'), esc(d['button']))) if d.get('button') else ''
-    return ('<div class="gen-left">'
+    kv = ('<img class="keyvisual" src="%s" alt="">' % KV) if (d.get('keyvisual') and KV) else ''
+    return ('%s<div class="gen-left">'
             '<div class="gen-eyebrow reveal d1">%s</div>'
             '<h1 class="gen-h1 reveal d1">%s</h1>'
             '%s%s%s</div>' % (
-            esc(d.get('eyebrow','')), acc(d.get('title','')),
+            kv, esc(d.get('eyebrow','')), acc(d.get('title','')),
             ('<p class="gen-lead reveal d3">%s</p>' % acc(d['lead'])) if d.get('lead') else '',
             ('<div class="gen-meta reveal d4">%s</div>' % meta) if meta else '', btn))
 
@@ -347,7 +380,12 @@ def r_split(d, fam):
     pts = ''.join('<div class="gen-li reveal d%d"><div class="ic">%s</div><p>%s</p></div>' %
                   (min(i+2,5), icon('check'), acc(p)) for i, p in enumerate(d.get('points', [])))
     img = d.get('image', '')
-    src = embed_img(img) if img else TEX[2]
+    if img:
+        src = embed_img(img)
+    elif d.get('placeholder'):
+        src = placeholder_svg(d['placeholder'])
+    else:
+        src = TEX[2]
     cap = ('<figcaption>%s</figcaption>' % esc(d['caption'])) if d.get('caption') else ''
     return ('<div class="gen-split-txt"><div class="gen-eyebrow reveal d1">%s</div>%s%s</div>'
             '<figure class="gen-figure reveal d2"><img src="%s" alt="">%s</figure>' % (
@@ -460,6 +498,8 @@ RENDER = {'cover':r_cover,'cards':r_cards,'kpi':r_kpi,'split':r_split,'quote':r_
 # Bild einbetten (Pfad relativ zum Spec) — fallback: Textur als Platzhalter
 SPEC_DIR = '.'
 def embed_img(path):
+    if isinstance(path, str) and path.startswith('data:'):
+        return path
     p = path if os.path.isabs(path) else os.path.join(SPEC_DIR, path)
     if os.path.exists(p):
         ext = 'jpeg' if p.lower().endswith(('.jpg','.jpeg')) else 'png'
