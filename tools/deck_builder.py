@@ -10,7 +10,8 @@ Marke   : nur BKM-Farben, Unbounded + TT Norms (aus glass-ag/demo.html eingebett
           Presenter-Modus ("S") + Notizen ("N").  Familien: bkm-glass-ag | bkm-bold-poster.
 Remote  : Jedes Deck ist standardmaessig per Funk-Fernbedienung/Presenter-Clicker steuerbar
           (Pfeil hoch/runter/links/rechts, Bild auf/ab, Leertaste) inkl. Black-Screen-Taste
-          (B oder Punkt). Zusaetzlich F=Vollbild, Home/End, Ziffern 1-9.
+          (B oder Punkt). Start-Taste (F5) startet Vollbild statt Reload. Plug-and-Play,
+          kein Plugin/Server. Zusaetzlich F=Vollbild, Home/End, Ziffern 1-9.
 
 Aufruf  : python3 tools/deck_builder.py <spec.json> -o <out.html> [--strict]
 """
@@ -299,6 +300,7 @@ if(['ArrowRight','ArrowDown',' ','PageDown'].indexOf(k)>=0){nav(1);e.preventDefa
 else if(['ArrowLeft','ArrowUp','PageUp'].indexOf(k)>=0){nav(-1);e.preventDefault();}
 else if(k==='Home'){black(false);show(0);}
 else if(k==='End'){black(false);show(sl.length-1);}
+else if(k==='F5'){if(!document.fullscreenElement&&document.documentElement.requestFullscreen)document.documentElement.requestFullscreen();e.preventDefault();}
 else if(k==='f'||k==='F'){toggleFs();}
 else if(k==='b'||k==='B'||k==='.'){black();e.preventDefault();}
 else if(/^[1-9]$/.test(k)){black(false);show(+k-1);}});
