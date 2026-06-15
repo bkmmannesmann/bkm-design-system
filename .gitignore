@@ -8,3 +8,4 @@ Thumbs.db
 
 # Node modules (falls zukünftig Tooling hinzugefügt wird)
 node_modules/
+.claude/
