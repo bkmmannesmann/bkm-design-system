@@ -3,568 +3,570 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BKM Mannesmann AG — Unternehmensfundament</title>
+<title>BKM MANNESMANN AG — Unternehmensfundament</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@900&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --deep-green: #1c4b42; --deep-green-2: #0f2620; --deep-green-1: #235a4f;
-  --lime: #b4e717; --transition-green: #287d4b; --pure-green: #4daf46;
-  --sand: #f6f5f2; --stone-grey: #494949; --pad-x: 140px;
-}
-html, body { width:100%; height:100%; overflow:hidden; background:#000; font-family:system-ui,-apple-system,sans-serif; }
-#viewport { width:100vw; height:100vh; display:flex; align-items:center; justify-content:center; overflow:hidden; }
-#stage { width:1920px; height:1080px; position:relative; background:var(--deep-green-2); overflow:hidden; transform-origin:center center; }
+  :root {
+    --deep-green: #1c4b42;
+    --deep-green-2: #0f2620;
+    --deep-green-1: #235a4f;
+    --lime: #b4e717;
+    --transition-green: #287d4b;
+    --pure-green: #4daf46;
+    --sand: #f6f5f2;
+    --stone-grey: #494949;
+    --pad-x: 140px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #000; font-family: system-ui, -apple-system, sans-serif; }
+  #viewport { width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  #stage { width: 1920px; height: 1080px; position: relative; background: var(--deep-green-2); transform-origin: center center; overflow: hidden; }
+  #progress-bar { position: absolute; top: 0; left: 0; height: 4px; background: var(--lime); z-index: 100; transition: width 0.5s cubic-bezier(0.16,1,0.3,1); box-shadow: 0 0 12px var(--lime); }
+  #slide-counter { position: absolute; bottom: 32px; right: 56px; z-index: 100; font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 13px; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; }
+  #nav-prev, #nav-next { position: absolute; bottom: 28px; z-index: 100; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 50%; width: 48px; height: 48px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; outline: none; transition: background 0.2s, border-color 0.2s; }
+  #nav-prev { left: 56px; }
+  #nav-next { left: 116px; }
+  #nav-prev:hover, #nav-next:hover { background: rgba(180,231,23,0.15); border-color: var(--lime); }
 
-#progress-bar { position:absolute; top:0; left:0; height:4px; background:var(--lime); z-index:1000; transition:width 0.5s cubic-bezier(0.16,1,0.3,1); box-shadow:0 0 16px var(--lime); }
-#slide-counter { position:absolute; bottom:32px; right:48px; z-index:1000; color:rgba(255,255,255,0.4); font-size:18px; letter-spacing:0.08em; }
-#nav-prev, #nav-next { position:absolute; bottom:28px; z-index:1000; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); border-radius:50%; width:52px; height:52px; cursor:pointer; color:rgba(255,255,255,0.7); font-size:20px; display:flex; align-items:center; justify-content:center; transition:background 0.2s,color 0.2s; }
-#nav-prev { left:140px; } #nav-next { left:204px; }
-#nav-prev:hover, #nav-next:hover { background:var(--lime); color:var(--deep-green-2); }
+  .slide { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; clip-path: inset(0 100% 0 0); pointer-events: none; user-select: none; }
+  .slide.active { clip-path: inset(0 0% 0 0); pointer-events: all; transition: clip-path 0.7s cubic-bezier(0.16,1,0.3,1); }
+  .slide.prev { clip-path: inset(0 0% 0 100%); transition: clip-path 0.7s cubic-bezier(0.16,1,0.3,1); }
+  .slide.notransition { transition: none !important; }
 
-.slide { position:absolute; inset:0; padding:var(--pad-x); padding-top:80px; display:flex; flex-direction:column; clip-path:inset(0 100% 0 0); transition:clip-path 0.7s cubic-bezier(0.16,1,0.3,1); pointer-events:none; z-index:1; }
-.slide.active { clip-path:inset(0 0% 0 0); pointer-events:all; z-index:2; }
-.slide.prev { clip-path:inset(0 0 0 100%); z-index:1; }
+  .slide-content > * { opacity: 0; transform: translateY(24px); transition: none; }
+  .slide.active .slide-content > * { opacity: 1; transform: translateY(0); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1) calc(var(--i,0) * 80ms), transform 0.6s cubic-bezier(0.16,1,0.3,1) calc(var(--i,0) * 80ms); }
+  .slide-content { display: contents; }
 
-.slide.active .anim { opacity:0; transform:translateY(20px); animation:fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) forwards; }
-.slide.active .anim:nth-child(1){animation-delay:0ms}
-.slide.active .anim:nth-child(2){animation-delay:80ms}
-.slide.active .anim:nth-child(3){animation-delay:160ms}
-.slide.active .anim:nth-child(4){animation-delay:240ms}
-.slide.active .anim:nth-child(5){animation-delay:320ms}
-.slide.active .anim:nth-child(6){animation-delay:400ms}
-.slide.active .anim:nth-child(7){animation-delay:480ms}
-.slide.active .anim:nth-child(8){animation-delay:560ms}
-@keyframes fadeUp { to{opacity:1;transform:translateY(0)} }
+  .glass { backdrop-filter: blur(16px); background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 24px; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+  .glass:hover { transform: scale(1.02); box-shadow: 0 0 32px rgba(180,231,23,0.18); }
 
-.lime { color:var(--lime); }
-.glass { backdrop-filter:blur(16px); background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); border-radius:24px; transition:transform 0.2s,box-shadow 0.2s; }
-.glass:hover { transform:scale(1.02); box-shadow:0 0 32px rgba(180,231,23,0.2); }
+  /* ORBS */
+  .orbs { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+  .orb { position: absolute; border-radius: 50%; filter: blur(80px); animation: floatOrb 8s ease-in-out infinite; }
+  .orb-1 { width:500px;height:500px;background:var(--lime);top:-150px;left:-100px;animation-delay:0s;opacity:0.18; }
+  .orb-2 { width:400px;height:400px;background:var(--pure-green);bottom:-100px;right:100px;animation-delay:-3s;opacity:0.3; }
+  .orb-3 { width:300px;height:300px;background:var(--lime);top:300px;right:300px;animation-delay:-5s;opacity:0.12; }
+  .orb-4 { width:350px;height:350px;background:var(--deep-green-1);top:200px;left:500px;animation-delay:-2s;opacity:0.35; }
+  .orb-5 { width:250px;height:250px;background:var(--transition-green);bottom:200px;left:200px;animation-delay:-6s;opacity:0.4; }
+  @keyframes floatOrb { 0%,100%{transform:translateY(0) scale(1);} 33%{transform:translateY(-40px) scale(1.05);} 66%{transform:translateY(20px) scale(0.97);} }
 
-.slide-title { font-family:'Unbounded',sans-serif; font-weight:900; font-size:52px; letter-spacing:-0.04em; color:#fff; margin-bottom:48px; line-height:1.1; }
-.slide-title .lime { color:var(--lime); }
+  /* COVER */
+  .cover-inner { position:absolute;inset:0;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:0 var(--pad-x);z-index:10; }
+  .c-eye { font-family:'Unbounded',sans-serif;font-weight:900;font-size:13px;letter-spacing:0.2em;color:var(--lime);text-transform:uppercase;margin-bottom:24px; }
+  .c-main { font-family:'Unbounded',sans-serif;font-weight:900;font-size:88px;letter-spacing:-0.04em;text-transform:uppercase;color:white;line-height:0.95;margin-bottom:20px; }
+  .c-sub { font-family:'Unbounded',sans-serif;font-weight:900;font-size:40px;letter-spacing:-0.02em;color:var(--lime);margin-bottom:12px; }
+  .c-tag { font-size:22px;color:rgba(255,255,255,0.6);margin-bottom:72px; }
+  .c-cards { display:flex;gap:24px; }
+  .c-card { padding:28px 40px;min-width:220px; }
+  .c-card-lbl { font-family:'Unbounded',sans-serif;font-weight:900;font-size:28px;letter-spacing:-0.03em;color:var(--lime); }
+  .c-card-desc { font-size:13px;color:rgba(255,255,255,0.5);margin-top:6px;text-transform:uppercase;letter-spacing:0.08em; }
 
-/* COVER */
-#slide-1 { background:var(--deep-green-2); justify-content:flex-end; padding-bottom:100px; }
-.orb { position:absolute; border-radius:50%; filter:blur(80px); animation:float 8s ease-in-out infinite; pointer-events:none; }
-.orb-1 { width:600px;height:600px;background:rgba(180,231,23,0.12);top:-100px;right:-100px;animation-duration:9s; }
-.orb-2 { width:400px;height:400px;background:rgba(40,125,75,0.25);top:200px;left:100px;animation-duration:7s;animation-delay:-3s; }
-.orb-3 { width:300px;height:300px;background:rgba(180,231,23,0.08);bottom:100px;right:400px;animation-duration:11s;animation-delay:-5s; }
-.orb-4 { width:200px;height:200px;background:rgba(77,175,70,0.2);bottom:300px;left:500px;animation-duration:6s;animation-delay:-2s; }
-@keyframes float { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(30px,-40px) scale(1.05)} 66%{transform:translate(-20px,20px) scale(0.95)} }
-.cover-main { font-family:'Unbounded',sans-serif;font-weight:900;font-size:110px;letter-spacing:-0.04em;text-transform:uppercase;color:#fff;line-height:1;margin-bottom:16px; }
-.cover-sub { font-family:'Unbounded',sans-serif;font-weight:900;font-size:36px;letter-spacing:0.1em;color:var(--lime);margin-bottom:12px; }
-.cover-tagline { font-size:22px;color:rgba(255,255,255,0.5);margin-bottom:64px;letter-spacing:0.04em; }
-.cover-cards { display:flex;gap:24px; }
-.cover-card { flex:1;padding:32px 40px;display:flex;flex-direction:column;gap:8px; }
-.cover-card-label { font-family:'Unbounded',sans-serif;font-weight:900;font-size:28px;letter-spacing:-0.04em;color:var(--lime); }
-.cover-card-desc { font-size:15px;color:rgba(255,255,255,0.6);line-height:1.5; }
+  /* STD SLIDE */
+  .std { background:var(--deep-green-2);padding:64px var(--pad-x) 80px;display:flex;flex-direction:column; }
+  .h-title { font-family:'Unbounded',sans-serif;font-weight:900;font-size:48px;letter-spacing:-0.04em;color:white;text-transform:uppercase;margin-bottom:48px;flex-shrink:0; }
+  .h-title span { color:var(--lime); }
 
-/* AGENDA */
-.agenda-grid { display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(4,1fr);gap:16px;flex:1; }
-.agenda-card { padding:28px 36px;display:flex;align-items:center;gap:24px; }
-.agenda-num { font-family:'Unbounded',sans-serif;font-weight:900;font-size:32px;letter-spacing:-0.04em;color:var(--lime);min-width:56px; }
-.agenda-text { color:rgba(255,255,255,0.85);font-size:16px;line-height:1.4; }
-.agenda-text strong { color:#fff;font-size:17px;display:block;margin-bottom:2px; }
+  /* DIVIDER */
+  .div-slide { background:var(--deep-green-2);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:0 var(--pad-x);position:relative;overflow:hidden; }
+  .div-num { position:absolute;font-family:'Unbounded',sans-serif;font-weight:900;font-size:480px;letter-spacing:-0.06em;color:white;opacity:0.05;line-height:1;right:-40px;top:50%;transform:translateY(-50%);user-select:none;pointer-events:none; }
+  .div-line { width:80px;height:5px;background:var(--lime);border-radius:3px;margin-bottom:32px;position:relative;z-index:2; }
+  .div-lbl { font-family:'Unbounded',sans-serif;font-weight:900;font-size:72px;letter-spacing:-0.04em;text-transform:uppercase;color:var(--lime);position:relative;z-index:2; }
+  .div-sub { font-family:'Unbounded',sans-serif;font-weight:900;font-size:40px;letter-spacing:-0.03em;color:white;position:relative;z-index:2;margin-top:12px; }
 
-/* DIVIDER */
-.divider-slide { background:var(--deep-green-2);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;position:absolute; }
-.divider-bg-num { position:absolute;font-family:'Unbounded',sans-serif;font-weight:900;font-size:420px;color:rgba(255,255,255,0.05);letter-spacing:-0.06em;line-height:1;right:60px;top:50%;transform:translateY(-50%);user-select:none;pointer-events:none; }
-.divider-tag { font-family:'Unbounded',sans-serif;font-weight:900;font-size:18px;letter-spacing:0.18em;color:var(--lime);text-transform:uppercase;margin-bottom:20px;border-left:4px solid var(--lime);padding-left:20px; }
-.divider-title { font-family:'Unbounded',sans-serif;font-weight:900;font-size:96px;letter-spacing:-0.04em;text-transform:uppercase;line-height:1;margin-bottom:16px; }
-.divider-title.lime { color:var(--lime); }
-.divider-sub { font-size:28px;color:rgba(255,255,255,0.55);letter-spacing:0.02em;padding-left:24px; }
+  /* AGENDA */
+  .ag-grid { display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);gap:20px;flex:1; }
+  .ag-card { padding:32px 28px;display:flex;flex-direction:column;justify-content:space-between; }
+  .ag-num { font-family:'Unbounded',sans-serif;font-weight:900;font-size:36px;letter-spacing:-0.04em;color:var(--lime);opacity:0.7; }
+  .ag-title { font-family:'Unbounded',sans-serif;font-weight:900;font-size:16px;letter-spacing:-0.02em;color:white;margin-top:12px; }
+  .ag-sub { font-size:13px;color:rgba(255,255,255,0.5);margin-top:6px;line-height:1.4; }
 
-/* CARDS */
-.grid-2x2 { display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:20px;flex:1; }
-.info-card { padding:36px 40px;display:flex;flex-direction:column;gap:12px; }
-.info-card-label { font-family:'Unbounded',sans-serif;font-weight:900;font-size:13px;letter-spacing:0.16em;color:var(--lime);text-transform:uppercase; }
-.info-card-text { font-size:17px;color:rgba(255,255,255,0.85);line-height:1.6; }
+  /* GRID 2x2 */
+  .g22 { display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:24px;flex:1; }
+  .icard { padding:36px 40px;display:flex;flex-direction:column;gap:12px; }
+  .icard-lbl { font-family:'Unbounded',sans-serif;font-weight:900;font-size:13px;letter-spacing:0.12em;color:var(--lime);text-transform:uppercase; }
+  .icard-txt { font-size:18px;color:rgba(255,255,255,0.75);line-height:1.6; }
 
-/* ZWEI WEGE */
-.zwei-wege-grid { display:grid;grid-template-columns:1fr 1fr;gap:24px;flex:1;margin-bottom:24px; }
-.weg-card { padding:40px;display:flex;flex-direction:column; }
-.weg-badge { display:inline-block;font-family:'Unbounded',sans-serif;font-weight:900;font-size:13px;letter-spacing:0.14em;color:var(--deep-green-2);background:var(--lime);border-radius:8px;padding:6px 16px;margin-bottom:24px;text-transform:uppercase; }
-.weg-title { font-family:'Unbounded',sans-serif;font-weight:900;font-size:32px;letter-spacing:-0.04em;color:#fff;margin-bottom:28px; }
-.weg-row { display:flex;gap:12px;margin-bottom:14px; }
-.weg-row-label { font-size:13px;letter-spacing:0.1em;color:var(--lime);text-transform:uppercase;min-width:110px;padding-top:2px; }
-.weg-row-val { font-size:15px;color:rgba(255,255,255,0.8);line-height:1.5; }
-.zwei-callout { padding:28px 48px;text-align:center;font-size:20px;color:rgba(255,255,255,0.9);font-style:italic; }
+  /* ZWEI WEGE */
+  .zw-grid { display:grid;grid-template-columns:1fr 1fr;gap:28px;flex:1; }
+  .zw-card { padding:40px 44px;display:flex;flex-direction:column;gap:18px; }
+  .zw-hdr { display:flex;align-items:center;gap:16px;margin-bottom:4px; }
+  .zw-icon { width:52px;height:52px;border-radius:14px;background:var(--lime);display:flex;align-items:center;justify-content:center;font-family:'Unbounded',sans-serif;font-weight:900;font-size:18px;color:var(--deep-green-2);flex-shrink:0; }
+  .zw-name { font-family:'Unbounded',sans-serif;font-weight:900;font-size:24px;letter-spacing:-0.03em;color:white; }
+  .zw-item { border-left:3px solid rgba(180,231,23,0.3);padding-left:16px; }
+  .zw-item-lbl { font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--lime);margin-bottom:4px; }
+  .zw-item-txt { font-size:15px;color:rgba(255,255,255,0.72);line-height:1.5; }
+  .zw-callout { margin-top:24px;padding:26px 44px;background:linear-gradient(135deg,rgba(180,231,23,0.1),rgba(180,231,23,0.04));border:1px solid rgba(180,231,23,0.3);border-radius:20px;font-family:'Unbounded',sans-serif;font-weight:900;font-size:20px;letter-spacing:-0.02em;color:white;text-align:center;flex-shrink:0; }
 
-/* LEITIDEE */
-.leitidee-grid { display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;flex:1; }
-.leitidee-card { padding:48px 40px;display:flex;flex-direction:column;gap:16px; }
-.leitidee-badge { font-family:'Unbounded',sans-serif;font-weight:900;font-size:36px;letter-spacing:-0.04em;color:var(--lime); }
-.leitidee-heading { font-size:16px;color:rgba(255,255,255,0.5);letter-spacing:0.1em;text-transform:uppercase; }
-.leitidee-text { font-size:16px;color:rgba(255,255,255,0.8);line-height:1.7; }
+  /* 3-col grid */
+  .g3 { display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;flex:1; }
+  .lid-card { padding:44px 40px;display:flex;flex-direction:column;gap:16px; }
+  .lid-kw { font-family:'Unbounded',sans-serif;font-weight:900;font-size:40px;letter-spacing:-0.04em;color:var(--lime); }
+  .lid-dash { width:48px;height:4px;background:var(--lime);border-radius:2px;opacity:0.5; }
+  .lid-tag { font-family:'Unbounded',sans-serif;font-weight:900;font-size:18px;letter-spacing:-0.02em;color:white; }
+  .lid-txt { font-size:16px;color:rgba(255,255,255,0.6);line-height:1.7; }
 
-/* MANIFEST */
-.manifest-grid { display:grid;grid-template-columns:1fr 1fr;gap:32px;flex:1; }
-.manifest-text-block { padding:48px;display:flex;flex-direction:column;justify-content:center; }
-.manifest-body { font-size:19px;color:rgba(255,255,255,0.8);line-height:1.8; }
-.manifest-quotes { display:flex;flex-direction:column;gap:20px;justify-content:center; }
-.manifest-quote { padding:28px 36px;font-family:'Unbounded',sans-serif;font-weight:900;font-size:20px;letter-spacing:-0.03em;color:var(--lime);line-height:1.3; }
+  /* MANIFEST */
+  .mf-layout { display:grid;grid-template-columns:1.1fr 0.9fr;gap:40px;flex:1; }
+  .mf-card { padding:48px;display:flex;flex-direction:column;justify-content:center; }
+  .mf-quote { font-size:20px;color:rgba(255,255,255,0.8);line-height:1.85;font-style:italic; }
+  .mf-stmts { display:flex;flex-direction:column;gap:20px; }
+  .mf-stmt { padding:28px 32px;border-left:4px solid var(--lime);background:rgba(180,231,23,0.05);border-radius:0 16px 16px 0;font-family:'Unbounded',sans-serif;font-weight:900;font-size:18px;letter-spacing:-0.02em;color:white; }
 
-/* KERNWERTE */
-.kernwerte-grid { display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:1fr 1fr;gap:16px;flex:1; }
-.kw-card { padding:28px 30px;display:flex;flex-direction:column;gap:10px; }
-.kw-num { font-family:'Unbounded',sans-serif;font-weight:900;font-size:24px;letter-spacing:-0.03em;color:var(--lime); }
-.kw-name { font-family:'Unbounded',sans-serif;font-weight:900;font-size:16px;letter-spacing:-0.02em;color:#fff;text-transform:uppercase; }
-.kw-desc { font-size:13px;color:rgba(255,255,255,0.65);line-height:1.5; }
+  /* KERNWERTE */
+  .kw-grid { display:grid;grid-template-columns:repeat(7,1fr);gap:14px;flex:1; }
+  .kw-card { padding:28px 20px;display:flex;flex-direction:column;gap:10px; }
+  .kw-n { font-family:'Unbounded',sans-serif;font-weight:900;font-size:28px;letter-spacing:-0.04em;color:var(--lime);opacity:0.7; }
+  .kw-t { font-family:'Unbounded',sans-serif;font-weight:900;font-size:13px;letter-spacing:-0.01em;color:white;text-transform:uppercase; }
+  .kw-d { font-size:13px;color:rgba(255,255,255,0.5);line-height:1.6; }
 
-/* EINZELWERTE */
-.wert-split { display:flex;flex-direction:column;gap:24px;flex:1; }
-.wert-split-3 { display:flex;flex-direction:column;gap:18px;flex:1; }
-.wert-card { flex:1;padding:40px 48px;display:flex;flex-direction:column;gap:14px; }
-.wert-card-3 { flex:1;padding:28px 40px;display:flex;flex-direction:column;gap:10px; }
-.wert-num-title { display:flex;align-items:center;gap:20px; }
-.wert-big-num { font-family:'Unbounded',sans-serif;font-weight:900;font-size:64px;letter-spacing:-0.04em;color:rgba(180,231,23,0.2);line-height:1; }
-.wert-big-num-sm { font-family:'Unbounded',sans-serif;font-weight:900;font-size:48px;letter-spacing:-0.04em;color:rgba(180,231,23,0.2);line-height:1; }
-.wert-name { font-family:'Unbounded',sans-serif;font-weight:900;font-size:28px;letter-spacing:-0.03em;color:var(--lime);text-transform:uppercase; }
-.wert-name-sm { font-family:'Unbounded',sans-serif;font-weight:900;font-size:22px;letter-spacing:-0.03em;color:var(--lime);text-transform:uppercase; }
-.wert-body { font-size:18px;color:rgba(255,255,255,0.8);line-height:1.7;max-width:780px; }
-.wert-body-sm { font-size:15px;color:rgba(255,255,255,0.8);line-height:1.6; }
+  /* WERTE BIG */
+  .wl { display:flex;flex-direction:column;gap:24px;flex:1; }
+  .wbig { padding:36px 48px;flex:1;display:flex;flex-direction:column;gap:14px; }
+  .wnt { display:flex;align-items:center;gap:20px; }
+  .wnum { font-family:'Unbounded',sans-serif;font-weight:900;font-size:52px;letter-spacing:-0.05em;color:var(--lime);opacity:0.6;line-height:1; }
+  .wname { font-family:'Unbounded',sans-serif;font-weight:900;font-size:30px;letter-spacing:-0.03em;color:white;text-transform:uppercase; }
+  .wtxt { font-size:18px;color:rgba(255,255,255,0.7);line-height:1.7; }
 
-/* VM */
-.vm-grid { display:grid;grid-template-columns:1fr 1fr;gap:32px;flex:1; }
-.vm-card { padding:60px 56px;display:flex;flex-direction:column;gap:20px;justify-content:center; }
-.vm-label { font-family:'Unbounded',sans-serif;font-weight:900;font-size:13px;letter-spacing:0.2em;color:var(--lime);text-transform:uppercase; }
-.vm-text { font-size:22px;color:#fff;line-height:1.65;font-style:italic; }
+  /* VISION MISSION */
+  .vm-grid { display:grid;grid-template-columns:1fr 1fr;gap:28px;flex:1; }
+  .vm-card { padding:52px;display:flex;flex-direction:column;gap:20px;justify-content:center; }
+  .vm-tag { font-family:'Unbounded',sans-serif;font-weight:900;font-size:13px;letter-spacing:0.2em;color:var(--lime);text-transform:uppercase; }
+  .vm-txt { font-family:'Unbounded',sans-serif;font-weight:900;font-size:24px;letter-spacing:-0.03em;color:white;line-height:1.45; }
 
-/* CLAIMS */
-.claims-table { display:flex;flex-direction:column;gap:12px;flex:1; }
-.claim-row { display:grid;grid-template-columns:280px 1fr;align-items:center;padding:24px 36px;gap:24px; }
-.claim-key { font-size:13px;letter-spacing:0.14em;color:var(--lime);text-transform:uppercase;font-weight:600; }
-.claim-val { font-family:'Unbounded',sans-serif;font-weight:900;font-size:20px;letter-spacing:-0.03em;color:#fff; }
+  /* CLAIMS */
+  .cl-tbl { flex:1;display:flex;flex-direction:column;gap:14px; }
+  .cl-row { display:grid;grid-template-columns:280px 1fr;border-radius:16px;overflow:hidden;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);flex:1; }
+  .cl-lbl { background:rgba(180,231,23,0.08);padding:0 28px;display:flex;align-items:center;font-family:'Unbounded',sans-serif;font-weight:900;font-size:11px;letter-spacing:0.08em;color:var(--lime);text-transform:uppercase;border-right:1px solid rgba(255,255,255,0.08); }
+  .cl-txt { padding:0 32px;display:flex;align-items:center;font-family:'Unbounded',sans-serif;font-weight:900;font-size:18px;letter-spacing:-0.02em;color:white; }
 
-/* SPRACHE */
-.sprache-list { display:flex;flex-direction:column;gap:24px;flex:1;justify-content:center; }
-.sprache-pair { padding:32px 48px;display:flex;flex-direction:column;gap:16px; }
-.sprache-bad { font-size:18px;color:rgba(255,255,255,0.4);display:flex;align-items:center;gap:16px; }
-.sprache-bad .x { color:#e74c3c;font-size:22px; }
-.sprache-good { font-family:'Unbounded',sans-serif;font-weight:900;font-size:22px;letter-spacing:-0.03em;color:var(--lime);display:flex;align-items:center;gap:16px; }
-.sprache-good .check { font-size:22px; }
-.arrow-sep { color:rgba(255,255,255,0.2);font-size:20px;margin-left:38px; }
+  /* SPRACHE */
+  .sp-list { flex:1;display:flex;flex-direction:column;gap:22px; }
+  .sp-pair { flex:1;padding:28px 40px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px; }
+  .sp-bef { display:flex;align-items:center;gap:14px; }
+  .sp-x { width:36px;height:36px;border-radius:50%;background:rgba(255,80,80,0.12);border:1px solid rgba(255,80,80,0.3);display:flex;align-items:center;justify-content:center;color:#ff5050;font-size:16px;font-weight:bold;flex-shrink:0; }
+  .sp-bef-txt { font-size:18px;color:rgba(255,255,255,0.42);font-style:italic; }
+  .sp-arr { font-size:28px;color:var(--lime);font-family:'Unbounded',sans-serif;font-weight:900; }
+  .sp-aft { display:flex;align-items:center;gap:14px; }
+  .sp-chk { width:36px;height:36px;border-radius:50%;background:rgba(180,231,23,0.15);border:1px solid rgba(180,231,23,0.4);display:flex;align-items:center;justify-content:center;color:var(--lime);font-size:18px;flex-shrink:0; }
+  .sp-aft-txt { font-family:'Unbounded',sans-serif;font-weight:900;font-size:20px;letter-spacing:-0.02em;color:white; }
 
-/* COMPARE */
-.compare-table { display:flex;flex-direction:column;flex:1;border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,0.12); }
-.compare-header { display:grid;grid-template-columns:200px 1fr 1fr;background:rgba(180,231,23,0.12);padding:20px 36px;gap:24px; }
-.compare-header-cell { font-family:'Unbounded',sans-serif;font-weight:900;font-size:15px;letter-spacing:-0.02em;color:var(--lime);text-transform:uppercase; }
-.compare-row { display:grid;grid-template-columns:200px 1fr 1fr;padding:22px 36px;gap:24px;border-top:1px solid rgba(255,255,255,0.07);align-items:center; }
-.compare-row:nth-child(even) { background:rgba(255,255,255,0.03); }
-.compare-row-label { font-size:13px;letter-spacing:0.12em;color:rgba(255,255,255,0.5);text-transform:uppercase; }
-.compare-cell { font-size:15px;color:rgba(255,255,255,0.85);line-height:1.5; }
-.compare-cell strong { color:#fff;font-family:'Unbounded',sans-serif;font-weight:900;font-size:13px; }
+  /* COMPARE */
+  .cmp-tbl { flex:1;display:flex;flex-direction:column;border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,0.1); }
+  .cmp-hdr { display:grid;grid-template-columns:240px 1fr 1fr;background:rgba(180,231,23,0.1);border-bottom:1px solid rgba(255,255,255,0.1);flex-shrink:0; }
+  .cmp-hcell { padding:18px 28px;font-family:'Unbounded',sans-serif;font-weight:900;font-size:14px;letter-spacing:0.08em;color:var(--lime);text-transform:uppercase; }
+  .cmp-row { display:grid;grid-template-columns:240px 1fr 1fr;border-bottom:1px solid rgba(255,255,255,0.06);flex:1; }
+  .cmp-row:last-child { border-bottom:none; }
+  .cmp-row:nth-child(even) { background:rgba(255,255,255,0.02); }
+  .cmp-cell { padding:16px 28px;display:flex;align-items:center;font-size:15px;color:rgba(255,255,255,0.7);line-height:1.5; }
+  .cmp-cell:first-child { font-family:'Unbounded',sans-serif;font-weight:900;font-size:12px;letter-spacing:0.08em;color:rgba(255,255,255,0.38);text-transform:uppercase;border-right:1px solid rgba(255,255,255,0.06); }
+  .cmp-cell:nth-child(2) { border-right:1px solid rgba(255,255,255,0.06); }
+  .cmp-lime { font-family:'Unbounded',sans-serif;font-weight:900;font-size:14px;color:var(--lime); }
 
-/* CHECK */
-.check-grid { display:grid;grid-template-columns:1fr 1fr;gap:20px;flex:1; }
-.check-card { padding:32px 40px;display:flex;align-items:center;gap:24px; }
-.check-icon { width:48px;height:48px;border-radius:50%;background:rgba(180,231,23,0.15);border:2px solid var(--lime);display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--lime);flex-shrink:0; }
-.check-text { font-size:17px;color:rgba(255,255,255,0.85);line-height:1.5; }
+  /* CHECK */
+  .ck-grid { display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,1fr);gap:20px;flex:1; }
+  .ck-card { padding:30px 36px;display:flex;align-items:center;gap:24px; }
+  .ck-icon { width:48px;height:48px;border-radius:50%;background:rgba(180,231,23,0.15);border:2px solid var(--lime);display:flex;align-items:center;justify-content:center;color:var(--lime);font-size:22px;flex-shrink:0; }
+  .ck-txt { font-family:'Unbounded',sans-serif;font-weight:900;font-size:17px;letter-spacing:-0.02em;color:white;line-height:1.3; }
 
-/* BLICK */
-.blick-grid { display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;gap:20px;flex:1; }
-.blick-card { padding:40px 44px;display:flex;flex-direction:column;gap:14px; }
-.blick-label { font-family:'Unbounded',sans-serif;font-weight:900;font-size:13px;letter-spacing:0.18em;color:var(--lime);text-transform:uppercase; }
-.blick-val { font-size:20px;color:#fff;line-height:1.4;font-weight:600; }
+  /* OVERVIEW */
+  .ov-grid { display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:24px;flex:1; }
+  .ov-card { padding:40px 36px;display:flex;flex-direction:column;gap:12px; }
+  .ov-lbl { font-family:'Unbounded',sans-serif;font-weight:900;font-size:12px;letter-spacing:0.16em;color:var(--lime);text-transform:uppercase; }
+  .ov-val { font-family:'Unbounded',sans-serif;font-weight:900;font-size:22px;letter-spacing:-0.03em;color:white;line-height:1.3; }
 
-/* CLOSING */
-#slide-22 { background:var(--deep-green-2);justify-content:center; }
-.closing-content { display:flex;flex-direction:column;align-items:flex-start; }
-.closing-quote { font-family:'Unbounded',sans-serif;font-weight:900;font-size:88px;letter-spacing:-0.04em;color:#fff;line-height:1.05;margin-bottom:24px;max-width:1200px; }
-.closing-lime { font-family:'Unbounded',sans-serif;font-weight:900;font-size:36px;letter-spacing:-0.03em;color:var(--lime);margin-bottom:64px; }
-.closing-footer { display:flex;flex-direction:column;gap:8px; }
-.closing-bkm { font-family:'Unbounded',sans-serif;font-weight:900;font-size:20px;letter-spacing:0.12em;color:rgba(255,255,255,0.3);text-transform:uppercase; }
-.closing-tagline-footer { font-size:15px;letter-spacing:0.2em;color:rgba(180,231,23,0.6);text-transform:uppercase; }
-.orb-close { position:absolute;border-radius:50%;filter:blur(100px);animation:float 10s ease-in-out infinite;pointer-events:none; }
-.orb-close-1 { width:700px;height:700px;background:rgba(180,231,23,0.05);right:-200px;top:-100px; }
-.orb-close-2 { width:400px;height:400px;background:rgba(40,125,75,0.15);right:200px;bottom:100px;animation-delay:-4s; }
+  /* CLOSING */
+  .cl-bg { position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(180,231,23,0.07) 0%,transparent 70%);pointer-events:none; }
+  .cl-ctr { position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 140px; }
+  .cl-q { font-family:'Unbounded',sans-serif;font-weight:900;font-size:72px;letter-spacing:-0.04em;color:white;text-transform:uppercase;line-height:1.05;margin-bottom:28px;position:relative;z-index:2; }
+  .cl-lime { font-family:'Unbounded',sans-serif;font-weight:900;font-size:36px;letter-spacing:-0.02em;color:var(--lime);margin-bottom:72px;position:relative;z-index:2; }
+  .cl-div { width:120px;height:2px;background:rgba(255,255,255,0.15);margin:0 auto 32px;position:relative;z-index:2; }
+  .cl-foot { font-family:'Unbounded',sans-serif;font-weight:900;font-size:22px;letter-spacing:0.08em;color:rgba(255,255,255,0.4);position:relative;z-index:2;margin-bottom:12px; }
+  .cl-brand { font-family:'Unbounded',sans-serif;font-weight:900;font-size:13px;letter-spacing:0.2em;color:rgba(255,255,255,0.2);text-transform:uppercase;position:relative;z-index:2; }
 </style>
 </head>
 <body>
 <div id="viewport">
-<div id="stage">
-<div id="progress-bar"></div>
+  <div id="stage">
+    <div id="progress-bar"></div>
 
-<!-- SLIDE 1 — COVER -->
-<div class="slide active" id="slide-1">
-  <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div><div class="orb orb-4"></div>
-  <div class="cover-main anim">BKM<br>Mannesmann AG</div>
-  <div class="cover-sub anim">UNTERNEHMENSFUNDAMENT</div>
-  <div class="cover-tagline anim">Zwei Wege. Ein Ziel.</div>
-  <div class="cover-cards anim">
-    <div class="glass cover-card"><div class="cover-card-label">BUILD</div><div class="cover-card-desc">Neu bauen, neu abdichten. Feuchtigkeitsschutz von Anfang an.</div></div>
-    <div class="glass cover-card"><div class="cover-card-label">KEEP</div><div class="cover-card-desc">Schützen, was besteht. Bestandserhalt durch präventiven Schutz.</div></div>
-    <div class="glass cover-card"><div class="cover-card-label">MAINTAIN</div><div class="cover-card-desc">Erhalten, was funktioniert. Regelmäßige Pflege und Instandhaltung.</div></div>
-  </div>
-</div>
-
-<!-- SLIDE 2 — AGENDA -->
-<div class="slide" id="slide-2">
-  <div class="slide-title anim">Das <span class="lime">Fundament</span></div>
-  <div class="agenda-grid anim">
-    <div class="glass agenda-card"><div class="agenda-num">01</div><div class="agenda-text"><strong>Kurzanalyse</strong>Wer ist BKM Mannesmann?</div></div>
-    <div class="glass agenda-card"><div class="agenda-num">02</div><div class="agenda-text"><strong>Strategische Leitidee</strong>Build · Keep · Maintain</div></div>
-    <div class="glass agenda-card"><div class="agenda-num">03</div><div class="agenda-text"><strong>Manifest</strong>Wofür wir stehen</div></div>
-    <div class="glass agenda-card"><div class="agenda-num">04</div><div class="agenda-text"><strong>Philosophie</strong>Der BKM-Ansatz</div></div>
-    <div class="glass agenda-card"><div class="agenda-num">05</div><div class="agenda-text"><strong>7 Kernwerte</strong>Was uns leitet</div></div>
-    <div class="glass agenda-card"><div class="agenda-num">06</div><div class="agenda-text"><strong>Vision</strong>Wohin wir wollen</div></div>
-    <div class="glass agenda-card"><div class="agenda-num">07</div><div class="agenda-text"><strong>Mission</strong>Was wir täglich tun</div></div>
-    <div class="glass agenda-card"><div class="agenda-num">08</div><div class="agenda-text"><strong>Konsistenzprüfung</strong>Alles zusammen</div></div>
-  </div>
-</div>
-
-<!-- SLIDE 3 — DIVIDER KURZANALYSE -->
-<div class="slide divider-slide" id="slide-3">
-  <div class="divider-bg-num">01</div>
-  <div class="divider-tag anim">Kapitel 01</div>
-  <div class="divider-title lime anim">KURZANALYSE</div>
-  <div class="divider-sub anim">des Unternehmens</div>
-</div>
-
-<!-- SLIDE 4 — WER IST BKM -->
-<div class="slide" id="slide-4">
-  <div class="slide-title anim">Wer ist <span class="lime">BKM MANNESMANN?</span></div>
-  <div class="grid-2x2 anim">
-    <div class="glass info-card"><div class="info-card-label">Kerngeschäft</div><div class="info-card-text">Feuchtigkeitsschutz &amp; Abdichtungslösungen für Gebäude und Infrastruktur</div></div>
-    <div class="glass info-card"><div class="info-card-label">Lösungsversprechen</div><div class="info-card-text">Feuchtigkeit stoppen – dauerhaft, fachgerecht, zuverlässig</div></div>
-    <div class="glass info-card"><div class="info-card-label">Zentrale Identität</div><div class="info-card-text">Der Spezialist für Feuchtigkeitsschutz mit System</div></div>
-    <div class="glass info-card"><div class="info-card-label">Marktpositionierung</div><div class="info-card-text">Premium-Anbieter mit breitem Produktportfolio für zwei Zielgruppen</div></div>
-  </div>
-</div>
-
-<!-- SLIDE 5 — ZWEI WEGE -->
-<div class="slide" id="slide-5">
-  <div class="slide-title anim">Zwei <span class="lime">Wege.</span> Ein Ziel.</div>
-  <div class="zwei-wege-grid anim">
-    <div class="glass weg-card">
-      <div class="weg-badge">DIY / Selbermacher</div>
-      <div class="weg-title">Für den Heimwerker</div>
-      <div class="weg-row"><div class="weg-row-label">Zielgruppe</div><div class="weg-row-val">Eigenheimbesitzer, Heimwerker, private Bauherren</div></div>
-      <div class="weg-row"><div class="weg-row-label">Bedarf</div><div class="weg-row-val">Einfache, sichere Lösungen zum Selbstanwenden</div></div>
-      <div class="weg-row"><div class="weg-row-label">Versprechen</div><div class="weg-row-val">Du schaffst das – mit dem richtigen Produkt</div></div>
-      <div class="weg-row"><div class="weg-row-label">Sortiment</div><div class="weg-row-val">Anwenderfreundliche Abdichtungssysteme</div></div>
+    <!-- SLIDE 1 COVER -->
+    <div class="slide active" id="slide-1">
+      <div class="orbs">
+        <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div><div class="orb orb-4"></div><div class="orb orb-5"></div>
+      </div>
+      <div class="cover-inner">
+        <div class="slide-content">
+          <div class="c-eye" style="--i:0">Praesentation 2024</div>
+          <div class="c-main" style="--i:1">BKM<br>MANNESMANN AG</div>
+          <div class="c-sub" style="--i:2">UNTERNEHMENSFUNDAMENT</div>
+          <div class="c-tag" style="--i:3">Zwei Wege. Ein Ziel.</div>
+          <div class="c-cards" style="--i:4">
+            <div class="glass c-card"><div class="c-card-lbl">BUILD</div><div class="c-card-desc">Neu bauen &amp; abdichten</div></div>
+            <div class="glass c-card"><div class="c-card-lbl">KEEP</div><div class="c-card-desc">Schuetzen &amp; bewahren</div></div>
+            <div class="glass c-card"><div class="c-card-lbl">MAINTAIN</div><div class="c-card-desc">Erhalten &amp; pflegen</div></div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="glass weg-card">
-      <div class="weg-badge">Fachbetrieb / Profi</div>
-      <div class="weg-title">Für den Profi</div>
-      <div class="weg-row"><div class="weg-row-label">Zielgruppe</div><div class="weg-row-val">Handwerker, Bauunternehmen, Planer, Architekten</div></div>
-      <div class="weg-row"><div class="weg-row-label">Bedarf</div><div class="weg-row-val">Technisch hochwertige Systeme mit Beratung &amp; Support</div></div>
-      <div class="weg-row"><div class="weg-row-label">Versprechen</div><div class="weg-row-val">Profi-Lösungen, die im Projekt funktionieren</div></div>
-      <div class="weg-row"><div class="weg-row-label">Sortiment</div><div class="weg-row-val">Systemlösungen für komplexe Anforderungen</div></div>
+
+    <!-- SLIDE 2 AGENDA -->
+    <div class="slide std" id="slide-2">
+      <div class="slide-content">
+        <div class="h-title" style="--i:0">Das <span>Fundament</span></div>
+        <div class="ag-grid" style="--i:1">
+          <div class="glass ag-card"><div class="ag-num">01</div><div><div class="ag-title">Kurzanalyse</div><div class="ag-sub">Wer ist BKM Mannesmann?</div></div></div>
+          <div class="glass ag-card"><div class="ag-num">02</div><div><div class="ag-title">Strategische Leitidee</div><div class="ag-sub">Build · Keep · Maintain</div></div></div>
+          <div class="glass ag-card"><div class="ag-num">03</div><div><div class="ag-title">Manifest</div><div class="ag-sub">Wofuer wir stehen</div></div></div>
+          <div class="glass ag-card"><div class="ag-num">04</div><div><div class="ag-title">Philosophie</div><div class="ag-sub">Der BKM-Ansatz</div></div></div>
+          <div class="glass ag-card"><div class="ag-num">05</div><div><div class="ag-title">7 Kernwerte</div><div class="ag-sub">Was uns leitet</div></div></div>
+          <div class="glass ag-card"><div class="ag-num">06</div><div><div class="ag-title">Vision</div><div class="ag-sub">Wohin wir wollen</div></div></div>
+          <div class="glass ag-card"><div class="ag-num">07</div><div><div class="ag-title">Mission</div><div class="ag-sub">Was wir taeglich tun</div></div></div>
+          <div class="glass ag-card"><div class="ag-num">08</div><div><div class="ag-title">Konsistenzpruefung</div><div class="ag-sub">Alles zusammen</div></div></div>
+        </div>
+      </div>
     </div>
+
+    <!-- SLIDE 3 DIVIDER KURZANALYSE -->
+    <div class="slide div-slide" id="slide-3">
+      <div class="div-num">01</div>
+      <div class="slide-content">
+        <div class="div-line" style="--i:0"></div>
+        <div class="div-lbl" style="--i:1">Kurzanalyse</div>
+        <div class="div-sub" style="--i:2">des Unternehmens</div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4 WER IST BKM -->
+    <div class="slide std" id="slide-4">
+      <div class="slide-content">
+        <div class="h-title" style="--i:0">Wer ist <span>BKM MANNESMANN?</span></div>
+        <div class="g22" style="--i:1">
+          <div class="glass icard"><div class="icard-lbl">Kerngeschaeft</div><div class="icard-txt">Feuchtigkeitsschutz &amp; Abdichtungsloesungen fuer Gebaeude und Infrastruktur</div></div>
+          <div class="glass icard"><div class="icard-lbl">Loesungsversprechen</div><div class="icard-txt">Feuchtigkeit stoppen &#8211; dauerhaft, fachgerecht, zuverlaessig</div></div>
+          <div class="glass icard"><div class="icard-lbl">Zentrale Identitaet</div><div class="icard-txt">Der Spezialist fuer Feuchtigkeitsschutz mit System</div></div>
+          <div class="glass icard"><div class="icard-lbl">Marktpositionierung</div><div class="icard-txt">Premium-Anbieter mit breitem Produktportfolio fuer zwei Zielgruppen</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5 ZWEI WEGE -->
+    <div class="slide std" id="slide-5">
+      <div class="slide-content">
+        <div class="h-title" style="--i:0">Zwei <span>Wege.</span> Ein <span>Ziel.</span></div>
+        <div class="zw-grid" style="--i:1">
+          <div class="glass zw-card">
+            <div class="zw-hdr"><div class="zw-icon">DIY</div><div class="zw-name">Selbermacher</div></div>
+            <div class="zw-item"><div class="zw-item-lbl">Zielgruppe</div><div class="zw-item-txt">Eigenheimbesitzer, Heimwerker, private Bauherren</div></div>
+            <div class="zw-item"><div class="zw-item-lbl">Bedarf</div><div class="zw-item-txt">Einfache, sichere Loesungen zum Selbstanwenden</div></div>
+            <div class="zw-item"><div class="zw-item-lbl">Versprechen</div><div class="zw-item-txt">Du schaffst das &#8211; mit dem richtigen Produkt</div></div>
+            <div class="zw-item"><div class="zw-item-lbl">Sortiment</div><div class="zw-item-txt">Anwenderfreundliche Abdichtungssysteme</div></div>
+          </div>
+          <div class="glass zw-card">
+            <div class="zw-hdr"><div class="zw-icon" style="font-size:14px">PRO</div><div class="zw-name">Fachbetrieb</div></div>
+            <div class="zw-item"><div class="zw-item-lbl">Zielgruppe</div><div class="zw-item-txt">Handwerker, Bauunternehmen, Planer, Architekten</div></div>
+            <div class="zw-item"><div class="zw-item-lbl">Bedarf</div><div class="zw-item-txt">Technisch hochwertige Systeme mit Beratung &amp; Support</div></div>
+            <div class="zw-item"><div class="zw-item-lbl">Versprechen</div><div class="zw-item-txt">Profi-Loesungen, die im Projekt funktionieren</div></div>
+            <div class="zw-item"><div class="zw-item-lbl">Sortiment</div><div class="zw-item-txt">Systemloesungen fuer komplexe Anforderungen</div></div>
+          </div>
+        </div>
+        <div class="zw-callout" style="--i:2">Ein Feuchtigkeitsproblem. Zwei Expertise-Wege. Immer die richtige Loesung.</div>
+      </div>
+    </div>
+
+    <!-- SLIDE 6 DIVIDER STRATEGISCHE LEITIDEE -->
+    <div class="slide div-slide" id="slide-6">
+      <div class="div-num">02</div>
+      <div class="slide-content">
+        <div class="div-line" style="--i:0"></div>
+        <div class="div-lbl" style="--i:1">Strategische Leitidee</div>
+        <div class="div-sub" style="--i:2">Build · Keep · Maintain</div>
+      </div>
+    </div>
+
+    <!-- SLIDE 7 DIE STRATEGISCHE LEITIDEE -->
+    <div class="slide std" id="slide-7">
+      <div class="slide-content">
+        <div class="h-title" style="--i:0">Die <span>strategische</span> Leitidee</div>
+        <div class="g3" style="--i:1">
+          <div class="glass lid-card"><div class="lid-kw">BUILD</div><div class="lid-dash"></div><div class="lid-tag">Neu bauen, neu abdichten</div><div class="lid-txt">Feuchtigkeitsschutz von Anfang an. Fuer Neubauten, Erweiterungen, Renovierungen.</div></div>
+          <div class="glass lid-card"><div class="lid-kw">KEEP</div><div class="lid-dash"></div><div class="lid-tag">Schuetzen, was besteht</div><div class="lid-txt">Bestandserhalt durch praeventiven Feuchtigkeitsschutz. Fuer Eigentuemer und Verwalter.</div></div>
+          <div class="glass lid-card"><div class="lid-kw">MAINTAIN</div><div class="lid-dash"></div><div class="lid-tag">Erhalten, was funktioniert</div><div class="lid-txt">Regelmaessige Pflege und Instandhaltung. Fuer alle, die auf Qualitaet setzen.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 8 DIVIDER MANIFEST -->
+    <div class="slide div-slide" id="slide-8">
+      <div class="div-num">03</div>
+      <div class="slide-content">
+        <div class="div-line" style="--i:0"></div>
+        <div class="div-lbl" style="--i:1">Manifest</div>
+        <div class="div-sub" style="--i:2">Was uns antreibt</div>
+      </div>
+    </div>
+
+    <!-- SLIDE 9 WOFUER BKM STEHT -->
+    <div class="slide std" id="slide-9">
+      <div class="slide-content">
+        <div class="h-title" style="--i:0">Wofuer <span>BKM</span> steht</div>
+        <div class="mf-layout" style="--i:1">
+          <div class="glass mf-card">
+            <p class="mf-quote">Feuchtigkeit ist kein Schicksal. Sie ist ein loesbares Problem &#8211; wenn man das richtige Know-how und die richtigen Produkte hat. BKM Mannesmann steht dafuer, dass jeder &#8211; ob Heimwerker oder Profi &#8211; Zugang zu echter Feuchtigkeitsschutz-Kompetenz bekommt. Wir glauben: Ein gutes Gebaeude ist ein trockenes Gebaeude.</p>
+          </div>
+          <div class="mf-stmts">
+            <div class="mf-stmt">&#8222;Feuchtigkeit ist kein Schicksal.&#8220;</div>
+            <div class="mf-stmt">&#8222;Jeder verdient den richtigen Schutz.&#8220;</div>
+            <div class="mf-stmt">&#8222;Wir liefern Loesungen &#8211; keine Produkte.&#8220;</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 10 DIVIDER KERNWERTE -->
+    <div class="slide div-slide" id="slide-10">
+      <div class="div-num">05</div>
+      <div class="slide-content">
+        <div class="div-line" style="--i:0"></div>
+        <div class="div-lbl" style="--i:1">Kernwerte</div>
+        <div class="div-sub" style="--i:2">Was uns leitet</div>
+      </div>
+    </div>
+
+    <!-- SLIDE 11 7 KERNWERTE OVERVIEW -->
+    <div class="slide std" id="slide-11">
+      <div class="slide-content">
+        <div class="h-title" style="--i:0"><span>7</span> Kernwerte</div>
+        <div class="kw-grid" style="--i:1">
+          <div class="glass kw-card"><div class="kw-n">01</div><div class="kw-t">Orientierung</div><div class="kw-d">Wir geben Orientierung im komplexen Markt</div></div>
+          <div class="glass kw-card"><div class="kw-n">02</div><div class="kw-t">Spezialisierung</div><div class="kw-d">Wir sind Spezialisten, keine Generalisten</div></div>
+          <div class="glass kw-card"><div class="kw-n">03</div><div class="kw-t">Zwei Wege</div><div class="kw-d">Wir bedienen DIY und Profi gleich gut</div></div>
+          <div class="glass kw-card"><div class="kw-n">04</div><div class="kw-t">Bestandsschutz</div><div class="kw-d">Wir schuetzen, was gebaut wurde</div></div>
+          <div class="glass kw-card"><div class="kw-n">05</div><div class="kw-t">Nachhaltigkeit</div><div class="kw-d">Wir denken langfristig</div></div>
+          <div class="glass kw-card"><div class="kw-n">06</div><div class="kw-t">Partnerschaft</div><div class="kw-d">Wir sind Partner, nicht nur Lieferant</div></div>
+          <div class="glass kw-card"><div class="kw-n">07</div><div class="kw-t">Klarheit</div><div class="kw-d">Wir sprechen klar und verstaendlich</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 12 WERTE 01 02 -->
+    <div class="slide std" id="slide-12">
+      <div class="slide-content">
+        <div class="h-title" style="--i:0">Kernwerte <span>01 &amp; 02</span></div>
+        <div class="wl" style="--i:1">
+          <div class="glass wbig"><div class="wnt"><div class="wnum">01</div><div class="wname">Orientierung</div></div><div class="wtxt">In einem Markt voller Optionen gibt BKM Mannesmann klare Richtung. Wir helfen Kunden, das richtige Produkt fuer das richtige Problem zu finden &#8211; schnell, sicher, kompetent.</div></div>
+          <div class="glass wbig"><div class="wnt"><div class="wnum">02</div><div class="wname">Spezialisierung</div></div><div class="wtxt">Wir sind kein Vollsortimenter. Wir sind Spezialisten fuer Feuchtigkeitsschutz. Diese Fokussierung ist unsere Staerke &#8211; sie macht uns zum zuverlaessigsten Partner in unserem Segment.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 13 WERTE 03 04 -->
+    <div class="slide std" id="slide-13">
+      <div class="slide-content">
+        <div class="h-title" style="--i:0">Kernwerte <span>03 &amp; 04</span></div>
+        <div class="wl" style="--i:1">
+          <div class="glass wbig"><div class="wnt"><div class="wnum">03</div><div class="wname">Zwei Wege</div></div><div class="wtxt">Ob Heimwerker oder Handwerksprofi &#8211; BKM Mannesmann bietet fuer beide den richtigen Zugang. Kein Kompromiss. Volle Kompetenz auf beiden Seiten.</div></div>
+          <div class="glass wbig"><div class="wnt"><div class="wnum">04</div><div class="wname">Bestandsschutz</div></div><div class="wtxt">Gebaeude sind Investitionen. Wir schuetzen sie. Mit Produkten und Systemen, die nicht nur heute funktionieren, sondern ueber Jahrzehnte Bestand haben.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 14 WERTE 05 06 07 -->
+    <div class="slide std" id="slide-14">
+      <div class="slide-content">
+        <div class="h-title" style="--i:0">Kernwerte <span>05, 06 &amp; 07</span></div>
+        <div class="wl" style="--i:1">
+          <div class="glass wbig"><div class="wnt"><div class="wnum">05</div><div class="wname">Nachhaltigkeit</div></div><div class="wtxt">Feuchtigkeitsschutz ist Ressourcenschutz. Wer Gebaeude schuetzt, verlaengert ihre Lebensdauer und reduziert Abriss, Neubau und Materialverbrauch.</div></div>
+          <div class="glass wbig"><div class="wnt"><div class="wnum">06</div><div class="wname">Partnerschaft</div></div><div class="wtxt">Wir verkaufen nicht nur Produkte. Wir begleiten Projekte. Ob Beratung, Schulung oder After-Sales &#8211; BKM Mannesmann ist Partner ueber den Kauf hinaus.</div></div>
+          <div class="glass wbig"><div class="wnt"><div class="wnum">07</div><div class="wname">Klarheit</div></div><div class="wtxt">Feuchtigkeitsschutz ist komplex. Unsere Kommunikation ist es nicht. Wir sprechen so, dass Heimwerker und Profis uns gleichermaassen verstehen.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 15 DIVIDER VISION MISSION -->
+    <div class="slide div-slide" id="slide-15">
+      <div class="div-num">06</div>
+      <div class="slide-content">
+        <div class="div-line" style="--i:0"></div>
+        <div class="div-lbl" style="--i:1">Vision &amp; Mission</div>
+        <div class="div-sub" style="--i:2">Wohin wir wollen &#8211; was wir taeglich tun</div>
+      </div>
+    </div>
+
+    <!-- SLIDE 16 VISION MISSION -->
+    <div class="slide std" id="slide-16">
+      <div class="slide-content">
+        <div class="h-title" style="--i:0"><span>Vision</span> &amp; <span>Mission</span></div>
+        <div class="vm-grid" style="--i:1">
+          <div class="glass vm-card"><div class="vm-tag">Vision</div><div class="vm-txt">&#8222;BKM Mannesmann ist die erste Adresse fuer Feuchtigkeitsschutz in Europa &#8211; der Spezialist, dem Heimwerker und Profis gleichermaassen vertrauen.&#8220;</div></div>
+          <div class="glass vm-card"><div class="vm-tag">Mission</div><div class="vm-txt">&#8222;Wir entwickeln, vermarkten und liefern Feuchtigkeitsschutz-Systeme, die funktionieren &#8211; fuer jeden Anwender, jedes Projekt, jede Anforderung. Taeglich.&#8220;</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 17 BOTSCHAFTEN CLAIMS -->
+    <div class="slide std" id="slide-17">
+      <div class="slide-content">
+        <div class="h-title" style="--i:0">Botschaften <span>&amp;</span> Claims</div>
+        <div class="cl-tbl" style="--i:1">
+          <div class="cl-row"><div class="cl-lbl">Claim Uebergeordnet</div><div class="cl-txt">&#8222;Feuchtigkeit hat keine Chance.&#8220;</div></div>
+          <div class="cl-row"><div class="cl-lbl">Claim DIY</div><div class="cl-txt">&#8222;Du schaffst das trocken.&#8220;</div></div>
+          <div class="cl-row"><div class="cl-lbl">Claim Profi</div><div class="cl-txt">&#8222;Systeme, die im Projekt funktionieren.&#8220;</div></div>
+          <div class="cl-row"><div class="cl-lbl">Claim BUILD</div><div class="cl-txt">&#8222;Richtig starten. Von Anfang an trocken.&#8220;</div></div>
+          <div class="cl-row"><div class="cl-lbl">Claim KEEP</div><div class="cl-txt">&#8222;Schuetzen, was du aufgebaut hast.&#8220;</div></div>
+          <div class="cl-row"><div class="cl-lbl">Claim MAINTAIN</div><div class="cl-txt">&#8222;Dauerhaft trocken. Dauerhaft sicher.&#8220;</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 18 SPRACHE SCHAERFEN -->
+    <div class="slide std" id="slide-18">
+      <div class="slide-content">
+        <div class="h-title" style="--i:0">Sprache <span>schaerfen</span></div>
+        <div class="sp-list" style="--i:1">
+          <div class="glass sp-pair">
+            <div class="sp-bef"><div class="sp-x">&#10005;</div><div class="sp-bef-txt">&#8222;Hochwertige Abdichtungsprodukte&#8220;</div></div>
+            <div class="sp-arr">&#8594;</div>
+            <div class="sp-aft"><div class="sp-chk">&#10003;</div><div class="sp-aft-txt">&#8222;Feuchtigkeitsschutz, der haelt.&#8220;</div></div>
+          </div>
+          <div class="glass sp-pair">
+            <div class="sp-bef"><div class="sp-x">&#10005;</div><div class="sp-bef-txt">&#8222;Fuer Heimwerker und Profis&#8220;</div></div>
+            <div class="sp-arr">&#8594;</div>
+            <div class="sp-aft"><div class="sp-chk">&#10003;</div><div class="sp-aft-txt">&#8222;Dein Weg. Dein Schutz.&#8220;</div></div>
+          </div>
+          <div class="glass sp-pair">
+            <div class="sp-bef"><div class="sp-x">&#10005;</div><div class="sp-bef-txt">&#8222;Umfangreiches Sortiment&#8220;</div></div>
+            <div class="sp-arr">&#8594;</div>
+            <div class="sp-aft"><div class="sp-chk">&#10003;</div><div class="sp-aft-txt">&#8222;Das Richtige fuer jedes Problem.&#8220;</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 19 WANN WELCHER WEG -->
+    <div class="slide std" id="slide-19">
+      <div class="slide-content">
+        <div class="h-title" style="--i:0">Wann <span>welcher</span> Weg?</div>
+        <div class="cmp-tbl" style="--i:1">
+          <div class="cmp-hdr">
+            <div class="cmp-hcell"></div>
+            <div class="cmp-hcell">DIY / Selbermacher</div>
+            <div class="cmp-hcell">Fachbetrieb / Profi</div>
+          </div>
+          <div class="cmp-row"><div class="cmp-cell">Anwender</div><div class="cmp-cell">Eigenheimbesitzer</div><div class="cmp-cell">Handwerksbetrieb</div></div>
+          <div class="cmp-row"><div class="cmp-cell">Projekt</div><div class="cmp-cell">Einfache Abdichtung, Keller, Bad</div><div class="cmp-cell">Komplexe Bauprojekte, Neubau</div></div>
+          <div class="cmp-row"><div class="cmp-cell">Beratung</div><div class="cmp-cell">Selbst entscheiden mit Orientierungshilfe</div><div class="cmp-cell">Technische Fachberatung</div></div>
+          <div class="cmp-row"><div class="cmp-cell">Produkte</div><div class="cmp-cell">Anwenderfreundlich, klar beschriftet</div><div class="cmp-cell">Systemloesungen, technische Datenblaetter</div></div>
+          <div class="cmp-row"><div class="cmp-cell">Versprechen</div><div class="cmp-cell cmp-lime">&#8222;Du schaffst das.&#8220;</div><div class="cmp-cell cmp-lime">&#8222;Wir liefern die Loesung.&#8220;</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 20 FUNDAMENT BESTEHT -->
+    <div class="slide std" id="slide-20">
+      <div class="slide-content">
+        <div class="h-title" style="--i:0">Das Fundament <span>besteht</span></div>
+        <div class="ck-grid" style="--i:1">
+          <div class="glass ck-card"><div class="ck-icon">&#10003;</div><div class="ck-txt">Klare Identitaet als Feuchtigkeitsschutz-Spezialist</div></div>
+          <div class="glass ck-card"><div class="ck-icon">&#10003;</div><div class="ck-txt">Zwei Zielgruppen, zwei Wege, ein Versprechen</div></div>
+          <div class="glass ck-card"><div class="ck-icon">&#10003;</div><div class="ck-txt">BUILD · KEEP · MAINTAIN als strategische Leitidee</div></div>
+          <div class="glass ck-card"><div class="ck-icon">&#10003;</div><div class="ck-txt">7 Kernwerte als innerer Kompass</div></div>
+          <div class="glass ck-card"><div class="ck-icon">&#10003;</div><div class="ck-txt">Vision und Mission konsistent verankert</div></div>
+          <div class="glass ck-card"><div class="ck-icon">&#10003;</div><div class="ck-txt">Sprache und Claims entwickelt</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 21 BKM AUF EINEN BLICK -->
+    <div class="slide std" id="slide-21">
+      <div class="slide-content">
+        <div class="h-title" style="--i:0">BKM auf <span>einen Blick</span></div>
+        <div class="ov-grid" style="--i:1">
+          <div class="glass ov-card"><div class="ov-lbl">Kerngeschaeft</div><div class="ov-val">Feuchtigkeitsschutz &amp; Abdichtung</div></div>
+          <div class="glass ov-card"><div class="ov-lbl">Leitidee</div><div class="ov-val">Build · Keep · Maintain</div></div>
+          <div class="glass ov-card"><div class="ov-lbl">Zielgruppen</div><div class="ov-val">DIY &amp; Fachbetrieb</div></div>
+          <div class="glass ov-card"><div class="ov-lbl">Versprechen</div><div class="ov-val">Der Spezialist, dem alle vertrauen</div></div>
+          <div class="glass ov-card"><div class="ov-lbl">Vision</div><div class="ov-val">#1 in Europa fuer Feuchtigkeitsschutz</div></div>
+          <div class="glass ov-card"><div class="ov-lbl">Mission</div><div class="ov-val">Taeglich. Fuer jeden. Ueberall.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 22 CLOSING -->
+    <div class="slide" id="slide-22" style="background:var(--deep-green-2)">
+      <div class="cl-bg"></div>
+      <div class="cl-ctr">
+        <div class="slide-content">
+          <div class="cl-q" style="--i:0">&#8222;Du musst Feuchtigkeit<br>nicht akzeptieren.&#8220;</div>
+          <div class="cl-lime" style="--i:1">Es gibt einen Weg.</div>
+          <div class="cl-div" style="--i:2"></div>
+          <div class="cl-foot" style="--i:3">Build · Keep · Maintain</div>
+          <div class="cl-brand" style="--i:4">BKM MANNESMANN AG</div>
+        </div>
+      </div>
+    </div>
+
+    <button id="nav-prev" onclick="changeSlide(-1)" title="Zurueck">&#8592;</button>
+    <button id="nav-next" onclick="changeSlide(1)" title="Weiter">&#8594;</button>
+    <div id="slide-counter">01 / 22</div>
   </div>
-  <div class="glass zwei-callout anim">„Ein Feuchtigkeitsproblem. Zwei Expertise-Wege. Immer die richtige Lösung."</div>
 </div>
-
-<!-- SLIDE 6 — DIVIDER STRATEGISCHE LEITIDEE -->
-<div class="slide divider-slide" id="slide-6">
-  <div class="divider-bg-num">02</div>
-  <div class="divider-tag anim">Kapitel 02</div>
-  <div class="divider-title lime anim" style="font-size:72px">STRATEGISCHE<br>LEITIDEE</div>
-  <div class="divider-sub anim">Build · Keep · Maintain</div>
-</div>
-
-<!-- SLIDE 7 — DIE STRATEGISCHE LEITIDEE -->
-<div class="slide" id="slide-7">
-  <div class="slide-title anim">Die strategische <span class="lime">Leitidee</span></div>
-  <div class="leitidee-grid anim">
-    <div class="glass leitidee-card"><div class="leitidee-badge">BUILD</div><div class="leitidee-heading">Neu bauen, neu abdichten</div><div class="leitidee-text">Feuchtigkeitsschutz von Anfang an. Für Neubauten, Erweiterungen, Renovierungen. Der richtige Schutz beginnt beim ersten Stein.</div></div>
-    <div class="glass leitidee-card"><div class="leitidee-badge">KEEP</div><div class="leitidee-heading">Schützen, was besteht</div><div class="leitidee-text">Bestandserhalt durch präventiven Feuchtigkeitsschutz. Für Eigentümer und Verwalter. Was aufgebaut wurde, muss geschützt werden.</div></div>
-    <div class="glass leitidee-card"><div class="leitidee-badge">MAINTAIN</div><div class="leitidee-heading">Erhalten, was funktioniert</div><div class="leitidee-text">Regelmäßige Pflege und Instandhaltung. Für alle, die auf Qualität setzen. Dauerhafter Schutz braucht kontinuierliche Aufmerksamkeit.</div></div>
-  </div>
-</div>
-
-<!-- SLIDE 8 — DIVIDER MANIFEST -->
-<div class="slide divider-slide" id="slide-8">
-  <div class="divider-bg-num">03</div>
-  <div class="divider-tag anim">Kapitel 03</div>
-  <div class="divider-title lime anim">MANIFEST</div>
-  <div class="divider-sub anim">Was uns antreibt</div>
-</div>
-
-<!-- SLIDE 9 — WOFÜR BKM STEHT -->
-<div class="slide" id="slide-9">
-  <div class="slide-title anim">Wofür <span class="lime">BKM</span> steht</div>
-  <div class="manifest-grid anim">
-    <div class="glass manifest-text-block">
-      <div class="manifest-body">Feuchtigkeit ist kein Schicksal. Sie ist ein lösbares Problem – wenn man das richtige Know-how und die richtigen Produkte hat.<br><br>BKM Mannesmann steht dafür, dass jeder – ob Heimwerker oder Profi – Zugang zu echter Feuchtigkeitsschutz-Kompetenz bekommt.<br><br>Wir glauben: Ein gutes Gebäude ist ein trockenes Gebäude.</div>
-    </div>
-    <div class="manifest-quotes">
-      <div class="glass manifest-quote">„Feuchtigkeit ist kein Schicksal."</div>
-      <div class="glass manifest-quote">„Jeder verdient den richtigen Schutz."</div>
-      <div class="glass manifest-quote">„Wir liefern Lösungen – keine Produkte."</div>
-    </div>
-  </div>
-</div>
-
-<!-- SLIDE 10 — DIVIDER KERNWERTE -->
-<div class="slide divider-slide" id="slide-10">
-  <div class="divider-bg-num">05</div>
-  <div class="divider-tag anim">Kapitel 05</div>
-  <div class="divider-title lime anim">KERNWERTE</div>
-  <div class="divider-sub anim">Was uns leitet</div>
-</div>
-
-<!-- SLIDE 11 — 7 KERNWERTE OVERVIEW -->
-<div class="slide" id="slide-11">
-  <div class="slide-title anim"><span class="lime">7</span> Kernwerte</div>
-  <div class="kernwerte-grid anim">
-    <div class="glass kw-card"><div class="kw-num">01</div><div class="kw-name">Orientierung</div><div class="kw-desc">Wir geben Orientierung im komplexen Markt</div></div>
-    <div class="glass kw-card"><div class="kw-num">02</div><div class="kw-name">Spezialisierung</div><div class="kw-desc">Wir sind Spezialisten, keine Generalisten</div></div>
-    <div class="glass kw-card"><div class="kw-num">03</div><div class="kw-name">Zwei Wege</div><div class="kw-desc">Wir bedienen DIY und Profi gleich gut</div></div>
-    <div class="glass kw-card"><div class="kw-num">04</div><div class="kw-name">Bestandsschutz</div><div class="kw-desc">Wir schützen, was gebaut wurde</div></div>
-    <div class="glass kw-card"><div class="kw-num">05</div><div class="kw-name">Nachhaltigkeit</div><div class="kw-desc">Wir denken langfristig</div></div>
-    <div class="glass kw-card"><div class="kw-num">06</div><div class="kw-name">Partnerschaft</div><div class="kw-desc">Wir sind Partner, nicht nur Lieferant</div></div>
-    <div class="glass kw-card"><div class="kw-num">07</div><div class="kw-name">Klarheit</div><div class="kw-desc">Wir sprechen klar und verständlich</div></div>
-    <div class="glass kw-card" style="background:rgba(180,231,23,0.04);border-color:rgba(180,231,23,0.18)"><div style="font-size:13px;color:rgba(255,255,255,0.4);line-height:1.7">Diese 7 Werte bilden den inneren Kompass – sie leiten jede Entscheidung, jedes Produkt, jede Kommunikation.</div></div>
-  </div>
-</div>
-
-<!-- SLIDE 12 — WERTE 01 & 02 -->
-<div class="slide" id="slide-12">
-  <div class="slide-title anim">Kernwerte <span class="lime">01 &amp; 02</span></div>
-  <div class="wert-split anim">
-    <div class="glass wert-card">
-      <div class="wert-num-title"><div class="wert-big-num">01</div><div class="wert-name">Orientierung</div></div>
-      <div class="wert-body">In einem Markt voller Optionen gibt BKM Mannesmann klare Richtung. Wir helfen Kunden, das richtige Produkt für das richtige Problem zu finden – schnell, sicher, kompetent.</div>
-    </div>
-    <div class="glass wert-card">
-      <div class="wert-num-title"><div class="wert-big-num">02</div><div class="wert-name">Spezialisierung</div></div>
-      <div class="wert-body">Wir sind kein Vollsortimenter. Wir sind Spezialisten für Feuchtigkeitsschutz. Diese Fokussierung ist unsere Stärke – sie macht uns zum verlässlichsten Partner in unserem Segment.</div>
-    </div>
-  </div>
-</div>
-
-<!-- SLIDE 13 — WERTE 03 & 04 -->
-<div class="slide" id="slide-13">
-  <div class="slide-title anim">Kernwerte <span class="lime">03 &amp; 04</span></div>
-  <div class="wert-split anim">
-    <div class="glass wert-card">
-      <div class="wert-num-title"><div class="wert-big-num">03</div><div class="wert-name">Zwei Wege</div></div>
-      <div class="wert-body">Ob Heimwerker oder Handwerksprofi – BKM Mannesmann bietet für beide den richtigen Zugang. Kein Kompromiss. Volle Kompetenz auf beiden Seiten.</div>
-    </div>
-    <div class="glass wert-card">
-      <div class="wert-num-title"><div class="wert-big-num">04</div><div class="wert-name">Bestandsschutz</div></div>
-      <div class="wert-body">Gebäude sind Investitionen. Wir schützen sie. Mit Produkten und Systemen, die nicht nur heute funktionieren, sondern über Jahrzehnte Bestand haben.</div>
-    </div>
-  </div>
-</div>
-
-<!-- SLIDE 14 — WERTE 05-07 -->
-<div class="slide" id="slide-14">
-  <div class="slide-title anim">Kernwerte <span class="lime">05, 06 &amp; 07</span></div>
-  <div class="wert-split-3 anim">
-    <div class="glass wert-card-3">
-      <div class="wert-num-title"><div class="wert-big-num-sm">05</div><div class="wert-name-sm">Nachhaltigkeit</div></div>
-      <div class="wert-body-sm">Feuchtigkeitsschutz ist Ressourcenschutz. Wer Gebäude schützt, verlängert ihre Lebensdauer und reduziert Abriss, Neubau und Materialverbrauch.</div>
-    </div>
-    <div class="glass wert-card-3">
-      <div class="wert-num-title"><div class="wert-big-num-sm">06</div><div class="wert-name-sm">Partnerschaft</div></div>
-      <div class="wert-body-sm">Wir verkaufen nicht nur Produkte. Wir begleiten Projekte. Ob Beratung, Schulung oder After-Sales – BKM Mannesmann ist Partner über den Kauf hinaus.</div>
-    </div>
-    <div class="glass wert-card-3">
-      <div class="wert-num-title"><div class="wert-big-num-sm">07</div><div class="wert-name-sm">Klarheit</div></div>
-      <div class="wert-body-sm">Feuchtigkeitsschutz ist komplex. Unsere Kommunikation ist es nicht. Wir sprechen so, dass Heimwerker und Profis uns gleichermaßen verstehen.</div>
-    </div>
-  </div>
-</div>
-
-<!-- SLIDE 15 — DIVIDER VISION & MISSION -->
-<div class="slide divider-slide" id="slide-15">
-  <div class="divider-bg-num">06</div>
-  <div class="divider-tag anim">Kapitel 06 &amp; 07</div>
-  <div class="divider-title lime anim" style="font-size:80px">VISION &amp;<br>MISSION</div>
-  <div class="divider-sub anim">Wohin wir wollen – was wir täglich tun</div>
-</div>
-
-<!-- SLIDE 16 — VISION & MISSION -->
-<div class="slide" id="slide-16">
-  <div class="slide-title anim"><span class="lime">Vision</span> &amp; Mission</div>
-  <div class="vm-grid anim">
-    <div class="glass vm-card"><div class="vm-label">Vision</div><div class="vm-text">„BKM Mannesmann ist die erste Adresse für Feuchtigkeitsschutz in Europa – der Spezialist, dem Heimwerker und Profis gleichermaßen vertrauen."</div></div>
-    <div class="glass vm-card"><div class="vm-label">Mission</div><div class="vm-text">„Wir entwickeln, vermarkten und liefern Feuchtigkeitsschutz-Systeme, die funktionieren – für jeden Anwender, jedes Projekt, jede Anforderung. Täglich."</div></div>
-  </div>
-</div>
-
-<!-- SLIDE 17 — BOTSCHAFTEN & CLAIMS -->
-<div class="slide" id="slide-17">
-  <div class="slide-title anim">Botschaften <span class="lime">&amp;</span> Claims</div>
-  <div class="claims-table anim">
-    <div class="glass claim-row"><div class="claim-key">Claim Übergeordnet</div><div class="claim-val">„Feuchtigkeit hat keine Chance."</div></div>
-    <div class="glass claim-row"><div class="claim-key">Claim DIY</div><div class="claim-val">„Du schaffst das trocken."</div></div>
-    <div class="glass claim-row"><div class="claim-key">Claim Profi</div><div class="claim-val">„Systeme, die im Projekt funktionieren."</div></div>
-    <div class="glass claim-row"><div class="claim-key">Claim BUILD</div><div class="claim-val">„Richtig starten. Von Anfang an trocken."</div></div>
-    <div class="glass claim-row"><div class="claim-key">Claim KEEP</div><div class="claim-val">„Schützen, was du aufgebaut hast."</div></div>
-    <div class="glass claim-row"><div class="claim-key">Claim MAINTAIN</div><div class="claim-val">„Dauerhaft trocken. Dauerhaft sicher."</div></div>
-  </div>
-</div>
-
-<!-- SLIDE 18 — SPRACHE SCHÄRFEN -->
-<div class="slide" id="slide-18">
-  <div class="slide-title anim">Sprache <span class="lime">schärfen</span></div>
-  <div class="sprache-list anim">
-    <div class="glass sprache-pair">
-      <div class="sprache-bad"><span class="x">✗</span> „Hochwertige Abdichtungsprodukte"</div>
-      <div class="arrow-sep">↓</div>
-      <div class="sprache-good"><span class="check">✓</span> „Feuchtigkeitsschutz, der hält."</div>
-    </div>
-    <div class="glass sprache-pair">
-      <div class="sprache-bad"><span class="x">✗</span> „Für Heimwerker und Profis"</div>
-      <div class="arrow-sep">↓</div>
-      <div class="sprache-good"><span class="check">✓</span> „Dein Weg. Dein Schutz."</div>
-    </div>
-    <div class="glass sprache-pair">
-      <div class="sprache-bad"><span class="x">✗</span> „Umfangreiches Sortiment"</div>
-      <div class="arrow-sep">↓</div>
-      <div class="sprache-good"><span class="check">✓</span> „Das Richtige für jedes Problem."</div>
-    </div>
-  </div>
-</div>
-
-<!-- SLIDE 19 — WANN WELCHER WEG -->
-<div class="slide" id="slide-19">
-  <div class="slide-title anim">Wann <span class="lime">welcher Weg?</span></div>
-  <div class="compare-table anim">
-    <div class="compare-header">
-      <div class="compare-header-cell">Kriterium</div>
-      <div class="compare-header-cell">DIY / Selbermacher</div>
-      <div class="compare-header-cell">Fachbetrieb / Profi</div>
-    </div>
-    <div class="compare-row"><div class="compare-row-label">Anwender</div><div class="compare-cell">Eigenheimbesitzer</div><div class="compare-cell">Handwerksbetrieb</div></div>
-    <div class="compare-row"><div class="compare-row-label">Projekt</div><div class="compare-cell">Einfache Abdichtung, Keller, Bad</div><div class="compare-cell">Komplexe Bauprojekte, Neubau</div></div>
-    <div class="compare-row"><div class="compare-row-label">Beratung</div><div class="compare-cell">Selbst entscheiden mit Orientierungshilfe</div><div class="compare-cell">Technische Fachberatung</div></div>
-    <div class="compare-row"><div class="compare-row-label">Produkte</div><div class="compare-cell">Anwenderfreundlich, klar beschriftet</div><div class="compare-cell">Systemlösungen, technische Datenblätter</div></div>
-    <div class="compare-row"><div class="compare-row-label">Versprechen</div><div class="compare-cell"><strong>„Du schaffst das."</strong></div><div class="compare-cell"><strong>„Wir liefern die Lösung."</strong></div></div>
-  </div>
-</div>
-
-<!-- SLIDE 20 — DAS FUNDAMENT BESTEHT -->
-<div class="slide" id="slide-20">
-  <div class="slide-title anim">Das Fundament <span class="lime">besteht</span></div>
-  <div class="check-grid anim">
-    <div class="glass check-card"><div class="check-icon">✓</div><div class="check-text">Klare Identität als Feuchtigkeitsschutz-Spezialist</div></div>
-    <div class="glass check-card"><div class="check-icon">✓</div><div class="check-text">Zwei Zielgruppen, zwei Wege, ein Versprechen</div></div>
-    <div class="glass check-card"><div class="check-icon">✓</div><div class="check-text">BUILD · KEEP · MAINTAIN als strategische Leitidee</div></div>
-    <div class="glass check-card"><div class="check-icon">✓</div><div class="check-text">7 Kernwerte als innerer Kompass</div></div>
-    <div class="glass check-card"><div class="check-icon">✓</div><div class="check-text">Vision und Mission konsistent verankert</div></div>
-    <div class="glass check-card"><div class="check-icon">✓</div><div class="check-text">Sprache und Claims entwickelt</div></div>
-  </div>
-</div>
-
-<!-- SLIDE 21 — BKM AUF EINEN BLICK -->
-<div class="slide" id="slide-21">
-  <div class="slide-title anim">BKM auf <span class="lime">einen Blick</span></div>
-  <div class="blick-grid anim">
-    <div class="glass blick-card"><div class="blick-label">Kerngeschäft</div><div class="blick-val">Feuchtigkeitsschutz &amp; Abdichtung</div></div>
-    <div class="glass blick-card"><div class="blick-label">Leitidee</div><div class="blick-val">Build · Keep · Maintain</div></div>
-    <div class="glass blick-card"><div class="blick-label">Zielgruppen</div><div class="blick-val">DIY &amp; Fachbetrieb</div></div>
-    <div class="glass blick-card"><div class="blick-label">Versprechen</div><div class="blick-val">Der Spezialist, dem alle vertrauen</div></div>
-    <div class="glass blick-card"><div class="blick-label">Vision</div><div class="blick-val">#1 in Europa für Feuchtigkeitsschutz</div></div>
-    <div class="glass blick-card"><div class="blick-label">Mission</div><div class="blick-val">Täglich. Für jeden. Überall.</div></div>
-  </div>
-</div>
-
-<!-- SLIDE 22 — CLOSING -->
-<div class="slide" id="slide-22">
-  <div class="orb-close orb-close-1"></div>
-  <div class="orb-close orb-close-2"></div>
-  <div class="closing-content">
-    <div class="closing-quote anim">„Du musst Feuchtigkeit<br>nicht akzeptieren."</div>
-    <div class="closing-lime anim">Es gibt einen Weg.</div>
-    <div class="closing-footer anim">
-      <div class="closing-tagline-footer">Build · Keep · Maintain</div>
-      <div class="closing-bkm">BKM Mannesmann AG</div>
-    </div>
-  </div>
-</div>
-
-<button id="nav-prev" aria-label="Vorherige Folie">&#8592;</button>
-<button id="nav-next" aria-label="Nächste Folie">&#8594;</button>
-<div id="slide-counter">1 / 22</div>
-</div>
-</div>
-
 <script>
 (function(){
   var TOTAL=22, current=1, animating=false;
-  var stage=document.getElementById('stage');
   var pb=document.getElementById('progress-bar');
-  var ctr=document.getElementById('slide-counter');
-
+  var sc=document.getElementById('slide-counter');
   function g(n){return document.getElementById('slide-'+n);}
-
-  function resetAnims(el){
-    el.querySelectorAll('.anim').forEach(function(a){
-      a.style.animation='none'; a.getBoundingClientRect(); a.style.animation='';
-    });
-  }
-
-  function upd(){
-    pb.style.width=((current/TOTAL)*100)+'%';
-    ctr.textContent=current+' / '+TOTAL;
-  }
-
-  function goTo(t){
-    if(animating||t===current||t<1||t>TOTAL) return;
+  function ui(){pb.style.width=((current/TOTAL)*100)+'%';sc.textContent=pad(current)+' / '+pad(TOTAL);}
+  function pad(n){return n<10?'0'+n:''+n;}
+  function scale(){var s=document.getElementById('stage');var sc2=Math.min(window.innerWidth/1920,window.innerHeight/1080);s.style.transform='scale('+sc2+')';}
+  window.changeSlide=function(d){
+    if(animating)return;
+    var nx=current+d;
+    if(nx<1||nx>TOTAL)return;
     animating=true;
-    var from=g(current), to=g(t), fwd=t>current;
-    from.classList.remove('active','prev');
-    to.classList.remove('active','prev');
-    if(fwd){
-      to.style.transition='none'; to.style.clipPath='inset(0 100% 0 0)';
-      to.getBoundingClientRect(); to.style.transition='';
-      to.classList.add('active');
-      from.style.transition='none'; from.style.clipPath='inset(0 0% 0 0)';
-      from.getBoundingClientRect(); from.style.transition='';
-      from.classList.add('prev');
+    var cur=g(current),nxt=g(nx);
+    if(d>0){
+      cur.classList.remove('active');cur.classList.add('prev');
+      nxt.classList.add('active');
     } else {
-      to.style.transition='none'; to.style.clipPath='inset(0 0 0 100%)';
-      to.getBoundingClientRect(); to.style.transition='';
-      to.classList.add('active');
-      from.style.transition='none'; from.style.clipPath='inset(0 0% 0 0)';
-      from.getBoundingClientRect(); from.style.transition='';
-      from.style.clipPath='inset(0 100% 0 0)';
-      from.classList.add('prev');
+      nxt.classList.add('notransition');
+      nxt.style.clipPath='inset(0 0% 0 100%)';
+      nxt.getBoundingClientRect();
+      nxt.classList.remove('notransition');
+      nxt.classList.add('active');
+      nxt.style.clipPath='';
+      cur.classList.remove('active');
+      cur.classList.add('notransition');
+      cur.style.clipPath='inset(0 100% 0 0)';
+      cur.getBoundingClientRect();
+      cur.classList.remove('notransition');
     }
-    resetAnims(to);
-    current=t; upd();
+    current=nx;ui();
     setTimeout(function(){
       animating=false;
-      document.querySelectorAll('.slide.prev').forEach(function(s){
-        s.classList.remove('prev'); s.style.clipPath=''; s.style.transition='';
-      });
-    },750);
-  }
-
-  function scale(){
-    var s=Math.min(window.innerWidth/1920,window.innerHeight/1080);
-    stage.style.transform='scale('+s+')';
-  }
-  window.addEventListener('resize',scale); scale(); upd();
-
+      for(var i=1;i<=TOTAL;i++){
+        if(i!==current){
+          var s=g(i);
+          s.classList.add('notransition');
+          s.classList.remove('active','prev');
+          s.style.clipPath='';
+          s.getBoundingClientRect();
+          s.classList.remove('notransition');
+        }
+      }
+    },800);
+  };
   document.addEventListener('keydown',function(e){
-    if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' '){e.preventDefault();goTo(current+1);}
-    else if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();goTo(current-1);}
+    if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' '){e.preventDefault();changeSlide(1);}
+    else if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();changeSlide(-1);}
   });
-
-  document.getElementById('nav-prev').addEventListener('click',function(e){e.stopPropagation();goTo(current-1);});
-  document.getElementById('nav-next').addEventListener('click',function(e){e.stopPropagation();goTo(current+1);});
-
-  var tx=0,ty=0;
-  stage.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;ty=e.touches[0].clientY;},{passive:true});
-  stage.addEventListener('touchend',function(e){
-    var dx=e.changedTouches[0].clientX-tx, dy=e.changedTouches[0].clientY-ty;
-    if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>50){dx<0?goTo(current+1):goTo(current-1);}
-  },{passive:true});
-
-  stage.addEventListener('click',function(e){
-    if(e.target.closest('#nav-prev')||e.target.closest('#nav-next')) return;
-    var r=stage.getBoundingClientRect();
-    e.clientX-r.left>r.width/2?goTo(current+1):goTo(current-1);
-  });
+  var tx=0;
+  document.getElementById('stage').addEventListener('touchstart',function(e){tx=e.touches[0].clientX;},{passive:true});
+  document.getElementById('stage').addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)changeSlide(dx<0?1:-1);},{passive:true});
+  window.addEventListener('resize',scale);
+  scale();ui();
 })();
 </script>
 </body>
