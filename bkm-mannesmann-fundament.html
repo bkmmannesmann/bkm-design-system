@@ -16,534 +16,130 @@
       --transition-green: #287d4b;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body {
-      width: 100%; height: 100%;
-      overflow: hidden;
-      background: #000;
-      font-family: system-ui, sans-serif;
-    }
+    body { background: #000; overflow: hidden; font-family: system-ui, sans-serif; }
+
     #progress-bar {
-      position: fixed;
-      top: 0; left: 0;
-      height: 4px;
-      background: var(--lime);
-      width: 0%;
-      transition: width 0.5s ease;
-      z-index: 1000;
+      position: fixed; top: 0; left: 0; height: 4px;
+      background: var(--lime); width: 0%; z-index: 1000;
+      transition: width 0.4s ease;
     }
     #stage-wrapper {
       width: 100vw; height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       overflow: hidden;
     }
     #stage {
-      width: 1920px;
-      height: 1080px;
+      width: 1920px; height: 1080px;
       background: var(--deep-green-2);
-      position: relative;
+      position: relative; overflow: hidden;
       transform-origin: center center;
     }
     .slide {
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       padding: 80px 140px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.5s ease, transform 0.5s ease;
-      transform: translateX(30px);
-      overflow: hidden;
+      display: flex; flex-direction: column;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.5s ease;
     }
-    .slide.active {
-      opacity: 1;
-      pointer-events: all;
-      transform: none;
-    }
-    /* AC animations */
-    @keyframes acIn {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .slide.active .ac {
-      animation: acIn 0.6s cubic-bezier(0.16,1,0.3,1) both;
-    }
-    .slide.active .ac:nth-child(1)  { animation-delay: 0ms; }
-    .slide.active .ac:nth-child(2)  { animation-delay: 80ms; }
-    .slide.active .ac:nth-child(3)  { animation-delay: 160ms; }
-    .slide.active .ac:nth-child(4)  { animation-delay: 240ms; }
-    .slide.active .ac:nth-child(5)  { animation-delay: 320ms; }
-    .slide.active .ac:nth-child(6)  { animation-delay: 400ms; }
-    .slide.active .ac:nth-child(7)  { animation-delay: 480ms; }
-    .slide.active .ac:nth-child(8)  { animation-delay: 560ms; }
-    .slide.active .ac:nth-child(9)  { animation-delay: 640ms; }
-    .slide.active .ac:nth-child(10) { animation-delay: 720ms; }
+    .slide.active { opacity: 1; pointer-events: all; }
 
-    /* Glass card */
+    h1, h2, h3, h4 { font-family: 'Unbounded', sans-serif; font-weight: 900; letter-spacing: -0.04em; }
+    h1 { font-size: 96px; text-transform: uppercase; color: #fff; line-height: 1; }
+    h2 { font-size: 64px; color: #fff; line-height: 1.1; }
+    h3 { font-size: 36px; color: #fff; }
+    h4 { font-size: 24px; color: #fff; }
+    p { font-size: 22px; color: rgba(255,255,255,0.75); line-height: 1.6; }
+    .label {
+      font-family: 'Unbounded', sans-serif; font-weight: 900;
+      font-size: 14px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--lime); margin-bottom: 16px;
+    }
     .glass {
       backdrop-filter: blur(16px);
       background: rgba(255,255,255,0.07);
       border: 1px solid rgba(255,255,255,0.12);
       border-radius: 24px;
+      padding: 36px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .glass:hover {
       transform: scale(1.02);
       box-shadow: 0 0 32px rgba(180,231,23,0.25);
     }
-
-    /* Typography */
-    h1, h2, .headline {
-      font-family: 'Unbounded', sans-serif;
-      font-weight: 900;
-      letter-spacing: -0.04em;
+    .ac {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1);
     }
-    h1 { text-transform: uppercase; }
+    .slide.active .ac:nth-child(1) { opacity:1; transform:translateY(0); transition-delay:80ms; }
+    .slide.active .ac:nth-child(2) { opacity:1; transform:translateY(0); transition-delay:160ms; }
+    .slide.active .ac:nth-child(3) { opacity:1; transform:translateY(0); transition-delay:240ms; }
+    .slide.active .ac:nth-child(4) { opacity:1; transform:translateY(0); transition-delay:320ms; }
+    .slide.active .ac:nth-child(5) { opacity:1; transform:translateY(0); transition-delay:400ms; }
+    .slide.active .ac:nth-child(6) { opacity:1; transform:translateY(0); transition-delay:480ms; }
+    .slide.active .ac:nth-child(7) { opacity:1; transform:translateY(0); transition-delay:560ms; }
+    .slide.active .ac:nth-child(8) { opacity:1; transform:translateY(0); transition-delay:640ms; }
+    .slide.active .ac:nth-child(9) { opacity:1; transform:translateY(0); transition-delay:720ms; }
+    .slide.active .ac:nth-child(10) { opacity:1; transform:translateY(0); transition-delay:800ms; }
 
-    /* Nav */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; }
+    .flex-row { display: flex; gap: 32px; }
+    .flex-1 { flex: 1; }
+
+    .orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(80px); opacity: 0.35;
+      animation: float 8s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-40px) scale(1.05); }
+    }
+    .bg-number {
+      position: absolute; font-family: 'Unbounded', sans-serif; font-weight: 900;
+      font-size: 500px; color: rgba(255,255,255,0.04);
+      right: -40px; bottom: -120px; line-height: 1; letter-spacing: -0.04em;
+      user-select: none; pointer-events: none;
+    }
+    .lime { color: var(--lime); }
+    .lime-bg { background: var(--lime); color: var(--deep-green-2); }
+    .green-bg { background: var(--pure-green); color: #fff; }
+    .callout {
+      background: rgba(180,231,23,0.12);
+      border-left: 4px solid var(--lime);
+      border-radius: 12px;
+      padding: 24px 32px;
+      font-size: 22px;
+      color: rgba(255,255,255,0.9);
+    }
+    .table-row {
+      display: grid; grid-template-columns: 280px 1fr;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding: 20px 0; align-items: center;
+    }
+    .table-row:first-child { border-top: 1px solid rgba(255,255,255,0.1); }
+    .table-key { font-family: 'Unbounded', sans-serif; font-size: 14px; font-weight: 900; letter-spacing: 0.1em; color: var(--lime); }
+    .table-val { font-size: 20px; color: rgba(255,255,255,0.85); }
+    .ba-pair { display: flex; align-items: center; gap: 24px; padding: 24px; background: rgba(255,255,255,0.05); border-radius: 16px; }
+    .ba-before { flex:1; font-size:18px; color:rgba(255,255,255,0.5); text-decoration: line-through; }
+    .ba-arrow { font-size: 28px; color: var(--lime); }
+    .ba-after { flex:1; font-size:20px; color:#fff; font-weight:600; }
+    .check-item { display: flex; align-items: flex-start; gap: 16px; font-size: 22px; color: rgba(255,255,255,0.85); }
+    .check-item::before { content: "✓"; color: var(--lime); font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 22px; flex-shrink: 0; }
+
     #nav {
-      position: fixed;
-      bottom: 32px;
-      right: 48px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      z-index: 1000;
+      position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 24px; z-index: 1000;
     }
     #nav button {
-      width: 48px; height: 48px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.2);
-      background: rgba(255,255,255,0.08);
-      color: #fff;
-      font-size: 18px;
-      cursor: pointer;
-      transition: background 0.2s;
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; border-radius: 50%; width: 48px; height: 48px;
+      font-size: 20px; cursor: pointer; transition: background 0.2s;
+      backdrop-filter: blur(8px);
     }
-    #nav button:hover { background: rgba(180,231,23,0.2); }
-    #counter {
-      font-family: system-ui;
-      color: rgba(255,255,255,0.5);
-      font-size: 14px;
-    }
-
-    /* Cover slide */
-    .slide-cover {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-    }
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.35;
-      animation: floatOrb 8s ease-in-out infinite;
-    }
-    @keyframes floatOrb {
-      0%,100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-40px) scale(1.08); }
-    }
-    .cover-year {
-      font-family: 'Unbounded', sans-serif;
-      font-size: 14px;
-      font-weight: 900;
-      letter-spacing: 0.3em;
-      color: var(--lime);
-      margin-bottom: 32px;
-    }
-    .cover-title {
-      font-family: 'Unbounded', sans-serif;
-      font-weight: 900;
-      font-size: 96px;
-      letter-spacing: -0.04em;
-      text-transform: uppercase;
-      color: #fff;
-      line-height: 1;
-      margin-bottom: 32px;
-    }
-    .cover-subtitle {
-      font-size: 24px;
-      color: rgba(255,255,255,0.7);
-      max-width: 700px;
-      line-height: 1.5;
-    }
-
-    /* Slide headings */
-    .slide-title {
-      font-family: 'Unbounded', sans-serif;
-      font-weight: 900;
-      font-size: 52px;
-      letter-spacing: -0.04em;
-      color: #fff;
-      margin-bottom: 48px;
-    }
-    .slide-subtitle {
-      font-size: 20px;
-      color: rgba(255,255,255,0.6);
-      margin-top: -36px;
-      margin-bottom: 48px;
-    }
-
-    /* Divider slide */
-    .slide-divider {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    .divider-bg-num {
-      position: absolute;
-      font-family: 'Unbounded', sans-serif;
-      font-weight: 900;
-      font-size: 500px;
-      color: rgba(255,255,255,0.04);
-      right: 80px;
-      top: 50%;
-      transform: translateY(-50%);
-      line-height: 1;
-      pointer-events: none;
-      letter-spacing: -0.06em;
-    }
-    .divider-label {
-      font-family: 'Unbounded', sans-serif;
-      font-size: 13px;
-      font-weight: 900;
-      letter-spacing: 0.3em;
-      color: var(--lime);
-      margin-bottom: 24px;
-    }
-    .divider-title {
-      font-family: 'Unbounded', sans-serif;
-      font-weight: 900;
-      font-size: 80px;
-      letter-spacing: -0.04em;
-      color: #fff;
-      margin-bottom: 24px;
-    }
-    .divider-subtitle {
-      font-size: 24px;
-      color: rgba(255,255,255,0.6);
-    }
-
-    /* Grid utils */
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
-    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 28px; }
-    .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 24px; }
-
-    /* Agenda */
-    .agenda-card {
-      padding: 28px 32px;
-      display: flex;
-      align-items: center;
-      gap: 24px;
-    }
-    .agenda-num {
-      font-family: 'Unbounded', sans-serif;
-      font-weight: 900;
-      font-size: 32px;
-      color: var(--lime);
-      min-width: 48px;
-    }
-    .agenda-text { font-size: 20px; color: #fff; }
-
-    /* Stat cards */
-    .stat-card {
-      padding: 48px 40px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .stat-value {
-      font-family: 'Unbounded', sans-serif;
-      font-weight: 900;
-      font-size: 48px;
-      letter-spacing: -0.04em;
-      color: var(--lime);
-    }
-    .stat-label { font-size: 18px; color: rgba(255,255,255,0.8); line-height: 1.4; }
-
-    /* Tall cards */
-    .tall-card {
-      padding: 56px 48px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-    .tall-card .card-icon { font-size: 48px; }
-    .tall-card .card-tag {
-      font-family: 'Unbounded', sans-serif;
-      font-weight: 900;
-      font-size: 22px;
-      letter-spacing: -0.02em;
-      color: var(--lime);
-    }
-    .tall-card .card-desc { font-size: 18px; color: rgba(255,255,255,0.7); }
-    .tall-card ul { list-style: none; padding: 0; margin-top: 8px; }
-    .tall-card ul li {
-      font-size: 17px;
-      color: rgba(255,255,255,0.8);
-      padding: 8px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      padding-left: 20px;
-      position: relative;
-    }
-    .tall-card ul li::before {
-      content: "→";
-      position: absolute;
-      left: 0;
-      color: var(--lime);
-    }
-
-    /* Callout */
-    .callout {
-      margin-top: 40px;
-      padding: 28px 40px;
-      background: rgba(180,231,23,0.1);
-      border: 1px solid rgba(180,231,23,0.3);
-      border-radius: 16px;
-      font-size: 19px;
-      color: rgba(255,255,255,0.9);
-      text-align: center;
-    }
-
-    /* BKM cards */
-    .bkm-card {
-      padding: 40px 36px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .bkm-card-accent {
-      font-family: 'Unbounded', sans-serif;
-      font-weight: 900;
-      font-size: 28px;
-      letter-spacing: -0.03em;
-    }
-    .bkm-card-accent.lime { color: var(--lime); }
-    .bkm-card-accent.green { color: var(--pure-green); }
-    .bkm-card-accent.white { color: #fff; }
-    .bkm-card-desc { font-size: 17px; color: rgba(255,255,255,0.7); line-height: 1.5; }
-    .bkm-tagline {
-      margin-top: 40px;
-      text-align: center;
-      font-size: 20px;
-      color: rgba(255,255,255,0.6);
-    }
-
-    /* Manifest */
-    .manifest-text {
-      font-size: 30px;
-      color: rgba(255,255,255,0.85);
-      line-height: 1.7;
-      max-width: 1300px;
-    }
-    .manifest-text .hl { color: var(--lime); font-weight: 700; }
-
-    /* Value grid */
-    .val-card {
-      padding: 28px 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .val-num {
-      font-family: 'Unbounded', sans-serif;
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: 0.2em;
-      color: var(--lime);
-    }
-    .val-title { font-size: 18px; color: #fff; font-weight: 700; }
-    .val-desc { font-size: 14px; color: rgba(255,255,255,0.6); }
-
-    /* Detail value cards */
-    .detail-card {
-      padding: 52px 48px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .detail-card .d-label {
-      font-family: 'Unbounded', sans-serif;
-      font-weight: 900;
-      font-size: 14px;
-      letter-spacing: 0.2em;
-      color: var(--lime);
-    }
-    .detail-card .d-icon { font-size: 44px; margin: 8px 0; }
-    .detail-card .d-headline {
-      font-size: 26px;
-      color: #fff;
-      font-weight: 700;
-      line-height: 1.3;
-    }
-    .detail-card .d-body {
-      font-size: 18px;
-      color: rgba(255,255,255,0.7);
-      line-height: 1.6;
-    }
-
-    /* Claims table */
-    .claim-row {
-      display: flex;
-      align-items: center;
-      padding: 24px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      gap: 40px;
-    }
-    .claim-tag {
-      font-family: 'Unbounded', sans-serif;
-      font-weight: 900;
-      font-size: 12px;
-      letter-spacing: 0.2em;
-      color: var(--lime);
-      min-width: 200px;
-    }
-    .claim-text { font-size: 20px; color: #fff; }
-
-    /* Before/after */
-    .ba-row {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-    }
-    .ba-box {
-      flex: 1;
-      padding: 28px 32px;
-      border-radius: 16px;
-    }
-    .ba-box.before {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-    .ba-box.after {
-      background: rgba(180,231,23,0.08);
-      border: 1px solid rgba(180,231,23,0.25);
-    }
-    .ba-label {
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .ba-label.vr { color: rgba(255,255,255,0.4); }
-    .ba-label.nh { color: var(--lime); }
-    .ba-text { font-size: 19px; color: #fff; }
-    .ba-arrow { font-size: 28px; color: var(--lime); }
-
-    /* Criteria cols */
-    .crit-col {
-      padding: 40px 40px;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-    .crit-heading {
-      font-size: 20px;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 24px;
-    }
-    .crit-item {
-      padding: 14px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      font-size: 17px;
-      color: rgba(255,255,255,0.8);
-    }
-    .crit-col.lime-col { border-top: 3px solid var(--lime); }
-    .crit-col.green-col { border-top: 3px solid var(--pure-green); }
-
-    /* Check cards */
-    .check-card {
-      padding: 32px 32px;
-      display: flex;
-      gap: 20px;
-      align-items: flex-start;
-    }
-    .check-mark {
-      font-size: 24px;
-      color: var(--lime);
-      font-weight: 900;
-      min-width: 32px;
-    }
-    .check-title { font-size: 17px; color: #fff; font-weight: 700; margin-bottom: 6px; }
-    .check-desc { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.4; }
-
-    /* Summary cards */
-    .sum-card {
-      padding: 36px 32px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .sum-icon { font-size: 32px; }
-    .sum-tag {
-      font-family: 'Unbounded', sans-serif;
-      font-weight: 900;
-      font-size: 12px;
-      letter-spacing: 0.2em;
-      color: var(--lime);
-    }
-    .sum-text { font-size: 16px; color: rgba(255,255,255,0.8); line-height: 1.5; }
-
-    /* Closing */
-    .slide-closing {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-    .closing-quote {
-      font-family: 'Unbounded', sans-serif;
-      font-weight: 900;
-      font-size: 72px;
-      letter-spacing: -0.04em;
-      color: #fff;
-      line-height: 1.1;
-      max-width: 1100px;
-      margin-bottom: 40px;
-    }
-    .closing-attr {
-      font-size: 20px;
-      color: var(--lime);
-      letter-spacing: 0.1em;
-      margin-bottom: 32px;
-    }
-    .closing-sub {
-      font-size: 22px;
-      color: rgba(255,255,255,0.6);
-    }
-
-    /* Vision/Mission */
-    .vm-card {
-      padding: 56px 52px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-    .vm-icon { font-size: 48px; }
-    .vm-label {
-      font-family: 'Unbounded', sans-serif;
-      font-weight: 900;
-      font-size: 14px;
-      letter-spacing: 0.25em;
-      color: var(--lime);
-    }
-    .vm-text {
-      font-size: 22px;
-      color: #fff;
-      line-height: 1.5;
-      font-weight: 600;
-    }
-    .vm-sub {
-      font-size: 17px;
-      color: rgba(255,255,255,0.6);
-      line-height: 1.5;
-      padding-top: 12px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
+    #nav button:hover { background: var(--lime); color: var(--deep-green-2); }
+    #counter { color: rgba(255,255,255,0.6); font-size: 16px; font-family: system-ui; min-width: 60px; text-align: center; }
   </style>
 </head>
 <body>
@@ -552,99 +148,103 @@
   <div id="stage">
 
     <!-- SLIDE 1: Cover -->
-    <div class="slide" style="display:flex;flex-direction:column;justify-content:center;align-items:flex-start;">
-      <div class="orb" style="width:600px;height:600px;background:var(--lime);top:-150px;right:-100px;animation-duration:9s;"></div>
-      <div class="orb" style="width:400px;height:400px;background:var(--pure-green);bottom:-80px;left:200px;animation-duration:11s;animation-delay:-3s;"></div>
-      <div class="orb" style="width:280px;height:280px;background:var(--transition-green);top:300px;right:400px;animation-duration:7s;animation-delay:-5s;"></div>
-      <div class="cover-year ac">2025</div>
-      <div class="cover-title ac">BKM<br>MANNESMANN</div>
-      <div class="cover-subtitle ac">Das Fundament — Strategische Positionierung &amp; Markenkern</div>
+    <div class="slide">
+      <div class="orb" style="width:600px;height:600px;background:var(--lime);top:-200px;left:-100px;animation-delay:0s"></div>
+      <div class="orb" style="width:400px;height:400px;background:var(--pure-green);bottom:-100px;right:200px;animation-delay:2s"></div>
+      <div class="orb" style="width:300px;height:300px;background:var(--transition-green);top:200px;right:-50px;animation-delay:4s"></div>
+      <div style="position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center;height:100%;">
+        <div class="label ac">2025</div>
+        <h1 class="ac" style="font-size:120px;margin-bottom:24px;">BKM<br>MANNESMANN</h1>
+        <p class="ac" style="font-size:28px;color:rgba(255,255,255,0.8);max-width:800px;">Das Fundament — Strategische Positionierung &amp; Markenkern</p>
+      </div>
     </div>
 
     <!-- SLIDE 2: Agenda -->
     <div class="slide">
-      <div class="slide-title ac">Agenda</div>
-      <div style="display:flex;flex-direction:column;gap:16px;">
-        <div class="glass agenda-card ac">
-          <span class="agenda-num">01</span>
-          <span class="agenda-text">Kurzanalyse — Wer sind wir, wo stehen wir?</span>
+      <h2 class="ac" style="margin-bottom:48px;">Agenda</h2>
+      <div style="display:flex;flex-direction:column;gap:20px;">
+        <div class="glass ac" style="display:flex;align-items:center;gap:24px;padding:24px 36px;">
+          <span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:32px;color:var(--lime);min-width:48px;">1</span>
+          <div><strong style="color:#fff;font-size:20px;">Kurzanalyse</strong><span style="color:rgba(255,255,255,0.5);font-size:18px;"> — Wer sind wir, wo stehen wir?</span></div>
         </div>
-        <div class="glass agenda-card ac">
-          <span class="agenda-num">02</span>
-          <span class="agenda-text">Strategische Leitidee — BUILD / KEEP / MAINTAIN</span>
+        <div class="glass ac" style="display:flex;align-items:center;gap:24px;padding:24px 36px;">
+          <span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:32px;color:var(--lime);min-width:48px;">2</span>
+          <div><strong style="color:#fff;font-size:20px;">Strategische Leitidee</strong><span style="color:rgba(255,255,255,0.5);font-size:18px;"> — BUILD / KEEP / MAINTAIN</span></div>
         </div>
-        <div class="glass agenda-card ac">
-          <span class="agenda-num">03</span>
-          <span class="agenda-text">Manifest — Wofür BKM MANNESMANN steht</span>
+        <div class="glass ac" style="display:flex;align-items:center;gap:24px;padding:24px 36px;">
+          <span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:32px;color:var(--lime);min-width:48px;">3</span>
+          <div><strong style="color:#fff;font-size:20px;">Manifest</strong><span style="color:rgba(255,255,255,0.5);font-size:18px;"> — Wofür BKM MANNESMANN steht</span></div>
         </div>
-        <div class="glass agenda-card ac">
-          <span class="agenda-num">04</span>
-          <span class="agenda-text">Kernwerte — Die 7 Säulen</span>
+        <div class="glass ac" style="display:flex;align-items:center;gap:24px;padding:24px 36px;">
+          <span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:32px;color:var(--lime);min-width:48px;">4</span>
+          <div><strong style="color:#fff;font-size:20px;">Kernwerte</strong><span style="color:rgba(255,255,255,0.5);font-size:18px;"> — Die 7 Säulen</span></div>
         </div>
-        <div class="glass agenda-card ac">
-          <span class="agenda-num">05</span>
-          <span class="agenda-text">Vision &amp; Mission</span>
+        <div class="glass ac" style="display:flex;align-items:center;gap:24px;padding:24px 36px;">
+          <span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:32px;color:var(--lime);min-width:48px;">5</span>
+          <div><strong style="color:#fff;font-size:20px;">Vision &amp; Mission</strong></div>
         </div>
-        <div class="glass agenda-card ac">
-          <span class="agenda-num">06</span>
-          <span class="agenda-text">Sprache &amp; Claims</span>
+        <div class="glass ac" style="display:flex;align-items:center;gap:24px;padding:24px 36px;">
+          <span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:32px;color:var(--lime);min-width:48px;">6</span>
+          <div><strong style="color:#fff;font-size:20px;">Sprache &amp; Claims</strong></div>
         </div>
       </div>
     </div>
 
     <!-- SLIDE 3: Divider 01 -->
-    <div class="slide" style="display:flex;flex-direction:column;justify-content:center;">
-      <div class="divider-bg-num">01</div>
-      <div class="divider-label ac">TEIL 01</div>
-      <div class="divider-title ac">Kurzanalyse</div>
-      <div class="divider-subtitle ac">Wer sind wir — und wo stehen wir heute?</div>
+    <div class="slide" style="justify-content:center;">
+      <div class="bg-number">01</div>
+      <div class="label ac">TEIL 01</div>
+      <h2 class="ac" style="font-size:80px;margin-bottom:24px;">Kurzanalyse</h2>
+      <p class="ac" style="font-size:28px;color:rgba(255,255,255,0.6);">Wer sind wir — und wo stehen wir heute?</p>
     </div>
 
     <!-- SLIDE 4: Wer ist BKM -->
     <div class="slide">
-      <div class="slide-title ac">Wer ist BKM MANNESMANN?</div>
-      <div class="grid-2" style="height:calc(100% - 140px);">
-        <div class="glass stat-card ac">
-          <div class="stat-value">70+ Jahre</div>
-          <div class="stat-label">Erfahrung in Feuchtigkeitsschutz &amp; Abdichtung</div>
+      <h2 class="ac" style="margin-bottom:48px;">Wer ist BKM MANNESMANN?</h2>
+      <div class="grid-2" style="flex:1;">
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:16px;">
+          <div style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:48px;color:var(--lime);">70+</div>
+          <h4>Jahre</h4>
+          <p>Erfahrung in Feuchtigkeitsschutz &amp; Abdichtung</p>
         </div>
-        <div class="glass stat-card ac">
-          <div class="stat-value">Zwei Zielgruppen</div>
-          <div class="stat-label">DIY-Endkunden &amp; professionelle Fachbetriebe</div>
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:16px;">
+          <div style="font-size:48px;">&#128101;</div>
+          <h4>Zwei Zielgruppen</h4>
+          <p>DIY-Endkunden &amp; professionelle Fachbetriebe</p>
         </div>
-        <div class="glass stat-card ac">
-          <div class="stat-value">Premium-Produkte</div>
-          <div class="stat-label">Hochwertige Lösungen für dauerhaften Schutz</div>
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:16px;">
+          <div style="font-size:48px;">&#11088;</div>
+          <h4>Premium-Produkte</h4>
+          <p>Hochwertige Lösungen für dauerhaften Schutz</p>
         </div>
-        <div class="glass stat-card ac">
-          <div class="stat-value">Vertrauen</div>
-          <div class="stat-label">Marke mit Geschichte — bekannt, bewährt, verlässlich</div>
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:16px;">
+          <div style="font-size:48px;">&#129309;</div>
+          <h4>Vertrauen</h4>
+          <p>Marke mit Geschichte — bekannt, bewährt, verlässlich</p>
         </div>
       </div>
     </div>
 
     <!-- SLIDE 5: Zwei Wege Ein Ziel -->
     <div class="slide">
-      <div class="slide-title ac">Zwei Wege. Ein Ziel.</div>
-      <div class="grid-2" style="height:calc(100% - 200px);">
-        <div class="glass tall-card ac">
-          <div class="card-icon">🏠</div>
-          <div class="card-tag">DIY</div>
-          <div class="card-desc">Für Heimwerker &amp; Selbermacher</div>
-          <ul>
-            <li>Einfache Anwendung</li>
-            <li>Klare Anleitungen</li>
-            <li>Sichtbare Ergebnisse</li>
+      <h2 class="ac" style="margin-bottom:40px;">Zwei Wege. Ein Ziel.</h2>
+      <div class="flex-row" style="flex:1;margin-bottom:32px;">
+        <div class="glass flex-1 ac" style="display:flex;flex-direction:column;gap:20px;">
+          <div style="font-size:56px;">&#127968;</div>
+          <h3 style="color:var(--lime);">DIY</h3>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;">
+            <li style="color:rgba(255,255,255,0.8);font-size:20px;">&#10003; Einfache Anwendung</li>
+            <li style="color:rgba(255,255,255,0.8);font-size:20px;">&#10003; Klare Anleitungen</li>
+            <li style="color:rgba(255,255,255,0.8);font-size:20px;">&#10003; Sichtbare Ergebnisse</li>
           </ul>
         </div>
-        <div class="glass tall-card ac">
-          <div class="card-icon">🔧</div>
-          <div class="card-tag">FACHBETRIEB</div>
-          <div class="card-desc">Für Profis &amp; Handwerker</div>
-          <ul>
-            <li>Technische Tiefe</li>
-            <li>Systemlösungen</li>
-            <li>Verlässliche Partner</li>
+        <div class="glass flex-1 ac" style="display:flex;flex-direction:column;gap:20px;">
+          <div style="font-size:56px;">&#128295;</div>
+          <h3 style="color:var(--pure-green);">FACHBETRIEB</h3>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;">
+            <li style="color:rgba(255,255,255,0.8);font-size:20px;">&#10003; Technische Tiefe</li>
+            <li style="color:rgba(255,255,255,0.8);font-size:20px;">&#10003; Systemlösungen</li>
+            <li style="color:rgba(255,255,255,0.8);font-size:20px;">&#10003; Verlässliche Partner</li>
           </ul>
         </div>
       </div>
@@ -652,278 +252,270 @@
     </div>
 
     <!-- SLIDE 6: Divider 02 -->
-    <div class="slide" style="display:flex;flex-direction:column;justify-content:center;">
-      <div class="divider-bg-num">02</div>
-      <div class="divider-label ac">TEIL 02</div>
-      <div class="divider-title ac">Strategische Leitidee</div>
-      <div class="divider-subtitle ac">Das Fundament unserer Markenarbeit</div>
+    <div class="slide" style="justify-content:center;">
+      <div class="bg-number">02</div>
+      <div class="label ac">TEIL 02</div>
+      <h2 class="ac" style="font-size:80px;margin-bottom:24px;">Strategische Leitidee</h2>
+      <p class="ac" style="font-size:28px;color:rgba(255,255,255,0.6);">Das Fundament unserer Markenarbeit</p>
     </div>
 
-    <!-- SLIDE 7: BUILD / KEEP / MAINTAIN -->
+    <!-- SLIDE 7: Die strategische Leitidee -->
     <div class="slide">
-      <div class="slide-title ac">Die strategische Leitidee</div>
-      <div class="grid-3" style="height:calc(100% - 200px);">
-        <div class="glass bkm-card ac">
-          <div class="bkm-card-accent lime">BUILD</div>
-          <div class="bkm-card-desc">Neue Kunden gewinnen &amp; Marke aufbauen</div>
+      <h2 class="ac" style="margin-bottom:48px;">Die strategische Leitidee</h2>
+      <div class="grid-3" style="flex:1;margin-bottom:32px;">
+        <div class="glass ac lime-bg" style="display:flex;flex-direction:column;gap:16px;">
+          <h3 style="font-size:40px;color:var(--deep-green-2);">BUILD</h3>
+          <p style="color:var(--deep-green-2);opacity:0.8;">Wir bauen Vertrauen auf. Schritt für Schritt, Produkt für Produkt.</p>
         </div>
-        <div class="glass bkm-card ac">
-          <div class="bkm-card-accent green">KEEP</div>
-          <div class="bkm-card-desc">Bestehende Kunden halten &amp; Loyalität stärken</div>
+        <div class="glass ac green-bg" style="display:flex;flex-direction:column;gap:16px;">
+          <h3 style="font-size:40px;">KEEP</h3>
+          <p style="opacity:0.85;">Wir halten, was wir versprechen. Dauerhaft und zuverlässig.</p>
         </div>
-        <div class="glass bkm-card ac">
-          <div class="bkm-card-accent white">MAINTAIN</div>
-          <div class="bkm-card-desc">Qualität sichern &amp; Versprechen einhalten</div>
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:16px;">
+          <h3 style="font-size:40px;">MAINTAIN</h3>
+          <p>Wir pflegen Beziehungen — zu Kunden, zu Produkten, zu Qualität.</p>
         </div>
       </div>
-      <div class="bkm-tagline ac">Drei Dimensionen. Eine Richtung. Dauerhafter Schutz.</div>
+      <div class="callout ac">Drei Dimensionen. Eine Richtung. Dauerhafter Schutz.</div>
     </div>
 
     <!-- SLIDE 8: Divider 03 -->
-    <div class="slide" style="display:flex;flex-direction:column;justify-content:center;">
-      <div class="divider-bg-num">03</div>
-      <div class="divider-label ac">TEIL 03</div>
-      <div class="divider-title ac">Manifest</div>
-      <div class="divider-subtitle ac">Wofür BKM MANNESMANN steht</div>
+    <div class="slide" style="justify-content:center;">
+      <div class="bg-number">03</div>
+      <div class="label ac">TEIL 03</div>
+      <h2 class="ac" style="font-size:80px;margin-bottom:24px;">Manifest</h2>
+      <p class="ac" style="font-size:28px;color:rgba(255,255,255,0.6);">Wofür BKM MANNESMANN steht</p>
     </div>
 
     <!-- SLIDE 9: Manifest Text -->
-    <div class="slide" style="display:flex;flex-direction:column;justify-content:center;">
-      <div class="slide-title ac">Wofür BKM MANNESMANN steht</div>
-      <div class="manifest-text ac">
-        Wir glauben, dass ein trockenes Zuhause <span class="hl">kein Luxus</span> ist — sondern <span class="hl">ein Grundrecht</span>. Seit über 70 Jahren schützen wir Gebäude vor Feuchtigkeit. Mit Produkten, die <span class="hl">halten, was sie versprechen</span>. Für Menschen, die selbst anpacken — und für Profis, die auf uns zählen.
+    <div class="slide">
+      <h2 class="ac" style="margin-bottom:48px;">Wofür BKM MANNESMANN steht</h2>
+      <div class="glass ac" style="flex:1;display:flex;align-items:center;">
+        <p style="font-size:26px;line-height:1.8;color:rgba(255,255,255,0.9);">
+          Feuchtigkeitsschutz ist <span class="lime" style="font-weight:700;">kein Luxus</span> — er ist
+          <span class="lime" style="font-weight:700;">ein Grundrecht</span> für jeden, der ein Gebäude besitzt oder bewohnt.
+          Wir bei BKM MANNESMANN wissen: Ein feuchtes Fundament ist kein Schicksal.
+          Es ist ein lösbares Problem. Unsere Produkte müssen
+          <span class="lime" style="font-weight:700;">halten, was sie versprechen</span> —
+          nicht nur heute, sondern für Jahrzehnte.
+          Deshalb entwickeln wir Lösungen, die wirklich funktionieren. Für Profis. Für Heimwerker. Für alle,
+          die ihr Zuhause schützen wollen.
+        </p>
       </div>
     </div>
 
-    <!-- SLIDE 10: Divider 05 -->
-    <div class="slide" style="display:flex;flex-direction:column;justify-content:center;">
-      <div class="divider-bg-num">05</div>
-      <div class="divider-label ac">TEIL 05</div>
-      <div class="divider-title ac">Kernwerte</div>
-      <div class="divider-subtitle ac">Die 7 Säulen unserer Marke</div>
+    <!-- SLIDE 10: Divider 05 (Kernwerte) -->
+    <div class="slide" style="justify-content:center;">
+      <div class="bg-number">05</div>
+      <div class="label ac">TEIL 05</div>
+      <h2 class="ac" style="font-size:80px;margin-bottom:24px;">Kernwerte</h2>
+      <p class="ac" style="font-size:28px;color:rgba(255,255,255,0.6);">Die 7 Säulen unserer Marke</p>
     </div>
 
     <!-- SLIDE 11: 7 Kernwerte Overview -->
     <div class="slide">
-      <div class="slide-title ac">Die 7 Kernwerte</div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;height:calc(100% - 140px);">
-        <div class="glass val-card ac">
-          <div class="val-num">01</div>
-          <div class="val-title">Orientierung</div>
-          <div class="val-desc">Wir führen, nicht verwirren</div>
+      <h2 class="ac" style="margin-bottom:36px;">Die 7 Kernwerte</h2>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;flex:1;">
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:8px;padding:24px;">
+          <span style="color:var(--lime);font-family:'Unbounded',sans-serif;font-weight:900;font-size:13px;">01</span>
+          <h4 style="font-size:18px;">Orientierung</h4>
         </div>
-        <div class="glass val-card ac">
-          <div class="val-num">02</div>
-          <div class="val-title">Spezialisierung</div>
-          <div class="val-desc">Tiefe statt Breite</div>
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:8px;padding:24px;">
+          <span style="color:var(--lime);font-family:'Unbounded',sans-serif;font-weight:900;font-size:13px;">02</span>
+          <h4 style="font-size:18px;">Spezialisierung</h4>
         </div>
-        <div class="glass val-card ac">
-          <div class="val-num">03</div>
-          <div class="val-title">Zwei Wege</div>
-          <div class="val-desc">DIY &amp; Fachbetrieb</div>
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:8px;padding:24px;">
+          <span style="color:var(--lime);font-family:'Unbounded',sans-serif;font-weight:900;font-size:13px;">03</span>
+          <h4 style="font-size:18px;">Zwei Wege</h4>
         </div>
-        <div class="glass val-card ac">
-          <div class="val-num">04</div>
-          <div class="val-title">Bestandsschutz</div>
-          <div class="val-desc">Langfristig denken</div>
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:8px;padding:24px;">
+          <span style="color:var(--lime);font-family:'Unbounded',sans-serif;font-weight:900;font-size:13px;">04</span>
+          <h4 style="font-size:18px;">Bestandsschutz</h4>
         </div>
-        <div class="glass val-card ac">
-          <div class="val-num">05</div>
-          <div class="val-title">Klarheit</div>
-          <div class="val-desc">Einfach. Direkt. Ehrlich.</div>
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:8px;padding:24px;">
+          <span style="color:var(--lime);font-family:'Unbounded',sans-serif;font-weight:900;font-size:13px;">05</span>
+          <h4 style="font-size:18px;">Klarheit</h4>
         </div>
-        <div class="glass val-card ac">
-          <div class="val-num">06</div>
-          <div class="val-title">Qualität</div>
-          <div class="val-desc">Premium ohne Kompromisse</div>
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:8px;padding:24px;">
+          <span style="color:var(--lime);font-family:'Unbounded',sans-serif;font-weight:900;font-size:13px;">06</span>
+          <h4 style="font-size:18px;">Qualität</h4>
         </div>
-        <div class="glass val-card ac">
-          <div class="val-num">07</div>
-          <div class="val-title">Vertrauen</div>
-          <div class="val-desc">70+ Jahre Beweis</div>
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:8px;padding:24px;">
+          <span style="color:var(--lime);font-family:'Unbounded',sans-serif;font-weight:900;font-size:13px;">07</span>
+          <h4 style="font-size:18px;">Vertrauen</h4>
         </div>
-        <div class="glass val-card ac" style="background:rgba(180,231,23,0.08);border-color:rgba(180,231,23,0.25);">
-          <div class="val-num" style="font-size:24px;">7 Werte</div>
-          <div class="val-title" style="color:var(--lime);">Ein gemeinsames Fundament</div>
+        <div class="glass ac lime-bg" style="display:flex;flex-direction:column;gap:8px;padding:24px;align-items:center;justify-content:center;text-align:center;">
+          <h4 style="font-size:20px;color:var(--deep-green-2);">7 Werte</h4>
+          <p style="color:var(--deep-green-2);font-size:14px;opacity:0.8;">Ein gemeinsames Fundament</p>
         </div>
       </div>
     </div>
 
     <!-- SLIDE 12: Werte 01-02 -->
     <div class="slide">
-      <div class="slide-title ac">Kernwert 01 &amp; 02</div>
-      <div class="grid-2" style="height:calc(100% - 140px);">
-        <div class="glass detail-card ac">
-          <div class="d-label">01 — ORIENTIERUNG</div>
-          <div class="d-icon">🧭</div>
-          <div class="d-headline">Wir führen, nicht verwirren.</div>
-          <div class="d-body">In einer Welt voller Produkte und Versprechen geben wir klare Orientierung. Unsere Kunden wissen immer: Was brauche ich? Wo finde ich es? Wie wende ich es an?</div>
+      <h2 class="ac" style="margin-bottom:48px;">Kernwert 01 &amp; 02</h2>
+      <div class="grid-2" style="flex:1;">
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:24px;align-items:flex-start;">
+          <span class="label">01 — ORIENTIERUNG</span>
+          <div style="font-size:72px;">&#129517;</div>
+          <h3>Wir führen, nicht verwirren.</h3>
+          <p>Klare Kommunikation, eindeutige Produktwahl, einfache Entscheidungswege — für Profis und Heimwerker.</p>
         </div>
-        <div class="glass detail-card ac">
-          <div class="d-label">02 — SPEZIALISIERUNG</div>
-          <div class="d-icon">🎯</div>
-          <div class="d-headline">Tiefe statt Breite.</div>
-          <div class="d-body">Wir sind keine Generalisten. Wir sind Spezialisten für Feuchtigkeitsschutz — und genau das macht uns stark. Fokus ist unsere Stärke.</div>
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:24px;align-items:flex-start;">
+          <span class="label">02 — SPEZIALISIERUNG</span>
+          <div style="font-size:72px;">&#127919;</div>
+          <h3>Tiefe statt Breite.</h3>
+          <p>Wir sind Spezialisten für Feuchtigkeitsschutz und Abdichtung. Das machen wir besser als alle anderen.</p>
         </div>
       </div>
     </div>
 
     <!-- SLIDE 13: Werte 03-04 -->
     <div class="slide">
-      <div class="slide-title ac">Kernwert 03 &amp; 04</div>
-      <div class="grid-2" style="height:calc(100% - 140px);">
-        <div class="glass detail-card ac">
-          <div class="d-label">03 — ZWEI WEGE</div>
-          <div class="d-icon">🔀</div>
-          <div class="d-headline">DIY &amp; Fachbetrieb — beide gehören zu uns.</div>
-          <div class="d-body">Wir sprechen zwei Welten an — und verstehen beide. Der Heimwerker braucht Vertrauen und Einfachheit. Der Profi braucht Tiefe und Verlässlichkeit. Wir liefern beides.</div>
+      <h2 class="ac" style="margin-bottom:48px;">Kernwert 03 &amp; 04</h2>
+      <div class="grid-2" style="flex:1;">
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:24px;align-items:flex-start;">
+          <span class="label">03 — ZWEI WEGE</span>
+          <div style="font-size:72px;">&#128256;</div>
+          <h3>DIY &amp; Fachbetrieb — beide gehören zu uns.</h3>
+          <p>Wir sprechen beide Sprachen und liefern für beide Welten die passenden Lösungen.</p>
         </div>
-        <div class="glass detail-card ac">
-          <div class="d-label">04 — BESTANDSSCHUTZ</div>
-          <div class="d-icon">🛡️</div>
-          <div class="d-headline">Langfristig denken. Nachhaltig schützen.</div>
-          <div class="d-body">Unsere Produkte sind nicht für heute — sie sind für die nächsten Jahrzehnte. Bestandsschutz ist kein Versprechen. Es ist unser Anspruch.</div>
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:24px;align-items:flex-start;">
+          <span class="label">04 — BESTANDSSCHUTZ</span>
+          <div style="font-size:72px;">&#128737;</div>
+          <h3>Langfristig denken. Nachhaltig schützen.</h3>
+          <p>Wir denken in Jahrzehnten, nicht in Quartalen. Echter Schutz hält ein Leben lang.</p>
         </div>
       </div>
     </div>
 
     <!-- SLIDE 14: Werte 05-07 -->
     <div class="slide">
-      <div class="slide-title ac">Kernwerte 05, 06 &amp; 07</div>
-      <div class="grid-3" style="height:calc(100% - 140px);">
-        <div class="glass detail-card ac">
-          <div class="d-label">05 — KLARHEIT</div>
-          <div class="d-icon">💡</div>
-          <div class="d-headline">Einfach. Direkt. Ehrlich.</div>
-          <div class="d-body">Keine Fachsprache wo sie nicht nötig ist. Keine leeren Versprechen. Nur klare Aussagen, die halten.</div>
+      <h2 class="ac" style="margin-bottom:48px;">Kernwerte 05, 06 &amp; 07</h2>
+      <div class="grid-3" style="flex:1;">
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:24px;align-items:flex-start;">
+          <span class="label">05 — KLARHEIT</span>
+          <div style="font-size:72px;">&#128161;</div>
+          <h3>Kein Fachjargon. Keine Verwirrung.</h3>
+          <p>Wir sagen, was wir meinen — verständlich, direkt, auf den Punkt.</p>
         </div>
-        <div class="glass detail-card ac">
-          <div class="d-label">06 — QUALITÄT</div>
-          <div class="d-icon">⭐</div>
-          <div class="d-headline">Premium ohne Kompromisse.</div>
-          <div class="d-body">Jedes Produkt trägt die Verantwortung unserer 70-jährigen Geschichte. Qualität ist nicht optional — sie ist unser Standard.</div>
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:24px;align-items:flex-start;">
+          <span class="label">06 — QUALITÄT</span>
+          <div style="font-size:72px;">&#11088;</div>
+          <h3>Kein Kompromiss beim Schutz.</h3>
+          <p>Unsere Produkte werden entwickelt, um dauerhaft zu funktionieren — nicht um kurzfristig zu verkaufen.</p>
         </div>
-        <div class="glass detail-card ac">
-          <div class="d-label">07 — VERTRAUEN</div>
-          <div class="d-icon">🤝</div>
-          <div class="d-headline">70+ Jahre Beweis.</div>
-          <div class="d-body">Vertrauen entsteht nicht durch Worte — sondern durch Jahrzehnte gelebter Qualität. Wir haben diesen Beweis erbracht.</div>
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:24px;align-items:flex-start;">
+          <span class="label">07 — VERTRAUEN</span>
+          <div style="font-size:72px;">&#129309;</div>
+          <h3>Marke mit Geschichte.</h3>
+          <p>Über 70 Jahre Erfahrung machen uns zu einem Partner, dem man vertrauen kann.</p>
         </div>
       </div>
     </div>
 
-    <!-- SLIDE 15: Divider 06 -->
-    <div class="slide" style="display:flex;flex-direction:column;justify-content:center;">
-      <div class="divider-bg-num">06</div>
-      <div class="divider-label ac">TEIL 06 / 07</div>
-      <div class="divider-title ac">Vision &amp; Mission</div>
-      <div class="divider-subtitle ac">Wo wir hinwollen — und wie wir dorthin kommen</div>
+    <!-- SLIDE 15: Divider 06/07 -->
+    <div class="slide" style="justify-content:center;">
+      <div class="bg-number">06</div>
+      <div class="label ac">TEIL 06 / 07</div>
+      <h2 class="ac" style="font-size:80px;margin-bottom:24px;">Vision &amp; Mission</h2>
+      <p class="ac" style="font-size:28px;color:rgba(255,255,255,0.6);">Wo wir hinwollen — und wie wir dorthin kommen</p>
     </div>
 
     <!-- SLIDE 16: Vision & Mission -->
     <div class="slide">
-      <div class="slide-title ac">Vision &amp; Mission</div>
-      <div class="grid-2" style="height:calc(100% - 140px);">
-        <div class="glass vm-card ac">
-          <div class="vm-icon">🔭</div>
-          <div class="vm-label">VISION</div>
-          <div class="vm-text">Die erste Wahl für dauerhaften Feuchtigkeitsschutz — für jeden, der baut, schützt oder erhält.</div>
-          <div class="vm-sub">Marktführer im Feuchtigkeitsschutz für DIY &amp; Fachbetrieb in der DACH-Region</div>
+      <h2 class="ac" style="margin-bottom:48px;">Vision &amp; Mission</h2>
+      <div class="grid-2" style="flex:1;">
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:24px;">
+          <div style="display:flex;align-items:center;gap:16px;">
+            <span style="font-size:48px;">&#128301;</span>
+            <span class="label" style="font-size:20px;margin:0;">VISION</span>
+          </div>
+          <h3 style="font-size:28px;line-height:1.4;">Die erste Adresse für dauerhaften Feuchtigkeitsschutz in Deutschland — für Profis und Heimwerker gleichermaßen.</h3>
+          <p>Eine Welt, in der kein Gebäude an Feuchtigkeit leidet, weil die richtigen Lösungen für jeden zugänglich sind.</p>
         </div>
-        <div class="glass vm-card ac">
-          <div class="vm-icon">🎯</div>
-          <div class="vm-label">MISSION</div>
-          <div class="vm-text">Wir entwickeln und liefern hochwertige Feuchtigkeitsschutzlösungen — verständlich für Heimwerker, verlässlich für Profis.</div>
-          <div class="vm-sub">Mit 70+ Jahren Expertise — heute und für die nächsten Generationen</div>
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:24px;">
+          <div style="display:flex;align-items:center;gap:16px;">
+            <span style="font-size:48px;">&#127919;</span>
+            <span class="label" style="font-size:20px;margin:0;">MISSION</span>
+          </div>
+          <h3 style="font-size:28px;line-height:1.4;">Wir entwickeln und liefern hochwertige Abdichtungslösungen, die wirklich halten.</h3>
+          <p>Mit klarer Kommunikation, technischer Expertise und echtem Kundennutzen — für DIY und Fachbetrieb.</p>
         </div>
       </div>
     </div>
 
     <!-- SLIDE 17: Botschaften & Claims -->
     <div class="slide">
-      <div class="slide-title ac">Botschaften &amp; Claims</div>
-      <div style="display:flex;flex-direction:column;">
-        <div class="claim-row ac">
-          <div class="claim-tag">HAUPTCLAIM</div>
-          <div class="claim-text">Du musst Feuchtigkeit nicht akzeptieren.</div>
+      <h2 class="ac" style="margin-bottom:40px;">Botschaften &amp; Claims</h2>
+      <div style="flex:1;display:flex;flex-direction:column;">
+        <div class="table-row ac">
+          <span class="table-key">HAUPTCLAIM</span>
+          <span class="table-val" style="font-size:24px;color:var(--lime);font-weight:700;">Du musst Feuchtigkeit nicht akzeptieren.</span>
         </div>
-        <div class="claim-row ac">
-          <div class="claim-tag">DIY-CLAIM</div>
-          <div class="claim-text">Mach es selbst. Mach es richtig. Mit BKM MANNESMANN.</div>
+        <div class="table-row ac">
+          <span class="table-key">DIY-CLAIM</span>
+          <span class="table-val">Selbst machen. Richtig machen. BKM MANNESMANN.</span>
         </div>
-        <div class="claim-row ac">
-          <div class="claim-tag">FACHBETRIEB-CLAIM</div>
-          <div class="claim-text">Für Profis, die auf Qualität zählen.</div>
+        <div class="table-row ac">
+          <span class="table-key">FACHBETRIEB-CLAIM</span>
+          <span class="table-val">Der Partner, dem Profis vertrauen.</span>
         </div>
-        <div class="claim-row ac">
-          <div class="claim-tag">VERTRAUEN</div>
-          <div class="claim-text">70 Jahre. Ein Versprechen. Dauerhafter Schutz.</div>
+        <div class="table-row ac">
+          <span class="table-key">VERTRAUEN</span>
+          <span class="table-val">70+ Jahre. Bewährt. Verlässlich.</span>
         </div>
-        <div class="claim-row ac">
-          <div class="claim-tag">TONALITÄT</div>
-          <div class="claim-text">Direkt. Kompetent. Menschlich.</div>
+        <div class="table-row ac">
+          <span class="table-key">TONALITÄT</span>
+          <span class="table-val">Direkt · Kompetent · Lösungsorientiert · Ehrlich</span>
         </div>
       </div>
     </div>
 
     <!-- SLIDE 18: Sprache schärfen -->
     <div class="slide">
-      <div class="slide-title ac">Sprache schärfen</div>
-      <div class="slide-subtitle ac">Vorher / Nachher</div>
-      <div style="display:flex;flex-direction:column;gap:24px;">
-        <div class="ba-row ac">
-          <div class="ba-box before">
-            <div class="ba-label vr">VORHER</div>
-            <div class="ba-text">Unser Produkt bietet guten Schutz</div>
-          </div>
-          <div class="ba-arrow">→</div>
-          <div class="ba-box after">
-            <div class="ba-label nh">NACHHER</div>
-            <div class="ba-text">Hält dicht. Für Jahrzehnte.</div>
-          </div>
+      <h2 class="ac" style="margin-bottom:12px;">Sprache schärfen</h2>
+      <p class="ac" style="margin-bottom:40px;font-size:22px;">Vorher / Nachher</p>
+      <div style="display:flex;flex-direction:column;gap:24px;flex:1;">
+        <div class="ba-pair ac">
+          <span class="ba-before">Unser Sortiment umfasst vielfältige Produkte zur Abdichtung von Feuchtigkeit.</span>
+          <span class="ba-arrow">&#8594;</span>
+          <span class="ba-after">Wir stoppen Feuchtigkeit. Dauerhaft.</span>
         </div>
-        <div class="ba-row ac">
-          <div class="ba-box before">
-            <div class="ba-label vr">VORHER</div>
-            <div class="ba-text">Geeignet für verschiedene Anwendungen</div>
-          </div>
-          <div class="ba-arrow">→</div>
-          <div class="ba-box after">
-            <div class="ba-label nh">NACHHER</div>
-            <div class="ba-text">Für jeden, der baut, schützt oder erhält.</div>
-          </div>
+        <div class="ba-pair ac">
+          <span class="ba-before">Für Heimwerker bieten wir einfach anwendbare Lösungen an.</span>
+          <span class="ba-arrow">&#8594;</span>
+          <span class="ba-after">Selbst machen? Wir zeigen wie. Schritt für Schritt.</span>
         </div>
-        <div class="ba-row ac">
-          <div class="ba-box before">
-            <div class="ba-label vr">VORHER</div>
-            <div class="ba-text">Hochwertige Materialien</div>
-          </div>
-          <div class="ba-arrow">→</div>
-          <div class="ba-box after">
-            <div class="ba-label nh">NACHHER</div>
-            <div class="ba-text">70 Jahre Qualität — kein Zufall.</div>
-          </div>
+        <div class="ba-pair ac">
+          <span class="ba-before">Qualitativ hochwertige Abdichtungssysteme für den Fachbetrieb.</span>
+          <span class="ba-arrow">&#8594;</span>
+          <span class="ba-after">Für Profis, die keine Kompromisse eingehen.</span>
         </div>
       </div>
     </div>
 
     <!-- SLIDE 19: Wann welcher Weg -->
     <div class="slide">
-      <div class="slide-title ac">Wann welcher Weg?</div>
-      <div class="grid-2" style="height:calc(100% - 260px);">
-        <div class="glass crit-col lime-col ac">
-          <div class="crit-heading">🏠 DIY — Wenn...</div>
-          <div class="crit-item">...der Schaden sichtbar &amp; lokal begrenzt ist</div>
-          <div class="crit-item">...kein Statikproblem vorliegt</div>
-          <div class="crit-item">...erste Maßnahmen schnell nötig sind</div>
-          <div class="crit-item">...Budget begrenzt ist</div>
+      <h2 class="ac" style="margin-bottom:40px;">Wann welcher Weg?</h2>
+      <div class="grid-2" style="margin-bottom:32px;">
+        <div class="glass ac" style="border-top:4px solid var(--lime);">
+          <h3 style="color:var(--lime);margin-bottom:20px;">&#127968; DIY</h3>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;">
+            <li style="color:rgba(255,255,255,0.8);font-size:18px;">&#10003; Kleinere Feuchtigkeitsschäden</li>
+            <li style="color:rgba(255,255,255,0.8);font-size:18px;">&#10003; Präventive Maßnahmen</li>
+            <li style="color:rgba(255,255,255,0.8);font-size:18px;">&#10003; Klare Schadensbilder</li>
+            <li style="color:rgba(255,255,255,0.8);font-size:18px;">&#10003; Budget-bewusste Projekte</li>
+          </ul>
         </div>
-        <div class="glass crit-col green-col ac">
-          <div class="crit-heading">🔧 FACHBETRIEB — Wenn...</div>
-          <div class="crit-item">...der Schaden komplex oder strukturell ist</div>
-          <div class="crit-item">...Garantie &amp; Haftung wichtig sind</div>
-          <div class="crit-item">...ein Gutachten gefordert wird</div>
-          <div class="crit-item">...langfristige Systeme gefragt sind</div>
+        <div class="glass ac" style="border-top:4px solid var(--pure-green);">
+          <h3 style="color:var(--pure-green);margin-bottom:20px;">&#128295; Fachbetrieb</h3>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;">
+            <li style="color:rgba(255,255,255,0.8);font-size:18px;">&#10003; Komplexe Schadensfälle</li>
+            <li style="color:rgba(255,255,255,0.8);font-size:18px;">&#10003; Statisch relevante Bereiche</li>
+            <li style="color:rgba(255,255,255,0.8);font-size:18px;">&#10003; Großprojekte &amp; Gewerbe</li>
+            <li style="color:rgba(255,255,255,0.8);font-size:18px;">&#10003; Haftungsrelevante Arbeiten</li>
+          </ul>
         </div>
       </div>
       <div class="callout ac">Im Zweifel: Lieber einmal zu viel den Profi fragen.</div>
@@ -931,169 +523,142 @@
 
     <!-- SLIDE 20: Das Fundament besteht -->
     <div class="slide">
-      <div class="slide-title ac">Das Fundament besteht</div>
-      <div class="slide-subtitle ac">Was wir jetzt haben</div>
-      <div class="grid-2" style="height:calc(100% - 220px);">
-        <div class="glass check-card ac">
-          <div class="check-mark">✓</div>
-          <div>
-            <div class="check-title">Klare Positionierung</div>
-            <div class="check-desc">BKM MANNESMANN als Premium-Spezialist für Feuchtigkeitsschutz</div>
-          </div>
+      <h2 class="ac" style="margin-bottom:12px;">Das Fundament besteht</h2>
+      <p class="ac" style="margin-bottom:40px;font-size:22px;">Was wir jetzt haben</p>
+      <div class="grid-3" style="flex:1;">
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:16px;">
+          <div class="check-item">Klare Positionierung</div>
+          <p style="font-size:18px;">Wir wissen, wer wir sind und wofür wir stehen.</p>
         </div>
-        <div class="glass check-card ac">
-          <div class="check-mark">✓</div>
-          <div>
-            <div class="check-title">Definierte Zielgruppen</div>
-            <div class="check-desc">DIY &amp; Fachbetrieb — beide verstanden, beide adressiert</div>
-          </div>
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:16px;">
+          <div class="check-item">Definierte Zielgruppen</div>
+          <p style="font-size:18px;">DIY und Fachbetrieb — beide klar adressiert.</p>
         </div>
-        <div class="glass check-card ac">
-          <div class="check-mark">✓</div>
-          <div>
-            <div class="check-title">7 Kernwerte</div>
-            <div class="check-desc">Als Leitplanken für Kommunikation &amp; Produktentwicklung</div>
-          </div>
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:16px;">
+          <div class="check-item">7 Kernwerte</div>
+          <p style="font-size:18px;">Das Fundament unserer Markenidentität.</p>
         </div>
-        <div class="glass check-card ac">
-          <div class="check-mark">✓</div>
-          <div>
-            <div class="check-title">Manifest</div>
-            <div class="check-desc">Das emotionale Fundament der Marke</div>
-          </div>
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:16px;">
+          <div class="check-item">Manifest</div>
+          <p style="font-size:18px;">Unsere Haltung, klar und unmissverständlich.</p>
         </div>
-        <div class="glass check-card ac">
-          <div class="check-mark">✓</div>
-          <div>
-            <div class="check-title">Vision &amp; Mission</div>
-            <div class="check-desc">Klare Richtung für die nächsten Jahre</div>
-          </div>
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:16px;">
+          <div class="check-item">Vision &amp; Mission</div>
+          <p style="font-size:18px;">Richtung und Zweck definiert.</p>
         </div>
-        <div class="glass check-card ac">
-          <div class="check-mark">✓</div>
-          <div>
-            <div class="check-title">Claims &amp; Sprache</div>
-            <div class="check-desc">Scharf, direkt, unverwechselbar</div>
-          </div>
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:16px;">
+          <div class="check-item">Claims &amp; Sprache</div>
+          <p style="font-size:18px;">Klare Botschaften für jede Zielgruppe.</p>
         </div>
       </div>
     </div>
 
     <!-- SLIDE 21: BKM auf einen Blick -->
     <div class="slide">
-      <div class="slide-title ac">BKM MANNESMANN — Auf einen Blick</div>
-      <div class="grid-3" style="height:calc(100% - 140px);">
-        <div class="glass sum-card ac">
-          <div class="sum-icon">🏢</div>
-          <div class="sum-tag">WER</div>
-          <div class="sum-text">Premium-Hersteller für Feuchtigkeitsschutz mit 70+ Jahren Erfahrung</div>
+      <h2 class="ac" style="margin-bottom:48px;">BKM MANNESMANN — Auf einen Blick</h2>
+      <div class="grid-3" style="flex:1;">
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:12px;padding:28px;">
+          <div style="font-size:40px;">&#127970;</div>
+          <span class="label" style="margin:0;">WER</span>
+          <p style="font-size:18px;">Spezialist für Feuchtigkeitsschutz mit 70+ Jahren Erfahrung</p>
         </div>
-        <div class="glass sum-card ac">
-          <div class="sum-icon">👥</div>
-          <div class="sum-tag">FÜR WEN</div>
-          <div class="sum-text">DIY-Heimwerker &amp; professionelle Fachbetriebe</div>
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:12px;padding:28px;">
+          <div style="font-size:40px;">&#128101;</div>
+          <span class="label" style="margin:0;">FÜR WEN</span>
+          <p style="font-size:18px;">DIY-Heimwerker &amp; professionelle Fachbetriebe</p>
         </div>
-        <div class="glass sum-card ac">
-          <div class="sum-icon">💡</div>
-          <div class="sum-tag">WAS</div>
-          <div class="sum-text">Hochwertige Abdichtungs- &amp; Feuchtigkeitsschutzlösungen</div>
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:12px;padding:28px;">
+          <div style="font-size:40px;">&#128161;</div>
+          <span class="label" style="margin:0;">WAS</span>
+          <p style="font-size:18px;">Premium-Abdichtungslösungen, die wirklich halten</p>
         </div>
-        <div class="glass sum-card ac">
-          <div class="sum-icon">🎯</div>
-          <div class="sum-tag">WARUM</div>
-          <div class="sum-text">Weil ein trockenes Zuhause kein Luxus ist — sondern ein Grundrecht</div>
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:12px;padding:28px;">
+          <div style="font-size:40px;">&#127919;</div>
+          <span class="label" style="margin:0;">WARUM</span>
+          <p style="font-size:18px;">Weil Feuchtigkeit kein Schicksal ist — sondern ein lösbares Problem</p>
         </div>
-        <div class="glass sum-card ac">
-          <div class="sum-icon">⭐</div>
-          <div class="sum-tag">WIE</div>
-          <div class="sum-text">Mit Fokus, Qualität &amp; 70 Jahren Expertise</div>
+        <div class="glass ac" style="display:flex;flex-direction:column;gap:12px;padding:28px;">
+          <div style="font-size:40px;">&#11088;</div>
+          <span class="label" style="margin:0;">WIE</span>
+          <p style="font-size:18px;">Direkt · Kompetent · Lösungsorientiert · Bewährt</p>
         </div>
-        <div class="glass sum-card ac">
-          <div class="sum-icon">📢</div>
-          <div class="sum-tag">CLAIM</div>
-          <div class="sum-text">Du musst Feuchtigkeit nicht akzeptieren.</div>
+        <div class="glass ac lime-bg" style="display:flex;flex-direction:column;gap:12px;padding:28px;">
+          <div style="font-size:40px;">&#128226;</div>
+          <span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:13px;letter-spacing:0.2em;color:var(--deep-green-2);margin:0;">CLAIM</span>
+          <p style="font-size:18px;color:var(--deep-green-2);font-weight:700;">Du musst Feuchtigkeit nicht akzeptieren.</p>
         </div>
       </div>
     </div>
 
     <!-- SLIDE 22: Closing -->
-    <div class="slide" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
-      <div class="orb" style="width:700px;height:700px;background:var(--lime);top:-200px;right:-200px;animation-duration:10s;opacity:0.2;"></div>
-      <div class="orb" style="width:500px;height:500px;background:var(--pure-green);bottom:-150px;left:-100px;animation-duration:13s;animation-delay:-4s;opacity:0.2;"></div>
-      <div class="closing-quote ac">"Du musst Feuchtigkeit nicht akzeptieren."</div>
-      <div class="closing-attr ac">— BKM MANNESMANN</div>
-      <div class="closing-sub ac">Das Fundament steht. Jetzt bauen wir darauf.</div>
+    <div class="slide">
+      <div class="orb" style="width:500px;height:500px;background:var(--lime);top:-150px;right:-100px;animation-delay:0s"></div>
+      <div class="orb" style="width:350px;height:350px;background:var(--pure-green);bottom:-80px;left:100px;animation-delay:3s"></div>
+      <div class="orb" style="width:250px;height:250px;background:var(--transition-green);top:300px;left:-50px;animation-delay:1.5s"></div>
+      <div style="position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center;align-items:center;height:100%;text-align:center;">
+        <p class="ac" style="font-size:14px;letter-spacing:0.3em;color:var(--lime);font-family:'Unbounded',sans-serif;font-weight:900;margin-bottom:40px;">BKM MANNESMANN</p>
+        <h1 class="ac" style="font-size:80px;max-width:1200px;margin-bottom:32px;line-height:1.1;">
+          &ldquo;Du musst Feuchtigkeit nicht akzeptieren.&rdquo;
+        </h1>
+        <p class="ac" style="font-size:28px;color:rgba(255,255,255,0.6);margin-bottom:64px;">— BKM MANNESMANN</p>
+        <p class="ac" style="font-size:24px;color:rgba(255,255,255,0.8);">Das Fundament steht. Jetzt bauen wir darauf.</p>
+      </div>
     </div>
 
   </div><!-- #stage -->
 </div><!-- #stage-wrapper -->
 
 <div id="nav">
-  <button id="prev">←</button>
+  <button id="prev">&#8592;</button>
   <span id="counter">1 / 22</span>
-  <button id="next">→</button>
+  <button id="next">&#8594;</button>
 </div>
 
 <script>
-  const total = 22;
-  let currentSlide = 0;
   const slides = document.querySelectorAll('.slide');
-  const progressBar = document.getElementById('progress-bar');
-  const counter = document.getElementById('counter');
-
-  function goTo(n) {
-    slides[currentSlide].classList.remove('active');
-    currentSlide = (n + total) % total;
-    const slide = slides[currentSlide];
-    slide.classList.add('active');
-
-    // Reset ac animations
-    const acEls = slide.querySelectorAll('.ac');
-    acEls.forEach(el => {
-      el.style.animation = 'none';
-      el.offsetHeight; // reflow
-      el.style.animation = '';
-    });
-
-    // Update progress
-    const pct = ((currentSlide + 1) / total) * 100;
-    progressBar.style.width = pct + '%';
-    counter.textContent = (currentSlide + 1) + ' / ' + total;
-  }
-
-  document.getElementById('prev').addEventListener('click', () => goTo(currentSlide - 1));
-  document.getElementById('next').addEventListener('click', () => goTo(currentSlide + 1));
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(currentSlide + 1);
-    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   goTo(currentSlide - 1);
-  });
-
-  let touchStartX = 0, touchStartY = 0;
-  document.addEventListener('touchstart', e => {
-    touchStartX = e.touches[0].clientX;
-    touchStartY = e.touches[0].clientY;
-  });
-  document.addEventListener('touchend', e => {
-    const dx = e.changedTouches[0].clientX - touchStartX;
-    const dy = e.changedTouches[0].clientY - touchStartY;
-    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
-      if (dx < 0) goTo(currentSlide + 1);
-      else goTo(currentSlide - 1);
-    }
-  });
+  const total = slides.length;
+  let current = 0;
 
   function scaleStage() {
     const stage = document.getElementById('stage');
-    const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+    const scaleX = window.innerWidth / 1920;
+    const scaleY = window.innerHeight / 1080;
+    const scale = Math.min(scaleX, scaleY);
     stage.style.transform = 'scale(' + scale + ')';
   }
 
+  function goTo(idx) {
+    if (idx < 0) idx = 0;
+    if (idx >= total) idx = total - 1;
+    slides[current].classList.remove('active');
+    current = idx;
+    slides[current].classList.add('active');
+    document.getElementById('counter').textContent = (current + 1) + ' / ' + total;
+    document.getElementById('progress-bar').style.width = ((current + 1) / total * 100) + '%';
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  document.getElementById('next').addEventListener('click', next);
+  document.getElementById('prev').addEventListener('click', prev);
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next();
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prev();
+  });
+
+  let touchStartX = 0;
+  document.addEventListener('touchstart', function(e) { touchStartX = e.touches[0].clientX; });
+  document.addEventListener('touchend', function(e) {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (dx < -50) next();
+    else if (dx > 50) prev();
+  });
+
   window.addEventListener('resize', scaleStage);
   scaleStage();
-
-  // Init progress
-  progressBar.style.width = (1 / total * 100) + '%';
+  goTo(0);
 </script>
 </body>
 </html>
