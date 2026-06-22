@@ -4,7 +4,38 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fachtagung 2027 — Planungstool</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  @font-face {
+    font-family: 'TT Norms Pro';
+    src: url('assets/fonts/TT_Norms_Pro_Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'TT Norms Pro';
+    src: url('assets/fonts/TT_Norms_Pro_Compact_Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Unbounded';
+    src: url('assets/fonts/Unbounded_400.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Unbounded';
+    src: url('assets/fonts/Unbounded_700.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Unbounded';
+    src: url('assets/fonts/Unbounded_900.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+  }
+</style>
 <style>
   :root {
     --primary: #1c4b42;
@@ -25,7 +56,7 @@
     --header-h: 64px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); display: flex; flex-direction: column; min-height: 100vh; }
+  body { font-family: 'TT Norms Pro', system-ui, sans-serif; background: var(--bg); color: var(--text); display: flex; flex-direction: column; min-height: 100vh; }
 
   /* Header */
   header {
@@ -33,7 +64,7 @@
     background: var(--primary); color: white; display: flex; align-items: center;
     padding: 0 24px; gap: 20px; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.2);
   }
-  header h1 { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.02em; flex: 1; }
+  header h1 { font-size: 1rem; font-weight: 700; letter-spacing: 0.08em; flex: 1; font-family: 'Unbounded', sans-serif; text-transform: uppercase; }
   header .badge { background: var(--accent); color: var(--primary); font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
   .progress-wrap { display: flex; align-items: center; gap: 10px; }
   .progress-bar { width: 180px; height: 8px; background: rgba(255,255,255,0.2); border-radius: 4px; overflow: hidden; }
@@ -76,8 +107,8 @@
     cursor: pointer; user-select: none;
   }
   .section-header:hover { background: var(--accent-soft); border-left: 3px solid var(--accent); }
-  .section-num { background: var(--primary); color: white; font-weight: 700; font-size: 0.8rem; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .section-title { font-size: 1rem; font-weight: 600; flex: 1; }
+  .section-num { background: var(--primary); color: white; font-weight: 700; font-size: 0.75rem; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: 'Unbounded', sans-serif; }
+  .section-title { font-size: 0.95rem; font-weight: 700; flex: 1; font-family: 'Unbounded', sans-serif; letter-spacing: 0.02em; }
   .section-progress-mini { font-size: 0.75rem; color: var(--text-muted); }
   .chevron { transition: transform 0.2s; font-size: 1rem; color: var(--text-muted); }
   .section.collapsed .chevron { transform: rotate(-90deg); }
@@ -209,9 +240,9 @@
 <body>
 
 <header>
-  <h1>📋 Fachtagung 2027 — Planungstool</h1>
+  <h1>Fachtagung 2027 — Planungstool</h1>
   <div class="progress-wrap">
-    <span id="savedIndicator" class="saved-indicator">✓ Gespeichert</span>
+    <span id="savedIndicator" class="saved-indicator">Gespeichert</span>
     <div class="progress-bar"><div class="progress-fill" id="globalProgress" style="width:0%"></div></div>
     <span class="progress-pct" id="globalPct">0%</span>
     <span class="badge">2027</span>
@@ -251,10 +282,10 @@ const SECTIONS = [
       <div class="subsection">
         <div class="subsection-title">Gewünschte Wirkung</div>
         <div class="fields-grid">
-          <div class="field"><label>🧠 Denken — Was sollen Teilnehmer anders denken?</label><textarea data-key="s1_denken" placeholder="..."></textarea></div>
-          <div class="field"><label>❤️ Fühlen — Was sollen Teilnehmer fühlen?</label><textarea data-key="s1_fuehlen" placeholder="..."></textarea></div>
-          <div class="field"><label>📚 Wissen — Was sollen Teilnehmer wissen?</label><textarea data-key="s1_wissen" placeholder="..."></textarea></div>
-          <div class="field"><label>🚀 Handeln — Was sollen Teilnehmer tun?</label><textarea data-key="s1_handeln" placeholder="..."></textarea></div>
+          <div class="field"><label>Denken — Was sollen Teilnehmer anders denken?</label><textarea data-key="s1_denken" placeholder="..."></textarea></div>
+          <div class="field"><label>Fühlen — Was sollen Teilnehmer fühlen?</label><textarea data-key="s1_fuehlen" placeholder="..."></textarea></div>
+          <div class="field"><label>Wissen — Was sollen Teilnehmer wissen?</label><textarea data-key="s1_wissen" placeholder="..."></textarea></div>
+          <div class="field"><label>Handeln — Was sollen Teilnehmer tun?</label><textarea data-key="s1_handeln" placeholder="..."></textarea></div>
         </div>
       </div>
       <div class="divider"></div>
@@ -410,10 +441,10 @@ const SECTIONS = [
       ])}</div>
       <div id="agenda-energie" class="tab-content">
         <div class="fields-grid">
-          <div class="field"><label>☀️ Morgen → Strategie</label><textarea data-key="s7_e1" placeholder="Schwerpunkt, Erwartetes Energielevel..."></textarea></div>
-          <div class="field"><label>📈 Vormittag → Input</label><textarea data-key="s7_e2" placeholder="..."></textarea></div>
-          <div class="field"><label>🤝 Nachmittag → Interaktion</label><textarea data-key="s7_e3" placeholder="..."></textarea></div>
-          <div class="field"><label>✨ Ende → Inspiration</label><textarea data-key="s7_e4" placeholder="..."></textarea></div>
+          <div class="field"><label>Morgen — Strategie</label><textarea data-key="s7_e1" placeholder="Schwerpunkt, Erwartetes Energielevel..."></textarea></div>
+          <div class="field"><label>Vormittag — Input</label><textarea data-key="s7_e2" placeholder="..."></textarea></div>
+          <div class="field"><label>Nachmittag — Interaktion</label><textarea data-key="s7_e3" placeholder="..."></textarea></div>
+          <div class="field"><label>Ende — Inspiration</label><textarea data-key="s7_e4" placeholder="..."></textarea></div>
         </div>
       </div>`
   },
@@ -569,7 +600,7 @@ const SECTIONS = [
       <div class="risk-grid">
         ${['Speaker-Ausfall','Technikprobleme','Wetter','Reiseprobleme','Geringe Teilnahme','Sonstige'].map((r,i) => `
           <div class="risk-card">
-            <div class="risk-title">⚠️ ${r}</div>
+            <div class="risk-title">${r}</div>
             <div class="field" style="margin-bottom:8px"><label>Eintrittswahrscheinlichkeit</label>
               <select data-key="s15_prob${i}">
                 <option value="">— wählen —</option>
@@ -834,7 +865,7 @@ function buildUI() {
   const main = document.getElementById('main');
 
   sidebar.innerHTML = SECTIONS.map(s => `
-    <a class="nav-item" href="#${s.id}" id="nav_${s.id}">
+    <a class="nav-item" href="#${s.id}" id="nav_${s.id}" onclick="scrollToSection(event,'${s.id}')">
       <span class="nav-num">${s.num}</span>
       <span style="flex:1">${s.title}</span>
       <span class="nav-dot" id="dot_${s.id}"></span>
@@ -881,6 +912,16 @@ function buildUI() {
 
 function toggleSection(id) {
   document.getElementById(id)?.classList.toggle('collapsed');
+}
+
+function scrollToSection(e, id) {
+  e.preventDefault();
+  const el = document.getElementById(id);
+  if (!el) return;
+  // Ensure section is expanded
+  el.classList.remove('collapsed');
+  const top = el.getBoundingClientRect().top + window.scrollY - parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) - 16;
+  window.scrollTo({ top, behavior: 'smooth' });
 }
 
 function loadAllValues() {
