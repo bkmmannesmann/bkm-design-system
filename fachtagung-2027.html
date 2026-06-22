@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fachtagung 2027 — Planungstool</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --primary-light: #2a5285;
+    --accent: #0ea5e9;
+    --accent-soft: #e0f2fe;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --bg: #f0f4f8;
+    --surface: #ffffff;
+    --surface2: #f8fafc;
+    --border: #e2e8f0;
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --sidebar-w: 280px;
+    --header-h: 64px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); display: flex; flex-direction: column; min-height: 100vh; }
+
+  /* Header */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; height: var(--header-h);
+    background: var(--primary); color: white; display: flex; align-items: center;
+    padding: 0 24px; gap: 20px; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  }
+  header h1 { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.02em; flex: 1; }
+  header .badge { background: var(--accent); color: white; font-size: 0.7rem; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
+  .progress-wrap { display: flex; align-items: center; gap: 10px; }
+  .progress-bar { width: 180px; height: 8px; background: rgba(255,255,255,0.2); border-radius: 4px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); border-radius: 4px; transition: width 0.4s ease; }
+  .progress-pct { font-size: 0.8rem; font-weight: 600; min-width: 36px; }
+
+  /* Layout */
+  .layout { display: flex; margin-top: var(--header-h); min-height: calc(100vh - var(--header-h)); }
+
+  /* Sidebar */
+  aside {
+    width: var(--sidebar-w); background: var(--primary); color: white;
+    position: fixed; top: var(--header-h); left: 0; bottom: 0;
+    overflow-y: auto; padding: 16px 0; z-index: 50;
+  }
+  aside::-webkit-scrollbar { width: 4px; }
+  aside::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 2px; }
+  .nav-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 20px; cursor: pointer; font-size: 0.82rem;
+    transition: background 0.15s; border-left: 3px solid transparent;
+    text-decoration: none; color: rgba(255,255,255,0.75);
+  }
+  .nav-item:hover { background: rgba(255,255,255,0.08); color: white; }
+  .nav-item.active { background: rgba(14,165,233,0.2); border-left-color: var(--accent); color: white; }
+  .nav-num { font-size: 0.7rem; font-weight: 700; background: rgba(255,255,255,0.15); border-radius: 4px; padding: 2px 6px; min-width: 26px; text-align: center; }
+  .nav-progress { margin-left: auto; font-size: 0.7rem; color: rgba(255,255,255,0.5); }
+  .nav-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.2); flex-shrink: 0; }
+  .nav-dot.done { background: var(--success); }
+  .nav-dot.partial { background: var(--warning); }
+
+  /* Main */
+  main { margin-left: var(--sidebar-w); flex: 1; padding: 32px 40px; max-width: 1100px; }
+
+  /* Section */
+  .section { margin-bottom: 40px; background: var(--surface); border-radius: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); overflow: hidden; }
+  .section-header {
+    display: flex; align-items: center; gap: 14px;
+    padding: 20px 24px; background: var(--surface2); border-bottom: 1px solid var(--border);
+    cursor: pointer; user-select: none;
+  }
+  .section-header:hover { background: var(--accent-soft); }
+  .section-num { background: var(--primary); color: white; font-weight: 700; font-size: 0.8rem; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .section-title { font-size: 1rem; font-weight: 600; flex: 1; }
+  .section-progress-mini { font-size: 0.75rem; color: var(--text-muted); }
+  .chevron { transition: transform 0.2s; font-size: 1rem; color: var(--text-muted); }
+  .section.collapsed .chevron { transform: rotate(-90deg); }
+  .section-body { padding: 24px; display: block; }
+  .section.collapsed .section-body { display: none; }
+
+  /* Subsection */
+  .subsection { margin-bottom: 20px; }
+  .subsection-title { font-size: 0.85rem; font-weight: 600; color: var(--primary-light); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* Items grid */
+  .items-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 8px; }
+  .check-item { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: var(--surface2); border-radius: 8px; border: 1px solid var(--border); transition: border-color 0.15s; }
+  .check-item:hover { border-color: var(--accent); }
+  .check-item input[type=checkbox] { width: 16px; height: 16px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; }
+  .check-item label { font-size: 0.85rem; cursor: pointer; flex: 1; }
+  .check-item.checked { background: #f0fdf4; border-color: var(--success); }
+  .check-item.checked label { color: var(--success); text-decoration: line-through; text-decoration-color: var(--success); }
+
+  /* Form fields */
+  .field-group { display: flex; flex-direction: column; gap: 12px; }
+  .field { display: flex; flex-direction: column; gap: 4px; }
+  .field label { font-size: 0.8rem; font-weight: 500; color: var(--text-muted); }
+  .field input, .field textarea, .field select {
+    border: 1px solid var(--border); border-radius: 8px; padding: 9px 12px;
+    font-size: 0.88rem; font-family: inherit; background: var(--surface2);
+    color: var(--text); transition: border-color 0.15s;
+    width: 100%;
+  }
+  .field input:focus, .field textarea:focus, .field select:focus { outline: none; border-color: var(--accent); background: white; }
+  .field textarea { resize: vertical; min-height: 80px; }
+  .fields-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+
+  /* Message boxes */
+  .cta-box { background: var(--accent-soft); border: 1px solid #bae6fd; border-radius: 10px; padding: 16px; margin-top: 8px; }
+  .cta-box .field textarea { background: white; }
+
+  /* Speaker cards */
+  .speaker-list { display: flex; flex-direction: column; gap: 16px; }
+  .speaker-card { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .speaker-card-header { background: var(--surface2); padding: 12px 16px; display: flex; align-items: center; gap: 10px; cursor: pointer; }
+  .speaker-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; }
+  .speaker-name { font-weight: 600; font-size: 0.9rem; flex: 1; }
+  .speaker-type { font-size: 0.72rem; color: white; background: var(--accent); padding: 2px 8px; border-radius: 12px; }
+  .speaker-body { padding: 16px; display: none; }
+  .speaker-card.open .speaker-body { display: block; }
+  .btn { padding: 9px 18px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; border: none; transition: opacity 0.15s; }
+  .btn-primary { background: var(--accent); color: white; }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-danger { background: var(--danger); color: white; font-size: 0.78rem; padding: 6px 12px; }
+  .btn-outline { background: white; color: var(--primary); border: 1px solid var(--border); }
+  .btn-outline:hover { border-color: var(--accent); }
+
+  /* Budget table */
+  .budget-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  .budget-table th { background: var(--primary); color: white; padding: 10px 14px; text-align: left; font-weight: 600; }
+  .budget-table td { padding: 9px 14px; border-bottom: 1px solid var(--border); }
+  .budget-table tr:last-child td { border-bottom: none; }
+  .budget-table tr:hover td { background: var(--surface2); }
+  .budget-table .total-row td { font-weight: 700; background: var(--accent-soft); border-top: 2px solid var(--accent); }
+  .budget-table input { border: 1px solid var(--border); border-radius: 6px; padding: 5px 8px; width: 120px; font-size: 0.85rem; font-family: inherit; text-align: right; }
+  .budget-table input:focus { outline: none; border-color: var(--accent); }
+  .diff-pos { color: var(--success); font-weight: 600; }
+  .diff-neg { color: var(--danger); font-weight: 600; }
+
+  /* Timeline */
+  .timeline { position: relative; }
+  .timeline::before { content: ''; position: absolute; left: 90px; top: 0; bottom: 0; width: 2px; background: var(--border); }
+  .tl-item { display: flex; gap: 20px; margin-bottom: 12px; align-items: flex-start; }
+  .tl-time { width: 80px; text-align: right; font-size: 0.82rem; font-weight: 600; color: var(--accent); padding-top: 8px; flex-shrink: 0; }
+  .tl-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 2px solid white; box-shadow: 0 0 0 2px var(--accent); flex-shrink: 0; margin-top: 10px; position: relative; z-index: 1; }
+  .tl-content { flex: 1; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+  .tl-content input { border: none; background: transparent; font-size: 0.88rem; font-weight: 500; width: 100%; font-family: inherit; color: var(--text); }
+  .tl-content input:focus { outline: none; }
+  .tl-content textarea { border: none; background: transparent; font-size: 0.8rem; color: var(--text-muted); width: 100%; resize: none; font-family: inherit; margin-top: 4px; }
+  .tl-content textarea:focus { outline: none; }
+
+  /* Risiken */
+  .risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+  .risk-card { border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+  .risk-card .risk-title { font-weight: 600; font-size: 0.88rem; margin-bottom: 8px; }
+  .risk-card select { width: 100%; margin-bottom: 8px; }
+
+  /* KPI */
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .kpi-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
+  .kpi-card label { font-size: 0.78rem; color: var(--text-muted); font-weight: 500; display: block; margin-bottom: 6px; }
+  .kpi-card input { border: none; background: transparent; font-size: 1.5rem; font-weight: 700; color: var(--primary); text-align: center; width: 100%; font-family: inherit; }
+  .kpi-card input:focus { outline: none; color: var(--accent); }
+  .kpi-unit { font-size: 0.75rem; color: var(--text-muted); }
+
+  /* Tabs */
+  .tabs { display: flex; gap: 4px; margin-bottom: 20px; }
+  .tab { padding: 8px 18px; border-radius: 8px; font-size: 0.85rem; font-weight: 500; cursor: pointer; border: 1px solid var(--border); background: var(--surface2); color: var(--text-muted); }
+  .tab.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* Dramaturgie */
+  .dramatik-grid { display: flex; flex-direction: column; gap: 12px; }
+  .dramatik-item { display: flex; gap: 14px; align-items: flex-start; }
+  .dramatik-num { background: var(--accent); color: white; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; flex-shrink: 0; }
+  .dramatik-content { flex: 1; }
+
+  /* Print */
+  @media print {
+    aside, header .progress-wrap { display: none; }
+    main { margin-left: 0; }
+    .section.collapsed .section-body { display: block !important; }
+    .section-header { background: none; }
+    .section { box-shadow: none; border: 1px solid #ccc; }
+    .btn { display: none; }
+  }
+
+  @media (max-width: 900px) {
+    aside { display: none; }
+    main { margin-left: 0; padding: 20px; }
+  }
+
+  .divider { height: 1px; background: var(--border); margin: 20px 0; }
+  .tag { display: inline-block; background: var(--accent-soft); color: var(--accent); font-size: 0.72rem; font-weight: 600; padding: 2px 8px; border-radius: 12px; }
+  .mt12 { margin-top: 12px; }
+  .mt20 { margin-top: 20px; }
+  .flex-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .saved-indicator { font-size: 0.75rem; color: var(--success); opacity: 0; transition: opacity 0.5s; }
+  .saved-indicator.show { opacity: 1; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📋 Fachtagung 2027 — Planungstool</h1>
+  <div class="progress-wrap">
+    <span id="savedIndicator" class="saved-indicator">✓ Gespeichert</span>
+    <div class="progress-bar"><div class="progress-fill" id="globalProgress" style="width:0%"></div></div>
+    <span class="progress-pct" id="globalPct">0%</span>
+    <span class="badge">2027</span>
+  </div>
+</header>
+
+<div class="layout">
+<aside id="sidebar"></aside>
+<main id="main"></main>
+</div>
+
+<script>
+// ─── Data structure ───────────────────────────────────────────────────────────
+const SECTIONS = [
+  {
+    id: 's1', num: 1, title: 'Strategie & Ziele',
+    render: () => `
+      <div class="subsection">
+        <div class="subsection-title">Anlass & Vision</div>
+        <div class="fields-grid">
+          <div class="field"><label>Anlass der Fachtagung</label><textarea data-key="s1_anlass" placeholder="Warum findet die Fachtagung statt?"></textarea></div>
+          <div class="field"><label>Vision / Leitmotiv</label><textarea data-key="s1_vision" placeholder="Das übergeordnete Thema oder Motto..."></textarea></div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="subsection">
+        <div class="subsection-title">Business-Ziele</div>
+        <div class="items-grid">
+          ${checkbox('s1_bz1','Wissen vermitteln')}
+          ${checkbox('s1_bz2','Strategie kommunizieren')}
+          ${checkbox('s1_bz3','Veränderung begleiten')}
+          ${checkbox('s1_bz4','Vernetzung fördern')}
+          ${checkbox('s1_bz5','Kultur stärken')}
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="subsection">
+        <div class="subsection-title">Gewünschte Wirkung</div>
+        <div class="fields-grid">
+          <div class="field"><label>🧠 Denken — Was sollen Teilnehmer anders denken?</label><textarea data-key="s1_denken" placeholder="..."></textarea></div>
+          <div class="field"><label>❤️ Fühlen — Was sollen Teilnehmer fühlen?</label><textarea data-key="s1_fuehlen" placeholder="..."></textarea></div>
+          <div class="field"><label>📚 Wissen — Was sollen Teilnehmer wissen?</label><textarea data-key="s1_wissen" placeholder="..."></textarea></div>
+          <div class="field"><label>🚀 Handeln — Was sollen Teilnehmer tun?</label><textarea data-key="s1_handeln" placeholder="..."></textarea></div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="subsection">
+        <div class="subsection-title">Erfolgskriterien</div>
+        <div class="fields-grid">
+          <div class="field"><label>Teilnehmerzufriedenheit (Zielwert, z.B. NPS > 40)</label><input type="text" data-key="s1_ec1" placeholder="Zielwert..."></div>
+          <div class="field"><label>Wissenstransfer (Messmethode)</label><input type="text" data-key="s1_ec2" placeholder="z.B. Pre/Post Quiz..."></div>
+          <div class="field"><label>Umsetzung (Maßnahmen nach Event)</label><input type="text" data-key="s1_ec3" placeholder="..."></div>
+          <div class="field"><label>Impact (Langfristige Wirkung)</label><input type="text" data-key="s1_ec4" placeholder="..."></div>
+        </div>
+      </div>`
+  },
+  {
+    id: 's2', num: 2, title: 'Teilnehmer',
+    render: () => `
+      <div class="subsection">
+        <div class="subsection-title">Zielgruppen</div>
+        <div class="items-grid">
+          ${checkbox('s2_zg1','Führungskräfte')}
+          ${checkbox('s2_zg2','Experten')}
+          ${checkbox('s2_zg3','Mitarbeitende')}
+          ${checkbox('s2_zg4','Neue Mitarbeitende')}
+          ${checkbox('s2_zg5','Externe Gäste')}
+        </div>
+        <div class="fields-grid mt12">
+          <div class="field"><label>Erwartete Teilnehmerzahl</label><input type="number" data-key="s2_anzahl" placeholder="z.B. 250"></div>
+          <div class="field"><label>Besonderheiten / Hinweise</label><input type="text" data-key="s2_hinweise" placeholder="..."></div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="subsection">
+        <div class="subsection-title">Teilnehmermanagement</div>
+        <div class="items-grid">
+          ${checkbox('s2_tm1','Einladungen')}
+          ${checkbox('s2_tm2','Registrierung')}
+          ${checkbox('s2_tm3','Teilnehmerliste')}
+          ${checkbox('s2_tm4','Check-in')}
+          ${checkbox('s2_tm5','Namensschilder')}
+        </div>
+        <div class="fields-grid mt12">
+          <div class="field"><label>Registrierungsplattform / -tool</label><input type="text" data-key="s2_tool" placeholder="z.B. Eventbrite, intern..."></div>
+          <div class="field"><label>Registrierungsdeadline</label><input type="date" data-key="s2_deadline"></div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="subsection">
+        <div class="subsection-title">Teilnehmerreise</div>
+        <div class="fields-grid">
+          <div class="field"><label>Vor dem Event (Kommunikation, Info-Paket)</label><textarea data-key="s2_pre" placeholder="Was bekommen Teilnehmer vorab?"></textarea></div>
+          <div class="field"><label>Anreise (Infos, Shuttle, Parkplätze)</label><textarea data-key="s2_anreise" placeholder="..."></textarea></div>
+          <div class="field"><label>Aufenthalt (Hotel-Empfehlungen, Besonderheiten)</label><textarea data-key="s2_aufenthalt" placeholder="..."></textarea></div>
+          <div class="field"><label>Nachbereitung (Follow-up, Materialien)</label><textarea data-key="s2_nachbe" placeholder="..."></textarea></div>
+        </div>
+      </div>`
+  },
+  {
+    id: 's3', num: 3, title: 'Kernbotschaften',
+    render: () => `
+      <div class="subsection">
+        <div class="subsection-title">Hauptbotschaften</div>
+        <div class="field-group">
+          ${['1','2','3','4'].map(n => `<div class="field"><label>Hauptbotschaft ${n}</label><textarea data-key="s3_hb${n}" placeholder="Botschaft ${n}..."></textarea></div>`).join('')}
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="cta-box">
+        <div class="subsection-title">Call to Action</div>
+        <div class="field"><label>Was sollen Teilnehmer nach der Tagung konkret tun?</label><textarea data-key="s3_cta" placeholder="Der eine klare Aufruf zum Handeln..."></textarea></div>
+      </div>`
+  },
+  {
+    id: 's4', num: 4, title: 'Inhalte & Themen',
+    render: () => `
+      <div class="subsection">
+        <div class="subsection-title">Themenfelder</div>
+        <div class="fields-grid">
+          ${['A — Markt & Zukunft','B — Strategie','C — Praxis','D — Innovation','E — Change / Kultur'].map((t,i) => `
+            <div class="field"><label>Themenfeld ${t}</label><textarea data-key="s4_tf${i}" placeholder="Konkrete Inhalte, Fragen, Fokus..."></textarea></div>
+          `).join('')}
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="subsection">
+        <div class="subsection-title">Formate (geplante Nutzung)</div>
+        <div class="items-grid">
+          ${['Keynotes','Fachvorträge','Workshops','Panels','Fireside Chats','Q&A'].map((f,i) => checkbox(`s4_f${i}`,f)).join('')}
+        </div>
+      </div>`
+  },
+  {
+    id: 's5', num: 5, title: 'Speaker',
+    render: () => `
+      <div class="flex-row" style="margin-bottom:16px">
+        <button class="btn btn-primary" onclick="addSpeaker()">+ Speaker hinzufügen</button>
+        <span style="font-size:0.8rem;color:var(--text-muted)">Klick auf Speaker-Karte zum Bearbeiten</span>
+      </div>
+      <div class="speaker-list" id="speakerList"></div>`
+  },
+  {
+    id: 's6', num: 6, title: 'Dramaturgie',
+    render: () => `
+      <div class="subsection">
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:16px">Beschreiben Sie den dramaturgischen Bogen der Tagung — von der Ausgangslage bis zum Handlungsaufruf.</p>
+        <div class="dramatik-grid">
+          ${[
+            ['1','Wo stehen wir?'],['2','Warum Veränderung?'],['3','Zukunftsbild'],
+            ['4','Konkrete Umsetzung'],['5','Nächste Schritte']
+          ].map(([n,t]) => `
+            <div class="dramatik-item">
+              <div class="dramatik-num">${n}</div>
+              <div class="dramatik-content">
+                <div style="font-weight:600;font-size:0.88rem;margin-bottom:6px">${t}</div>
+                <div class="field"><textarea data-key="s6_k${n}" placeholder="Inhalt, Botschaft, Format..."></textarea></div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>`
+  },
+  {
+    id: 's7', num: 7, title: 'Agenda & Ablauf',
+    render: () => `
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab('agenda','tag1')">Tag 1</div>
+        <div class="tab" onclick="switchTab('agenda','tag2')">Tag 2</div>
+        <div class="tab" onclick="switchTab('agenda','energie')">Energiekurve</div>
+      </div>
+      <div id="agenda-tag1" class="tab-content active">${renderTimeline('s7_t1', [
+        {time:'08:30',label:'Registrierung & Welcome Coffee'},
+        {time:'09:00',label:'Eröffnung'},
+        {time:'09:30',label:'Keynote 1'},
+        {time:'10:30',label:'Pause'},
+        {time:'11:00',label:'Keynote 2'},
+        {time:'12:00',label:'Mittagspause'},
+        {time:'13:00',label:'Workshop-Runde 1'},
+        {time:'14:30',label:'Session A'},
+        {time:'15:30',label:'Kaffeepause'},
+        {time:'16:00',label:'Session B'},
+        {time:'17:00',label:'Networking'},
+        {time:'19:00',label:'Abendprogramm'},
+      ])}</div>
+      <div id="agenda-tag2" class="tab-content">${renderTimeline('s7_t2', [
+        {time:'08:30',label:'Recap & Morning Briefing'},
+        {time:'09:00',label:'Fachsession 1'},
+        {time:'10:30',label:'Pause'},
+        {time:'11:00',label:'Panel-Diskussion'},
+        {time:'12:00',label:'Mittagspause'},
+        {time:'13:00',label:'Workshop-Runde 2'},
+        {time:'15:00',label:'Abschluss-Keynote'},
+        {time:'15:45',label:'Closing Ceremony'},
+        {time:'16:30',label:'Ende'},
+      ])}</div>
+      <div id="agenda-energie" class="tab-content">
+        <div class="fields-grid">
+          <div class="field"><label>☀️ Morgen → Strategie</label><textarea data-key="s7_e1" placeholder="Schwerpunkt, Erwartetes Energielevel..."></textarea></div>
+          <div class="field"><label>📈 Vormittag → Input</label><textarea data-key="s7_e2" placeholder="..."></textarea></div>
+          <div class="field"><label>🤝 Nachmittag → Interaktion</label><textarea data-key="s7_e3" placeholder="..."></textarea></div>
+          <div class="field"><label>✨ Ende → Inspiration</label><textarea data-key="s7_e4" placeholder="..."></textarea></div>
+        </div>
+      </div>`
+  },
+  {
+    id: 's8', num: 8, title: 'Teilnehmererlebnis (Experience)',
+    render: () => `
+      <div class="subsection">
+        <div class="subsection-title">Checkliste</div>
+        <div class="items-grid">
+          ${['Branding','Key Visual','Event Design','Beschilderung','Atmosphäre','Networking','Gimmicks','Give-aways'].map((x,i) => checkbox(`s8_c${i}`,x)).join('')}
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="subsection">
+        <div class="subsection-title">Details</div>
+        <div class="fields-grid">
+          <div class="field"><label>Branding / Key Visual Beschreibung</label><textarea data-key="s8_brand" placeholder="Farben, Schriften, Stil..."></textarea></div>
+          <div class="field"><label>Besondere Erlebnismomente</label><textarea data-key="s8_moments" placeholder="Was soll in Erinnerung bleiben?"></textarea></div>
+          <div class="field"><label>Networking-Konzept</label><textarea data-key="s8_net" placeholder="Formate, Apps, Aktivitäten..."></textarea></div>
+          <div class="field"><label>Give-aways / Merchandise</label><textarea data-key="s8_give" placeholder="Geplante Artikel..."></textarea></div>
+        </div>
+      </div>`
+  },
+  {
+    id: 's9', num: 9, title: 'Kommunikation',
+    render: () => `
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab('komm','vorher')">Vorher</div>
+        <div class="tab" onclick="switchTab('komm','waehrend')">Währenddessen</div>
+        <div class="tab" onclick="switchTab('komm','danach')">Danach</div>
+      </div>
+      <div id="komm-vorher" class="tab-content active">
+        <div class="items-grid" style="margin-bottom:16px">
+          ${['Save the Date','Einladung','Speaker Announcement','Reminder'].map((x,i) => checkbox(`s9_v${i}`,x)).join('')}
+        </div>
+        <div class="fields-grid">
+          <div class="field"><label>Save the Date — Datum</label><input type="date" data-key="s9_std"></div>
+          <div class="field"><label>Einladung versenden — Datum</label><input type="date" data-key="s9_einl"></div>
+          <div class="field"><label>Reminder — Datum</label><input type="date" data-key="s9_rem"></div>
+          <div class="field"><label>Kommunikationskanal(e)</label><input type="text" data-key="s9_kanal" placeholder="z.B. E-Mail, Intranet, Teams..."></div>
+        </div>
+      </div>
+      <div id="komm-waehrend" class="tab-content">
+        <div class="items-grid" style="margin-bottom:16px">
+          ${['Social Media','Liveticker','Fotos','Video'].map((x,i) => checkbox(`s9_w${i}`,x)).join('')}
+        </div>
+        <div class="fields-grid">
+          <div class="field"><label>Social-Media-Kanal(e) & Hashtag</label><input type="text" data-key="s9_sm" placeholder="z.B. LinkedIn, #FT2027"></div>
+          <div class="field"><label>Fotograf / Videograf</label><input type="text" data-key="s9_foto" placeholder="Name / Dienstleister..."></div>
+          <div class="field"><label>Liveticker-Plattform</label><input type="text" data-key="s9_live" placeholder="..."></div>
+        </div>
+      </div>
+      <div id="komm-danach" class="tab-content">
+        <div class="items-grid" style="margin-bottom:16px">
+          ${['Follow-up E-Mail','Dokumentation','Präsentationen teilen'].map((x,i) => checkbox(`s9_d${i}`,x)).join('')}
+        </div>
+        <div class="fields-grid">
+          <div class="field"><label>Follow-up Termin (Versanddatum)</label><input type="date" data-key="s9_fup"></div>
+          <div class="field"><label>Doku-Format (Video, Fotos, Zusammenfassung)</label><input type="text" data-key="s9_doku" placeholder="..."></div>
+        </div>
+      </div>`
+  },
+  {
+    id: 's10', num: 10, title: 'Event Operations & Orga-Team',
+    render: () => `
+      <div class="subsection">
+        <div class="subsection-title">Rollen & Verantwortlichkeiten</div>
+        <div class="fields-grid">
+          ${['Projektleitung','PMO','Teilnehmermanagement','Speaker Management','Content Management','Event Experience','Hospitality','Technikmanagement','Backoffice'].map((r,i) => `
+            <div class="field"><label>${r}</label><input type="text" data-key="s10_r${i}" placeholder="Name / Team..."></div>
+          `).join('')}
+        </div>
+      </div>`
+  },
+  {
+    id: 's11', num: 11, title: 'Dienstleister & Partner',
+    render: () => `
+      <div class="fields-grid">
+        ${['Location','Eventagentur','Technikdienstleister','Fotograf','Videograf','Streaming','Catering','Security','Druckerei','Messebauer','Sponsoren / Partner'].map((d,i) => `
+          <div class="field"><label>${d}</label><input type="text" data-key="s11_d${i}" placeholder="Firma / Kontakt / Status..."></div>
+        `).join('')}
+      </div>`
+  },
+  {
+    id: 's12', num: 12, title: 'Programmpunkte außerhalb Vorträge',
+    render: () => `
+      <div class="subsection">
+        <div class="subsection-title">Checkliste</div>
+        <div class="items-grid">
+          ${['Registrierung','Welcome Coffee','Networking Slots','Expo Area','Abendprogramm','Award Ceremony','Live-Demo','Closing Ceremony'].map((x,i) => checkbox(`s12_c${i}`,x)).join('')}
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="subsection">
+        <div class="subsection-title">Details</div>
+        <div class="fields-grid">
+          <div class="field"><label>Abendprogramm-Konzept</label><textarea data-key="s12_abend" placeholder="Location, Aktivitäten, Rahmenprogramm..."></textarea></div>
+          <div class="field"><label>Expo Area — Aussteller / Themen</label><textarea data-key="s12_expo" placeholder="..."></textarea></div>
+          <div class="field"><label>Award Ceremony — Kategorien</label><textarea data-key="s12_award" placeholder="..."></textarea></div>
+        </div>
+      </div>`
+  },
+  {
+    id: 's13', num: 13, title: 'Governance & Steuerung',
+    render: () => `
+      <div class="subsection">
+        <div class="subsection-title">Checkliste</div>
+        <div class="items-grid">
+          ${['Budgetfreigaben','Entscheidungswege','Eskalationspfade','Compliance','Datenschutz','Qualitätsmanagement'].map((x,i) => checkbox(`s13_c${i}`,x)).join('')}
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="fields-grid">
+        <div class="field"><label>Entscheidungsverantwortlicher</label><input type="text" data-key="s13_ev" placeholder="Name / Funktion..."></div>
+        <div class="field"><label>Budgetfreigabe bis</label><input type="date" data-key="s13_bf"></div>
+        <div class="field"><label>Datenschutz-Ansprechpartner</label><input type="text" data-key="s13_dsp" placeholder="..."></div>
+        <div class="field"><label>Compliance-Besonderheiten</label><textarea data-key="s13_comp" placeholder="..."></textarea></div>
+      </div>`
+  },
+  {
+    id: 's14', num: 14, title: 'Budget',
+    render: () => `
+      <div style="overflow-x:auto">
+      <table class="budget-table" id="budgetTable">
+        <thead><tr><th>Kategorie</th><th>Geplant (€)</th><th>Tatsächlich (€)</th><th>Differenz</th></tr></thead>
+        <tbody>
+          ${['Location','Technik','Catering','Speaker','Dienstleister','Marketing','Merchandise','Reserve'].map((k,i) => `
+          <tr>
+            <td>${k}</td>
+            <td><input type="number" data-key="s14_p${i}" placeholder="0" oninput="updateBudget()"></td>
+            <td><input type="number" data-key="s14_a${i}" placeholder="0" oninput="updateBudget()"></td>
+            <td id="s14_diff${i}" class="diff-pos">—</td>
+          </tr>`).join('')}
+        </tbody>
+        <tfoot>
+          <tr class="total-row">
+            <td>Gesamt</td>
+            <td id="s14_totalP">0 €</td>
+            <td id="s14_totalA">0 €</td>
+            <td id="s14_totalDiff">—</td>
+          </tr>
+        </tfoot>
+      </table>
+      </div>
+      <div class="fields-grid mt20">
+        <div class="field"><label>Gesamtbudget (genehmigt)</label><input type="number" data-key="s14_approved" placeholder="Genehmigtes Budget in €" oninput="updateBudget()"></div>
+        <div class="field"><label>Notizen zum Budget</label><textarea data-key="s14_notes" placeholder="Budgetpuffer, Sonderposten..."></textarea></div>
+      </div>`
+  },
+  {
+    id: 's15', num: 15, title: 'Risiken',
+    render: () => `
+      <div class="risk-grid">
+        ${['Speaker-Ausfall','Technikprobleme','Wetter','Reiseprobleme','Geringe Teilnahme','Sonstige'].map((r,i) => `
+          <div class="risk-card">
+            <div class="risk-title">⚠️ ${r}</div>
+            <div class="field" style="margin-bottom:8px"><label>Eintrittswahrscheinlichkeit</label>
+              <select data-key="s15_prob${i}">
+                <option value="">— wählen —</option>
+                <option>Niedrig</option><option>Mittel</option><option>Hoch</option>
+              </select>
+            </div>
+            <div class="field" style="margin-bottom:8px"><label>Auswirkung</label>
+              <select data-key="s15_imp${i}">
+                <option value="">— wählen —</option>
+                <option>Gering</option><option>Mittel</option><option>Kritisch</option>
+              </select>
+            </div>
+            <div class="field"><label>Notfallplan / Maßnahme</label><textarea data-key="s15_plan${i}" placeholder="Vorgehen bei Eintreten..." style="min-height:60px"></textarea></div>
+          </div>
+        `).join('')}
+      </div>`
+  },
+  {
+    id: 's16', num: 16, title: 'Regieplan & Ablaufsteuerung',
+    render: () => `
+      <div style="overflow-x:auto">
+      <table class="budget-table">
+        <thead><tr><th>Uhrzeit</th><th>Programmpunkt</th><th>Verantwortlich</th><th>Technik</th><th>Cue / Trigger</th><th>Backup</th></tr></thead>
+        <tbody id="regieTbody">${renderRegieRows()}</tbody>
+      </table>
+      </div>
+      <div class="mt12">
+        <button class="btn btn-outline" onclick="addRegieRow()">+ Zeile hinzufügen</button>
+      </div>`
+  },
+  {
+    id: 's17', num: 17, title: 'Erfolgsmessung',
+    render: () => `
+      <div class="subsection">
+        <div class="subsection-title">Quantitative KPIs</div>
+        <div class="kpi-grid">
+          <div class="kpi-card"><label>Teilnehmerzahl (Ziel)</label><input type="number" data-key="s17_q1" placeholder="—"><div class="kpi-unit">Personen</div></div>
+          <div class="kpi-card"><label>Attendance Rate (Ziel)</label><input type="number" data-key="s17_q2" placeholder="—"><div class="kpi-unit">%</div></div>
+          <div class="kpi-card"><label>Session-Auslastung (Ziel)</label><input type="number" data-key="s17_q3" placeholder="—"><div class="kpi-unit">%</div></div>
+          <div class="kpi-card"><label>Engagement Score (Ziel)</label><input type="number" data-key="s17_q4" placeholder="—"><div class="kpi-unit">Punkte</div></div>
+          <div class="kpi-card"><label>NPS (Ziel)</label><input type="number" data-key="s17_q5" placeholder="—"><div class="kpi-unit">Punkte</div></div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="subsection">
+        <div class="subsection-title">Qualitative KPIs</div>
+        <div class="fields-grid">
+          <div class="field"><label>Relevanz — Messmethode</label><input type="text" data-key="s17_ql1" placeholder="z.B. Umfrage nach Event..."></div>
+          <div class="field"><label>Nutzen — Messmethode</label><input type="text" data-key="s17_ql2" placeholder="..."></div>
+          <div class="field"><label>Feedback — Erhebungsmethode</label><input type="text" data-key="s17_ql3" placeholder="z.B. digitale Umfrage, Interviews..."></div>
+          <div class="field"><label>Weiterempfehlung — Zielwert</label><input type="text" data-key="s17_ql4" placeholder="z.B. 80% würden weiterempfehlen..."></div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="subsection">
+        <div class="subsection-title">Messinstrumente</div>
+        <div class="items-grid">
+          ${['Teilnehmerbefragung (digital)','Live-Polling / App','Beobachtung vor Ort','Post-Event Interviews','30-Tage-Follow-up'].map((x,i) => checkbox(`s17_mi${i}`,x)).join('')}
+        </div>
+      </div>`
+  },
+  {
+    id: 's18', num: 18, title: 'Nachbereitung',
+    render: () => `
+      <div class="subsection">
+        <div class="subsection-title">Aufgaben-Checkliste</div>
+        <div class="items-grid">
+          ${['Feedbackauswertung','Lessons Learned','Präsentationen bereitstellen','Fotos / Videos aufbereiten','Maßnahmenplan erstellen','Follow-up Kommunikation','Vorbereitung 2028'].map((x,i) => checkbox(`s18_c${i}`,x)).join('')}
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="fields-grid">
+        <div class="field"><label>Feedbackauswertung — Verantwortlich</label><input type="text" data-key="s18_fv" placeholder="..."></div>
+        <div class="field"><label>Lessons-Learned-Termin</label><input type="date" data-key="s18_ll"></div>
+        <div class="field"><label>Follow-up Versanddatum</label><input type="date" data-key="s18_fup"></div>
+        <div class="field"><label>Lessons Learned — Wichtigste Erkenntnisse</label><textarea data-key="s18_erkenntnisse" placeholder="Was lief gut? Was verbessern?"></textarea></div>
+        <div class="field"><label>Maßnahmen für 2028</label><textarea data-key="s18_2028" placeholder="..."></textarea></div>
+      </div>`
+  }
+];
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+function checkbox(key, label) {
+  return `<div class="check-item" id="ci_${key}">
+    <input type="checkbox" id="cb_${key}" data-key="${key}" onchange="onCheck('${key}',this)">
+    <label for="cb_${key}">${label}</label>
+  </div>`;
+}
+
+function renderTimeline(prefix, items) {
+  return `<div class="timeline">${items.map((item,i) => `
+    <div class="tl-item">
+      <div class="tl-time">${item.time}</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <input type="text" data-key="${prefix}_label${i}" value="${item.label}">
+        <textarea data-key="${prefix}_note${i}" placeholder="Notizen, Verantwortliche, Technik..." rows="1"></textarea>
+      </div>
+    </div>`).join('')}</div>`;
+}
+
+function renderRegieRows() {
+  const rows = load('s16_rows') || [
+    {time:'08:30',prog:'Einlass / Registrierung',verantw:'',tech:'',cue:'',backup:''},
+    {time:'09:00',prog:'Eröffnung',verantw:'',tech:'',cue:'Moderation',backup:''},
+  ];
+  return rows.map((r,i) => regieRow(r,i)).join('');
+}
+
+function regieRow(r, i) {
+  return `<tr id="regie_${i}">
+    <td><input type="text" value="${r.time||''}" oninput="saveRegieRow(${i},'time',this.value)" style="width:70px"></td>
+    <td><input type="text" value="${r.prog||''}" oninput="saveRegieRow(${i},'prog',this.value)" style="width:180px"></td>
+    <td><input type="text" value="${r.verantw||''}" oninput="saveRegieRow(${i},'verantw',this.value)" style="width:130px"></td>
+    <td><input type="text" value="${r.tech||''}" oninput="saveRegieRow(${i},'tech',this.value)" style="width:120px"></td>
+    <td><input type="text" value="${r.cue||''}" oninput="saveRegieRow(${i},'cue',this.value)" style="width:120px"></td>
+    <td><input type="text" value="${r.backup||''}" oninput="saveRegieRow(${i},'backup',this.value)" style="width:130px"></td>
+  </tr>`;
+}
+
+// ─── Storage ─────────────────────────────────────────────────────────────────
+function save(key, val) { try { localStorage.setItem('ft27_'+key, JSON.stringify(val)); } catch(e){} }
+function load(key) { try { const v = localStorage.getItem('ft27_'+key); return v ? JSON.parse(v) : null; } catch(e){ return null; } }
+
+function saveField(key, val) { save(key, val); showSaved(); updateProgress(); }
+function showSaved() {
+  const el = document.getElementById('savedIndicator');
+  el.classList.add('show');
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.classList.remove('show'), 2000);
+}
+
+// ─── Speakers ─────────────────────────────────────────────────────────────────
+let speakers = load('speakers') || [];
+
+function saveSpeakers() { save('speakers', speakers); updateProgress(); }
+
+function addSpeaker() {
+  speakers.push({name:'Neuer Speaker',type:'Intern',kontakt:'',bio:'',titel:'',abstract:'',lernziele:'',pres:'',tech:'',honorar:'',hotel:'',anreise:'',briefing:''});
+  saveSpeakers();
+  renderSpeakers();
+}
+
+function renderSpeakers() {
+  const list = document.getElementById('speakerList');
+  if (!list) return;
+  list.innerHTML = speakers.map((sp, i) => `
+    <div class="speaker-card ${sp._open?'open':''}" id="spcard_${i}">
+      <div class="speaker-card-header" onclick="toggleSpeaker(${i})">
+        <div class="speaker-avatar">${(sp.name||'?')[0].toUpperCase()}</div>
+        <div class="speaker-name">${sp.name||'Unbenannt'}</div>
+        <span class="speaker-type">${sp.type||'Intern'}</span>
+        <span style="font-size:1rem;margin-left:8px;color:var(--text-muted)">${sp._open?'▲':'▼'}</span>
+      </div>
+      <div class="speaker-body">
+        <div class="fields-grid">
+          <div class="field"><label>Name</label><input type="text" value="${esc(sp.name)}" oninput="updateSpeaker(${i},'name',this.value)"></div>
+          <div class="field"><label>Typ</label><select oninput="updateSpeaker(${i},'type',this.value)">
+            ${['Intern','Extern','Moderator','Panelgast'].map(t=>`<option ${sp.type===t?'selected':''}>${t}</option>`).join('')}
+          </select></div>
+          <div class="field"><label>Kontaktdaten</label><input type="text" value="${esc(sp.kontakt)}" oninput="updateSpeaker(${i},'kontakt',this.value)" placeholder="E-Mail / Telefon"></div>
+          <div class="field"><label>Vortragstitel</label><input type="text" value="${esc(sp.titel)}" oninput="updateSpeaker(${i},'titel',this.value)" placeholder="Titel des Vortrags"></div>
+          <div class="field"><label>Bio</label><textarea oninput="updateSpeaker(${i},'bio',this.value)" placeholder="Kurzbiografie...">${esc(sp.bio)}</textarea></div>
+          <div class="field"><label>Abstract</label><textarea oninput="updateSpeaker(${i},'abstract',this.value)" placeholder="Inhalt des Vortrags...">${esc(sp.abstract)}</textarea></div>
+          <div class="field"><label>Lernziele</label><textarea oninput="updateSpeaker(${i},'lernziele',this.value)" placeholder="Was nehmen Teilnehmer mit?">${esc(sp.lernziele)}</textarea></div>
+          <div class="field"><label>Präsentation</label><select oninput="updateSpeaker(${i},'pres',this.value)">
+            ${['—','Ausstehend','In Arbeit','Eingereicht','Freigegeben'].map(s=>`<option ${sp.pres===s?'selected':''}>${s}</option>`).join('')}
+          </select></div>
+          <div class="field"><label>Technikbedarf</label><input type="text" value="${esc(sp.tech)}" oninput="updateSpeaker(${i},'tech',this.value)" placeholder="Beamer, Mikro, Laptop..."></div>
+          <div class="field"><label>Honorar (€)</label><input type="number" value="${esc(sp.honorar)}" oninput="updateSpeaker(${i},'honorar',this.value)" placeholder="0"></div>
+          <div class="field"><label>Hotel</label><input type="text" value="${esc(sp.hotel)}" oninput="updateSpeaker(${i},'hotel',this.value)" placeholder="Name / gebucht?"></div>
+          <div class="field"><label>Anreise</label><input type="text" value="${esc(sp.anreise)}" oninput="updateSpeaker(${i},'anreise',this.value)" placeholder="Bahn, Flug, eigener PKW..."></div>
+          <div class="field"><label>Briefing-Status</label><select oninput="updateSpeaker(${i},'briefing',this.value)">
+            ${['—','Ausstehend','Termin vereinbart','Durchgeführt'].map(s=>`<option ${sp.briefing===s?'selected':''}>${s}</option>`).join('')}
+          </select></div>
+        </div>
+        <div class="mt12"><button class="btn btn-danger" onclick="deleteSpeaker(${i})">Speaker entfernen</button></div>
+      </div>
+    </div>`).join('');
+}
+
+function toggleSpeaker(i) { speakers[i]._open = !speakers[i]._open; saveSpeakers(); renderSpeakers(); }
+function updateSpeaker(i, field, val) { speakers[i][field] = val; saveSpeakers(); renderSpeakers(); }
+function deleteSpeaker(i) { if(confirm('Speaker wirklich entfernen?')) { speakers.splice(i,1); saveSpeakers(); renderSpeakers(); } }
+function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// ─── Budget ───────────────────────────────────────────────────────────────────
+function updateBudget() {
+  let totalP = 0, totalA = 0;
+  for(let i=0;i<8;i++) {
+    const pi = document.querySelector(`[data-key="s14_p${i}"]`);
+    const ai = document.querySelector(`[data-key="s14_a${i}"]`);
+    const p = parseFloat(pi?.value||0)||0;
+    const a = parseFloat(ai?.value||0)||0;
+    totalP += p; totalA += a;
+    const diff = p - a;
+    const el = document.getElementById(`s14_diff${i}`);
+    if(el) { el.textContent = diff===0?'—':(diff>0?'+':'')+diff.toLocaleString('de-DE')+'€'; el.className = diff>=0?'diff-pos':'diff-neg'; }
+    if(pi) saveField(`s14_p${i}`, pi.value);
+    if(ai) saveField(`s14_a${i}`, ai.value);
+  }
+  const el = document.getElementById('s14_totalP'); if(el) el.textContent=totalP.toLocaleString('de-DE')+'€';
+  const ea = document.getElementById('s14_totalA'); if(ea) ea.textContent=totalA.toLocaleString('de-DE')+'€';
+  const ed = document.getElementById('s14_totalDiff');
+  if(ed) { const d=totalP-totalA; ed.textContent=(d>=0?'+':'')+d.toLocaleString('de-DE')+'€'; ed.className=d>=0?'diff-pos':'diff-neg'; }
+}
+
+// ─── Regie ────────────────────────────────────────────────────────────────────
+let regieRows = load('s16_rows') || [{time:'08:30',prog:'Einlass',verantw:'',tech:'',cue:'',backup:''},{time:'09:00',prog:'Eröffnung',verantw:'',tech:'',cue:'',backup:''}];
+
+function addRegieRow() {
+  regieRows.push({time:'',prog:'',verantw:'',tech:'',cue:'',backup:''});
+  save('s16_rows', regieRows);
+  const tbody = document.getElementById('regieTbody');
+  if(tbody) tbody.innerHTML = regieRows.map((r,i)=>regieRow(r,i)).join('');
+}
+function saveRegieRow(i, field, val) { regieRows[i][field]=val; save('s16_rows',regieRows); showSaved(); }
+
+// ─── Tabs ─────────────────────────────────────────────────────────────────────
+function switchTab(group, tab) {
+  document.querySelectorAll(`[id^="${group}-"]`).forEach(el => el.classList.remove('active'));
+  document.getElementById(`${group}-${tab}`)?.classList.add('active');
+  const tabs = document.querySelectorAll(`.tab`);
+  tabs.forEach(t => {
+    if(t.getAttribute('onclick')===`switchTab('${group}','${tab}')`) t.classList.add('active');
+    else if(t.getAttribute('onclick')?.startsWith(`switchTab('${group}'`)) t.classList.remove('active');
+  });
+}
+
+// ─── Checkboxes ───────────────────────────────────────────────────────────────
+function onCheck(key, el) {
+  saveField(key, el.checked);
+  const ci = document.getElementById('ci_'+key);
+  if(ci) ci.classList.toggle('checked', el.checked);
+}
+
+// ─── Progress ─────────────────────────────────────────────────────────────────
+function updateProgress() {
+  const checkboxes = document.querySelectorAll('input[type=checkbox][data-key]');
+  const total = checkboxes.length;
+  const checked = Array.from(checkboxes).filter(c=>c.checked).length;
+  const pct = total ? Math.round(checked/total*100) : 0;
+  document.getElementById('globalProgress').style.width = pct+'%';
+  document.getElementById('globalPct').textContent = pct+'%';
+
+  SECTIONS.forEach(sec => {
+    const cbs = document.querySelectorAll(`#${sec.id} input[type=checkbox]`);
+    const tot = cbs.length;
+    const chk = Array.from(cbs).filter(c=>c.checked).length;
+    const dot = document.getElementById('dot_'+sec.id);
+    if(dot) {
+      dot.className = 'nav-dot' + (chk===0?'':(chk===tot?' done':' partial'));
+    }
+    const pctEl = document.getElementById('navpct_'+sec.id);
+    if(pctEl) pctEl.textContent = tot?`${chk}/${tot}`:'';
+  });
+}
+
+// ─── Render ───────────────────────────────────────────────────────────────────
+function buildUI() {
+  const sidebar = document.getElementById('sidebar');
+  const main = document.getElementById('main');
+
+  sidebar.innerHTML = SECTIONS.map(s => `
+    <a class="nav-item" href="#${s.id}" id="nav_${s.id}">
+      <span class="nav-num">${s.num}</span>
+      <span style="flex:1">${s.title}</span>
+      <span class="nav-dot" id="dot_${s.id}"></span>
+      <span class="nav-progress" id="navpct_${s.id}"></span>
+    </a>`).join('');
+
+  main.innerHTML = SECTIONS.map(s => `
+    <div class="section" id="${s.id}">
+      <div class="section-header" onclick="toggleSection('${s.id}')">
+        <div class="section-num">${s.num}</div>
+        <div class="section-title">${s.title}</div>
+        <span class="section-progress-mini" id="sp_${s.id}"></span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">${s.render()}</div>
+    </div>`).join('');
+
+  loadAllValues();
+  renderSpeakers();
+  updateBudget();
+  updateProgress();
+
+  // Active nav on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting) {
+        document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+        document.getElementById('nav_'+e.target.id)?.classList.add('active');
+      }
+    });
+  }, {rootMargin:'-20% 0px -70% 0px'});
+  SECTIONS.forEach(s => { const el = document.getElementById(s.id); if(el) observer.observe(el); });
+
+  // Wire up generic inputs
+  document.addEventListener('input', e => {
+    const key = e.target.dataset.key;
+    if(key && e.target.type !== 'checkbox') saveField(key, e.target.value);
+  });
+  document.addEventListener('change', e => {
+    const key = e.target.dataset.key;
+    if(key && e.target.tagName==='SELECT') saveField(key, e.target.value);
+  });
+}
+
+function toggleSection(id) {
+  document.getElementById(id)?.classList.toggle('collapsed');
+}
+
+function loadAllValues() {
+  document.querySelectorAll('[data-key]').forEach(el => {
+    const val = load(el.dataset.key);
+    if(val === null) return;
+    if(el.type === 'checkbox') {
+      el.checked = val;
+      const ci = document.getElementById('ci_'+el.dataset.key);
+      if(ci) ci.classList.toggle('checked', val);
+    } else {
+      el.value = val;
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', buildUI);
+</script>
+</body>
+</html>
