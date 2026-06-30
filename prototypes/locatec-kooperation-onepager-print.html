@@ -32,16 +32,17 @@
 }
 
 html, body {
-  width: 794px;           /* A4 @ 96dpi */
+  width: 882px;       /* 794px / 0.9 — Playwright scale:0.9 maps this to A4 width */
+  margin: 0;
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 14px;
   color: var(--stone-grey);
   background: #f2ede6;
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
 }
 
-/* Prevent any element from being split across page breaks */
+/* Prevent splits at page breaks */
 * { page-break-inside: avoid; break-inside: avoid; }
 
 /* ─── PAGE BACKGROUND ─── */
@@ -53,7 +54,11 @@ body::before {
   z-index: -1;
 }
 
-.page { padding: 32px 36px 40px; max-width: 794px; }
+/* 882px × scale 0.9 = 794px A4 width */
+.page {
+  width: 882px;
+  padding: 22px 34px 22px;
+}
 
 /* ─── GLASS (PDF-safe: no backdrop-filter, solid semi-transparent white) ─── */
 .glass {
@@ -70,9 +75,9 @@ body::before {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
-.header-logo { height: 32px; }
+.header-logo { height: 30px; }
 
 .badge {
   display: inline-flex;
@@ -81,24 +86,24 @@ body::before {
   background: rgba(77,175,70,0.13);
   border: 1px solid rgba(77,175,70,0.38);
   border-radius: 999px;
-  padding: 4px 13px;
+  padding: 3px 12px;
   font-size: 9px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.13em;
   color: var(--transition-green);
-  margin-bottom: 10px;
+  margin-bottom: 7px;
 }
 
 .headline {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: 28px;
+  font-size: 26px;
   color: var(--deep-green);
   letter-spacing: -0.04em;
   line-height: 1.0;
   text-transform: uppercase;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 .headline span { color: var(--pure-green); }
 .sub-headline {
@@ -107,26 +112,26 @@ body::before {
   text-transform: uppercase;
   letter-spacing: 0.13em;
   color: var(--transition-green);
-  margin-bottom: 12px;
+  margin-bottom: 0;
 }
 .hero-text {
-  font-size: 12.5px;
-  line-height: 1.65;
+  font-size: 13px;
+  line-height: 1.58;
   color: var(--stone-grey);
-  max-width: 680px;
-  margin-bottom: 22px;
+  max-width: 100%;
+  margin-bottom: 12px;
 }
 .hero-text strong { color: var(--deep-green); font-weight: 700; }
 .hero-text em     { color: var(--transition-green); font-style: normal; font-weight: 600; }
 
 /* ─── PARTNERSHIP BOX ─── */
 .partnership {
-  padding: 18px 28px;
-  margin-bottom: 14px;
+  padding: 16px 28px;
+  margin-bottom: 12px;
 }
 .partnership-grid {
   display: grid;
-  grid-template-columns: 1fr 140px 1fr;
+  grid-template-columns: 1fr 148px 1fr;
   gap: 16px;
   align-items: center;
 }
@@ -146,7 +151,7 @@ body::before {
   letter-spacing: -0.01em;
   margin-bottom: 5px;
 }
-.partner-desc { font-size: 11px; line-height: 1.5; color: rgba(73,73,73,0.72); }
+.partner-desc { font-size: 12px; line-height: 1.5; color: rgba(73,73,73,0.72); }
 
 .exchange {
   display: flex;
@@ -175,12 +180,12 @@ body::before {
 .two-col {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  margin-bottom: 14px;
+  gap: 10px;
+  margin-bottom: 10px;
   align-items: start;
 }
 
-.section-card { padding: 18px 20px 15px; }
+.section-card { padding: 13px 16px 11px; }
 
 .section-label {
   display: inline-flex;
@@ -192,7 +197,7 @@ body::before {
   letter-spacing: 0.14em;
   padding: 3px 10px;
   border-radius: 999px;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 .label-locatec {
   background: rgba(28,75,66,0.09);
@@ -208,11 +213,11 @@ body::before {
 .card-title {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: 10px;
+  font-size: 11px;
   color: var(--deep-green);
   text-transform: uppercase;
   letter-spacing: -0.01em;
-  margin-bottom: 11px;
+  margin-bottom: 8px;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -228,35 +233,35 @@ body::before {
 }
 
 /* ─── STEPS ─── */
-.steps { display: flex; flex-direction: column; gap: 7px; margin-bottom: 12px; }
+.steps { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; }
 .step  { display: flex; gap: 8px; align-items: flex-start; }
 .step-num {
-  min-width: 18px; height: 18px;
+  min-width: 19px; height: 19px;
   border-radius: 50%;
   background: var(--pure-green);
   color: #fff;
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
   margin-top: 1px;
 }
-.step-text { font-size: 11.5px; line-height: 1.5; }
+.step-text { font-size: 12px; line-height: 1.5; }
 .step-text strong { color: var(--transition-green); font-weight: 700; }
 
 /* ─── WEG CARDS ─── */
-.weg-cards { display: flex; flex-direction: column; gap: 9px; margin-bottom: 12px; }
+.weg-cards { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
 .weg-card {
   background: rgba(77,175,70,0.07);
   border: 1px solid rgba(77,175,70,0.2);
   border-radius: 10px;
-  padding: 12px 14px;
+  padding: 10px 13px;
 }
-.weg-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.weg-header { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
 .weg-badge {
   background: var(--pure-green);
   color: #fff;
-  font-size: 8px;
+  font-size: 9px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -264,13 +269,13 @@ body::before {
   border-radius: 4px;
   white-space: nowrap;
 }
-.weg-title { font-weight: 700; font-size: 11.5px; color: var(--deep-green); }
-.weg-body { font-size: 11px; line-height: 1.55; }
+.weg-title { font-weight: 700; font-size: 12px; color: var(--deep-green); }
+.weg-body { font-size: 11.5px; line-height: 1.52; }
 .weg-body strong { color: var(--deep-green); }
 
 /* ─── RECHNUNGSFLUSS ─── */
-.rechnung-items { display: flex; flex-direction: column; gap: 6px; }
-.rechnung-item { display: flex; gap: 7px; align-items: flex-start; font-size: 11.5px; line-height: 1.5; }
+.rechnung-items { display: flex; flex-direction: column; gap: 5px; }
+.rechnung-item { display: flex; gap: 7px; align-items: flex-start; font-size: 12px; line-height: 1.5; }
 .r-dot { min-width: 6px; height: 6px; border-radius: 50%; background: var(--pure-green); margin-top: 5px; flex-shrink: 0; }
 .rechnung-item strong { color: var(--transition-green); }
 .tag-green {
@@ -287,10 +292,10 @@ body::before {
   background: rgba(28,75,66,0.06);
   border: 1px solid rgba(28,75,66,0.13);
   border-radius: 8px;
-  padding: 9px 12px;
-  font-size: 11px;
-  line-height: 1.55;
-  margin-top: 9px;
+  padding: 8px 11px;
+  font-size: 11.5px;
+  line-height: 1.52;
+  margin-top: 8px;
   color: rgba(73,73,73,0.85);
 }
 .rechnung-note strong { color: var(--deep-green); }
@@ -300,22 +305,22 @@ body::before {
   background: rgba(77,175,70,0.07);
   border: 1px solid rgba(77,175,70,0.22);
   border-radius: 8px;
-  padding: 9px 12px;
-  font-size: 11px;
-  line-height: 1.55;
-  margin-bottom: 12px;
+  padding: 8px 11px;
+  font-size: 11.5px;
+  line-height: 1.52;
+  margin-bottom: 10px;
 }
 .note-box strong { color: var(--deep-green); }
 
-.divider { height: 1px; background: rgba(77,175,70,0.17); margin: 11px 0; }
+.divider { height: 1px; background: rgba(77,175,70,0.17); margin: 8px 0; }
 
 .contact-item {
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  padding: 6px 0;
+  padding: 5px 0;
   border-bottom: 1px solid rgba(77,175,70,0.13);
-  font-size: 11.5px;
+  font-size: 12px;
 }
 .contact-item:last-child { border-bottom: none; }
 .contact-icon {
@@ -353,31 +358,31 @@ body::before {
   background: rgba(28,75,66,0.06);
   border: 1px solid rgba(28,75,66,0.15);
   border-radius: 8px;
-  padding: 9px 12px;
-  font-size: 11px;
-  line-height: 1.55;
-  margin-top: 9px;
+  padding: 8px 11px;
+  font-size: 11.5px;
+  line-height: 1.52;
+  margin-top: 8px;
 }
 .emergency-box strong { color: var(--deep-green); }
 
 /* ─── VERTRIEB ─── */
-.vertrieb-card { padding: 18px 24px 16px; margin-bottom: 14px; }
+.vertrieb-card { padding: 16px 20px 14px; margin-bottom: 12px; }
 
 .vorteil-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin: 14px 0 12px;
+  gap: 10px;
+  margin: 9px 0 8px;
 }
 .vorteil-box {
   background: rgba(255,255,255,0.72);
   border: 1px solid rgba(255,255,255,0.95);
   border-radius: 11px;
-  padding: 15px 16px 13px;
+  padding: 13px 14px 11px;
   box-shadow: 0 3px 10px rgba(28,75,66,0.06);
 }
 .vorteil-eyebrow {
-  font-size: 8px;
+  font-size: 9px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.14em;
@@ -387,19 +392,19 @@ body::before {
 .vorteil-title {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: 9.5px;
+  font-size: 10px;
   color: var(--deep-green);
   text-transform: uppercase;
   letter-spacing: -0.01em;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
 }
-.vorteil-body { font-size: 11px; line-height: 1.58; }
+.vorteil-body { font-size: 11.5px; line-height: 1.55; }
 
 .hinweis-box {
   background: rgba(77,175,70,0.07);
   border: 1px solid rgba(77,175,70,0.2);
   border-radius: 9px;
-  padding: 10px 14px;
+  padding: 9px 13px;
   font-size: 11px;
   line-height: 1.6;
   display: flex;
@@ -414,15 +419,15 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 28px;
-  padding-top: 14px;
+  margin-top: 14px;
+  padding-top: 10px;
   border-top: 1px solid rgba(77,175,70,0.18);
 }
 .page-footer img { height: 20px; opacity: 0.4; }
 .page-footer-text { font-size: 10px; color: rgba(73,73,73,0.4); text-align: right; }
 
 /* ─── BKM col stacks ─── */
-.bkm-col { display: flex; flex-direction: column; gap: 14px; }
+.bkm-col { display: flex; flex-direction: column; gap: 10px; }
 </style>
 </head>
 <body>
@@ -543,7 +548,7 @@ body::before {
   <!-- VERTRIEB -->
   <div class="glass vertrieb-card">
     <div class="card-title"><span class="ct-icon">↑</span>Vertriebspotenzial für den BKM Fachbetrieb</div>
-    <p style="font-size:12px;line-height:1.65;margin-bottom:0;">Diese Kooperation lebt von persönlicher Vernetzung — <strong style="color:var(--deep-green)">hier arbeiten Menschen mit Menschen.</strong> Der erste Schritt: Stellt euch aktiv bei den Locatec Partnern in eurer Region vor. Je besser die Zusammenarbeit vor Ort, desto stärker der gegenseitige Nutzen am Point of Sale.</p>
+    <p style="font-size:12.5px;line-height:1.55;margin-bottom:0;">Diese Kooperation lebt von persönlicher Vernetzung — <strong style="color:var(--deep-green)">hier arbeiten Menschen mit Menschen.</strong> Der erste Schritt: Stellt euch aktiv bei den Locatec Partnern in eurer Region vor. Je besser die Zusammenarbeit vor Ort, desto stärker der gegenseitige Nutzen am Point of Sale.</p>
     <div class="vorteil-grid">
       <div class="vorteil-box">
         <div class="vorteil-eyebrow">Vorteil A</div>
