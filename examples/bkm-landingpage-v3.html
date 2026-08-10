@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BKM Mannesmann — Feuchtigkeitsschutz. Kostenlose Beratung.</title>
+  <meta name="description" content="Professionelle Bauwerksabdichtung & Mauertrockenlegung seit 1977. 5 Jahre Garantie. Kostenlose Erstberatung vor Ort. Jetzt anfragen.">
+
+  <!-- Structured Data: LocalBusiness -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HomeAndConstructionBusiness",
+    "name": "BKM Mannesmann AG",
+    "description": "Spezialist für Bauwerksabdichtung und Mauertrockenlegung seit 1977",
+    "foundingDate": "1977",
+    "url": "https://www.bkm-mannesmann.de",
+    "telephone": "+498000000000",
+    "areaServed": "DE",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Feuchtigkeitsschutz-Verfahren",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "MICROPOREX® Injektionsverfahren" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "BKM Sanierputzsystem" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Keller-Abdichtung" } }
+      ]
+    }
+  }
+  </script>
+
+  <style>
+
+/* ═══════════════════════════════════════════════════════════════
+   BKM MANNESMANN — LANDING PAGE V3
+   Awwwards-Level Motion Design
+   Features: Grain · Orbs · Char-Animation · 3D Tilt · Load Reveal
+═══════════════════════════════════════════════════════════════ */
+
+/* ─── FONTS ─────────────────────────────────────────────────── */
+@font-face { font-family:'Unbounded'; src:url('../assets/fonts/Unbounded_900.woff2') format('woff2'); font-weight:900; font-display:block; }
+@font-face { font-family:'Unbounded'; src:url('../assets/fonts/Unbounded_700.woff2') format('woff2'); font-weight:700; font-display:block; }
+@font-face { font-family:'TT Norms Pro'; src:url('../assets/fonts/TT_Norms_Pro_Compact_Regular.woff2') format('woff2'); font-weight:400; font-display:block; }
+@font-face { font-family:'TT Norms Pro'; src:url('../assets/fonts/TT_Norms_Pro_Bold.woff2') format('woff2'); font-weight:700; font-display:block; }
+
+/* ─── TOKENS ─────────────────────────────────────────────────── */
+:root {
+  --dg:    #1c4b42; --dg2: #122e27; --dg1: #235a4f;
+  --lime:  #b4e717; --lime2: #a0d014;
+  --tg:    #287d4b;
+  --sand:  #f6f5f2; --sand2: #f0efec;
+  --white: #ffffff; --black: #1a1a1a; --stone: #494949;
+  --out:   #c8c5be; --out2: #e8e6e1;
+  --fd: 'Unbounded', sans-serif;
+  --fb: 'TT Norms Pro', -apple-system, system-ui, sans-serif;
+  --r1:4px; --r2:8px; --r3:12px; --r4:16px; --r5:24px; --rf:9999px;
+  --e1: cubic-bezier(0.16,1,0.3,1);   /* Snappy out    */
+  --e2: cubic-bezier(0.4,0,0.2,1);    /* Material      */
+  --e3: cubic-bezier(0.34,1.56,0.64,1); /* Springy     */
+}
+
+/* ─── RESET ──────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:16px;}
+body{
+  font-family:var(--fb); color:var(--black); background:var(--dg2);
+  overflow-x:hidden; -webkit-font-smoothing:antialiased;
+  /* body starts invisible — load reveal shows it */
+  opacity:0;
+}
+body.loaded { opacity:1; }
+a{text-decoration:none;color:inherit;}
+ul{list-style:none;}
+button{cursor:pointer;border:none;background:none;font-family:inherit;}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   ❶ FILM GRAIN OVERLAY
+   SVG turbulence noise — animates position for "live film" feel
+   opacity: .03–.05 keeps it subliminal
+═══════════════════════════════════════════════════════════════ */
+body::after {
+  content:'';
+  position:fixed; inset:0; z-index:9990; pointer-events:none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.038;
+  mix-blend-mode: overlay;
+  animation: grain 0.45s steps(1) infinite;
+}
+@keyframes grain {
+  0%  { background-position:   0%   0%; }
+  10% { background-position:  -5% -10%; }
+  20% { background-position: -15%   5%; }
+  30% { background-position:   7% -25%; }
+  40% { background-position:  -5%  25%; }
+  50% { background-position: -15%  10%; }
+  60% { background-position:  15%   0%; }
+  70% { background-position:   0%  15%; }
+  80% { background-position:   3%  35%; }
+  90% { background-position: -10%  10%; }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   ❷ PAGE LOAD REVEAL
+   Two panels slide away (top/bottom) revealing the page
+═══════════════════════════════════════════════════════════════ */
+.loader {
+  position:fixed; inset:0; z-index:9999;
+  display:flex; align-items:center; justify-content:center;
+  pointer-events:none; overflow:hidden;
+}
+.loader-panel {
+  position:absolute; left:0; right:0; height:50%;
+  background:var(--dg2);
+  transition: transform 0.85s var(--e1);
+}
+.loader-panel.top { top:0; transform-origin:top; }
+.loader-panel.bot { bottom:0; transform-origin:bottom; }
+
+.loader-logo {
+  position:relative; z-index:1;
+  display:flex; flex-direction:column; align-items:center; gap:12px;
+  transition: opacity 0.4s, transform 0.4s var(--e2);
+}
+.loader-wordmark {
+  font-family:var(--fd); font-size:32px; font-weight:900;
+  letter-spacing:-0.04em; color:var(--white);
+}
+.loader-wordmark em { font-style:normal; color:var(--lime); }
+.loader-tagline {
+  font-size:11px; font-weight:700; letter-spacing:.14em;
+  text-transform:uppercase; color:rgba(255,255,255,.35);
+}
+.loader-bar {
+  width:48px; height:2px; background:rgba(255,255,255,.1);
+  border-radius:var(--rf); overflow:hidden; margin-top:16px;
+}
+.loader-bar-fill {
+  height:100%; width:0%; background:var(--lime);
+  border-radius:var(--rf);
+  animation: loadbar 0.9s var(--e2) forwards;
+}
+@keyframes loadbar { to { width:100%; } }
+
+/* On done class: panels slide, logo fades */
+.loader.done .loader-panel.top { transform: translateY(-100%); }
+.loader.done .loader-panel.bot { transform: translateY(100%); }
+.loader.done .loader-logo      { opacity:0; transform:scale(0.95); }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   ❸ CUSTOM CURSOR
+═══════════════════════════════════════════════════════════════ */
+.cur-dot, .cur-ring {
+  position:fixed; pointer-events:none; z-index:9995;
+  border-radius:50%; transform:translate(-50%,-50%);
+  mix-blend-mode:exclusion;
+}
+.cur-dot {
+  width:8px; height:8px; background:var(--lime);
+  transition: width .15s, height .15s;
+}
+.cur-ring {
+  width:36px; height:36px;
+  border:1.5px solid rgba(180,231,23,.55);
+  transition: width .5s var(--e1), height .5s var(--e1), opacity .3s;
+}
+body.ch .cur-dot  { width:14px; height:14px; }
+body.ch .cur-ring { width:60px; height:60px; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   NAVIGATION — Minimal LP style
+═══════════════════════════════════════════════════════════════ */
+.nav {
+  position:fixed; inset:0 0 auto 0; z-index:1000; height:68px;
+  display:flex; align-items:center;
+  padding:0 clamp(20px,4vw,56px);
+  transition: background .5s, backdrop-filter .5s;
+}
+.nav.sc {
+  background: rgba(18,46,39,.9);
+  backdrop-filter:blur(24px) saturate(160%);
+  -webkit-backdrop-filter:blur(24px) saturate(160%);
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.nav-logo-text {
+  font-family:var(--fd); font-size:16px; font-weight:900;
+  letter-spacing:-0.03em; color:var(--white); flex:0 0 auto;
+}
+.nav-logo-text em { font-style:normal; color:var(--lime); }
+.nav-phone {
+  flex:1; text-align:center;
+  font-size:14px; font-weight:700; color:rgba(255,255,255,.55);
+  letter-spacing:.01em;
+  transition: color .2s;
+}
+.nav-phone a { color:inherit; transition:color .2s; }
+.nav-phone a:hover { color:var(--lime); }
+.nav-cta { flex:0 0 auto; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════════════════════════════ */
+.btn {
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  padding:0 24px; height:48px; border-radius:var(--r1);
+  font-family:var(--fd); font-size:12px; font-weight:900;
+  letter-spacing:.02em; text-transform:uppercase; white-space:nowrap;
+  transition:all .28s var(--e1); position:relative; overflow:hidden;
+}
+.btn::after {
+  content:''; position:absolute; inset:0;
+  background:rgba(255,255,255,0);
+  transition:background .18s;
+}
+.btn:hover::after { background:rgba(255,255,255,.07); }
+
+.btn-p { background:var(--lime); color:var(--dg); }
+.btn-p:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(180,231,23,.42); }
+
+.btn-g { background:transparent; color:var(--white); border:1.5px solid rgba(255,255,255,.22); }
+.btn-g:hover { border-color:rgba(255,255,255,.6); }
+
+.btn-d { background:var(--dg); color:var(--white); }
+.btn-d:hover { background:var(--dg1); transform:translateY(-2px); box-shadow:0 8px 24px rgba(28,75,66,.42); }
+
+.btn-lg { height:56px; padding:0 32px; font-size:13px; }
+.btn-xl { height:64px; padding:0 40px; font-size:14px; }
+
+/* Magnetic wrapper */
+.mag { display:inline-block; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   ❹ HERO — Orbs + Character Animation
+═══════════════════════════════════════════════════════════════ */
+.hero {
+  min-height:100svh; background:var(--dg2);
+  position:relative; overflow:hidden;
+  display:flex; flex-direction:column; justify-content:flex-end;
+  padding:0 clamp(20px,4vw,56px) clamp(72px,10vh,120px);
+}
+
+/* Texture */
+.hero-tex {
+  position:absolute; inset:0;
+  background:url('../assets/backgrounds/bg-green-texture-1.jpg') center/cover;
+  opacity:.18; pointer-events:none;
+}
+
+/* ❹a Gradient Orbs */
+.orbs { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+.orb {
+  position:absolute; border-radius:50%;
+  filter:blur(80px); will-change:transform;
+}
+.orb-1 {
+  width:clamp(400px,55vw,800px); height:clamp(400px,55vw,800px);
+  background:radial-gradient(circle, rgba(180,231,23,.13) 0%, transparent 65%);
+  top:-15%; right:-10%;
+  animation:orb1 14s ease-in-out infinite;
+}
+.orb-2 {
+  width:clamp(300px,40vw,600px); height:clamp(300px,40vw,600px);
+  background:radial-gradient(circle, rgba(40,125,75,.2) 0%, transparent 65%);
+  bottom:-10%; left:-8%;
+  animation:orb2 18s ease-in-out infinite;
+}
+.orb-3 {
+  width:clamp(200px,25vw,380px); height:clamp(200px,25vw,380px);
+  background:radial-gradient(circle, rgba(180,231,23,.07) 0%, transparent 65%);
+  top:40%; left:38%;
+  animation:orb3 22s ease-in-out infinite;
+}
+@keyframes orb1 {
+  0%,100% { transform:translate(0,0) scale(1);    }
+  33%     { transform:translate(-40px,30px) scale(1.08); }
+  66%     { transform:translate(30px,-40px) scale(0.93); }
+}
+@keyframes orb2 {
+  0%,100% { transform:translate(0,0) scale(1);    }
+  40%     { transform:translate(50px,-30px) scale(1.1);  }
+  70%     { transform:translate(-30px,50px) scale(0.95); }
+}
+@keyframes orb3 {
+  0%,100% { transform:translate(0,0) scale(1);    }
+  50%     { transform:translate(-60px,-40px) scale(1.15); }
+}
+
+/* Vignette */
+.hero-vig {
+  position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(to bottom,rgba(18,46,39,.5) 0%,transparent 40%,rgba(18,46,39,.7) 100%);
+}
+
+.hero-content { position:relative; z-index:1; max-width:1280px; width:100%; }
+
+/* Eyebrow */
+.eyebrow {
+  display:inline-flex; align-items:center; gap:10px;
+  font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+  color:rgba(255,255,255,.45); margin-bottom:28px;
+}
+.eyebrow-dot {
+  width:6px; height:6px; background:var(--lime); border-radius:50%;
+  animation:blink 2s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:.3;} }
+
+/* ❹b Character-by-character headline */
+.hero-h1 {
+  font-family:var(--fd);
+  font-size:clamp(44px,8.5vw,120px);
+  font-weight:900; line-height:.95; letter-spacing:-0.05em;
+  text-transform:uppercase; color:var(--white);
+  margin-bottom:36px;
+}
+.hero-h1 em { font-style:normal; color:var(--lime); }
+
+/* Each char wrapped by JS */
+.ch-char {
+  display:inline-block;
+  opacity:0;
+  transform:translateY(60%) skewY(6deg);
+  transition:opacity .5s var(--e1), transform .6s var(--e1);
+}
+.ch-char.in { opacity:1; transform:translateY(0) skewY(0deg); }
+/* Space chars don't animate */
+.ch-space { display:inline; }
+
+/* Hero bottom row */
+.hero-bottom {
+  display:flex; align-items:flex-end;
+  justify-content:space-between; gap:40px; flex-wrap:wrap;
+}
+.hero-sub {
+  font-size:clamp(15px,1.5vw,18px); line-height:1.65;
+  color:rgba(255,255,255,.6); max-width:460px; margin-bottom:32px;
+}
+.hero-actions { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+
+/* Stat pills cluster */
+.hero-pills { display:flex; flex-direction:column; gap:10px; align-items:flex-end; }
+.pill {
+  display:inline-flex; align-items:center; gap:12px;
+  background:rgba(255,255,255,.065);
+  backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,.1); border-radius:var(--rf);
+  padding:10px 18px 10px 14px;
+}
+.pill-n {
+  font-family:var(--fd); font-size:20px; font-weight:900;
+  letter-spacing:-0.03em; color:var(--lime); line-height:1;
+}
+.pill-l { font-size:12px; font-weight:700; color:rgba(255,255,255,.5); }
+
+/* Scroll cue */
+.scroll-cue {
+  position:absolute; bottom:28px; left:clamp(20px,4vw,56px); z-index:2;
+  display:flex; align-items:center; gap:10px;
+  opacity:0; animation:fadeUp .6s 2s forwards;
+}
+@keyframes fadeUp { from{opacity:0;transform:translateY(8px);} to{opacity:1;transform:none;} }
+.scroll-cue-line {
+  width:1px; height:44px;
+  background:linear-gradient(to bottom,rgba(255,255,255,.5),transparent);
+  animation:scrollCue 1.8s ease-in-out infinite;
+  transform-origin:top;
+}
+@keyframes scrollCue {
+  0%   {transform:scaleY(0);transform-origin:top;}
+  50%  {transform:scaleY(1);transform-origin:top;}
+  51%  {transform:scaleY(1);transform-origin:bottom;}
+  100% {transform:scaleY(0);transform-origin:bottom;}
+}
+.scroll-cue-label {
+  font-size:10px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+  color:rgba(255,255,255,.3); writing-mode:vertical-rl;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   MARQUEE
+═══════════════════════════════════════════════════════════════ */
+.marquee { background:var(--lime); overflow:hidden; }
+.marquee-track {
+  display:flex; animation:mq 26s linear infinite; will-change:transform;
+}
+.marquee-track:hover { animation-play-state:paused; }
+.mi {
+  flex:0 0 auto; height:50px; padding:0 28px;
+  display:flex; align-items:center;
+  font-family:var(--fd); font-size:12px; font-weight:900;
+  letter-spacing:.05em; text-transform:uppercase; color:var(--dg);
+  white-space:nowrap;
+}
+.ms { flex:0 0 6px; height:6px; background:rgba(28,75,66,.25); border-radius:50%; align-self:center; margin:0 20px; }
+@keyframes mq { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   SECTION UTILITIES
+═══════════════════════════════════════════════════════════════ */
+.sec { padding:clamp(72px,9vw,120px) clamp(20px,4vw,56px); }
+.in  { max-width:1280px; margin:0 auto; width:100%; }
+
+.lbl {
+  font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--tg); margin-bottom:13px; display:block;
+}
+.lbl.d { color:var(--lime); }
+
+.h2 {
+  font-family:var(--fd); font-size:clamp(28px,3.8vw,52px);
+  font-weight:900; line-height:1.02; letter-spacing:-0.03em; color:var(--black);
+}
+.h2.d { color:var(--white); }
+
+.bd {
+  font-size:17px; line-height:1.7; color:var(--stone); max-width:580px; margin-top:14px;
+}
+.bd.d { color:rgba(255,255,255,.55); }
+
+/* Reveal */
+[data-r] {
+  opacity:0; transform:translateY(32px);
+  transition:opacity .7s var(--e1), transform .7s var(--e1);
+}
+[data-r].vis { opacity:1; transform:none; }
+[data-r][data-d="1"]{transition-delay:.1s;}
+[data-r][data-d="2"]{transition-delay:.2s;}
+[data-r][data-d="3"]{transition-delay:.3s;}
+[data-r][data-d="4"]{transition-delay:.4s;}
+[data-r][data-d="5"]{transition-delay:.5s;}
+
+/* Diagonal cut helper */
+.cut-t::before { /* Light section above, dark section: cuts top-right */
+  content:''; position:absolute; top:-1px; left:0; right:0; height:80px;
+  background:var(--white);
+  clip-path:polygon(0 0,100% 0,100% 100%);
+  pointer-events:none;
+}
+.cut-b::after { /* Dark section, light section below: cuts bottom-left */
+  content:''; position:absolute; bottom:-1px; left:0; right:0; height:80px;
+  background:var(--sand);
+  clip-path:polygon(0 100%,100% 100%,100% 0);
+  pointer-events:none;
+}
+.cut-b2::after { /* Dark → White */
+  content:''; position:absolute; bottom:-1px; left:0; right:0; height:80px;
+  background:var(--white);
+  clip-path:polygon(0 100%,100% 100%,100% 0);
+  pointer-events:none;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   ❺ PROBLEM SECTION — 3D Tilt Cards
+═══════════════════════════════════════════════════════════════ */
+.prob { background:var(--dg2); position:relative; }
+.prob .in { position:relative; z-index:1; }
+
+.prob-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:52px; }
+
+/* ❺a 3D Tilt Glass Card */
+.tcard-wrap {
+  perspective:800px;
+}
+.tcard {
+  background:rgba(255,255,255,.055);
+  backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.085);
+  border-radius:var(--r5);
+  padding:clamp(24px,3vw,40px);
+  position:relative; overflow:hidden;
+  transform-style:preserve-3d;
+  transition:transform .6s var(--e1), border-color .3s;
+  /* Spotlight via CSS custom props */
+  background-image:radial-gradient(
+    500px circle at var(--cx,-9999px) var(--cy,-9999px),
+    rgba(180,231,23,.09), transparent 40%
+  );
+  will-change:transform;
+}
+.tcard::before { /* Top shimmer */
+  content:''; position:absolute; top:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);
+}
+.tcard:hover { border-color:rgba(255,255,255,.15); }
+
+/* Sheen layer — reflects on tilt */
+.tcard-sheen {
+  position:absolute; inset:0; border-radius:inherit;
+  background:linear-gradient(105deg,rgba(255,255,255,0) 40%,rgba(255,255,255,.05) 50%,rgba(255,255,255,0) 60%);
+  pointer-events:none; opacity:0;
+  transition:opacity .3s;
+}
+.tcard:hover .tcard-sheen { opacity:1; }
+
+.c-num { position:absolute; top:16px; right:20px; font-family:var(--fd); font-size:64px; font-weight:900; letter-spacing:-.06em; color:rgba(255,255,255,.032); line-height:1; pointer-events:none; }
+.c-ico  { width:46px; height:46px; background:rgba(180,231,23,.1); border-radius:var(--r2); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:20px; }
+.c-tit  { font-family:var(--fd); font-size:18px; font-weight:900; letter-spacing:-.02em; color:var(--white); margin-bottom:10px; line-height:1.2; }
+.c-bod  { font-size:13.5px; line-height:1.65; color:rgba(255,255,255,.55); }
+.c-tag  { display:inline-flex; align-items:center; gap:6px; margin-top:20px; padding-top:16px; border-top:1px solid rgba(255,255,255,.07); font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--lime); background:rgba(180,231,23,.1); border-radius:var(--rf); padding:4px 10px; border:none; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   STATS — Compact Bento
+═══════════════════════════════════════════════════════════════ */
+.stats { background:var(--dg); position:relative; overflow:hidden; }
+.stats-bg {
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  font-family:var(--fd); font-size:clamp(120px,20vw,280px); font-weight:900;
+  letter-spacing:-.08em; text-transform:uppercase; white-space:nowrap;
+  color:rgba(255,255,255,.018); pointer-events:none; user-select:none;
+}
+.bento { display:grid; grid-template-columns:repeat(12,1fr); gap:14px; position:relative; z-index:1; margin-top:48px; }
+.bc4 { grid-column:span 4; }
+.bc5 { grid-column:span 5; }
+.bc7 { grid-column:span 7; }
+
+.bcell {
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:var(--r4); padding:clamp(24px,3vw,38px);
+  position:relative; overflow:hidden;
+  transition:background .3s, border-color .3s, transform .4s var(--e1);
+}
+.bcell:hover { background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.14); transform:translateY(-3px); }
+.bcell.acc { background:var(--lime); border-color:transparent; }
+.bcell.acc:hover { background:var(--lime2); }
+
+.bg { position:absolute; bottom:-12px; right:-6px; font-family:var(--fd); font-size:clamp(56px,10vw,130px); font-weight:900; letter-spacing:-.06em; line-height:1; pointer-events:none; user-select:none; }
+.bcell:not(.acc) .bg { color:rgba(255,255,255,.032); }
+.bcell.acc .bg { color:rgba(28,75,66,.1); }
+
+.bn { font-family:var(--fd); font-size:clamp(44px,6vw,80px); font-weight:900; letter-spacing:-.05em; line-height:1; margin-bottom:8px; }
+.bcell:not(.acc) .bn { color:var(--lime); }
+.bcell.acc .bn { color:var(--dg); }
+
+.bl { font-size:13px; font-weight:700; letter-spacing:.01em; }
+.bcell:not(.acc) .bl { color:rgba(255,255,255,.5); }
+.bcell.acc .bl { color:rgba(28,75,66,.7); }
+
+.bd2 { font-size:12px; line-height:1.55; margin-top:6px; }
+.bcell:not(.acc) .bd2 { color:rgba(255,255,255,.3); }
+.bcell.acc .bd2 { color:rgba(28,75,66,.5); }
+
+/* Wide cell */
+.bcell.wide { display:flex; align-items:center; gap:32px; }
+.bcell.wide .bn { flex:0 0 auto; margin-bottom:0; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   PROCESS — Horizontal steps
+═══════════════════════════════════════════════════════════════ */
+.process { background:var(--sand); }
+.process-steps {
+  display:grid; grid-template-columns:repeat(4,1fr);
+  gap:0; margin-top:52px; position:relative;
+}
+/* Connecting line */
+.process-steps::before {
+  content:''; position:absolute; top:32px; left:calc(12.5% + 20px); right:calc(12.5% + 20px);
+  height:2px;
+  background:linear-gradient(to right,
+    var(--lime) 0%, var(--lime) var(--progress,0%),
+    var(--out2) var(--progress,0%), var(--out2) 100%);
+  z-index:0;
+  transition: --progress 1s;
+}
+
+.pstep { padding:0 20px; position:relative; z-index:1; }
+.pstep-num {
+  width:64px; height:64px; border-radius:50%;
+  background:var(--dg); color:var(--lime);
+  font-family:var(--fd); font-size:18px; font-weight:900;
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:20px; position:relative; z-index:1;
+  transition:background .3s, box-shadow .3s, transform .3s var(--e3);
+  cursor:default;
+}
+.pstep:hover .pstep-num {
+  background:var(--dg1);
+  box-shadow:0 0 0 8px rgba(28,75,66,.1);
+  transform:scale(1.08);
+}
+.pstep-done .pstep-num { background:var(--lime); color:var(--dg); }
+
+.pstep-title { font-family:var(--fd); font-size:15px; font-weight:900; letter-spacing:-.02em; color:var(--black); margin-bottom:8px; line-height:1.2; }
+.pstep-body  { font-size:13px; line-height:1.65; color:var(--stone); }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   SOCIAL PROOF — Testimonials
+═══════════════════════════════════════════════════════════════ */
+.proof { background:var(--white); }
+.proof-grid { display:grid; grid-template-columns:1.3fr 1fr; gap:18px; margin-top:48px; }
+
+.tcard2 {
+  border-radius:var(--r5); padding:clamp(28px,3.5vw,44px);
+  position:relative; overflow:hidden; display:flex; flex-direction:column;
+}
+.tcard2.dk { background:var(--dg); }
+.tcard2.lt { background:var(--sand); box-shadow:none; }
+
+.t2-stars { display:flex; gap:3px; margin-bottom:14px; }
+.t2-star { font-size:14px; color:var(--lime); }
+.tcard2.lt .t2-star { color:var(--dg); }
+
+.t2-q { font-family:Georgia,serif; font-size:48px; line-height:.7; font-style:italic; margin-bottom:10px; color:var(--lime); }
+.tcard2.lt .t2-q { color:var(--dg); opacity:.25; }
+
+.t2-txt { font-size:15px; line-height:1.7; flex:1; margin-bottom:24px; }
+.tcard2.dk .t2-txt { color:rgba(255,255,255,.7); }
+.tcard2.lt .t2-txt { color:var(--stone); }
+
+.t2-auth { display:flex; align-items:center; gap:12px; padding-top:18px; }
+.tcard2.dk .t2-auth { border-top:1px solid rgba(255,255,255,.1); }
+.tcard2.lt .t2-auth { border-top:1px solid var(--out2); }
+
+.t2-av { width:40px; height:40px; border-radius:50%; flex:0 0 auto; display:flex; align-items:center; justify-content:center; font-family:var(--fd); font-size:12px; font-weight:900; }
+.tcard2.dk .t2-av { background:rgba(255,255,255,.1); color:var(--lime); }
+.tcard2.lt .t2-av { background:var(--dg); color:var(--lime); }
+
+.t2-name { font-size:14px; font-weight:700; }
+.tcard2.dk .t2-name { color:var(--white); }
+.tcard2.lt .t2-name { color:var(--black); }
+
+.t2-role { font-size:12px; color:rgba(255,255,255,.35); }
+.tcard2.lt .t2-role { color:var(--stone); }
+
+/* Right column: stacked 2 small */
+.proof-right { display:flex; flex-direction:column; gap:18px; }
+.proof-small { background:var(--sand); border-radius:var(--r4); padding:28px; }
+.ps-stars { display:flex; gap:2px; margin-bottom:10px; }
+.ps-star { font-size:12px; color:var(--dg); }
+.ps-txt { font-size:14px; line-height:1.65; color:var(--stone); margin-bottom:16px; }
+.ps-auth { font-size:13px; font-weight:700; color:var(--black); }
+.ps-loc { font-size:12px; color:var(--stone); }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   CTA — Conversion Section
+═══════════════════════════════════════════════════════════════ */
+.cta { background:var(--dg); position:relative; overflow:hidden; text-align:center; }
+.cta-tex {
+  position:absolute; inset:0;
+  background:url('../assets/backgrounds/bg-green-texture-4.jpg') center/cover;
+  opacity:.12; pointer-events:none;
+}
+.cta-word {
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  font-family:var(--fd); font-size:clamp(80px,18vw,260px); font-weight:900;
+  letter-spacing:-.08em; text-transform:uppercase; white-space:nowrap;
+  color:rgba(255,255,255,.018); pointer-events:none; user-select:none;
+}
+.cta-in { position:relative; z-index:1; max-width:700px; margin:0 auto; }
+.cta-tag { display:inline-flex; align-items:center; gap:7px; font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--lime); margin-bottom:20px; opacity:.8; }
+.cta-h { font-family:var(--fd); font-size:clamp(36px,6vw,80px); font-weight:900; letter-spacing:-.05em; text-transform:uppercase; color:var(--white); line-height:.95; margin-bottom:24px; }
+.cta-h em { font-style:normal; color:var(--lime); }
+.cta-sub { font-size:16px; line-height:1.65; color:rgba(255,255,255,.5); margin-bottom:36px; max-width:480px; margin-left:auto; margin-right:auto; }
+.cta-acts { display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; }
+.cta-note { margin-top:18px; font-size:12px; color:rgba(255,255,255,.25); }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   FAQ — Accordion
+═══════════════════════════════════════════════════════════════ */
+.faq { background:var(--sand); }
+.faq-wrap { max-width:760px; margin:48px auto 0; }
+.faq-item { border-bottom:1px solid var(--out2); }
+.faq-btn { width:100%; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:20px 0; text-align:left; font-family:var(--fd); font-size:15px; font-weight:900; letter-spacing:-.01em; color:var(--black); transition:color .18s; }
+.faq-btn:hover { color:var(--dg); }
+.faq-ico { width:26px; height:26px; border-radius:50%; background:var(--out2); display:flex; align-items:center; justify-content:center; font-size:17px; color:var(--dg); flex:0 0 auto; transition:background .3s, transform .35s var(--e1); }
+.faq-item.o .faq-ico { background:var(--lime); transform:rotate(45deg); }
+.faq-ans { overflow:hidden; max-height:0; transition:max-height .38s var(--e1); }
+.faq-item.o .faq-ans { max-height:280px; }
+.faq-at { padding-bottom:18px; font-size:14px; line-height:1.7; color:var(--stone); }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   FOOTER — Minimal LP version
+═══════════════════════════════════════════════════════════════ */
+.footer {
+  background:var(--dg2); border-top:1px solid rgba(255,255,255,.07);
+  padding:clamp(32px,4vw,52px) clamp(20px,4vw,56px);
+}
+.footer-in {
+  max-width:1280px; margin:0 auto;
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;
+}
+.f-brand { font-family:var(--fd); font-size:15px; font-weight:900; letter-spacing:-.03em; color:var(--white); }
+.f-brand em { font-style:normal; color:var(--lime); }
+.f-links { display:flex; gap:24px; }
+.f-links a { font-size:12px; color:rgba(255,255,255,.3); transition:color .2s; }
+.f-links a:hover { color:rgba(255,255,255,.6); }
+.f-legal { font-size:12px; color:rgba(255,255,255,.2); }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════════════ */
+@media (max-width:1024px) {
+  .prob-grid { grid-template-columns:1fr 1fr; }
+  .bento { grid-template-columns:repeat(6,1fr); }
+  .bc4 { grid-column:span 3; }
+  .bc5,.bc7 { grid-column:span 6; }
+  .bcell.wide { flex-direction:column; align-items:flex-start; gap:8px; }
+  .bcell.wide .bn { margin-bottom:8px; }
+  .process-steps { grid-template-columns:1fr 1fr; gap:32px; }
+  .process-steps::before { display:none; }
+  .proof-grid { grid-template-columns:1fr; }
+  .proof-right { flex-direction:row; }
+}
+@media (max-width:768px) {
+  .nav-phone { display:none; }
+  .prob-grid { grid-template-columns:1fr; }
+  .bento { grid-template-columns:1fr 1fr; }
+  .bc4,.bc5,.bc7 { grid-column:span 2; }
+  .process-steps { grid-template-columns:1fr; }
+  .proof-right { flex-direction:column; }
+  .footer-in { flex-direction:column; align-items:flex-start; gap:16px; }
+  .hero-pills { display:none; }
+}
+
+  </style>
+</head>
+<body>
+
+<!-- ═══ CURSOR ═══════════════════════════════════════════════ -->
+<div class="cur-dot" id="cd"></div>
+<div class="cur-ring" id="cr"></div>
+
+<!-- ═══ PAGE LOADER ══════════════════════════════════════════ -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-panel top"></div>
+  <div class="loader-panel bot"></div>
+  <div class="loader-logo">
+    <div class="loader-wordmark">BKM<em>.</em></div>
+    <div class="loader-tagline">Feuchtigkeitsschutz seit 1977</div>
+    <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+  </div>
+</div>
+
+<!-- ═══ NAV ══════════════════════════════════════════════════ -->
+<nav class="nav" id="nav">
+  <div class="nav-logo-text">BKM<em>.</em></div>
+  <div class="nav-phone">
+    <a href="tel:+49800000000">📞 0800 000 000 — Kostenlos & Montag–Freitag</a>
+  </div>
+  <div class="nav-cta">
+    <a href="#cta" class="btn btn-p">Kostenlos anfragen</a>
+  </div>
+</nav>
+
+
+<!-- ═══ HERO ══════════════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero-tex"></div>
+  <div class="orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+  <div class="hero-vig"></div>
+
+  <div class="hero-content">
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      Kostenlose Erstberatung — deutschlandweit
+    </div>
+
+    <h1 class="hero-h1" id="heroH1">
+      FEUCHTIGKEIT<br>
+      HAT <em>KEINE</em><br>
+      CHANCE.
+    </h1>
+
+    <div class="hero-bottom">
+      <div>
+        <p class="hero-sub">
+          Professionelle Bauwerksabdichtung & Mauertrockenlegung —
+          dauerhaft trocken, 5 Jahre Garantie, seit 1977.
+        </p>
+        <div class="hero-actions">
+          <div class="mag">
+            <a href="#cta" class="btn btn-p btn-xl">
+              Jetzt kostenlos beraten lassen
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+          </div>
+          <a href="tel:+49800000000" class="btn btn-g btn-xl">📞 Anrufen</a>
+        </div>
+      </div>
+      <div class="hero-pills" data-r data-d="3">
+        <div class="pill"><div class="pill-n">47+</div><div class="pill-l">Jahre Erfahrung</div></div>
+        <div class="pill"><div class="pill-n">10k+</div><div class="pill-l">Projekte</div></div>
+        <div class="pill"><div class="pill-n">5 J.</div><div class="pill-l">Garantie</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-cue" aria-hidden="true">
+    <div class="scroll-cue-line"></div>
+    <div class="scroll-cue-label">Scrollen</div>
+  </div>
+</section>
+
+
+<!-- ═══ MARQUEE ═══════════════════════════════════════════════ -->
+<div class="marquee" aria-label="Vertrauenssignale">
+  <div class="marquee-track">
+    <span class="mi">Seit 1977</span><span class="ms"></span>
+    <span class="mi">TÜV-Zertifiziert</span><span class="ms"></span>
+    <span class="mi">10.000+ Projekte</span><span class="ms"></span>
+    <span class="mi">5 Jahre Garantie</span><span class="ms"></span>
+    <span class="mi">Deutschlandweit</span><span class="ms"></span>
+    <span class="mi">MICROPOREX® Verfahren</span><span class="ms"></span>
+    <span class="mi">Kostenlose Beratung</span><span class="ms"></span>
+    <!-- duplicate for seamless loop -->
+    <span class="mi">Seit 1977</span><span class="ms"></span>
+    <span class="mi">TÜV-Zertifiziert</span><span class="ms"></span>
+    <span class="mi">10.000+ Projekte</span><span class="ms"></span>
+    <span class="mi">5 Jahre Garantie</span><span class="ms"></span>
+    <span class="mi">Deutschlandweit</span><span class="ms"></span>
+    <span class="mi">MICROPOREX® Verfahren</span><span class="ms"></span>
+    <span class="mi">Kostenlose Beratung</span><span class="ms"></span>
+  </div>
+</div>
+
+
+<!-- ═══ PROBLEM — 3D Tilt Cards ═══════════════════════════════ -->
+<section class="sec prob cut-t cut-b2" id="problem">
+  <div class="in">
+    <div data-r>
+      <span class="lbl d">Das Problem</span>
+      <h2 class="h2 d">Feuchtigkeit zerstört<br>mehr als nur Putz</h2>
+      <p class="bd d">
+        Jedes Jahr wächst der Schaden — unbemerkt, unaufhaltsam.
+        Ohne professionelle Abdichtung ist kein Gebäude sicher.
+      </p>
+    </div>
+
+    <div class="prob-grid">
+      <div class="tcard-wrap" data-r data-d="1">
+        <div class="tcard js-tilt">
+          <div class="tcard-sheen"></div>
+          <div class="c-num">01</div>
+          <div class="c-ico">💧</div>
+          <div class="c-tit">Kapillarfeuchtigkeit</div>
+          <div class="c-bod">Bodenwasser steigt durch Kapillarkräfte im Mauerwerk auf — 24 Stunden täglich, ohne Unterbrechung, unaufhaltsam ohne Horizontalsperre.</div>
+          <div class="c-tag">Häufigste Ursache</div>
+        </div>
+      </div>
+      <div class="tcard-wrap" data-r data-d="2">
+        <div class="tcard js-tilt">
+          <div class="tcard-sheen"></div>
+          <div class="c-num">02</div>
+          <div class="c-ico">🍄</div>
+          <div class="c-tit">Schimmel & Gesundheit</div>
+          <div class="c-bod">Schimmelpilze brauchen nur 72 Stunden Feuchtigkeit. Mycotoxine belasten Atemwege und Immunsystem — besonders bei Kindern und Senioren.</div>
+          <div class="c-tag">Gesundheitsrisiko</div>
+        </div>
+      </div>
+      <div class="tcard-wrap" data-r data-d="3">
+        <div class="tcard js-tilt">
+          <div class="tcard-sheen"></div>
+          <div class="c-num">03</div>
+          <div class="c-ico">📉</div>
+          <div class="c-tit">Wertverlust der Immobilie</div>
+          <div class="c-bod">Feuchtigkeitsschäden senken den Immobilienwert um 15–40 %. Frostschäden, Salzausblühungen und Putzverlust summieren sich schnell zu sechsstelligen Kosten.</div>
+          <div class="c-tag">Bis –40% Wert</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ STATS — Bento ═════════════════════════════════════════ -->
+<section class="sec stats cut-b" id="zahlen">
+  <div class="stats-bg" aria-hidden="true">ZAHLEN</div>
+  <div class="in">
+    <div data-r>
+      <span class="lbl d">BKM in Zahlen</span>
+      <h2 class="h2 d">Erfahrung, die<br>man zählen kann</h2>
+    </div>
+    <div class="bento">
+      <div class="bcell bc4" data-r data-d="1">
+        <div class="bg">47</div>
+        <div class="bn js-cnt" data-to="47" data-sx="+">0</div>
+        <div class="bl">Jahre Erfahrung</div>
+        <div class="bd2">Gegründet 1977 — einer der ältesten Spezialisten Deutschlands.</div>
+      </div>
+      <div class="bcell bc4 acc" data-r data-d="2">
+        <div class="bg">10k</div>
+        <div class="bn">10k+</div>
+        <div class="bl">Projekte realisiert</div>
+        <div class="bd2">Einfamilienhäuser, Denkmäler, Industrie — jedes Projekt individuell.</div>
+      </div>
+      <div class="bcell bc4" data-r data-d="3">
+        <div class="bg">5</div>
+        <div class="bn js-cnt" data-to="5">0</div>
+        <div class="bl">Jahre Garantie</div>
+        <div class="bd2">Schriftlich — auf alle ausgeführten Arbeiten.</div>
+      </div>
+      <div class="bcell bc7 wide" data-r data-d="1">
+        <div class="bg">98</div>
+        <div class="bn js-cnt" data-to="98" data-sx="%">0</div>
+        <div>
+          <div class="bl">Weiterempfehlung</div>
+          <div class="bd2" style="margin-top:8px;line-height:1.55;">98 % der Kunden empfehlen BKM weiter — ermittelt in unserer jährlichen Kundenstudie.</div>
+        </div>
+      </div>
+      <div class="bcell bc5" data-r data-d="2">
+        <div class="bg" style="font-size:56px;bottom:-6px;">DE</div>
+        <div class="bn" style="font-size:clamp(32px,4vw,52px);">DE-weit</div>
+        <div class="bl">Zertifizierte Partner</div>
+        <div class="bd2" style="margin-top:8px;">Fachbetriebe in ganz Deutschland — schnelle Reaktionszeiten garantiert.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ PROCESS — Horizontal ══════════════════════════════════ -->
+<section class="sec process" id="vorgehen">
+  <div class="in">
+    <div data-r>
+      <span class="lbl">Unser Vorgehen</span>
+      <h2 class="h2">In 4 Schritten zur<br>dauerhaft trockenen Wand</h2>
+    </div>
+    <div class="process-steps" id="processSteps">
+      <div class="pstep pstep-done" data-r data-d="1">
+        <div class="pstep-num">01</div>
+        <div class="pstep-title">Kostenlose Erstdiagnose</div>
+        <div class="pstep-body">Vor-Ort-Besichtigung mit professioneller Feuchtigkeitsmessung — kostenlos & unverbindlich.</div>
+      </div>
+      <div class="pstep" data-r data-d="2">
+        <div class="pstep-num">02</div>
+        <div class="pstep-title">Individuelles Konzept</div>
+        <div class="pstep-body">Detailliertes Angebot mit Kostenaufstellung, Zeitplan und optimierter Verfahrensempfehlung.</div>
+      </div>
+      <div class="pstep" data-r data-d="3">
+        <div class="pstep-num">03</div>
+        <div class="pstep-title">Professionelle Ausführung</div>
+        <div class="pstep-body">Zertifizierte BKM-Fachbetriebe führen die Maßnahmen sauber, pünktlich und gründlich durch.</div>
+      </div>
+      <div class="pstep" data-r data-d="4">
+        <div class="pstep-num">✓</div>
+        <div class="pstep-title">Abnahme & Garantie</div>
+        <div class="pstep-body">Schriftliche 5-Jahres-Garantieurkunde nach Abnahme — bindend, übertragbar, ohne Einschränkungen.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ SOCIAL PROOF ══════════════════════════════════════════ -->
+<section class="sec proof" id="referenzen">
+  <div class="in">
+    <div data-r>
+      <span class="lbl">Kundenstimmen</span>
+      <h2 class="h2">Über 10.000 zufriedene<br>Kunden sprechen für uns</h2>
+    </div>
+    <div class="proof-grid">
+      <div class="tcard2 dk" data-r data-d="1">
+        <div class="t2-stars"><span class="t2-star">★</span><span class="t2-star">★</span><span class="t2-star">★</span><span class="t2-star">★</span><span class="t2-star">★</span></div>
+        <div class="t2-q">"</div>
+        <p class="t2-txt">
+          Unser Altbaukeller war seit 12 Jahren feucht — trotz mehrerer
+          Sanierungsversuche anderer Anbieter. BKM Mannesmann hat das Problem
+          in zwei Tagen dauerhaft gelöst. Seit jetzt zwei Jahren kein einziger
+          Feuchtigkeitsfleck mehr. Absolut beeindruckend.
+        </p>
+        <div class="t2-auth">
+          <div class="t2-av">MK</div>
+          <div>
+            <div class="t2-name">Maria K.</div>
+            <div class="t2-role">Hausbesitzerin · München</div>
+          </div>
+        </div>
+      </div>
+      <div class="proof-right">
+        <div class="proof-small" data-r data-d="2">
+          <div class="ps-stars"><span class="ps-star">★</span><span class="ps-star">★</span><span class="ps-star">★</span><span class="ps-star">★</span><span class="ps-star">★</span></div>
+          <p class="ps-txt">Als Hausverwaltung haben wir bereits drei Objekte durch BKM sanieren lassen. Professionell, pünktlich, faire Preise. Klare Empfehlung.</p>
+          <div class="ps-auth">Thomas H.</div>
+          <div class="ps-loc">Hausverwaltung · Hamburg</div>
+        </div>
+        <div class="proof-small" data-r data-d="3">
+          <div class="ps-stars"><span class="ps-star">★</span><span class="ps-star">★</span><span class="ps-star">★</span><span class="ps-star">★</span><span class="ps-star">★</span></div>
+          <p class="ps-txt">Ehrliche Diagnose, kein Überverkaufen, transparente Preise. Das Ergebnis: trockener Keller und spürbar bessere Wohnqualität.</p>
+          <div class="ps-auth">Sabine S.</div>
+          <div class="ps-loc">Eigentümerin · Berlin</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ CTA ════════════════════════════════════════════════════ -->
+<section class="sec cta" id="cta">
+  <div class="cta-tex"></div>
+  <div class="cta-word" aria-hidden="true">JETZT</div>
+  <div class="cta-in" data-r>
+    <div class="cta-tag"><span>●</span> Kostenlos & unverbindlich</div>
+    <h2 class="cta-h">Jetzt <em>kostenlos</em><br>beraten lassen</h2>
+    <p class="cta-sub">
+      Unser Expertenteam analysiert Ihr Problem und erstellt ein
+      individuelles Sanierungskonzept — ohne versteckte Kosten.
+    </p>
+    <div class="cta-acts">
+      <div class="mag">
+        <a href="tel:+49800000000" class="btn btn-p btn-xl">📞 Jetzt anrufen</a>
+      </div>
+      <a href="mailto:info@bkm-mannesmann.de" class="btn btn-g btn-xl">✉️ Nachricht senden</a>
+    </div>
+    <div class="cta-note">Montag–Freitag · 08:00–18:00 Uhr · Kostenlos aus dem deutschen Festnetz</div>
+  </div>
+</section>
+
+
+<!-- ═══ FAQ ════════════════════════════════════════════════════ -->
+<section class="sec faq" id="faq">
+  <div class="in">
+    <div data-r style="text-align:center; margin-bottom:0;">
+      <span class="lbl" style="justify-content:center; display:flex;">FAQ</span>
+      <h2 class="h2" style="text-align:center;">Häufige Fragen</h2>
+    </div>
+    <div class="faq-wrap">
+      <div class="faq-item o">
+        <button class="faq-btn" onclick="faqT(this)">Wie lange dauert eine Sanierung?<div class="faq-ico">+</div></button>
+        <div class="faq-ans"><div class="faq-at">Abhängig vom Umfang: Eine Horizontalsperre per MICROPOREX®-Injektion dauert 1–2 Tage. Größere Kellersanierungen typischerweise 3–7 Werktage. Verbindlichen Zeitplan nennen wir vor Auftragserteilung.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="faqT(this)">Muss das Gebäude geräumt werden?<div class="faq-ico">+</div></button>
+        <div class="faq-ans"><div class="faq-at">In den meisten Fällen nein. Unsere Verfahren sind so konzipiert, dass normale Nutzung während der Arbeiten möglich bleibt. Bei spezifischen Maßnahmen informieren wir Sie rechtzeitig.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="faqT(this)">Was kostet eine Feuchtigkeitssanierung?<div class="faq-ico">+</div></button>
+        <div class="faq-ans"><div class="faq-at">Die Kosten variieren je nach Schadensumfang, Wandstärke und Verfahren. Die Grundlage ist immer eine kostenlose Erstbegutachtung — danach erhalten Sie ein detailliertes Festpreisangebot ohne versteckte Positionen.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="faqT(this)">Welche Garantie erhalte ich?<div class="faq-ico">+</div></button>
+        <div class="faq-ans"><div class="faq-at">5 Jahre Garantie auf alle ausgeführten Arbeiten — schriftlich als Garantieurkunde nach Abnahme. Die Garantie ist bindend und übertragbar (z.B. beim Immobilienverkauf).</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="faqT(this)">Ist die Erstberatung wirklich kostenlos?<div class="faq-ico">+</div></button>
+        <div class="faq-ans"><div class="faq-at">Ja — die Erstbegutachtung vor Ort inklusive professioneller Feuchtigkeitsmessung ist vollständig kostenlos und unverbindlich. Kein Risiko, keine versteckten Kosten.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ FOOTER — Minimal ═══════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-in">
+    <div class="f-brand">BKM<em>.</em> Mannesmann AG</div>
+    <div class="f-links">
+      <a href="#">Impressum</a>
+      <a href="#">Datenschutz</a>
+      <a href="#">AGB</a>
+      <a href="#">Sitemap</a>
+    </div>
+    <div class="f-legal">© 2025 BKM Mannesmann AG</div>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     JAVASCRIPT — All Motion Systems
+═══════════════════════════════════════════════════════════════ -->
+<script>
+(function() {
+'use strict';
+
+/* ─── ❶ PAGE LOAD REVEAL ─────────────────────────────────────
+   1) Body starts opacity:0 (CSS)
+   2) Loader shows BKM logo + progress bar for 1.1s
+   3) Panels slide away, body fades in
+*/
+window.addEventListener('DOMContentLoaded', function() {
+  var loader = document.getElementById('loader');
+  // Wait for bar animation (0.9s) + small buffer
+  setTimeout(function() {
+    loader.classList.add('done');
+    document.body.classList.add('loaded');
+    // Trigger hero char animation after reveal
+    setTimeout(animateHeroChars, 200);
+    // Remove loader from DOM after transition
+    setTimeout(function() { loader.style.display = 'none'; }, 1000);
+  }, 1100);
+});
+
+
+/* ─── ❷ CUSTOM CURSOR ────────────────────────────────────────── */
+var hasFine = window.matchMedia('(pointer: fine)').matches;
+if (hasFine) {
+  var cd = document.getElementById('cd');
+  var cr = document.getElementById('cr');
+  var mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', function(e) { mx = e.clientX; my = e.clientY; });
+  (function cursorLoop() {
+    cd.style.left = mx + 'px'; cd.style.top = my + 'px';
+    rx += (mx - rx) * 0.1;
+    ry += (my - ry) * 0.1;
+    cr.style.left = rx + 'px'; cr.style.top = ry + 'px';
+    requestAnimationFrame(cursorLoop);
+  })();
+  document.querySelectorAll('a, button, .tcard').forEach(function(el) {
+    el.addEventListener('mouseenter', function() { document.body.classList.add('ch'); });
+    el.addEventListener('mouseleave', function() { document.body.classList.remove('ch'); });
+  });
+} else {
+  document.getElementById('cd').style.display = 'none';
+  document.getElementById('cr').style.display = 'none';
+}
+
+
+/* ─── ❸ NAVIGATION SCROLL ──────────────────────────────────── */
+var nav = document.getElementById('nav');
+var hero = document.getElementById('hero');
+var navObs = new IntersectionObserver(function(entries) {
+  nav.classList.toggle('sc', !entries[0].isIntersecting);
+}, { threshold: 0.05 });
+navObs.observe(hero);
+
+
+/* ─── ❹a CHARACTER ANIMATION ──────────────────────────────── */
+function animateHeroChars() {
+  var h1 = document.getElementById('heroH1');
+  if (!h1) return;
+
+  // Walk child nodes, splitting text into char spans
+  function splitNode(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      var frag = document.createDocumentFragment();
+      node.textContent.split('').forEach(function(ch) {
+        if (ch === ' ') {
+          frag.appendChild(document.createTextNode(' '));
+        } else {
+          var s = document.createElement('span');
+          s.className = 'ch-char';
+          s.textContent = ch;
+          frag.appendChild(s);
+        }
+      });
+      return frag;
+    }
+    if (node.nodeType === Node.ELEMENT_NODE) {
+      var clone = node.cloneNode(false);
+      Array.from(node.childNodes).forEach(function(child) {
+        clone.appendChild(splitNode(child));
+      });
+      return clone;
+    }
+    return node.cloneNode(true);
+  }
+
+  var newContent = document.createDocumentFragment();
+  Array.from(h1.childNodes).forEach(function(child) {
+    newContent.appendChild(splitNode(child));
+  });
+  h1.innerHTML = '';
+  h1.appendChild(newContent);
+
+  // Stagger each char
+  var chars = h1.querySelectorAll('.ch-char');
+  chars.forEach(function(ch, i) {
+    setTimeout(function() { ch.classList.add('in'); }, i * 28);
+  });
+}
+
+
+/* ─── ❹b HERO ORBS MOUSE INFLUENCE ───────────────────────── */
+if (hasFine) {
+  var heroEl = document.getElementById('hero');
+  var orb1 = document.querySelector('.orb-1');
+  var orb2 = document.querySelector('.orb-2');
+  heroEl.addEventListener('mousemove', function(e) {
+    var r = heroEl.getBoundingClientRect();
+    var nx = (e.clientX - r.left) / r.width  - 0.5;
+    var ny = (e.clientY - r.top)  / r.height - 0.5;
+    orb1.style.transform = 'translate(' + (nx * 30) + 'px, ' + (ny * 20) + 'px) scale(1.05)';
+    orb2.style.transform = 'translate(' + (-nx * 20) + 'px, ' + (-ny * 15) + 'px) scale(1.02)';
+  });
+  heroEl.addEventListener('mouseleave', function() {
+    orb1.style.transform = '';
+    orb2.style.transform = '';
+  });
+}
+
+
+/* ─── ❺ 3D CARD TILT ─────────────────────────────────────── */
+if (hasFine) {
+  document.querySelectorAll('.js-tilt').forEach(function(card) {
+    var MAX_ROT = 10;
+    card.addEventListener('mousemove', function(e) {
+      var r = card.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width  - 0.5;  // -0.5 to 0.5
+      var y = (e.clientY - r.top)  / r.height - 0.5;
+      card.style.transition = 'transform .1s';
+      card.style.transform =
+        'perspective(700px)' +
+        ' rotateX(' + (-y * MAX_ROT) + 'deg)' +
+        ' rotateY(' + ( x * MAX_ROT) + 'deg)' +
+        ' translateZ(10px)';
+      // Spotlight follows cursor
+      card.style.setProperty('--cx', (e.clientX - r.left) + 'px');
+      card.style.setProperty('--cy', (e.clientY - r.top)  + 'px');
+    });
+    card.addEventListener('mouseleave', function() {
+      card.style.transition = 'transform .6s cubic-bezier(0.16,1,0.3,1)';
+      card.style.transform = 'perspective(700px) rotateX(0deg) rotateY(0deg) translateZ(0)';
+      card.style.setProperty('--cx', '-9999px');
+      card.style.setProperty('--cy', '-9999px');
+    });
+  });
+}
+
+
+/* ─── SCROLL REVEAL ─────────────────────────────────────────── */
+var revObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) { e.target.classList.add('vis'); revObs.unobserve(e.target); }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('[data-r]').forEach(function(el) { revObs.observe(el); });
+
+
+/* ─── NUMBER COUNTER ─────────────────────────────────────────── */
+var cntObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (!e.isIntersecting) return;
+    var el = e.target;
+    var to  = parseInt(el.dataset.to);
+    var sx  = el.dataset.sx || '';
+    var dur = 1600;
+    var t0  = performance.now();
+    function tick(now) {
+      var t = Math.min((now - t0) / dur, 1);
+      var ease = 1 - Math.pow(1 - t, 3);
+      el.textContent = Math.floor(ease * to) + sx;
+      if (t < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+    cntObs.unobserve(el);
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.js-cnt').forEach(function(el) { cntObs.observe(el); });
+
+
+/* ─── MAGNETIC BUTTONS ───────────────────────────────────────── */
+if (hasFine) {
+  document.querySelectorAll('.mag').forEach(function(wrap) {
+    var btn = wrap.querySelector('.btn');
+    if (!btn) return;
+    wrap.addEventListener('mousemove', function(e) {
+      var r = wrap.getBoundingClientRect();
+      var dx = (e.clientX - (r.left + r.width/2))  * 0.38;
+      var dy = (e.clientY - (r.top  + r.height/2)) * 0.38;
+      btn.style.transform = 'translate(' + dx + 'px, ' + dy + 'px)';
+    });
+    wrap.addEventListener('mouseleave', function() { btn.style.transform = ''; });
+  });
+}
+
+
+/* ─── PROCESS STEP HOVER ANIMATION ─────────────────────────── */
+document.querySelectorAll('.pstep').forEach(function(step) {
+  step.addEventListener('mouseenter', function() {
+    step.querySelector('.pstep-num').style.background = '#1c4b42';
+  });
+  step.addEventListener('mouseleave', function() {
+    if (!step.classList.contains('pstep-done'))
+      step.querySelector('.pstep-num').style.background = '';
+  });
+});
+
+
+/* ─── FAQ ACCORDION ─────────────────────────────────────────── */
+window.faqT = function(btn) {
+  var item = btn.closest('.faq-item');
+  var wasOpen = item.classList.contains('o');
+  document.querySelectorAll('.faq-item').forEach(function(i) { i.classList.remove('o'); });
+  if (!wasOpen) item.classList.add('o');
+};
+
+})(); // end IIFE
+</script>
+</body>
+</html>
