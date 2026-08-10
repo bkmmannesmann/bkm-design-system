@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feuchte Wand oder nasser Keller? Ursache finden | BKM Mannesmann</title>
+<meta name="description" content="Feuchte Wand, nasser Keller oder Schimmel? Mit dem kostenlosen BKM Feuchte-Check mögliche Ursachen einordnen und den passenden Sanierungsweg finden.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"BKM Mannesmann GmbH","foundingDate":"1976","url":"https://bkm-mannesmann.de","description":"Feuchtigkeitsschutz und Abdichtungslösungen seit 1976"}
+</script>
+<style>
+/* ── FONTS ─────────────────────────────────────────────────── */
+@font-face{font-family:'Unbounded';src:url('../assets/fonts/Unbounded_900.woff2') format('woff2');font-weight:900;font-style:normal;font-display:block}
+@font-face{font-family:'TT Norms Pro';src:url('../assets/fonts/TT_Norms_Pro_Compact_Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:block}
+@font-face{font-family:'TT Norms Pro';src:url('../assets/fonts/TT_Norms_Pro_Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:block}
+
+/* ── TOKENS ────────────────────────────────────────────────── */
+:root{
+  --dg:#1c4b42;--dg2:#122e27;--dg1:#235a4f;
+  --lime:#b4e717;--lime2:#a0d014;
+  --tg:#287d4b;--sand:#f6f5f2;--sand2:#f0efec;
+  --white:#ffffff;--black:#1a1a1a;--stone:#494949;--outline:#c8c5be;
+  --fd:'Unbounded',sans-serif;
+  --fb:'TT Norms Pro',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  --e1:cubic-bezier(0.16,1,0.3,1);--e2:cubic-bezier(0.4,0,0.2,1);
+  --tf:0.18s;--tb:0.28s;--ts:0.5s;
+  --sp-sec:clamp(80px,10vw,130px);--sp-g:clamp(20px,4vw,56px);
+  --max-w:1280px;
+  --r-sm:4px;--r-md:8px;--r-lg:12px;--r-xl:16px;--r-xxl:24px;--r-full:9999px;
+  --sh1:0 0 0 1px rgba(0,0,0,.08),0 2px 4px rgba(0,0,0,.04);
+  --sh2:0 0 0 1px rgba(0,0,0,.08),0 8px 16px -4px rgba(0,0,0,.06);
+  --sh-lime:0 8px 32px rgba(180,231,23,.45);
+  --sh-green:0 8px 24px rgba(28,75,66,.4);
+}
+
+/* ── RESET ─────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family:var(--fb);color:var(--black);background:var(--dg2);
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  opacity:0;transition:opacity .4s var(--e1);
+}
+body.loaded{opacity:1}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+
+/* ── FILM GRAIN ────────────────────────────────────────────── */
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size:300px 300px;opacity:.038;mix-blend-mode:overlay;
+  animation:grain .45s steps(1) infinite;
+}
+@keyframes grain{
+  0%{background-position:0 0}10%{background-position:-5% -10%}20%{background-position:-15% 5%}
+  30%{background-position:7% -25%}40%{background-position:-5% 25%}50%{background-position:-15% 10%}
+  60%{background-position:15% 0}70%{background-position:0 15%}80%{background-position:3% 35%}
+  90%{background-position:-10% 10%}100%{background-position:0 0}
+}
+
+/* ── LOADER ────────────────────────────────────────────────── */
+.loader{position:fixed;inset:0;z-index:9998;overflow:hidden;display:flex;flex-direction:column;pointer-events:none}
+.lp{flex:1;background:var(--dg2);transition:transform .9s var(--e1);display:flex;align-items:center;justify-content:center}
+.lp.top{align-items:flex-end;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.05)}
+.lp.bot{align-items:flex-start;padding-top:8px}
+.loader-wordmark{font-family:var(--fd);font-size:10px;font-weight:900;letter-spacing:.22em;color:rgba(255,255,255,.28);text-transform:uppercase}
+.loader-bar{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100px;height:1px;background:rgba(255,255,255,.06);overflow:hidden}
+.loader-bar::after{content:'';display:block;height:1px;background:var(--lime);animation:lbar 1.1s var(--e1) forwards}
+@keyframes lbar{from{width:0}to{width:100%}}
+.loader.done .lp.top{transform:translateY(-100%)}
+.loader.done .lp.bot{transform:translateY(100%)}
+
+/* ── CURSOR ────────────────────────────────────────────────── */
+.cur-dot,.cur-ring{position:fixed;pointer-events:none;z-index:9997;border-radius:50%;transform:translate(-50%,-50%)}
+.cur-dot{width:6px;height:6px;background:var(--lime)}
+.cur-ring{width:32px;height:32px;border:1.5px solid rgba(180,231,23,.5);transition:width .25s var(--e1),height .25s var(--e1)}
+@media(hover:none){.cur-dot,.cur-ring{display:none}}
+
+/* ── UTILS ─────────────────────────────────────────────────── */
+.sec{padding:var(--sp-sec) var(--sp-g)}
+.inner{max-width:var(--max-w);margin:0 auto;width:100%}
+.eyebrow{font-family:var(--fb);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:16px}
+.eyebrow.lime{color:var(--lime)}
+.eyebrow.tg{color:var(--tg)}
+.eyebrow.dg{color:var(--dg)}
+.sh{font-family:var(--fd);font-weight:900;font-size:clamp(30px,3.8vw,52px);line-height:1.02;letter-spacing:-.03em}
+.sh.white{color:var(--white)}
+.sh.black{color:var(--black)}
+.sb{font-size:17px;line-height:1.7}
+.sb.muted{color:var(--stone)}
+.sb.dark{color:rgba(255,255,255,.5)}
+.mt8{margin-top:8px}.mt12{margin-top:12px}.mt16{margin-top:16px}.mt20{margin-top:20px}.mt24{margin-top:24px}.mt32{margin-top:32px}.mt48{margin-top:48px}.mt64{margin-top:64px}
+
+/* ── BUTTONS ───────────────────────────────────────────────── */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:0 24px;height:48px;border-radius:var(--r-sm);
+  font-family:var(--fd);font-size:12px;font-weight:900;letter-spacing:.03em;
+  text-transform:uppercase;white-space:nowrap;
+  transition:all var(--tb) var(--e1);position:relative;overflow:hidden;
+}
+.btn-primary{background:var(--lime);color:var(--dg)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:var(--sh-lime)}
+.btn-ghost{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,.22)}
+.btn-ghost:hover{border-color:rgba(255,255,255,.55);background:rgba(255,255,255,.05)}
+.btn-dark{background:var(--dg);color:var(--white)}
+.btn-dark:hover{background:var(--dg1);transform:translateY(-2px);box-shadow:var(--sh-green)}
+.btn-outline-dark{background:transparent;color:var(--dg);border:1.5px solid rgba(28,75,66,.3)}
+.btn-outline-dark:hover{background:var(--dg);color:var(--white)}
+.btn-lg{height:56px;padding:0 32px;font-size:13px}
+.btn-xl{height:64px;padding:0 40px;font-size:14px}
+.btn-magnetic{display:inline-block}
+.link-arrow{
+  font-size:13px;font-weight:700;color:var(--tg);letter-spacing:.02em;
+  display:inline-flex;align-items:center;gap:6px;
+  transition:gap var(--tf);
+}
+.link-arrow:hover{gap:10px}
+.link-arrow-white{color:rgba(255,255,255,.6)}
+.link-arrow-white:hover{color:var(--white)}
+
+/* ── SCROLL REVEAL ─────────────────────────────────────────── */
+[data-reveal]{opacity:0;transform:translateY(28px);transition:opacity .7s var(--e1),transform .7s var(--e1)}
+[data-reveal].in-view{opacity:1;transform:translateY(0)}
+[data-delay="1"]{transition-delay:.1s}[data-delay="2"]{transition-delay:.2s}
+[data-delay="3"]{transition-delay:.3s}[data-delay="4"]{transition-delay:.4s}
+[data-delay="5"]{transition-delay:.5s}[data-delay="6"]{transition-delay:.6s}
+[data-delay="7"]{transition-delay:.7s}[data-delay="8"]{transition-delay:.8s}
+
+/* ── GLASS ─────────────────────────────────────────────────── */
+.glass{
+  background:rgba(255,255,255,.055);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.08);border-radius:var(--r-xxl);
+  position:relative;overflow:hidden;
+}
+.glass::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);pointer-events:none;
+}
+
+/* ── NAV ───────────────────────────────────────────────────── */
+.nav{
+  position:fixed;inset:0 0 auto;z-index:1000;height:72px;
+  display:flex;align-items:center;padding:0 var(--sp-g);
+  transition:background var(--ts),backdrop-filter var(--ts),border-color var(--ts);
+  border-bottom:1px solid transparent;
+}
+.nav.scrolled{
+  background:rgba(18,46,39,.92);
+  backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);
+  border-bottom-color:rgba(255,255,255,.06);
+}
+.nav-inner{max-width:var(--max-w);margin:0 auto;width:100%;display:flex;align-items:center;gap:24px}
+.nav-logo{
+  font-family:var(--fd);font-size:12px;font-weight:900;letter-spacing:.08em;
+  color:var(--white);white-space:nowrap;flex-shrink:0;
+}
+.nav-links{flex:1;display:flex;align-items:center;justify-content:center;gap:24px}
+.nav-links a{
+  font-size:13px;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:.02em;
+  transition:color var(--tf);
+}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{flex-shrink:0}
+.nav-toggle{display:none;flex-direction:column;gap:5px;padding:4px;cursor:pointer}
+.nav-toggle span{display:block;width:22px;height:1.5px;background:var(--white);border-radius:2px;transition:all var(--tb)}
+
+/* ── HERO ──────────────────────────────────────────────────── */
+.hero{
+  min-height:100svh;background:var(--dg2);
+  display:flex;align-items:center;
+  padding:120px var(--sp-g) 80px;
+  position:relative;overflow:hidden;
+}
+.hero-orbs{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.orb{position:absolute;border-radius:50%;pointer-events:none}
+.orb-1{
+  width:clamp(500px,65vw,950px);height:clamp(500px,65vw,950px);
+  top:-25%;left:-18%;
+  background:radial-gradient(circle,rgba(180,231,23,.09) 0%,transparent 58%);
+  filter:blur(90px);animation:orb1 18s ease-in-out infinite;
+}
+.orb-2{
+  width:clamp(300px,40vw,620px);height:clamp(300px,40vw,620px);
+  top:5%;right:-8%;
+  background:radial-gradient(circle,rgba(28,90,79,.7) 0%,transparent 65%);
+  filter:blur(70px);animation:orb2 22s ease-in-out infinite;
+}
+.orb-3{
+  width:clamp(200px,28vw,450px);height:clamp(200px,28vw,450px);
+  bottom:8%;left:38%;
+  background:radial-gradient(circle,rgba(40,125,75,.3) 0%,transparent 65%);
+  filter:blur(55px);animation:orb3 14s ease-in-out infinite;
+}
+@keyframes orb1{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(-35px,45px) scale(1.06)}66%{transform:translate(25px,-35px) scale(0.94)}}
+@keyframes orb2{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(35px,25px) scale(1.09)}70%{transform:translate(-25px,35px) scale(0.91)}}
+@keyframes orb3{0%,100%{transform:translate(0,0)}50%{transform:translate(-25px,-35px) scale(1.12)}}
+
+.hero-inner{
+  max-width:var(--max-w);margin:0 auto;width:100%;
+  display:grid;grid-template-columns:1fr 440px;gap:64px;align-items:center;
+  position:relative;z-index:2;
+}
+.hero-eyebrow{font-family:var(--fb);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);margin-bottom:20px;display:block}
+.hero-h1{font-family:var(--fd);font-weight:900;color:var(--white);margin-bottom:24px}
+.hero-h1-q{
+  font-size:clamp(18px,2.2vw,30px);color:rgba(255,255,255,.45);
+  letter-spacing:-.02em;line-height:1.1;display:block;margin-bottom:10px;
+}
+.hero-h1-main{
+  font-size:clamp(38px,5.5vw,78px);line-height:1.0;letter-spacing:-.04em;display:block;
+}
+/* char animation */
+.ch-char{display:inline-block;transform:translateY(65%) skewY(6deg);opacity:0;transition:transform .5s var(--e1),opacity .4s var(--e1)}
+.ch-char.in{transform:translateY(0) skewY(0deg);opacity:1}
+.hero-sub{font-size:clamp(15px,1.4vw,17px);line-height:1.65;color:rgba(255,255,255,.48);max-width:480px;margin-bottom:32px}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:14px}
+.hero-micro{font-size:12px;color:rgba(255,255,255,.3);letter-spacing:.02em;margin-bottom:22px}
+.hero-trust{
+  font-size:13px;color:rgba(255,255,255,.28);max-width:420px;line-height:1.55;
+  border-left:2px solid rgba(180,231,23,.25);padding-left:14px;
+}
+
+/* hero check card */
+.check-card{
+  background:rgba(255,255,255,.06);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border:1px solid rgba(255,255,255,.11);border-radius:20px;padding:28px;
+  position:relative;overflow:hidden;
+}
+.check-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);
+}
+.check-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.check-badge{
+  font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--lime);
+  background:rgba(180,231,23,.1);border:1px solid rgba(180,231,23,.2);
+  border-radius:var(--r-full);padding:4px 10px;
+}
+.check-step-label{font-size:11px;color:rgba(255,255,255,.28);font-weight:700;letter-spacing:.06em}
+.check-bar{height:2px;background:rgba(255,255,255,.07);border-radius:2px;margin-bottom:20px;overflow:hidden}
+.check-bar-fill{height:100%;width:20%;background:var(--lime);border-radius:2px;transition:width .4s var(--e1)}
+.check-q{font-family:var(--fd);font-size:14px;font-weight:900;color:var(--white);line-height:1.3;margin-bottom:16px}
+.check-opts{display:flex;flex-direction:column;gap:7px}
+.check-opt{
+  display:flex;align-items:center;gap:10px;padding:10px 14px;
+  border:1px solid rgba(255,255,255,.09);border-radius:var(--r-md);
+  cursor:pointer;transition:all var(--tf);
+  font-size:14px;color:rgba(255,255,255,.62);background:rgba(255,255,255,.025);
+}
+.check-opt:hover{border-color:rgba(180,231,23,.3);background:rgba(180,231,23,.05);color:var(--white)}
+.check-opt.sel{border-color:var(--lime);background:rgba(180,231,23,.1);color:var(--white)}
+.opt-dot{
+  width:16px;height:16px;border-radius:50%;border:1.5px solid rgba(255,255,255,.18);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all var(--tf);
+}
+.check-opt.sel .opt-dot{background:var(--lime);border-color:var(--lime)}
+.check-opt.sel .opt-dot::after{content:'';display:block;width:6px;height:6px;background:var(--dg2);border-radius:50%}
+.check-foot{margin-top:18px;display:flex;align-items:center;justify-content:space-between}
+.check-info{font-size:11px;color:rgba(255,255,255,.22)}
+.check-next{
+  padding:0 18px;height:38px;font-size:11px;font-family:var(--fd);font-weight:900;
+  letter-spacing:.04em;text-transform:uppercase;background:var(--lime);color:var(--dg);
+  border-radius:var(--r-sm);transition:all var(--tf);
+}
+.check-next:hover{transform:translateY(-1px);box-shadow:var(--sh-lime)}
+
+/* ── MARQUEE ───────────────────────────────────────────────── */
+.marquee-wrap{background:var(--lime);overflow:hidden;padding:13px 0;position:relative;z-index:2}
+.marquee-track{display:flex;animation:marquee 32s linear infinite;will-change:transform}
+.marquee-track:hover{animation-play-state:paused}
+.marquee-item{
+  display:flex;align-items:center;
+  font-family:var(--fd);font-size:10px;font-weight:900;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--dg);white-space:nowrap;padding:0 20px;
+}
+.msep{display:inline-block;width:4px;height:4px;background:var(--dg2);border-radius:50%;margin:0 14px;opacity:.35}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── S02 ERKENNTNIS (white) ────────────────────────────────── */
+.s02{background:var(--white)}
+.s02-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.s02-lead{font-size:20px;line-height:1.65;color:var(--stone);max-width:500px;margin-top:20px}
+.s02-lead strong{color:var(--black);font-weight:700}
+.prob-cards{display:flex;flex-direction:column;gap:0;margin-top:32px}
+.prob-card{
+  padding:24px 0;border-top:1px solid var(--outline);
+}
+.prob-card:last-child{border-bottom:1px solid var(--outline)}
+.prob-nr{font-family:var(--fd);font-size:11px;font-weight:900;color:var(--tg);letter-spacing:.08em;margin-bottom:8px;display:block}
+.prob-title{font-family:var(--fd);font-size:18px;font-weight:900;color:var(--black);margin-bottom:8px;letter-spacing:-.02em}
+.prob-body{font-size:14px;line-height:1.6;color:var(--stone)}
+.s02-bottom{margin-top:56px;padding-top:40px;border-top:1px solid var(--outline);display:flex;align-items:center;justify-content:space-between;gap:24px}
+.s02-bottom-statement{font-family:var(--fd);font-size:clamp(16px,1.8vw,22px);font-weight:900;color:var(--black);max-width:560px;line-height:1.2;letter-spacing:-.02em}
+
+/* ── S03 PROBLEMVERTIEFUNG (dg2) ───────────────────────────── */
+.s03{background:var(--dg2);position:relative;overflow:visible}
+.s03::before{
+  content:'';position:absolute;top:-1px;left:0;right:0;height:80px;
+  background:var(--white);clip-path:polygon(0 0,100% 0,100% 100%);pointer-events:none;
+}
+.s03-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+.prob-q-card{
+  background:rgba(255,255,255,.055);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.08);border-radius:var(--r-xxl);
+  padding:32px;position:relative;overflow:hidden;
+  transition:border-color var(--tb),transform var(--tb) var(--e1);
+  transform-style:preserve-3d;will-change:transform;
+  background-image:radial-gradient(600px circle at var(--cx,-9999px) var(--cy,-9999px),rgba(180,231,23,.07),transparent 40%);
+}
+.prob-q-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);
+}
+.prob-q-nr{
+  font-family:var(--fd);font-size:10px;font-weight:900;letter-spacing:.12em;
+  color:var(--lime);display:block;margin-bottom:14px;text-transform:uppercase;
+}
+.prob-q-title{
+  font-family:var(--fd);font-size:clamp(18px,1.8vw,22px);font-weight:900;
+  color:var(--white);line-height:1.2;letter-spacing:-.02em;margin-bottom:16px;
+}
+.prob-q-title .q-mark{color:rgba(255,255,255,.35)}
+.prob-q-body{font-size:14px;line-height:1.65;color:rgba(255,255,255,.5);margin-bottom:20px}
+.prob-q-cta{font-size:12px;font-weight:700;color:var(--lime);letter-spacing:.04em;text-transform:uppercase;display:inline-flex;align-items:center;gap:6px;transition:gap var(--tf)}
+.prob-q-cta:hover{gap:10px}
+
+/* ── S04 FEUCHTE-CHECK (dg) ────────────────────────────────── */
+.s04{background:var(--dg);position:relative;overflow:hidden}
+.s04-texture{
+  position:absolute;inset:0;
+  background:url('../assets/backgrounds/bg-green-texture-2.jpg') center/cover;
+  opacity:.08;pointer-events:none;mix-blend-mode:overlay;
+}
+.s04-inner-wrap{position:relative;z-index:1}
+.s04-top{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;margin-bottom:64px}
+.s04-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:56px}
+.s04-step{padding:28px 0;border-top:1px solid rgba(255,255,255,.1)}
+.s04-step-nr{
+  font-family:var(--fd);font-size:clamp(48px,5vw,80px);font-weight:900;
+  color:rgba(255,255,255,.06);line-height:1;letter-spacing:-.04em;margin-bottom:12px;
+}
+.s04-step-title{
+  font-family:var(--fd);font-size:18px;font-weight:900;color:var(--white);
+  letter-spacing:-.01em;margin-bottom:10px;text-transform:uppercase;
+}
+.s04-step-q{font-size:13px;color:rgba(255,255,255,.38);font-style:italic;margin-bottom:10px}
+.s04-step-body{font-size:14px;line-height:1.6;color:rgba(255,255,255,.45)}
+.s04-trust{
+  display:flex;flex-wrap:wrap;gap:0;
+  border-top:1px solid rgba(255,255,255,.08);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  margin-bottom:48px;
+}
+.s04-trust-item{
+  flex:1;min-width:160px;padding:24px 28px;
+  border-right:1px solid rgba(255,255,255,.08);
+}
+.s04-trust-item:last-child{border-right:none}
+.s04-trust-num{
+  font-family:var(--fd);font-size:clamp(28px,3vw,42px);font-weight:900;
+  color:var(--lime);line-height:1;letter-spacing:-.03em;margin-bottom:6px;
+}
+.s04-trust-label{font-size:12px;color:rgba(255,255,255,.4);line-height:1.4}
+.s04-cta-wrap{text-align:center}
+.s04-cta-head{
+  font-family:var(--fd);font-size:clamp(28px,3.5vw,50px);font-weight:900;
+  color:var(--white);letter-spacing:-.03em;margin-bottom:24px;line-height:1.05;
+}
+.s04-cta-head .lime{color:var(--lime)}
+.s04-disclaimer{font-size:12px;color:rgba(255,255,255,.28);max-width:560px;margin:20px auto 0;line-height:1.5}
+
+/* ── S05 PROZESS (sand) ────────────────────────────────────── */
+.s05{background:var(--sand);position:relative}
+.s05::before{
+  content:'';position:absolute;top:-1px;left:0;right:0;
+  height:70px;background:var(--dg);clip-path:polygon(0 0,0 100%,100% 0);pointer-events:none;
+}
+.s05-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:56px;position:relative}
+.s05-steps::before{
+  content:'';position:absolute;top:20px;left:calc(16.66% + 16px);right:calc(16.66% + 16px);
+  height:1px;background:var(--outline);z-index:0;
+}
+.s05-step{padding:0 32px;text-align:center;position:relative;z-index:1}
+.s05-step:first-child{padding-left:0;text-align:left}
+.s05-step:last-child{padding-right:0;text-align:right}
+.s05-nr{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:40px;height:40px;border-radius:50%;
+  background:var(--dg);color:var(--lime);
+  font-family:var(--fd);font-size:11px;font-weight:900;letter-spacing:.04em;
+  margin-bottom:20px;position:relative;z-index:2;
+}
+.s05-title{font-family:var(--fd);font-size:clamp(22px,2.5vw,32px);font-weight:900;color:var(--black);letter-spacing:-.03em;margin-bottom:12px;text-transform:uppercase}
+.s05-q{font-size:12px;color:var(--tg);font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-bottom:10px}
+.s05-body{font-size:14px;line-height:1.6;color:var(--stone)}
+.s05-tagline{
+  text-align:center;margin-top:56px;padding-top:40px;border-top:1px solid var(--outline);
+  font-family:var(--fd);font-size:clamp(20px,2.5vw,32px);font-weight:900;color:var(--black);letter-spacing:-.03em;
+}
+
+/* ── S06 ZWEI WEGE (white) ─────────────────────────────────── */
+.s06{background:var(--white)}
+.s06-intro{max-width:580px;margin-bottom:56px}
+.s06-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.wege-card{border-radius:20px;padding:48px 40px;position:relative;overflow:hidden}
+.wege-card.dark{background:var(--dg2)}
+.wege-card.light{background:var(--sand);border:1px solid var(--outline)}
+.wege-label{
+  font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  display:inline-block;border-radius:var(--r-full);padding:4px 12px;margin-bottom:20px;
+}
+.wege-card.dark .wege-label{color:var(--lime);background:rgba(180,231,23,.1);border:1px solid rgba(180,231,23,.2)}
+.wege-card.light .wege-label{color:var(--tg);background:rgba(40,125,75,.07);border:1px solid rgba(40,125,75,.15)}
+.wege-title{font-family:var(--fd);font-size:clamp(22px,2.2vw,30px);font-weight:900;letter-spacing:-.03em;line-height:1.1;margin-bottom:16px}
+.wege-card.dark .wege-title{color:var(--white)}
+.wege-card.light .wege-title{color:var(--black)}
+.wege-body{font-size:15px;line-height:1.65;margin-bottom:28px}
+.wege-card.dark .wege-body{color:rgba(255,255,255,.48)}
+.wege-card.light .wege-body{color:var(--stone)}
+.wege-flow{display:flex;flex-direction:column;gap:0;margin-bottom:32px;padding:20px;border-radius:var(--r-lg)}
+.wege-card.dark .wege-flow{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)}
+.wege-card.light .wege-flow{background:var(--white);border:1px solid var(--outline)}
+.wege-flow-step{padding:10px 0;font-size:13px;font-weight:700}
+.wege-card.dark .wege-flow-step{color:rgba(255,255,255,.55)}
+.wege-card.light .wege-flow-step{color:var(--stone)}
+.wege-flow-arrow{font-size:14px;padding:2px 0;opacity:.35;align-self:flex-start;padding-left:2px}
+.wege-card.dark .wege-flow-arrow{color:var(--lime)}
+.wege-card.light .wege-flow-arrow{color:var(--tg)}
+.wege-ctas{display:flex;flex-direction:column;gap:10px}
+.wege-micro{font-size:12px;margin-top:12px;line-height:1.4}
+.wege-card.dark .wege-micro{color:rgba(255,255,255,.25)}
+.wege-card.light .wege-micro{color:rgba(0,0,0,.35)}
+
+/* ── S07 WHY BKM (dg2) ─────────────────────────────────────── */
+.s07{background:var(--dg2);position:relative;overflow:visible}
+.s07::before{content:'';position:absolute;top:-1px;left:0;right:0;height:70px;background:var(--white);clip-path:polygon(0 0,100% 0,100% 100%);pointer-events:none}
+.s07-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.s07-copy{font-size:16px;line-height:1.7;color:rgba(255,255,255,.48);margin-top:20px}
+.s07-copy strong{color:rgba(255,255,255,.75);font-weight:700}
+.s07-divider{height:1px;background:rgba(255,255,255,.08);margin:24px 0}
+.s07-proof{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.proof-item{
+  padding:20px;border-radius:var(--r-lg);
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);
+  background-image:radial-gradient(400px circle at var(--cx,-9999px) var(--cy,-9999px),rgba(180,231,23,.05),transparent 40%);
+}
+.proof-num{font-family:var(--fd);font-size:24px;font-weight:900;color:var(--lime);letter-spacing:-.02em;margin-bottom:6px}
+.proof-label{font-size:13px;font-weight:700;color:var(--white);margin-bottom:4px}
+.proof-body{font-size:12px;color:rgba(255,255,255,.38);line-height:1.5}
+.s07-quote{
+  font-size:19px;line-height:1.55;color:rgba(255,255,255,.75);
+  border-left:3px solid var(--lime);padding-left:24px;margin-top:32px;
+}
+.s07-quote em{font-style:normal;color:var(--lime)}
+
+/* ── S08 URSACHENWELT (dg) ──────────────────────────────────── */
+.s08{background:var(--dg);position:relative;overflow:hidden}
+.s08-texture{position:absolute;inset:0;background:url('../assets/backgrounds/bg-green-texture-3.jpg') center/cover;opacity:.07;pointer-events:none;mix-blend-mode:overlay}
+.s08-inner{position:relative;z-index:1}
+.s08-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:48px}
+.ursache-card{
+  padding:24px;border-radius:var(--r-xl);
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);
+  transition:background var(--tb),border-color var(--tb),transform var(--tb) var(--e1);
+  cursor:default;
+  background-image:radial-gradient(300px circle at var(--cx,-9999px) var(--cy,-9999px),rgba(180,231,23,.06),transparent 40%);
+}
+.ursache-card:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12);transform:translateY(-4px)}
+.ursache-icon{
+  width:36px;height:36px;border-radius:var(--r-md);margin-bottom:14px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(180,231,23,.1);border:1px solid rgba(180,231,23,.15);
+  font-size:16px;
+}
+.ursache-title{font-family:var(--fd);font-size:13px;font-weight:900;color:var(--white);letter-spacing:-.01em;margin-bottom:8px;line-height:1.2}
+.ursache-body{font-size:12px;line-height:1.55;color:rgba(255,255,255,.4);margin-bottom:12px}
+.ursache-link{font-size:11px;font-weight:700;color:var(--lime);letter-spacing:.04em;text-transform:uppercase;display:inline-flex;align-items:center;gap:4px;transition:gap var(--tf)}
+.ursache-link:hover{gap:8px}
+.s08-bottom{margin-top:48px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding-top:40px;border-top:1px solid rgba(255,255,255,.08)}
+.s08-bottom-text{font-size:17px;color:rgba(255,255,255,.45);max-width:480px;line-height:1.55}
+.s08-bottom-text strong{color:rgba(255,255,255,.7);font-weight:700}
+
+/* ── S09 SOCIAL PROOF (sand) ───────────────────────────────── */
+.s09{background:var(--sand);position:relative}
+.s09::before{content:'';position:absolute;top:-1px;left:0;right:0;height:70px;background:var(--dg);clip-path:polygon(0 0,100% 0,100% 100%);pointer-events:none}
+.s09-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+.case-card{background:var(--white);border-radius:20px;overflow:hidden;box-shadow:var(--sh1);transition:transform var(--tb) var(--e1),box-shadow var(--tb)}
+.case-card:hover{transform:translateY(-6px);box-shadow:var(--sh2)}
+.case-header{background:var(--dg2);padding:24px;display:flex;align-items:center;justify-content:space-between}
+.case-tag{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--lime);background:rgba(180,231,23,.1);border:1px solid rgba(180,231,23,.2);border-radius:var(--r-full);padding:3px 8px}
+.case-year{font-size:11px;color:rgba(255,255,255,.3);font-weight:700}
+.case-body{padding:24px}
+.case-situation{font-size:13px;font-weight:700;color:var(--stone);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.case-title{font-family:var(--fd);font-size:17px;font-weight:900;color:var(--black);letter-spacing:-.02em;margin-bottom:12px;line-height:1.2}
+.case-row{display:flex;gap:8px;margin-bottom:8px;align-items:flex-start}
+.case-row-label{font-size:11px;font-weight:700;color:var(--tg);text-transform:uppercase;letter-spacing:.06em;min-width:90px;padding-top:2px}
+.case-row-val{font-size:13px;color:var(--stone);line-height:1.45}
+.case-placeholder{font-size:11px;color:var(--outline);text-align:center;margin-top:16px;font-style:italic}
+
+/* ── S10 RATGEBER (white) ───────────────────────────────────── */
+.s10{background:var(--white)}
+.s10-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.artikel-card{border-bottom:2px solid transparent;transition:border-color var(--tb)}
+.artikel-card:hover{border-bottom-color:var(--tg)}
+.artikel-img{
+  height:180px;border-radius:var(--r-xl);background:var(--sand2);
+  margin-bottom:20px;overflow:hidden;display:flex;align-items:center;justify-content:center;
+  color:var(--outline);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  border:1px solid var(--outline);
+}
+.artikel-cat{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--tg);margin-bottom:8px}
+.artikel-title{font-family:var(--fd);font-size:clamp(16px,1.6vw,20px);font-weight:900;color:var(--black);letter-spacing:-.02em;line-height:1.2;margin-bottom:10px}
+.artikel-body{font-size:14px;line-height:1.6;color:var(--stone);margin-bottom:16px}
+.s10-more{text-align:center;margin-top:48px}
+
+/* ── S11 FINAL CTA (dg) ────────────────────────────────────── */
+.s11{background:var(--dg);position:relative;overflow:hidden;text-align:center}
+.s11::before{content:'';position:absolute;top:-1px;left:0;right:0;height:70px;background:var(--white);clip-path:polygon(0 0,0 100%,100% 0);pointer-events:none}
+.s11-texture{position:absolute;inset:0;background:url('../assets/backgrounds/bg-green-texture-1.jpg') center/cover;opacity:.09;pointer-events:none;mix-blend-mode:overlay}
+.s11-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
+.s11-h2{
+  font-family:var(--fd);font-weight:900;
+  font-size:clamp(34px,5vw,72px);line-height:1.0;letter-spacing:-.04em;color:var(--white);
+  margin-bottom:24px;
+}
+.s11-h2 .line2{color:rgba(255,255,255,.4);display:block;margin-top:4px}
+.s11-body{font-size:17px;line-height:1.65;color:rgba(255,255,255,.48);margin-bottom:36px;max-width:500px;margin-left:auto;margin-right:auto}
+.s11-micro{font-size:12px;color:rgba(255,255,255,.3);margin-top:14px;letter-spacing:.02em}
+/* orb in s11 */
+.s11-orb{
+  position:absolute;width:600px;height:600px;top:50%;left:50%;transform:translate(-50%,-50%);
+  background:radial-gradient(circle,rgba(180,231,23,.07) 0%,transparent 60%);
+  filter:blur(80px);pointer-events:none;animation:orb1 20s ease-in-out infinite;
+}
+
+/* ── S12 BRAND STATEMENT (dg2) ─────────────────────────────── */
+.s12{background:var(--dg2);text-align:center;padding:clamp(80px,12vw,160px) var(--sp-g)}
+.s12-words{display:flex;flex-direction:column;gap:0;margin-bottom:32px}
+.s12-word{
+  font-family:var(--fd);font-weight:900;
+  font-size:clamp(64px,13vw,200px);line-height:.9;letter-spacing:-.05em;
+  color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.15);
+  transition:color var(--tb),-webkit-text-stroke-color var(--tb);
+  cursor:default;
+}
+.s12-word:hover{color:var(--white);-webkit-text-stroke-color:transparent}
+.s12-sub{font-size:16px;color:rgba(255,255,255,.3);max-width:480px;margin:0 auto;line-height:1.6}
+.s12-sub strong{color:rgba(255,255,255,.6);font-weight:700}
+
+/* ── FOOTER ────────────────────────────────────────────────── */
+.footer{background:var(--dg2);padding:64px var(--sp-g) 32px;border-top:1px solid rgba(255,255,255,.06)}
+.footer-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:32px;margin-bottom:48px}
+.footer-col-head{font-family:var(--fd);font-size:11px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:16px}
+.footer-col ul{display:flex;flex-direction:column;gap:8px}
+.footer-col ul a{font-size:13px;color:rgba(255,255,255,.35);transition:color var(--tf);line-height:1.4}
+.footer-col ul a:hover{color:rgba(255,255,255,.7)}
+.footer-bottom{
+  padding-top:24px;border-top:1px solid rgba(255,255,255,.06);
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.22)}
+.footer-legal{display:flex;gap:16px;flex-wrap:wrap}
+.footer-legal a{font-size:12px;color:rgba(255,255,255,.3);transition:color var(--tf)}
+.footer-legal a:hover{color:rgba(255,255,255,.6)}
+
+/* ── RESPONSIVE ────────────────────────────────────────────── */
+@media(max-width:1024px){
+  .hero-inner{grid-template-columns:1fr;gap:40px}
+  .check-card{max-width:480px}
+  .s02-grid{grid-template-columns:1fr;gap:40px}
+  .s03-grid{grid-template-columns:1fr}
+  .s04-top{grid-template-columns:1fr;gap:32px}
+  .s04-steps{grid-template-columns:1fr}
+  .s04-trust{flex-direction:column}
+  .s04-trust-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.08);padding:16px 0}
+  .s04-trust-item:last-child{border-bottom:none}
+  .s05-steps{grid-template-columns:1fr;gap:24px}
+  .s05-steps::before{display:none}
+  .s05-step{padding:0;text-align:left}
+  .s05-step:first-child,.s05-step:last-child{text-align:left}
+  .s06-grid{grid-template-columns:1fr}
+  .s07-layout{grid-template-columns:1fr;gap:40px}
+  .s07-proof{grid-template-columns:1fr 1fr}
+  .s08-grid{grid-template-columns:repeat(2,1fr)}
+  .s09-grid{grid-template-columns:1fr}
+  .s10-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:repeat(2,1fr)}
+  .nav-links{display:none}
+}
+@media(max-width:768px){
+  .hero-h1-main{font-size:clamp(32px,8vw,56px)}
+  .s04-trust{flex-direction:row;flex-wrap:wrap}
+  .s04-trust-item{flex:1;min-width:140px;border-right:1px solid rgba(255,255,255,.08);border-bottom:none}
+  .s06-grid{grid-template-columns:1fr}
+  .s07-proof{grid-template-columns:1fr}
+  .s08-grid{grid-template-columns:1fr 1fr}
+  .s08-bottom{flex-direction:column;gap:20px}
+  .s09-grid{grid-template-columns:1fr}
+  .s10-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .s02-bottom{flex-direction:column;gap:16px}
+  .s12-word{font-size:clamp(56px,16vw,120px)}
+}
+@media(max-width:480px){
+  .s08-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .s04-trust{flex-direction:column}
+  .wege-card{padding:32px 24px}
+}
+</style>
+</head>
+<body>
+
+<!-- ── LOADER ─────────────────────────────────────────────────── -->
+<div class="loader" id="loader">
+  <div class="lp top"><div class="loader-wordmark">BKM Mannesmann</div></div>
+  <div class="loader-bar"></div>
+  <div class="lp bot"><div class="loader-wordmark">Seit 1976</div></div>
+</div>
+
+<!-- ── CURSOR ─────────────────────────────────────────────────── -->
+<div class="cur-dot" id="curDot"></div>
+<div class="cur-ring" id="curRing"></div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     NAV
+══════════════════════════════════════════════════════════════ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="../assets/logos/bkm-logo-white.svg" alt="BKM Mannesmann" style="height:28px;width:auto"
+        onerror="this.outerHTML='BKM MANNESMANN'">
+    </a>
+    <div class="nav-links">
+      <a href="#problem-einordnen">Feuchteproblem lösen</a>
+      <a href="#selbst-sanieren">Selbst sanieren</a>
+      <a href="#sanieren-lassen">Sanieren lassen</a>
+      <a href="#ratgeber">Wissen</a>
+      <a href="#profis">Für Profis</a>
+      <a href="#ueber-bkm">Über BKM</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#feuchte-check" class="btn btn-primary">Feuchte-Check starten</a>
+    </div>
+    <div class="nav-toggle" id="navToggle" aria-label="Menü öffnen">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════════
+     S01 — HERO
+══════════════════════════════════════════════════════════════ -->
+<section class="hero" id="home">
+  <div class="hero-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+  <div class="hero-inner">
+    <!-- Content Column -->
+    <div class="hero-content">
+      <span class="hero-eyebrow">Feuchte Wand · Nasser Keller · Schimmel?</span>
+      <h1 class="hero-h1" id="heroH1">
+        <span class="hero-h1-q" id="heroQ">Feuchtigkeit im Gebäude?</span>
+        <span class="hero-h1-main" id="heroMain">Erst die Ursache verstehen. Dann richtig handeln.</span>
+      </h1>
+      <p class="hero-sub">
+        Feuchte Wände können unterschiedliche Ursachen haben – und brauchen deshalb unterschiedliche Lösungen. Der kostenlose BKM Feuchte-Check hilft dir, dein Schadensbild einzuordnen und zeigt dir den nächsten sinnvollen Schritt.
+      </p>
+      <div class="hero-ctas">
+        <div class="btn-magnetic">
+          <a href="#feuchte-check" class="btn btn-primary btn-lg">Feuchte-Check starten →</a>
+        </div>
+        <a href="#zwei-wege" class="btn btn-ghost btn-lg">Ich kenne die Ursache bereits</a>
+      </div>
+      <p class="hero-micro">Kostenlos · ca. 4–6 Minuten · ohne Kaufpflicht</p>
+      <p class="hero-trust">Du bekommst Orientierung – auch dann, wenn die richtige Empfehlung kein BKM-Produkt ist.</p>
+    </div>
+    <!-- Interactive Check Preview -->
+    <div class="hero-visual" data-reveal data-delay="3">
+      <div class="check-card">
+        <div class="check-top">
+          <span class="check-badge">BKM Feuchte-Check</span>
+          <span class="check-step-label">Schritt 1 von 5</span>
+        </div>
+        <div class="check-bar"><div class="check-bar-fill" id="checkBar"></div></div>
+        <p class="check-q">Wo tritt die Feuchtigkeit auf?</p>
+        <div class="check-opts" id="checkOpts">
+          <label class="check-opt"><div class="opt-dot"></div>Keller / Untergeschoss</label>
+          <label class="check-opt"><div class="opt-dot"></div>Erdgeschoss</label>
+          <label class="check-opt"><div class="opt-dot"></div>Obergeschoss</label>
+          <label class="check-opt"><div class="opt-dot"></div>Dachgeschoss</label>
+          <label class="check-opt"><div class="opt-dot"></div>Garage / Nebengebäude</label>
+        </div>
+        <div class="check-foot">
+          <span class="check-info">Kostenlos · ohne Kaufpflicht</span>
+          <button class="check-next" onclick="location.href='#feuchte-check'">Weiter →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TRUST MARQUEE ──────────────────────────────────────────── -->
+<div class="marquee-wrap">
+  <div class="marquee-track" aria-hidden="true">
+    <!-- repeat twice for seamless loop -->
+    <span class="marquee-item">Feuchte Wand<span class="msep"></span></span>
+    <span class="marquee-item">Nasser Keller<span class="msep"></span></span>
+    <span class="marquee-item">Schimmel verstehen<span class="msep"></span></span>
+    <span class="marquee-item">Ursache einordnen<span class="msep"></span></span>
+    <span class="marquee-item">Richtig sanieren<span class="msep"></span></span>
+    <span class="marquee-item">Seit 1976<span class="msep"></span></span>
+    <span class="marquee-item">BKM Mannesmann<span class="msep"></span></span>
+    <span class="marquee-item">Build. Keep. Maintain.<span class="msep"></span></span>
+    <span class="marquee-item">Feuchte Wand<span class="msep"></span></span>
+    <span class="marquee-item">Nasser Keller<span class="msep"></span></span>
+    <span class="marquee-item">Schimmel verstehen<span class="msep"></span></span>
+    <span class="marquee-item">Ursache einordnen<span class="msep"></span></span>
+    <span class="marquee-item">Richtig sanieren<span class="msep"></span></span>
+    <span class="marquee-item">Seit 1976<span class="msep"></span></span>
+    <span class="marquee-item">BKM Mannesmann<span class="msep"></span></span>
+    <span class="marquee-item">Build. Keep. Maintain.<span class="msep"></span></span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     S02 — DIE ZENTRALE ERKENNTNIS
+══════════════════════════════════════════════════════════════ -->
+<section class="sec s02" id="problem-einordnen">
+  <div class="inner">
+    <div class="s02-grid">
+      <div>
+        <span class="eyebrow tg" data-reveal>Das Problem</span>
+        <h2 class="sh black" data-reveal data-delay="1">
+          Eine feuchte Wand ist<br>ein Symptom.<br><span style="color:var(--stone)">Noch keine Diagnose.</span>
+        </h2>
+        <p class="s02-lead" data-reveal data-delay="2">
+          Aufsteigende Feuchtigkeit, seitlich eindringende Feuchte, Kondensation, eine undichte Leitung oder Wasser von außen können auf den ersten Blick ähnlich aussehen.<br><br>
+          Die richtige Maßnahme kann trotzdem völlig unterschiedlich sein.
+        </p>
+        <p class="sb muted mt20" data-reveal data-delay="3" style="font-size:16px;max-width:460px">
+          <strong style="color:var(--black)">Deshalb sollte eine Sanierung nicht mit einem Produkt beginnen, sondern mit der Frage:</strong> Woher kommt die Feuchtigkeit?
+        </p>
+      </div>
+      <div>
+        <div class="prob-cards">
+          <div class="prob-card" data-reveal data-delay="1">
+            <span class="prob-nr">01 / Aufsteigende Feuchtigkeit</span>
+            <h3 class="prob-title">Bodennah sichtbar, oft mit Salzausblühungen</h3>
+            <p class="prob-body">Feuchtigkeit zeigt sich häufig bodennah und kann mit Salzausblühungen oder abplatzendem Putz einhergehen.</p>
+          </div>
+          <div class="prob-card" data-reveal data-delay="2">
+            <span class="prob-nr">02 / Kondensation</span>
+            <h3 class="prob-title">Warme Luft trifft auf kalte Bauteile</h3>
+            <p class="prob-body">Warme, feuchte Luft trifft auf kalte Bauteile. Besonders Keller und kühle Raumecken können betroffen sein.</p>
+          </div>
+          <div class="prob-card" data-reveal data-delay="3">
+            <span class="prob-nr">03 / Leckage</span>
+            <h3 class="prob-title">Schaden an Leitungen, Schaden woanders sichtbar</h3>
+            <p class="prob-body">Ein Schaden an Wasser-, Heizungs- oder Abwasserleitungen kann Feuchtigkeit verursachen, die an einer ganz anderen Stelle sichtbar wird.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="s02-bottom" data-reveal>
+      <p class="s02-bottom-statement">Gleiches Symptom. Unterschiedliche Ursache. Unterschiedlicher Weg.</p>
+      <a href="#ursachen" class="link-arrow tg" style="color:var(--tg);flex-shrink:0">Alle möglichen Ursachen verstehen →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     S03 — PROBLEMVERTIEFUNG (dark, glassmorphism + 3D tilt)
+══════════════════════════════════════════════════════════════ -->
+<section class="sec s03" id="drei-fragen">
+  <div class="inner">
+    <div style="max-width:600px">
+      <span class="eyebrow lime" data-reveal>Was Eigentümer wirklich wissen wollen</span>
+      <h2 class="sh white" data-reveal data-delay="1">Drei Fragen kommen fast immer zuerst.</h2>
+    </div>
+    <div class="s03-grid">
+      <div class="prob-q-card" data-reveal data-delay="1">
+        <span class="prob-q-nr">Frage 01</span>
+        <h3 class="prob-q-title"><span class="q-mark">„</span>Wie schlimm ist das?<span class="q-mark">"</span></h3>
+        <p class="prob-q-body">Eine feuchte Wand wirkt schnell bedrohlich. Entscheidend ist aber nicht nur, was du siehst, sondern was dahintersteckt.</p>
+        <span class="prob-q-cta">Der Feuchte-Check hilft dir, die Situation zunächst sachlich einzuordnen →</span>
+      </div>
+      <div class="prob-q-card" data-reveal data-delay="2">
+        <span class="prob-q-nr">Frage 02</span>
+        <h3 class="prob-q-title"><span class="q-mark">„</span>Was muss ich jetzt tun?<span class="q-mark">"</span></h3>
+        <p class="prob-q-body">Nicht jedes Schadensbild braucht einen Fachbetrieb – und nicht jede Sanierung gehört in Eigenregie.</p>
+        <span class="prob-q-cta">Du bekommst einen nachvollziehbaren nächsten Schritt →</span>
+      </div>
+      <div class="prob-q-card" data-reveal data-delay="3">
+        <span class="prob-q-nr">Frage 03</span>
+        <h3 class="prob-q-title"><span class="q-mark">„</span>Wem kann ich vertrauen?<span class="q-mark">"</span></h3>
+        <p class="prob-q-body">Eine gute Empfehlung muss auch lauten können: <em style="font-style:normal;color:rgba(255,255,255,.7)">Noch nichts kaufen. Erst weiter prüfen.</em></p>
+        <span class="prob-q-cta">Zuerst Ursache einordnen, dann Sanierungsweg →</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     S04 — FEUCHTE-CHECK (Conversion)
+══════════════════════════════════════════════════════════════ -->
+<section class="sec s04" id="feuchte-check">
+  <div class="s04-texture"></div>
+  <div class="inner s04-inner-wrap">
+    <div class="s04-top">
+      <div>
+        <span class="eyebrow lime" data-reveal>Der BKM Feuchte-Check</span>
+        <h2 class="sh white" data-reveal data-delay="1">
+          In wenigen Minuten von<br>
+          <span style="color:rgba(255,255,255,.4)">&ldquo;Was ist das?&rdquo;</span><br>
+          zu <span style="color:var(--lime)">&ldquo;Was mache ich jetzt?&rdquo;</span>
+        </h2>
+      </div>
+      <div data-reveal data-delay="2">
+        <p class="sb dark" style="font-size:16px">
+          Der Feuchte-Check führt dich Schritt für Schritt durch dein Schadensbild. Dabei werden acht mögliche Ursachen systematisch gegeneinander geprüft.
+        </p>
+        <p class="sb dark mt16" style="font-size:16px">Du brauchst kein Fachwissen. Am Ende bekommst du keine pauschale Produktliste, sondern eine Einordnung und einen sinnvollen nächsten Schritt.</p>
+      </div>
+    </div>
+
+    <!-- 3 Steps -->
+    <div class="s04-steps">
+      <div class="s04-step" data-reveal>
+        <div class="s04-step-nr">01</div>
+        <div class="s04-step-title">Beschreiben</div>
+        <div class="s04-step-q">Dein Schadensbild</div>
+        <p class="s04-step-body">Wo tritt die Feuchtigkeit auf? Wie hoch reicht sie? Wie sieht sie aus? Wann wird sie stärker? Welche Bauteile befinden sich in der Nähe?</p>
+      </div>
+      <div class="s04-step" data-reveal data-delay="1">
+        <div class="s04-step-nr">02</div>
+        <div class="s04-step-title">Einordnen</div>
+        <div class="s04-step-q">Acht Ursachen werden geprüft</div>
+        <p class="s04-step-body">Hinweise, Gegenhinweise und Ausschlusskriterien werden gegeneinander bewertet. Wenn die Angaben keine klare Einordnung zulassen, sagt der Check genau das.</p>
+      </div>
+      <div class="s04-step" data-reveal data-delay="2">
+        <div class="s04-step-nr">03</div>
+        <div class="s04-step-title">Entscheiden</div>
+        <div class="s04-step-q">Du bekommst deinen nächsten Schritt</div>
+        <p class="s04-step-body">Je nach Ergebnis: <strong style="color:rgba(255,255,255,.7)">Selbst sanieren</strong>, <strong style="color:rgba(255,255,255,.7)">Sanieren lassen</strong> – oder <strong style="color:var(--lime)">Erst weiter prüfen</strong>.</p>
+      </div>
+    </div>
+
+    <!-- Trust Strip -->
+    <div class="s04-trust" data-reveal>
+      <div class="s04-trust-item">
+        <div class="s04-trust-num js-count" data-to="8" data-suffix="">0</div>
+        <div class="s04-trust-label">mögliche Ursachen<br>systematisch geprüft</div>
+      </div>
+      <div class="s04-trust-item">
+        <div class="s04-trust-num">4–6</div>
+        <div class="s04-trust-label">Minuten<br>ca. Bearbeitungszeit</div>
+      </div>
+      <div class="s04-trust-item">
+        <div class="s04-trust-num">0 €</div>
+        <div class="s04-trust-label">Kosten<br>vollständig kostenlos</div>
+      </div>
+      <div class="s04-trust-item">
+        <div class="s04-trust-num">0</div>
+        <div class="s04-trust-label">Kaufpflicht<br>keine</div>
+      </div>
+      <div class="s04-trust-item">
+        <div class="s04-trust-num">3</div>
+        <div class="s04-trust-label">mögliche Ergebnisse<br>mit Begründung</div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="s04-cta-wrap" data-reveal>
+      <h3 class="s04-cta-head">
+        Kostenlosen Feuchte-Check<br>
+        <span class="lime">starten →</span>
+      </h3>
+      <div class="btn-magnetic">
+        <a href="#" class="btn btn-primary btn-xl">Feuchte-Check starten</a>
+      </div>
+      <p class="s04-disclaimer">Das Ergebnis dient der ersten Orientierung und ersetzt bei komplexen oder unklaren Schadensbildern keine fachliche Untersuchung vor Ort.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     S05 — DER BKM PROZESS
+══════════════════════════════════════════════════════════════ -->
+<section class="sec s05" id="prozess">
+  <div class="inner">
+    <div style="max-width:560px">
+      <span class="eyebrow dg" data-reveal>Ein klarer Weg</span>
+      <h2 class="sh black" data-reveal data-delay="1">Verstehen.<br>Entscheiden.<br>Lösen.</h2>
+      <p class="sb muted mt16" data-reveal data-delay="2" style="font-size:16px">Feuchtesanierung kann technisch komplex sein. Der Weg zur richtigen Entscheidung sollte es nicht sein.</p>
+    </div>
+    <div class="s05-steps">
+      <div class="s05-step" data-reveal>
+        <div class="s05-nr">01</div>
+        <h3 class="s05-title">Verstehen</h3>
+        <div class="s05-q">Frage: Was passiert hier wahrscheinlich?</div>
+        <p class="s05-body">Schadensbild und mögliche Ursache einordnen – ohne Fachwissen, mit dem Feuchte-Check.</p>
+      </div>
+      <div class="s05-step" data-reveal data-delay="1">
+        <div class="s05-nr">02</div>
+        <h3 class="s05-title">Entscheiden</h3>
+        <div class="s05-q">Frage: Selbst lösen oder Unterstützung?</div>
+        <p class="s05-body">Bestimmen, welcher Sanierungsweg zur Situation passt – auf Basis einer klaren Einordnung.</p>
+      </div>
+      <div class="s05-step" data-reveal data-delay="2">
+        <div class="s05-nr">03</div>
+        <h3 class="s05-title">Lösen</h3>
+        <div class="s05-q">Frage: Welche Lösung gehört zu diesem Problem?</div>
+        <p class="s05-body">Die passende Maßnahme korrekt umsetzen – selbst oder mit einem BKM Fachbetrieb.</p>
+      </div>
+    </div>
+    <p class="s05-tagline" data-reveal>Erst verstehen. Dann lösen.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     S06 — ZWEI WEGE
+══════════════════════════════════════════════════════════════ -->
+<section class="sec s06" id="zwei-wege">
+  <div class="inner">
+    <div class="s06-intro">
+      <span class="eyebrow tg" data-reveal>Deine Entscheidung</span>
+      <h2 class="sh black" data-reveal data-delay="1">Zwei Wege. Ein Ziel:<br>dein Gebäude erhalten.</h2>
+      <p class="sb muted mt16" data-reveal data-delay="2" style="font-size:16px">Du möchtest selbst handeln? Oder Analyse und Umsetzung lieber abgeben? Beides ist möglich. Entscheidend ist, dass der Weg zum Schadensbild passt.</p>
+    </div>
+    <div class="s06-grid">
+      <!-- Selbst sanieren -->
+      <div class="wege-card dark" data-reveal id="selbst-sanieren">
+        <span class="wege-label">Selbst machen</span>
+        <h3 class="wege-title">Du möchtest selbst sanieren?</h3>
+        <p class="wege-body">Mit der BKM Home Line erhältst du Lösungen für geeignete Schadensbilder, verständliche Verarbeitungshinweise und einen klaren Weg von der Produktauswahl bis zur Anwendung.</p>
+        <div class="wege-flow">
+          <div class="wege-flow-step">Problem verstehen</div>
+          <div class="wege-flow-arrow">↓</div>
+          <div class="wege-flow-step">Passendes System auswählen</div>
+          <div class="wege-flow-arrow">↓</div>
+          <div class="wege-flow-step">Schritt für Schritt anwenden</div>
+        </div>
+        <div class="wege-ctas">
+          <a href="#" class="btn btn-primary btn-lg">Selbst sanieren →</a>
+          <a href="#" class="link-arrow" style="color:rgba(255,255,255,.45)">Zur BKM Home Line</a>
+        </div>
+        <p class="wege-micro">Nicht sicher, ob dein Fall dafür geeignet ist? Erst Feuchte-Check durchführen.</p>
+      </div>
+      <!-- Sanieren lassen -->
+      <div class="wege-card light" data-reveal data-delay="1" id="sanieren-lassen">
+        <span class="wege-label">Machen lassen</span>
+        <h3 class="wege-title">Du möchtest das Problem abgeben?</h3>
+        <p class="wege-body">Ein BKM Fachbetrieb kann die Situation am Gebäude prüfen, den Sanierungsbedarf einordnen und eine passende Ausführung vorschlagen.</p>
+        <div class="wege-flow">
+          <div class="wege-flow-step">Situation vor Ort prüfen</div>
+          <div class="wege-flow-arrow">↓</div>
+          <div class="wege-flow-step">Sanierungsweg festlegen</div>
+          <div class="wege-flow-arrow">↓</div>
+          <div class="wege-flow-step">Fachgerecht ausführen lassen</div>
+        </div>
+        <div class="wege-ctas">
+          <a href="#" class="btn btn-dark btn-lg">Fachbetrieb finden →</a>
+          <a href="#" class="link-arrow" style="color:var(--tg)">So läuft eine Sanierung ab →</a>
+        </div>
+        <p class="wege-micro">Besonders bei komplexen, größeren oder unklaren Schadensbildern ist die Prüfung vor Ort der richtige nächste Schritt.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     S07 — WARUM BKM
+══════════════════════════════════════════════════════════════ -->
+<section class="sec s07" id="ueber-bkm">
+  <div class="inner">
+    <div class="s07-layout">
+      <div>
+        <span class="eyebrow lime" data-reveal>Warum BKM</span>
+        <h2 class="sh white" data-reveal data-delay="1">Wir wollen dir nicht für jedes Problem dasselbe verkaufen.</h2>
+        <p class="s07-copy" data-reveal data-delay="2">
+          Seit 1976 beschäftigt sich BKM mit dem Schutz und Erhalt von Bestandsgebäuden. Aus dieser Erfahrung ist ein System entstanden, das zwei Dinge miteinander verbindet:
+          <strong>Produkte für geeignete Eigenanwendungen</strong> und <strong>ein Netzwerk von Fachbetrieben für professionelle Sanierungen.</strong>
+        </p>
+        <div class="s07-divider" data-reveal data-delay="2"></div>
+        <blockquote class="s07-quote" data-reveal data-delay="3">
+          Dadurch beginnt die Frage nicht bei: <em>„Welches Produkt können wir verkaufen?"</em><br>
+          Sondern bei: <em>„Welcher Weg passt zu diesem Schadensbild?"</em>
+        </blockquote>
+        <div class="mt32" data-reveal data-delay="4">
+          <a href="#" class="link-arrow" style="color:rgba(255,255,255,.45)">Mehr über BKM erfahren →</a>
+        </div>
+      </div>
+      <div>
+        <div class="s07-proof">
+          <div class="proof-item" data-reveal data-delay="1">
+            <div class="proof-num">1976</div>
+            <div class="proof-label">Gründungsjahr</div>
+            <div class="proof-body">Erfahrung im Feuchtigkeitsschutz und Erhalt von Bestandsgebäuden.</div>
+          </div>
+          <div class="proof-item" data-reveal data-delay="2">
+            <div class="proof-num">8</div>
+            <div class="proof-label">Ursachen geprüft</div>
+            <div class="proof-body">Der Feuchte-Check betrachtet unterschiedliche mögliche Schadensursachen statt nur einer Produktkategorie.</div>
+          </div>
+          <div class="proof-item" data-reveal data-delay="3">
+            <div class="proof-num">2</div>
+            <div class="proof-label">Sanierungswege</div>
+            <div class="proof-body">Selbst sanieren oder fachgerecht sanieren lassen – je nach Schadensbild.</div>
+          </div>
+          <div class="proof-item" data-reveal data-delay="4">
+            <div class="proof-num">3×</div>
+            <div class="proof-label">Mögliche Ergebnisse</div>
+            <div class="proof-body">Auch „Erst weiter prüfen" ist ein valides Ergebnis – und ein Vertrauensbeweis.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     S08 — URSACHENWELT
+══════════════════════════════════════════════════════════════ -->
+<section class="sec s08" id="ursachen">
+  <div class="s08-texture"></div>
+  <div class="inner s08-inner">
+    <div style="max-width:600px">
+      <span class="eyebrow lime" data-reveal>Feuchtigkeit verstehen</span>
+      <h2 class="sh white" data-reveal data-delay="1">Acht mögliche Ursachen.<br><span style="color:rgba(255,255,255,.35)">Nicht achtmal dieselbe Lösung.</span></h2>
+      <p class="sb dark mt20" data-reveal data-delay="2" style="font-size:16px">Der Feuchte-Check berücksichtigt unterschiedliche Ursachen, die ähnliche Schadensbilder erzeugen können.</p>
+    </div>
+    <div class="s08-grid">
+      <div class="ursache-card" data-reveal><div class="ursache-icon">↑</div><h3 class="ursache-title">Aufsteigende Feuchtigkeit</h3><p class="ursache-body">Feuchtigkeit kann aus dem erdberührten Bereich kapillar im Mauerwerk aufsteigen.</p><a href="#" class="ursache-link">Mehr erfahren →</a></div>
+      <div class="ursache-card" data-reveal data-delay="1"><div class="ursache-icon">→</div><h3 class="ursache-title">Seitlich eindringende Feuchtigkeit</h3><p class="ursache-body">Feuchtigkeit kann durch erdberührte Wandflächen seitlich in das Bauteil gelangen.</p><a href="#" class="ursache-link">Mehr erfahren →</a></div>
+      <div class="ursache-card" data-reveal data-delay="2"><div class="ursache-icon">⬇</div><h3 class="ursache-title">Drückendes Wasser</h3><p class="ursache-body">Bei entsprechender Wasserbelastung kann Wasser unter Druck auf erdberührte Bauteile wirken.</p><a href="#" class="ursache-link">Mehr erfahren →</a></div>
+      <div class="ursache-card" data-reveal data-delay="3"><div class="ursache-icon">~</div><h3 class="ursache-title">Rohrbruch / Leckage</h3><p class="ursache-body">Undichte Leitungen können lokal oder über verdeckte Wege Feuchtigkeit verursachen.</p><a href="#" class="ursache-link">Mehr erfahren →</a></div>
+      <div class="ursache-card" data-reveal><div class="ursache-icon">○</div><h3 class="ursache-title">Kondensation / Tauwasser</h3><p class="ursache-body">Warme, feuchte Luft kann an kalten Oberflächen kondensieren.</p><a href="#" class="ursache-link">Mehr erfahren →</a></div>
+      <div class="ursache-card" data-reveal data-delay="1"><div class="ursache-icon">≈</div><h3 class="ursache-title">Schlagregen</h3><p class="ursache-body">Regen kann über Fassaden, Fugen oder beschädigte Oberflächen in das Mauerwerk gelangen.</p><a href="#" class="ursache-link">Mehr erfahren →</a></div>
+      <div class="ursache-card" data-reveal data-delay="2"><div class="ursache-icon">◻</div><h3 class="ursache-title">Baufeuchte</h3><p class="ursache-body">Nach Bau- oder Sanierungsmaßnahmen kann noch Feuchtigkeit in Baustoffen vorhanden sein.</p><a href="#" class="ursache-link">Mehr erfahren →</a></div>
+      <div class="ursache-card" data-reveal data-delay="3"><div class="ursache-icon">⌒</div><h3 class="ursache-title">Leckage von oben</h3><p class="ursache-body">Dach, Balkon, Fensteranschlüsse oder Räume oberhalb können Ursache eines Feuchtigkeitsschadens sein.</p><a href="#" class="ursache-link">Mehr erfahren →</a></div>
+    </div>
+    <div class="s08-bottom" data-reveal>
+      <p class="s08-bottom-text"><strong>Nicht sicher, was bei dir zutrifft?</strong><br>Der Feuchte-Check ordnet die Ursachen für dich ein – ohne Fachwissen, kostenlos.</p>
+      <div class="btn-magnetic">
+        <a href="#feuchte-check" class="btn btn-primary btn-lg">Feuchte-Check starten →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     S09 — SOCIAL PROOF / KUNDENPROJEKTE
+══════════════════════════════════════════════════════════════ -->
+<section class="sec s09" id="kundenprojekte">
+  <div class="inner">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:48px">
+      <div>
+        <span class="eyebrow dg" data-reveal>Aus der Praxis</span>
+        <h2 class="sh black" data-reveal data-delay="1">Vom Schadensbild zum<br>passenden Sanierungsweg.</h2>
+        <p class="sb muted mt16" data-reveal data-delay="2" style="font-size:15px;max-width:480px">Nicht entscheidend ist, wie spektakulär eine Sanierung klingt. Entscheidend ist, ob Ursache, Maßnahme und Ergebnis zusammenpassen.</p>
+      </div>
+      <div data-reveal data-delay="3" style="flex-shrink:0">
+        <a href="#" class="btn btn-outline-dark">Alle Projekte →</a>
+      </div>
+    </div>
+    <div class="s09-grid">
+      <!-- Case 1 -->
+      <div class="case-card" data-reveal>
+        <div class="case-header">
+          <span class="case-tag">Aufsteigende Feuchtigkeit</span>
+          <span class="case-year">Einfamilienhaus · 2023</span>
+        </div>
+        <div class="case-body">
+          <div class="case-situation">Ausgangssituation</div>
+          <h3 class="case-title">Feuchte Kellerwand mit abplatzendem Putz</h3>
+          <div class="case-row"><span class="case-row-label">Einordnung</span><span class="case-row-val">Aufsteigende Feuchtigkeit durch fehlende Horizontalsperre</span></div>
+          <div class="case-row"><span class="case-row-label">Maßnahme</span><span class="case-row-val">Injektion + Sanierputzsystem, Eigenanwendung</span></div>
+          <div class="case-row"><span class="case-row-label">Ergebnis</span><span class="case-row-val">Trockene Wand nach 3 Monaten, keine Folgeschäden</span></div>
+          <p class="case-placeholder">Echtes Kundenprojekt — Daten werden ergänzt</p>
+        </div>
+      </div>
+      <!-- Case 2 -->
+      <div class="case-card" data-reveal data-delay="1">
+        <div class="case-header">
+          <span class="case-tag">Fachbetrieb-Sanierung</span>
+          <span class="case-year">Mehrfamilienhaus · 2024</span>
+        </div>
+        <div class="case-body">
+          <div class="case-situation">Ausgangssituation</div>
+          <h3 class="case-title">Nasser Keller, Ursache nach erster Prüfung unklar</h3>
+          <div class="case-row"><span class="case-row-label">Einordnung</span><span class="case-row-val">Drückendes Wasser + Leckage kombiniert</span></div>
+          <div class="case-row"><span class="case-row-label">Maßnahme</span><span class="case-row-val">Vor-Ort-Prüfung, Abdichtung Außenwand, BKM Fachbetrieb</span></div>
+          <div class="case-row"><span class="case-row-label">Ergebnis</span><span class="case-row-val">Dauerhaft trocken, Substanzschäden gestoppt</span></div>
+          <p class="case-placeholder">Echtes Kundenprojekt — Daten werden ergänzt</p>
+        </div>
+      </div>
+      <!-- Case 3 -->
+      <div class="case-card" data-reveal data-delay="2">
+        <div class="case-header">
+          <span class="case-tag">Erst weiter prüfen</span>
+          <span class="case-year">Altbau · 2024</span>
+        </div>
+        <div class="case-body">
+          <div class="case-situation">Ausgangssituation</div>
+          <h3 class="case-title">Schimmel in Kellerraum, Ursache zunächst unklar</h3>
+          <div class="case-row"><span class="case-row-label">Einordnung</span><span class="case-row-val">Check-Empfehlung: Vor-Ort-Prüfung erforderlich</span></div>
+          <div class="case-row"><span class="case-row-label">Maßnahme</span><span class="case-row-val">Lüftungsanalyse + Wärmebrücken-Prüfung vor Maßnahme</span></div>
+          <div class="case-row"><span class="case-row-label">Ergebnis</span><span class="case-row-val">Kondensation erkannt, falsche Abdichtung vermieden</span></div>
+          <p class="case-placeholder">Echtes Kundenprojekt — Daten werden ergänzt</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     S10 — RATGEBER
+══════════════════════════════════════════════════════════════ -->
+<section class="sec s10" id="ratgeber">
+  <div class="inner">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:48px">
+      <div>
+        <span class="eyebrow tg" data-reveal>Wissen statt Raten</span>
+        <h2 class="sh black" data-reveal data-delay="1">Je besser du dein Schadensbild<br>verstehst, desto besser kannst<br>du entscheiden.</h2>
+      </div>
+      <div data-reveal data-delay="3" style="flex-shrink:0">
+        <a href="#" class="btn btn-outline-dark">Alle Ratgeber →</a>
+      </div>
+    </div>
+    <div class="s10-grid">
+      <a href="#" class="artikel-card" data-reveal>
+        <div class="artikel-img">Artikelbild</div>
+        <div class="artikel-cat">Ursachen &amp; Diagnose</div>
+        <h3 class="artikel-title">Feuchte Kellerwand: Welche Ursachen kommen infrage?</h3>
+        <p class="artikel-body">Ursachen erkennen und typische Schadensbilder besser unterscheiden.</p>
+        <span class="link-arrow" style="color:var(--tg)">Artikel lesen →</span>
+      </a>
+      <a href="#" class="artikel-card" data-reveal data-delay="1">
+        <div class="artikel-img">Artikelbild</div>
+        <div class="artikel-cat">Aufsteigende Feuchtigkeit</div>
+        <h3 class="artikel-title">Aufsteigende Feuchtigkeit erkennen</h3>
+        <p class="artikel-body">Welche Hinweise dafür sprechen können – und welche dagegen.</p>
+        <span class="link-arrow" style="color:var(--tg)">Artikel lesen →</span>
+      </a>
+      <a href="#" class="artikel-card" data-reveal data-delay="2">
+        <div class="artikel-img">Artikelbild</div>
+        <div class="artikel-cat">Kondensation</div>
+        <h3 class="artikel-title">Keller im Sommer lüften?</h3>
+        <p class="artikel-body">Warum warme Sommerluft in kühlen Kellern zum Problem werden kann.</p>
+        <span class="link-arrow" style="color:var(--tg)">Artikel lesen →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     S11 — FINAL CTA
+══════════════════════════════════════════════════════════════ -->
+<section class="sec s11" id="cta-final">
+  <div class="s11-texture"></div>
+  <div class="s11-orb"></div>
+  <div class="inner" style="position:relative;z-index:1">
+    <div class="s11-inner">
+      <span class="eyebrow lime" style="display:block;text-align:center" data-reveal>Dein nächster Schritt</span>
+      <h2 class="s11-h2" data-reveal data-delay="1">
+        Du musst die Ursache<br>noch nicht kennen.
+        <span class="line2">Genau dafür ist der Check da.</span>
+      </h2>
+      <p class="s11-body" data-reveal data-delay="2">
+        Beschreibe dein Schadensbild und finde heraus, welche Ursachen zu deiner Situation passen könnten und welcher nächste Schritt sinnvoll ist.
+      </p>
+      <div data-reveal data-delay="3">
+        <div class="btn-magnetic">
+          <a href="#feuchte-check" class="btn btn-primary btn-xl">Feuchte-Check starten →</a>
+        </div>
+        <p class="s11-micro">Kostenlos · ca. 4–6 Minuten · ohne Kaufpflicht</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     S12 — BRAND STATEMENT
+══════════════════════════════════════════════════════════════ -->
+<section class="s12">
+  <div class="s12-words">
+    <div class="s12-word" data-reveal>BUILD.</div>
+    <div class="s12-word" data-reveal data-delay="1">KEEP.</div>
+    <div class="s12-word" data-reveal data-delay="2">MAINTAIN.</div>
+  </div>
+  <p class="s12-sub" data-reveal data-delay="3">
+    <strong>Schutz aufbauen. Bestand bewahren. Gebäude erhalten.</strong><br>
+    BKM entwickelt Lösungen für den Schutz und Erhalt von Bestandsgebäuden – zur Eigenanwendung und für die professionelle Verarbeitung.
+  </p>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="inner">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-col-head">Feuchteproblem lösen</div>
+        <ul>
+          <li><a href="#">Feuchte-Check</a></li>
+          <li><a href="#">Feuchte Wand</a></li>
+          <li><a href="#">Nasser Keller</a></li>
+          <li><a href="#">Schimmel &amp; Kondensation</a></li>
+          <li><a href="#">Feuchtigkeitsursachen</a></li>
+          <li><a href="#">Ratgeber</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-head">Selbst sanieren</div>
+        <ul>
+          <li><a href="#">BKM Home Line</a></li>
+          <li><a href="#">Lösung finden</a></li>
+          <li><a href="#">Anleitungen</a></li>
+          <li><a href="#">Produkte</a></li>
+          <li><a href="#">Onlineshop</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-head">Sanieren lassen</div>
+        <ul>
+          <li><a href="#">Fachbetrieb finden</a></li>
+          <li><a href="#">Vor-Ort-Prüfung</a></li>
+          <li><a href="#">So läuft eine Sanierung ab</a></li>
+          <li><a href="#">Fachbetriebe</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-head">Für Profis</div>
+        <ul>
+          <li><a href="#">Pro Line</a></li>
+          <li><a href="#">Fachbetriebspartner</a></li>
+          <li><a href="#">Schulungen</a></li>
+          <li><a href="#">Partner werden</a></li>
+          <li><a href="#">Technische Unterlagen</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-head">BKM</div>
+        <ul>
+          <li><a href="#">Unternehmen</a></li>
+          <li><a href="#">Build. Keep. Maintain.</a></li>
+          <li><a href="#">Qualität &amp; Entwicklung</a></li>
+          <li><a href="#">Karriere</a></li>
+          <li><a href="#">Kontakt</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 BKM Mannesmann GmbH · Seit 1976</span>
+      <div class="footer-legal">
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+        <a href="#">AGB</a>
+        <a href="#">Widerruf</a>
+        <a href="#">Cookie-Einstellungen</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════════════════════════ -->
+<script>
+(function(){
+'use strict';
+
+/* ── PAGE LOADER ────────────────────────────────────── */
+var loader = document.getElementById('loader');
+setTimeout(function(){
+  loader.classList.add('done');
+  document.body.classList.add('loaded');
+  setTimeout(animateHeroChars, 300);
+}, 1100);
+
+/* ── CHAR ANIMATION (Hero H1 main line) ─────────────── */
+function splitChars(el){
+  var original = el.innerHTML;
+  var result = '';
+  Array.from(el.innerText).forEach(function(ch){
+    if(ch === ' '){ result += ' '; }
+    else { result += '<span class="ch-char">'+ch+'</span>'; }
+  });
+  el.innerHTML = result;
+  return el.querySelectorAll('.ch-char');
+}
+function animateHeroChars(){
+  var el = document.getElementById('heroMain');
+  if(!el) return;
+  var chars = splitChars(el);
+  chars.forEach(function(ch, i){
+    setTimeout(function(){ ch.classList.add('in'); }, i * 22);
+  });
+}
+
+/* ── CUSTOM CURSOR ──────────────────────────────────── */
+var dot  = document.getElementById('curDot');
+var ring = document.getElementById('curRing');
+var mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',function(e){
+  mx=e.clientX; my=e.clientY;
+  dot.style.left=mx+'px'; dot.style.top=my+'px';
+});
+(function tickRing(){
+  rx+=(mx-rx)*.1; ry+=(my-ry)*.1;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(tickRing);
+})();
+
+/* ── NAV SCROLL ─────────────────────────────────────── */
+var nav = document.getElementById('nav');
+window.addEventListener('scroll',function(){
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+},{passive:true});
+
+/* ── SCROLL REVEAL ──────────────────────────────────── */
+var io = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); }
+  });
+},{threshold:0.1, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('[data-reveal]').forEach(function(el){ io.observe(el); });
+
+/* ── COUNTER ANIMATION ──────────────────────────────── */
+var cio = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(!e.isIntersecting) return;
+    var el=e.target, to=parseInt(el.dataset.to), suffix=el.dataset.suffix||'', dur=1600, start=performance.now();
+    function tick(now){
+      var t=Math.min((now-start)/dur,1), ease=1-Math.pow(1-t,3);
+      el.textContent=Math.floor(ease*to)+suffix;
+      if(t<1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+    cio.unobserve(el);
+  });
+},{threshold:0.5});
+document.querySelectorAll('.js-count').forEach(function(el){ cio.observe(el); });
+
+/* ── MAGNETIC BUTTONS ───────────────────────────────── */
+document.querySelectorAll('.btn-magnetic').forEach(function(wrap){
+  var btn=wrap.querySelector('.btn');
+  if(!btn) return;
+  wrap.addEventListener('mousemove',function(e){
+    var r=wrap.getBoundingClientRect();
+    var dx=(e.clientX-(r.left+r.width/2))*.35;
+    var dy=(e.clientY-(r.top+r.height/2))*.35;
+    btn.style.transform='translate('+dx+'px,'+dy+'px)';
+  });
+  wrap.addEventListener('mouseleave',function(){ btn.style.transform=''; });
+});
+
+/* ── 3D CARD TILT (S03 glass cards) ────────────────── */
+document.querySelectorAll('.prob-q-card').forEach(function(card){
+  card.addEventListener('mousemove',function(e){
+    var r=card.getBoundingClientRect();
+    var x=(e.clientX-r.left)/r.width-.5;
+    var y=(e.clientY-r.top)/r.height-.5;
+    card.style.transform='perspective(800px) rotateX('+(-y*8)+'deg) rotateY('+(x*8)+'deg) translateZ(8px)';
+    card.style.setProperty('--cx',(e.clientX-r.left)+'px');
+    card.style.setProperty('--cy',(e.clientY-r.top)+'px');
+  });
+  card.addEventListener('mouseleave',function(){
+    card.style.transform='';
+    card.style.setProperty('--cx','-9999px');
+    card.style.setProperty('--cy','-9999px');
+  });
+});
+
+/* ── CURSOR SPOTLIGHT (S07 proof items) ─────────────── */
+document.querySelectorAll('.proof-item,.ursache-card').forEach(function(el){
+  el.addEventListener('mousemove',function(e){
+    var r=el.getBoundingClientRect();
+    el.style.setProperty('--cx',(e.clientX-r.left)+'px');
+    el.style.setProperty('--cy',(e.clientY-r.top)+'px');
+  });
+  el.addEventListener('mouseleave',function(){
+    el.style.setProperty('--cx','-9999px');
+    el.style.setProperty('--cy','-9999px');
+  });
+});
+
+/* ── HERO CHECK CARD (interactive options) ──────────── */
+document.querySelectorAll('.check-opt').forEach(function(opt){
+  opt.addEventListener('click',function(){
+    document.querySelectorAll('.check-opt').forEach(function(o){ o.classList.remove('sel'); });
+    opt.classList.add('sel');
+    var bar=document.getElementById('checkBar');
+    if(bar) bar.style.width='40%';
+  });
+});
+
+})();
+</script>
+</body>
+</html>
