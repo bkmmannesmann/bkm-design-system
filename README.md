@@ -14,7 +14,9 @@ This repository contains the complete design system for BKM Mannesmann AG, a man
 
 | File | Purpose | Lines |
 |------|---------|-------|
-| `DESIGN.md` | Complete design tokens (colors, typography, spacing, shadows, components, animations, responsive) + documentation | 700+ |
+| `DESIGN.md` | Complete design tokens (colors, typography, spacing, shadows, components, animations, responsive) + **Website System (v1.2)** | 700+ |
+| `website/` | **Corporate-Website Vertical Slice** — statisch, ohne Dependencies; Referenzimplementierung des Web-Systems | |
+| `docs/strategy/`, `docs/design/`, `docs/architecture/`, `docs/implementation/`, `docs/research/`, `docs/reviews/` | Website-Projekt: Strategie, Creative Direction, Architektur, Roadmap, Source-Audit, Design-Audit | |
 | `AGENTS.md` | Instructions for AI coding agents + CSS variables template + Tailwind v4 config | 200+ |
 | `docs/brand-voice.md` | Tone, claims, copy patterns, UI text guidelines | |
 | `docs/digitale-medien.md` | Web/app implementation details, CSS variables, Dark Mode | |

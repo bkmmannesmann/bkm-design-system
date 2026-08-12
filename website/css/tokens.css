@@ -46,7 +46,7 @@
   --outline-variant: #e8e6e1;
   --on-dark: #ffffff;
   --on-dark-soft: rgba(255, 255, 255, 0.72);
-  --on-dark-faint: rgba(255, 255, 255, 0.5);
+  --on-dark-faint: rgba(255, 255, 255, 0.62); /* AA: 4.9:1 auf Deep Green */
   --error: #dc2626;
   --error-container: #fef2f2;
   --on-error-container: #991b1b;

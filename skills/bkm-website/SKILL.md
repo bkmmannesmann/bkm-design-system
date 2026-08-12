@@ -2,6 +2,8 @@
 
 > Generiert brand-konforme Websites und Web-Applikationen im BKM Mannesmann Design System. Nutzt React + Tailwind CSS + shadcn/ui und die BKM Pattern Library.
 
+> **⚠️ Für die Corporate Website gilt seit v1.2 das Web-System in `/DESIGN.md` (Abschnitt „Website System") als verbindlich** — inklusive der dortigen Anti-Pattern-Regeln. Dekorative Effekte aus `patterns/` (Aurora Gradient, Spotlight Cards, 3D Cards, Colourful Text) sind auf der Corporate Website **nicht** zulässig; sie bleiben für Kampagnen-/Experimental-Flächen verfügbar. Referenzimplementierung: `/website/` (statisch, ohne Runtime-Dependencies). Begründung: `docs/research/source-audit.md`, `docs/design/creative-direction.md`.
+
 ## Wann diesen Skill verwenden
 
 - Wenn Websites, Landing Pages oder Web-Apps im BKM-Stil erstellt werden sollen
