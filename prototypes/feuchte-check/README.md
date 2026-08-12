@@ -1,8 +1,24 @@
 # Prototyp: BKM Feuchte-Check (Landingpage + Diagnose-Wizard)
 
-> **Status: in Arbeit.** Interaktive Lead-Gen-Landingpage, die 8 Schadensursachen
+> **Status: in Arbeit.** Interaktive Landingpage, die 8 Schadensursachen
 > systematisch prüft — „wie ein Gutachter". Ein-Frage-Wizard (Typeform-Stil),
 > Regelwerk-basierte Auswertung, Lead-Gate vor dem vollständigen Ergebnis.
+> Primäres Ziel laut PRODUCT.md: Orientierung und Klarheit für den Kunden.
+
+## Qualitäts-Pass (Impeccable, 2026-08)
+
+Anti-Slop-Überarbeitung mit `npx impeccable detect` (70 → 11 Findings):
+Eyebrows/Kicker entfernt, farbige Kantenbalken (side-tabs) ersetzt, Emoji-Icons
+durch gezeichnete SVG-Icons ersetzt, Kontraste auf WCAG AA angehoben,
+Schriftgrößen/Radien auf die DESIGN.md-Ramp gerastert, `width`-Transitions durch
+`transform:scaleX` ersetzt, Headings-Hierarchie repariert, Buttons ohne Uppercase
+(nur H1 ist laut DESIGN.md uppercase).
+
+Bewusste Ausnahmen (Detector-Restmeldungen): `cramped-padding`-Meldungen auf
+Sektionen sind False Positives des statischen Parsers (clamp()-Padding);
+`flat-type-hierarchy` entspricht exakt der dokumentierten DESIGN.md-Ramp
+(12/14/16/18); neutrale Schatten-Alpha `rgba(0,0,0,.35)` auf dem Lime-Button ist
+beabsichtigt (neutrale Elevation statt Farb-Glow).
 
 ## Datei
 
