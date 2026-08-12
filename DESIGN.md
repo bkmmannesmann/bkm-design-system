@@ -646,3 +646,71 @@ The following patterns are **web UI design** and must NOT appear in slides, broc
 - Multiple card shadows competing for attention
 
 These patterns remain valid for the **website/digital context** (see `skills/bkm-website/`) but are explicitly forbidden in editorial output.
+
+## Website System (Web Extension, v1.2)
+
+This section extends the token base above with the systems required for the corporate website (`website/`). It is normative for all web output. Rationale and creative direction: `docs/design/creative-direction.md`. Where this section and older pattern docs conflict (e.g. `patterns/backgrounds/aurora-gradient.md`), **this section wins** — decorative background effects are not used on the corporate website.
+
+### Responsive Type Scale
+
+Fluid sizes via `clamp()`, anchored to the desktop values defined in the YAML tokens. Unbounded never renders below 18px.
+
+| Token | CSS | Use |
+|-------|-----|-----|
+| display-xl | `clamp(2.5rem, 1.4rem + 5vw, 4.5rem)` / Unbounded 900 / lh 1.0 / ls -0.04em / uppercase | H1 Startseite |
+| display | `clamp(2.25rem, 1.5rem + 3.4vw, 3.5rem)` / Unbounded 900 / lh 1.05 / ls -0.03em / uppercase | H1 Unterseiten |
+| h2 | `clamp(1.75rem, 1.3rem + 2vw, 2.75rem)` / Unbounded 900 / lh 1.08 / ls -0.02em / sentence case | Sektionen |
+| h3 | `clamp(1.375rem, 1.15rem + 1vw, 1.75rem)` / Unbounded 900 / lh 1.2 / sentence case | Subsektionen |
+| h4 | `1.25rem` / Unbounded 900 / lh 1.3 / sentence case | Card-Titel (min 20px ≥ 18px rule) |
+| lead | `clamp(1.125rem, 1rem + 0.5vw, 1.375rem)` / TT Norms Pro 400 / lh 1.6 | Intro-Absätze |
+| body | `1.0625rem` (17px) / TT Norms Pro 400 / lh 1.7 | Fließtext |
+| small | `0.9375rem` / TT Norms Pro 400 / lh 1.5 | Sekundärtext |
+| caption | `0.8125rem` / TT Norms Pro 400 / lh 1.5 | Bildunterschriften |
+| label | `0.8125rem` / TT Norms Pro 700 / ls 0.1em / uppercase | Kicker/Labels ("Technical Label") |
+| value | `clamp(2rem, 1.5rem + 2vw, 3rem)` / Unbounded 900 | Messwert-Block (S5) |
+
+Reading measure: body text never exceeds **68ch**.
+
+### Layout System
+
+- **Max content width:** 1200px (`--container`); wide band content 1440px; full-bleed only for surface bands and hero imagery.
+- **Grid:** 12 columns desktop / 6 tablet / 4 mobile; gutter 24px (32px ≥1200px); outer padding 20px mobile, 32px tablet, 48px desktop.
+- **Breakpoints:** 480 / 768 / 1024 / 1280 / 1600.
+- **Section spacing:** `clamp(64px, 5vw + 32px, 128px)` vertical between major sections; 48–64px between related blocks inside a section.
+- **Rhythm:** dark and light bands alternate with hard cuts (see Layout chapter above). Max one dark band per two light bands on content pages — dark is emphasis, not wallpaper.
+- **Asymmetry rule:** editorial sections prefer 7/5 or 8/4 column splits over 6/6; centered layouts are reserved for the Feuchte-Check and CTA moments.
+- **Full-bleed rule:** photography and the Wandschnitt diagram may bleed to the viewport edge on one side only; text content never does.
+
+### Motion Language
+
+The site must be excellent with zero animation. Motion is added only for orientation, hierarchy, feedback, explanation, storytelling, or brand character.
+
+| Token | Value | Use |
+|-------|-------|-----|
+| `--ease-out` | `cubic-bezier(0.22, 1, 0.36, 1)` | Reveals, entrances |
+| `--ease-inout` | `cubic-bezier(0.65, 0, 0.35, 1)` | Diagram/state transitions |
+| `--dur-fast` | 150ms | Hover, focus, button feedback |
+| `--dur-med` | 300ms | Panel/accordion, nav |
+| `--dur-slow` | 600ms | Section reveals (once, on first intersection) |
+| `--dur-story` | 1200ms | Wandschnitt "drying" animation only |
+| Stagger | 60–80ms, max 5 items | Grouped card/list reveals |
+
+Rules: reveals move max 16px translateY + fade, run once, never re-trigger; no scroll-hijacking, no parallax decoration, no marquees, no cursor effects; hover lift is -2px with shadow escalation (existing card spec); `prefers-reduced-motion: reduce` disables all reveals and story animations (elements simply visible), keeps only color/opacity feedback.
+
+### Signature Elements (web)
+
+Defined in `docs/design/creative-direction.md`; token-level rules:
+
+1. **S1 Wandschnitt-Diagramm** — brand-owned SVG system. Fixed color coding: moisture zone Deep Green `#1c4b42` (hatch/fill), barrier line Lime `#b4e717` 4px, dry zone Sand `#f6f5f2`/Pure Green `#4daf46` accents, strokes `#c8c5be`/`#494949`. The Wandschnitt is drawn as inline SVG (it is content, not the protected Keyvisual — the Keyvisual asset rule is untouched).
+2. **S2 Sperrschicht-Kante** — a 4px Lime rule marking selected dark↔light section cuts. Max 1–2 per page, BKM AG context only.
+3. **S3 Zwei-Wege-Weiche** — the recurring two-path decision module. Fixed anatomy: kicker "Zwei Wege. Ein Ziel.", two equal panels (Selbst sanieren → Home Line / Fachbetrieb beauftragen → Pro Line), one primary CTA per panel. Identical anatomy on every page it appears.
+4. **S4 Diagnose-Interface** — Feuchte-Check UI: large answer cards, circular Deep-Green/Lime line icons (icon system), progress as a horizontal "Trocknungslinie" animating Deep Green → Pure Green.
+5. **S5 Messwert-Block** — label (TT Norms Pro 700 uppercase 13px, letter-spacing 0.1em) + value (Unbounded 900) + unit (TT Norms Pro 400) + hairline divider `#e8e6e1`. Replaces generic stat cards. Only real, verifiable values.
+
+### Image Direction (web)
+
+Documentary, warm-natural grade; real buildings, hands at work, macro material surfaces, honest before/after pairs. No stock-smile scenes, no HDR, no AI-purple grading, no SaaS illustrations. Placeholders while photography is missing: material textures from `assets/backgrounds/` or S1 diagrams — never fake photos. Formats: WebP with JPEG fallback, explicit `width`/`height` (CLS), `loading="lazy"` below the fold.
+
+### Web Anti-Patterns (binding)
+
+No gradient meshes; no glassmorphism without a photo background and a reason; no bento grids; no three-identical-feature-cards rows; no icon+headline+paragraph ×6 walls; no pill-chip overload; no dashboard aesthetics on marketing pages; no invented numbers, testimonials, awards or certificates. Every visual decision must pass: *"Würde ein erfahrener Designer diese Entscheidung auch treffen, wenn niemand wüsste, dass AI beteiligt war?"*
