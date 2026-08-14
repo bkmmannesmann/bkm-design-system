@@ -443,6 +443,12 @@ body.results-mode .res-head{border-radius:16px}
 .lead h3{margin-bottom:6px}
 .lead .ok-msg{display:none;color:var(--bkm-deep-green);font-weight:700;font-size:14px;margin-top:12px}
 
+/* Chat-Uebergabe */
+.chatmsg{background:var(--bkm-sand-white);border-radius:8px;box-shadow:rgba(0,0,0,0.08) 0px 0px 0px 1px;padding:16px 18px;max-height:280px;overflow:auto}
+.chatmsg pre{font-family:inherit;font-size:14px;line-height:1.6;white-space:pre-wrap;color:var(--bkm-ink);margin:0}
+.chatmsg-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:14px}
+.copy-ok{font-size:14px;font-weight:700;color:var(--bkm-deep-green)}
+
 /* Datentransparenz */
 .data-json{background:var(--bkm-deep-green);color:rgba(255,255,255,.85);border-radius:8px;padding:16px;font-size:12px;line-height:1.5;overflow:auto;max-height:280px;white-space:pre}
 
@@ -500,7 +506,7 @@ details.faq[open] .a{animation:faqIn .25s ease}
 
 /* ================= Print (Ergebnis-Protokoll) ================= */
 @media print{
-  .hero,.relief,.misdiag,.how,.principles,.journey,.causes,.faq-sec,.cta-band,.wz-foot,.res-tools,.lead,.gate,#gateSec,.unlock-note,#btnRestart{display:none!important}
+  .hero,.relief,.misdiag,.how,.principles,.journey,.causes,.faq-sec,.cta-band,.wz-foot,.res-tools,.lead,.gate,#gateSec,.unlock-note,#btnRestart,#secChat{display:none!important}
   main{padding-top:0}
   body{background:#fff}
   section{padding:0}
@@ -784,6 +790,16 @@ details.faq[open] .a{animation:faqIn .25s ease}
             <h3>Dein nächster Schritt</h3>
             <p class="sub" id="routeSub"></p>
             <div class="routes" id="routes"></div>
+          </div>
+
+          <div class="res-sec" id="secChat">
+            <h3>Ergebnis mit dem BKM Chat-Berater besprechen</h3>
+            <p class="sub">Du kannst dein Ergebnis direkt in das Chat-Bot-Fenster einpflegen: Nachricht kopieren, im Chat einfügen, absenden – der Chat kennt dann dein Schadensbild und bespricht mit dir, was zu tun ist.</p>
+            <div class="chatmsg"><pre id="chatMsgText"></pre></div>
+            <div class="chatmsg-actions">
+              <button class="btn btn-green btn-sm" id="btnCopyChat" type="button">Nachricht kopieren</button>
+              <span class="copy-ok" id="copyOk" hidden></span>
+            </div>
           </div>
 
           <p style="font-size:12px;color:var(--bkm-stone-grey);line-height:1.6" id="disclaimer"></p>
@@ -3315,6 +3331,22 @@ document.addEventListener("keydown", e=>{
   else if (e.key==="ArrowLeft" && !$("#btnBack").hidden){ advance("back"); }
 });
 $("#btnLead").addEventListener("click", unlock);
+$("#btnCopyChat").addEventListener("click", async ()=>{
+  const t = $("#chatMsgText").textContent;
+  let ok = false;
+  try { await navigator.clipboard.writeText(t); ok = true; }
+  catch(e){
+    const ta = document.createElement("textarea");
+    ta.value = t; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    try { ok = document.execCommand("copy"); } catch(_){}
+    ta.remove();
+  }
+  const okEl = $("#copyOk");
+  okEl.hidden = false;
+  okEl.textContent = ok ? "✓ Kopiert – jetzt im Chat-Fenster einfügen." : "Kopieren blockiert – bitte Text markieren und manuell kopieren.";
+  clearTimeout(okEl._t); okEl._t = setTimeout(()=>{ okEl.hidden = true; }, 5000);
+});
 
 /* ---------- Abschluss & Ergebnis ---------- */
 function anonymPayload(erg){
@@ -3468,6 +3500,36 @@ function unlock(){
 }
 
 /* renderDetails(): füllt Hinweise, Messprotokoll, Befunde, Empfehlungen (erst nach Freischaltung). */
+function chatNachricht(erg){
+  const L = [];
+  L.push("Hier ist das Ergebnis meiner Feuchte-Check-Analyse – besprich weiter mit mir, was zu tun ist:");
+  L.push("");
+  if (erg.unklar){
+    L.push("Ergebnis: unklar – kein Schadensbild hat ausreichende Evidenz erreicht.");
+  } else {
+    const h = LAIE.hyp[erg.primaer];
+    const kombi = erg.kombidiagnose ? LAIE.hyp[erg.kombidiagnose] : null;
+    L.push("Wahrscheinlichste Ursache: " + h.name + (kombi ? " + " + kombi.name + " (Kombinationsschaden)" : ""));
+    L.push("Evidenz: " + Math.round(erg.rangliste[0].p*100) + " % · Konfidenz: " + erg.konfidenz);
+  }
+  L.push("");
+  L.push("Messprotokoll (erreichte Evidenz je Ursache):");
+  erg.rangliste.forEach(r => L.push("- " + LAIE.hyp[r.id].name + ": " + Math.round(r.p*100) + " %"));
+  if (erg.ausgeschlossen.length)
+    L.push("Ausgeschlossen: " + erg.ausgeschlossen.map(a => LAIE.hyp[a.hypothese].name).join(", "));
+  if (!erg.unklar){
+    const b = befunde(RULES, state.antworten, erg.primaer);
+    if (b.pro.length) L.push("Spricht dafür: " + b.pro.map(i => i.option).join("; "));
+    if (b.con.length) L.push("Spricht dagegen: " + b.con.map(i => i.option).join("; "));
+  }
+  const rt = routing(erg, state.antworten);
+  const rec = rt.routes.find(r => r.rec);
+  if (rec) L.push("Empfohlener nächster Schritt laut Check: " + rec.h);
+  L.push("");
+  L.push("(Quelle: BKM Feuchte-Check, Regelwerk v" + (RULES.version || "2.1") + ")");
+  return L.join("\n");
+}
+
 function renderDetails(erg){
   const notices = plausibilitaet(state.antworten, erg);
   $("#secNotices").innerHTML = notices.map(n=>
@@ -3506,6 +3568,8 @@ function renderDetails(erg){
       <span class="tag">${r.tag}</span><h4>${r.h}</h4><p>${r.p}</p>
       ${r.cta?`<a class="btn btn-sm ${r.rec?'btn-lime':'btn-outline'}" href="${r.href}" ${r.href.startsWith('http')?'target="_blank" rel="noopener"':''}>${r.cta}</a>`:""}
     </div>`).join("");
+
+  $("#chatMsgText").textContent = chatNachricht(erg);
 
   $("#disclaimer").textContent = RULES.hinweis_rechtlich || "";
 }
