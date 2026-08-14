@@ -45,6 +45,14 @@ beabsichtigt (neutrale Elevation statt Farb-Glow).
 
 - **Regelwerk** v2.1 (`RULES` im Inline-Script): Fragen, Bedingungen, Gewichtung,
   Ausschlüsse; Auswertung in `auswerten()`, Plausibilitätsprüfung, `routing()`
+- **Adaptiver Fragenfluss** (seit 2026-08): ~13 Kernfragen, weitere Fragen nur
+  bei relevantem Schadensbild (`sichtbar_wenn` mit `oder`-Logik; typisch 16–20
+  statt starr 29–31). Die Auswertung normalisiert nur über beantwortete Fragen,
+  Raumtyp/Schwerlast/Heizverhalten und PLZ wurden aus dem Fluss entfernt.
+- **SB7-Aufbau** (StoryBrand): Hero (Held + Ziel + Ergebnis-Versprechen) →
+  Problem/Villain (Fehldiagnose) → Guide-Empathie (Beruhigung) → Autorität
+  (Systematik/Prinzipien) → Plan (3 Schritte) → Call-to-Action (Check) →
+  Erfolg (Protokoll) → FAQ
 - **Lead-Endpoint:** `api/lead.php` (relativ; Backend nicht Teil dieses Prototyps).
   Es werden zwei Payloads gesendet: anonyme Auswertung + Protokoll mit Lead-Daten.
 - **Design System:** BKM Tokens aus `DESIGN.md`/`AGENTS.md`, Noise-Textur, Aurora

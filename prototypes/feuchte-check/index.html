@@ -193,7 +193,7 @@ p.sec-sub{color:var(--bkm-stone-grey);max-width:64ch;margin-bottom:42px;font-siz
 .pcard .v{font-size:14px;color:var(--bkm-stone-grey);line-height:1.65}
 
 /* ================= Wizard – Ein-Frage-Fokus (Typeform-Stil) ================= */
-#check{scroll-margin-top:12px;position:relative;overflow:hidden;background:var(--bkm-deep-green);padding:clamp(64px,9vw,104px) 0}
+#check{scroll-margin-top:12px;position:relative;overflow:hidden;background:var(--bkm-deep-green);padding:clamp(48px,7vw,80px) 0}
 #check .check-bg{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.5}
 #check .narrow{position:relative;z-index:2}
 /* Heller Text auf der dunklen Check-Bühne */
@@ -203,7 +203,7 @@ p.sec-sub{color:var(--bkm-stone-grey);max-width:64ch;margin-bottom:42px;font-siz
 .wizard{background:var(--bkm-surface);border-radius:16px;overflow:hidden;
   box-shadow:0 2px 0 rgba(255,255,255,.06), 0 30px 60px -24px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.04);
   position:relative}
-.wz-top{position:relative;display:flex;align-items:center;gap:16px;padding:26px 32px 0}
+.wz-top{position:relative;display:flex;align-items:center;gap:16px;padding:18px 28px 0}
 .phase{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--bkm-transition-green);transition:opacity .3s}
 .wz-back{margin-left:auto;display:inline-flex;align-items:center;gap:6px;background:none;border:none;cursor:pointer;
   color:var(--bkm-stone-grey);font-family:inherit;font-size:14px;font-weight:700;padding:6px 8px;border-radius:4px;transition:color .15s,background .15s}
@@ -213,29 +213,29 @@ p.sec-sub{color:var(--bkm-stone-grey);max-width:64ch;margin-bottom:42px;font-siz
 .thread{position:absolute;left:0;right:0;bottom:-1px;height:3px;background:var(--bkm-neutral-dim)}
 .thread-f{height:100%;width:100%;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,var(--bkm-deep-green),var(--bkm-pure-green));transition:transform .55s cubic-bezier(.22,.7,.3,1)}
 /* Bühne: viel Ruhe, eine große Frage */
-.wz-stage{padding:44px 32px 8px;min-height:340px;position:relative}
+.wz-stage{padding:30px 28px 6px;min-height:240px;position:relative}
 @keyframes qIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 @keyframes qOutL{from{opacity:1;transform:none}to{opacity:0;transform:translateX(-26px)}}
 @keyframes qOutR{from{opacity:1;transform:none}to{opacity:0;transform:translateX(26px)}}
 .qcard{animation:qIn .42s cubic-bezier(.22,.7,.3,1)}
 .qcard.out-fwd{animation:qOutL .28s ease forwards}
 .qcard.out-back{animation:qOutR .28s ease forwards}
-.qcard .ql{font-family:'Unbounded';font-weight:900;letter-spacing:-.02em;line-height:1.18;font-size:clamp(22px,3vw,28px);color:var(--bkm-deep-green);max-width:20ch}
+.qcard .ql{font-family:'Unbounded';font-weight:900;letter-spacing:-.02em;line-height:1.2;font-size:clamp(18px,2.4vw,22px);color:var(--bkm-deep-green);max-width:26ch}
 .qcard .ql .req{display:none}
-.qcard .qh{font-size:14px;color:var(--bkm-stone-grey);margin-top:14px;max-width:60ch;line-height:1.65}
+.qcard .qh{font-size:14px;color:var(--bkm-stone-grey);margin-top:10px;max-width:60ch;line-height:1.6}
 .qcard .qh .opt-note{display:inline-block;margin-top:2px;font-weight:700;color:var(--bkm-transition-green)}
-.opts{display:grid;gap:12px;margin-top:30px}
+.opts{display:grid;gap:8px;margin-top:20px}
 .opts.cols{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
 /* Große, ganzflächig klickbare Kacheln; Radio/Checkbox versteckt */
-.opt{position:relative;display:flex;gap:14px;align-items:center;border-radius:12px;padding:18px 20px;cursor:pointer;background:var(--bkm-surface);
+.opt{position:relative;display:flex;gap:12px;align-items:center;border-radius:8px;padding:12px 14px;cursor:pointer;background:var(--bkm-surface);
   box-shadow:rgba(0,0,0,0.09) 0px 0px 0px 1px;transition:box-shadow .16s,background .16s,transform .12s;font-size:16px}
 .opt:hover{box-shadow:var(--bkm-deep-green) 0px 0px 0px 1.5px;transform:translateY(-1px)}
 .opt.sel{box-shadow:var(--bkm-deep-green) 0px 0px 0px 2px;background:var(--bkm-neutral-dim)}
 .opt input{position:absolute;opacity:0;pointer-events:none}
-.opt .mark{flex:none;width:24px;height:24px;border-radius:50%;box-shadow:inset 0 0 0 2px var(--bkm-outline);display:flex;align-items:center;justify-content:center;transition:box-shadow .16s,background .16s}
+.opt .mark{flex:none;width:20px;height:20px;border-radius:50%;box-shadow:inset 0 0 0 2px var(--bkm-outline);display:flex;align-items:center;justify-content:center;transition:box-shadow .16s,background .16s}
 .opt.multi .mark{border-radius:8px}
-.opt .mark svg{width:14px;height:14px;stroke:#fff;stroke-width:3.2;opacity:0;transform:scale(.5);transition:opacity .16s,transform .16s}
-.opt.sel .mark{box-shadow:inset 0 0 0 12px var(--bkm-deep-green)}
+.opt .mark svg{width:12px;height:12px;stroke:#fff;stroke-width:3.2;opacity:0;transform:scale(.5);transition:opacity .16s,transform .16s}
+.opt.sel .mark{box-shadow:inset 0 0 0 10px var(--bkm-deep-green)}
 .opt.sel .mark svg{opacity:1;transform:none}
 .opt .ol{font-weight:600;color:var(--bkm-ink);line-height:1.3}
 .opt.sel .ol{color:var(--bkm-deep-green)}
@@ -248,7 +248,7 @@ p.sec-sub{color:var(--bkm-stone-grey);max-width:64ch;margin-bottom:42px;font-siz
 .opt.has-ft{align-items:flex-start}
 .opt .key{margin-left:auto;flex:none;font-size:12px;font-weight:700;color:var(--bkm-stone-grey);background:var(--bkm-neutral-dim);border-radius:4px;padding:3px 8px;opacity:.7}
 @media(max-width:560px){.opt .key{display:none}}
-.wz-foot{display:flex;align-items:center;gap:16px;padding:22px 32px 26px;flex-wrap:wrap}
+.wz-foot{display:flex;align-items:center;gap:16px;padding:16px 28px 20px;flex-wrap:wrap}
 .wz-foot .hintline{font-size:12px;color:var(--bkm-stone-grey);order:3;flex-basis:100%;display:flex;align-items:center;gap:6px}
 .wz-foot .hintline kbd{font-family:inherit;font-size:12px;background:var(--bkm-neutral-dim);border-radius:4px;padding:1px 6px;box-shadow:rgba(0,0,0,.08) 0 0 0 1px}
 .skiplink{background:none;border:none;color:var(--bkm-stone-grey);text-decoration:underline;cursor:pointer;font-size:14px;font-family:inherit}
@@ -475,17 +475,17 @@ details.faq[open] .a{animation:faqIn .25s ease}
 
 /* ================= Responsive Feinschliff ================= */
 @media(max-width:560px){
-  .wz-stage{padding:30px 18px 4px;min-height:300px}
-  .wz-top{padding:18px 18px 0}
+  .wz-stage{padding:22px 16px 4px;min-height:220px}
+  .wz-top{padding:14px 16px 0}
   .res-body{padding:22px 18px}
-  .wz-foot{padding:18px}
+  .wz-foot{padding:14px 16px 16px}
   .res-head{padding:28px 20px}
   .proto .row{grid-template-columns:1fr 56px;grid-template-areas:"n p" "b b";row-gap:8px}
   .proto .name{grid-area:n}.proto .bar{grid-area:b}.proto .pv{grid-area:p}
   .btn{width:100%;max-width:420px}
   .hero .cta-row .btn{width:100%}
   .how .step{padding:26px 22px}
-  .opt{padding:16px 16px}
+  .opt{padding:11px 12px}
   .wz-foot .hintline{order:3;flex-basis:100%}
 }
 @media(min-width:561px){.btn{width:auto}}
@@ -530,7 +530,7 @@ details.faq[open] .a{animation:faqIn .25s ease}
     <div class="hero-grid">
       <div class="hero-copy">
         <h1 class="h-display reveal" style="--d:.08s">Welche Sanierung ist wirklich nötig?</h1>
-        <p class="sub reveal" style="--d:.16s">Der kostenlose Feuchte-Check prüft acht mögliche Ursachen wie ein Gutachter – und zeigt dir, ob du den Schaden <span class="rot" id="rot" aria-label="selbst beheben, beheben lassen oder erst prüfen"><span class="measure">beheben lassen</span></span> solltest.</p>
+        <p class="sub reveal" style="--d:.16s">Der kostenlose Feuchte-Check prüft acht mögliche Ursachen wie ein Gutachter – und zeigt dir, ob du den Schaden <span class="rot" id="rot" aria-label="selbst beheben, beheben lassen oder erst prüfen"><span class="measure">beheben lassen</span></span> solltest. Dein Ergebnis: die wahrscheinlichste Ursache, die Begründung dahinter und dein nächster Schritt.</p>
         <div class="cta-row reveal" style="--d:.24s">
           <a class="btn btn-lime" href="#check">Feuchte-Check starten <span class="arr">→</span></a>
           <a class="btn btn-ghost" href="#funktion">Wie der Check dir hilft</a>
@@ -549,6 +549,31 @@ details.faq[open] .a{animation:faqIn .25s ease}
   </div>
 </div>
 
+<!-- ============ FEHLDIAGNOSE: warum die richtige Ursache Geld wert ist ============ -->
+<section class="misdiag" id="fehldiagnose">
+  <div class="wrap">
+    <h2 class="h2 sec reveal" style="--d:.06s">Die teuerste Sanierung ist die falsche.</h2>
+    <p class="sec-sub reveal" style="--d:.12s">Nicht die Sanierung selbst ist das größte Kostenrisiko – sondern eine Sanierung, die die falsche Ursache bekämpft. Diese Muster sehen Fachleute immer wieder:</p>
+    <div class="grid">
+      <div class="mcard reveal" style="--d:.06s">
+        <div class="did">Kelleraußenwand aufwendig ausgeschachtet und abgedichtet.</div>
+        <div class="was">Tatsächliche Ursache: <b>Kondensation.</b> Die Feuchte kam aus der Raumluft – und bleibt nach der teuren Außenabdichtung genauso da wie vorher.</div>
+      </div>
+      <div class="mcard reveal" style="--d:.14s">
+        <div class="did">Horizontalsperre injiziert, Wand neu verputzt.</div>
+        <div class="was">Tatsächliche Ursache: <b>Rohrbruch.</b> Die Leitung verliert weiter Wasser – der Schaden kommt zurück, oft wäre es ein Fall für die Versicherung gewesen.</div>
+      </div>
+      <div class="mcard reveal" style="--d:.22s">
+        <div class="did">Schimmel entfernt und überstrichen.</div>
+        <div class="was">Tatsächliche Ursache: <b>Feuchte dringt weiter ein.</b> Ohne Ursachenbeseitigung ist der Befall in wenigen Monaten wieder da – plus die Kosten der Wiederholung.</div>
+      </div>
+    </div>
+    <div class="takeaway reveal" style="--d:.1s">
+      <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+      <p><b>Genau dafür gibt es den Feuchte-Check:</b> Er prüft erst die Ursache und dann den Weg – damit du dein Geld nur einmal ausgibst, und zwar für die richtige Lösung. Auch, wenn diese Lösung heißt: erstmal gar nichts kaufen.</p>
+    </div>
+  </div>
+</section>
 <!-- ============ BERUHIGUNG: die drei Kernsorgen aufgreifen ============ -->
 <section class="relief" id="beruhigung">
   <div class="wrap">
@@ -579,32 +604,6 @@ details.faq[open] .a{animation:faqIn .25s ease}
   </div>
 </section>
 
-<!-- ============ FEHLDIAGNOSE: warum die richtige Ursache Geld wert ist ============ -->
-<section class="misdiag" id="fehldiagnose">
-  <div class="wrap">
-    <h2 class="h2 sec reveal" style="--d:.06s">Die teuerste Sanierung ist die falsche.</h2>
-    <p class="sec-sub reveal" style="--d:.12s">Nicht die Sanierung selbst ist das größte Kostenrisiko – sondern eine Sanierung, die die falsche Ursache bekämpft. Diese Muster sehen Fachleute immer wieder:</p>
-    <div class="grid">
-      <div class="mcard reveal" style="--d:.06s">
-        <div class="did">Kelleraußenwand aufwendig ausgeschachtet und abgedichtet.</div>
-        <div class="was">Tatsächliche Ursache: <b>Kondensation.</b> Die Feuchte kam aus der Raumluft – und bleibt nach der teuren Außenabdichtung genauso da wie vorher.</div>
-      </div>
-      <div class="mcard reveal" style="--d:.14s">
-        <div class="did">Horizontalsperre injiziert, Wand neu verputzt.</div>
-        <div class="was">Tatsächliche Ursache: <b>Rohrbruch.</b> Die Leitung verliert weiter Wasser – der Schaden kommt zurück, oft wäre es ein Fall für die Versicherung gewesen.</div>
-      </div>
-      <div class="mcard reveal" style="--d:.22s">
-        <div class="did">Schimmel entfernt und überstrichen.</div>
-        <div class="was">Tatsächliche Ursache: <b>Feuchte dringt weiter ein.</b> Ohne Ursachenbeseitigung ist der Befall in wenigen Monaten wieder da – plus die Kosten der Wiederholung.</div>
-      </div>
-    </div>
-    <div class="takeaway reveal" style="--d:.1s">
-      <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
-      <p><b>Genau dafür gibt es den Feuchte-Check:</b> Er prüft erst die Ursache und dann den Weg – damit du dein Geld nur einmal ausgibst, und zwar für die richtige Lösung. Auch, wenn diese Lösung heißt: erstmal gar nichts kaufen.</p>
-    </div>
-  </div>
-</section>
-
 <!-- ============ SO FUNKTIONIERT'S (Glas-Karten auf Deep Green) ============ -->
 <section class="how noise noise-dark on-dark" id="funktion">
   <div class="aurora" aria-hidden="true"><i class="a2" style="left:60%;bottom:-40%"></i><i class="a1" style="opacity:.3;left:-18%"></i></div>
@@ -616,7 +615,7 @@ details.faq[open] .a{animation:faqIn .25s ease}
         <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="3" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M9 12h6"/><path d="M9 16h4"/></svg></div>
         <div class="n">Schritt 01</div>
         <h3>Schadensbild beschreiben</h3>
-        <p>Du beantwortest geführte Fragen zu Gebäude, Schadensbild, Umfeld und zeitlichem Verlauf – in klarer Sprache, ohne Fachwissen. Dauer: 4–6 Minuten.</p>
+        <p>Du beantwortest geführte Fragen zu Gebäude, Schadensbild und Verlauf – in klarer Sprache, ohne Fachwissen. Der Check überspringt, was für dich nicht relevant ist. Dauer: rund 3 Minuten.</p>
       </div>
       <div class="step glass reveal" style="--d:.2s">
         <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></div>
@@ -700,7 +699,7 @@ details.faq[open] .a{animation:faqIn .25s ease}
   <div class="check-bg aurora" aria-hidden="true"><i class="a1"></i><i class="a2"></i><i class="a3"></i></div>
   <div class="narrow">
     <h2 class="h2 sec reveal" style="--d:.06s">Jetzt bist du dran.</h2>
-    <p class="sec-sub reveal" style="--d:.12s">Immer nur eine Frage. Tippe deine Antwort an – der Check führt dich Schritt für Schritt zur wahrscheinlichsten Ursache. Rund vier Minuten, ehrlich ausgewertet.</p>
+    <p class="sec-sub reveal" style="--d:.12s">Immer nur eine Frage – der Check passt sich deinen Antworten an und überspringt alles, was für dein Schadensbild keine Rolle spielt. Nach rund drei Minuten steht dein Feuchte-Protokoll: Ursache, Begründung, Empfehlung.</p>
 
     <div class="wizard reveal" id="wizard" style="--d:.16s">
       <div class="wz-top">
@@ -815,7 +814,7 @@ details.faq[open] .a{animation:faqIn .25s ease}
       </details>
       <details class="faq reveal" style="--d:.2s">
         <summary>Was passiert mit meinen Daten?</summary>
-        <div class="a">Ausgewertet wird ausschließlich anonymisiert: deine Antworten, das Ergebnis und – falls angegeben – die ersten zwei Ziffern der Postleitzahl. Kein Name, keine E-Mail, keine Adresse. Das vollständige Datenpaket kannst du dir im Ergebnis ansehen, bevor irgendetwas passiert. Deine E-Mail nutzen wir nur, wenn du aktiv das PDF-Protokoll oder einen Rückruf anforderst.</div>
+        <div class="a">Ausgewertet wird ausschließlich anonymisiert: deine Antworten und das Ergebnis. Kein Name, keine E-Mail, keine Adresse. Das vollständige Datenpaket kannst du dir im Ergebnis ansehen, bevor irgendetwas passiert. Deine E-Mail nutzen wir nur, wenn du aktiv das PDF-Protokoll oder einen Rückruf anforderst.</div>
       </details>
       <details class="faq reveal" style="--d:.25s">
         <summary>Kann ich den Check als Handwerksbetrieb oder Verwalter nutzen?</summary>
@@ -1110,7 +1109,7 @@ const RULES = {
    "id": "F1_raumtyp",
    "schritt": 1,
    "typ": "single",
-   "pflicht": true,
+   "pflicht": false,
    "label": "Raumtyp",
    "optionen": [
     {
@@ -1163,7 +1162,16 @@ const RULES = {
      "label": "Sonstiges",
      "punkte": {}
     }
-   ]
+   ],
+   "sichtbar_wenn": {
+    "frage": "F1_standort",
+    "wert_in": [
+     "eg_unterkellert",
+     "eg_nicht_unterkellert",
+     "og",
+     "dachgeschoss"
+    ]
+   }
   },
   {
    "id": "F1_baujahr",
@@ -1197,7 +1205,7 @@ const RULES = {
    "id": "F1_baustoff",
    "schritt": 1,
    "typ": "single",
-   "pflicht": true,
+   "pflicht": false,
    "label": "Aus welchem Baustoff besteht die betroffene Wand?",
    "hinweis": "Materialbestimmung gemäß Baustoff-Referenz: entscheidet über kapillaren Feuchtetransport und die Verfahrenswahl (Injektions-Horizontalsperre nur bei mineralisch-kapillaraktivem, gemauertem Untergrund).",
    "optionen": [
@@ -1327,7 +1335,15 @@ const RULES = {
       "unbekannt": true
      }
     }
-   ]
+   ],
+   "sichtbar_wenn": {
+    "frage": "F2_schadenshoehe",
+    "wert_in": [
+     "bodenflaeche",
+     "bodennah",
+     "mehrere"
+    ]
+   }
   },
   {
    "id": "F3_baumassnahme_24m",
@@ -1624,7 +1640,7 @@ const RULES = {
    "id": "F2_ecken",
    "schritt": 2,
    "typ": "single",
-   "pflicht": true,
+   "pflicht": false,
    "label": "Sind Raumecken / Wand-Decken-Anschlüsse betroffen (Feuchte oder Schimmel in den Ecken)?",
    "kommentar": "KORREKTUR gegenüber v1: Feuchte/Schimmel in (oberen) Raumecken ist der klassische Indikator für geometrische Wärmebrücken → KONDENSATION, nicht Druckwasser.",
    "optionen": [
@@ -1640,13 +1656,29 @@ const RULES = {
      "label": "Nein",
      "punkte": {}
     }
-   ]
+   ],
+   "sichtbar_wenn": {
+    "oder": [
+     {
+      "frage": "F2_schaeden",
+      "enthaelt": "schimmel"
+     },
+     {
+      "frage": "F2_schaeden",
+      "enthaelt": "verfaerbungen"
+     },
+     {
+      "frage": "F2_schaeden",
+      "enthaelt": "oberflaechenfilm"
+     }
+    ]
+   }
   },
   {
    "id": "F2_wandbodenfuge",
    "schritt": 2,
    "typ": "single",
-   "pflicht": true,
+   "pflicht": false,
    "label": "Tritt Wasser sichtbar an der Wand-Boden-Fuge / in bodennahen Ecken aus?",
    "kommentar": "NEUE FRAGE — das ist der eigentliche Druckwasser-Indikator, der in v1 mit den Raumecken vermischt war.",
    "optionen": [
@@ -1662,7 +1694,16 @@ const RULES = {
      "label": "Nein",
      "punkte": {}
     }
-   ]
+   ],
+   "sichtbar_wenn": {
+    "frage": "F1_standort",
+    "wert_in": [
+     "keller",
+     "eg_unterkellert",
+     "eg_nicht_unterkellert",
+     "garage"
+    ]
+   }
   },
   {
    "id": "F2_schwerlast",
@@ -1685,7 +1726,11 @@ const RULES = {
      "label": "Nein",
      "punkte": {}
     }
-   ]
+   ],
+   "sichtbar_wenn": {
+    "frage": "F2_schaeden",
+    "enthaelt": "schimmel"
+   }
   },
   {
    "id": "F3_lueftung",
@@ -1721,7 +1766,7 @@ const RULES = {
    "id": "F3_heizung",
    "schritt": 3,
    "typ": "single",
-   "pflicht": true,
+   "pflicht": false,
    "label": "Heizverhalten",
    "optionen": [
     {
@@ -1743,13 +1788,32 @@ const RULES = {
       "KO": -10
      }
     }
-   ]
+   ],
+   "sichtbar_wenn": {
+    "oder": [
+     {
+      "frage": "F3_lueftung",
+      "wert_in": [
+       "gelegentlich",
+       "selten"
+      ]
+     },
+     {
+      "frage": "F2_schaeden",
+      "enthaelt": "schimmel"
+     },
+     {
+      "frage": "F2_schaeden",
+      "enthaelt": "oberflaechenfilm"
+     }
+    ]
+   }
   },
   {
    "id": "F3_sanitaer",
    "schritt": 3,
    "typ": "single",
-   "pflicht": true,
+   "pflicht": false,
    "label": "Wasser-/Heizungs-/Abwasserleitungen im oder am Schadensbereich?",
    "optionen": [
     {
@@ -1771,13 +1835,29 @@ const RULES = {
      "label": "Unbekannt",
      "punkte": {}
     }
-   ]
+   ],
+   "sichtbar_wenn": {
+    "oder": [
+     {
+      "frage": "F2_ausbreitung",
+      "enthaelt": "punktuell"
+     },
+     {
+      "frage": "F2_schadenshoehe",
+      "wert_in": [
+       "mittel",
+       "deckennah",
+       "mehrere"
+      ]
+     }
+    ]
+   }
   },
   {
    "id": "F3_fbh",
    "schritt": 3,
    "typ": "single",
-   "pflicht": true,
+   "pflicht": false,
    "label": "Fußbodenheizung vorhanden?",
    "optionen": [
     {
@@ -1799,7 +1879,22 @@ const RULES = {
      "label": "Nein",
      "punkte": {}
     }
-   ]
+   ],
+   "sichtbar_wenn": {
+    "oder": [
+     {
+      "frage": "F1_wandart",
+      "enthaelt": "bodenplatte"
+     },
+     {
+      "frage": "F2_schadenshoehe",
+      "wert_in": [
+       "bodenflaeche",
+       "bodennah"
+      ]
+     }
+    ]
+   }
   },
   {
    "id": "F3_leitungsdefekt",
@@ -1851,7 +1946,23 @@ const RULES = {
      "punkte": {},
      "aktion": "empfehle_wasserzaehlertest"
     }
-   ]
+   ],
+   "sichtbar_wenn": {
+    "oder": [
+     {
+      "frage": "F3_leitungsdefekt",
+      "wert": "ja"
+     },
+     {
+      "frage": "F3_sanitaer",
+      "wert": "ja"
+     },
+     {
+      "frage": "F3_fbh",
+      "wert": "ja_alt"
+     }
+    ]
+   }
   },
   {
    "id": "F3_boden_warm",
@@ -1873,7 +1984,14 @@ const RULES = {
      "label": "Nein",
      "punkte": {}
     }
-   ]
+   ],
+   "sichtbar_wenn": {
+    "frage": "F3_fbh",
+    "wert_in": [
+     "ja_alt",
+     "ja_neu"
+    ]
+   }
   },
   {
    "id": "F3_fassade",
@@ -1939,13 +2057,20 @@ const RULES = {
      "label": "Nein / nicht vorhanden",
      "punkte": {}
     }
-   ]
+   ],
+   "sichtbar_wenn": {
+    "frage": "F4_regen",
+    "wert_in": [
+     "ja_sofort",
+     "ja_verzoegert"
+    ]
+   }
   },
   {
    "id": "F3_darueber",
    "schritt": 3,
    "typ": "single",
-   "pflicht": true,
+   "pflicht": false,
    "label": "Was befindet sich direkt über dem Schadensbereich?",
    "kommentar": "NEUE PFLICHTFRAGE — Grundlage für Hypothese LO (Leckage von oben), die in v1 komplett fehlte.",
    "optionen": [
@@ -1985,7 +2110,15 @@ const RULES = {
       "LO": -15
      }
     }
-   ]
+   ],
+   "sichtbar_wenn": {
+    "frage": "F2_schadenshoehe",
+    "wert_in": [
+     "mittel",
+     "deckennah",
+     "mehrere"
+    ]
+   }
   },
   {
    "id": "F4_regen",
@@ -2037,7 +2170,7 @@ const RULES = {
    "id": "F4_saison",
    "schritt": 4,
    "typ": "single",
-   "pflicht": true,
+   "pflicht": false,
    "label": "Saisonales Muster",
    "kommentar": "KORREKTUR gegenüber v1: 'Sommer → aufsteigende Feuchte' ist fachlich nicht haltbar. Der Klassiker ist SOMMERKONDENSATION im Keller (warme, feuchte Außenluft kondensiert an kalten Kellerwänden). Kontextabhängige Bewertung über Kombiregeln K1/K2.",
    "optionen": [
@@ -2065,7 +2198,19 @@ const RULES = {
       "KO": -10
      }
     }
-   ]
+   ],
+   "sichtbar_wenn": {
+    "oder": [
+     {
+      "frage": "F1_standort",
+      "wert": "keller"
+     },
+     {
+      "frage": "F2_schaeden",
+      "enthaelt": "schimmel"
+     }
+    ]
+   }
   },
   {
    "id": "F4_konstant",
@@ -2122,7 +2267,14 @@ const RULES = {
      "label": "Unbekannt",
      "punkte": {}
     }
-   ]
+   ],
+   "sichtbar_wenn": {
+    "frage": "F1_standort",
+    "wert_in": [
+     "keller",
+     "eg_unterkellert"
+    ]
+   }
   },
   {
    "id": "F4_ereignis",
@@ -2167,7 +2319,19 @@ const RULES = {
       "KO": 5
      }
     }
-   ]
+   ],
+   "sichtbar_wenn": {
+    "oder": [
+     {
+      "frage": "F4_konstant",
+      "wert": "nein"
+     },
+     {
+      "frage": "F3_baumassnahme_24m",
+      "wert": "ja"
+     }
+    ]
+   }
   },
   {
    "id": "F5_messung",
@@ -2242,7 +2406,15 @@ const RULES = {
       "AF": -10
      }
     }
-   ]
+   ],
+   "sichtbar_wenn": {
+    "profil": true,
+    "frage": "P_rolle",
+    "wert_in": [
+     "handwerk",
+     "verwaltung"
+    ]
+   }
   }
  ],
  "kombiregeln": [
@@ -2675,18 +2847,17 @@ const PROFILE_STEP = {
         {id:"immobilien",label:"Immobilien / Makler:in"},
         {id:"gutachter",label:"Sachverständige:r / Gutachter:in"},
         {id:"sonstiges_gewerk",label:"Anderes Gewerk – ich trage es ein",freitext:true}
-      ]},
-    {id:"P_plz",typ:"plz",pflicht:false,label:"Postleitzahl des Gebäudes (optional)",hinweis:"Hilft bei der regionalen Auswertung und – falls gewünscht – bei der Vermittlung eines Fachbetriebs in deiner Nähe. Anonym gespeichert werden nur die ersten zwei Ziffern."}
+      ]}
   ]
 };
 
 /* ---------- Phasen (nur für sanftes Label + Fadenfarbe, KEINE Schrittzahl sichtbar) ---------- */
 const STEP_DEFS = [
   {n:0, titel:"Profil", ids:null},
-  {n:1, titel:"Gebäude & Ort", ids:["F1_standort","F1_raumtyp","F1_baujahr","F1_baustoff","F3_baumassnahme_24m","F1_wandart"]},
-  {n:2, titel:"Schadensbild", ids:["F2_schaeden","F2_schadenshoehe","F2_ausbreitung","F2_ecken","F2_wandbodenfuge","F2_schwerlast"]},
-  {n:3, titel:"Umfeld & Technik", ids:["F3_lueftung","F3_heizung","F3_sanitaer","F3_fbh","F3_leitungsdefekt","F3_wasserzaehler","F3_boden_warm","F3_fassade","F3_regenentwaesserung","F3_darueber"]},
-  {n:4, titel:"Zeitlicher Verlauf", ids:["F4_regen","F4_saison","F4_konstant","F4_grundwasser","F4_ereignis"]},
+  {n:1, titel:"Gebäude & Ort", ids:["F1_standort","F1_baujahr","F3_baumassnahme_24m","F1_wandart"]},
+  {n:2, titel:"Schadensbild", ids:["F2_schaeden","F2_schadenshoehe","F2_ausbreitung","F1_baustoff","F2_ecken","F2_wandbodenfuge"]},
+  {n:3, titel:"Umfeld & Technik", ids:["F3_lueftung","F3_sanitaer","F3_fbh","F3_leitungsdefekt","F3_wasserzaehler","F3_boden_warm","F3_fassade","F3_darueber"]},
+  {n:4, titel:"Zeitlicher Verlauf", ids:["F4_regen","F3_regenentwaesserung","F4_saison","F4_konstant","F4_grundwasser","F4_ereignis"]},
   {n:5, titel:"Feinschliff", ids:["F5_messung"], optional:true}
 ];
 /* Sanfte Phasenlabels – bewusst ohne "Schritt x von y" */
@@ -2697,7 +2868,7 @@ const PHASE_LABEL = {
 /* Frage-ID -> Phasennummer (für Label & Fadenfarbe) */
 const PHASE_OF = {};
 STEP_DEFS.forEach(s=>{ if(s.ids) s.ids.forEach(id=>PHASE_OF[id]=s.n); });
-PHASE_OF["P_rolle"]=0; PHASE_OF["P_gewerk"]=0; PHASE_OF["P_plz"]=0;
+PHASE_OF["P_rolle"]=0; PHASE_OF["P_gewerk"]=0;
 
 const state = { i:0, antworten:{}, profil:{}, scout:null, dir:"fwd" };
 try { state.scout = new URLSearchParams(location.search).get("scout") || null; } catch(e){}
@@ -2711,6 +2882,7 @@ function enthaelt(antworten, frageId, wert){
 }
 function pruefeBedingung(b, antworten){
   if (b.alle) return b.alle.every(x => pruefeBedingung(x, antworten));
+  if (b.oder) return b.oder.some(x => pruefeBedingung(x, antworten));
   const a = antworten[b.frage];
   if (b.bedingung === "nur_innenwand")
     return Array.isArray(a) && a.length > 0 && a.every(w => w === "innenwand");
@@ -2941,7 +3113,7 @@ function sichtbar(f){
    Wird bei jeder Antwort neu berechnet, damit bedingte Fragen (z. B. Gewerk, F3_fassade) korrekt
    auftauchen/verschwinden – der Nutzer sieht immer nur EINE Frage. */
 function buildQueue(){
-  const q = PROFILE_STEP.fragen.filter(sichtbar); // P_rolle, (P_gewerk), P_plz
+  const q = PROFILE_STEP.fragen.filter(sichtbar); // P_rolle, (P_gewerk)
   for (const s of STEP_DEFS){
     if (!s.ids) continue;
     for (const id of s.ids){
