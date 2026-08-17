@@ -209,9 +209,10 @@ p.sec-sub{color:var(--bkm-stone-grey);max-width:64ch;margin-bottom:42px;font-siz
   color:var(--bkm-stone-grey);font-family:inherit;font-size:14px;font-weight:700;padding:6px 8px;border-radius:4px;transition:color .15s,background .15s}
 .wz-back:hover{color:var(--bkm-deep-green);background:var(--bkm-neutral-dim)}
 .wz-back[hidden]{display:none}
-/* „Faden“-Fortschritt: ein dünner, durchgehender Strich – keine Zahlen, kein Gesamtumfang */
-.thread{position:absolute;left:0;right:0;bottom:-1px;height:3px;background:var(--bkm-neutral-dim)}
-.thread-f{height:100%;width:100%;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,var(--bkm-deep-green),var(--bkm-pure-green));transition:transform .55s cubic-bezier(.22,.7,.3,1)}
+/* Fortschritt: Ort - Schadensbild - Verlauf - Ergebnis (keine "Frage x von y") */
+.prog{position:absolute;left:0;right:0;bottom:-1px;height:3px;display:flex;gap:4px}
+.prog i{flex:1;background:var(--bkm-neutral-dim);transition:background .4s}
+.prog i.on{background:var(--bkm-transition-green)}
 /* Bühne: viel Ruhe, eine große Frage */
 .wz-stage{padding:30px 28px 6px;min-height:240px;position:relative}
 @keyframes qIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
@@ -272,15 +273,14 @@ label.small{font-size:14px;font-weight:700;display:block;margin-bottom:6px;color
 .badge.mittel{background:rgba(255,255,255,.16);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
 .badge.niedrig,.badge.unklar{background:var(--bkm-error);color:#fff}
 .badge.neutral{background:rgba(255,255,255,.14);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
-/* Konfidenz-Gauge */
-.gauge{width:132px;height:132px;position:relative;flex:none}
-.gauge svg{transform:rotate(-90deg)}
-.gauge .track{fill:none;stroke:rgba(255,255,255,.14);stroke-width:9}
-.gauge .val{fill:none;stroke:var(--bkm-lime);stroke-width:9;stroke-linecap:round;transition:stroke-dashoffset 1.1s cubic-bezier(.22,.7,.3,1)}
-.gauge .num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.gauge .num b{font-family:'Unbounded';font-weight:900;font-size:28px;color:#fff;letter-spacing:-.02em}
-.gauge .num span{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.75)}
-@media(max-width:640px){.res-head .grid{grid-template-columns:1fr}.gauge{margin-top:4px}}
+/* Sicherheits-Anzeige (qualitativ, keine Prozentwerte) */
+.certainty{display:none;flex-direction:column;align-items:flex-end;gap:8px;flex:none}
+.certainty span{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.75)}
+.certainty .dots{display:flex;gap:6px}
+.certainty .dots i{width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,.18)}
+.certainty .dots i.on{background:var(--bkm-lime)}
+.certainty b{font-family:'Unbounded';font-weight:900;font-size:18px;color:#fff;letter-spacing:-.01em}
+@media(max-width:640px){.res-head .grid{grid-template-columns:1fr}.certainty{align-items:flex-start;margin-top:4px}}
 .res-body{background:var(--bkm-surface);border-radius:0 0 16px 16px;padding:36px;box-shadow:var(--shadow-elevated)}
 .res-sec{margin-bottom:42px}
 .res-sec h3{font-family:'Unbounded';font-weight:900;font-size:18px;letter-spacing:-0.01em;color:var(--bkm-deep-green);margin-bottom:6px}
@@ -385,9 +385,20 @@ body.results-mode .res-bar{display:flex}
 body.results-mode .result{padding:clamp(20px,4vw,44px) 0 80px}
 body.results-mode .res-head{border-radius:16px}
 
+/* Was bedeutet das */
+.meaning{max-width:70ch;font-size:16px;line-height:1.7;color:var(--bkm-ink)}
+
+/* Was wir geprueft haben (aufklappbar) */
+details.checked{background:var(--bkm-surface-container);border-radius:8px;box-shadow:rgba(0,0,0,0.06) 0px 0px 0px 1px}
+details.checked summary{cursor:pointer;padding:16px 18px;font-weight:700;font-size:16px;color:var(--bkm-deep-green);list-style:none;display:flex;align-items:center;gap:10px}
+details.checked summary::-webkit-details-marker{display:none}
+details.checked summary::after{content:"+";margin-left:auto;font-family:'Unbounded';font-weight:900;font-size:17px;color:var(--bkm-transition-green);transition:transform .2s;flex:none}
+details.checked[open] summary::after{transform:rotate(45deg)}
+details.checked .inner{padding:0 18px 18px}
+
 /* Messprotokoll */
 .proto{border-radius:12px;box-shadow:rgba(0,0,0,0.08) 0px 0px 0px 1px;overflow:hidden}
-.proto .row{display:grid;grid-template-columns:minmax(160px,230px) 1fr 64px;gap:14px;align-items:center;padding:13px 18px;
+.proto .row{display:grid;grid-template-columns:minmax(160px,230px) 1fr 128px;gap:14px;align-items:center;padding:13px 18px;
   box-shadow:var(--bkm-outline-variant) 0px -1px 0px 0px inset;font-size:14px;background:var(--bkm-surface)}
 .proto .row.top{background:var(--bkm-sand-white)}
 .proto .name{font-weight:700;color:var(--bkm-ink)}
@@ -395,7 +406,7 @@ body.results-mode .res-head{border-radius:16px}
 .bar{height:14px;border-radius:4px;background:var(--bkm-neutral-dim);box-shadow:rgba(0,0,0,0.06) 0px 0px 0px 1px inset;position:relative;overflow:hidden}
 .bar .f{position:absolute;inset:0;width:100%;transform:scaleX(0);transform-origin:left;background:var(--bkm-transition-green);transition:transform 1s cubic-bezier(.22,.7,.3,1)}
 .bar .f.top{background:var(--bkm-deep-green)}
-.proto .pv{font-weight:700;font-size:14px;text-align:right;color:var(--bkm-stone-grey)}
+.proto .pv{font-weight:700;font-size:12px;text-align:right;color:var(--bkm-stone-grey);letter-spacing:.02em}
 .proto .row.top .pv{color:var(--bkm-deep-green)}
 .excl{margin-top:14px}
 .excl details{border-radius:8px;background:var(--bkm-surface-container);box-shadow:rgba(0,0,0,0.06) 0px 0px 0px 1px;margin-bottom:8px}
@@ -621,7 +632,7 @@ details.faq[open] .a{animation:faqIn .25s ease}
         <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="3" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M9 12h6"/><path d="M9 16h4"/></svg></div>
         <div class="n">Schritt 01</div>
         <h3>Schadensbild beschreiben</h3>
-        <p>Du beantwortest geführte Fragen zu Gebäude, Schadensbild und Verlauf – in klarer Sprache, ohne Fachwissen. Der Check überspringt, was für dich nicht relevant ist. Dauer: rund 3 Minuten.</p>
+        <p>Fünf kurze Schritte zu Ort, Schadensbild und Verlauf – in klarer Sprache, ohne Fachwissen. Nur wenn nötig, stellt der Check bis zu drei gezielte Rückfragen. Dauer: rund 2 Minuten.</p>
       </div>
       <div class="step glass reveal" style="--d:.2s">
         <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></div>
@@ -705,7 +716,7 @@ details.faq[open] .a{animation:faqIn .25s ease}
   <div class="check-bg aurora" aria-hidden="true"><i class="a1"></i><i class="a2"></i><i class="a3"></i></div>
   <div class="narrow">
     <h2 class="h2 sec reveal" style="--d:.06s">Jetzt bist du dran.</h2>
-    <p class="sec-sub reveal" style="--d:.12s">Immer nur eine Frage – der Check passt sich deinen Antworten an und überspringt alles, was für dein Schadensbild keine Rolle spielt. Nach rund drei Minuten steht dein Feuchte-Protokoll: Ursache, Begründung, Empfehlung.</p>
+    <p class="sec-sub reveal" style="--d:.12s">Fünf kurze Schritte – und nur falls nötig, bis zu drei kurze Rückfragen. Deine erste Einordnung siehst du sofort und kostenlos: Ursache, Begründung, Sicherheit und dein Weg.</p>
 
     <div class="wizard reveal" id="wizard" style="--d:.16s">
       <div class="wz-top">
@@ -714,7 +725,7 @@ details.faq[open] .a{animation:faqIn .25s ease}
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
           <span>Zurück</span>
         </button>
-        <div class="thread" id="threadBar" aria-hidden="true"><div class="thread-f" id="threadFill"></div></div>
+        <div class="prog" id="threadBar" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
       </div>
       <div class="wz-stage" id="wzStage"></div>
       <div class="wz-foot" id="wzFoot">
@@ -733,63 +744,70 @@ details.faq[open] .a{animation:faqIn .25s ease}
             <div class="td-name" id="teaserName"><span class="lockbar"></span><span class="lockbar short"></span></div>
             <div class="td-sub" id="teaserSub">Deine Analyse ist abgeschlossen. Schalte das vollständige Ergebnis mit Begründung und Handlungsempfehlung frei.</div>
           </div>
-          <div class="gauge" id="gauge" style="display:none">
-            <svg width="132" height="132" viewBox="0 0 132 132" aria-hidden="true">
-              <circle class="track" cx="66" cy="66" r="56"></circle>
-              <circle class="val" id="gaugeVal" cx="66" cy="66" r="56"></circle>
-            </svg>
-            <div class="num"><b id="gaugeNum">0 %</b><span>Evidenz</span></div>
+          <div class="certainty" id="certainty" style="display:none">
+            <span>Unsere Einordnung</span>
+            <div class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+            <b id="certWord"></b>
           </div>
         </div>
       </div>
       <div class="res-body">
-        <!-- LEAD-GATE: E-Mail Pflicht zum Freischalten -->
-        <div class="res-sec" id="gateSec">
-          <div class="gate">
-            <div class="gate-badge">Vollständiges Ergebnis freischalten</div>
-            <h3>Wohin dürfen wir dein persönliches Protokoll senden?</h3>
-            <p class="gate-lead">Du bekommst dein Feuchte-Protokoll als PDF – mit der genauen Ursache, dem Messprotokoll aller acht geprüften Ursachen und deiner konkreten Handlungsempfehlung. Kostenlos. Auf Wunsch mit einer unverbindlichen Einschätzung durch einen BKM Experten – kein Verkaufsanruf.</p>
-            <div class="fieldrow" style="margin-bottom:12px">
-              <div><label class="small" for="leadMail">E-Mail-Adresse *</label><input type="email" id="leadMail" placeholder="du@beispiel.de" autocomplete="email"></div>
-              <div><label class="small" for="leadName">Name (optional)</label><input type="text" id="leadName" placeholder="Vorname" autocomplete="given-name"></div>
-            </div>
-            <label class="checkline" style="margin-bottom:12px"><input type="checkbox" id="leadCallback"><span>Ja, ein BKM Experte darf sich für eine kostenlose Einschätzung bei mir melden.</span></label>
-            <label class="checkline" style="margin-bottom:16px"><input type="checkbox" id="leadConsent"><span>Ich bin einverstanden, dass meine Angaben zur Erstellung und Übersendung des Protokolls verarbeitet werden. <span id="privacyHint" style="color:rgba(255,255,255,.65)">Es gilt die Datenschutzerklärung.</span></span></label>
-            <button class="btn btn-green" id="btnLead" type="button">Ergebnis freischalten <span class="arr">→</span></button>
-            <div class="err" id="leadErr" style="margin-top:12px">Bitte gib eine gültige E-Mail-Adresse an und bestätige die Verarbeitung.</div>
-            <p class="gate-trust">Deine Daten werden ausschließlich zur Protokollerstellung und – nur bei aktiver Zustimmung – zur Kontaktaufnahme genutzt. Keine Weitergabe an Dritte.</p>
-          </div>
-        </div>
-
-        <!-- FREIGESCHALTETER BEREICH: erst nach E-Mail sichtbar -->
+        <!-- ERGEBNIS: sofort sichtbar, ohne Gate -->
         <div id="unlocked" style="display:none">
-          <div class="unlock-note" id="unlockNote">✓ Freigeschaltet – dein Protokoll ist unterwegs. Hier ist dein vollständiges Ergebnis:</div>
-
           <div class="res-tools">
             <button class="btn btn-outline btn-sm" type="button" onclick="window.print()">Protokoll drucken / PDF</button>
           </div>
           <div class="res-sec" id="secNotices"></div>
 
-          <div class="res-sec">
-            <h3>Messprotokoll: Wie wahrscheinlich ist jede Ursache?</h3>
-            <p class="sub">Jeder Wert zeigt, wie viel der für diese Ursache möglichen Evidenz dein Schadensbild tatsächlich erreicht.</p>
-            <div class="proto" id="protoRows"></div>
-            <div class="excl" id="exclList"></div>
-          </div>
-
           <div class="res-sec" id="secFindings">
-            <h3>Die wichtigsten Befunde</h3>
+            <h3>Darauf basiert unsere Einordnung</h3>
             <p class="sub" id="findingsSub"></p>
             <div class="findings">
               <div class="fbox pro"><h4>✓ Spricht dafür</h4><ul id="listPro"></ul></div>
-              <div class="fbox con"><h4>✕ Spricht dagegen / einschränkend</h4><ul id="listCon"></ul></div>
+              <div class="fbox con"><h4>✕ Haben wir auch berücksichtigt</h4><ul id="listCon"></ul></div>
             </div>
+          </div>
+
+          <div class="res-sec" id="secMeaning" style="display:none">
+            <h3>Was bedeutet das?</h3>
+            <p class="meaning" id="meaningText"></p>
           </div>
 
           <div class="res-sec">
             <h3>Dein nächster Schritt</h3>
             <p class="sub" id="routeSub"></p>
             <div class="routes" id="routes"></div>
+          </div>
+
+          <div class="res-sec" id="secChecked">
+            <details class="checked">
+              <summary>Was wir geprüft haben – acht Ursachen im Vergleich</summary>
+              <div class="inner">
+                <p class="sub">Alle acht Ursachen laufen bei jeder Antwort gegeneinander. So ist die Lage bei dir:</p>
+                <div class="proto" id="protoRows"></div>
+                <div class="excl" id="exclList"></div>
+              </div>
+            </details>
+          </div>
+
+          <div class="res-sec" id="gateSec">
+            <div class="gate">
+              <div class="gate-badge">Dein persönlicher Lösungsplan</div>
+              <h3>Deinen persönlichen Lösungsplan erhalten – kostenlos per E-Mail</h3>
+              <p class="gate-lead">Deine erste Klarheit hast du – kostenlos und ohne Anmeldung. Wenn du willst, helfen wir dir jetzt weiter: Du bekommst dein vollständiges Feuchte-Protokoll, die passenden nächsten Schritte und – je nach Weg – Anleitungen, System-Empfehlung oder Fachbetriebsoption.</p>
+              <div id="planForm">
+                <div class="fieldrow" style="margin-bottom:12px">
+                  <div><label class="small" for="leadMail">E-Mail-Adresse *</label><input type="email" id="leadMail" placeholder="du@beispiel.de" autocomplete="email"></div>
+                  <div><label class="small" for="leadName">Name (optional)</label><input type="text" id="leadName" placeholder="Vorname" autocomplete="given-name"></div>
+                </div>
+                <label class="checkline" style="margin-bottom:12px"><input type="checkbox" id="leadCallback"><span>Ja, ein BKM Experte darf sich für eine kostenlose Einschätzung bei mir melden.</span></label>
+                <label class="checkline" style="margin-bottom:16px"><input type="checkbox" id="leadConsent"><span>Ich bin einverstanden, dass meine Angaben zur Erstellung und Übersendung des Lösungsplans verarbeitet werden. <span id="privacyHint" style="color:rgba(255,255,255,.65)">Es gilt die Datenschutzerklärung.</span></span></label>
+                <button class="btn btn-green" id="btnLead" type="button">Lösungsplan anfordern <span class="arr">→</span></button>
+                <div class="err" id="leadErr" style="margin-top:12px">Bitte gib eine gültige E-Mail-Adresse an und bestätige die Verarbeitung.</div>
+                <p class="gate-trust">Deine Daten werden ausschließlich für den Lösungsplan und – nur bei aktiver Zustimmung – zur Kontaktaufnahme genutzt. Keine Weitergabe an Dritte.</p>
+              </div>
+              <div class="unlock-note" id="unlockNote" style="display:none"></div>
+            </div>
           </div>
 
           <div class="res-sec" id="secChat">
@@ -818,7 +836,7 @@ details.faq[open] .a{animation:faqIn .25s ease}
     <div class="faq-list">
       <details class="faq reveal" style="--d:.05s">
         <summary>Ist der Feuchte-Check wirklich kostenlos?</summary>
-        <div class="a">Ja, vollständig – ohne Anmeldung, ohne versteckte Kosten, ohne Pflicht zum Kauf. Der Check ist kostenlos, weil die anonymisierten Schadensdaten uns helfen, Diagnostik und Produkte weiterzuentwickeln. Was genau gespeichert wird, zeigen wir dir transparent direkt im Ergebnis.</div>
+        <div class="a">Ja, vollständig – und deine erste Einordnung siehst du sofort, ohne E-Mail-Adresse. Nur wenn du deinen persönlichen Lösungsplan per E-Mail möchtest, fragen wir nach deiner Adresse. Der Check ist kostenlos, weil die anonymisierten Schadensdaten uns helfen, Diagnostik und Produkte weiterzuentwickeln.</div>
       </details>
       <details class="faq reveal" style="--d:.1s">
         <summary>Wie zuverlässig ist das Ergebnis?</summary>
@@ -830,11 +848,11 @@ details.faq[open] .a{animation:faqIn .25s ease}
       </details>
       <details class="faq reveal" style="--d:.2s">
         <summary>Was passiert mit meinen Daten?</summary>
-        <div class="a">Ausgewertet wird ausschließlich anonymisiert: deine Antworten und das Ergebnis. Kein Name, keine E-Mail, keine Adresse. Das vollständige Datenpaket kannst du dir im Ergebnis ansehen, bevor irgendetwas passiert. Deine E-Mail nutzen wir nur, wenn du aktiv das PDF-Protokoll oder einen Rückruf anforderst.</div>
+        <div class="a">Ausgewertet wird ausschließlich anonymisiert: deine Antworten und das Ergebnis. Kein Name, keine E-Mail, keine Adresse. Das vollständige Datenpaket kannst du dir im Ergebnis ansehen, bevor irgendetwas passiert. Deine E-Mail nutzen wir nur, wenn du aktiv deinen Lösungsplan oder einen Rückruf anforderst.</div>
       </details>
       <details class="faq reveal" style="--d:.25s">
         <summary>Kann ich den Check als Handwerksbetrieb oder Verwalter nutzen?</summary>
-        <div class="a">Unbedingt – dafür ist er gebaut. Wähle im ersten Schritt dein Profil, nutze den optionalen Messwerte-Schritt (Feuchteprofil, Taupunkt, Salztest) für Gutachter-Genauigkeit und teile den Check per Link mit deinen Kunden. Als BKM-Partner bekommst du einen persönlichen Link, über den deine Empfehlungen dir zugeordnet werden.</div>
+        <div class="a">Unbedingt. Der Check ist bewusst laienverständlich formuliert, funktioniert aber auch als schnelle Erst-Einordnung im Kundengespräch – teile ihn einfach per Link. Ein vertiefter Profi-Modus mit Messwerten (Feuchteprofil, Taupunkt, Salztest) ist als Anschlussmodul geplant.</div>
       </details>
       <details class="faq reveal" style="--d:.3s">
         <summary>Was bedeutet es, wenn „unklar“ herauskommt?</summary>
@@ -1118,6 +1136,10 @@ const RULES = {
       "SR": 5,
       "KO": 5
      }
+    },
+    {
+     "id": "unsicher",
+     "label": "Ich bin nicht sicher"
     }
    ]
   },
@@ -1604,6 +1626,10 @@ const RULES = {
       "LO": 5
      },
      "aktion": "flag_kombischaden"
+    },
+    {
+     "id": "unbekannt",
+     "label": "Kann ich nicht einschätzen"
     }
    ]
   },
@@ -2179,6 +2205,10 @@ const RULES = {
       "LO": -10,
       "DW": -10
      }
+    },
+    {
+     "id": "unbekannt",
+     "label": "Weiß ich nicht"
     }
    ]
   },
@@ -2839,54 +2869,22 @@ const LAIE = {
 };
 
 /* ---------- Profil (Datenschicht, fließt nicht ins Scoring) ---------- */
-const PROFILE_STEP = {
-  id:0, titel:"Profil", fragen:[
-    {id:"P_rolle",typ:"single",pflicht:true,label:"Wer führt den Check durch?",profil:true,optionen:[
-      {id:"privat_eigentum",label:"Privat – Eigentümer:in"},
-      {id:"privat_miete",label:"Privat – Mieter:in"},
-      {id:"handwerk",label:"Handwerksbetrieb / anderes Gewerk",sub:"z. B. Stuckateur, Schornsteinfeger, Energieberatung, Hausmeisterdienst"},
-      {id:"verwaltung",label:"Hausverwaltung / Wohnungswirtschaft"},
-      {id:"sonstige",label:"Sonstige"}
-    ]},
-    {id:"P_gewerk",typ:"gewerk",profil:true,pflicht:true,label:"Aus welchem Gewerk kommst du?",
-      hinweis:"Das hilft uns, unser Partnernetzwerk gezielt für dein Gewerk aufzubauen. Ist deins nicht dabei, trag es einfach ein.",
-      sichtbar_wenn:{frage:"P_rolle",wert:"handwerk",profil:true},
-      optionen:[
-        {id:"stuckateur",label:"Stuckateur / Maler / Verputzer"},
-        {id:"schornsteinfeger",label:"Schornsteinfeger:in"},
-        {id:"energieberatung",label:"Energieberatung"},
-        {id:"heizung_sanitaer",label:"Heizung / Sanitär / SHK"},
-        {id:"dachdecker",label:"Dachdecker:in / Zimmerei"},
-        {id:"bautrocknung",label:"Bautrocknung / Leckortung"},
-        {id:"hausmeister",label:"Hausmeister- / Facility-Service"},
-        {id:"entruempelung",label:"Entrümpelung / Haushaltsauflösung"},
-        {id:"immobilien",label:"Immobilien / Makler:in"},
-        {id:"gutachter",label:"Sachverständige:r / Gutachter:in"},
-        {id:"sonstiges_gewerk",label:"Anderes Gewerk – ich trage es ein",freitext:true}
-      ]}
-  ]
-};
+const PROFILE_STEP = { id:0, titel:"Profil", fragen:[] };
 
 /* ---------- Phasen (nur für sanftes Label + Fadenfarbe, KEINE Schrittzahl sichtbar) ---------- */
+/* Feuchte-Check 2.0: 5 Kern-Screens, danach entscheidet die Engine (Smart Questions).
+   Alle uebrigen Regelwerk-Fragen bleiben als Smart-Question-Pool im Hintergrund. */
 const STEP_DEFS = [
-  {n:0, titel:"Profil", ids:null},
-  {n:1, titel:"Gebäude & Ort", ids:["F1_standort","F1_baujahr","F3_baumassnahme_24m","F1_wandart"]},
-  {n:2, titel:"Schadensbild", ids:["F2_schaeden","F2_schadenshoehe","F2_ausbreitung","F1_baustoff","F2_ecken","F2_wandbodenfuge"]},
-  {n:3, titel:"Umfeld & Technik", ids:["F3_lueftung","F3_sanitaer","F3_fbh","F3_leitungsdefekt","F3_wasserzaehler","F3_boden_warm","F3_fassade","F3_darueber"]},
-  {n:4, titel:"Zeitlicher Verlauf", ids:["F4_regen","F3_regenentwaesserung","F4_saison","F4_konstant","F4_grundwasser","F4_ereignis"]},
-  {n:5, titel:"Feinschliff", ids:["F5_messung"], optional:true}
+  {n:1, titel:"Ort", ids:["F1_standort","F1_wandart"]},
+  {n:2, titel:"Schadensbild", ids:["F2_schaeden","F2_schadenshoehe","F2_ausbreitung"]},
+  {n:3, titel:"Verlauf", ids:["F4_regen","F0_verlauf"]}
 ];
-/* Sanfte Phasenlabels – bewusst ohne "Schritt x von y" */
-const PHASE_LABEL = {
-  0:"Los geht's", 1:"Ein paar Basics", 2:"Das Schadensbild",
-  3:"Rund um die Wand", 4:"Zeitlicher Verlauf", 5:"Fast geschafft"
-};
-/* Frage-ID -> Phasennummer (für Label & Fadenfarbe) */
+const PHASE_LABEL = { 1:"Wo tritt es auf?", 2:"Das Schadensbild", 3:"Der Verlauf" };
 const PHASE_OF = {};
 STEP_DEFS.forEach(s=>{ if(s.ids) s.ids.forEach(id=>PHASE_OF[id]=s.n); });
-PHASE_OF["P_rolle"]=0; PHASE_OF["P_gewerk"]=0;
+const CORE_IDS = STEP_DEFS.flatMap(s=>s.ids);
 
-const state = { i:0, antworten:{}, profil:{}, scout:null, dir:"fwd" };
+const state = { i:0, antworten:{}, profil:{}, smart:[], eff:null, scout:null, dir:"fwd" };
 try { state.scout = new URLSearchParams(location.search).get("scout") || null; } catch(e){}
 
 /* ============================================================
@@ -2988,7 +2986,7 @@ function befunde(regeln, antworten, hyp){
       const opt = f.optionen.find(o=>o.id===oid);
       if (!opt) continue;
       const p = (opt.punkte||{})[hyp]||0;
-      if (p!==0) items.push({frage:f.label,option:LAIE.o[f.id+"."+oid]||opt.label,p});
+      if (p!==0) items.push({frage:(LAIE.q[f.id]&&LAIE.q[f.id].label)||f.label,option:LAIE.o[f.id+"."+oid]||opt.label,p});
     }
   }
   for (const k of regeln.kombiregeln||[]){
@@ -3113,6 +3111,87 @@ function routing(erg, antworten){
 const $ = s => document.querySelector(s);
 const frageById = Object.fromEntries(RULES.fragen.map(f=>[f.id,f]));
 
+/* Screen 5: EIN Verlaufs-Screen statt vier Einzelfragen. Die Antwort wird in die
+   bestehenden Engine-Antworten (Konstanz, Saison, Baumassnahme) uebersetzt. */
+frageById["F0_verlauf"] = { id:"F0_verlauf", typ:"single", pflicht:true,
+  label:"Was beschreibt den Verlauf am besten?",
+  hinweis:"Der zeitliche Verlauf trennt viele Ursachen zuverlässig – z. B. Baufeuchte von aufsteigender Feuchtigkeit.",
+  optionen:[
+    {id:"ploetzlich",label:"Plötzlich entstanden"},
+    {id:"staerker",label:"Wird langsam stärker"},
+    {id:"gleich",label:"Bleibt ungefähr gleich"},
+    {id:"sommer",label:"Vor allem im Sommer"},
+    {id:"winter",label:"Vor allem im Winter"},
+    {id:"nach_bau",label:"Seit Bau- oder Sanierungsarbeiten"},
+    {id:"lange",label:"Schon lange vorhanden"},
+    {id:"unbekannt",label:"Kann ich nicht einschätzen"}
+  ]};
+
+/* Laienfreundliche Screen-Titel fuer die Kernfragen */
+["F1_standort","F1_wandart","F2_schaeden","F2_schadenshoehe","F2_ausbreitung","F4_regen"].forEach(id=>{ LAIE.q[id] = LAIE.q[id] || {}; });
+LAIE.q.F1_standort.label = "Wo tritt die Feuchtigkeit auf?";
+LAIE.q.F1_wandart.label = "Welche Wand ist betroffen?";
+LAIE.q.F2_schaeden.label = "Was siehst du an der betroffenen Stelle?";
+LAIE.q.F2_schaeden.hinweis = "Wähle alles aus, was zutrifft.";
+LAIE.q.F2_schadenshoehe.label = "In welcher Höhe zeigt sich die Feuchtigkeit?";
+LAIE.q.F2_ausbreitung.label = "Wie verteilt sich die Feuchtigkeit?";
+LAIE.q.F4_regen.label = "Verändert sich der Schaden bei Regen?";
+
+/* "Weiss ich nicht"-Antworten zaehlen nicht als Evidenz: sie werden vor der
+   Auswertung entfernt, damit sie keine Hypothese verzerren. */
+const WN_ANTWORTEN = { F1_standort:"unsicher", F2_schadenshoehe:"unbekannt", F4_regen:"unbekannt" };
+function effektiveAntworten(){
+  const a = Object.assign({}, state.antworten);
+  for (const [k,v] of Object.entries(WN_ANTWORTEN)) if (a[k]===v) delete a[k];
+  const verlauf = a.F0_verlauf; delete a.F0_verlauf;
+  if (verlauf && verlauf !== "unbekannt"){
+    if (a.F4_konstant === undefined){
+      if (verlauf === "ploetzlich") a.F4_konstant = "nein";
+      if (verlauf === "staerker" || verlauf === "gleich" || verlauf === "lange") a.F4_konstant = "ja";
+    }
+    if (a.F4_saison === undefined){
+      if (verlauf === "sommer") a.F4_saison = "sommer";
+      else if (verlauf === "winter") a.F4_saison = "winter";
+    }
+    if (a.F3_baumassnahme_24m === undefined)
+      a.F3_baumassnahme_24m = (verlauf === "nach_bau") ? "ja" : "nein";
+  }
+  return a;
+}
+
+/* Smart Question: die noch offene Frage, die die beiden Top-Ursachen am
+   staerksten trennt (maximaler Punkte-Abstand ueber alle Optionen). */
+function smartFrage(erg){
+  const eff = effektiveAntworten();
+  const h1 = erg.rangliste[0] && erg.rangliste[0].id;
+  const h2 = erg.rangliste[1] && erg.rangliste[1].id;
+  if (!h1 || !h2) return null;
+  let best = null, bestD = 0;
+  for (const f of RULES.fragen){
+    if (CORE_IDS.includes(f.id) || f.id === "F5_messung") continue;
+    if (state.smart.includes(f.id)) continue;
+    if (eff[f.id] !== undefined || state.antworten[f.id] !== undefined) continue;
+    if (f.sichtbar_wenn && !pruefeBedingung(f.sichtbar_wenn, eff)) continue;
+    let d = 0;
+    for (const o of f.optionen || []){
+      const pk = o.punkte || {};
+      d = Math.max(d, Math.abs((pk[h1]||0) - (pk[h2]||0)));
+    }
+    if (d > bestD){ bestD = d; best = f; }
+  }
+  return bestD >= 10 ? best : null;
+}
+
+/* Nach den Kern-Screens: Ergebnis, wenn sicher genug – sonst max. 3 Rueckfragen. */
+function nachKern(){
+  const erg = auswerten(RULES, effektiveAntworten());
+  if (erg.konfidenz !== "hoch" && state.smart.length < 3){
+    const f = smartFrage(erg);
+    if (f){ state.smart.push(f.id); renderQuestion("fwd"); scrollCheckIntoView(); return; }
+  }
+  finish();
+}
+
 function sichtbar(f){
   if (!f.sichtbar_wenn) return true;
   const c = f.sichtbar_wenn;
@@ -3122,21 +3201,21 @@ function sichtbar(f){
     if (c.wert_in) return c.wert_in.includes(state.profil[c.frage]);
     return false;
   }
-  return pruefeBedingung(c, state.antworten);
+  return pruefeBedingung(c, effektiveAntworten());
 }
 
 /* Flache, dynamische Fragenliste: Profil + alle sichtbaren Regel-Fragen in Phasen-Reihenfolge.
    Wird bei jeder Antwort neu berechnet, damit bedingte Fragen (z. B. Gewerk, F3_fassade) korrekt
    auftauchen/verschwinden – der Nutzer sieht immer nur EINE Frage. */
 function buildQueue(){
-  const q = PROFILE_STEP.fragen.filter(sichtbar); // P_rolle, (P_gewerk)
+  const q = [];
   for (const s of STEP_DEFS){
-    if (!s.ids) continue;
     for (const id of s.ids){
       const f = frageById[id];
       if (f && sichtbar(f)) q.push(f);
     }
   }
+  for (const id of state.smart){ const f = frageById[id]; if (f) q.push(f); }
   return q;
 }
 function storeOf(f){ return f.profil ? state.profil : state.antworten; }
@@ -3151,13 +3230,15 @@ function answered(f){
   return true;
 }
 
-/* Sanfter Faden-Fortschritt: bewusst NICHT als „x von y". Wir schätzen den Fortschritt
-   über die Phase (0..5), damit der Nutzer den Gesamtumfang nie als Zahl sieht. */
+/* Fortschritt in vier Etappen (Ort - Schadensbild - Verlauf - Ergebnis), nie "x von y".
+   Smart Questions erklaeren sich selbst: die Antwort hat wirklich etwas veraendert. */
 function updateThread(f){
-  const phase = PHASE_OF[f.id] ?? 0;
-  const frac = Math.min(0.97, (phase + 0.5) / (STEP_DEFS.length));
-  $("#threadFill").style.transform = "scaleX(" + frac.toFixed(3) + ")";
-  const label = PHASE_LABEL[phase] || "";
+  const smartIdx = state.smart.indexOf(f.id);
+  const phase = smartIdx >= 0 ? 4 : (PHASE_OF[f.id] ?? 1);
+  document.querySelectorAll("#threadBar i").forEach((el,i)=> el.classList.toggle("on", i < phase));
+  const label = smartIdx === 0 ? "Eine Sache möchten wir noch prüfen"
+    : smartIdx > 0 ? "Fast eindeutig – noch eine kurze Frage"
+    : (PHASE_LABEL[phase] || "");
   const pl = $("#phaseLabel");
   if (pl.textContent !== label){ pl.style.opacity=0; setTimeout(()=>{ pl.textContent=label; pl.style.opacity=1; }, 160); }
 }
@@ -3166,7 +3247,7 @@ let animLock = false;
 function renderQuestion(dir){
   const queue = buildQueue();
   if (state.i < 0) state.i = 0;
-  if (state.i >= queue.length){ finish(); return; }
+  if (state.i >= queue.length){ nachKern(); return; }
   const f = queue[state.i];
   const stage = $("#wzStage");
 
@@ -3286,7 +3367,7 @@ function advance(dir){
   state.i += (dir==="back" ? -1 : 1);
   if (state.i < 0) state.i = 0;
   const queue = buildQueue();
-  if (state.i >= queue.length){ finish(); return; }
+  if (state.i >= queue.length){ nachKern(); return; }
   renderQuestion(dir);
   scrollCheckIntoView();
 }
@@ -3304,10 +3385,11 @@ $("#btnSkip").addEventListener("click", ()=>{
   advance("fwd");
 });
 function resetCheck(){
-  state.i=0; state.antworten={}; state.profil={}; state.erg=null;
+  state.i=0; state.antworten={}; state.profil={}; state.erg=null; state.smart=[]; state.eff=null;
   document.body.classList.remove("results-mode");
   $("#result").style.display="none"; $("#wizard").style.display="block";
-  $("#unlocked").style.display="none"; $("#gateSec").style.display="block";
+  $("#unlocked").style.display="none";
+  $("#planForm").style.display="block"; $("#unlockNote").style.display="none";
   $("#leadMail").value=""; $("#leadName").value="";
   $("#leadCallback").checked=false; $("#leadConsent").checked=false;
   $("#leadErr").style.display="none";
@@ -3315,6 +3397,7 @@ function resetCheck(){
   window.scrollTo(0,0);
   scrollCheckIntoView();
 }
+window.addEventListener("beforeprint", ()=>{ document.querySelectorAll("details.checked").forEach(d=>d.open=true); });
 $("#btnRestart").addEventListener("click", resetCheck);
 $("#btnNewTop").addEventListener("click", resetCheck);
 
@@ -3404,63 +3487,60 @@ function protokollPayload(erg){
 }
 
 function sendData(payload){
-  /* POST an das Server-Skript: archiviert den Lead, erzeugt das PDF
-     und versendet es per SMTP. Zugangsdaten liegen NUR auf dem Server. */
-  const note = $("#unlockNote");
+  /* POST an das Server-Skript: archiviert die Anfrage, erzeugt den Loesungsplan
+     und versendet ihn per SMTP. Zugangsdaten liegen NUR auf dem Server.
+     Die Bestaetigung im UI setzt unlock() – hier wird nur still gesendet. */
   if (typeof fetch !== "function"){ console.log("Feuchte-Check Lead (kein fetch):", payload); return; }
   fetch(LEAD_ENDPOINT, {
     method:"POST",
     headers:{"Content-Type":"application/json"},
     body: JSON.stringify(payload)
-  }).then(r=>r.json().catch(()=>({ok:false}))).then(res=>{
-    if (res && res.ok){
-      note.textContent = "✓ Freigeschaltet – dein Feuchte-Protokoll (PDF) ist unterwegs an " + payload.lead.email + ".";
-    } else {
-      note.textContent = "✓ Freigeschaltet. Der PDF-Versand hat gerade nicht geklappt – deine Anfrage ist bei uns eingegangen, wir senden das Protokoll manuell nach.";
-    }
-  }).catch(()=>{
-    note.textContent = "✓ Freigeschaltet. Der PDF-Versand hat gerade nicht geklappt – deine Anfrage ist bei uns eingegangen, wir senden das Protokoll manuell nach.";
-  });
+  }).catch(()=>{ /* Prototyp ohne Backend: Anfrage wird clientseitig bestaetigt */ });
 }
 
 /* finish(): berechnet das Ergebnis, zeigt aber nur den verschleierten Teaser + Gauge + Lead-Gate.
    Es werden noch KEINE Daten gesendet und keine Details gerendert. */
 function finish(){
-  const erg = auswerten(RULES, state.antworten);
-  state.erg = erg;
-  document.body.classList.add("results-mode");   /* Marketing-Seite ausblenden, Fokus aufs Ergebnis */
+  const eff = effektiveAntworten();
+  const erg = auswerten(RULES, eff);
+  state.erg = erg; state.eff = eff;
+  document.body.classList.add("results-mode");
   $("#wizard").style.display="none";
-  const res = $("#result"); res.style.display="block";
-  $("#unlocked").style.display="none";
+  $("#result").style.display="block";
+  $("#unlocked").style.display="block";
   $("#gateSec").style.display="block";
+  $("#planForm").style.display="block";
+  $("#unlockNote").style.display="none";
   $("#teaserHead").style.display="block";
   window.scrollTo(0,0);
 
-  /* Gauge zeigt die Konfidenz/Evidenz – das ist ein Teaser-Wert, kein Ursachen-Verrat */
+  /* Ergebniszustaende: A klar / B wahrscheinlich / C Kombination / D unklar */
+  const tName = $("#teaserName"), tSub = $("#teaserSub"), tLabel = $("#resLabel");
+  tName.className = "td-name";
   if (erg.unklar){
-    $("#gauge").style.display="none";
+    tLabel.textContent = "Ehrliches Ergebnis";
+    tName.textContent = "Die Ursache lässt sich noch nicht sicher genug eingrenzen.";
+    tSub.textContent = "Deine Angaben passen zu mehreren möglichen Ursachen. Bevor du Geld oder Zeit in die falsche Sanierung investierst, sollte der Schaden genauer geprüft werden.";
   } else {
-    const pct = Math.round(erg.rangliste[0].p*100);
-    $("#gauge").style.display="block";
-    const C = 2*Math.PI*56, val = $("#gaugeVal");
-    val.style.strokeDasharray = C; val.style.strokeDashoffset = C;
-    $("#gaugeNum").textContent = pct+" %";
-    raf(()=>raf(()=>{ val.style.strokeDashoffset = C*(1-pct/100); }));
+    const h = LAIE.hyp[erg.primaer];
+    const kombi = erg.kombidiagnose ? LAIE.hyp[erg.kombidiagnose] : null;
+    tLabel.textContent = kombi ? "Kombinationsschaden" : (erg.konfidenz==="hoch" ? "Klare Einordnung" : "Wahrscheinlichste Ursache");
+    tName.textContent = kombi ? h.name + " + " + kombi.name : h.name;
+    tSub.textContent = (erg.konfidenz==="hoch"
+      ? "Dein Schadensbild spricht deutlich für diese Ursache."
+      : "Dein Schadensbild spricht am ehesten für diese Ursache.")
+      + (kombi ? " Wahrscheinlich wirken zwei Ursachen zusammen – die Maßnahmen gehören in einen gemeinsamen Plan." : "");
   }
 
-  /* Verschmolzener Ergebniskopf: Label + verschleierter Name + Kontext in EINEM Block.
-     Ursachenname NICHT im DOM (erst bei Freischaltung gesetzt), nur Platzhalter-Balken. */
-  const tName = $("#teaserName"), tSub = $("#teaserSub"), tLabel = $("#resLabel");
-  tName.className = "td-name locked";
-  tName.innerHTML = `<span class="lockbar"></span><span class="lockbar short"></span>`;
-  if (erg.unklar){
-    tLabel.textContent = "Deine Analyse ist fertig";
-    tSub.innerHTML = `Wir haben dein Schadensbild ausgewertet – es lässt mehrere Ursachen zu. Schalte frei, welche Prüfung als Nächstes sinnvoll ist. <b>Konfidenz: unklar.</b>`;
-  } else {
-    const konfText = {hoch:"hoch",mittel:"mittel",niedrig:"eingeschränkt"}[erg.konfidenz]||erg.konfidenz;
-    tLabel.textContent = "Wahrscheinlichste Ursache";
-    tSub.innerHTML = `Acht Ursachen wurden systematisch geprüft – für deine Wand gibt es eine klar wahrscheinlichste, <b>Konfidenz: ${konfText}</b>${erg.kombidiagnose?", inklusive einer zweiten mitwirkenden Ursache":""}. Namen, Messprotokoll und Handlungsempfehlung schalten wir dir per E-Mail frei.`;
-  }
+  /* Sicherheit: qualitativ statt Prozent */
+  const lvl = erg.unklar ? 1 : ({hoch:4, mittel:3, niedrig:2}[erg.konfidenz] || 2);
+  const word = erg.unklar ? "Nicht sicher genug" : ({hoch:"Klar", mittel:"Gut eingrenzbar", niedrig:"Noch nicht eindeutig"}[erg.konfidenz] || "");
+  const cert = $("#certainty");
+  cert.style.display = "flex";
+  cert.querySelectorAll(".dots i").forEach((el,i)=> el.classList.toggle("on", i < lvl));
+  $("#certWord").textContent = word;
+
+  renderDetails(erg);
 }
 
 /* unlock(): validiert Lead, sendet Daten, deckt Ursache auf und rendert alle Details. */
@@ -3472,31 +3552,13 @@ function unlock(){
   $("#leadErr").style.display="none";
 
   const erg = state.erg;
-  const payload = anonymPayload(erg);
-  sendData(payload);   /* <-- erst JETZT verlassen die Daten den Browser */
+  sendData(anonymPayload(erg));
+  sendData(protokollPayload(erg));   /* Loesungsplan-Anforderung mit Kontakt */
 
-  /* Ursache im Teaser aufdecken */
-  const tName = $("#teaserName");
-  if (erg.unklar){
-    tName.className = "td-name";
-    tName.innerHTML = "Ehrliches Ergebnis: Die Ursache ist noch unklar.";
-    $("#teaserSub").innerHTML = "Kein Schadensbild erreicht ausreichende Evidenz – und wir erfinden keine Diagnose. Der sinnvolle nächste Schritt steht unten.";
-  } else {
-    const h = LAIE.hyp[erg.primaer];
-    const kombi = erg.kombidiagnose ? LAIE.hyp[erg.kombidiagnose] : null;
-    tName.className = "td-name";
-    tName.innerHTML = kombi ? `${h.name} + ${kombi.name}` : h.name;
-    $("#teaserSub").innerHTML = `${h.laie}${kombi ? " – Zusätzlich: "+kombi.laie : ""}`;
-  }
-  $("#resLabel").textContent = erg.unklar ? "Ergebnis" : (erg.kombidiagnose ? "Kombinationsschaden" : "Wahrscheinlichste Ursache");
-
-  renderDetails(erg);
-  $("#gateSec").style.display="none";
-  $("#unlocked").style.display="block";
-  raf(()=>{
-    const u = $("#unlocked");
-    if (u.scrollIntoView) u.scrollIntoView({behavior: REDUCED?"auto":"smooth", block:"start"});
-  });
+  $("#planForm").style.display="none";
+  const note = $("#unlockNote");
+  note.textContent = "✓ Danke! Dein Lösungsplan geht an " + mail + ". Kommt nichts an, schau bitte auch im Spam-Ordner nach – deine Anfrage ist in jedem Fall bei uns eingegangen.";
+  note.style.display="block";
 }
 
 /* renderDetails(): füllt Hinweise, Messprotokoll, Befunde, Empfehlungen (erst nach Freischaltung). */
@@ -3518,11 +3580,11 @@ function chatNachricht(erg){
   if (erg.ausgeschlossen.length)
     L.push("Ausgeschlossen: " + erg.ausgeschlossen.map(a => LAIE.hyp[a.hypothese].name).join(", "));
   if (!erg.unklar){
-    const b = befunde(RULES, state.antworten, erg.primaer);
-    if (b.pro.length) L.push("Spricht dafür: " + b.pro.map(i => i.option).join("; "));
-    if (b.con.length) L.push("Spricht dagegen: " + b.con.map(i => i.option).join("; "));
+    const b = befunde(RULES, state.eff, erg.primaer);
+    if (b.pro.length) L.push("Spricht dafür: " + b.pro.map(i => i.frage + " → " + i.option).join("; "));
+    if (b.con.length) L.push("Spricht dagegen: " + b.con.map(i => i.frage + " → " + i.option).join("; "));
   }
-  const rt = routing(erg, state.antworten);
+  const rt = routing(erg, state.eff);
   const rec = rt.routes.find(r => r.rec);
   if (rec) L.push("Empfohlener nächster Schritt laut Check: " + rec.h);
   L.push("");
@@ -3531,17 +3593,18 @@ function chatNachricht(erg){
 }
 
 function renderDetails(erg){
-  const notices = plausibilitaet(state.antworten, erg);
+  const notices = plausibilitaet(state.eff, erg);
   $("#secNotices").innerHTML = notices.map(n=>
     `<div class="notice ${n.t==='alert'?'alert':n.t==='info'?'info':''}"><b>${n.h}</b>${n.x}</div>`).join("");
 
   $("#protoRows").innerHTML = erg.rangliste.map((r,i)=>{
     const h = LAIE.hyp[r.id];
     const pct = Math.round(r.p*100);
+    const status = r.p >= 0.5 ? "wahrscheinlich" : r.p >= 0.3 ? "möglich" : "unwahrscheinlich";
     return `<div class="row ${i===0&&!erg.unklar?'top':''}">
-      <div class="name">${h.name}<span class="tag">${r.id} · ${r.roh} / ${r.max} Punkte</span></div>
+      <div class="name">${h.name}<span class="tag">${r.id}</span></div>
       <div class="bar"><div class="f ${i===0&&!erg.unklar?'top':''}" data-w="${pct}" style="transform:scaleX(0)"></div></div>
-      <div class="pv">${pct} %</div>
+      <div class="pv">${status}</div>
     </div>`;
   }).join("");
   raf(()=>raf(()=>{
@@ -3554,14 +3617,17 @@ function renderDetails(erg){
   }).join("");
 
   if (!erg.unklar){
-    const b = befunde(RULES, state.antworten, erg.primaer);
-    $("#findingsSub").textContent = "Bezogen auf die Diagnose „"+LAIE.hyp[erg.primaer].name+"“ – so kannst du das Ergebnis selbst nachvollziehen:";
-    $("#listPro").innerHTML = b.pro.length ? b.pro.map(i=>`<li><span>${i.option}</span><span class="pts">+${i.p}</span></li>`).join("") : `<li class="empty">Keine starken Einzelbefunde.</li>`;
-    $("#listCon").innerHTML = b.con.length ? b.con.map(i=>`<li><span>${i.option}</span><span class="pts">${i.p}</span></li>`).join("") : `<li class="empty">Keine Gegenbefunde – das stützt die Diagnose.</li>`;
+    const b = befunde(RULES, state.eff, erg.primaer);
+    $("#findingsSub").textContent = "Wir kommen zu dieser Einordnung, weil deine Angaben zusammenpassen – so kannst du es selbst nachvollziehen:";
+    const hypDef = RULES.hypothesen.find(x=>x.id===erg.primaer);
+    $("#secMeaning").style.display = hypDef ? "block" : "none";
+    if (hypDef) $("#meaningText").textContent = hypDef.beschreibung;
+    $("#listPro").innerHTML = b.pro.length ? b.pro.map(i=>`<li><span>${i.frage} <b>${i.option}</b></span></li>`).join("") : `<li class="empty">Keine starken Einzelbefunde.</li>`;
+    $("#listCon").innerHTML = b.con.length ? b.con.map(i=>`<li><span>${i.frage} <b>${i.option}</b></span></li>`).join("") : `<li class="empty">Keine Gegenbefunde – das stützt die Diagnose.</li>`;
     $("#secFindings").style.display="block";
-  } else $("#secFindings").style.display="none";
+  } else { $("#secFindings").style.display="none"; $("#secMeaning").style.display="none"; }
 
-  const rt = routing(erg, state.antworten);
+  const rt = routing(erg, state.eff);
   $("#routeSub").textContent = rt.sub;
   $("#routes").innerHTML = rt.routes.map(r=>
     `<div class="route ${r.rec?'rec on-dark':''}">

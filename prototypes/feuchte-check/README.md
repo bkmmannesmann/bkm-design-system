@@ -45,10 +45,19 @@ beabsichtigt (neutrale Elevation statt Farb-Glow).
 
 - **Regelwerk** v2.1 (`RULES` im Inline-Script): Fragen, Bedingungen, Gewichtung,
   Ausschlüsse; Auswertung in `auswerten()`, Plausibilitätsprüfung, `routing()`
-- **Adaptiver Fragenfluss** (seit 2026-08): ~13 Kernfragen, weitere Fragen nur
-  bei relevantem Schadensbild (`sichtbar_wenn` mit `oder`-Logik; typisch 16–20
-  statt starr 29–31). Die Auswertung normalisiert nur über beantwortete Fragen,
-  Raumtyp/Schwerlast/Heizverhalten und PLZ wurden aus dem Fluss entfernt.
+- **Feuchte-Check 2.0** (seit 2026-08): Trennung in Diagnose und Lösung.
+  Phase A = 7 Kern-Screens in 3 Etappen (Ort / Schadensbild / Verlauf), der
+  Verlaufs-Screen (`F0_verlauf`) übersetzt eine Laienantwort in mehrere
+  Engine-Antworten. Danach entscheidet die Engine: Konfidenz hoch → Ergebnis,
+  sonst max. 3 **Smart Questions** (`smartFrage()`: die offene Frage mit dem
+  größten Punkte-Abstand zwischen den Top-2-Hypothesen; Pool = alle übrigen
+  Regelwerk-Fragen inkl. `sichtbar_wenn`-Gating). „Weiß ich nicht" ist bei den
+  Kernfragen Pflichtoption und zählt nicht als Evidenz (`effektiveAntworten()`).
+  Ergebnis sofort und ohne Gate: Einordnung, qualitative Sicherheit
+  (Punkte statt Prozent), Warum-Befunde, Bedeutung, Weg-Routing, aufklappbares
+  „Was wir geprüft haben". Lead-Gate erst danach als „Persönlicher Lösungsplan".
+  Modul C (DIY-Konfigurator, Fachbetriebs-Übergabe mit PLZ/Protokoll) ist
+  konzipiert, aber noch nicht gebaut — braucht Produktdaten bzw. Backend.
 - **SB7-Aufbau** (StoryBrand): Hero (Held + Ziel + Ergebnis-Versprechen) →
   Problem/Villain (Fehldiagnose) → Guide-Empathie (Beruhigung) → Autorität
   (Systematik/Prinzipien) → Plan (3 Schritte) → Call-to-Action (Check) →
