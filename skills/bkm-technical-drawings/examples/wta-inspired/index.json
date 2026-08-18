@@ -1,0 +1,132 @@
+{
+  "package": "bkm-reference-aligned-principle-drawings",
+  "status": "DRAFT",
+  "drawings": [
+    {
+      "id": "BKM-TD-101",
+      "slug": "exterior-primary-waterproofing",
+      "family": "exterior",
+      "variant": "primary",
+      "title": "Außenabdichtung – Systemprinzip"
+    },
+    {
+      "id": "BKM-TD-102",
+      "slug": "exterior-floor-transition",
+      "family": "exterior",
+      "variant": "floor",
+      "title": "Außenabdichtung – Bodenanschluss"
+    },
+    {
+      "id": "BKM-TD-103",
+      "slug": "exterior-rehabilitation",
+      "family": "exterior",
+      "variant": "rehab",
+      "title": "Außenabdichtung – Überarbeitung Bestand"
+    },
+    {
+      "id": "BKM-TD-104",
+      "slug": "exterior-protection-layer",
+      "family": "exterior",
+      "variant": "protection",
+      "title": "Außenabdichtung – Schutzschichtprinzip"
+    },
+    {
+      "id": "BKM-TD-105",
+      "slug": "joint-waterproofing-axonometric",
+      "family": "axonometric",
+      "variant": "joint",
+      "title": "Fugenabdichtung – räumliches Prinzip"
+    },
+    {
+      "id": "BKM-TD-106",
+      "slug": "penetration-manschette",
+      "family": "penetration",
+      "variant": "manschette",
+      "title": "Durchdringung – Manschettenprinzip"
+    },
+    {
+      "id": "BKM-TD-107",
+      "slug": "penetration-sleeve",
+      "family": "penetration",
+      "variant": "sleeve",
+      "title": "Durchdringung – Futterrohrprinzip"
+    },
+    {
+      "id": "BKM-TD-108",
+      "slug": "penetration-flange",
+      "family": "penetration",
+      "variant": "flange",
+      "title": "Durchdringung – Flanschprinzip"
+    },
+    {
+      "id": "BKM-TD-109",
+      "slug": "penetration-clamping-flange",
+      "family": "penetration",
+      "variant": "clamp",
+      "title": "Durchdringung – Klemmsystemprinzip"
+    },
+    {
+      "id": "BKM-TD-110",
+      "slug": "penetration-liquid-applied",
+      "family": "penetration",
+      "variant": "liquid",
+      "title": "Durchdringung – flüssige Systemschicht"
+    },
+    {
+      "id": "BKM-TD-111",
+      "slug": "inspection-reference-area",
+      "family": "inspection",
+      "variant": "reference",
+      "title": "Systemprüfung – Referenzfläche"
+    },
+    {
+      "id": "BKM-TD-112",
+      "slug": "interior-waterproofing-section",
+      "family": "interior",
+      "variant": "section",
+      "title": "Innenabdichtung – Wand-Sohlen-Prinzip"
+    },
+    {
+      "id": "BKM-TD-113",
+      "slug": "interior-crosswall-transition",
+      "family": "interior",
+      "variant": "crosswall",
+      "title": "Innenabdichtung – Querwandübergang"
+    },
+    {
+      "id": "BKM-TD-114",
+      "slug": "interior-exterior-transition",
+      "family": "interior",
+      "variant": "transition",
+      "title": "Innen zu Außen – Systemübergang"
+    },
+    {
+      "id": "BKM-TD-115",
+      "slug": "wall-installation-interior",
+      "family": "interior",
+      "variant": "installation",
+      "title": "Innenabdichtung – Wandinstallation"
+    },
+    {
+      "id": "BKM-TD-116",
+      "slug": "interior-penetration",
+      "family": "penetration",
+      "variant": "interior",
+      "title": "Innenabdichtung – Rohrdurchdringung"
+    },
+    {
+      "id": "BKM-TD-117",
+      "slug": "floor-waterproofing-section",
+      "family": "floor",
+      "variant": "section",
+      "title": "Bodenflächenabdichtung – Systemprinzip"
+    },
+    {
+      "id": "BKM-TD-118",
+      "slug": "floor-slab-transition",
+      "family": "floor",
+      "variant": "slab",
+      "title": "Bodenplatte – Übergangsdetail"
+    }
+  ]
+}

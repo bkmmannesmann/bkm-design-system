@@ -15,6 +15,8 @@ Alle wesentlichen Änderungen am BKM Mannesmann Design System werden hier dokume
 - v4-System (5 Templates) nach `skills/bkm-slides/legacy/` archiviert.
 
 ### Hinzugefügt
+- **`skills/bkm-technical-drawings`** — neues Technical Drawing System für originale BKM-Prinzipzeichnungen als HTML + Inline-SVG. Enthält eine Vier-Grün-Systematik, semantische Layer, A4/A3-Vorlagen, Metadaten, Standards-Registry, strukturellen Validator und 18 schematische Referenzzeichnungen für Außen-/Innenabdichtung, Fugen, Durchdringungen, Bodenanschlüsse und Prüfdetails. Die Beispiele bleiben `DRAFT`, `NOT_TO_SCALE` und `NORMATIVE_VERIFICATION_REQUIRED`; sie ersetzen keine Fach- oder Normenprüfung.
+- **Technical Drawings – Referenzangleichung** — Linien-, Schraffur-, Systemband-, Achs-/Verdeckt-, Komponentenlisten- und Detailbezuglogik anhand einer visuellen Analyse der intern bereitgestellten WTA- und BKM-Referenzen überarbeitet. Die BKM-Dateien bleiben eigenständig; es wurden keine Referenzgrafiken, Originalmaße, -texte oder -layouts übernommen.
 - Aus Open-Design-Analyse (Apache-2.0) übernommen: `skills/bkm-slides/checklist.md`
   (P0/P1/P2 + 5-Dim-Selbstkritik), Anti-Slop-**Positivregeln** in `PATTERN_CATALOG.md`,
   Engine-Härtung in `ENGINE.md` (Capture-Keydown, Autofokus, localStorage-Position),

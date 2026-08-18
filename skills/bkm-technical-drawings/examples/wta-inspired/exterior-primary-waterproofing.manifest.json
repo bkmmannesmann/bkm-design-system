@@ -1,0 +1,23 @@
+{
+  "id": "BKM-TD-101",
+  "title": "Außenabdichtung – Systemprinzip",
+  "family": "exterior",
+  "variant": "primary",
+  "status": "DRAFT",
+  "scale": "NOT_TO_SCALE",
+  "schematic_layer_thickness": true,
+  "reference_basis": "visuelle interne Referenzanalyse WTA Merkblatt 4-6 und BKM-Planungsratgeber; originale BKM-Geometrie und -Beschriftung",
+  "review": {
+    "technical": false,
+    "normative": false,
+    "visual": false
+  },
+  "bkm_color_roles": {
+    "deep_green": "Systembandkanten",
+    "transition_green": "Funktionspfad",
+    "pure_green": "Systembandkern",
+    "lime_green": "Prüfmarker"
+  },
+  "normative_text_in_repository": false,
+  "normative_verification_required": true
+}
