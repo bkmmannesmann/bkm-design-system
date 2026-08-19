@@ -420,6 +420,12 @@ All buttons use Unbounded at weight 900, uppercase, with slight letter-spacing. 
 
 **Slide/Print/Editorial context:** Cards use a **4px solid colored left border** as the primary visual differentiator — NO shadow, NO hover effects. White card on Sand/Beige background. Minimal rounded corners (8px). Icon + Title (TT Norms Pro Bold) + Body (TT Norms Pro Regular). The border color carries semantic meaning: Deep Green = standard, Red = warning/problem, Lime = highlight (BKM AG), Pure Green = highlight (Fachbetrieb).
 
+### Icons
+
+Use only the curated **Phosphor Icons** in **Bold** or **Fill** across every BKM output. Bold is the default for navigation, document structure and technical information. Fill is reserved for semantic status and emphasis, such as confirmation, warning, information, energy or sustainability. Use local SVGs from `assets/icons/phosphor/` for print, PDFs and offline outputs. For webfont use, load only the pinned Phosphor Bold and/or Fill stylesheet required by the interface.
+
+Do not use thin, light, regular or duotone weights. Do not use Font Awesome, Lucide, Heroicons, Material Symbols, emoji, or custom redrawn icons. Names, allowed usage and the pinned source version are defined in `assets/icons/phosphor/manifest.json`; visual rules are in `docs/icon-system.md`.
+
 ### Navigation
 
 The navigation bar uses Deep Green (`primary`) at 64px height. Links are white, transitioning to Lime on hover. The single CTA button in the navigation is Lime.

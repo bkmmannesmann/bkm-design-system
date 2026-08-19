@@ -14,6 +14,7 @@
 8. **Hard cuts between surface modes.** Never gradients, waves, or diagonals.
 9. **Slides are editorial, not web design.** No noise textures, no aurora gradients, no bento grids, no floating badges. Clean flat surfaces + photography + whitespace.
 10. **Glasmorphismus is allowed** in both contexts as an optional overlay technique on photo backgrounds. Use sparingly (max 1–2 elements per viewport).
+11. **Icons:** Use only the curated local Phosphor Icons in **Bold** or **Fill**. Bold is the default; Fill is reserved for status and semantic emphasis. Do not use Font Awesome, Lucide, Heroicons, Material Symbols, emoji, or custom redrawn icons. Read `docs/icon-system.md` and `assets/icons/phosphor/manifest.json` before selecting an icon.
 
 ## Quick Start
 
@@ -339,6 +340,7 @@ npx @google/design.md export --format css-tailwind DESIGN.md
 - [ ] Unbounded: weight 900, 18px minimum. H1 uppercase, H2+ sentence case
 - [ ] TT Norms Pro self-hosted from assets/fonts/ (not Google Fonts)
 - [ ] Body text in TT Norms Pro Regular (400), emphasis in Bold (700)
+- [ ] Every icon uses a curated Phosphor Bold or Fill asset from `assets/icons/phosphor/manifest.json`
 - [ ] Only ONE primary button per viewport fold
 - [ ] WCAG AA contrast ratios met (4.5:1 minimum)
 

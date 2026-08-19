@@ -25,6 +25,7 @@
       Box-Hintergrund; Bilder immer im **Original-Seitenverhältnis** (`object-fit:contain`, **nie** beschnitten).
 - [ ] **Keine Bildunterschriften** (figcaptions aus).
 - [ ] **Kapitelfolien**: erste Zeile (Eyebrow) **weiß**, das große Akzentwort **lime**.
+- [ ] **Icons ausschließlich Phosphor Bold oder Fill** aus `../../assets/icons/phosphor/manifest.json`; keine anderen Iconbibliotheken, keine Emoji und keine nachgezeichneten Symbole.
 
 ## P1 — wichtig (stark empfohlen)
 

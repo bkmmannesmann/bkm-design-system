@@ -1,3 +1,8 @@
+---
+name: bkm-slides
+description: Erstelle und prüfe markenkonforme BKM-Mannesmann-Folien, Pitch-Decks und Showrooms. Verwende diesen Skill für jede BKM-Präsentation oder HTML-basierte Slide-Ausgabe.
+---
+
 # BKM Slides — Skill (v5)
 
 > Generiert visuell ansprechende, marken­konforme HTML-Präsentationen im BKM Mannesmann
@@ -31,6 +36,7 @@ Textfarbe, das Akzentwort in Pure/Transition Green.
    nie beschnitten); kein `border-radius`/Rand/Schatten, kein Box-Hintergrund.
 4. **Keine Bildunterschriften** (figcaptions aus).
 5. **Kapitelfolien:** erste Zeile (Eyebrow) **weiß**, großes Akzentwort **lime**.
+6. **Icons:** Verwende ausschließlich die kuratierten **Phosphor Bold**- oder **Fill**-Icons aus `../../assets/icons/phosphor/manifest.json`. Bold ist Standard; Fill ist Status oder semantischer Akzent. Keine anderen Iconbibliotheken, keine Emoji und keine nachgezeichneten Symbole.
 
 ---
 
@@ -39,6 +45,7 @@ Textfarbe, das Akzentwort in Pure/Transition Green.
 | Datei | Inhalt |
 |-------|--------|
 | `../../DESIGN.md`, `../../AGENTS.md` | Verbindliche Marken-Token & -Regeln (Repo-Wurzel) |
+| `../../docs/icon-system.md`, `../../assets/icons/phosphor/manifest.json` | Verbindlicher Iconstandard, Gewicht und kuratierte Auswahl |
 | `ENGINE.md` | Fixed-Stage-Engine (Shell-CSS/JS, 1:1 kopieren) |
 | `tokens.css` | **Kanonische Design-Tokens** (CSS-Variablen, Single Source of Truth) |
 | `components.html` | Gerendertes Komponenten-Schaufenster (lebende Referenz) |
@@ -132,6 +139,7 @@ Erst wenn P0 vollständig grün **und** alle Kritik-Dimensionen ≥ 3/5 sind: au
 6. **8px-Rundung** für Flächen-Elemente (Tags, Kacheln, Karten, Buttons); Balken oben
    gerundet; Linien bleiben Linien. (Glas-Cards größer: 24px.)
 7. **Logo** nie umfärben/verzerren (`../../docs/logo.md`).
+8. **Icons nur Phosphor Bold oder Fill** aus dem zentralen Manifest. Für Webfonts nur die fest versionierten Bold-/Fill-Stylesheets laden; für Exporte und offlinefähige Folien lokale SVGs verwenden.
 
 ---
 
@@ -168,7 +176,7 @@ skills/bkm-slides/
 3. preview.md der Finalisten lesen → Stil wählen (Mensch: style-discovery.html zeigen)
 4. GENAU EINE design.md der gewählten Familie lesen
 5. Engine-Shell aus ENGINE.md kopieren → Folien im Familien-Stil bauen
-6. Logo/Keyvisual per Pfad; Marken-Leitplanken einhalten
+6. Logo/Keyvisual per Pfad; ausschließlich Phosphor Bold/Fill-Icons aus dem Manifest einsetzen
 7. checklist.md (P0 muss grün) + 5-Dim-Selbstkritik → erst dann ausliefern
 ```
 

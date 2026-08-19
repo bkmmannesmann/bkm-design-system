@@ -1,0 +1,429 @@
+{
+  "schema_version": "1.0",
+  "library": "Phosphor Icons",
+  "upstream_repository": "https://github.com/phosphor-icons/core",
+  "upstream_release": "v2.0.8",
+  "license": "MIT",
+  "license_file": "LICENSE-MIT.txt",
+  "policy": {
+    "allowed_weights": [
+      "bold",
+      "fill"
+    ],
+    "default_weight": "bold",
+    "fill_usage": "Nur für Status, Bestätigung, Warnung, Information oder bewusste Flächenakzente.",
+    "forbidden": [
+      "thin",
+      "light",
+      "regular",
+      "duotone",
+      "eigene Nachzeichnungen",
+      "gemischte Icon-Bibliotheken",
+      "Emoji als UI- oder Dokument-Icon"
+    ]
+  },
+  "icons": [
+    {
+      "name": "arrow-right",
+      "weight": "bold",
+      "path": "bold/arrow-right.svg",
+      "purpose": "Vorwärtsnavigation und CTA"
+    },
+    {
+      "name": "arrow-up-right",
+      "weight": "bold",
+      "path": "bold/arrow-up-right.svg",
+      "purpose": "Externer Verweis"
+    },
+    {
+      "name": "book-open",
+      "weight": "bold",
+      "path": "bold/book-open.svg",
+      "purpose": "Verarbeitungsanleitung und Wissen"
+    },
+    {
+      "name": "caret-right",
+      "weight": "bold",
+      "path": "bold/caret-right.svg",
+      "purpose": "Schrittfolge und Listenführung"
+    },
+    {
+      "name": "check",
+      "weight": "bold",
+      "path": "bold/check.svg",
+      "purpose": "Vorteil, erledigter Schritt und positive Eigenschaft"
+    },
+    {
+      "name": "download-simple",
+      "weight": "bold",
+      "path": "bold/download-simple.svg",
+      "purpose": "Download von PDF oder Daten"
+    },
+    {
+      "name": "file-pdf",
+      "weight": "bold",
+      "path": "bold/file-pdf.svg",
+      "purpose": "PDF-Dokument und Druckausgabe"
+    },
+    {
+      "name": "globe",
+      "weight": "bold",
+      "path": "bold/globe.svg",
+      "purpose": "Website und digitale Ausgabe"
+    },
+    {
+      "name": "house",
+      "weight": "bold",
+      "path": "bold/house.svg",
+      "purpose": "Anwendungsgebiet und Gebäude"
+    },
+    {
+      "name": "list-bullets",
+      "weight": "bold",
+      "path": "bold/list-bullets.svg",
+      "purpose": "Technische Daten, Verzeichnis und Inhaltsübersicht"
+    },
+    {
+      "name": "package",
+      "weight": "bold",
+      "path": "bold/package.svg",
+      "purpose": "Gebinde und Produktverpackung"
+    },
+    {
+      "name": "presentation",
+      "weight": "bold",
+      "path": "bold/presentation.svg",
+      "purpose": "Präsentation und Schulung"
+    },
+    {
+      "name": "printer",
+      "weight": "bold",
+      "path": "bold/printer.svg",
+      "purpose": "Printdokument und Druckfreigabe"
+    },
+    {
+      "name": "scales",
+      "weight": "bold",
+      "path": "bold/scales.svg",
+      "purpose": "Rechtliche Hinweise und Compliance"
+    },
+    {
+      "name": "table",
+      "weight": "bold",
+      "path": "bold/table.svg",
+      "purpose": "Tabelle, Inhaltsverzeichnis und Datensatz"
+    },
+    {
+      "name": "trash",
+      "weight": "bold",
+      "path": "bold/trash.svg",
+      "purpose": "Entsorgung und Löschvorgang"
+    },
+    {
+      "name": "warning",
+      "weight": "bold",
+      "path": "bold/warning.svg",
+      "purpose": "Hinweis und technische Warnung"
+    },
+    {
+      "name": "warehouse",
+      "weight": "bold",
+      "path": "bold/warehouse.svg",
+      "purpose": "Lagerbedingungen und Logistik"
+    },
+    {
+      "name": "check-circle",
+      "weight": "fill",
+      "path": "fill/check-circle.svg",
+      "purpose": "Bestätigter Status und Freigabe"
+    },
+    {
+      "name": "info",
+      "weight": "fill",
+      "path": "fill/info.svg",
+      "purpose": "Information und Erläuterung"
+    },
+    {
+      "name": "leaf",
+      "weight": "fill",
+      "path": "fill/leaf.svg",
+      "purpose": "Nachhaltigkeit und Umweltbezug"
+    },
+    {
+      "name": "lightning",
+      "weight": "fill",
+      "path": "fill/lightning.svg",
+      "purpose": "Leistung, Energie und schneller Ablauf"
+    },
+    {
+      "name": "warning",
+      "weight": "fill",
+      "path": "fill/warning.svg",
+      "purpose": "Kritischer Status und Sicherheitswarnung"
+    },
+    {
+      "name": "arrows-out",
+      "weight": "bold",
+      "path": "bold/arrows-out.svg",
+      "purpose": "Vollbild und Vergrößerung"
+    },
+    {
+      "name": "atom",
+      "weight": "bold",
+      "path": "bold/atom.svg",
+      "purpose": "Technologie und Materialwissenschaft"
+    },
+    {
+      "name": "caret-left",
+      "weight": "bold",
+      "path": "bold/caret-left.svg",
+      "purpose": "Rückwärtsnavigation"
+    },
+    {
+      "name": "certificate",
+      "weight": "bold",
+      "path": "bold/certificate.svg",
+      "purpose": "Zertifikat und Qualitätsnachweis"
+    },
+    {
+      "name": "chat-centered-text",
+      "weight": "bold",
+      "path": "bold/chat-centered-text.svg",
+      "purpose": "Dialog, Kontakt und Rückmeldung"
+    },
+    {
+      "name": "flask",
+      "weight": "bold",
+      "path": "bold/flask.svg",
+      "purpose": "Entwicklung, Labor und Test"
+    },
+    {
+      "name": "gear-six",
+      "weight": "bold",
+      "path": "bold/gear-six.svg",
+      "purpose": "Einstellung und Prozess"
+    },
+    {
+      "name": "handshake",
+      "weight": "bold",
+      "path": "bold/handshake.svg",
+      "purpose": "Partnerschaft und Zusammenarbeit"
+    },
+    {
+      "name": "laptop",
+      "weight": "bold",
+      "path": "bold/laptop.svg",
+      "purpose": "Digitale Anwendung und Software"
+    },
+    {
+      "name": "link",
+      "weight": "bold",
+      "path": "bold/link.svg",
+      "purpose": "Verknüpfung und Verbindung"
+    },
+    {
+      "name": "plug",
+      "weight": "bold",
+      "path": "bold/plug.svg",
+      "purpose": "Integration und Anschluss"
+    },
+    {
+      "name": "rocket",
+      "weight": "bold",
+      "path": "bold/rocket.svg",
+      "purpose": "Start und Entwicklung"
+    },
+    {
+      "name": "seal-check",
+      "weight": "bold",
+      "path": "bold/seal-check.svg",
+      "purpose": "Verifizierter Status und Freigabe"
+    },
+    {
+      "name": "shield-check",
+      "weight": "bold",
+      "path": "bold/shield-check.svg",
+      "purpose": "Sicherheit und Schutz"
+    },
+    {
+      "name": "squares-four",
+      "weight": "bold",
+      "path": "bold/squares-four.svg",
+      "purpose": "Übersicht und Modulraster"
+    },
+    {
+      "name": "users",
+      "weight": "bold",
+      "path": "bold/users.svg",
+      "purpose": "Zielgruppe und Team"
+    },
+    {
+      "name": "drop-half",
+      "weight": "bold",
+      "path": "bold/drop-half.svg",
+      "purpose": "Feuchtigkeit, Wassereintrag und Horizontalsperre"
+    },
+    {
+      "name": "stack",
+      "weight": "bold",
+      "path": "bold/stack.svg",
+      "purpose": "Mehrschichtaufbau und Systemlagen"
+    },
+    {
+      "name": "arrows-clockwise",
+      "weight": "bold",
+      "path": "bold/arrows-clockwise.svg",
+      "purpose": "Aktualisierung und zyklischer Prozess"
+    },
+    {
+      "name": "calendar",
+      "weight": "bold",
+      "path": "bold/calendar.svg",
+      "purpose": "Termin und Zeitplanung"
+    },
+    {
+      "name": "calendar-check",
+      "weight": "bold",
+      "path": "bold/calendar-check.svg",
+      "purpose": "Bestätigter Termin und Meilenstein"
+    },
+    {
+      "name": "chalkboard-teacher",
+      "weight": "bold",
+      "path": "bold/chalkboard-teacher.svg",
+      "purpose": "Schulung und Wissenstransfer"
+    },
+    {
+      "name": "chat-centered-dots",
+      "weight": "bold",
+      "path": "bold/chat-centered-dots.svg",
+      "purpose": "Kommentar und Austausch"
+    },
+    {
+      "name": "clipboard-text",
+      "weight": "bold",
+      "path": "bold/clipboard-text.svg",
+      "purpose": "Prüfliste und Aufgaben"
+    },
+    {
+      "name": "clock",
+      "weight": "bold",
+      "path": "bold/clock.svg",
+      "purpose": "Zeit und Dauer"
+    },
+    {
+      "name": "compass",
+      "weight": "bold",
+      "path": "bold/compass.svg",
+      "purpose": "Orientierung und Strategie"
+    },
+    {
+      "name": "drop",
+      "weight": "bold",
+      "path": "bold/drop.svg",
+      "purpose": "Feuchtigkeit und Wasser"
+    },
+    {
+      "name": "eye",
+      "weight": "bold",
+      "path": "bold/eye.svg",
+      "purpose": "Ansicht und Sichtprüfung"
+    },
+    {
+      "name": "file-ppt",
+      "weight": "bold",
+      "path": "bold/file-ppt.svg",
+      "purpose": "Präsentationsdatei"
+    },
+    {
+      "name": "funnel",
+      "weight": "bold",
+      "path": "bold/funnel.svg",
+      "purpose": "Filter und Auswahl"
+    },
+    {
+      "name": "hammer",
+      "weight": "bold",
+      "path": "bold/hammer.svg",
+      "purpose": "Handwerk und Verarbeitung"
+    },
+    {
+      "name": "image",
+      "weight": "bold",
+      "path": "bold/image.svg",
+      "purpose": "Bild und Visualisierung"
+    },
+    {
+      "name": "keyboard",
+      "weight": "bold",
+      "path": "bold/keyboard.svg",
+      "purpose": "Eingabe und Arbeitsoberfläche"
+    },
+    {
+      "name": "magnifying-glass",
+      "weight": "bold",
+      "path": "bold/magnifying-glass.svg",
+      "purpose": "Suche und Analyse"
+    },
+    {
+      "name": "map-pin",
+      "weight": "bold",
+      "path": "bold/map-pin.svg",
+      "purpose": "Standort und Einsatzort"
+    },
+    {
+      "name": "megaphone",
+      "weight": "bold",
+      "path": "bold/megaphone.svg",
+      "purpose": "Kommunikation und Ankündigung"
+    },
+    {
+      "name": "paper-plane-tilt",
+      "weight": "bold",
+      "path": "bold/paper-plane-tilt.svg",
+      "purpose": "Nachricht und Versand"
+    },
+    {
+      "name": "share-network",
+      "weight": "bold",
+      "path": "bold/share-network.svg",
+      "purpose": "Teilen und Verteilung"
+    },
+    {
+      "name": "target",
+      "weight": "bold",
+      "path": "bold/target.svg",
+      "purpose": "Ziel und Priorität"
+    },
+    {
+      "name": "tree-structure",
+      "weight": "bold",
+      "path": "bold/tree-structure.svg",
+      "purpose": "Struktur und Systemübersicht"
+    },
+    {
+      "name": "trophy",
+      "weight": "bold",
+      "path": "bold/trophy.svg",
+      "purpose": "Auszeichnung und Erfolg"
+    },
+    {
+      "name": "user",
+      "weight": "bold",
+      "path": "bold/user.svg",
+      "purpose": "Einzelperson und Ansprechpartner"
+    },
+    {
+      "name": "x",
+      "weight": "bold",
+      "path": "bold/x.svg",
+      "purpose": "Schließen und Abbruch"
+    },
+    {
+      "name": "check-circle",
+      "weight": "bold",
+      "path": "bold/check-circle.svg",
+      "purpose": "Bestätigung und positive Statusmarkierung"
+    }
+  ]
+}
