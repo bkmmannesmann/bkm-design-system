@@ -1,0 +1,48 @@
+/*
+ * BKM Technical Drawings — referenzorientierte Rollen-Tokens
+ *
+ * Die Werte bilden eine visuell überprüfte technische Zeichengrammatik ab.
+ * Sie sind kein Ersatz für lizenzierte DIN-/ISO-/WTA-Normtexte.
+ */
+:root {
+  --bkm-deep-green: #1c4b42;
+  --bkm-transition-green: #287d4b;
+  --bkm-pure-green: #4daf46;
+  --bkm-lime: #b4e717;
+  --bkm-stone-grey: #494949;
+  --bkm-ink: #1a1a1a;
+  --bkm-sand-white: #f6f5f2;
+  --bkm-white: #ffffff;
+  --bkm-outline: #c8c5be;
+
+  /* Technische Gewichtshierarchie auf der SVG-Koordinatenebene. */
+  --td-line-section: .70;
+  --td-line-object: .50;
+  --td-line-secondary: .35;
+  --td-line-annotation: .22;
+  --td-line-hatch: .18;
+  --td-line-system-edge: .78;
+
+  --td-font-display: "Unbounded", Arial, sans-serif;
+  --td-font-body: "TT Norms Pro", Arial, sans-serif;
+}
+
+/* Primäre technische Linienlogik. */
+.td-section { stroke: var(--bkm-ink); stroke-width: var(--td-line-section); fill: none; }
+.td-object { stroke: var(--bkm-stone-grey); stroke-width: var(--td-line-object); fill: none; }
+.td-secondary { stroke: var(--bkm-stone-grey); stroke-width: var(--td-line-secondary); fill: none; }
+.td-hatch { stroke: var(--bkm-stone-grey); stroke-width: var(--td-line-hatch); fill: none; }
+.td-annotation { stroke: var(--bkm-stone-grey); stroke-width: var(--td-line-annotation); fill: none; }
+.td-axis { stroke: var(--bkm-stone-grey); stroke-width: var(--td-line-annotation); stroke-dasharray: 6 1.4 1.1 1.4; fill: none; }
+.td-hidden { stroke: var(--bkm-stone-grey); stroke-width: var(--td-line-annotation); stroke-dasharray: 2 1.2; fill: none; }
+
+/* Vier BKM-Farbrollen mit technischer Redundanz. */
+.td-system-band { fill: var(--bkm-pure-green); fill-opacity: .12; stroke: var(--bkm-deep-green); stroke-width: var(--td-line-system-edge); }
+.td-system-edge { stroke: var(--bkm-deep-green); stroke-width: var(--td-line-system-edge); fill: none; }
+.td-system-segment { fill: var(--bkm-white); stroke: var(--bkm-deep-green); stroke-width: var(--td-line-annotation); }
+.td-function-path { stroke: var(--bkm-transition-green); stroke-width: var(--td-line-secondary); stroke-dasharray: 2.8 1.2; fill: none; }
+.td-check-marker { fill: var(--bkm-lime); stroke: var(--bkm-deep-green); stroke-width: var(--td-line-secondary); }
+
+@media print {
+  * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+}

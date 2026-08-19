@@ -1,0 +1,76 @@
+{
+  "registry_version": "0.1",
+  "policy": {
+    "normative_text_in_repository": false,
+    "automated_normative_approval": false,
+    "unverified_marker": "NORMATIVE_VERIFICATION_REQUIRED"
+  },
+  "standards": [
+    {
+      "standard": "ISO 129-1",
+      "edition": "2018",
+      "status": "published",
+      "checked_at": "2026-08-18",
+      "source": "https://www.iso.org/standard/64007.html",
+      "scope": "Mögliche Referenz für Bemaßung in technischen 2D-Zeichnungen.",
+      "affected_components": ["dimension"],
+      "applicability": "NORMATIVE_VERIFICATION_REQUIRED",
+      "normative_text_in_repository": false
+    },
+    {
+      "standard": "ISO 3098-1",
+      "edition": "2015",
+      "status": "published",
+      "checked_at": "2026-08-18",
+      "source": "https://www.iso.org/standard/65679.html",
+      "scope": "Mögliche Referenz für Beschriftung in technischer Produktdokumentation.",
+      "affected_components": ["annotation", "dimension", "title-block"],
+      "applicability": "NORMATIVE_VERIFICATION_REQUIRED",
+      "normative_text_in_repository": false
+    },
+    {
+      "standard": "ISO 5455",
+      "edition": "1979",
+      "status": "published",
+      "checked_at": "2026-08-18",
+      "source": "https://www.iso.org/standard/11500.html",
+      "scope": "Mögliche Referenz für Maßstabsbezeichnung.",
+      "affected_components": ["metadata", "title-block"],
+      "applicability": "NORMATIVE_VERIFICATION_REQUIRED",
+      "normative_text_in_repository": false
+    },
+    {
+      "standard": "DIN 18533-1",
+      "edition": "2026-06",
+      "status": "current",
+      "checked_at": "2026-08-18",
+      "source": "https://www.dinmedia.de/en/standard/din-18533-1/399850897",
+      "scope": "Möglicher projektbezogener Bezug für Abdichtung erdberührter Bauteile.",
+      "affected_components": ["exterior-waterproofing", "floor-transition"],
+      "applicability": "NORMATIVE_VERIFICATION_REQUIRED",
+      "normative_text_in_repository": false
+    },
+    {
+      "standard": "DIN 18533-2",
+      "edition": "2026-06",
+      "status": "current",
+      "checked_at": "2026-08-18",
+      "source": "https://www.dinmedia.de/en/standard/din-18533-2/399850968",
+      "scope": "Möglicher projektbezogener Bezug für bahnenförmige Abdichtungsstoffe.",
+      "affected_components": ["waterproofing-layer"],
+      "applicability": "NORMATIVE_VERIFICATION_REQUIRED",
+      "normative_text_in_repository": false
+    },
+    {
+      "standard": "DIN 18533-3",
+      "edition": "2026-06",
+      "status": "current",
+      "checked_at": "2026-08-18",
+      "source": "https://www.dinmedia.de/en/standard/din-18533-3/399851072",
+      "scope": "Möglicher projektbezogener Bezug für flüssig zu verarbeitende Abdichtungsstoffe.",
+      "affected_components": ["waterproofing-layer", "penetration"],
+      "applicability": "NORMATIVE_VERIFICATION_REQUIRED",
+      "normative_text_in_repository": false
+    }
+  ]
+}
