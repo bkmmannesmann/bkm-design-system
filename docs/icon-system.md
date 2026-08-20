@@ -60,6 +60,26 @@ Für Print, PDFs und offlinefähige Websites verwendest du die kuratierten, loka
 
 Bei Inline-SVG darf `fill="currentColor"` gesetzt werden. Das bevorzugte Verfahren für Websites mit JavaScript ist eine zentrale lokale Icon-Komponente; sie referenziert ausschließlich den BKM-Manifestnamen und nicht den Namen eines fremden Icon-Sets.
 
+## Fester Satz für technische Datenblätter
+
+Technische Datenblätter verwenden **nicht** eine freie Auswahl aus dem allgemeinen Phosphor-Manifest. Für die neun Abschnittsüberschriften gilt der geschlossene Satz in [`assets/icons/tds/`](../assets/icons/tds/). Die Dateien sind nach dem Inhaltsblock benannt; diese Zuordnung wird weder produktbezogen geändert noch durch optisch ähnliche Symbole ersetzt.
+
+| Inhaltsblock | Rendererdatei | Phosphor-Bold-Quelle |
+|:---|:---|:---|
+| Vorteile | `tds/vorteile.svg` | `seal-check` |
+| Eigenschaften | `tds/eigenschaften.svg` | `atom` |
+| Technische Daten | `tds/daten.svg` | `table` |
+| Anwendungsgebiete | `tds/anwendung.svg` | `house-line` |
+| Hinweise | `tds/hinweise.svg` | `warning` |
+| Verpackungseinheiten / Gebinde | `tds/gebinde.svg` | `package` |
+| Lagerbedingungen | `tds/lagerung.svg` | `thermometer-simple` |
+| Entsorgung | `tds/entsorgung.svg` | `recycle` |
+| Rechtliche Hinweise | `tds/recht.svg` | `scales` |
+
+Das [TDS-Manifest](../assets/icons/tds/manifest.json) verknüpft für jede Datei Inhaltsblock, Phosphor-Bold-Quelle sowie Quell- und Rendererprüfsumme. Die TDS-Geometrien sind als freigegebene Version gepinnt und nicht automatisch ein Alias des allgemeinen Phosphor-Bestands. Für Datenblätter sind ausschließlich die TDS-Dateien dieses Ordners zulässig.
+
+> **PDF-Rendererregel:** Die TDS-SVGs enthalten neben `fill="currentColor"` den festen Wurzelstil `fill:#b4e717`. WeasyPrint löst CSS-Variablen für `currentColor` in eingebettetem Inline-SVG nicht zuverlässig auf und würde die Glyphe sonst schwarz rendern. Die feste Lime-Füllung ist daher ein technischer Render-Schutz, keine alternative Produkt- oder Web-Icon-Farbe.
+
 ## Webfont-Nutzung
 
 Wenn eine Website eine Icon-Webfont verwenden muss, wird ausschließlich die fest versionierte Phosphor-Webbibliothek verwendet. Lade nur die tatsächlich benötigten Gewichte, niemals pauschal alle Gewichte. Der Webfont ist für Webanwendungen geeignet, aber **nicht** die bevorzugte Quelle für Print-PDFs oder offline erzeugte Dokumente.

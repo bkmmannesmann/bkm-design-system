@@ -14,7 +14,7 @@
 8. **Hard cuts between surface modes.** Never gradients, waves, or diagonals.
 9. **Slides are editorial, not web design.** No noise textures, no aurora gradients, no bento grids, no floating badges. Clean flat surfaces + photography + whitespace.
 10. **Glasmorphismus is allowed** in both contexts as an optional overlay technique on photo backgrounds. Use sparingly (max 1–2 elements per viewport).
-11. **Icons:** Use only the curated local Phosphor Icons in **Bold** or **Fill**. Bold is the default; Fill is reserved for status and semantic emphasis. Do not use Font Awesome, Lucide, Heroicons, Material Symbols, emoji, or custom redrawn icons. Read `docs/icon-system.md` and `assets/icons/phosphor/manifest.json` before selecting an icon.
+11. **Icons:** Use only the curated local Phosphor Icons in **Bold** or **Fill**. Bold is the default; Fill is reserved for status and semantic emphasis. Do not use Font Awesome, Lucide, Heroicons, Material Symbols, emoji, or custom redrawn icons. Read `docs/icon-system.md` and `assets/icons/phosphor/manifest.json` before selecting an icon. **For technical data sheets, do not choose freely:** use the fixed block-to-icon mapping in `assets/icons/tds/manifest.json` and embed only the matching renderer-safe TDS file.
 
 ## Quick Start
 

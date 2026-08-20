@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "set": "BKM technische Datenblätter",
+  "source_repository": "bkmmannesmann/bkm-layout-system",
+  "source_branch": "fix/tds-stand-2026-08-20",
+  "source_commit": "837f79699122519ebd896fa426f2d855ea0de23e",
+  "provenance": {
+    "library": "Phosphor Icons Core",
+    "weight": "bold",
+    "version_rule": "Die freigegebenen TDS-Pfade sind über source_sha256 versionsgesichert. Sie dürfen nicht stillschweigend durch optisch ähnliche oder durch eine abweichende Version des allgemeinen Phosphor-Bestands ersetzt werden."
+  },
+  "rendering_contract": {
+    "container": "#1c4b42",
+    "glyph": "#b4e717",
+    "inline_svg_fill": "style=\"fill:#b4e717\"",
+    "reason": "WeasyPrint löst CSS-Variablen für currentColor in eingebettetem Inline-SVG nicht zuverlässig auf und rendert die Glyphen sonst schwarz."
+  },
+  "rules": {
+    "naming": "Dateien tragen den Inhaltsblocknamen und werden nicht produktbezogen umbenannt oder umbelegt.",
+    "usage": "Für TDS ausschließlich die rendererfesten Dateien dieses Ordners verwenden; nicht frei aus assets/icons/phosphor/ wählen.",
+    "update": "Jede Änderung erfordert gleichzeitig eine fachliche Freigabe, neue Quell- und Rendererprüfsummen sowie eine Sichtprüfung des erzeugten PDFs."
+  },
+  "icons": [
+    {"block": "Vorteile", "file": "vorteile.svg", "phosphor_name": "seal-check", "source_sha256": "f29d05b2145f5e01686493632a33c2d306df0c932f57cf9c34e1e7942fa55716", "renderer_sha256": "0532d9d0116c98814550429510da80b10a499ba1e026a693a104c8633e7a2b35"},
+    {"block": "Eigenschaften", "file": "eigenschaften.svg", "phosphor_name": "atom", "source_sha256": "50b215004b364200416bea5a7d952a841dc9b801c65359410c32209c45a6f709", "renderer_sha256": "b4a6e5d5040b2dedda12ddf7158f4f58a5b56dcec96aefeead2bab8f757cf65f"},
+    {"block": "Technische Daten", "file": "daten.svg", "phosphor_name": "table", "source_sha256": "f0809a3a92d47d85f178324edd5d3b495750809e0d05ebbcf4a44eeae3405b5f", "renderer_sha256": "ff0b3a8a669d166f8de63472c3ece9e100937f1082ab7e924f5737462d2bc4b1"},
+    {"block": "Anwendungsgebiete", "file": "anwendung.svg", "phosphor_name": "house-line", "source_sha256": "c8cdf780da2882b25d5530155047b7c519a6cc2bbed476f5313cf95517308656", "renderer_sha256": "067819a7ac3832b3e5ec7bfc80c63cbfc9671b3ceafb3391fbe60594e7e861c8"},
+    {"block": "Hinweise", "file": "hinweise.svg", "phosphor_name": "warning", "source_sha256": "c2b1af21bbb1b92808c46f5ec01ade9169bd5cff30f8090c42da85e6e95d7558", "renderer_sha256": "0a7dde69e5d924541e57e3b690175498bd15de0ac9e37a9b834a765423c80da4"},
+    {"block": "Verpackungseinheiten / Gebinde", "file": "gebinde.svg", "phosphor_name": "package", "source_sha256": "d8edc6001426d6ef610a7a60425357eb300ff2b0abf8a700eb89792c6c5a40d8", "renderer_sha256": "18ee52061a25dbf9c47d0c7dcb530b6e438c5d40d2efac72580ef3b0051c5ade"},
+    {"block": "Lagerbedingungen", "file": "lagerung.svg", "phosphor_name": "thermometer-simple", "source_sha256": "2e833e800fcb84960d8bd4d39acb2af8b2c1b4df60f20766decd190dd962ac35", "renderer_sha256": "4997534fd31142cebabebfe609bcf68f36cbdaeb0b7875c71554c1537f5ab9a0"},
+    {"block": "Entsorgung", "file": "entsorgung.svg", "phosphor_name": "recycle", "source_sha256": "a46175ae6673793626fa076feb9143f95b7f5ee5563a75471d2af975c5f09caa", "renderer_sha256": "649a31bc251911d05bf130790de3b1a909a9aa33462a6e1fcfcfa6165a18c0c0"},
+    {"block": "Rechtliche Hinweise", "file": "recht.svg", "phosphor_name": "scales", "source_sha256": "05da65086b033c0604d8f12d6ea0b51b1b47f698e3f5e396af9d2929ce859dae", "renderer_sha256": "cf214b60261f3f8ddcd030493860530cdcb1f39280d85ea8c48fd5aa7a1c3a28"}
+  ]
+}
