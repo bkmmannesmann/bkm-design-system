@@ -15,6 +15,7 @@ Alle wesentlichen Änderungen am BKM Mannesmann Design System werden hier dokume
 - v4-System (5 Templates) nach `skills/bkm-slides/legacy/` archiviert.
 
 ### Hinzugefügt
+- **Fester TDS-Abschnittsiconsatz.** Neun rendererfeste, nach Inhaltsblock benannte Phosphor-Bold-Dateien unter `assets/icons/tds/` mit Manifest, Quell- und Rendererprüfsummen. Die zusätzliche Lime-Füllung verhindert schwarze SVG-Glyphen in WeasyPrint-PDFs. Der Satz bleibt als freigegebene TDS-Version gepinnt und wird nicht durch abweichende allgemeine Phosphor-Assets ersetzt.
 - Aus Open-Design-Analyse (Apache-2.0) übernommen: `skills/bkm-slides/checklist.md`
   (P0/P1/P2 + 5-Dim-Selbstkritik), Anti-Slop-**Positivregeln** in `PATTERN_CATALOG.md`,
   Engine-Härtung in `ENGINE.md` (Capture-Keydown, Autofokus, localStorage-Position),

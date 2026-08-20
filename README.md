@@ -25,6 +25,7 @@ This repository contains the complete design system for BKM Mannesmann AG, a man
 | `docs/icon-system.md` | Verbindlicher Phosphor-Standard für Bold- und Fill-Icons in allen Ausgabeformaten | |
 | `docs/repository-architecture.md` | Zielarchitektur für getrennte BKM-Fachrepositories und gemeinsame Governance | |
 | `assets/icons/phosphor/manifest.json` | Kuratierte, versionierte Icon-Auswahl mit erlaubtem Einsatzzweck | |
+| `assets/icons/tds/manifest.json` | Fester, rendererfester Abschnittsiconsatz für technische Datenblätter | |
 | `docs/referenzen.md` | External design system references (Vercel, MongoDB, NVIDIA, Mintlify, Supabase) | |
 | `docs/verbesserungsvorschlaege.md` | Improvement proposals based on reference analysis | |
 | `docs/bkm-slide-prompt.md` | Legacy v3 slide prompt — superseded by `skills/bkm-slides/QUICKSTART.md` | |
@@ -76,6 +77,8 @@ Read DESIGN.md, AGENTS.md and docs/icon-system.md from
 https://github.com/bkmmannesmann/bkm-design-system. Use only the curated
 Phosphor Bold or Fill icons from assets/icons/phosphor/manifest.json and create
 [Instagram posts / print materials / etc.] following the BKM Mannesmann design.
+For technical data sheets, use only the fixed block-to-icon mapping and the
+renderer-safe files from assets/icons/tds/manifest.json.
 ```
 
 **For a New BKM Document Repository:** Read [`docs/repository-architecture.md`](docs/repository-architecture.md) first. Select the matching BKM Fachrepository, pin the design-system revision and use the common repository structure before creating content.
@@ -102,7 +105,7 @@ The BKM system is built on five pillars:
 3. **Product-Line Geometry** — Angular (0–4px) for Pro Line, Rounded (pill) for Home Line
 4. **Single-Accent Strategy** — Lime Green (`#b4e717`) exclusively for interactive elements
 5. **Two-Voice Typography** — Unbounded (announce), TT Norms Pro Regular + Bold (read + specify)
-6. **Icon Continuity** — Only curated Phosphor Bold and Fill icons, used consistently across digital and print media
+6. **Icon Continuity** — Only curated Phosphor Bold and Fill icons, used consistently across digital and print media; technical data sheets use the fixed renderer-safe set in `assets/icons/tds/`
 
 ## Supported Output Formats
 

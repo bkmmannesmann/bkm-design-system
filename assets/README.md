@@ -6,10 +6,19 @@ Dieses Verzeichnis enthält alle offiziellen Marken-Assets für die digitale und
 
 ```
 assets/
+├── icons/
+│   ├── phosphor/       ← Kuratierte Phosphor-Bold- und Fill-Rohpfade mit Manifest
+│   └── tds/            ← Fester, rendererfester Satz für technische Datenblätter
 ├── keyvisual/          ← Keyvisual-Varianten (SVG + PNG)
 ├── logos/              ← Logo-Varianten (SVG + PNG)
 └── README.md           ← Diese Datei
 ```
+
+## TDS-Abschnittsicons
+
+Der Ordner `icons/tds/` enthält genau neun rendererfeste Abschnittsicons für technische Datenblätter. Die Dateien sind nach ihrem Inhaltsblock benannt und ihre verbindliche Zuordnung, Phosphor-Bold-Quelle sowie Quell- und Rendererprüfsummen stehen in `icons/tds/manifest.json`.
+
+Der TDS-Satz ist über Phosphor-Bold-Quell- und Rendererprüfsummen als eigene freigegebene Version gepinnt; er darf nicht stillschweigend durch eine andere Version aus `icons/phosphor/` ersetzt werden. Die Dateien in `icons/tds/` enthalten zusätzlich die feste Lime-Füllung `#b4e717`, da WeasyPrint die per CSS gesetzte `currentColor`-Variable in Inline-SVGs nicht zuverlässig übernimmt. Details und die vollständige Blockzuordnung stehen in [`docs/icon-system.md`](../docs/icon-system.md).
 
 ## Keyvisual
 
