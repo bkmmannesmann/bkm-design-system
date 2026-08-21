@@ -199,7 +199,15 @@ p.sec-sub{color:var(--bkm-stone-grey);max-width:64ch;margin-bottom:42px;font-siz
 /* Start-Screen: dunkle Buehne mit Lime-CTA, bevor die erste Frage kommt */
 .wizard.start-mode .wz-stage{background:var(--bkm-deep-green);flex:1}
 .wizard.start-mode .wz-foot{display:none}
-.startcard{display:flex;flex-direction:column;align-items:flex-start;gap:18px;padding:20px 4px;color:#fff}
+.startcard{display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:center;padding:20px 4px;color:#fff}
+.startcard .start-text{display:flex;flex-direction:column;align-items:flex-start;gap:18px}
+.startcard .start-pic{border-radius:12px;overflow:hidden;box-shadow:0 16px 40px -16px rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.14)}
+.startcard .start-pic img{display:block;width:100%;height:100%;object-fit:cover;aspect-ratio:4/3}
+@media(max-width:700px){
+  .startcard{grid-template-columns:1fr;gap:18px}
+  .startcard .start-pic{order:-1}
+  .startcard .start-pic img{aspect-ratio:16/9}
+}
 .startcard h3{font-family:'Unbounded';font-weight:900;font-size:clamp(22px,2.6vw,28px);letter-spacing:-.02em;line-height:1.25;color:#fff;max-width:24ch}
 .startcard p{font-size:16px;line-height:1.7;color:rgba(255,255,255,.75);max-width:56ch}
 .startcard .btn{margin-top:10px}
@@ -3221,11 +3229,19 @@ function renderStart(){
   document.querySelectorAll("#threadBar i").forEach(el=>el.classList.remove("on"));
   $("#phaseLabel").textContent = "Los geht's";
   $("#wzStage").innerHTML = `<div class="startcard qcard">
-    <h3>Finde heraus, was hinter deinem Feuchtigkeitsschaden steckt.</h3>
-    <p>Sechs kurze Fragen zu Ort, Schadensbild und Verlauf – danach kennst du die wahrscheinliche Ursache, die Begründung und deinen nächsten Schritt.</p>
-    <button class="btn btn-lime" id="btnStart" type="button">Starten <span class="arr">→</span></button>
-    <div class="start-meta">In wenigen Minuten · ohne Fachwissen · kostenlos</div>
+    <div class="start-text">
+      <h3>Finde heraus, was hinter deinem Feuchtigkeitsschaden steckt.</h3>
+      <p>Sechs kurze Fragen zu Ort, Schadensbild und Verlauf – danach kennst du die wahrscheinliche Ursache, die Begründung und deinen nächsten Schritt.</p>
+      <button class="btn btn-lime" id="btnStart" type="button">Starten <span class="arr">→</span></button>
+      <div class="start-meta">In wenigen Minuten · ohne Fachwissen · kostenlos</div>
+    </div>
+    <div class="start-pic"><img alt="Feuchte Wand im Keller – ein typisches Schadensbild"></div>
   </div>`;
+  /* Bild aus der Ablauf-Sektion wiederverwenden (keine Duplizierung der Base64-Daten) */
+  const startQuelle = document.querySelector("#ablauf .jstep .pic img");
+  const startImg = $("#wzStage").querySelector(".start-pic img");
+  if (startQuelle && startImg) startImg.src = startQuelle.src;
+  else if (startImg) startImg.closest(".start-pic").style.display = "none";
   $("#btnStart").addEventListener("click", startCheck);
 }
 function startCheck(){
