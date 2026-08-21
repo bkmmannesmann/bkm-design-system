@@ -724,7 +724,7 @@ details.faq[open] .a{animation:faqIn .25s ease}
   <div class="check-bg aurora" aria-hidden="true"><i class="a1"></i><i class="a2"></i><i class="a3"></i></div>
   <div class="narrow">
     <h2 class="h2 sec reveal" style="--d:.06s">Dein Feuchte-Check</h2>
-    <p class="sec-sub reveal" style="--d:.12s">Sechs kurze Fragen – und nur falls nötig, bis zu drei kurze Rückfragen. Danach öffnest du mit deiner E-Mail-Adresse deine persönliche Einordnung: Ursache, Begründung und dein nächster Schritt.</p>
+    <p class="sec-sub reveal" style="--d:.12s">Sechs kurze Fragen – und nur falls nötig, bis zu drei kurze Rückfragen. Danach siehst du sofort deine Einordnung – und besprichst sie direkt im Chat weiter, um deine Empfehlung zu bekommen.</p>
 
     <div class="wizard reveal" id="wizard" style="--d:.16s">
       <div class="wz-top">
@@ -758,24 +758,7 @@ details.faq[open] .a{animation:faqIn .25s ease}
         </div>
       </div>
       <div class="res-body">
-        <div class="res-sec" id="gateSec">
-          <div class="gate">
-            <h3>Deine Analyse ist fertig.</h3>
-            <p class="gate-lead">Wir haben deine Angaben ausgewertet. Gib deine E-Mail-Adresse ein, um deine persönliche Einordnung zu öffnen und für später zu speichern.</p>
-            <div id="planForm">
-              <div class="fieldrow" style="margin-bottom:12px">
-                <div><label class="small" for="leadMail">E-Mail-Adresse *</label><input type="email" id="leadMail" placeholder="du@beispiel.de" autocomplete="email"></div>
-              </div>
-              <label class="checkline" style="margin-bottom:16px"><input type="checkbox" id="leadConsent"><span>Ich bin einverstanden, dass meine Angaben zur Auswertung und Zusendung meines Ergebnisses verarbeitet werden. <span id="privacyHint" style="color:rgba(255,255,255,.65)">Es gilt die Datenschutzerklärung.</span></span></label>
-              <button class="btn btn-green" id="btnLead" type="button">Ergebnis ansehen <span class="arr">→</span></button>
-              <div class="err" id="leadErr" style="margin-top:12px">Bitte gib eine gültige E-Mail-Adresse an und bestätige die Verarbeitung.</div>
-              <p class="gate-trust">Kostenlos. Keine Telefonnummer erforderlich.</p>
-            </div>
-          </div>
-        </div>
-
         <div id="unlocked" style="display:none">
-          <div class="unlock-note" id="unlockNote" style="display:none"></div>
           <div class="res-tools">
             <button class="btn btn-outline btn-sm" type="button" onclick="window.print()">Protokoll drucken / PDF</button>
           </div>
@@ -795,10 +778,22 @@ details.faq[open] .a{animation:faqIn .25s ease}
             <p class="meaning" id="meaningText"></p>
           </div>
 
-          <div class="res-sec">
-            <h3>Dein nächster Schritt</h3>
-            <p class="sub" id="routeSub"></p>
-            <div class="routes" id="routes"></div>
+          <div class="res-sec" id="secChat">
+            <div class="gate">
+              <h3>Hol dir jetzt deine Empfehlung im Chat</h3>
+              <p class="gate-lead">Deine Einordnung steht – die passende Empfehlung bekommst du im Gespräch: Der BKM Chat kennt dein Ergebnis und klärt mit dir die nächsten Schritte, auf Wunsch mit zwei Fotos deines Schadens.</p>
+              <div class="chatmsg-actions" style="margin-top:0">
+                <button class="btn btn-lime" id="btnChatOpen" type="button">Im Chat weiterprüfen <span class="arr">→</span></button>
+                <span class="copy-ok" id="copyOk" hidden></span>
+              </div>
+              <details class="checked" style="margin-top:16px;background:rgba(255,255,255,.08);box-shadow:none">
+                <summary style="color:#fff">Falls sich der Chat nicht öffnet: Nachricht zum Einfügen</summary>
+                <div class="inner">
+                  <div class="chatmsg"><pre id="chatMsgText"></pre></div>
+                  <div class="chatmsg-actions"><button class="btn btn-outline btn-sm" id="btnCopyChat" type="button">Nachricht kopieren</button></div>
+                </div>
+              </details>
+            </div>
           </div>
 
           <div class="res-sec" id="secChecked">
@@ -813,22 +808,6 @@ details.faq[open] .a{animation:faqIn .25s ease}
           </div>
 
 
-          <div class="res-sec" id="secChat">
-            <h3>Im Chat weiterprüfen</h3>
-            <p class="sub">Dein Check geht im Chat weiter: Der BKM Chat kennt dein Ergebnis bereits und prüft mit dir die nächsten Schritte – auf Wunsch mit zwei Fotos deines Schadens.</p>
-            <div class="chatmsg-actions" style="margin-top:0">
-              <button class="btn btn-green btn-sm" id="btnChatOpen" type="button">Im Chat weiterprüfen <span class="arr">→</span></button>
-              <span class="copy-ok" id="copyOk" hidden></span>
-            </div>
-            <details class="checked" style="margin-top:16px">
-              <summary>Falls sich der Chat nicht öffnet: Nachricht zum Einfügen</summary>
-              <div class="inner">
-                <p class="sub">Kopiere die Nachricht und füge sie im Chat-Fenster ein – sie enthält dein komplettes Ergebnis.</p>
-                <div class="chatmsg"><pre id="chatMsgText"></pre></div>
-                <div class="chatmsg-actions"><button class="btn btn-outline btn-sm" id="btnCopyChat" type="button">Nachricht kopieren</button></div>
-              </div>
-            </details>
-          </div>
 
           <p style="font-size:12px;color:var(--bkm-stone-grey);line-height:1.6" id="disclaimer"></p>
           <p style="margin-top:16px"><button class="restart" id="btnRestart" type="button">Check neu starten</button></p>
@@ -846,7 +825,7 @@ details.faq[open] .a{animation:faqIn .25s ease}
     <div class="faq-list">
       <details class="faq reveal" style="--d:.05s">
         <summary>Ist der Feuchte-Check wirklich kostenlos?</summary>
-        <div class="a">Ja, vollständig. Du beantwortest die Fragen kostenlos, gibst am Ende deine E-Mail-Adresse an und siehst dein Ergebnis sofort auf der Seite – zusätzlich speichern wir es dir per E-Mail. Keine versteckten Kosten, keine Telefonnummer. Der Check ist kostenlos, weil die anonymisierten Schadensdaten uns helfen, Diagnostik und Produkte weiterzuentwickeln.</div>
+        <div class="a">Ja, vollständig – du siehst dein Ergebnis sofort, ganz ohne Anmeldung oder E-Mail-Adresse. Der Check ist kostenlos, weil die anonymisierten Schadensdaten uns helfen, Diagnostik und Produkte weiterzuentwickeln.</div>
       </details>
       <details class="faq reveal" style="--d:.1s">
         <summary>Wie zuverlässig ist das Ergebnis?</summary>
@@ -858,7 +837,7 @@ details.faq[open] .a{animation:faqIn .25s ease}
       </details>
       <details class="faq reveal" style="--d:.2s">
         <summary>Was passiert mit meinen Daten?</summary>
-        <div class="a">Ausgewertet wird ausschließlich anonymisiert: deine Antworten und das Ergebnis. Kein Name, keine E-Mail, keine Adresse. Das vollständige Datenpaket kannst du dir im Ergebnis ansehen, bevor irgendetwas passiert. Deine E-Mail nutzen wir, um dir dein Ergebnis zu speichern und zu senden – für nichts anderes.</div>
+        <div class="a">Ausgewertet wird ausschließlich anonymisiert: deine Antworten und das Ergebnis. Kein Name, keine E-Mail, keine Adresse. Das vollständige Datenpaket kannst du dir im Ergebnis ansehen, bevor irgendetwas passiert. Eine E-Mail-Adresse brauchst du nicht – dein Ergebnis erscheint direkt auf der Seite.</div>
       </details>
       <details class="faq reveal" style="--d:.25s">
         <summary>Kann ich den Check als Handwerksbetrieb oder Verwalter nutzen?</summary>
@@ -3401,9 +3380,6 @@ function resetCheck(){
   document.body.classList.remove("results-mode");
   $("#result").style.display="none"; $("#wizard").style.display="block";
   $("#unlocked").style.display="none";
-  $("#planForm").style.display="block"; $("#unlockNote").style.display="none";
-  $("#leadMail").value=""; $("#leadConsent").checked=false;
-  $("#leadErr").style.display="none";
   renderQuestion("fwd");
   window.scrollTo(0,0);
   scrollCheckIntoView();
@@ -3425,7 +3401,6 @@ document.addEventListener("keydown", e=>{
   } else if (e.key==="Enter"){ advance("fwd"); }
   else if (e.key==="ArrowLeft" && !$("#btnBack").disabled){ advance("back"); }
 });
-$("#btnLead").addEventListener("click", unlock);
 $("#btnChatOpen").addEventListener("click", ()=>{
   /* Userlike-Widget oeffnen (bkm-mannesmann.de). API-Namen variieren je nach
      Widget-Version, daher mehrere Versuche; ohne Widget greift der Fallback. */
@@ -3539,34 +3514,12 @@ function finish(){
   const erg = auswerten(RULES, eff);
   state.erg = erg; state.eff = eff;
   state.analysisId = "FC-" + Date.now().toString(36).toUpperCase();
+  sendData(anonymPayload(erg));
   document.body.classList.add("results-mode");
   $("#wizard").style.display="none";
   $("#result").style.display="block";
   $("#teaserHead").style.display="block";
-  /* Transparente Reihenfolge: Analyse fertig -> E-Mail -> Ergebnis oeffnet sofort */
-  $("#gateSec").style.display="block";
-  $("#planForm").style.display="block";
-  $("#unlocked").style.display="none";
-  $("#unlockNote").style.display="none";
-  $("#certainty").style.display="none";
-  $("#resLabel").textContent = "Analyse abgeschlossen";
-  const tName = $("#teaserName"); tName.className = "td-name";
-  tName.textContent = "Deine Analyse ist fertig.";
-  $("#teaserSub").textContent = "Öffne jetzt deine persönliche Einordnung – mit Ursache, Begründung und deinem nächsten Schritt.";
-  window.scrollTo(0,0);
-}
-
-/* unlock(): validiert Lead, sendet Daten, deckt Ursache auf und rendert alle Details. */
-function unlock(){
-  const mail = $("#leadMail").value.trim();
-  const consent = $("#leadConsent").checked;
-  const mailOk = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(mail);
-  if (!mailOk || !consent){ $("#leadErr").style.display="block"; return; }
-  $("#leadErr").style.display="none";
-
-  const erg = state.erg;
-  sendData(anonymPayload(erg));
-  sendData(protokollPayload(erg));
+  $("#unlocked").style.display="block";
 
   /* Ergebniszustaende: A klar / B wahrscheinlich / C Kombination / D unklar */
   const tName = $("#teaserName"), tSub = $("#teaserSub"), tLabel = $("#resLabel");
@@ -3574,7 +3527,7 @@ function unlock(){
   if (erg.unklar){
     tLabel.textContent = "Ehrliches Ergebnis";
     tName.textContent = "Die Ursache lässt sich noch nicht sicher genug eingrenzen.";
-    tSub.textContent = "Deine Angaben passen zu mehreren möglichen Ursachen. Bevor du Geld oder Zeit in die falsche Sanierung investierst, sollte der Schaden genauer geprüft werden.";
+    tSub.textContent = "Deine Angaben passen zu mehreren möglichen Ursachen. Besprich dein Ergebnis im Chat – dort klären wir gemeinsam den nächsten Prüfschritt.";
   } else {
     const h = LAIE.hyp[erg.primaer];
     const kombi = erg.kombidiagnose ? LAIE.hyp[erg.kombidiagnose] : null;
@@ -3583,20 +3536,17 @@ function unlock(){
     tSub.textContent = (erg.konfidenz==="hoch"
       ? "Dein Schadensbild spricht deutlich für diese Ursache."
       : "Dein Schadensbild spricht am ehesten für diese Ursache.")
-      + (kombi ? " Wahrscheinlich wirken zwei Ursachen zusammen – die Maßnahmen gehören in einen gemeinsamen Plan." : "");
+      + " Deine persönliche Empfehlung bekommst du jetzt im Chat.";
   }
   const word = erg.unklar ? "Nicht sicher genug" : ({hoch:"Klar", mittel:"Gut eingrenzbar", niedrig:"Noch nicht eindeutig"}[erg.konfidenz] || "");
   $("#certWord").textContent = word;
   $("#certainty").style.display = "flex";
 
   renderDetails(erg);
-  $("#gateSec").style.display="none";
-  $("#unlocked").style.display="block";
-  const note = $("#unlockNote");
-  note.textContent = "✓ Geöffnet. Dein Ergebnis wurde zusätzlich an " + mail + " gesendet.";
-  note.style.display="block";
   window.scrollTo(0,0);
 }
+
+/* unlock(): validiert Lead, sendet Daten, deckt Ursache auf und rendert alle Details. */
 
 /* renderDetails(): füllt Hinweise, Messprotokoll, Befunde, Empfehlungen (erst nach Freischaltung). */
 function chatNachricht(erg){
@@ -3664,14 +3614,6 @@ function renderDetails(erg){
     $("#listCon").innerHTML = b.con.length ? b.con.map(i=>`<li><span>${i.frage} <b>${i.option}</b></span></li>`).join("") : `<li class="empty">Keine Gegenbefunde – das stützt die Diagnose.</li>`;
     $("#secFindings").style.display="block";
   } else { $("#secFindings").style.display="none"; $("#secMeaning").style.display="none"; }
-
-  const rt = routing(erg, state.eff);
-  $("#routeSub").textContent = rt.sub;
-  $("#routes").innerHTML = rt.routes.map(r=>
-    `<div class="route ${r.rec?'rec on-dark':''}">
-      <span class="tag">${r.tag}</span><h4>${r.h}</h4><p>${r.p}</p>
-      ${r.cta?`<a class="btn btn-sm ${r.rec?'btn-lime':'btn-outline'}" href="${r.href}" ${r.href.startsWith('http')?'target="_blank" rel="noopener"':''}>${r.cta}</a>`:""}
-    </div>`).join("");
 
   $("#chatMsgText").textContent = chatNachricht(erg);
 
