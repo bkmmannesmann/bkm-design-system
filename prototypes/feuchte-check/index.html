@@ -1382,7 +1382,7 @@ const RULES = {
    "id": "F2_schaeden",
    "schritt": 2,
    "typ": "multi",
-   "pflicht": true,
+   "pflicht": false,
    "label": "Sichtbare Schäden (Mehrfachauswahl)",
    "optionen": [
     {
@@ -1425,31 +1425,6 @@ const RULES = {
      "kommentar": "Salze stammen aus Erdreich/Baustoff. Trinkwasser ist salzarm → Negativ-Evidenz für Rohrbruch (Ausnahme Abwasser, siehe P2)."
     },
     {
-     "id": "oberflaechenfilm",
-     "label": "Tropfen oder Feuchtefilm auf der Oberfläche",
-     "punkte": {
-      "KO": 20
-     },
-     "kommentar": "NEUE OPTION — direktes Tauwasser-Symptom."
-    },
-    {
-     "id": "feuchtegrenze",
-     "label": "Waagerechte Feuchtegrenze an der Wand",
-     "punkte": {
-      "AF": 30
-     },
-     "kommentar": "NEUE OPTION — pathognomonisches Leitsymptom der aufsteigenden Feuchte."
-    },
-    {
-     "id": "wasserraender",
-     "label": "Wasserränder / Laufspuren",
-     "punkte": {
-      "RL": 15,
-      "LO": 15,
-      "DW": 5
-     }
-    },
-    {
      "id": "pfuetzen",
      "label": "Pfützen / stehendes Wasser",
      "punkte": {
@@ -1485,10 +1460,6 @@ const RULES = {
       "SF": 5
      },
      "kommentar": "NEUE OPTION. Bei intensivem Pilzgeruch + Holzbauteilen → Hinweis auf Schimmelmodul / Hausschwammprüfung."
-    },
-    {
-     "id": "nichts_davon",
-     "label": "Nichts davon / schwer zu erkennen"
     }
    ]
   },
@@ -2865,10 +2836,8 @@ const OPTION_FILTER = {
     risse_boden: ["boden"],
     risse_mauerwerk: ["wand"],
     putz_abblaetternd: ["wand"],
-    feuchtegrenze: ["wand"],
     salzausbluehungen: ["wand","boden"],
-    pfuetzen: ["boden"],
-    wasserraender: ["wand","decke"]
+    pfuetzen: ["boden"]
   }
 };
 function optionSichtbar(frageId, optId, antworten){
@@ -3144,7 +3113,7 @@ const WN_ANTWORTEN = {
   F4_konstant:"unbekannt", F3_fassade:"unbekannt", F3_fbh:"unbekannt", F4_saison:"unbekannt"
 };
 /* Bei Mehrfachauswahl: exklusive "Weiss nicht"/"Nichts davon"-Karte, wird vor Auswertung entfernt */
-const WN_MULTI = { F2_schaeden:"nichts_davon", F2_ausbreitung:"unbekannt" };
+const WN_MULTI = { F2_ausbreitung:"unbekannt" };
 function effektiveAntworten(){
   const a = Object.assign({}, state.antworten);
   for (const [k,v] of Object.entries(WN_ANTWORTEN)) if (a[k]===v) delete a[k];
