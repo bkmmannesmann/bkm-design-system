@@ -1085,7 +1085,7 @@ const RULES = {
     },
     {
      "id": "eg_unterkellert",
-     "label": "Erdgeschoss (unterkellert)",
+     "label": "Erdgeschoss – mit Keller darunter",
      "punkte": {
       "AF": 10,
       "SF": 5,
@@ -1097,7 +1097,7 @@ const RULES = {
     },
     {
      "id": "eg_nicht_unterkellert",
-     "label": "Erdgeschoss (nicht unterkellert)",
+     "label": "Erdgeschoss – ohne Keller",
      "punkte": {
       "AF": 20,
       "SF": 10,
@@ -1128,7 +1128,7 @@ const RULES = {
     },
     {
      "id": "garage",
-     "label": "Garage",
+     "label": "Garage / Nebengebäude",
      "punkte": {
       "AF": 15,
       "SF": 10,
@@ -1148,7 +1148,7 @@ const RULES = {
    "schritt": 1,
    "typ": "single",
    "pflicht": false,
-   "label": "Raumtyp",
+   "label": "In welchem Raum zeigt sich der Schaden?",
    "optionen": [
     {
      "id": "bad",
@@ -1216,7 +1216,7 @@ const RULES = {
    "schritt": 1,
    "typ": "single",
    "pflicht": true,
-   "label": "Baujahr / Fundamentart",
+   "label": "Wann wurde das Haus ungefähr gebaut?",
    "optionen": [
     {
      "id": "vor_1970",
@@ -1236,6 +1236,10 @@ const RULES = {
       "AF": -5
      },
      "kommentar": "Leckagewasser kann sich unter dem Estrich verteilen und weit entfernt austreten."
+    },
+    {
+     "id": "unbekannt",
+     "label": "Weiß ich nicht"
     }
    ]
   },
@@ -1424,7 +1428,7 @@ const RULES = {
     },
     {
      "id": "aussen_erdberuehrt",
-     "label": "Außenwand erdberührt",
+     "label": "Außenwand – dahinter liegt Erdreich (z. B. Kellerwand)",
      "punkte": {
       "AF": 15,
       "SF": 20,
@@ -1433,7 +1437,7 @@ const RULES = {
     },
     {
      "id": "aussen_nicht_erdberuehrt",
-     "label": "Außenwand nicht erdberührt",
+     "label": "Außenwand – oberirdisch, Luft dahinter",
      "punkte": {
       "SR": 15,
       "KO": 10
@@ -1448,6 +1452,10 @@ const RULES = {
       "AF": 5
      },
      "kommentar": "NEUE OPTION — Boden ist ein eigenes Bauteil, kein Wandtyp; bisher nicht sauber abbildbar."
+    },
+    {
+     "id": "unbekannt",
+     "label": "Weiß ich nicht"
     }
    ]
   },
@@ -1460,13 +1468,13 @@ const RULES = {
    "optionen": [
     {
      "id": "feuchte_flecken",
-     "label": "Feuchte Flecken",
+     "label": "Feuchte oder dunkle Flecken",
      "punkte": {},
      "kommentar": "Unspezifisch — bewusst 0 Punkte. Punktevergabe für unspezifische Merkmale verwässert die Trennschärfe."
     },
     {
      "id": "schimmel",
-     "label": "Schimmelbefall",
+     "label": "Schimmel",
      "punkte": {
       "KO": 15,
       "LO": 5,
@@ -1477,8 +1485,17 @@ const RULES = {
      "kommentar": "Schimmel wächst bevorzugt bei moderater Dauerfeuchte (Kondensat); auf stark salzbelastetem Mauerwerk schlechter."
     },
     {
+     "id": "putz_abblaetternd",
+     "label": "Putz oder Farbe löst sich",
+     "punkte": {
+      "AF": 10,
+      "SF": 10,
+      "DW": 5
+     }
+    },
+    {
      "id": "salzausbluehungen",
-     "label": "Salzausblühungen",
+     "label": "Weiße Ausblühungen (Salz)",
      "punkte": {
       "AF": 25,
       "SF": 10,
@@ -1489,20 +1506,20 @@ const RULES = {
      "kommentar": "Salze stammen aus Erdreich/Baustoff. Trinkwasser ist salzarm → Negativ-Evidenz für Rohrbruch (Ausnahme Abwasser, siehe P2)."
     },
     {
-     "id": "putz_abblaetternd",
-     "label": "Abblätternde Farbe / Putz",
+     "id": "oberflaechenfilm",
+     "label": "Tropfen oder Feuchtefilm auf der Oberfläche",
      "punkte": {
-      "AF": 10,
-      "SF": 10,
-      "DW": 5
-     }
+      "KO": 20
+     },
+     "kommentar": "NEUE OPTION — direktes Tauwasser-Symptom."
     },
     {
-     "id": "verfaerbungen",
-     "label": "Verfärbungen",
+     "id": "feuchtegrenze",
+     "label": "Waagerechte Feuchtegrenze an der Wand",
      "punkte": {
-      "KO": 5
-     }
+      "AF": 30
+     },
+     "kommentar": "NEUE OPTION — pathognomonisches Leitsymptom der aufsteigenden Feuchte."
     },
     {
      "id": "wasserraender",
@@ -1515,7 +1532,7 @@ const RULES = {
     },
     {
      "id": "pfuetzen",
-     "label": "Pfützenbildung / stehendes Wasser",
+     "label": "Pfützen / stehendes Wasser",
      "punkte": {
       "DW": 25,
       "RL": 15,
@@ -1525,24 +1542,8 @@ const RULES = {
      }
     },
     {
-     "id": "feuchtegrenze",
-     "label": "Scharfe horizontale Feuchtegrenze mit Salzrand (\"Hochwasserlinie\")",
-     "punkte": {
-      "AF": 30
-     },
-     "kommentar": "NEUE OPTION — pathognomonisches Leitsymptom der aufsteigenden Feuchte."
-    },
-    {
-     "id": "oberflaechenfilm",
-     "label": "Wassertropfen / Feuchtefilm auf der Oberfläche (Anlauffeuchte)",
-     "punkte": {
-      "KO": 20
-     },
-     "kommentar": "NEUE OPTION — direktes Tauwasser-Symptom."
-    },
-    {
      "id": "risse_mauerwerk",
-     "label": "Risse im Mauerwerk",
+     "label": "Risse in der Wand",
      "punkte": {
       "SF": 10,
       "SR": 10
@@ -1550,7 +1551,7 @@ const RULES = {
     },
     {
      "id": "risse_boden",
-     "label": "Risse im Boden / Bodenplatte",
+     "label": "Risse im Boden",
      "punkte": {
       "DW": 10,
       "RL": 5
@@ -1558,13 +1559,17 @@ const RULES = {
     },
     {
      "id": "geruch_muffig",
-     "label": "Muffiger / modriger Geruch",
+     "label": "Muffiger Geruch",
      "punkte": {
       "KO": 5,
       "AF": 5,
       "SF": 5
      },
      "kommentar": "NEUE OPTION. Bei intensivem Pilzgeruch + Holzbauteilen → Hinweis auf Schimmelmodul / Hausschwammprüfung."
+    },
+    {
+     "id": "nichts_davon",
+     "label": "Nichts davon / schwer zu erkennen"
     }
    ]
   },
@@ -1675,6 +1680,10 @@ const RULES = {
       "SF": 10,
       "BF": 10
      }
+    },
+    {
+     "id": "unbekannt",
+     "label": "Kann ich nicht sagen"
     }
    ]
   },
@@ -1697,6 +1706,10 @@ const RULES = {
      "id": "nein",
      "label": "Nein",
      "punkte": {}
+    },
+    {
+     "id": "unbekannt",
+     "label": "Kann ich nicht sagen"
     }
    ],
    "sichtbar_wenn": {
@@ -1735,6 +1748,10 @@ const RULES = {
      "id": "nein",
      "label": "Nein",
      "punkte": {}
+    },
+    {
+     "id": "unbekannt",
+     "label": "Kann ich nicht sagen"
     }
    ],
    "sichtbar_wenn": {
@@ -1752,7 +1769,7 @@ const RULES = {
    "schritt": 2,
    "typ": "single",
    "pflicht": false,
-   "label": "Schwerlastverkehr / Erschütterungsquellen in der Nähe?",
+   "label": "Gibt es starke Erschütterungen in der Nähe (LKW-Verkehr, Bahn, Baustelle)?",
    "optionen": [
     {
      "id": "ja",
@@ -1767,6 +1784,10 @@ const RULES = {
      "id": "nein",
      "label": "Nein",
      "punkte": {}
+    },
+    {
+     "id": "unbekannt",
+     "label": "Weiß ich nicht"
     }
    ],
    "sichtbar_wenn": {
@@ -1779,7 +1800,7 @@ const RULES = {
    "schritt": 3,
    "typ": "single",
    "pflicht": true,
-   "label": "Lüftungsverhalten",
+   "label": "Wie oft wird der betroffene Raum gelüftet?",
    "optionen": [
     {
      "id": "regelmaessig",
@@ -1809,7 +1830,7 @@ const RULES = {
    "schritt": 3,
    "typ": "single",
    "pflicht": false,
-   "label": "Heizverhalten",
+   "label": "Wie wird der Raum im Winter beheizt?",
    "optionen": [
     {
      "id": "normal",
@@ -1856,7 +1877,7 @@ const RULES = {
    "schritt": 3,
    "typ": "single",
    "pflicht": false,
-   "label": "Wasser-/Heizungs-/Abwasserleitungen im oder am Schadensbereich?",
+   "label": "Verlaufen Wasser-, Heizungs- oder Abwasserleitungen im oder am Schadensbereich?",
    "optionen": [
     {
      "id": "ja",
@@ -1900,7 +1921,7 @@ const RULES = {
    "schritt": 3,
    "typ": "single",
    "pflicht": false,
-   "label": "Fußbodenheizung vorhanden?",
+   "label": "Gibt es eine Fußbodenheizung im betroffenen Bereich?",
    "optionen": [
     {
      "id": "ja_alt",
@@ -1920,6 +1941,10 @@ const RULES = {
      "id": "nein",
      "label": "Nein",
      "punkte": {}
+    },
+    {
+     "id": "unbekannt",
+     "label": "Weiß ich nicht"
     }
    ],
    "sichtbar_wenn": {
@@ -1943,7 +1968,7 @@ const RULES = {
    "schritt": 3,
    "typ": "single",
    "pflicht": true,
-   "label": "Bekannte Leitungsdefekte (Wasser, Abfluss, Heizung, Hauptleitung)?",
+   "label": "Sind bereits Leitungsdefekte bekannt (Wasser, Abfluss, Heizung)?",
    "optionen": [
     {
      "id": "ja",
@@ -2025,6 +2050,10 @@ const RULES = {
      "id": "nein",
      "label": "Nein",
      "punkte": {}
+    },
+    {
+     "id": "unbekannt",
+     "label": "Nicht geprüft"
     }
    ],
    "sichtbar_wenn": {
@@ -2040,7 +2069,7 @@ const RULES = {
    "schritt": 3,
    "typ": "single",
    "pflicht": true,
-   "label": "Fassadenzustand an der betroffenen Außenwand",
+   "label": "Wie sieht die Fassade an der betroffenen Außenwand aus?",
    "sichtbar_wenn": {
     "frage": "F1_wandart",
     "enthaelt": "aussen_nicht_erdberuehrt"
@@ -2074,6 +2103,10 @@ const RULES = {
      "punkte": {
       "SR": -15
      }
+    },
+    {
+     "id": "unbekannt",
+     "label": "Kann ich nicht beurteilen"
     }
    ]
   },
@@ -2098,6 +2131,10 @@ const RULES = {
      "id": "nein",
      "label": "Nein / nicht vorhanden",
      "punkte": {}
+    },
+    {
+     "id": "unbekannt",
+     "label": "Weiß ich nicht"
     }
    ],
    "sichtbar_wenn": {
@@ -2217,7 +2254,7 @@ const RULES = {
    "schritt": 4,
    "typ": "single",
    "pflicht": false,
-   "label": "Saisonales Muster",
+   "label": "Gibt es ein jahreszeitliches Muster?",
    "kommentar": "KORREKTUR gegenüber v1: 'Sommer → aufsteigende Feuchte' ist fachlich nicht haltbar. Der Klassiker ist SOMMERKONDENSATION im Keller (warme, feuchte Außenluft kondensiert an kalten Kellerwänden). Kontextabhängige Bewertung über Kombiregeln K1/K2.",
    "optionen": [
     {
@@ -2243,6 +2280,10 @@ const RULES = {
       "DW": 5,
       "KO": -10
      }
+    },
+    {
+     "id": "unbekannt",
+     "label": "Kann ich nicht sagen"
     }
    ],
    "sichtbar_wenn": {
@@ -2263,7 +2304,7 @@ const RULES = {
    "schritt": 4,
    "typ": "single",
    "pflicht": true,
-   "label": "Ist der Schaden konstant vorhanden (nicht wechselnd)?",
+   "label": "Ist der Schaden dauerhaft da – oder kommt und geht er?",
    "optionen": [
     {
      "id": "ja",
@@ -2282,6 +2323,10 @@ const RULES = {
       "SR": 5,
       "DW": 5
      }
+    },
+    {
+     "id": "unbekannt",
+     "label": "Kann ich nicht sagen"
     }
    ]
   },
@@ -2290,7 +2335,7 @@ const RULES = {
    "schritt": 4,
    "typ": "single",
    "pflicht": false,
-   "label": "Hoher Grundwasserstand / Hanglage / bekannte Grundwasserereignisse?",
+   "label": "Ist hoher Grundwasserstand oder Hanglage am Haus bekannt?",
    "optionen": [
     {
      "id": "ja",
@@ -2327,7 +2372,7 @@ const RULES = {
    "schritt": 4,
    "typ": "single",
    "pflicht": false,
-   "label": "Trat der Schaden erstmals nach einem konkreten Ereignis auf?",
+   "label": "Trat der Schaden erstmals nach einem bestimmten Ereignis auf?",
    "kommentar": "NEUE FRAGE — Ereignisanamnese ist in der Praxis oft der schnellste Weg zur Ursache.",
    "optionen": [
     {
@@ -2837,12 +2882,12 @@ const LAIE = {
   q: {
     F1_baujahr:{hinweis:"Bis ca. 1970 wurden Häuser meist auf Streifenfundamenten gebaut – Sperrschichten fehlen oft oder sind verschlissen. Ab ca. 1970 ist eine durchgehende Betonbodenplatte üblich."},
     F1_baustoff:{label:"Aus welchem Baustoff besteht die betroffene Wand?",hinweis:"Das Material entscheidet, ob und wie sich Feuchte in der Wand bewegt – und welche Sanierung überhaupt möglich ist. Nicht sicher? Wähle „Weiß ich nicht“, das ist völlig in Ordnung."},
-    F3_baumassnahme_24m:{label:"Wurde in den letzten 24 Monaten neu gebaut, kernsaniert oder Estrich/Putz eingebracht?"},
-    F1_wandart:{hinweis:"„Erdberührt“ heißt: Hinter der Wand liegt Erdreich (typisch im Keller)."},
+    F3_baumassnahme_24m:{label:"Wurde in den letzten zwei Jahren gebaut, saniert oder neuer Estrich/Putz eingebracht?"},
+    F1_wandart:{hinweis:"Mehrfachauswahl möglich. Nicht sicher? „Weiß ich nicht“ ist völlig okay."},
     F2_schaeden:{hinweis:"Wähle alles aus, was du siehst – auch Kleinigkeiten helfen bei der Eingrenzung."},
     F2_wandbodenfuge:{label:"Tritt Wasser sichtbar dort aus, wo Wand und Fußboden zusammenstoßen?"},
-    F2_ecken:{label:"Sind Raumecken oder der Übergang Wand/Decke betroffen (Feuchte oder Schimmel in den Ecken)?"},
-    F3_wasserzaehler:{label:"Wasserzähler-Stillstandstest: Läuft der Zähler, obwohl alle Hähne zu sind?",hinweis:"So geht's: Alle Wasserhähne und Geräte (Spülmaschine, Waschmaschine) schließen, dann 10–15 Minuten den Wasserzähler beobachten. Dreht er sich weiter, verliert eine Leitung Wasser. Das ist der stärkste Einzeltest im ganzen Check."},
+    F2_ecken:{label:"Sind vor allem Raumecken oder der Übergang zur Decke betroffen?"},
+    F3_wasserzaehler:{label:"Läuft der Wasserzähler weiter, obwohl alle Hähne geschlossen sind?",hinweis:"So geht's: Alle Wasserhähne und Geräte (Spülmaschine, Waschmaschine) schließen, dann 10–15 Minuten den Wasserzähler beobachten. Dreht er sich weiter, verliert eine Leitung Wasser. Das ist der stärkste Einzeltest im ganzen Check."},
     F3_boden_warm:{hinweis:"Ein punktuell warmer Fleck am Boden kann auf eine undichte Heizungs- oder Warmwasserleitung hinweisen."},
     F3_darueber:{label:"Was befindet sich direkt über der Schadenstelle?"},
     F4_saison:{hinweis:"Auch eine Verschlechterung im Sommer ist ein wichtiger Hinweis – gerade im Keller."},
@@ -2901,7 +2946,7 @@ function pruefeBedingung(b, antworten){
   if (b.bedingung === "nur_innenwand")
     return Array.isArray(a) && a.length > 0 && a.every(w => w === "innenwand");
   if (b.bedingung === "keine_aussenwand_nicht_erdberuehrt")
-    return !(Array.isArray(a) && a.includes("aussen_nicht_erdberuehrt"));
+    return Array.isArray(a) && a.length > 0 && !a.includes("aussen_nicht_erdberuehrt");
   if (b.wert !== undefined) return a === b.wert;
   if (b.wert_nicht !== undefined) return a !== undefined && a !== b.wert_nicht;
   if (b.wert_in) return b.wert_in.includes(a);
@@ -3041,7 +3086,7 @@ function plausibilitaet(antworten, erg){
     w.push({t:"warn",h:"Porenbeton im Erdreich ist heikel",x:"Porenbeton nimmt sehr viel Wasser auf und ist für erdberührte, feuchtebelastete Kellerwände nicht empfohlen. Hier sollte das Sanierungskonzept fachlich geprüft und die Herstellerempfehlung beachtet werden."});
   if (bst==="lehm" && top && top!=="RL")
     w.push({t:"info",h:"Lehmwand: nur diffusionsoffen arbeiten",x:"Lehmbaustoffe vertragen keine zementären Beschichtungen – nur diffusionsoffene Systeme wie Lehmputz. Lehm ist mechanisch empfindlich, deshalb vor jedem Eingriff die Statik prüfen lassen."});
-  if (bst==="unbekannt" && ["AF","SF","DW"].includes(top))
+  if ((bst==="unbekannt" || bst===undefined) && ["AF","SF","DW"].includes(top))
     w.push({t:"info",h:"Baustoff bestätigen lohnt sich",x:"Für die Wahl des richtigen Verfahrens ist das Wandmaterial entscheidend. Ein Blick in die Bauakten oder eine kleine Bauteilöffnung bringt Klarheit – gerade um kapillaraktives Mauerwerk von Beton zu unterscheiden."});
   return w;
 }
@@ -3139,10 +3184,23 @@ LAIE.q.F4_regen.label = "Verändert sich der Schaden bei Regen?";
 
 /* "Weiss ich nicht"-Antworten zaehlen nicht als Evidenz: sie werden vor der
    Auswertung entfernt, damit sie keine Hypothese verzerren. */
-const WN_ANTWORTEN = { F1_standort:"unsicher", F2_schadenshoehe:"unbekannt", F4_regen:"unbekannt" };
+const WN_ANTWORTEN = {
+  F1_standort:"unsicher", F2_schadenshoehe:"unbekannt", F4_regen:"unbekannt",
+  F1_baujahr:"unbekannt", F2_ecken:"unbekannt", F2_wandbodenfuge:"unbekannt",
+  F2_schwerlast:"unbekannt", F3_boden_warm:"unbekannt", F3_regenentwaesserung:"unbekannt",
+  F4_konstant:"unbekannt", F3_fassade:"unbekannt", F3_fbh:"unbekannt", F4_saison:"unbekannt"
+};
+/* Bei Mehrfachauswahl: exklusive "Weiss nicht"/"Nichts davon"-Karte, wird vor Auswertung entfernt */
+const WN_MULTI = { F1_wandart:"unbekannt", F2_schaeden:"nichts_davon", F2_ausbreitung:"unbekannt" };
 function effektiveAntworten(){
   const a = Object.assign({}, state.antworten);
   for (const [k,v] of Object.entries(WN_ANTWORTEN)) if (a[k]===v) delete a[k];
+  for (const [k,tok] of Object.entries(WN_MULTI)){
+    if (Array.isArray(a[k])){
+      const v = a[k].filter(x=>x!==tok);
+      if (v.length) a[k]=v; else delete a[k];
+    }
+  }
   const verlauf = a.F0_verlauf; delete a.F0_verlauf;
   if (verlauf && verlauf !== "unbekannt"){
     if (a.F4_konstant === undefined){
@@ -3314,6 +3372,15 @@ function wireCard(card, f, queue){
     inp.addEventListener("change", ()=>{
       const store = storeOf(f);
       if (f.typ==="multi"){
+        const excl = WN_MULTI[f.id];
+        if (excl && inp.checked){
+          if (inp.value === excl){
+            card.querySelectorAll(`input[name="${f.id}"]`).forEach(i=>{ if (i.value !== excl) i.checked = false; });
+          } else {
+            const e = card.querySelector(`input[name="${f.id}"][value="${excl}"]`);
+            if (e) e.checked = false;
+          }
+        }
         const vals = [...card.querySelectorAll(`input[name="${f.id}"]:checked`)].map(i=>i.value);
         if (vals.length) store[f.id]=vals; else delete store[f.id];
         // Kachel-Optik aktualisieren
