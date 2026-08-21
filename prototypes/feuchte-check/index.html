@@ -425,18 +425,6 @@ details.checked .inner{padding:0 18px 18px}
 .excl details[open] summary::after{transform:rotate(45deg)}
 .excl .body{padding:0 16px 15px;font-size:14px;color:var(--bkm-stone-grey);line-height:1.65}
 
-/* Befunde */
-.findings{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-@media(max-width:640px){.findings{grid-template-columns:1fr}}
-.fbox{border-radius:12px;padding:22px;box-shadow:rgba(0,0,0,0.08) 0px 0px 0px 1px;background:var(--bkm-surface)}
-.fbox h4{font-size:14px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
-.fbox.pro h4{color:var(--bkm-transition-green)} .fbox.con h4{color:var(--bkm-error)}
-.fbox ul{list-style:none}
-.fbox li{font-size:14px;padding:10px 0;box-shadow:var(--bkm-outline-variant) 0px 1px 0px 0px inset;display:flex;justify-content:space-between;gap:12px;color:var(--bkm-ink)}
-.fbox li:first-of-type{box-shadow:none}
-.fbox li .pts{font-weight:700;font-size:12px;flex:none}
-.fbox.pro .pts{color:var(--bkm-transition-green)} .fbox.con .pts{color:var(--bkm-error)}
-.fbox .empty{font-size:14px;color:var(--bkm-stone-grey)}
 
 /* Hinweise */
 .notice{background:var(--bkm-neutral-dim);border-radius:8px;padding:16px 18px;font-size:14px;margin-bottom:10px;color:var(--bkm-ink);line-height:1.6}
@@ -777,15 +765,6 @@ details.faq[open] .a{animation:faqIn .25s ease}
           </div>
 
           <div class="res-sec" id="secNotices"></div>
-
-          <div class="res-sec" id="secFindings">
-            <h3>Darauf basiert unsere Einordnung</h3>
-            <p class="sub" id="findingsSub"></p>
-            <div class="findings">
-              <div class="fbox pro"><h4>✓ Spricht dafür</h4><ul id="listPro"></ul></div>
-              <div class="fbox con"><h4>✕ Haben wir auch berücksichtigt</h4><ul id="listCon"></ul></div>
-            </div>
-          </div>
 
           <div class="res-sec" id="secMeaning" style="display:none">
             <h3>Was bedeutet das?</h3>
@@ -2733,7 +2712,7 @@ const RULES = {
    ]
   }
  },
- "hinweis_rechtlich": "Das Ergebnis ist eine systematische ERSTEINSCHÄTZUNG auf Basis der Vor-Ort-Angaben. Es ersetzt weder eine Bauteilöffnung noch Labordiagnostik noch ein Sachverständigengutachten. Dieser Disclaimer ist verpflichtender Bestandteil jedes PDF-Berichts. WTA-/DIN-Referenzen vor Produktivsetzung durch die Fachabteilung auf den aktuellen Ausgabestand prüfen."
+ "hinweis_rechtlich": "Das Ergebnis ist eine systematische Ersteinschätzung auf Basis deiner Angaben. Es ersetzt weder eine Prüfung vor Ort noch eine Bauteilöffnung, Labordiagnostik oder ein Sachverständigengutachten."
 };
 const REDUCED = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const raf = window.requestAnimationFrame ? window.requestAnimationFrame.bind(window) : (cb=>setTimeout(cb,16));
@@ -2977,8 +2956,6 @@ function plausibilitaet(antworten, erg){
     w.push({t:"warn",h:"Porenbeton im Erdreich ist heikel",x:"Porenbeton nimmt sehr viel Wasser auf und ist für erdberührte, feuchtebelastete Kellerwände nicht empfohlen. Hier sollte das Sanierungskonzept fachlich geprüft und die Herstellerempfehlung beachtet werden."});
   if (bst==="lehm" && top && top!=="RL")
     w.push({t:"info",h:"Lehmwand: nur diffusionsoffen arbeiten",x:"Lehmbaustoffe vertragen keine zementären Beschichtungen – nur diffusionsoffene Systeme wie Lehmputz. Lehm ist mechanisch empfindlich, deshalb vor jedem Eingriff die Statik prüfen lassen."});
-  if ((bst==="unbekannt" || bst===undefined) && ["AF","SF","DW"].includes(top))
-    w.push({t:"info",h:"Baustoff bestätigen lohnt sich",x:"Für die Wahl des richtigen Verfahrens ist das Wandmaterial entscheidend. Ein Blick in die Bauakten oder eine kleine Bauteilöffnung bringt Klarheit – gerade um kapillaraktives Mauerwerk von Beton zu unterscheiden."});
   return w;
 }
 
@@ -3596,15 +3573,10 @@ function renderDetails(erg){
   }).join("");
 
   if (!erg.unklar){
-    const b = befunde(RULES, state.eff, erg.primaer);
-    $("#findingsSub").textContent = "Wir kommen zu dieser Einordnung, weil deine Angaben zusammenpassen – so kannst du es selbst nachvollziehen:";
     const hypDef = RULES.hypothesen.find(x=>x.id===erg.primaer);
     $("#secMeaning").style.display = hypDef ? "block" : "none";
     if (hypDef) $("#meaningText").textContent = hypDef.beschreibung;
-    $("#listPro").innerHTML = b.pro.length ? b.pro.map(i=>`<li><span>${i.frage} <b>${i.option}</b></span></li>`).join("") : `<li class="empty">Keine starken Einzelbefunde.</li>`;
-    $("#listCon").innerHTML = b.con.length ? b.con.map(i=>`<li><span>${i.frage} <b>${i.option}</b></span></li>`).join("") : `<li class="empty">Keine Gegenbefunde – das stützt die Diagnose.</li>`;
-    $("#secFindings").style.display="block";
-  } else { $("#secFindings").style.display="none"; $("#secMeaning").style.display="none"; }
+  } else { $("#secMeaning").style.display="none"; }
 
   $("#chatMsgText").textContent = chatNachricht(erg);
 
