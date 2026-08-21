@@ -288,11 +288,8 @@ label.small{font-size:14px;font-weight:700;display:block;margin-bottom:6px;color
 .badge.mittel{background:rgba(255,255,255,.16);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
 .badge.niedrig,.badge.unklar{background:var(--bkm-error);color:#fff}
 .badge.neutral{background:rgba(255,255,255,.14);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
-/* Sicherheits-Anzeige (qualitativ, keine Prozentwerte) */
-.certainty{display:none;flex-direction:column;align-items:flex-end;gap:8px;flex:none}
-.certainty span{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.75)}
-.certainty b{font-family:'Unbounded';font-weight:900;font-size:18px;color:#fff;letter-spacing:-.01em}
-@media(max-width:640px){.res-head .grid{grid-template-columns:1fr}.certainty{align-items:flex-start;margin-top:4px}}
+.td-sub .chat-hin{color:var(--bkm-lime);font-weight:700}
+@media(max-width:640px){.res-head .grid{grid-template-columns:1fr}}
 .res-body{padding:36px 0}
 .res-sec{margin-bottom:42px}
 .res-sec h3{font-family:'Unbounded';font-weight:900;font-size:18px;letter-spacing:-0.01em;color:var(--bkm-deep-green);margin-bottom:6px}
@@ -302,7 +299,7 @@ label.small{font-size:14px;font-weight:700;display:block;margin-bottom:6px;color
 .res-head-main{position:relative;z-index:2}
 .td-label{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--bkm-lime);margin-bottom:12px}
 .td-name{font-family:'Unbounded';font-weight:900;letter-spacing:-.02em;font-size:clamp(22px,3.2vw,36px);color:#fff;line-height:1.14;position:relative;z-index:1}
-.td-sub{font-size:14px;color:rgba(255,255,255,.72);margin-top:14px;max-width:56ch;line-height:1.65;position:relative;z-index:1}
+.td-sub{font-size:14px;color:rgba(255,255,255,.72);margin-top:14px;line-height:1.65;position:relative;z-index:1}
 .td-sub b{color:#fff;font-weight:700}
 /* Verschleierte Diagnose: animierte Platzhalter-Balken (Klartext ist NICHT im DOM) */
 .lockbar{display:inline-block;height:.8em;border-radius:4px;vertical-align:middle;
@@ -752,10 +749,6 @@ details.faq[open] .a{animation:faqIn .25s ease}
             <div class="td-label" id="resLabel">Wahrscheinlichste Ursache</div>
             <div class="td-name" id="teaserName"><span class="lockbar"></span><span class="lockbar short"></span></div>
             <div class="td-sub" id="teaserSub">Deine Analyse ist abgeschlossen. Schalte das vollständige Ergebnis mit Begründung und Handlungsempfehlung frei.</div>
-          </div>
-          <div class="certainty" id="certainty" style="display:none">
-            <span>Unsere Einordnung</span>
-            <b id="certWord"></b>
           </div>
         </div>
       </div>
@@ -3513,20 +3506,17 @@ function finish(){
   if (erg.unklar){
     tLabel.textContent = "Ehrliches Ergebnis";
     tName.textContent = "Die Ursache lässt sich noch nicht sicher genug eingrenzen.";
-    tSub.textContent = "Deine Angaben passen zu mehreren möglichen Ursachen. Besprich dein Ergebnis im Chat – dort klären wir gemeinsam den nächsten Prüfschritt.";
+    tSub.innerHTML = 'Deine Angaben passen zu mehreren möglichen Ursachen. <b class="chat-hin">Besprich dein Ergebnis im Chat – dort klären wir gemeinsam den nächsten Prüfschritt.</b>';
   } else {
     const h = LAIE.hyp[erg.primaer];
     const kombi = erg.kombidiagnose ? LAIE.hyp[erg.kombidiagnose] : null;
     tLabel.textContent = kombi ? "Kombinationsschaden" : (erg.konfidenz==="hoch" ? "Klare Einordnung" : "Wahrscheinlichste Ursache");
     tName.textContent = kombi ? h.name + " + " + kombi.name : h.name;
-    tSub.textContent = (erg.konfidenz==="hoch"
+    tSub.innerHTML = (erg.konfidenz==="hoch"
       ? "Dein Schadensbild spricht deutlich für diese Ursache."
       : "Dein Schadensbild spricht am ehesten für diese Ursache.")
-      + " Deine persönliche Empfehlung bekommst du jetzt im Chat.";
+      + ' <b class="chat-hin">Deine persönliche Empfehlung bekommst du jetzt im Chat.</b>';
   }
-  const word = erg.unklar ? "Nicht sicher genug" : ({hoch:"Klar", mittel:"Gut eingrenzbar", niedrig:"Noch nicht eindeutig"}[erg.konfidenz] || "");
-  $("#certWord").textContent = word;
-  $("#certainty").style.display = "flex";
 
   renderDetails(erg);
   window.scrollTo(0,0);
