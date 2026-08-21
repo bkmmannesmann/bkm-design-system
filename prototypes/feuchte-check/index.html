@@ -1516,7 +1516,7 @@ const RULES = {
    "id": "F2_ausbreitung",
    "schritt": 2,
    "typ": "multi",
-   "pflicht": true,
+   "pflicht": false,
    "label": "Ausbreitungsmuster (Mehrfachauswahl)",
    "optionen": [
     {
@@ -2794,7 +2794,7 @@ const PROFILE_STEP = { id:0, titel:"Profil", fragen:[] };
    Alle uebrigen Regelwerk-Fragen bleiben als Smart-Question-Pool im Hintergrund. */
 const STEP_DEFS = [
   {n:1, titel:"Ort", ids:["F1_standort","F0_bauteil","F1_wandart"]},
-  {n:2, titel:"Schadensbild", ids:["F2_schaeden","F2_schadenshoehe","F2_ausbreitung"]},
+  {n:2, titel:"Schadensbild", ids:["F2_schaeden","F2_schadenshoehe"]},
   {n:3, titel:"Verlauf", ids:["F4_regen","F0_verlauf"]}
 ];
 const PHASE_LABEL = { 1:"Wo tritt es auf?", 2:"Das Schadensbild", 3:"Der Verlauf" };
@@ -3097,7 +3097,7 @@ const WN_ANTWORTEN = {
   F4_konstant:"unbekannt", F3_fassade:"unbekannt", F3_fbh:"unbekannt", F4_saison:"unbekannt"
 };
 /* Bei Mehrfachauswahl: exklusive "Weiss nicht"/"Nichts davon"-Karte, wird vor Auswertung entfernt */
-const WN_MULTI = { F2_ausbreitung:"unbekannt" };
+const WN_MULTI = {};
 function effektiveAntworten(){
   const a = Object.assign({}, state.antworten);
   for (const [k,v] of Object.entries(WN_ANTWORTEN)) if (a[k]===v) delete a[k];
@@ -3140,7 +3140,7 @@ function smartFrage(erg){
   if (!h1 || !h2) return null;
   let best = null, bestD = 0;
   for (const f of RULES.fragen){
-    if (CORE_IDS.includes(f.id) || f.id === "F5_messung") continue;
+    if (CORE_IDS.includes(f.id) || f.id === "F5_messung" || f.id === "F2_ausbreitung") continue;
     if (state.smart.includes(f.id)) continue;
     if (eff[f.id] !== undefined || state.antworten[f.id] !== undefined) continue;
     if (f.sichtbar_wenn && !pruefeBedingung(f.sichtbar_wenn, eff)) continue;
