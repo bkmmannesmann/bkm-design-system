@@ -200,21 +200,17 @@ p.sec-sub{color:var(--bkm-stone-grey);max-width:64ch;margin-bottom:42px;font-siz
 #check h2.sec{color:#fff}
 #check p.sec-sub{color:rgba(255,255,255,.72)}
 /* Die Wizard-Karte schwebt deutlich auf der dunklen Bühne */
-.wizard{background:var(--bkm-surface);border-radius:16px;overflow:hidden;
+.wizard{background:var(--bkm-surface);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;min-height:600px;
   box-shadow:0 2px 0 rgba(255,255,255,.06), 0 30px 60px -24px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.04);
   position:relative}
 .wz-top{position:relative;display:flex;align-items:center;gap:16px;padding:18px 28px 0}
 .phase{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--bkm-transition-green);transition:opacity .3s}
-.wz-back{margin-left:auto;display:inline-flex;align-items:center;gap:6px;background:none;border:none;cursor:pointer;
-  color:var(--bkm-stone-grey);font-family:inherit;font-size:14px;font-weight:700;padding:6px 8px;border-radius:4px;transition:color .15s,background .15s}
-.wz-back:hover{color:var(--bkm-deep-green);background:var(--bkm-neutral-dim)}
-.wz-back[hidden]{display:none}
 /* Fortschritt: Ort - Schadensbild - Verlauf - Ergebnis (keine "Frage x von y") */
 .prog{position:absolute;left:0;right:0;bottom:-1px;height:3px;display:flex;gap:4px}
 .prog i{flex:1;background:var(--bkm-neutral-dim);transition:background .4s}
 .prog i.on{background:var(--bkm-transition-green)}
 /* Bühne: viel Ruhe, eine große Frage */
-.wz-stage{padding:30px 28px 6px;min-height:240px;position:relative}
+.wz-stage{padding:30px 28px 6px;flex:1;position:relative}
 @keyframes qIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 @keyframes qOutL{from{opacity:1;transform:none}to{opacity:0;transform:translateX(-26px)}}
 @keyframes qOutR{from{opacity:1;transform:none}to{opacity:0;transform:translateX(26px)}}
@@ -249,8 +245,13 @@ p.sec-sub{color:var(--bkm-stone-grey);max-width:64ch;margin-bottom:42px;font-siz
 .opt.has-ft{align-items:flex-start}
 .opt .key{margin-left:auto;flex:none;font-size:12px;font-weight:700;color:var(--bkm-stone-grey);background:var(--bkm-neutral-dim);border-radius:4px;padding:3px 8px;opacity:.7}
 @media(max-width:560px){.opt .key{display:none}}
-.wz-foot{display:flex;align-items:center;gap:16px;padding:16px 28px 20px;flex-wrap:wrap}
-.wz-foot .hintline{font-size:12px;color:var(--bkm-stone-grey);order:3;flex-basis:100%;display:flex;align-items:center;gap:6px}
+.wz-foot{padding:16px 28px 20px}
+.wz-actions{display:flex;align-items:center;gap:12px}
+.wz-actions .skiplink{margin-left:auto;visibility:hidden}
+.wz-actions .skiplink.sichtbar{visibility:visible}
+#btnBack{flex:none}
+#btnBack[disabled]{opacity:.35;pointer-events:none}
+.wz-foot .hintline{font-size:12px;color:var(--bkm-stone-grey);display:flex;align-items:center;gap:6px;min-height:20px;margin-top:10px}
 .wz-foot .hintline kbd{font-family:inherit;font-size:12px;background:var(--bkm-neutral-dim);border-radius:4px;padding:1px 6px;box-shadow:rgba(0,0,0,.08) 0 0 0 1px}
 .skiplink{background:none;border:none;color:var(--bkm-stone-grey);text-decoration:underline;cursor:pointer;font-size:14px;font-family:inherit}
 .err{color:var(--bkm-error);font-size:14px;font-weight:700;margin-top:14px;display:none}
@@ -492,14 +493,17 @@ details.faq[open] .a{animation:faqIn .25s ease}
 
 /* ================= Responsive Feinschliff ================= */
 @media(max-width:560px){
-  .wz-stage{padding:22px 16px 4px;min-height:220px}
+  .wz-stage{padding:22px 16px 4px}
   .wz-top{padding:14px 16px 0}
   .res-body{padding:22px 18px}
   .wz-foot{padding:14px 16px 16px}
+  .wizard{min-height:600px}
   .res-head{padding:28px 20px}
   .proto .row{grid-template-columns:1fr 56px;grid-template-areas:"n p" "b b";row-gap:8px}
   .proto .name{grid-area:n}.proto .bar{grid-area:b}.proto .pv{grid-area:p}
   .btn{width:100%;max-width:420px}
+  .wz-actions .btn{width:auto;flex:1;max-width:none}
+  .wz-actions .skiplink{margin-left:8px}
   .hero .cta-row .btn{width:100%}
   .how .step{padding:26px 22px}
   .opt{padding:11px 12px}
@@ -717,16 +721,15 @@ details.faq[open] .a{animation:faqIn .25s ease}
     <div class="wizard reveal" id="wizard" style="--d:.16s">
       <div class="wz-top">
         <div class="phase" id="phaseLabel">Los geht's</div>
-        <button class="wz-back" id="btnBack" type="button" aria-label="Eine Frage zurück">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-          <span>Zurück</span>
-        </button>
         <div class="prog" id="threadBar" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
       </div>
       <div class="wz-stage" id="wzStage"></div>
       <div class="wz-foot" id="wzFoot">
-        <button class="btn btn-green" id="btnNext" type="button">Weiter <span class="arr">→</span></button>
-        <button class="skiplink" id="btnSkip" type="button" style="display:none">Überspringen</button>
+        <div class="wz-actions">
+          <button class="btn btn-outline" id="btnBack" type="button" aria-label="Eine Frage zurück">← Zurück</button>
+          <button class="btn btn-green" id="btnNext" type="button">Weiter <span class="arr">→</span></button>
+          <button class="skiplink" id="btnSkip" type="button">Überspringen</button>
+        </div>
         <div class="hintline" id="footHint"></div>
       </div>
     </div>
@@ -1168,7 +1171,7 @@ const RULES = {
    "optionen": [
     {
      "id": "vor_1970",
-     "label": "Bis 1970 (i. d. R. Streifenfundament, oft keine/defekte Horizontalsperre)",
+     "label": "Bis 1970",
      "punkte": {
       "AF": 20,
       "SF": 10,
@@ -1177,7 +1180,7 @@ const RULES = {
     },
     {
      "id": "ab_1970",
-     "label": "Ab 1970 (i. d. R. Betonbodenplatte)",
+     "label": "Ab 1970",
      "punkte": {
       "RL": 10,
       "DW": 5,
@@ -2754,7 +2757,7 @@ const LAIE = {
     LO:{name:"Leckage von oben",laie:"Wasser kommt aus einer darüberliegenden Ebene: undichtes Dach, Balkon-/Fensteranschluss oder ein Nassraum darüber."}
   },
   q: {
-    F1_baujahr:{hinweis:"Bis ca. 1970 wurden Häuser meist auf Streifenfundamenten gebaut – Sperrschichten fehlen oft oder sind verschlissen. Ab ca. 1970 ist eine durchgehende Betonbodenplatte üblich."},
+    F1_baujahr:{hinweis:"Das Baujahr sagt viel über die typische Bauweise des Hauses aus."},
     F1_baustoff:{label:"Aus welchem Baustoff besteht die betroffene Wand?",hinweis:"Das Material entscheidet, ob und wie sich Feuchte in der Wand bewegt – und welche Sanierung überhaupt möglich ist. Nicht sicher? Wähle „Weiß ich nicht“, das ist völlig in Ordnung."},
     F3_baumassnahme_24m:{label:"Wurde in den letzten zwei Jahren gebaut, saniert oder neuer Estrich/Putz eingebracht?"},
     F2_schaeden:{hinweis:"Wähle alles aus, was du siehst – auch Kleinigkeiten helfen bei der Eingrenzung."},
@@ -2770,8 +2773,8 @@ const LAIE = {
     "F2_schaeden.salzausbluehungen":"Weiße, pudrige oder watteartige Kristalle auf der Wand",
     "F2_schaeden.feuchtegrenze":"Deutliche waagerechte Linie, bis zu der die Wand feucht/verfärbt ist – mit Salzrand",
     "F2_schaeden.oberflaechenfilm":"Die Wand „schwitzt“: Tropfen oder feuchter Film auf der Oberfläche",
-    "F1_baujahr.vor_1970":"Bis 1970 gebaut",
-    "F1_baujahr.ab_1970":"Ab 1970 gebaut",
+    "F1_baujahr.vor_1970":"",
+    "F1_baujahr.ab_1970":"",
     "F1_baustoff.vollziegel":"Rote/braune Einzelsteine mit sichtbaren Mörtelfugen; Klinker klingt hart beim Anschlagen",
     "F1_baustoff.hochlochziegel":"Ziegel mit durchgehenden Löchern, leicht – oft in Neubauten ab ca. 1970",
     "F1_baustoff.kalksandstein":"Helle, fast weiße bis graue, sehr gleichmäßige Steine mit Fugen",
@@ -3087,7 +3090,7 @@ LAIE.q.F4_regen.label = "Verändert sich der Schaden bei Regen?";
 /* "Weiss ich nicht"-Antworten zaehlen nicht als Evidenz: sie werden vor der
    Auswertung entfernt, damit sie keine Hypothese verzerren. */
 const WN_ANTWORTEN = {
-  F1_baujahr:"unbekannt", F2_ecken:"unbekannt", F2_wandbodenfuge:"unbekannt",
+  F1_baujahr:"unbekannt", F2_wandbodenfuge:"unbekannt",
   F2_schwerlast:"unbekannt", F3_boden_warm:"unbekannt", F3_regenentwaesserung:"unbekannt",
   F4_konstant:"unbekannt", F3_fassade:"unbekannt", F3_fbh:"unbekannt", F4_saison:"unbekannt"
 };
@@ -3131,7 +3134,7 @@ function smartFrage(erg){
   if (!h1 || !h2) return null;
   let best = null, bestD = 0;
   for (const f of RULES.fragen){
-    if (CORE_IDS.includes(f.id) || ["F5_messung","F2_ausbreitung","F4_regen","F1_baustoff"].includes(f.id)) continue;
+    if (CORE_IDS.includes(f.id) || ["F5_messung","F2_ausbreitung","F4_regen","F1_baustoff","F2_ecken"].includes(f.id)) continue;
     if (state.smart.includes(f.id)) continue;
     if (eff[f.id] !== undefined || state.antworten[f.id] !== undefined) continue;
     if (f.sichtbar_wenn && !pruefeBedingung(f.sichtbar_wenn, eff)) continue;
@@ -3226,7 +3229,7 @@ function renderQuestion(dir){
     const cur = storeOf(f)[f.id];
     const freitextVal = state.profil[f.id+"_text"] || "";
     const sichtbareOpts = f.optionen.filter(o => optionSichtbar(f.id, o.id, state.antworten));
-    inner = `<div class="opts ${sichtbareOpts.length>5?'':'cols'}">` + sichtbareOpts.map((o,idx)=>{
+    inner = `<div class="opts ${sichtbareOpts.length>8?'':'cols'}">` + sichtbareOpts.map((o,idx)=>{
       const sel = multi ? (Array.isArray(cur)&&cur.includes(o.id)) : cur===o.id;
       const sub = LAIE.o[f.id+"."+o.id] || o.sub || "";
       const key = idx<9 ? (idx+1) : "";
@@ -3262,8 +3265,8 @@ function renderQuestion(dir){
   updateThread(f);
   // Foot-UI
   const isProfilPflicht = f.pflicht;
-  $("#btnBack").hidden = (state.i===0);
-  $("#btnSkip").style.display = f.pflicht ? "none" : "inline";
+  $("#btnBack").disabled = (state.i===0);
+  $("#btnSkip").classList.toggle("sichtbar", !f.pflicht);
   const isLast = state.i >= queue.length-1;
   $("#btnNext").innerHTML = isLast ? 'Auswertung ansehen <span class="arr">→</span>' : 'Weiter <span class="arr">→</span>';
   // Bei Single-Choice ist "Weiter" optisch sekundär (Auto-Advance), zeige Hinweis
@@ -3384,7 +3387,7 @@ document.addEventListener("keydown", e=>{
     const opt = $("#wzStage").querySelectorAll(".opt")[(+e.key)-1];
     if (opt){ const inp=opt.querySelector("input"); inp.checked = inp.type==="checkbox" ? !inp.checked : true; inp.dispatchEvent(new Event("change",{bubbles:true})); }
   } else if (e.key==="Enter"){ advance("fwd"); }
-  else if (e.key==="ArrowLeft" && !$("#btnBack").hidden){ advance("back"); }
+  else if (e.key==="ArrowLeft" && !$("#btnBack").disabled){ advance("back"); }
 });
 $("#btnLead").addEventListener("click", unlock);
 $("#btnCopyChat").addEventListener("click", async ()=>{
