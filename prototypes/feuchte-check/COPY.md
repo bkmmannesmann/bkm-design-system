@@ -9,9 +9,10 @@
 
 ## Hero
 
-- **Headline (H1):** Welche Sanierung ist wirklich nötig?
-- **Subline:** Der kostenlose Feuchte-Check prüft vier mögliche Ursachen wie ein Gutachter – und zeigt dir, ob du den Schaden **[rotierend: selbst beheben / beheben lassen / erst prüfen]** solltest. Dein Ergebnis: die wahrscheinlichste Ursache, die Begründung dahinter und dein nächster Schritt.
-- **Buttons:** Feuchte-Check starten → · Wie der Check dir hilft
+- **Headline (H1):** Feuchte Wand? Finde heraus, was dahintersteckt.
+- **Subline:** Der kostenlose BKM Feuchte-Check grenzt die mögliche Ursache ein und zeigt dir, was als Nächstes sinnvoll ist – bevor du Zeit oder Geld in die falsche Sanierung investierst.
+- **Button:** Feuchte-Check starten →
+- **Notiz-Zeile:** In wenigen Minuten · ohne Fachwissen
 
 ## Sektion: fehldiagnose
 

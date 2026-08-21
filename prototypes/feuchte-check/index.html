@@ -107,15 +107,10 @@ img{max-width:100%}
 .hero .kv{position:absolute;top:0;right:0;height:100%;width:auto;max-width:32%;object-fit:cover;object-position:left;opacity:.9;pointer-events:none;z-index:1}
 @media(max-width:760px){.hero .kv{opacity:.22;max-width:64%}}
 .hero .inner{position:relative;z-index:2;padding-top:clamp(72px,10vw,128px);padding-bottom:clamp(64px,8vw,104px)}
-.hero h1{font-size:clamp(36px,4.8vw,56px);color:#fff}
+.hero h1{font-size:clamp(32px,3.7vw,44px);color:#fff}
 .hero .sub{margin-top:26px;font-size:clamp(16px,2vw,18px);line-height:1.7;color:rgba(255,255,255,.72);max-width:580px}
 .hero .cta-row{margin-top:40px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
-/* Wort-Rotator (Finovate-Signature, BKM-Botschaft) */
-.rot{display:inline-block;position:relative;color:var(--bkm-lime);white-space:nowrap}
-.rot .w{display:inline-block;opacity:0;position:absolute;left:0;top:0;transform:translateY(.5em);transition:opacity .5s,transform .5s}
-.rot .w.on{opacity:1;position:relative;transform:none}
-.rot .measure{visibility:hidden}
-@media(prefers-reduced-motion:reduce){.rot .w{transition:none}}
+.hero .note{margin-top:14px;font-size:14px;color:rgba(255,255,255,.7)}
 
 
 /* Ursachen-Grid (Services-Muster: die 8 geprüften Ursachen zeigen) */
@@ -543,12 +538,12 @@ details.faq[open] .a{animation:faqIn .25s ease}
   <div class="wrap inner">
     <div class="hero-grid">
       <div class="hero-copy">
-        <h1 class="h-display reveal" style="--d:.08s">Welche Sanierung ist wirklich nötig?</h1>
-        <p class="sub reveal" style="--d:.16s">Der kostenlose Feuchte-Check prüft vier mögliche Ursachen wie ein Gutachter – und zeigt dir, ob du den Schaden <span class="rot" id="rot" aria-label="selbst beheben, beheben lassen oder erst prüfen"><span class="measure">beheben lassen</span></span> solltest. Dein Ergebnis: die wahrscheinlichste Ursache, die Begründung dahinter und dein nächster Schritt.</p>
+        <h1 class="h-display reveal" style="--d:.08s">Feuchte Wand? Finde heraus, was dahintersteckt.</h1>
+        <p class="sub reveal" style="--d:.16s">Der kostenlose BKM Feuchte-Check grenzt die mögliche Ursache ein und zeigt dir, was als Nächstes sinnvoll ist – bevor du Zeit oder Geld in die falsche Sanierung investierst.</p>
         <div class="cta-row reveal" style="--d:.24s">
           <a class="btn btn-lime" href="#check">Feuchte-Check starten <span class="arr">→</span></a>
-          <a class="btn btn-ghost" href="#funktion">Wie der Check dir hilft</a>
         </div>
+        <p class="note reveal" style="--d:.3s">In wenigen Minuten · ohne Fachwissen</p>
       </div>
       <div class="hero-figure reveal" style="--d:.2s">
         <div class="frame">
@@ -3660,34 +3655,6 @@ function renderDetails(erg){
     });
   });
 
-  /* Hero-Wort-Rotator (Finovate-Signature) */
-  const rot = document.getElementById("rot");
-  if (rot){
-    const words = ["selbst beheben","beheben lassen","erst prüfen"];
-    let widest = 0;
-    const spans = words.map((t,i)=>{
-      const s = document.createElement("span");
-      s.className = "w" + (i===0?" on":"");
-      s.textContent = t;
-      rot.appendChild(s);
-      return s;
-    });
-    /* Breite fixieren, damit der Satz nicht springt */
-    const measure = rot.querySelector(".measure");
-    raf(()=>{
-      spans.forEach(s=>{ widest = Math.max(widest, s.offsetWidth); });
-      if (measure) measure.style.display="none";
-      rot.style.minWidth = widest + "px";
-    });
-    if (!REDUCED){
-      let idx = 0;
-      setInterval(()=>{
-        spans[idx].classList.remove("on");
-        idx = (idx+1) % spans.length;
-        spans[idx].classList.add("on");
-      }, 2400);
-    }
-  }
 })();
 
 renderQuestion("fwd");
