@@ -240,7 +240,6 @@ p.sec-sub{color:var(--bkm-stone-grey);max-width:64ch;margin-bottom:42px;font-siz
 .opt:hover{box-shadow:var(--bkm-deep-green) 0px 0px 0px 1.5px;transform:translateY(-1px);background:var(--bkm-deep-green)}
 .opt:hover .ol{color:#fff}
 .opt:hover .os{color:rgba(255,255,255,.75)}
-.opt:hover .key{background:rgba(255,255,255,.18);color:#fff;opacity:1}
 .opt:hover .mark{box-shadow:inset 0 0 0 2px rgba(255,255,255,.55)}
 .opt.sel{box-shadow:var(--bkm-deep-green) 0px 0px 0px 2px;background:var(--bkm-deep-green)}
 .opt input{position:absolute;opacity:0;pointer-events:none}
@@ -260,8 +259,6 @@ p.sec-sub{color:var(--bkm-stone-grey);max-width:64ch;margin-bottom:42px;font-siz
   background:var(--bkm-surface);box-shadow:var(--bkm-transition-green) 0px 0px 0px 1.5px;color:var(--bkm-ink)}
 .opt .freitext input:focus{box-shadow:var(--bkm-transition-green) 0px 0px 0px 2px;outline:none}
 .opt.has-ft{align-items:flex-start}
-.opt .key{margin-left:auto;flex:none;font-size:12px;font-weight:700;color:var(--bkm-stone-grey);background:var(--bkm-neutral-dim);border-radius:4px;padding:3px 8px;opacity:.7}
-@media(max-width:560px){.opt .key{display:none}}
 .wz-foot{padding:14px 28px 6px}
 .wz-actions{display:flex;align-items:center;gap:12px}
 #btnNext{color:var(--bkm-lime)}
@@ -3277,7 +3274,6 @@ function renderQuestion(dir){
     inner = `<div class="opts ${sichtbareOpts.length>8?'':'cols'}">` + sichtbareOpts.map((o,idx)=>{
       const sel = multi ? (Array.isArray(cur)&&cur.includes(o.id)) : cur===o.id;
       const sub = LAIE.o[f.id+"."+o.id] || o.sub || "";
-      const key = idx<9 ? (idx+1) : "";
       const ft = o.freitext
         ? `<div class="freitext" ${sel?'':'hidden'}><input type="text" id="ft_${f.id}" maxlength="60" placeholder="Dein Gewerk – z. B. Kellersanierung, Immobilienverwaltung …" value="${freitextVal.replace(/"/g,'&quot;')}"></div>`
         : "";
@@ -3285,7 +3281,6 @@ function renderQuestion(dir){
         <input type="${multi?'checkbox':'radio'}" name="${f.id}" value="${o.id}" ${sel?'checked':''}>
         <span class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 6"/></svg></span>
         <span class="opt-body"><span class="ol">${o.label}</span>${sub?`<span class="os">${sub}</span>`:""}${ft}</span>
-        ${key?`<span class="key">${key}</span>`:""}
       </label>`;
     }).join("") + `</div>`;
   }
