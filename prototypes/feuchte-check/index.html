@@ -297,7 +297,6 @@ label.small{font-size:14px;font-weight:700;display:block;margin-bottom:6px;color
 .res-sec{margin-bottom:42px}
 .res-sec h3{font-family:'Unbounded';font-weight:900;font-size:18px;letter-spacing:-0.01em;color:var(--bkm-deep-green);margin-bottom:6px}
 .res-sec .sub{font-size:14px;color:var(--bkm-stone-grey);margin-bottom:18px}
-.res-tools{display:flex;gap:10px;justify-content:flex-end;margin-bottom:22px;flex-wrap:wrap}
 
 /* ===== Lead-Gate / Teaser ===== */
 .res-head-main{position:relative;z-index:2}
@@ -784,9 +783,6 @@ details.faq[open] .a{animation:faqIn .25s ease}
             </div>
           </div>
 
-          <div class="res-tools">
-            <button class="btn btn-outline btn-sm" type="button" onclick="window.print()">Protokoll drucken / PDF</button>
-          </div>
           <div class="res-sec" id="secNotices"></div>
 
           <div class="res-sec" id="secFindings">
@@ -3537,32 +3533,15 @@ function finish(){
 /* renderDetails(): füllt Hinweise, Messprotokoll, Befunde, Empfehlungen (erst nach Freischaltung). */
 function chatNachricht(erg){
   const L = [];
-  L.push("Hier ist das Ergebnis meiner Feuchte-Check-Analyse – besprich weiter mit mir, was zu tun ist:");
-  L.push("Analyse-ID: " + (state.analysisId || "-"));
-  L.push("");
+  L.push("Hier ist das Ergebnis meiner Feuchte-Check-Analyse – besprich weiter mit mir, was zu tun ist. Brauche ich einen Fachbetrieb oder kann ich es alleine ausführen? Dabei stellst du mir nochmal gezielt Fragen, zum Beispiel wie groß der Schaden ist.");
   if (erg.unklar){
-    L.push("Ergebnis: unklar – kein Schadensbild hat ausreichende Evidenz erreicht.");
+    L.push("Ergebnis: noch nicht eindeutig – die Ursache konnte nicht sicher genug eingegrenzt werden.");
   } else {
     const h = LAIE.hyp[erg.primaer];
     const kombi = erg.kombidiagnose ? LAIE.hyp[erg.kombidiagnose] : null;
-    L.push("Wahrscheinlichste Ursache: " + h.name + (kombi ? " + " + kombi.name + " (Kombinationsschaden)" : ""));
-    L.push("Sicherheit: " + ({hoch:"klar",mittel:"gut eingrenzbar",niedrig:"noch nicht eindeutig"}[erg.konfidenz] || erg.konfidenz));
+    L.push("Ergebnis: " + h.name + (kombi ? " + " + kombi.name : "") + " (" + ({hoch:"klar", mittel:"gut eingrenzbar", niedrig:"noch nicht eindeutig"}[erg.konfidenz] || erg.konfidenz) + ")");
   }
-  L.push("");
-  L.push("Einschätzung je Ursache (interner Übereinstimmungswert):");
-  erg.rangliste.forEach(r => L.push("- " + LAIE.hyp[r.id].name + ": " + Math.round(r.p*100) + " %"));
-  if (erg.ausgeschlossen.length)
-    L.push("Ausgeschlossen: " + erg.ausgeschlossen.map(a => LAIE.hyp[a.hypothese].name).join(", "));
-  if (!erg.unklar){
-    const b = befunde(RULES, state.eff, erg.primaer);
-    if (b.pro.length) L.push("Spricht dafür: " + b.pro.map(i => i.frage + " → " + i.option).join("; "));
-    if (b.con.length) L.push("Spricht dagegen: " + b.con.map(i => i.frage + " → " + i.option).join("; "));
-  }
-  const rt = routing(erg, state.eff);
-  const rec = rt.routes.find(r => r.rec);
-  if (rec) L.push("Empfohlener nächster Schritt laut Check: " + rec.h);
-  L.push("");
-  L.push("(Quelle: BKM Feuchte-Check, Regelwerk v" + (RULES.version || "2.1") + ")");
+  L.push("(Quelle: BKM Feuchte-Check)");
   return L.join("\n");
 }
 
