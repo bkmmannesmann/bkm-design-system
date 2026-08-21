@@ -188,7 +188,7 @@ p.sec-sub{color:var(--bkm-stone-grey);max-width:64ch;margin-bottom:42px;font-siz
 #check .check-bg{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.5}
 #check .narrow{position:relative;z-index:2}
 /* Heller Text auf der dunklen Check-Bühne */
-#check h2.sec{color:#fff}
+#check h2.sec{color:var(--bkm-lime)}
 #check p.sec-sub{color:rgba(255,255,255,.72)}
 /* Die Wizard-Karte schwebt deutlich auf der dunklen Bühne */
 .wizard{background:var(--bkm-surface);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;min-height:440px;
@@ -210,7 +210,10 @@ p.sec-sub{color:var(--bkm-stone-grey);max-width:64ch;margin-bottom:42px;font-siz
 .prog i{flex:1;background:rgba(255,255,255,.22);transition:background .4s}
 .prog i.on{background:var(--bkm-lime)}
 /* Bühne: viel Ruhe, eine große Frage */
-.wz-stage{padding:30px 28px 6px;position:relative}
+.wz-quest{padding:26px 28px 0}
+.wz-quest .ql{font-family:'Unbounded';font-weight:900;letter-spacing:-.02em;line-height:1.2;font-size:clamp(22px,2.4vw,28px);color:var(--bkm-deep-green);max-width:30ch;min-height:2.4em;transition:opacity .25s}
+.wizard.start-mode .wz-quest{display:none}
+.wz-stage{padding:4px 28px 26px;position:relative}
 @keyframes qIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 @keyframes qOutL{from{opacity:1;transform:none}to{opacity:0;transform:translateX(-26px)}}
 @keyframes qOutR{from{opacity:1;transform:none}to{opacity:0;transform:translateX(26px)}}
@@ -247,7 +250,7 @@ p.sec-sub{color:var(--bkm-stone-grey);max-width:64ch;margin-bottom:42px;font-siz
 .opt.has-ft{align-items:flex-start}
 .opt .key{margin-left:auto;flex:none;font-size:12px;font-weight:700;color:var(--bkm-stone-grey);background:var(--bkm-neutral-dim);border-radius:4px;padding:3px 8px;opacity:.7}
 @media(max-width:560px){.opt .key{display:none}}
-.wz-foot{padding:16px 28px 20px}
+.wz-foot{padding:14px 28px 6px}
 .wz-actions{display:flex;align-items:center;gap:12px}
 .wz-actions .skiplink{margin-left:auto;visibility:hidden}
 .wz-actions .skiplink.sichtbar{visibility:visible}
@@ -492,10 +495,11 @@ details.faq[open] .a{animation:faqIn .25s ease}
 
 /* ================= Responsive Feinschliff ================= */
 @media(max-width:560px){
-  .wz-stage{padding:22px 16px 4px}
+  .wz-stage{padding:4px 16px 20px}
+  .wz-quest{padding:18px 16px 0}
   .wz-top{padding:14px 16px 0}
   .res-body{padding:22px 18px}
-  .wz-foot{padding:14px 16px 16px}
+  .wz-foot{padding:12px 16px 4px}
   .wizard{min-height:600px}
   .res-head{padding:28px 20px}
   .proto .row{grid-template-columns:1fr 56px;grid-template-areas:"n p" "b b";row-gap:8px}
@@ -711,7 +715,7 @@ details.faq[open] .a{animation:faqIn .25s ease}
 <section id="check" class="noise noise-dark on-dark">
   <div class="check-bg aurora" aria-hidden="true"><i class="a1"></i><i class="a2"></i><i class="a3"></i></div>
   <div class="narrow">
-    <h2 class="h2 sec reveal" style="--d:.06s">Jetzt bist du dran.</h2>
+    <h2 class="h2 sec reveal" style="--d:.06s">Dein Feuchte-Check</h2>
     <p class="sec-sub reveal" style="--d:.12s">Sechs kurze Fragen – und nur falls nötig, bis zu drei kurze Rückfragen. Danach öffnest du mit deiner E-Mail-Adresse deine persönliche Einordnung: Ursache, Begründung und dein nächster Schritt.</p>
 
     <div class="wizard reveal" id="wizard" style="--d:.16s">
@@ -719,7 +723,7 @@ details.faq[open] .a{animation:faqIn .25s ease}
         <div class="phase" id="phaseLabel">Los geht's</div>
         <div class="prog" id="threadBar" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
       </div>
-      <div class="wz-stage" id="wzStage"></div>
+      <div class="wz-quest"><div class="ql" id="qLabel"></div></div>
       <div class="wz-foot" id="wzFoot">
         <div class="wz-actions">
           <button class="btn btn-outline" id="btnBack" type="button" aria-label="Eine Frage zurück">← Zurück</button>
@@ -728,6 +732,7 @@ details.faq[open] .a{animation:faqIn .25s ease}
         </div>
         <div class="hintline" id="footHint"></div>
       </div>
+      <div class="wz-stage" id="wzStage"></div>
     </div>
 
     <!-- Ergebnis -->
@@ -1645,7 +1650,7 @@ const RULES = {
    "schritt": 2,
    "typ": "single",
    "pflicht": false,
-   "label": "Gibt es starke Erschütterungen in der Nähe (LKW-Verkehr, Bahn, Baustelle)?",
+   "label": "Gibt es starke Erschütterungen in der Nähe?",
    "optionen": [
     {
      "id": "ja",
@@ -1669,7 +1674,8 @@ const RULES = {
    "sichtbar_wenn": {
     "frage": "F2_schaeden",
     "enthaelt": "schimmel"
-   }
+   },
+   "hinweis": "Zum Beispiel LKW-Verkehr, Bahnlinie oder eine Baustelle."
   },
   {
    "id": "F3_lueftung",
@@ -1753,7 +1759,7 @@ const RULES = {
    "schritt": 3,
    "typ": "single",
    "pflicht": false,
-   "label": "Verlaufen Wasser-, Heizungs- oder Abwasserleitungen im oder am Schadensbereich?",
+   "label": "Verlaufen Leitungen im oder am Schadensbereich?",
    "optionen": [
     {
      "id": "ja",
@@ -1790,7 +1796,8 @@ const RULES = {
       ]
      }
     ]
-   }
+   },
+   "hinweis": "Gemeint sind Wasser-, Heizungs- und Abwasserleitungen."
   },
   {
    "id": "F3_fbh",
@@ -2248,7 +2255,7 @@ const RULES = {
    "schritt": 4,
    "typ": "single",
    "pflicht": false,
-   "label": "Trat der Schaden erstmals nach einem bestimmten Ereignis auf?",
+   "label": "Kam der Schaden nach einem bestimmten Ereignis?",
    "kommentar": "NEUE FRAGE — Ereignisanamnese ist in der Praxis oft der schnellste Weg zur Ursache.",
    "optionen": [
     {
@@ -2760,9 +2767,9 @@ const LAIE = {
     F1_baustoff:{label:"Aus welchem Baustoff besteht die betroffene Wand?",hinweis:"Das Material entscheidet, ob und wie sich Feuchte in der Wand bewegt – und welche Sanierung überhaupt möglich ist. Nicht sicher? Wähle „Weiß ich nicht“, das ist völlig in Ordnung."},
     F3_baumassnahme_24m:{label:"Wurde in den letzten zwei Jahren gebaut, saniert oder neuer Estrich/Putz eingebracht?"},
     F2_schaeden:{hinweis:"Wähle alles aus, was du siehst – auch Kleinigkeiten helfen bei der Eingrenzung."},
-    F2_wandbodenfuge:{label:"Tritt Wasser sichtbar dort aus, wo Wand und Fußboden zusammenstoßen?"},
+    F2_wandbodenfuge:{label:"Tritt Wasser an der Fuge zwischen Wand und Boden aus?"},
     F2_ecken:{label:"Sind vor allem Raumecken oder der Übergang zur Decke betroffen?"},
-    F3_wasserzaehler:{label:"Läuft der Wasserzähler weiter, obwohl alle Hähne geschlossen sind?",hinweis:"So geht's: Alle Wasserhähne und Geräte (Spülmaschine, Waschmaschine) schließen, dann 10–15 Minuten den Wasserzähler beobachten. Dreht er sich weiter, verliert eine Leitung Wasser. Das ist der stärkste Einzeltest im ganzen Check."},
+    F3_wasserzaehler:{label:"Läuft der Wasserzähler, obwohl alle Hähne zu sind?",hinweis:"So geht's: Alle Wasserhähne und Geräte (Spülmaschine, Waschmaschine) schließen, dann 10–15 Minuten den Wasserzähler beobachten. Dreht er sich weiter, verliert eine Leitung Wasser. Das ist der stärkste Einzeltest im ganzen Check."},
     F3_boden_warm:{hinweis:"Ein punktuell warmer Fleck am Boden kann auf eine undichte Heizungs- oder Warmwasserleitung hinweisen."},
     F3_darueber:{label:"Was befindet sich direkt über der Schadenstelle?"},
     F4_saison:{hinweis:"Auch eine Verschlechterung im Sommer ist ein wichtiger Hinweis – gerade im Keller."},
@@ -3264,12 +3271,16 @@ function renderQuestion(dir){
     }).join("") + `</div>`;
   }
 
+  const ql = $("#qLabel");
+  if (ql.textContent !== label){
+    ql.style.opacity = 0;
+    setTimeout(()=>{ ql.textContent = label; ql.style.opacity = 1; }, 140);
+  }
   const card = document.createElement("div");
   card.className = "qcard";
   card.innerHTML = `
-    <div class="ql">${label}</div>
-    ${hinweis?`<div class="qh">${hinweis}</div>`:""}
-    ${(!f.pflicht)?`<div class="qh" style="margin-top:8px"><span class="opt-note">Optional – du kannst direkt weiter.</span></div>`:""}
+    ${hinweis?`<div class="qh" style="margin-top:0">${hinweis}</div>`:""}
+    ${(!f.pflicht)?`<div class="qh" style="margin-top:6px"><span class="opt-note">Optional – du kannst direkt weiter.</span></div>`:""}
     ${inner}
     <div class="err" id="err_${f.id}">Bitte wähle eine Antwort, um fortzufahren.</div>`;
 
