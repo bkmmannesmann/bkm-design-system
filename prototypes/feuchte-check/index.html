@@ -183,22 +183,23 @@ p.sec-sub{color:var(--bkm-stone-grey);max-width:64ch;margin-bottom:42px;font-siz
 .pcard .v{font-size:14px;color:var(--bkm-stone-grey);line-height:1.65}
 
 /* ================= Wizard – Ein-Frage-Fokus (Typeform-Stil) ================= */
-#check{scroll-margin-top:12px;position:relative;overflow:hidden;background:var(--bkm-deep-green);padding:clamp(48px,7vw,80px) 0}
+#check{scroll-margin-top:12px;position:relative;overflow:hidden;background:var(--bkm-deep-green);padding:clamp(64px,8vw,110px) 0}
+#check h2.sec{font-size:clamp(32px,4vw,56px)}
 #check .check-bg{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.5}
 #check .narrow{position:relative;z-index:2}
 /* Heller Text auf der dunklen Check-Bühne */
 #check h2.sec{color:#fff}
 #check p.sec-sub{color:rgba(255,255,255,.72)}
 /* Die Wizard-Karte schwebt deutlich auf der dunklen Bühne */
-.wizard{background:var(--bkm-surface);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;min-height:600px;
-  box-shadow:0 2px 0 rgba(255,255,255,.06), 0 30px 60px -24px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.04);
-  position:relative}
-.wz-top{position:relative;display:flex;align-items:center;gap:16px;padding:18px 28px 0}
-.phase{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--bkm-transition-green);transition:opacity .3s}
+.wizard{background:var(--bkm-surface);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;min-height:632px;
+  box-shadow:0 2px 0 rgba(255,255,255,.08), 0 48px 110px -36px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.1);
+  position:relative;margin-top:8px}
+.wz-top{position:relative;display:flex;align-items:center;gap:16px;padding:18px 28px 16px;background:var(--bkm-deep-green)}
+.phase{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--bkm-lime);transition:opacity .3s}
 /* Fortschritt: Ort - Schadensbild - Verlauf - Ergebnis (keine "Frage x von y") */
-.prog{position:absolute;left:0;right:0;bottom:-1px;height:3px;display:flex;gap:4px}
-.prog i{flex:1;background:var(--bkm-neutral-dim);transition:background .4s}
-.prog i.on{background:var(--bkm-transition-green)}
+.prog{position:absolute;left:0;right:0;bottom:0;height:3px;display:flex;gap:4px}
+.prog i{flex:1;background:rgba(255,255,255,.22);transition:background .4s}
+.prog i.on{background:var(--bkm-lime)}
 /* Bühne: viel Ruhe, eine große Frage */
 .wz-stage{padding:30px 28px 6px;flex:1;position:relative}
 @keyframes qIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
@@ -207,7 +208,7 @@ p.sec-sub{color:var(--bkm-stone-grey);max-width:64ch;margin-bottom:42px;font-siz
 .qcard{animation:qIn .42s cubic-bezier(.22,.7,.3,1)}
 .qcard.out-fwd{animation:qOutL .28s ease forwards}
 .qcard.out-back{animation:qOutR .28s ease forwards}
-.qcard .ql{font-family:'Unbounded';font-weight:900;letter-spacing:-.02em;line-height:1.2;font-size:clamp(18px,2.4vw,22px);color:var(--bkm-deep-green);max-width:26ch}
+.qcard .ql{font-family:'Unbounded';font-weight:900;letter-spacing:-.02em;line-height:1.2;font-size:clamp(22px,2.4vw,28px);color:var(--bkm-deep-green);max-width:26ch}
 .qcard .ql .req{display:none}
 .qcard .qh{font-size:14px;color:var(--bkm-stone-grey);margin-top:10px;max-width:60ch;line-height:1.6}
 .qcard .qh .opt-note{display:inline-block;margin-top:2px;font-weight:700;color:var(--bkm-transition-green)}
@@ -215,17 +216,19 @@ p.sec-sub{color:var(--bkm-stone-grey);max-width:64ch;margin-bottom:42px;font-siz
 .opts.cols{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
 /* Große, ganzflächig klickbare Kacheln; Radio/Checkbox versteckt */
 .opt{position:relative;display:flex;gap:12px;align-items:center;border-radius:8px;padding:12px 14px;cursor:pointer;background:var(--bkm-surface);
-  box-shadow:rgba(0,0,0,0.09) 0px 0px 0px 1px;transition:box-shadow .16s,background .16s,transform .12s;font-size:16px}
+  box-shadow:rgba(0,0,0,0.09) 0px 0px 0px 1px;transition:box-shadow .16s,transform .12s;font-size:16px}
 .opt:hover{box-shadow:var(--bkm-deep-green) 0px 0px 0px 1.5px;transform:translateY(-1px)}
-.opt.sel{box-shadow:var(--bkm-deep-green) 0px 0px 0px 2px;background:var(--bkm-neutral-dim)}
+.opt.sel{box-shadow:var(--bkm-deep-green) 0px 0px 0px 2px;background:var(--bkm-deep-green)}
 .opt input{position:absolute;opacity:0;pointer-events:none}
-.opt .mark{flex:none;width:20px;height:20px;border-radius:50%;box-shadow:inset 0 0 0 2px var(--bkm-outline);display:flex;align-items:center;justify-content:center;transition:box-shadow .16s,background .16s}
+.opt .mark{flex:none;width:20px;height:20px;border-radius:50%;box-shadow:inset 0 0 0 2px var(--bkm-outline);display:flex;align-items:center;justify-content:center;transition:box-shadow .16s}
 .opt.multi .mark{border-radius:8px}
 .opt .mark svg{width:12px;height:12px;stroke:#fff;stroke-width:3.2;opacity:0;transform:scale(.5);transition:opacity .16s,transform .16s}
-.opt.sel .mark{box-shadow:inset 0 0 0 10px var(--bkm-deep-green)}
+.opt.sel .mark svg{stroke:var(--bkm-deep-green)}
+.opt.sel .mark{box-shadow:inset 0 0 0 10px var(--bkm-lime)}
 .opt.sel .mark svg{opacity:1;transform:none}
 .opt .ol{font-weight:600;color:var(--bkm-ink);line-height:1.3}
-.opt.sel .ol{color:var(--bkm-deep-green)}
+.opt.sel .ol{color:#fff}
+.opt.sel .os{color:rgba(255,255,255,.75)}
 .opt .os{display:block;font-size:14px;color:var(--bkm-stone-grey);margin-top:3px;font-weight:400}
 .opt .opt-body{display:block;flex:1}
 .opt .freitext{margin-top:12px}
@@ -3377,17 +3380,26 @@ document.addEventListener("keydown", e=>{
 });
 $("#btnLead").addEventListener("click", unlock);
 $("#btnChatOpen").addEventListener("click", ()=>{
-  /* Ziel-Integration: das Chat-Widget der Website erhaelt die Analyse-ID automatisch.
-     Im Prototyp ohne Widget oeffnet sich der Fallback mit der Kopier-Nachricht. */
-  if (window.BKMChat && typeof window.BKMChat.open === "function"){
-    window.BKMChat.open({ analyseId: state.analysisId, nachricht: chatNachricht(state.erg) });
-    return;
-  }
+  /* Userlike-Widget oeffnen (bkm-mannesmann.de). API-Namen variieren je nach
+     Widget-Version, daher mehrere Versuche; ohne Widget greift der Fallback. */
+  const geoeffnet = (() => {
+    try {
+      if (window.BKMChat && typeof window.BKMChat.open === "function"){
+        window.BKMChat.open({ analyseId: state.analysisId, nachricht: chatNachricht(state.erg) }); return true;
+      }
+      if (window.userlike && typeof window.userlike.userlikeStartChat === "function"){ window.userlike.userlikeStartChat(); return true; }
+      if (typeof window.userlikeStartChat === "function"){ window.userlikeStartChat(); return true; }
+      if (window.userlike && typeof window.userlike.maximize === "function"){ window.userlike.maximize(); return true; }
+    } catch(e){}
+    return false;
+  })();
   const det = document.querySelector("#secChat details"); if (det) det.open = true;
   const ok = $("#copyOk");
   ok.hidden = false;
-  ok.textContent = "Der Chat ist auf dieser Vorschau-Seite nicht eingebunden – nutze die Nachricht unten.";
-  clearTimeout(ok._t); ok._t = setTimeout(()=>{ ok.hidden = true; }, 6000);
+  ok.textContent = geoeffnet
+    ? "Chat geöffnet – füge deine Ergebnis-Nachricht unten ein, damit der Chat dein Schadensbild kennt."
+    : "Der Chat ist auf dieser Vorschau-Seite nicht verfügbar – auf bkm-mannesmann.de öffnet er sich hier direkt. Nutze solange die Nachricht unten.";
+  clearTimeout(ok._t); ok._t = setTimeout(()=>{ ok.hidden = true; }, 8000);
 });
 $("#btnCopyChat").addEventListener("click", async ()=>{
   const t = $("#chatMsgText").textContent;
@@ -3678,5 +3690,8 @@ function renderDetails(erg){
 
 renderQuestion("fwd");
 </script>
+
+<!-- Userlike Chat-Widget (bkm-mannesmann.de) -->
+<script async type="text/javascript" src="https://userlike-cdn-widgets.s3-eu-west-1.amazonaws.com/93c22986954a4a93837912d5b4e7e3df3a0a7188c6ee46a28a27975a30cb504b.js"></script>
 </body>
 </html>
