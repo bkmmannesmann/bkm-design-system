@@ -3288,8 +3288,8 @@ function renderQuestion(dir){
   // Foot-UI
   const isProfilPflicht = f.pflicht;
   $("#btnBack").disabled = (state.i===0);
-  const isLast = state.i >= queue.length-1;
-  $("#btnNext").innerHTML = isLast ? 'Auswertung ansehen <span class="arr">→</span>' : 'Weiter <span class="arr">→</span>';
+  /* Immer "Weiter": ob noch Rueckfragen kommen, entscheidet die Engine erst nach der Antwort */
+  $("#btnNext").innerHTML = 'Weiter <span class="arr">→</span>';
   // Bei Single-Choice ist "Weiter" optisch sekundär (Auto-Advance), zeige Hinweis
   $("#footHint").innerHTML = (f.typ==="single")
     ? 'Tipp: Antwort antippen genügt – es geht automatisch weiter.'
