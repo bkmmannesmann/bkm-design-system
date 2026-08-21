@@ -237,7 +237,11 @@ p.sec-sub{color:var(--bkm-stone-grey);max-width:64ch;margin-bottom:42px;font-siz
 /* Große, ganzflächig klickbare Kacheln; Radio/Checkbox versteckt */
 .opt{position:relative;display:flex;gap:12px;align-items:center;border-radius:8px;padding:12px 14px;cursor:pointer;background:var(--bkm-surface);
   box-shadow:rgba(0,0,0,0.09) 0px 0px 0px 1px;transition:box-shadow .16s,transform .12s;font-size:16px}
-.opt:hover{box-shadow:var(--bkm-deep-green) 0px 0px 0px 1.5px;transform:translateY(-1px)}
+.opt:hover{box-shadow:var(--bkm-deep-green) 0px 0px 0px 1.5px;transform:translateY(-1px);background:var(--bkm-deep-green)}
+.opt:hover .ol{color:#fff}
+.opt:hover .os{color:rgba(255,255,255,.75)}
+.opt:hover .key{background:rgba(255,255,255,.18);color:#fff;opacity:1}
+.opt:hover .mark{box-shadow:inset 0 0 0 2px rgba(255,255,255,.55)}
 .opt.sel{box-shadow:var(--bkm-deep-green) 0px 0px 0px 2px;background:var(--bkm-deep-green)}
 .opt input{position:absolute;opacity:0;pointer-events:none}
 .opt .mark{flex:none;width:20px;height:20px;border-radius:50%;box-shadow:inset 0 0 0 2px var(--bkm-outline);display:flex;align-items:center;justify-content:center;transition:box-shadow .16s}
