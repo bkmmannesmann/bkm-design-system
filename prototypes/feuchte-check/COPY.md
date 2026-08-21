@@ -5,7 +5,7 @@
 ## Meta
 
 - **Seitentitel:** BKM Feuchte-Check – Finde die Ursache deines Feuchtigkeitsschadens
-- **Meta-Description:** Der kostenlose BKM Feuchte-Check prüft die vier klassischen Feuchte-Ursachen systematisch – wie ein Gutachter. Transparentes Ergebnis, ehrliche Empfehlung: selbst sanieren oder sanieren lassen.
+- **Meta-Description:** Der kostenlose BKM Feuchte-Check grenzt die vier klassischen Feuchte-Ursachen nach festen Diagnosekriterien ein – statt nach Bauchgefühl. Transparentes Ergebnis, ehrliche Empfehlung: selbst sanieren oder sanieren lassen.
 
 ## Hero
 
@@ -39,7 +39,7 @@
 
 ## Sektion: funktion
 
-**Headline:** Kein Ratespiel. Dieselbe Systematik wie beim Gutachter.
+**Headline:** Nach festen Diagnosekriterien statt nach Bauchgefühl.
 
 **Intro:** Damit die Einordnung belastbar ist, steckt hinter dem Check das BKM Diagnose-Regelwerk – dieselbe Systematik, mit der zertifizierte Fachbetriebe Schadensbilder vor Ort beurteilen.
 
