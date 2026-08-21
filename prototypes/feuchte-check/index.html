@@ -1501,30 +1501,14 @@ const RULES = {
      }
     },
     {
-     "id": "deckennah",
-     "label": "Deckennah (> 150 cm)",
-     "punkte": {
-      "KO": 15,
-      "LO": 20,
-      "SR": 10,
-      "DW": -20,
-      "AF": -10
-     },
-     "kommentar": "AF: -10 gilt nur im Keller (sonst Gate G6). Im Keller außerdem Kombiregel K2 (Sommerkondensation Kellerdecke) und K3 (Leitungen unter der Kellerdecke) beachten."
-    },
-    {
      "id": "mehrere",
-     "label": "Mehrere Höhen",
+     "label": "Gesamte Wandfläche",
      "punkte": {
       "SF": 10,
       "SR": 5,
       "LO": 5
      },
      "aktion": "flag_kombischaden"
-    },
-    {
-     "id": "unbekannt",
-     "label": "Kann ich nicht einschätzen"
     }
    ]
   },
@@ -3107,7 +3091,7 @@ LAIE.q.F4_regen.label = "Verändert sich der Schaden bei Regen?";
 /* "Weiss ich nicht"-Antworten zaehlen nicht als Evidenz: sie werden vor der
    Auswertung entfernt, damit sie keine Hypothese verzerren. */
 const WN_ANTWORTEN = {
-  F2_schadenshoehe:"unbekannt", F4_regen:"unbekannt",
+  F4_regen:"unbekannt",
   F1_baujahr:"unbekannt", F2_ecken:"unbekannt", F2_wandbodenfuge:"unbekannt",
   F2_schwerlast:"unbekannt", F3_boden_warm:"unbekannt", F3_regenentwaesserung:"unbekannt",
   F4_konstant:"unbekannt", F3_fassade:"unbekannt", F3_fbh:"unbekannt", F4_saison:"unbekannt"
