@@ -264,8 +264,8 @@ p.sec-sub{color:var(--bkm-stone-grey);max-width:64ch;margin-bottom:42px;font-siz
 @media(max-width:560px){.opt .key{display:none}}
 .wz-foot{padding:14px 28px 6px}
 .wz-actions{display:flex;align-items:center;gap:12px}
-.wz-actions .skiplink{margin-left:auto;visibility:hidden}
-.wz-actions .skiplink.sichtbar{visibility:visible}
+#btnNext{color:var(--bkm-lime)}
+#btnNext:hover{background:var(--bkm-lime);color:var(--bkm-deep-green)}
 #btnBack{flex:none}
 #btnBack[disabled]{opacity:.35;pointer-events:none}
 .wz-foot .hintline{font-size:12px;color:var(--bkm-stone-grey);display:flex;align-items:center;gap:6px;min-height:20px;margin-top:10px}
@@ -518,7 +518,6 @@ details.faq[open] .a{animation:faqIn .25s ease}
   .proto .name{grid-area:n}.proto .bar{grid-area:b}.proto .pv{grid-area:p}
   .btn{width:100%;max-width:420px}
   .wz-actions .btn{width:auto;flex:1;max-width:none}
-  .wz-actions .skiplink{margin-left:8px}
   .hero .cta-row .btn{width:100%}
   .how .step{padding:26px 22px}
   .opt{padding:11px 12px}
@@ -740,7 +739,6 @@ details.faq[open] .a{animation:faqIn .25s ease}
         <div class="wz-actions">
           <button class="btn btn-outline" id="btnBack" type="button" aria-label="Eine Frage zurück">← Zurück</button>
           <button class="btn btn-green" id="btnNext" type="button">Weiter <span class="arr">→</span></button>
-          <button class="skiplink" id="btnSkip" type="button">Überspringen</button>
         </div>
         <div class="hintline" id="footHint"></div>
       </div>
@@ -3300,7 +3298,6 @@ function renderQuestion(dir){
   card.className = "qcard";
   card.innerHTML = `
     ${hinweis?`<div class="qh" style="margin-top:0">${hinweis}</div>`:""}
-    ${(!f.pflicht)?`<div class="qh" style="margin-top:6px"><span class="opt-note">Optional – du kannst direkt weiter.</span></div>`:""}
     ${inner}
     <div class="err" id="err_${f.id}">Bitte wähle eine Antwort, um fortzufahren.</div>`;
 
@@ -3316,7 +3313,6 @@ function renderQuestion(dir){
   // Foot-UI
   const isProfilPflicht = f.pflicht;
   $("#btnBack").disabled = (state.i===0);
-  $("#btnSkip").classList.toggle("sichtbar", !f.pflicht);
   const isLast = state.i >= queue.length-1;
   $("#btnNext").innerHTML = isLast ? 'Auswertung ansehen <span class="arr">→</span>' : 'Weiter <span class="arr">→</span>';
   // Bei Single-Choice ist "Weiter" optisch sekundär (Auto-Advance), zeige Hinweis
@@ -3383,7 +3379,6 @@ function validateCurrent(){
   const queue = buildQueue();
   const f = queue[state.i];
   if (!f) return true;
-  if (!f.pflicht) return true;
   if (!answered(f)){ const el=$("#err_"+f.id); if(el) el.style.display="block"; return false; }
   return true;
 }
@@ -3405,11 +3400,6 @@ function scrollCheckIntoView(){
 
 $("#btnNext").addEventListener("click", ()=>advance("fwd"));
 $("#btnBack").addEventListener("click", ()=>advance("back"));
-$("#btnSkip").addEventListener("click", ()=>{
-  const queue = buildQueue(); const f = queue[state.i];
-  if (f) delete storeOf(f)[f.id];
-  advance("fwd");
-});
 function resetCheck(){
   state.i=0; state.started=false; state.antworten={}; state.profil={}; state.erg=null; state.smart=[]; state.eff=null;
   document.body.classList.remove("results-mode");
