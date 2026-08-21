@@ -5,7 +5,7 @@
 ## Meta
 
 - **Seitentitel:** BKM Feuchte-Check – Finde die Ursache deines Feuchtigkeitsschadens
-- **Meta-Description:** Der kostenlose BKM Feuchte-Check grenzt die vier klassischen Feuchte-Ursachen nach festen Diagnosekriterien ein – statt nach Bauchgefühl. Transparentes Ergebnis, ehrliche Empfehlung: selbst sanieren oder sanieren lassen.
+- **Meta-Description:** Der BKM Feuchte-Check hilft dir herauszufinden, was hinter deinem Feuchtigkeitsschaden steckt – damit du weißt, was zu tun ist, bevor du falsch sanierst.
 
 ## Hero
 
@@ -34,7 +34,7 @@
   *„Ist das schlimm? Frisst sich das gerade durch mein ganzes Haus?“*
 - **Du siehst, welcher Weg zu dir passt** — Manche Schäden kannst du mit dem richtigen Produkt selbst beheben. Andere gehören in Fachhand. Der Check sagt dir ehrlich, was deine Situation braucht – und wovon du die Finger lassen kannst.  
   *„Was kostet mich das? Und zahle ich am Ende für etwas, das ich nicht gebraucht hätte?“*
-- **Du bekommst Orientierung, kein Verkaufsgespräch** — Wir verdienen nichts an deiner Unsicherheit. Der Check zeigt dir auch dann den richtigen Weg, wenn er nicht über ein BKM-Produkt führt. Diese Ehrlichkeit ist der Punkt.  
+- **Du bekommst Orientierung, kein Verkaufsgespräch** — Der Check empfiehlt nicht automatisch ein Produkt. Wenn weitere Prüfung oder ein Fachbetrieb sinnvoller ist, sagen wir dir das genauso deutlich.  
   *„Wem kann ich vertrauen, ohne mir etwas aufschwatzen zu lassen?“*
 
 ## Sektion: funktion
@@ -44,19 +44,19 @@
 **Intro:** Damit die Einordnung belastbar ist, steckt hinter dem Check das BKM Diagnose-Regelwerk – dieselbe Systematik, mit der zertifizierte Fachbetriebe Schadensbilder vor Ort beurteilen.
 
 - **Schritt 01** — Fünf kurze Schritte zu Ort, Schadensbild und Verlauf – in klarer Sprache, ohne Fachwissen. Nur wenn nötig, stellt der Check bis zu drei gezielte Rückfragen. Dauer: rund 2 Minuten.
-- **Schritt 02** — Die Diagnose-Engine lässt vier Schadensursachen gegeneinander antreten: Unmögliches wird ausgeschlossen, Gegenbeweise zählen, Kombinationen werden erkannt.
+- **Schritt 02** — Der Check prüft vier typische Feuchtebilder – und achtet gleichzeitig auf Hinweise, die für andere Ursachen oder eine Prüfung vor Ort sprechen. Unmögliches wird ausgeschlossen, Gegenbeweise zählen.
 - **Schritt 03** — Du bekommst das Messprotokoll mit Begründungen – und genau eine Empfehlung: selbst sanieren, sanieren lassen oder erst weiter prüfen.
 
 ## Sektion: prinzipien
 
-**Headline:** Kein Verkaufsgespräch. Ein Messverfahren.
+**Headline:** Kein Verkaufsgespräch. Eine systematische Ersteinschätzung.
 
 **Intro:** Vier Regeln machen das Ergebnis belastbar – und unterscheiden den Check von jedem Werbe-Quiz:
 
 - **Ausschluss vor Verdacht** — Physikalisch unmögliche Ursachen werden hart ausgeschlossen – drückendes Wasser gibt es nur an erdberührten Bauteilen. Du siehst jede Ausschlussbegründung.
 - **Gegenbeweise zählen** — Befunde können auch gegen eine Ursache sprechen. Salzausblühungen etwa widersprechen einem Trinkwasser-Rohrbruch.
 - **Mehrfachursachen sind normal** — In der Praxis treten oft zwei Ursachen gemeinsam auf. Der Check weist Kombinationsschäden aus, statt eine Ursache zu erzwingen.
-- **Ehrliches Ergebnis** — Reicht die Evidenz nicht, sagt der Check „unklar“ und empfiehlt den nächsten Diagnoseschritt – statt eine Diagnose zu erfinden.
+- **Ehrliches Ergebnis** — Wenn wir es nicht sicher genug wissen, sagen wir es. Dann bekommst du den nächsten sinnvollen Prüfschritt – statt einer erfundenen Diagnose.
 
 ## Sektion: Ablauf
 
@@ -70,7 +70,7 @@
 
 ## Sektion: Vier Ursachen
 
-**Headline:** Vier Ursachen. Eine ehrliche Antwort.
+**Headline:** Vier typische Feuchtebilder. Eine ehrliche Antwort.
 
 **Intro:** Feuchtigkeit hat viele Gesichter – und jede Ursache verlangt eine andere Lösung. Der Check lässt diese vier gegeneinander antreten, statt vorschnell zu urteilen.
 
@@ -317,23 +317,23 @@
 - Werkzeuge: „Protokoll drucken / PDF“ · „Check neu starten“
 - Ergebnis-Kopfzeile: „Dein Feuchte-Protokoll“ · Button „Neuer Check“
 
-## Lösungsplan (Lead-Formular)
+## Ergebnis-Gate (nach der letzten Frage)
 
-- **Badge:** Dein persönlicher Lösungsplan
-- **Headline:** Deinen persönlichen Lösungsplan erhalten – kostenlos per E-Mail
-- **Text:** Deine erste Klarheit hast du – kostenlos und ohne Anmeldung. Wenn du willst, helfen wir dir jetzt weiter: Du bekommst dein vollständiges Feuchte-Protokoll, die passenden nächsten Schritte und – je nach Weg – Anleitungen, System-Empfehlung oder Fachbetriebsoption.
-- **Checkbox:** Ja, ein BKM Experte darf sich für eine kostenlose Einschätzung bei mir melden.
-- **Checkbox:** Ich bin einverstanden, dass meine Angaben zur Erstellung und Übersendung des Lösungsplans verarbeitet werden. Es gilt die Datenschutzerklärung.
-- **Button:** Lösungsplan anfordern →
-- **Fehlermeldung:** Bitte gib eine gültige E-Mail-Adresse an und bestätige die Verarbeitung.
-- **Vertrauenszeile:** Deine Daten werden ausschließlich für den Lösungsplan und – nur bei aktiver Zustimmung – zur Kontaktaufnahme genutzt. Keine Weitergabe an Dritte.
-- **Bestätigung:** „✓ Danke! Dein Lösungsplan geht an *E-Mail*. Kommt nichts an, schau bitte auch im Spam-Ordner nach – deine Anfrage ist in jedem Fall bei uns eingegangen.“
+- **Kopf:** Analyse abgeschlossen — „Deine Analyse ist fertig.“
+- **Text:** Wir haben deine Angaben ausgewertet. Gib deine E-Mail-Adresse ein, um deine persönliche Einordnung zu öffnen und für später zu speichern.
+- **Feld:** E-Mail-Adresse *
+- **Checkbox:** Ich bin einverstanden, dass meine Angaben zur Auswertung und Zusendung meines Ergebnisses verarbeitet werden. Es gilt die Datenschutzerklärung.
+- **Button:** Ergebnis ansehen →
+- **Vertrauenszeile:** Kostenlos. Keine Telefonnummer erforderlich.
+- **Nach dem Öffnen:** „✓ Geöffnet. Dein Ergebnis wurde zusätzlich an *E-Mail* gesendet.“ (Ergebnis erscheint sofort auf der Seite)
 
 ## Chat-Übergabe
 
-- **Erklärtext:** Du kannst dein Ergebnis direkt in das Chat-Bot-Fenster einpflegen: Nachricht kopieren, im Chat einfügen, absenden – der Chat kennt dann dein Schadensbild und bespricht mit dir, was zu tun ist.
-- **Button:** Nachricht kopieren · Bestätigung: „✓ Kopiert – jetzt im Chat-Fenster einfügen.“
-- **Nachrichten-Einleitung:** „Hier ist das Ergebnis meiner Feuchte-Check-Analyse – besprich weiter mit mir, was zu tun ist:“
+- **Headline:** Im Chat weiterprüfen
+- **Text:** Dein Check geht im Chat weiter: Der BKM Chat kennt dein Ergebnis bereits und prüft mit dir die nächsten Schritte – auf Wunsch mit zwei Fotos deines Schadens.
+- **Primär-Button:** Im Chat weiterprüfen → (übergibt die Analyse-ID automatisch an das Chat-Widget)
+- **Fallback (aufklappbar):** „Falls sich der Chat nicht öffnet: Nachricht zum Einfügen“ + Kopier-Button
+- **Nachrichten-Einleitung:** „Hier ist das Ergebnis meiner Feuchte-Check-Analyse – besprich weiter mit mir, was zu tun ist:“ + Analyse-ID
 
 ## Rechtlicher Hinweis (Disclaimer)
 
