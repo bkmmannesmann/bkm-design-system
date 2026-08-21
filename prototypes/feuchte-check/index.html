@@ -3070,12 +3070,8 @@ frageById["F0_verlauf"] = { id:"F0_verlauf", typ:"single", pflicht:true,
   optionen:[
     {id:"ploetzlich",label:"Plötzlich entstanden"},
     {id:"staerker",label:"Wird langsam stärker"},
-    {id:"gleich",label:"Bleibt ungefähr gleich"},
     {id:"sommer",label:"Vor allem im Sommer"},
-    {id:"winter",label:"Vor allem im Winter"},
-    {id:"nach_bau",label:"Seit Bau- oder Sanierungsarbeiten"},
-    {id:"lange",label:"Schon lange vorhanden"},
-    {id:"unbekannt",label:"Kann ich nicht einschätzen"}
+    {id:"lange",label:"Schon lange vorhanden"}
   ]};
 
 /* Laienfreundliche Screen-Titel fuer die Kernfragen */
@@ -3115,17 +3111,13 @@ function effektiveAntworten(){
     a.F1_wandart = w;
   }
   const verlauf = a.F0_verlauf; delete a.F0_verlauf;
-  if (verlauf && verlauf !== "unbekannt"){
+  if (verlauf){
     if (a.F4_konstant === undefined){
       if (verlauf === "ploetzlich") a.F4_konstant = "nein";
-      if (verlauf === "staerker" || verlauf === "gleich" || verlauf === "lange") a.F4_konstant = "ja";
+      if (verlauf === "staerker" || verlauf === "lange") a.F4_konstant = "ja";
     }
-    if (a.F4_saison === undefined){
-      if (verlauf === "sommer") a.F4_saison = "sommer";
-      else if (verlauf === "winter") a.F4_saison = "winter";
-    }
-    if (a.F3_baumassnahme_24m === undefined)
-      a.F3_baumassnahme_24m = (verlauf === "nach_bau") ? "ja" : "nein";
+    if (a.F4_saison === undefined && verlauf === "sommer") a.F4_saison = "sommer";
+    if (a.F3_baumassnahme_24m === undefined) a.F3_baumassnahme_24m = "nein";
   }
   return a;
 }
@@ -3139,7 +3131,7 @@ function smartFrage(erg){
   if (!h1 || !h2) return null;
   let best = null, bestD = 0;
   for (const f of RULES.fragen){
-    if (CORE_IDS.includes(f.id) || ["F5_messung","F2_ausbreitung","F4_regen"].includes(f.id)) continue;
+    if (CORE_IDS.includes(f.id) || ["F5_messung","F2_ausbreitung","F4_regen","F1_baustoff"].includes(f.id)) continue;
     if (state.smart.includes(f.id)) continue;
     if (eff[f.id] !== undefined || state.antworten[f.id] !== undefined) continue;
     if (f.sichtbar_wenn && !pruefeBedingung(f.sichtbar_wenn, eff)) continue;
