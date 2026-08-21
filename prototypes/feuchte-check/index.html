@@ -1107,28 +1107,8 @@ const RULES = {
      }
     },
     {
-     "id": "og",
-     "label": "Obergeschoss",
-     "punkte": {
-      "KO": 10,
-      "RL": 10,
-      "SR": 10,
-      "LO": 10
-     }
-    },
-    {
-     "id": "dachgeschoss",
-     "label": "Dachgeschoss",
-     "punkte": {
-      "KO": 15,
-      "LO": 20,
-      "SR": 10,
-      "RL": 5
-     }
-    },
-    {
      "id": "garage",
-     "label": "Garage / Nebengebäude",
+     "label": "Garage",
      "punkte": {
       "AF": 15,
       "SF": 10,
@@ -1136,10 +1116,6 @@ const RULES = {
       "SR": 5,
       "KO": 5
      }
-    },
-    {
-     "id": "unsicher",
-     "label": "Ich bin nicht sicher"
     }
    ]
   },
@@ -3185,7 +3161,7 @@ LAIE.q.F4_regen.label = "Verändert sich der Schaden bei Regen?";
 /* "Weiss ich nicht"-Antworten zaehlen nicht als Evidenz: sie werden vor der
    Auswertung entfernt, damit sie keine Hypothese verzerren. */
 const WN_ANTWORTEN = {
-  F1_standort:"unsicher", F2_schadenshoehe:"unbekannt", F4_regen:"unbekannt",
+  F2_schadenshoehe:"unbekannt", F4_regen:"unbekannt",
   F1_baujahr:"unbekannt", F2_ecken:"unbekannt", F2_wandbodenfuge:"unbekannt",
   F2_schwerlast:"unbekannt", F3_boden_warm:"unbekannt", F3_regenentwaesserung:"unbekannt",
   F4_konstant:"unbekannt", F3_fassade:"unbekannt", F3_fbh:"unbekannt", F4_saison:"unbekannt"
