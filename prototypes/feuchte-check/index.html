@@ -293,7 +293,7 @@ label.small{font-size:14px;font-weight:700;display:block;margin-bottom:6px;color
 .certainty span{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.75)}
 .certainty b{font-family:'Unbounded';font-weight:900;font-size:18px;color:#fff;letter-spacing:-.01em}
 @media(max-width:640px){.res-head .grid{grid-template-columns:1fr}.certainty{align-items:flex-start;margin-top:4px}}
-.res-body{background:var(--bkm-surface);border-radius:0 0 16px 16px;padding:36px;box-shadow:var(--shadow-elevated)}
+.res-body{padding:36px 0}
 .res-sec{margin-bottom:42px}
 .res-sec h3{font-family:'Unbounded';font-weight:900;font-size:18px;letter-spacing:-0.01em;color:var(--bkm-deep-green);margin-bottom:6px}
 .res-sec .sub{font-size:14px;color:var(--bkm-stone-grey);margin-bottom:18px}
@@ -376,8 +376,8 @@ body.results-mode #check > .narrow > h2.sec,
 body.results-mode #check > .narrow > p.sec-sub,
 body.results-mode #wizard{display:none!important}
 
-body.results-mode{background:var(--bkm-sand-white)}
-body.results-mode #check{padding:0;background:var(--bkm-sand-white)}
+body.results-mode{background:#ffffff}
+body.results-mode #check{padding:0;background:#ffffff}
 body.results-mode #check .check-bg{display:none}
 body.results-mode #check > .narrow{max-width:900px}
 body.results-mode .result{display:block}
@@ -509,7 +509,7 @@ details.faq[open] .a{animation:faqIn .25s ease}
   .wz-stage{padding:4px 16px 20px}
   .wz-quest{padding:18px 16px 0}
   .wz-top{padding:14px 16px 0}
-  .res-body{padding:22px 18px}
+  .res-body{padding:22px 0}
   .wz-foot{padding:12px 16px 4px}
   .wizard{min-height:600px}
   .res-head{padding:28px 20px}
@@ -1186,7 +1186,11 @@ const RULES = {
      "id": "unbekannt",
      "label": "Weiß ich nicht"
     }
-   ]
+   ],
+   "sichtbar_wenn": {
+    "frage": "F1_standort",
+    "wert_nicht": "garage"
+   }
   },
   {
    "id": "F1_baustoff",
