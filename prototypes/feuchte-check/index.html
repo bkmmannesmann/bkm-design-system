@@ -2077,7 +2077,7 @@ const RULES = {
    "id": "F4_regen",
    "schritt": 4,
    "typ": "single",
-   "pflicht": true,
+   "pflicht": false,
    "label": "Verschlechterung bei / nach Regen?",
    "optionen": [
     {
@@ -2795,7 +2795,7 @@ const PROFILE_STEP = { id:0, titel:"Profil", fragen:[] };
 const STEP_DEFS = [
   {n:1, titel:"Ort", ids:["F1_standort","F0_bauteil","F1_wandart"]},
   {n:2, titel:"Schadensbild", ids:["F2_schaeden","F2_schadenshoehe"]},
-  {n:3, titel:"Verlauf", ids:["F4_regen","F0_verlauf"]}
+  {n:3, titel:"Verlauf", ids:["F0_verlauf"]}
 ];
 const PHASE_LABEL = { 1:"Wo tritt es auf?", 2:"Das Schadensbild", 3:"Der Verlauf" };
 const PHASE_OF = {};
@@ -3091,7 +3091,6 @@ LAIE.q.F4_regen.label = "Verändert sich der Schaden bei Regen?";
 /* "Weiss ich nicht"-Antworten zaehlen nicht als Evidenz: sie werden vor der
    Auswertung entfernt, damit sie keine Hypothese verzerren. */
 const WN_ANTWORTEN = {
-  F4_regen:"unbekannt",
   F1_baujahr:"unbekannt", F2_ecken:"unbekannt", F2_wandbodenfuge:"unbekannt",
   F2_schwerlast:"unbekannt", F3_boden_warm:"unbekannt", F3_regenentwaesserung:"unbekannt",
   F4_konstant:"unbekannt", F3_fassade:"unbekannt", F3_fbh:"unbekannt", F4_saison:"unbekannt"
@@ -3140,7 +3139,7 @@ function smartFrage(erg){
   if (!h1 || !h2) return null;
   let best = null, bestD = 0;
   for (const f of RULES.fragen){
-    if (CORE_IDS.includes(f.id) || f.id === "F5_messung" || f.id === "F2_ausbreitung") continue;
+    if (CORE_IDS.includes(f.id) || ["F5_messung","F2_ausbreitung","F4_regen"].includes(f.id)) continue;
     if (state.smart.includes(f.id)) continue;
     if (eff[f.id] !== undefined || state.antworten[f.id] !== undefined) continue;
     if (f.sichtbar_wenn && !pruefeBedingung(f.sichtbar_wenn, eff)) continue;
