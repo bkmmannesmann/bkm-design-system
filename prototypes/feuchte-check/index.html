@@ -467,6 +467,9 @@ details.checked .inner{padding:0 18px 18px}
 .lead .ok-msg{display:none;color:var(--bkm-deep-green);font-weight:700;font-size:14px;margin-top:12px}
 
 /* Chat-Uebergabe */
+.chat-schritte{margin:0 0 4px;padding-left:0;list-style:none;counter-reset:cs;display:flex;flex-direction:column;gap:8px}
+.chat-schritte li{counter-increment:cs;display:flex;align-items:center;gap:12px;font-size:15px;font-weight:700;color:#fff}
+.chat-schritte li::before{content:counter(cs);flex:none;width:26px;height:26px;border-radius:50%;background:var(--bkm-lime);color:var(--bkm-deep-green);font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center}
 .chatmsg{background:var(--bkm-sand-white);border-radius:8px;box-shadow:rgba(0,0,0,0.08) 0px 0px 0px 1px;padding:16px 18px;max-height:280px;overflow:auto}
 .chatmsg pre{font-family:inherit;font-size:14px;line-height:1.6;white-space:pre-wrap;color:var(--bkm-ink);margin:0}
 .chatmsg-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:14px}
@@ -759,6 +762,28 @@ details.faq[open] .a{animation:faqIn .25s ease}
       </div>
       <div class="res-body">
         <div id="unlocked" style="display:none">
+          <div class="res-sec" id="secChat">
+            <div class="gate">
+              <h3>Hol dir jetzt deine Empfehlung im Chat</h3>
+              <p class="gate-lead">Deine Einordnung steht – deine persönliche Empfehlung bekommst du im Chat. <b>Wichtig: Der Chat kennt dein Ergebnis nur, wenn du deine Ergebnis-Nachricht kopierst und dort einfügst.</b></p>
+              <ol class="chat-schritte">
+                <li>Ergebnis-Nachricht kopieren</li>
+                <li>Chat unten rechts öffnen</li>
+                <li>Nachricht einfügen und absenden</li>
+              </ol>
+              <div class="chatmsg-actions" style="margin-top:14px">
+                <button class="btn btn-lime" id="btnCopyChat" type="button">Ergebnis-Nachricht kopieren</button>
+                <span class="copy-ok" id="copyOk" hidden></span>
+              </div>
+              <details class="checked" style="margin-top:16px;background:rgba(255,255,255,.08);box-shadow:none">
+                <summary style="color:#fff">Nachricht ansehen</summary>
+                <div class="inner">
+                  <div class="chatmsg"><pre id="chatMsgText"></pre></div>
+                </div>
+              </details>
+            </div>
+          </div>
+
           <div class="res-tools">
             <button class="btn btn-outline btn-sm" type="button" onclick="window.print()">Protokoll drucken / PDF</button>
           </div>
@@ -778,23 +803,6 @@ details.faq[open] .a{animation:faqIn .25s ease}
             <p class="meaning" id="meaningText"></p>
           </div>
 
-          <div class="res-sec" id="secChat">
-            <div class="gate">
-              <h3>Hol dir jetzt deine Empfehlung im Chat</h3>
-              <p class="gate-lead">Deine Einordnung steht – die passende Empfehlung bekommst du im Gespräch: Der BKM Chat kennt dein Ergebnis und klärt mit dir die nächsten Schritte, auf Wunsch mit zwei Fotos deines Schadens.</p>
-              <div class="chatmsg-actions" style="margin-top:0">
-                <button class="btn btn-lime" id="btnChatOpen" type="button">Im Chat weiterprüfen <span class="arr">→</span></button>
-                <span class="copy-ok" id="copyOk" hidden></span>
-              </div>
-              <details class="checked" style="margin-top:16px;background:rgba(255,255,255,.08);box-shadow:none">
-                <summary style="color:#fff">Falls sich der Chat nicht öffnet: Nachricht zum Einfügen</summary>
-                <div class="inner">
-                  <div class="chatmsg"><pre id="chatMsgText"></pre></div>
-                  <div class="chatmsg-actions"><button class="btn btn-outline btn-sm" id="btnCopyChat" type="button">Nachricht kopieren</button></div>
-                </div>
-              </details>
-            </div>
-          </div>
 
           <div class="res-sec" id="secChecked">
             <details class="checked">
@@ -3401,28 +3409,6 @@ document.addEventListener("keydown", e=>{
   } else if (e.key==="Enter"){ advance("fwd"); }
   else if (e.key==="ArrowLeft" && !$("#btnBack").disabled){ advance("back"); }
 });
-$("#btnChatOpen").addEventListener("click", ()=>{
-  /* Userlike-Widget oeffnen (bkm-mannesmann.de). API-Namen variieren je nach
-     Widget-Version, daher mehrere Versuche; ohne Widget greift der Fallback. */
-  const geoeffnet = (() => {
-    try {
-      if (window.BKMChat && typeof window.BKMChat.open === "function"){
-        window.BKMChat.open({ analyseId: state.analysisId, nachricht: chatNachricht(state.erg) }); return true;
-      }
-      if (window.userlike && typeof window.userlike.userlikeStartChat === "function"){ window.userlike.userlikeStartChat(); return true; }
-      if (typeof window.userlikeStartChat === "function"){ window.userlikeStartChat(); return true; }
-      if (window.userlike && typeof window.userlike.maximize === "function"){ window.userlike.maximize(); return true; }
-    } catch(e){}
-    return false;
-  })();
-  const det = document.querySelector("#secChat details"); if (det) det.open = true;
-  const ok = $("#copyOk");
-  ok.hidden = false;
-  ok.textContent = geoeffnet
-    ? "Chat geöffnet – füge deine Ergebnis-Nachricht unten ein, damit der Chat dein Schadensbild kennt."
-    : "Der Chat ist auf dieser Vorschau-Seite nicht verfügbar – auf bkm-mannesmann.de öffnet er sich hier direkt. Nutze solange die Nachricht unten.";
-  clearTimeout(ok._t); ok._t = setTimeout(()=>{ ok.hidden = true; }, 8000);
-});
 $("#btnCopyChat").addEventListener("click", async ()=>{
   const t = $("#chatMsgText").textContent;
   let ok = false;
@@ -3436,7 +3422,7 @@ $("#btnCopyChat").addEventListener("click", async ()=>{
   }
   const okEl = $("#copyOk");
   okEl.hidden = false;
-  okEl.textContent = ok ? "✓ Kopiert – jetzt im Chat-Fenster einfügen." : "Kopieren blockiert – bitte Text markieren und manuell kopieren.";
+  okEl.textContent = ok ? "✓ Kopiert! Öffne jetzt den Chat unten rechts und füge die Nachricht ein." : "Kopieren blockiert – bitte Nachricht unter „Nachricht ansehen“ markieren und manuell kopieren.";
   clearTimeout(okEl._t); okEl._t = setTimeout(()=>{ okEl.hidden = true; }, 5000);
 });
 
