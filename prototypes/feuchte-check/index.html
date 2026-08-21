@@ -3101,6 +3101,16 @@ function effektiveAntworten(){
   }
   if (Array.isArray(a.F2_schaeden))
     a.F2_schaeden = a.F2_schaeden.filter(oid => optionSichtbar("F2_schaeden", oid, a));
+  if (Array.isArray(a.F2_schadenshoehe)){
+    const arr = a.F2_schadenshoehe;
+    if (arr.includes("bodenflaeche")){
+      const w = Array.isArray(a.F1_wandart) ? a.F1_wandart.slice()
+        : (typeof a.F1_wandart === "string" ? [a.F1_wandart] : []);
+      if (!w.includes("bodenplatte")) w.push("bodenplatte");
+      a.F1_wandart = w;
+    }
+    a.F2_schadenshoehe = arr.find(x => x !== "bodenflaeche") || "bodenflaeche";
+  }
   if (Array.isArray(a.F0_bauteil) && a.F0_bauteil.includes("boden")){
     const w = Array.isArray(a.F1_wandart) ? a.F1_wandart.slice()
       : (typeof a.F1_wandart === "string" ? [a.F1_wandart] : []);
@@ -3247,7 +3257,7 @@ function renderQuestion(dir){
     const v = state.profil[f.id]||"";
     inner = `<div class="opts"><input type="text" inputmode="numeric" maxlength="5" id="in_${f.id}" value="${v}" placeholder="z. B. 59174" style="max-width:260px"></div>`;
   } else {
-    const multi = f.typ==="multi";
+    const multi = f.typ==="multi" || f.id==="F2_schadenshoehe";
     const cur = storeOf(f)[f.id];
     const freitextVal = state.profil[f.id+"_text"] || "";
     const sichtbareOpts = f.optionen.filter(o => optionSichtbar(f.id, o.id, state.antworten));
@@ -3302,7 +3312,12 @@ function wireCard(card, f, queue){
   card.querySelectorAll("input[type=radio],input[type=checkbox]").forEach(inp=>{
     inp.addEventListener("change", ()=>{
       const store = storeOf(f);
-      if (f.typ==="multi"){
+      const multiUI = f.typ==="multi" || f.id==="F2_schadenshoehe";
+      if (multiUI){
+        /* Hoehe: nur EINE Wandhoehe; "Bodenflaeche" darf als zweite Auswahl dazu */
+        if (f.id === "F2_schadenshoehe" && inp.checked && inp.value !== "bodenflaeche"){
+          card.querySelectorAll(`input[name="${f.id}"]`).forEach(i=>{ if (i.value !== inp.value && i.value !== "bodenflaeche") i.checked = false; });
+        }
         const excl = WN_MULTI[f.id];
         if (excl && inp.checked){
           if (inp.value === excl){
@@ -3528,6 +3543,7 @@ function finish(){
 function chatNachricht(erg){
   const L = [];
   L.push("Hier ist das Ergebnis meiner Feuchte-Check-Analyse – besprich weiter mit mir, was zu tun ist. Brauche ich einen Fachbetrieb oder kann ich es alleine ausführen? Dabei stellst du mir nochmal gezielt Fragen, zum Beispiel wie groß der Schaden ist.");
+  L.push("");
   if (erg.unklar){
     L.push("Ergebnis: noch nicht eindeutig – die Ursache konnte nicht sicher genug eingegrenzt werden.");
   } else {
@@ -3535,6 +3551,22 @@ function chatNachricht(erg){
     const kombi = erg.kombidiagnose ? LAIE.hyp[erg.kombidiagnose] : null;
     L.push("Ergebnis: " + h.name + (kombi ? " + " + kombi.name : "") + " (" + ({hoch:"klar", mittel:"gut eingrenzbar", niedrig:"noch nicht eindeutig"}[erg.konfidenz] || erg.konfidenz) + ")");
   }
+  L.push("");
+  L.push("Meine Angaben aus dem Fragebogen:");
+  for (const [fid, wert] of Object.entries(state.antworten)){
+    const f = frageById[fid];
+    if (!f) continue;
+    const label = (LAIE.q[fid] && LAIE.q[fid].label) || f.label;
+    const werte = (Array.isArray(wert) ? wert : [wert])
+      .map(v => (f.optionen.find(o => o.id === v) || {}).label || v).join(", ");
+    L.push("- " + label + " " + werte);
+  }
+  L.push("");
+  L.push("Einschätzung je Ursache (interner Übereinstimmungswert):");
+  erg.rangliste.forEach(r => L.push("- " + LAIE.hyp[r.id].name + ": " + Math.round(r.p*100) + " %"));
+  if (erg.ausgeschlossen.length)
+    L.push("Ausgeschlossen: " + erg.ausgeschlossen.map(a => LAIE.hyp[a.hypothese].name).join(", "));
+  L.push("");
   L.push("(Quelle: BKM Feuchte-Check)");
   return L.join("\n");
 }
