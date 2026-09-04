@@ -3,14 +3,6 @@
 > Fertige Prompts für den Umbau des Support-Cockpits auf `bkm-app`.
 > Einer davon wird kopiert, die Klammern ausgefüllt, abgeschickt.
 
-**Solange der Pull Request offen ist, liegt alles auf dem Branch
-`claude/bkm-design-improvements-fj1fa2`, nicht auf `main`.** Wer nur
-„lies das Repo" sagt, landet auf `main` und findet `skills/bkm-app/` dort nicht.
-Die Prompts unten nennen den Branch deshalb ausdrücklich. Nach dem Merge kann
-der Satz entfallen.
-
----
-
 ## Vorher: welcher Weg?
 
 | Situation | Weg |
@@ -24,9 +16,8 @@ der Satz entfallen.
 ## A — Bestehende Anwendung umstellen (mit Repo-Zugriff)
 
 ```
-Im Repo bkmmannesmann/bkm-design-system liegt auf dem Branch
-claude/bkm-design-improvements-fj1fa2 ein neuer Skill für Anwendungs-Oberflächen.
-Er ist noch nicht auf main — bitte den Branch lesen, nicht den Standardstand.
+Im Repo bkmmannesmann/bkm-design-system liegt ein Skill für
+Anwendungs-Oberflächen: skills/bkm-app.
 
 Lies zuerst, in dieser Reihenfolge:
   1. skills/bkm-app/SKILL.md        — 24 verbindliche Regeln
@@ -62,8 +53,8 @@ Reihenfolge in `MIGRATION.md` ist nach Wirkung je Aufwand sortiert.
 
 ## B — Ohne Repo-Zugriff
 
-`skills/bkm-app/templates/bkm-cockpit/demo.html` vom Branch herunterladen und an
-den Chat anhängen. Die Datei ist eigenständig — Schriften, Logo, Keyvisual,
+`skills/bkm-app/templates/bkm-cockpit/demo.html` aus dem Repo herunterladen und
+an den Chat anhängen. Die Datei ist eigenständig — Schriften, Logo, Keyvisual,
 Texturen und Icons sind eingebettet. Dazu `SKILL.md` und `MIGRATION.md` als Text
 einfügen. Dann:
 
@@ -90,7 +81,7 @@ Zeig mir das Ergebnis in beiden Themes und bei 1440, 834 und 390 Pixeln Breite.
 ```
 Baue die Ansicht [Name] für das BKM Support-Cockpit.
 
-Nutze den bkm-app-Skill vom Branch claude/bkm-design-improvements-fj1fa2.
+Nutze den bkm-app-Skill.
 Baue auf skills/bkm-app/templates/bkm-cockpit/demo.html auf: kopiere die
 Struktur, ersetze nur den Inhalt im <main>. Lass Tokens, Komponenten-CSS,
 Schriften, Icons und den Theme-Umschalter unverändert.
@@ -122,9 +113,6 @@ ersetze nur den Inhalt."*
 ---
 
 ## Bekannte Stolpersteine
-
-**„Ich sehe skills/bkm-app nicht."** Der Standardstand ist `main`, dort liegt es
-noch nicht. Branch nennen.
 
 **Die Vorlage wird komplett gelesen und der Kontext ist voll.** 748 KB, das
 meiste davon eingebettete Schriften und Bilder. Anweisen, gezielt den benötigten
