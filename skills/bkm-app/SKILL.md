@@ -67,7 +67,22 @@ Decks (→ `bkm-slides`), technische Datenblätter (→ `docs/print-anwendungen.
 9. **Icons ausschließlich aus `assets/icons/phosphor/` in Bold oder Fill.**
    Keine andere Bibliothek, keine Emoji, keine nachgezeichneten Symbole.
    Fehlt ein benötigtes Icon im Manifest, wird es dort ergänzt — nicht ersetzt.
-10. **Zahlen tabellarisch.** `font-variant-numeric: tabular-nums` für alle Werte,
+10. **Ein Icon setzt nie seine eigene Farbe.** Es erbt die Textfarbe seines
+    Kontextes (`fill: currentColor`), damit die Farbregel automatisch greift:
+
+    | Fläche | Icon-/Textfarbe | Kontrast |
+    |---|---|---|
+    | Deep Green `#1c4b42` | **Lime** `#b4e717` | 6.74 |
+    | Transition Green `#287d4b` | **Weiß** `#ffffff` | 5.09 |
+    | Pure Green `#4daf46` | **Weiß** `#ffffff` | — |
+    | Weiß / Sand White | **Transition Green** `#287d4b` | 5.09 / 4.67 |
+
+    Lime auf Transition Green ist mit 3.49 nur für großen Text zulässig und
+    deshalb für Icons und Beschriftungen ausgeschlossen (Kontrastmatrix,
+    `DESIGN.md`). Beim Einbetten von SVGs als `<symbol>` darauf achten, dass
+    `fill="currentColor"` erhalten bleibt — sonst fallen die Pfade still auf
+    Schwarz zurück.
+11. **Zahlen tabellarisch.** `font-variant-numeric: tabular-nums` für alle Werte,
     Mengen, Zeitstempel und Prozentangaben, damit Spalten stehen.
 
 ---
