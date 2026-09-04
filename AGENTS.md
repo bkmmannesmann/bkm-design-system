@@ -6,7 +6,7 @@
 
 1. **The Keyvisual is a pre-rendered image asset. NEVER recreate it in code.** No SVG generation, no CSS clip-paths, no procedural patterns. Place the provided image file, right-aligned, cropped.
 2. **One brand, two color contexts.** BKM AG uses Deep Green + Lime on dark surfaces. Fachbetrieb uses White/Sand White surfaces with Transition Green + Pure Green accents. Stone Grey is text color only in Fachbetrieb — never a dominant surface.
-3. **Lime Green = interactive only (BKM AG context).** Never decorative. Never on text. Never on large surfaces. Never in Fachbetrieb context.
+3. **Lime Green = interactive only.** Never decorative. Never on text. Never on large surfaces. Not the Fachbetrieb identity accent — Pure Green is — but it may appear there as an accent.
 4. **The greens tell a story.** Deep Green = moisture/problem. Pure Green = dry/solution. This is not arbitrary branding — it visualizes the drying process.
 5. **Max ONE primary button per viewport fold.**
 6. **Cards: context-dependent technique.** Website = shadow-as-border. Slides/Print = 4px colored border-left (no shadow).
@@ -334,8 +334,8 @@ npx @google/design.md export --format css-tailwind DESIGN.md
 - [ ] Determined context: BKM AG or Fachbetrieb?
 - [ ] Keyvisual placed as image (if applicable) — not generated in code
 - [ ] Surface modes alternate with hard cuts (no gradients)
-- [ ] Lime used ONLY for interactive elements (BKM AG context only)
-- [ ] Pure Green used for Fachbetrieb accents (not Lime)
+- [ ] Lime used ONLY for interactive elements, never as text on light surfaces
+- [ ] Pure Green is the identity accent in Fachbetrieb context
 - [ ] Fachbetrieb surfaces are WHITE/SAND WHITE — Stone Grey is text only, never a surface
 - [ ] Unbounded: weight 900, 18px minimum. H1 uppercase, H2+ sentence case
 - [ ] TT Norms Pro self-hosted from assets/fonts/ (not Google Fonts)

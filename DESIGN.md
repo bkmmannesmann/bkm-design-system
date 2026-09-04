@@ -314,7 +314,7 @@ The different green tones are not arbitrary — they visualize the drying proces
 - **Deep Green (#1c4b42)** — Represents moisture, dampness, the problem state. A wall that is wet. This is the dominant brand color because BKM's entire business starts with the problem: rising damp, laterally penetrating water.
 - **Transition Green (#287d4b)** — The process of drying. The barrier is working.
 - **Pure Green (#4daf46)** — The dry end state. The solution achieved. The wall is protected. This color identifies the Fachbetrieb context because the Fachbetrieb delivers the solution at the customer's site.
-- **Lime Green (#b4e717)** — An effect color added later to the system. It works exceptionally well with Deep Green as a high-contrast accent for interactive elements and key highlights. It is never used in the Fachbetrieb context.
+- **Lime Green (#b4e717)** — An effect color added later to the system. It works exceptionally well with Deep Green as a high-contrast accent for interactive elements and key highlights. It is not the identity accent of the Fachbetrieb context — Pure Green carries that role — but it may appear there as an accent where the contrast table allows.
 
 ### What This System Is NOT
 
@@ -325,11 +325,11 @@ This is not a generic SaaS interface. It is not a "clean modern website." It is 
 The palette communicates protection through depth and material contrast.
 
 - **Primary (#1c4b42):** Deep Green — the protective, authoritative surface color. Represents moisture/the problem. Used for dark marketing surfaces, navigation, and the dominant brand presence.
-- **Secondary (#b4e717):** Lime Green — the high-contrast interactive accent. Used ONLY for primary CTAs and active states on dark surfaces. Never decorative, never on large surfaces, never as body text. Not used in Fachbetrieb context.
+- **Secondary (#b4e717):** Lime Green — the high-contrast interactive accent. Used ONLY for primary CTAs and active states on dark surfaces. Never decorative, never on large surfaces, never as body text. In the Fachbetrieb context it is a secondary accent, not the identity color.
 - **Tertiary (#287d4b):** Transition Green — the process color. Used for links, secondary actions, and hover states on light surfaces.
 - **Neutral (#f6f5f2):** Sand White — warm foundation for documentation and technical surfaces.
 
-For the Fachbetrieb context: `fachbetrieb-primary` (#4daf46, Pure Green) is the identity and accent color. `fachbetrieb-primary-deep` (#287d4b, Transition Green) is used for headlines on light backgrounds, links, and header bands. `fachbetrieb-secondary` (#494949, Stone Grey) is the primary text color — it replaces Deep Green's role as text, NOT as surface. **Critical: Stone Grey must never be used as a dominant background surface in the Fachbetrieb context.** The dominant surfaces are White (#ffffff) and Sand White (#f6f5f2). If a dark accent band is needed, use Transition Green (#287d4b) sparingly — not Stone Grey. Lime Green does not appear.
+For the Fachbetrieb context: `fachbetrieb-primary` (#4daf46, Pure Green) is the identity and accent color. `fachbetrieb-primary-deep` (#287d4b, Transition Green) is used for headlines on light backgrounds, links, and header bands. `fachbetrieb-secondary` (#494949, Stone Grey) is the primary text color — it replaces Deep Green's role as text, NOT as surface. **Critical: Stone Grey must never be used as a dominant background surface in the Fachbetrieb context.** The dominant surfaces are White (#ffffff) and Sand White (#f6f5f2). If a dark accent band is needed, use Transition Green (#287d4b) sparingly — not Stone Grey. Lime Green is not the identity accent here; where it is used, the contrast table applies — on White and Sand White it never carries text or an interactive state (1.46 / 1.34, both FAIL).
 
 ## Typography
 
@@ -373,7 +373,7 @@ For presentations, brochures, and editorial layouts, cards use a **4px solid lef
 
 - **Deep Green border-left** — Standard content card on Sand/White backgrounds.
 - **Red border-left** — Warning or problem-state cards.
-- **Lime border-left** — Highlight or success-state cards (BKM AG context only).
+- **Lime border-left** — Highlight or success-state cards on dark surfaces.
 - **Pure Green border-left** — Fachbetrieb context cards.
 
 Cards in editorial context have minimal rounded corners (8px), white background on Sand surfaces, and NO box-shadow. The colored border-left provides all necessary visual differentiation.
@@ -507,13 +507,14 @@ All color combinations used in this system have been validated against WCAG AA:
 | Stone Grey | White (#ffffff) | 9.00 | PASS | Text + UI |
 | Pure Green (#4daf46) | White (#ffffff) | 2.79 | FAIL | Decorative only |
 | Lime (#b4e717) | White (#ffffff) | 1.46 | FAIL | Decorative only |
+| Lime (#b4e717) | Sand White (#f6f5f2) | 1.34 | FAIL | Decorative only |
 
 **Key rule:** Pure Green and Lime Green must NEVER be used as text on light backgrounds. They only work as text on dark backgrounds (Deep Green, Stone Grey).
 
 ## Do's and Don'ts
 
 - Do use Lime Green (`secondary`) exclusively for interactive elements on dark surfaces
-- Don't use Lime Green in the Fachbetrieb context — use Pure Green instead
+- Don't make Lime Green the identity accent in the Fachbetrieb context — Pure Green carries that role
 - Do maintain hard horizontal cuts between dark and light surface bands
 - Don't use gradients, waves, diagonals, or any soft transition between surfaces
 - Do place the Keyvisual as a pre-rendered image asset (right edge, cropped)

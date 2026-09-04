@@ -1,0 +1,289 @@
+/* ============================================================================
+   BKM Mannesmann — Anwendungs-UI Tokens (bkm-app)
+   ----------------------------------------------------------------------------
+   Kanonische Token-Quelle für Werkzeug-Oberflächen (Cockpits, Portale, interne
+   Tools). Ergänzt DESIGN.md um den Anwendungs-Kontext — ersetzt nichts.
+
+   AUFBAU IN ZWEI EBENEN
+   1. Marken-Konstanten  (--bkm-*)  : unveränderlich, spiegeln DESIGN.md
+   2. Semantische Tokens (--surface-*, --text-*, --accent-*, --status-*)
+                                     : wechseln mit dem Theme
+
+   DIE EINE REGEL
+   Komponenten verwenden AUSSCHLIESSLICH Ebene 2. Wer #b4e717 oder
+   var(--bkm-lime) direkt in eine Komponente schreibt, zerstört den
+   Day/Night-Switch.
+
+   KONTRAST
+   Alle Paare unten sind gegen WCAG 2.1 gerechnet, nicht geschätzt.
+   Night-Werte sind gegen --surface-2 geprüft (der härteste Fall),
+   Day-Werte gegen --surface-0 (Sand White).
+   ========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   EBENE 1 — Marken-Konstanten (identisch zu DESIGN.md / docs/digitale-medien.md)
+   --------------------------------------------------------------------------- */
+:root {
+  --bkm-deep-green:       #1c4b42;
+  --bkm-deep-green-light: #2a6b5e;
+  --bkm-transition-green: #287d4b;
+  --bkm-pure-green:       #4daf46;
+  --bkm-lime:             #b4e717;
+  --bkm-sand-white:       #f6f5f2;
+  --bkm-clean-white:      #ffffff;
+  --bkm-stone-grey:       #494949;
+  --bkm-charcoal:         #1a1a1a;
+  --bkm-outline:          #c8c5be;
+  --bkm-outline-variant:  #e8e6e1;
+
+  /* Typografie */
+  --font-display: 'Unbounded', system-ui, sans-serif;   /* nur 900, nur >= 18px */
+  --font-ui:      'TT Norms Pro', system-ui, sans-serif;
+
+  /* Raster — 8px-Skala aus DESIGN.md */
+  --space-2xs: 4px;  --space-xs: 8px;   --space-sm: 12px; --space-md: 16px;
+  --space-lg:  24px; --space-xl: 32px;  --space-2xl: 48px;
+
+  /* Form — DESIGN.md: Buttons 4px, Inputs 8px, Cards 12px, NIE Pill */
+  --radius-control: 4px;
+  --radius-input:   8px;
+  --radius-card:    12px;
+  --radius-avatar:  9999px;   /* ausschließlich Avatare + Status-Punkte */
+  /* Umschalter, Filter und Reiter: eigener Radius, damit sie weicher wirken
+     als Buttons, ohne zur Pille zu werden (DESIGN.md: "never pill-shaped").
+     Ein Wert — hier lässt sich die Weichheit zentral drehen. */
+  --radius-switch:       10px;
+  --radius-switch-inner:  7px;
+
+  /* Typo-Skala Anwendung — deutlich kleiner als die Marketing-Skala.
+     Ein Werkzeug wird 50x am Tag benutzt; Höhe ist teuer. */
+  --text-page-title: 28px;  /* Unbounded 900 — genau eine pro Screen */
+  --text-hero:       40px;  /* Unbounded 900 — nur Einstiegs-/Leerseiten */
+  --text-section:    16px;  /* TT Norms Bold  — Kartentitel, Panel-Köpfe */
+  --text-body:       15px;  /* TT Norms Regular */
+  --text-sm:         13px;  /* Sekundärtext, Metadaten */
+  --text-label:      12px;  /* TT Norms Bold, uppercase, letter-spacing .06em */
+
+  /* Dichte-Dial (siehe SKILL.md) — 1 = luftig/Marketing, 3 = dicht/Cockpit */
+  --density-row:  44px;   /* Zeilenhöhe Listen/Tabellen */
+  --density-pad:  20px;   /* Innenabstand Karten */
+
+  --focus-ring-width: 2px;
+
+  /* Marken-Assets als Material. Pfade relativ zu dieser Datei; in
+     eigenstaendigen Vorlagen stattdessen als data:-URI einbetten. */
+  --tex-green: url("../../assets/backgrounds/bg-green-texture-1.jpg");
+  --tex-sand:  url("../../assets/backgrounds/bg-sand-texture-1.jpg");
+  --kv-dark:   url("../../assets/keyvisual/keyvisual-on-dark.png");
+  --kv-light:  url("../../assets/keyvisual/keyvisual-on-light.png");
+  --motion-fast: 120ms cubic-bezier(.4,0,.2,1);
+  --motion-base: 200ms cubic-bezier(.4,0,.2,1);
+}
+
+/* ---------------------------------------------------------------------------
+   EBENE 2a — NIGHT (Standard im Cockpit)
+
+   Flächenleiter: Deep Green ist der ANKER (--surface-1, die Karte — die Farbe,
+   an der die Marke erkannt wird). Die Arbeitsfläche darunter ist eine
+   abgedunkelte Stufe desselben Farbtons, kein neuer Farbwert und kein Schwarz.
+   Gleicher Hue (168.5°) und gleiche Sättigung (45.6%) über alle vier Stufen.
+   --------------------------------------------------------------------------- */
+:root,
+[data-bkm-theme="night"] {
+  --surface-0: #13322c;   /* Arbeitsfläche / Seitenhintergrund      L 13.5% */
+  --surface-1: #1c4b42;   /* Karte, Panel — Deep Green, der Anker   L 20.2% */
+  --surface-2: #235d52;   /* angehoben: Hover, aktive Zeile         L 25.0% */
+  --surface-3: #286c5f;   /* Popover, Dropdown, Modal               L 29.0% */
+  --surface-inset: #13322c;  /* Eingabefelder, Fortschritts-Spuren */
+
+  --text-primary:   #ffffff;   /* 9.84 auf s1 · 7.61 auf s2   AA */
+  --text-secondary: #c3d6d0;   /* 6.49 auf s1 · 5.02 auf s2   AA */
+  --text-muted:     #a8c2ba;   /* 5.20 auf s1 — NUR auf surface-0/1, nie auf s2 */
+  --text-on-accent: #1c4b42;
+
+  --line:        rgba(255,255,255,.10);  /* dekorative Trennlinie */
+  --line-strong: #5e9084;                /* bedeutungstragende Grenze (>=3:1) */
+
+  --accent:        #b4e717;   /* Lime — 6.74 auf s1 · 5.21 auf s2   AA */
+  --accent-hover:  #c9f04a;
+  --accent-quiet:  rgba(180,231,23,.14);  /* Fläche hinter aktiven Zuständen */
+
+  --status-success:    #8fd96e;   /* 5.77 auf s1 */
+  --status-warning:    #facc5e;   /* 6.50 auf s1 · 5.02 auf s2  AA */
+  --status-danger:     #ffa99c;   /* 5.34 auf s1 */
+  --status-info:       #9ad8e8;   /* 6.26 auf s1 · 4.84 auf s2  AA */
+  --status-success-bg: rgba(143,217,110,.14);
+  --status-warning-bg: rgba(250,204,94,.14);
+  --status-danger-bg:  rgba(255,169,156,.14);
+  --status-info-bg:    rgba(154,216,232,.14);
+
+  /* Datenvisualisierung — bewusst NICHT Lime. Lime bleibt interaktiv.
+     Die Rampe laeuft auf dunklem Grund AUFWAERTS (heller werdend); jede Stufe
+     haelt >=3:1 gegen die Karte. Eine ins Dunkle laufende Rampe macht die
+     unteren Werte unsichtbar. */
+  --data-1: #cfe8dd;  --data-2: #a9d2c3;  --data-3: #84bca9;  --data-4: #63a690;
+  --data-track: rgba(255,255,255,.10);
+
+  /* Grund: Markentextur, mit dem Flächentoken überdeckt — die Textur
+     moduliert nur, die gerechneten Kontraste bleiben gültig. */
+  --ground: linear-gradient(rgba(19,50,44,.90),rgba(19,50,44,.95)), var(--tex-green);
+
+  /* Material. Ein grosser weicher Schatten trägt auf dunklem Grund nicht —
+     eine Lichtkante oben und ein enger Schatten unten sehr wohl. Die
+     Lichtkante ist derselbe "inset highlight", den DESIGN.md für die
+     Stufe "Featured" vorsieht. */
+  --card-sheen: linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,0) 62%);
+  --elevation-card:       inset 0 1px 0 rgba(255,255,255,.09),
+                          0 1px 2px rgba(0,0,0,.30),
+                          0 14px 32px -18px rgba(0,0,0,.60);
+  --elevation-card-hover: inset 0 1px 0 rgba(255,255,255,.14),
+                          0 2px 4px rgba(0,0,0,.34),
+                          0 20px 40px -20px rgba(0,0,0,.70);
+  --elevation-overlay:    inset 0 1px 0 rgba(255,255,255,.10),
+                          0 24px 60px -20px rgba(0,0,0,.70);
+
+  /* Brillanz: Lichtkante, Streiflicht, Akzentschimmer, Akzentring.
+     Alles CSS — kein Displacement-Filter, keine Bibliothek, in jedem
+     Browser identisch. */
+  --rim:      inset 0 1px 0 rgba(255,255,255,.14), inset 0 0 0 1px rgba(255,255,255,.05);
+  --specular: linear-gradient(104deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,0) 24%,
+                                     rgba(255,255,255,0) 68%,rgba(255,255,255,.07) 100%);
+  --accent-glow: 0 0 26px -6px rgba(180,231,23,.50);
+  --ring-accent: inset 0 0 0 1px var(--accent);   /* Nacht: Lime */
+
+  /* Auswahl. Die GROESSE des Elements entscheidet die Form, nie die Farbe:
+     kleine Bedienelemente werden mit dem Akzent gefuellt, grosse Flaechen
+     bekommen Ring plus geduempfte Akzentflaeche. DESIGN.md: Lime nie auf
+     grossen Flaechen. */
+  --selected-fill:    var(--accent);
+  --selected-on-fill: var(--text-on-accent);
+  --selected-surface: var(--accent-quiet);
+  --selected-ring:    inset 0 0 0 2px var(--accent);
+
+  --chrome-glass: rgba(28,75,66,.78);
+  --kv: var(--kv-dark);
+  --kv-opacity: .16;
+
+  color-scheme: dark;
+}
+
+/* ---------------------------------------------------------------------------
+   EBENE 2b — DAY
+
+   Entspricht der Web-App-Tabelle aus docs/digitale-medien.md:
+   Background Sand White, Cards Clean White, Header Deep Green.
+   Hier gilt Shadow-as-Border (DESIGN.md) — auf hellem Grund trägt Schatten.
+
+   WICHTIG: Lime überlebt den Wechsel nicht (1.34 auf Sand White = FAIL).
+   Der Akzent schlägt auf Transition Green um — exakt das, was DESIGN.md für
+   helle Flächen ohnehin vorschreibt ("Tertiary: links, secondary actions and
+   hover states on light surfaces"). Kein Kompromiss, sondern die Regel.
+   --------------------------------------------------------------------------- */
+[data-bkm-theme="day"] {
+  --surface-0: #f6f5f2;
+  --surface-1: #ffffff;
+  --surface-2: #ffffff;
+  --surface-3: #ffffff;
+  --surface-inset: #f6f5f2;
+
+  --text-primary:   #1c4b42;   /* 9.02 auf Sand White   AA */
+  --text-secondary: #494949;   /* 8.26 auf Sand White   AA */
+  --text-muted:     #5f6b64;   /* 5.10 auf Sand White   AA */
+  --text-on-accent: #ffffff;
+
+  --line:        var(--bkm-outline-variant);
+  --line-strong: var(--bkm-outline);
+
+  --accent:        #287d4b;   /* 4.67 auf Sand · 5.09 auf Weiß   AA */
+  --accent-hover:  #1c4b42;
+  --accent-quiet:  rgba(40,125,75,.10);
+
+  --status-success:    #1f7a3d;   /* 4.93 auf Sand */
+  --status-warning:    #8a5a00;   /* 5.44 auf Sand */
+  --status-danger:     #b91c1c;   /* 5.93 auf Sand */
+  --status-info:       #1f6b7a;
+  --status-success-bg: rgba(31,122,61,.10);
+  --status-warning-bg: rgba(138,90,0,.10);
+  --status-danger-bg:  rgba(185,28,28,.09);
+  --status-info-bg:    rgba(31,107,122,.10);
+
+  --data-1: #287d4b;  --data-2: #4a9268;  --data-3: #6ba885;  --data-4: #8ebda3;
+  --data-track: rgba(28,75,66,.10);
+
+  --ground: linear-gradient(rgba(246,245,242,.84),rgba(246,245,242,.92)), var(--tex-sand);
+
+  /* Auf Hell trägt Schatten: Shadow-as-Border (DESIGN.md) plus Lichtkante. */
+  --card-sheen: linear-gradient(180deg,rgba(255,255,255,.9),rgba(255,255,255,0) 40%);
+  --elevation-card:       inset 0 1px 0 #fff,
+                          rgba(28,75,66,.10) 0 0 0 1px,
+                          rgba(28,75,66,.05) 0 2px 4px,
+                          rgba(28,75,66,.06) 0 14px 28px -16px;
+  --elevation-card-hover: inset 0 1px 0 #fff,
+                          rgba(28,75,66,.14) 0 0 0 1px,
+                          rgba(28,75,66,.07) 0 4px 8px,
+                          rgba(28,75,66,.10) 0 20px 36px -18px;
+  --elevation-overlay:    rgba(28,75,66,.12) 0 0 0 1px,
+                          rgba(28,75,66,.16) 0 24px 48px -16px;
+
+  /* Auf hellem Grund traegt eine saubere Kante, kein Leuchten. */
+  --rim:      inset 0 1px 0 #fff, inset 0 0 0 1px rgba(28,75,66,.06);
+  --specular: linear-gradient(104deg,rgba(255,255,255,.14) 0%,rgba(255,255,255,0) 26%,
+                                     rgba(255,255,255,0) 70%,rgba(255,255,255,.10) 100%);
+  --accent-glow: none;
+  --ring-accent: inset 0 0 0 1px var(--accent);   /* Tag: Transition Green */
+
+  --selected-fill:    var(--accent);
+  --selected-on-fill: var(--text-on-accent);
+  --selected-surface: var(--accent-quiet);
+  --selected-ring:    inset 0 0 0 2px var(--accent);
+
+  --chrome-glass: rgba(28,75,66,.90);
+  --kv: var(--kv-light);
+  --kv-opacity: .22;
+
+  color-scheme: light;
+}
+
+/* Ohne gesetztes data-theme gilt Night — die Tokens stehen bereits auf :root.
+   Der Umschalter setzt data-bkm-theme="day" | "night" auf <html>.
+   Eigener Attributname, damit er nicht mit dem data-theme kollidiert, das
+   Host-Umgebungen (z. B. eingebettete Vorschauen) selbst setzen. */
+
+/* ---------------------------------------------------------------------------
+   CHROME — Kopfleiste / Navigation
+
+   Bewusst themeunabhängig: die Kopfleiste bleibt in beiden Themes Deep Green
+   (so schreibt es docs/digitale-medien.md für Web-Apps vor: "Header/Footer =
+   Deep Green"). Nur die Arbeitsfläche darunter wechselt. Das hält die
+   Markenwiedererkennung konstant und macht den Umschalter ruhiger.
+   --------------------------------------------------------------------------- */
+:root {
+  --chrome-line: rgba(255,255,255,.14);
+}
+
+/* Nacht: Deep Green, Akzent Lime */
+:root,
+[data-bkm-theme="night"] {
+  --chrome-surface:  #1c4b42;
+  --chrome-glass:    rgba(28,75,66,.66);
+  --chrome-text:     #ffffff;   /* 9.84 */
+  --chrome-muted:    #a8c2ba;   /* 5.20 */
+  --chrome-accent:   #b4e717;   /* 6.74 */
+  --chrome-on-accent:#1c4b42;   /* 6.74 auf Lime */
+  --chrome-glow:     0 0 18px -6px rgba(180,231,23,.55);
+}
+
+/* Tag: Transition Green, Akzent WEISS.
+   Lime auf Transition Green liegt bei 3.49 und ist damit nur für großen Text
+   zulässig — für Bedienelemente ausgeschlossen (Kontrastmatrix, DESIGN.md).
+   Der gedämpfte Ton muss hier sehr nah an Weiß liegen: die Fläche ist hell,
+   Weiß selbst erreicht nur 5.09, mehr ist nicht zu holen. */
+[data-bkm-theme="day"] {
+  --chrome-surface:  #287d4b;
+  --chrome-glass:    rgba(40,125,75,.86);
+  --chrome-text:     #ffffff;   /* 5.09 */
+  --chrome-muted:    #eaf4ee;   /* 4.53 */
+  --chrome-accent:   #ffffff;   /* 5.09 */
+  --chrome-on-accent:#287d4b;   /* 5.09 auf Weiß */
+  --chrome-glow:     none;      /* auf heller Fläche wirkt Leuchten schmutzig */
+}

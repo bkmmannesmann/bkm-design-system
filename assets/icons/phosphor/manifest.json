@@ -424,6 +424,78 @@
       "weight": "bold",
       "path": "bold/check-circle.svg",
       "purpose": "Bestätigung und positive Statusmarkierung"
+    },
+    {
+      "name": "sun",
+      "weight": "bold",
+      "path": "bold/sun.svg",
+      "purpose": "Tagansicht im Darstellungs-Umschalter"
+    },
+    {
+      "name": "moon",
+      "weight": "bold",
+      "path": "bold/moon.svg",
+      "purpose": "Nachtansicht im Darstellungs-Umschalter"
+    },
+    {
+      "name": "sign-out",
+      "weight": "bold",
+      "path": "bold/sign-out.svg",
+      "purpose": "Abmelden und Sitzung beenden"
+    },
+    {
+      "name": "bell",
+      "weight": "bold",
+      "path": "bold/bell.svg",
+      "purpose": "Benachrichtigung und Erinnerung"
+    },
+    {
+      "name": "dots-three",
+      "weight": "bold",
+      "path": "bold/dots-three.svg",
+      "purpose": "Weitere Aktionen zu einem Element"
+    },
+    {
+      "name": "sort-ascending",
+      "weight": "bold",
+      "path": "bold/sort-ascending.svg",
+      "purpose": "Sortierung in Tabellen und Listen"
+    },
+    {
+      "name": "funnel-simple",
+      "weight": "bold",
+      "path": "bold/funnel-simple.svg",
+      "purpose": "Filter in Listen und Suchergebnissen"
+    },
+    {
+      "name": "caret-up-down",
+      "weight": "bold",
+      "path": "bold/caret-up-down.svg",
+      "purpose": "Auswahlfeld und sortierbare Spalte"
+    },
+    {
+      "name": "upload-simple",
+      "weight": "bold",
+      "path": "bold/upload-simple.svg",
+      "purpose": "Datei oder Foto hochladen"
+    },
+    {
+      "name": "camera",
+      "weight": "bold",
+      "path": "bold/camera.svg",
+      "purpose": "Foto aufnehmen und Pflichtfoto"
+    },
+    {
+      "name": "video",
+      "weight": "bold",
+      "path": "bold/video.svg",
+      "purpose": "Anwendungsvideo und Videoanleitung"
+    },
+    {
+      "name": "youtube-logo",
+      "weight": "bold",
+      "path": "bold/youtube-logo.svg",
+      "purpose": "Verweis auf den BKM-YouTube-Kanal"
     }
   ]
 }
