@@ -137,6 +137,15 @@
   --elevation-overlay:    inset 0 1px 0 rgba(255,255,255,.10),
                           0 24px 60px -20px rgba(0,0,0,.70);
 
+  /* Brillanz: Lichtkante, Streiflicht, Akzentschimmer, Akzentring.
+     Alles CSS — kein Displacement-Filter, keine Bibliothek, in jedem
+     Browser identisch. */
+  --rim:      inset 0 1px 0 rgba(255,255,255,.14), inset 0 0 0 1px rgba(255,255,255,.05);
+  --specular: linear-gradient(104deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,0) 24%,
+                                     rgba(255,255,255,0) 68%,rgba(255,255,255,.07) 100%);
+  --accent-glow: 0 0 26px -6px rgba(180,231,23,.50);
+  --ring-accent: inset 0 0 0 1px var(--accent);   /* Nacht: Lime */
+
   --chrome-glass: rgba(28,75,66,.78);
   --kv: var(--kv-dark);
   --kv-opacity: .16;
@@ -201,6 +210,13 @@
                           rgba(28,75,66,.10) 0 20px 36px -18px;
   --elevation-overlay:    rgba(28,75,66,.12) 0 0 0 1px,
                           rgba(28,75,66,.16) 0 24px 48px -16px;
+
+  /* Auf hellem Grund traegt eine saubere Kante, kein Leuchten. */
+  --rim:      inset 0 1px 0 #fff, inset 0 0 0 1px rgba(28,75,66,.06);
+  --specular: linear-gradient(104deg,rgba(255,255,255,.14) 0%,rgba(255,255,255,0) 26%,
+                                     rgba(255,255,255,0) 70%,rgba(255,255,255,.10) 100%);
+  --accent-glow: none;
+  --ring-accent: inset 0 0 0 1px var(--accent);   /* Tag: Transition Green */
 
   --chrome-glass: rgba(28,75,66,.90);
   --kv: var(--kv-light);

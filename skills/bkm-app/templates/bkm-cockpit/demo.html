@@ -88,6 +88,9 @@
   --specular:linear-gradient(104deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,0) 24%,
                                     rgba(255,255,255,0) 68%,rgba(255,255,255,.07) 100%);
   --accent-glow:0 0 26px -6px rgba(180,231,23,.50);
+  /* Akzentring beim Hover. --accent traegt den Themeunterschied:
+     Nacht Lime, Tag Transition Green. */
+  --ring-accent:inset 0 0 0 1px var(--accent);
   --kv:var(--kv-dark);
   --kv-opacity:.16;
   color-scheme:dark;
@@ -129,6 +132,7 @@
   --specular:linear-gradient(104deg,rgba(255,255,255,.14) 0%,rgba(255,255,255,0) 26%,
                                     rgba(255,255,255,0) 70%,rgba(255,255,255,.10) 100%);
   --accent-glow:none;
+  --ring-accent:inset 0 0 0 1px var(--accent);
   --kv:var(--kv-light);
   --kv-opacity:.22;
   color-scheme:light;
@@ -371,7 +375,12 @@ svg,use{fill:currentColor}
 }
 .tile:hover{
   transform:translateY(-3px);
-  box-shadow:var(--elevation-card-hover);
+  box-shadow:var(--ring-accent), var(--elevation-card-hover);
+  background:var(--card-sheen), var(--surface-2);
+}
+/* Tastaturbedienung sieht dasselbe wie die Maus. */
+.tile:focus-visible{
+  box-shadow:var(--ring-accent), var(--elevation-card-hover);
   background:var(--card-sheen), var(--surface-2);
 }
 .tile__icon{
@@ -429,7 +438,7 @@ svg,use{fill:currentColor}
   border-radius:var(--radius-control); cursor:pointer;
   transition:background var(--motion-fast);
 }
-.row:hover{background:var(--accent-quiet)}
+.row:hover{background:var(--accent-quiet);box-shadow:var(--ring-accent)}
 .row + .row{border-top:1px solid var(--line)}
 .row__title{font-size:var(--text-body);font-weight:700;line-height:1.35}
 .row__sub{font-size:var(--text-sm);color:var(--text-secondary);line-height:1.35}
