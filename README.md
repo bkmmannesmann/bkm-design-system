@@ -34,17 +34,31 @@ This repository contains the complete design system for BKM Mannesmann AG, a man
 | `skills/bkm-slides/templates/<family>/demo.html` | **Self-contained golden-reference decks** (embedded fonts, logo, textures) — the actual starting point | |
 | `skills/bkm-slides/STYLE_PRESETS.md` | Exact CSS tokens for glassmorphism slides (both contexts) | |
 | `skills/bkm-slides/PATTERN_CATALOG.md` | Allowed and forbidden patterns with exact CSS values | |
+| `skills/bkm-app/SKILL.md` | App-UI skill entry point — 24 binding rules for tools people work in daily | |
+| `skills/bkm-app/QUICKSTART.md` | **How to build or convert an on-brand app UI (start here)** — ready-to-copy prompts | |
+| `skills/bkm-app/tokens.css` | **Canonical app tokens** — semantic layer, Day/Night themes, computed contrasts | |
+| `skills/bkm-app/templates/bkm-cockpit/demo.html` | **Self-contained golden-reference cockpit** (eight views, embedded fonts, logo, icons) | |
+| `skills/bkm-app/MIGRATION.md` | Converting a running application — current state, deltas, four stages | |
 
 ## Quick Start
 
 ### For AI Agents (Cursor, Copilot, Manus, etc.)
 
-**For Websites, Landing Pages, Web Apps:**
+**For Websites and Landing Pages:**
 
 ```
 Read the DESIGN.md and AGENTS.md from https://github.com/bkmmannesmann/bkm-design-system
-and create [a landing page / web app / etc.] following the BKM Mannesmann design.
+and create [a landing page / marketing site / etc.] following the BKM Mannesmann design.
 ```
+
+**For Web Apps, Cockpits, Portals and Internal Tools — read `skills/bkm-app/QUICKSTART.md` first.**
+
+> ⚠️ A **working surface** someone uses 50 times a day is not a landing page. Deriving one from
+> `DESIGN.md` alone yields the marketing look: display headlines above a customer list, Lime as
+> decoration, no status system, no states. `skills/bkm-app/` adds the missing medium — a semantic
+> token layer (so the Day/Night switch works at all), a status system, and a self-contained
+> reference cockpit. Same rule as for decks: **start from the template and replace only the
+> content.** To convert an application that already exists, follow `skills/bkm-app/MIGRATION.md`.
 
 **For Slide Presentations — read `skills/bkm-slides/QUICKSTART.md` first.**
 
@@ -103,7 +117,7 @@ The BKM system is built on five pillars:
 1. **Dual-Mode Architecture** — Deep Green marketing surfaces alternate with Sand White documentation surfaces
 2. **Shadow-as-Border** — Multi-layer box-shadow stacks replace traditional CSS borders (inspired by Vercel)
 3. **Product-Line Geometry** — Angular (0–4px) for Pro Line, Rounded (pill) for Home Line
-4. **Single-Accent Strategy** — Lime Green (`#b4e717`) exclusively for interactive elements
+4. **Single-Accent Strategy** — Lime Green (`#b4e717`) exclusively for interactive elements, on dark surfaces. On light surfaces the accent shifts to Transition Green (`#287d4b`) — Lime on Sand White has a contrast ratio of 1.34 and fails
 5. **Two-Voice Typography** — Unbounded (announce), TT Norms Pro Regular + Bold (read + specify)
 6. **Icon Continuity** — Only curated Phosphor Bold and Fill icons, used consistently across digital and print media; technical data sheets use the fixed renderer-safe set in `assets/icons/tds/`
 
@@ -112,6 +126,7 @@ The BKM system is built on five pillars:
 This design system can be applied to generate:
 
 - Websites (React, HTML/CSS, Tailwind, Next.js)
+- Web applications (cockpits, portals, internal tools — see `skills/bkm-app/`)
 - Slide presentations (PowerPoint, Google Slides, image-based)
 - Instagram Carousel Posts (4:5 or 1:1)
 - Print documents (brochures, technical data sheets, labels)
