@@ -894,6 +894,205 @@ svg:not([width]){width:1em;height:1em}
 .hint{font-size:var(--text-sm);color:var(--text-muted);margin:var(--space-lg) 0 0}
 
 /* ===========================================================================
+   FALLANSICHT — Erfassung links, Einschaetzung rechts
+   =========================================================================== */
+
+/* Werkzeugleiste des Falls: klebt unter der Brotkrume, damit Speichern und
+   Abschliessen nie weggescrollt sind. */
+.casebar{
+  display:flex;align-items:center;gap:var(--space-md);flex-wrap:wrap;
+  padding:var(--space-md) 0;
+}
+.casebar__title{display:flex;align-items:center;gap:var(--space-sm);flex-wrap:wrap;min-width:0}
+/* Ein Kundenname ist Inhalt, keine Ankuendigung — TT Norms, nicht Unbounded. */
+.casebar__name{font-size:20px;font-weight:700;line-height:1.2}
+.casebar__actions{margin-left:auto;display:flex;gap:var(--space-xs);flex-wrap:wrap}
+
+/* Schrittleiste mit echtem Zustand statt gleich aussehender Reiter */
+.stepper{
+  display:flex;gap:var(--space-2xs);padding:3px;margin-bottom:var(--space-lg);
+  background:var(--surface-inset);border-radius:var(--radius-switch);
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.18);overflow-x:auto;
+}
+.step{
+  display:inline-flex;align-items:center;gap:8px;flex:1 0 auto;
+  padding:9px 13px;border:0;background:transparent;cursor:pointer;
+  border-radius:var(--radius-switch-inner);white-space:nowrap;
+  font-size:var(--text-sm);font-weight:700;color:var(--text-secondary);
+  transition:color var(--motion-fast),background var(--motion-fast);
+}
+.step:hover{color:var(--text-primary)}
+.step[aria-selected="true"]{
+  background:var(--selected-fill);color:var(--selected-on-fill);
+  box-shadow:0 1px 3px rgba(0,0,0,.25),var(--accent-glow);
+}
+/* Der Punkt traegt den Fortschritt: erledigt, offen, lueckenhaft. */
+.step__dot{
+  width:19px;height:19px;flex-shrink:0;border-radius:var(--radius-avatar);
+  display:grid;place-items:center;font-size:10px;font-weight:700;
+  background:var(--data-track);color:var(--text-secondary);
+}
+.step__dot svg{width:11px;height:11px}
+.step--done .step__dot{background:var(--status-success);color:var(--surface-1)}
+.step--gap  .step__dot{background:var(--status-warning);color:var(--surface-1)}
+.step[aria-selected="true"] .step__dot{background:rgba(0,0,0,.16);color:inherit}
+
+/* Zweispaltig: links wird gearbeitet, rechts steht die Bewertung */
+.case{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:var(--space-md);
+  align-items:start}
+/* Die Spalte ist hoeher als der Bildschirm. Ein blosses sticky wuerde ihren
+   unteren Teil unerreichbar machen, deshalb scrollt sie in sich selbst.
+   Der Versatz entspricht Kopfleiste (62) + Brotkrume (42) + Luft. */
+.case__rail{
+  position:sticky;top:116px;display:grid;gap:var(--space-sm);
+  max-height:calc(100vh - 132px);overflow-y:auto;
+  padding-right:var(--space-2xs);
+  scrollbar-width:thin;
+  scrollbar-color:var(--line-strong) transparent;
+}
+.case__rail::-webkit-scrollbar{width:8px}
+.case__rail::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:4px}
+.case__rail::-webkit-scrollbar-track{background:transparent}
+
+/* --- Formular -------------------------------------------------------------- */
+.form{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-md)}
+.form__full{grid-column:1 / -1}
+.formfield{display:grid;gap:6px;min-width:0}
+.formfield > span{font-size:var(--text-sm);font-weight:700;color:var(--text-secondary)}
+.formfield__req{color:var(--status-warning)}
+.formfield input,.formfield select,.formfield textarea{
+  width:100%;min-width:0;height:46px;padding:0 var(--space-sm);
+  background:var(--surface-inset);color:var(--text-primary);
+  border:1px solid var(--line-strong);border-radius:var(--radius-input);
+  font-family:inherit;font-size:var(--text-body);outline:0;
+  transition:border-color var(--motion-fast),box-shadow var(--motion-fast);
+}
+.formfield textarea{height:auto;padding:10px var(--space-sm);resize:vertical;min-height:84px}
+.formfield input:focus,.formfield select:focus,.formfield textarea:focus{
+  border-color:var(--accent);box-shadow:var(--ring-accent);
+}
+.formfield input::placeholder{color:var(--text-muted)}
+.check{display:flex;align-items:center;gap:10px;cursor:pointer;
+  font-size:var(--text-body);font-weight:700}
+.check input{width:20px;height:20px;accent-color:var(--accent);cursor:pointer}
+
+/* --- Bewertungsspalte ------------------------------------------------------ */
+.rail{
+  background:var(--card-sheen),var(--surface-1);border-radius:var(--radius-card);
+  box-shadow:var(--elevation-card);padding:var(--density-pad);
+}
+.rail > * + *{margin-top:var(--space-md)}
+.score{display:flex;align-items:center;gap:var(--space-md)}
+.score > span:last-child{min-width:0}
+.score__grade{
+  width:54px;height:54px;flex-shrink:0;border-radius:var(--radius-avatar);
+  display:grid;place-items:center;
+  font-family:var(--font-display);font-weight:900;font-size:26px;line-height:1;
+  background:var(--status-warning-bg);color:var(--status-warning);
+  box-shadow:inset 0 0 0 2px var(--status-warning);
+}
+.score__cause{display:block;font-size:18px;font-weight:700;line-height:1.25;text-wrap:balance}
+.score__prob{display:block;font-size:var(--text-sm);color:var(--text-secondary);margin-top:3px}
+.score__prob b{color:var(--text-primary)}
+
+.meter__head{display:flex;align-items:baseline;justify-content:space-between;gap:var(--space-sm);
+  margin-bottom:6px}
+.meter__label{font-size:var(--text-sm);font-weight:700;color:var(--text-secondary)}
+.meter__value{font-size:var(--text-sm);font-weight:700;font-variant-numeric:tabular-nums}
+.meter__track{height:7px;border-radius:4px;background:var(--data-track);overflow:hidden;
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.18)}
+.meter__fill{height:100%;border-radius:4px;background:var(--progress-fill);
+  box-shadow:var(--progress-edge)}
+
+/* Fakten als Paare, nicht als Fliesstext */
+.facts{display:grid;gap:0;margin:0}
+.fact{display:flex;align-items:baseline;justify-content:space-between;gap:var(--space-sm);
+  padding:9px 0;border-bottom:1px solid var(--line);font-size:var(--text-sm)}
+.fact:last-child{border-bottom:0}
+.fact__key{color:var(--text-secondary);flex-shrink:0}
+.fact__val{font-weight:700;text-align:right;min-width:0}
+
+/* Was noch fehlt — der handlungsfaehige Teil, deshalb weit oben */
+.todo{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.todo li{display:flex;align-items:flex-start;gap:9px;padding:7px 0;
+  font-size:var(--text-sm);line-height:1.45}
+.todo li::before{
+  content:"";width:7px;height:7px;margin-top:6px;flex-shrink:0;
+  border-radius:var(--radius-avatar);background:var(--status-warning);
+}
+.todo li b{font-weight:700}
+
+/* Belege einklappbar: verfuegbar, aber nicht als Textwand ausgekippt */
+.disc{border-top:1px solid var(--line);padding-top:var(--space-sm)}
+.disc > summary{
+  display:flex;align-items:center;gap:8px;cursor:pointer;list-style:none;
+  font-size:var(--text-sm);font-weight:700;color:var(--text-secondary);
+  padding:4px 0;
+}
+.disc > summary::-webkit-details-marker{display:none}
+.disc > summary:hover{color:var(--text-primary)}
+.disc > summary::after{
+  content:"";width:7px;height:7px;margin-left:auto;flex-shrink:0;
+  border-right:2px solid currentColor;border-bottom:2px solid currentColor;
+  transform:rotate(45deg) translate(-2px,-2px);transition:transform var(--motion-fast);
+}
+.disc[open] > summary::after{transform:rotate(-135deg) translate(-2px,-2px)}
+.disc__body{padding:var(--space-xs) 0 var(--space-sm);font-size:var(--text-sm);
+  color:var(--text-secondary);line-height:1.55}
+.disc__body p{margin:0 0 var(--space-xs)}
+.disc__body ul{margin:0;padding-left:1.1em;display:grid;gap:5px}
+
+/* --- Geodaten als Befundliste statt Textwand ------------------------------- */
+.findings{display:grid;gap:0}
+.finding{display:grid;grid-template-columns:120px 1fr auto;gap:var(--space-sm);
+  align-items:start;padding:var(--space-sm) 0;border-bottom:1px solid var(--line)}
+.finding:last-child{border-bottom:0}
+.finding__key{display:flex;align-items:center;gap:8px;
+  font-size:var(--text-label);font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--text-secondary)}
+.finding__dot{width:7px;height:7px;border-radius:var(--radius-avatar);flex-shrink:0}
+.finding__text{font-size:var(--text-sm);line-height:1.5;color:var(--text-secondary);min-width:0}
+.finding__text b{color:var(--text-primary)}
+
+/* --- Fotos ----------------------------------------------------------------- */
+.photos{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-sm)}
+.photo{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  aspect-ratio:4/3;padding:var(--space-sm);text-align:center;cursor:pointer;
+  background:var(--surface-inset);border:1px dashed var(--line-strong);
+  border-radius:var(--radius-input);color:var(--text-secondary);
+  font-size:var(--text-sm);font-weight:700;
+  transition:border-color var(--motion-fast),color var(--motion-fast);
+}
+.photo:hover,.photo:focus-visible{border-color:var(--accent);color:var(--accent)}
+.photo svg{width:22px;height:22px}
+.photo--done{border-style:solid;border-color:var(--status-success);
+  color:var(--status-success);background:var(--status-success-bg)}
+
+/* --- Fragen ---------------------------------------------------------------- */
+.qlist{list-style:none;margin:0;padding:0}
+.q{display:flex;align-items:flex-start;gap:var(--space-md);
+  padding:var(--space-sm) 0;border-bottom:1px solid var(--line)}
+.q:last-child{border-bottom:0}
+.q__code{font-size:var(--text-sm);font-weight:700;color:var(--text-muted);
+  font-variant-numeric:tabular-nums;flex-shrink:0;min-width:52px}
+.q__text{font-size:var(--text-body);line-height:1.45;min-width:0;flex:1}
+.q__hint{display:block;font-size:var(--text-sm);color:var(--text-secondary);margin-top:2px}
+
+/* --- Hinweiskasten --------------------------------------------------------- */
+.note{
+  padding:var(--space-md);border-radius:var(--radius-input);
+  font-size:var(--text-sm);line-height:1.55;
+  background:var(--status-warning-bg);color:var(--text-primary);
+  box-shadow:inset 3px 0 0 var(--status-warning);
+}
+.note--info{background:var(--status-info-bg);box-shadow:inset 3px 0 0 var(--status-info)}
+.note b{font-weight:700}
+.note p{margin:0 0 var(--space-xs)}
+.note p:last-child{margin:0}
+.small{font-size:var(--text-sm);color:var(--text-muted);line-height:1.5}
+
+/* ===========================================================================
    RESPONSIV — dieselbe Bedienbarkeit auf Desktop, Tablet und Smartphone
 
    Zwei Achsen, die oft verwechselt werden:
@@ -911,6 +1110,10 @@ svg:not([width]){width:1em;height:1em}
 
 /* --- Tablet hoch: Chrome-Knöpfe werden zu Icons --------------------------- */
 @media (max-width:1100px){
+  /* Die Bewertung rutscht unter die Erfassung, statt sich totzuquetschen */
+  .case{grid-template-columns:1fr}
+  .case__rail{position:static;max-height:none;overflow:visible;padding-right:0}
+  .photos{grid-template-columns:repeat(3,1fr)}
   .products,.cats{grid-template-columns:repeat(3,1fr)}
   .kpis{grid-template-columns:repeat(2,1fr)}
   .split{grid-template-columns:1fr}
@@ -948,6 +1151,10 @@ svg:not([width]){width:1em;height:1em}
   .page{padding-inline:var(--space-md)}
 
   .products,.cats{grid-template-columns:repeat(2,1fr)}
+  .form{grid-template-columns:1fr}
+  .photos{grid-template-columns:repeat(2,1fr)}
+  .finding{grid-template-columns:1fr;gap:4px}
+  .casebar__actions{margin-left:0;width:100%}
   .filterbar{grid-template-columns:1fr}
   .docs,.rules{grid-template-columns:1fr}
   .panel__head{flex-wrap:wrap;row-gap:var(--space-xs)}
@@ -1018,6 +1225,8 @@ svg:not([width]){width:1em;height:1em}
   [data-bkm-theme="night"] .theme-toggle::after{transform:translateX(48px)}
   .chrome-btn,.brand,.menu__trigger{min-height:44px}
   .crumbs{min-height:52px}
+  .step{padding:12px 14px}
+  .photo{min-height:120px}
   .crumbs__home,.crumbs__current{min-height:44px}
   .search{min-height:44px}
   .row{min-height:56px}
@@ -1033,8 +1242,10 @@ svg:not([width]){width:1em;height:1em}
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="i-arrow-right" viewBox="0 0 256 256" fill="currentColor"><path d="M224.49,136.49l-72,72a12,12,0,0,1-17-17L187,140H40a12,12,0,0,1,0-24H187L135.51,64.48a12,12,0,0,1,17-17l72,72A12,12,0,0,1,224.49,136.49Z"/></symbol>
 <symbol id="i-book-open" viewBox="0 0 256 256" fill="currentColor"><path d="M224,44H160a43.86,43.86,0,0,0-32,13.85A43.86,43.86,0,0,0,96,44H32A20,20,0,0,0,12,64V192a20,20,0,0,0,20,20H96a20,20,0,0,1,20,20,12,12,0,0,0,24,0,20,20,0,0,1,20-20h64a20,20,0,0,0,20-20V64A20,20,0,0,0,224,44ZM96,188H36V68H96a20,20,0,0,1,20,20V192.81A43.79,43.79,0,0,0,96,188Zm124,0H160a43.71,43.71,0,0,0-20,4.83V88a20,20,0,0,1,20-20h60Z"/></symbol>
+<symbol id="i-camera" viewBox="0 0 256 256" fill="currentColor"><path d="M208,52H182.42L170,33.34A12,12,0,0,0,160,28H96a12,12,0,0,0-10,5.34L73.57,52H48A28,28,0,0,0,20,80V192a28,28,0,0,0,28,28H208a28,28,0,0,0,28-28V80A28,28,0,0,0,208,52Zm4,140a4,4,0,0,1-4,4H48a4,4,0,0,1-4-4V80a4,4,0,0,1,4-4H80a12,12,0,0,0,10-5.34L102.42,52h51.15L166,70.66A12,12,0,0,0,176,76h32a4,4,0,0,1,4,4ZM128,84a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,84Zm0,72a24,24,0,1,1,24-24A24,24,0,0,1,128,156Z"/></symbol>
 <symbol id="i-caret-right" viewBox="0 0 256 256" fill="currentColor"><path d="M184.49,136.49l-80,80a12,12,0,0,1-17-17L159,128,87.51,56.49a12,12,0,1,1,17-17l80,80A12,12,0,0,1,184.49,136.49Z"/></symbol>
 <symbol id="i-chalkboard-teacher" viewBox="0 0 256 256" fill="currentColor"><path d="M56,84A12,12,0,0,1,68,72H188a12,12,0,0,1,12,12v88a12,12,0,0,1-24,0V96H68A12,12,0,0,1,56,84ZM236,56V200a20,20,0,0,1-20,20H149.26a12,12,0,0,1-11.4-8.26,36,36,0,0,0-67.74,0A12,12,0,0,1,58.74,220H40a20,20,0,0,1-20-20V56A20,20,0,0,1,40,36H216A20,20,0,0,1,236,56ZM104,164a16,16,0,1,0-16-16A16,16,0,0,0,104,164ZM212,60H44V196h6.92a60.18,60.18,0,0,1,21.76-23.16,40,40,0,1,1,62.64,0A60.18,60.18,0,0,1,157.08,196H212Z"/></symbol>
+<symbol id="i-check" viewBox="0 0 256 256" fill="currentColor"><path d="M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z"/></symbol>
 <symbol id="i-check-circle" viewBox="0 0 256 256" fill="currentColor"><path d="M176.49,95.51a12,12,0,0,1,0,17l-56,56a12,12,0,0,1-17,0l-24-24a12,12,0,1,1,17-17L112,143l47.51-47.52A12,12,0,0,1,176.49,95.51ZM236,128A108,108,0,1,1,128,20,108.12,108.12,0,0,1,236,128Zm-24,0a84,84,0,1,0-84,84A84.09,84.09,0,0,0,212,128Z"/></symbol>
 <symbol id="i-clipboard-text" viewBox="0 0 256 256" fill="currentColor"><path d="M172,156a12,12,0,0,1-12,12H96a12,12,0,0,1,0-24h64A12,12,0,0,1,172,156Zm-12-52H96a12,12,0,0,0,0,24h64a12,12,0,0,0,0-24Zm60-56V216a20,20,0,0,1-20,20H56a20,20,0,0,1-20-20V48A20,20,0,0,1,56,28H90.53a51.88,51.88,0,0,1,74.94,0H200A20,20,0,0,1,220,48ZM128,36a28,28,0,0,0-27.71,24h55.42A28,28,0,0,0,128,36Zm68,16H178.59A52.13,52.13,0,0,1,180,64v8a12,12,0,0,1-12,12H88A12,12,0,0,1,76,72V64a52.13,52.13,0,0,1,1.41-12H60V212H196Z"/></symbol>
 <symbol id="i-download-simple" viewBox="0 0 256 256" fill="currentColor"><path d="M228,152v56a20,20,0,0,1-20,20H48a20,20,0,0,1-20-20V152a12,12,0,0,1,24,0v52H204V152a12,12,0,0,1,24,0Zm-108.49,8.49a12,12,0,0,0,17,0l40-40a12,12,0,0,0-17-17L140,123V40a12,12,0,0,0-24,0v83L96.49,103.51a12,12,0,0,0-17,17Z"/></symbol>
@@ -1055,6 +1266,7 @@ svg:not([width]){width:1em;height:1em}
 <symbol id="i-sign-out" viewBox="0 0 256 256" fill="currentColor"><path d="M116,216a12,12,0,0,1-12,12H48a20,20,0,0,1-20-20V48A20,20,0,0,1,48,28h56a12,12,0,0,1,0,24H52V204h52A12,12,0,0,1,116,216Zm108.49-96.49-40-40a12,12,0,0,0-17,17L187,116H104a12,12,0,0,0,0,24h83l-19.52,19.51a12,12,0,0,0,17,17l40-40A12,12,0,0,0,224.49,119.51Z"/></symbol>
 <symbol id="i-stack" viewBox="0 0 256 256" fill="currentColor"><path d="M234.36,170A12,12,0,0,1,230,186.37l-96,56a12,12,0,0,1-12.1,0l-96-56a12,12,0,0,1,12.09-20.74l90,52.48L218,165.63A12,12,0,0,1,234.36,170ZM218,117.63,128,170.11,38.05,117.63A12,12,0,0,0,26,138.37l96,56a12,12,0,0,0,12.1,0l96-56A12,12,0,0,0,218,117.63ZM20,80a12,12,0,0,1,6-10.37l96-56a12.06,12.06,0,0,1,12.1,0l96,56a12,12,0,0,1,0,20.74l-96,56a12,12,0,0,1-12.1,0l-96-56A12,12,0,0,1,20,80Zm35.82,0L128,122.11,200.18,80,128,37.89Z"/></symbol>
 <symbol id="i-sun" viewBox="0 0 256 256" fill="currentColor"><path d="M116,32V16a12,12,0,0,1,24,0V32a12,12,0,0,1-24,0Zm80,96a68,68,0,1,1-68-68A68.07,68.07,0,0,1,196,128Zm-24,0a44,44,0,1,0-44,44A44.05,44.05,0,0,0,172,128ZM51.51,68.49a12,12,0,1,0,17-17l-12-12a12,12,0,0,0-17,17Zm0,119-12,12a12,12,0,0,0,17,17l12-12a12,12,0,1,0-17-17ZM196,72a12,12,0,0,0,8.49-3.51l12-12a12,12,0,0,0-17-17l-12,12A12,12,0,0,0,196,72Zm8.49,115.51a12,12,0,0,0-17,17l12,12a12,12,0,0,0,17-17ZM44,128a12,12,0,0,0-12-12H16a12,12,0,0,0,0,24H32A12,12,0,0,0,44,128Zm84,84a12,12,0,0,0-12,12v16a12,12,0,0,0,24,0V224A12,12,0,0,0,128,212Zm112-96H224a12,12,0,0,0,0,24h16a12,12,0,0,0,0-24Z"/></symbol>
+<symbol id="i-upload-simple" viewBox="0 0 256 256" fill="currentColor"><path d="M228,152v56a20,20,0,0,1-20,20H48a20,20,0,0,1-20-20V152a12,12,0,0,1,24,0v52H204V152a12,12,0,0,1,24,0ZM96.49,88.49,116,69v83a12,12,0,0,0,24,0V69l19.51,19.52a12,12,0,0,0,17-17l-40-40a12,12,0,0,0-17,0l-40,40a12,12,0,0,0,17,17Z"/></symbol>
 <symbol id="i-video" viewBox="0 0 256 256" fill="currentColor"><path d="M216,36H40A20,20,0,0,0,20,56V160a20,20,0,0,0,20,20H216a20,20,0,0,0,20-20V56A20,20,0,0,0,216,36Zm-4,120H44V60H212Zm24,52a12,12,0,0,1-12,12H32a12,12,0,0,1,0-24H224A12,12,0,0,1,236,208ZM104,128V88a12,12,0,0,1,18.36-10.18l32,20a12,12,0,0,1,0,20.36l-32,20A12,12,0,0,1,104,128Z"/></symbol>
 <symbol id="i-youtube-logo" viewBox="0 0 256 256" fill="currentColor"><path d="M170.49,117.91l-56-36A12,12,0,0,0,96,92v72a12,12,0,0,0,18.49,10.09l56-36a12,12,0,0,0,0-20.18ZM120,142V114l21.81,14Zm118.21-73.5a28.05,28.05,0,0,0-16.93-19.14C186.4,35.91,131.29,36,128,36s-58.4-.09-93.28,13.38A28.05,28.05,0,0,0,17.79,68.52C15.15,78.72,12,97.32,12,128s3.15,49.28,5.79,59.48a28.05,28.05,0,0,0,16.93,19.14C68.21,219.55,120.36,220,127.37,220h1.26c7,0,59.16-.45,92.65-13.38a28.05,28.05,0,0,0,16.93-19.14c2.64-10.2,5.79-28.8,5.79-59.48S240.85,78.72,238.21,68.52ZM215,181.46a4,4,0,0,1-2.34,2.77C182.78,195.76,132.27,196,128.32,196h-.39c-.53,0-53.64.17-84.56-11.77A4,4,0,0,1,41,181.46c-1.88-7.24-5-23.82-5-53.46s3.15-46.22,5-53.46a4,4,0,0,1,2.34-2.77C74.29,59.83,127.39,60,127.92,60h.15c.54,0,53.64-.17,84.56,11.77A4,4,0,0,1,215,74.54c1.88,7.24,5,23.82,5,53.46S216.85,174.22,215,181.46Z"/></symbol>
 </defs></svg>
@@ -1126,7 +1338,7 @@ svg:not([width]){width:1em;height:1em}
         <svg aria-hidden="true"><use href="#i-caret-right"/></svg>
       </button>
       <div class="menu__panel" id="section-panel" role="menu" hidden>
-        <button class="menu__item" role="menuitem" data-goto="soon" data-title="Feuchte-Check" data-section="Feuchte-Check">
+        <button class="menu__item" role="menuitem" data-goto="fall" data-section="Feuchte-Check">
           <svg aria-hidden="true"><use href="#i-drop-half"/></svg>Feuchte-Check</button>
         <button class="menu__item" role="menuitem" data-goto="soon" data-title="Sanierungssysteme" data-section="Sanierungssysteme">
           <svg aria-hidden="true"><use href="#i-shield-check"/></svg>Sanierungssysteme</button>
@@ -1166,7 +1378,7 @@ svg:not([width]){width:1em;height:1em}
 
   <div class="page">
     <ul class="tiles">
-      <li><button class="tile" data-goto="soon" data-title="Feuchte-Check">
+      <li><button class="tile" data-goto="fall">
         <span class="tile__icon"><svg aria-hidden="true"><use href="#i-drop-half"/></svg></span>
         <span class="tile__title">Feuchte-Check</span>
         <span class="tile__meta">8 offene Analysen</span></button></li>
@@ -1465,7 +1677,7 @@ svg:not([width]){width:1em;height:1em}
         <div class="empty">
           <p class="empty__text">Noch keine Angebote. Erstelle den ersten Entwurf aus einem
             abgeschlossenen Feuchte-Check mit Systemlösung.</p>
-          <button class="btn btn--quiet" data-goto="soon" data-title="Feuchte-Check">Zum Feuchte-Check</button>
+          <button class="btn btn--quiet" data-goto="fall">Zum Feuchte-Check</button>
         </div>
         <p class="hint">Jedes Angebot ist deterministisch aus seinem Feuchte-Check abgeleitet
           und friert beim Speichern seinen Preisstand ein.</p>
@@ -1565,6 +1777,346 @@ svg:not([width]){width:1em;height:1em}
   </div>
 </section>
 
+<!-- ============================ FALLANSICHT ============================ -->
+<section class="view" data-view="fall">
+  <div class="page">
+
+    <div class="casebar">
+      <div class="casebar__title">
+        <span class="casebar__name">Petersen</span>
+        <span class="chip chip--warning">Offen</span>
+        <span class="small">Großenwiehe · Außenwand · zuletzt 20.08.26, 10:48</span>
+      </div>
+      <div class="casebar__actions">
+        <button class="btn btn--quiet">Speichern</button>
+        <button class="btn">Abschließen</button>
+      </div>
+    </div>
+
+    <!-- Die Punkte tragen den Fortschritt: erledigt, lückenhaft, offen -->
+    <div class="stepper" role="tablist" aria-label="Erfassungsschritte">
+      <button class="step step--done" role="tab" aria-selected="false" data-step="kunde">
+        <span class="step__dot" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Kunde</button>
+      <button class="step step--done" role="tab" aria-selected="false" data-step="objekt">
+        <span class="step__dot" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Objekt</button>
+      <button class="step step--done" role="tab" aria-selected="true" data-step="geo">
+        <span class="step__dot" aria-hidden="true"><svg><use href="#i-check"/></svg></span>Geodaten</button>
+      <button class="step step--gap" role="tab" aria-selected="false" data-step="fragen">
+        <span class="step__dot" aria-hidden="true">5</span>Fragen</button>
+      <button class="step step--gap" role="tab" aria-selected="false" data-step="fotos">
+        <span class="step__dot" aria-hidden="true">4</span>Fotos</button>
+      <button class="step" role="tab" aria-selected="false" data-step="ergebnis">
+        <span class="step__dot" aria-hidden="true">6</span>Ergebnis</button>
+      <button class="step" role="tab" aria-selected="false" data-step="menge">
+        <span class="step__dot" aria-hidden="true">7</span>Menge</button>
+    </div>
+
+    <div class="case">
+      <div class="stack">
+
+        <!-- ---------------- Schritt: Kunde ---------------- -->
+        <section class="panel" data-panel="kunde" hidden>
+          <div class="panel__head"><h2 class="label">Kunde</h2></div>
+          <label class="check" style="margin-bottom:var(--space-md)">
+            <input type="checkbox"> Kunde ist eine Firma</label>
+          <div class="form">
+            <label class="formfield"><span>Nachname <i class="formfield__req">*</i></span>
+              <input value="Petersen"></label>
+            <label class="formfield"><span>Vorname</span>
+              <input value="Peter"></label>
+            <label class="formfield"><span>Telefon <i class="formfield__req">*</i></span>
+              <input value="01605361054"></label>
+            <label class="formfield"><span>E-Mail</span>
+              <input value="p.petersen@example.de"></label>
+            <label class="formfield form__full"><span>Straße &amp; Nr.</span>
+              <input value="Hauptstraße 12"></label>
+            <label class="formfield"><span>PLZ <i class="formfield__req">*</i></span>
+              <input placeholder="24969"></label>
+            <label class="formfield"><span>Ort <i class="formfield__req">*</i></span>
+              <input value="Großenwiehe"></label>
+          </div>
+        </section>
+
+        <!-- ---------------- Schritt: Objekt ---------------- -->
+        <section class="panel" data-panel="objekt" hidden>
+          <div class="panel__head"><h2 class="label">Objekt</h2></div>
+          <div class="form">
+            <label class="formfield"><span>Baujahr</span><input value="1962"></label>
+            <label class="formfield"><span>Bauweise</span>
+              <select><option>Mauerwerk, zweischalig</option><option>Mauerwerk, einschalig</option>
+              <option>Beton</option></select></label>
+            <label class="formfield"><span>Geschoss</span>
+              <select><option>Keller</option><option>Erdgeschoss</option></select></label>
+            <label class="formfield"><span>Nutzung</span>
+              <select><option>Lager</option><option>Wohnen</option><option>Hobbyraum</option></select></label>
+            <label class="formfield form__full"><span>Notiz zum Objekt</span>
+              <textarea placeholder="Auffälligkeiten, Vorgeschichte, frühere Maßnahmen …"></textarea></label>
+          </div>
+        </section>
+
+        <!-- ---------------- Schritt: Geodaten ---------------- -->
+        <section class="panel" data-panel="geo">
+          <div class="panel__head"><h2 class="label">Standort-Vorbefund · automatisch</h2>
+            <span class="chip chip--warning">W2.1-E anzunehmen</span></div>
+          <p class="small" style="margin:0 0 var(--space-md)">
+            Amtliche Geodaten zur Objektadresse. Jeder Fakt ist belegt und wandert als
+            Standort-Antwort in die Diagnose — eigene Antworten werden nie überschrieben.</p>
+
+          <div class="findings">
+            <div class="finding">
+              <span class="finding__key"><span class="finding__dot" style="background:var(--status-success)"></span>Grundwasser</span>
+              <span class="finding__text">Flurabstand <b>≈ 6,94 m</b> (auf Objekthöhe umgerechnet).
+                Nächste geeignete Messstelle 4533 m entfernt — für eine belastbare
+                DIN-Einordnung zu weit.</span>
+              <span class="chip chip--info">W1-E?</span>
+            </div>
+            <div class="finding">
+              <span class="finding__key"><span class="finding__dot" style="background:var(--status-warning)"></span>Boden</span>
+              <span class="finding__text">Nach HÜK250 <b>mittel durchlässig</b>. Sickerwasser versickert
+                in der Regel, Stauwasser wenig wahrscheinlich.</span>
+              <span class="chip chip--warning">grundwassergeprägt</span>
+            </div>
+            <div class="finding">
+              <span class="finding__key"><span class="finding__dot" style="background:var(--status-success)"></span>Hochwasser</span>
+              <span class="finding__text">Außerhalb der amtlichen Gefahrenkulissen.</span>
+              <span class="chip chip--success">unauffällig</span>
+            </div>
+            <div class="finding">
+              <span class="finding__key"><span class="finding__dot" style="background:var(--status-warning)"></span>Radon</span>
+              <span class="finding__text">Geogenes Potenzial <b>mittel</b>, kein Vorsorgegebiet. Die
+                normgerechte Abdichtung deckt den üblichen Radonschutz mit ab.</span>
+              <span class="chip chip--warning">mittel</span>
+            </div>
+            <div class="finding">
+              <span class="finding__key"><span class="finding__dot" style="background:var(--status-danger)"></span>Niederschlag</span>
+              <span class="finding__text">Schlagregen-Beanspruchungsgruppe <b>III</b> (≈ 883 mm/Jahr,
+                DIN 4108-3). Seitliche Durchfeuchtung an Wetterseiten in Betracht ziehen.</span>
+              <span class="chip chip--danger">Auslöser</span>
+            </div>
+          </div>
+
+          <div class="note" style="margin-top:var(--space-md)">
+            <p><b>Warum W2.1-E anzunehmen ist.</b> Der hohe Jahresniederschlag lässt Sickerwasser
+              am Bauwerk zeitweise aufstauen. Ohne funktionierende Dränage gilt W2.1-E; mit
+              nachweislich funktionsfähiger Dränage nach DIN 4095 ist W1-E ansetzbar.</p>
+            <p><b>Vor Ort zu klären:</b> Ist eine Dränage vorhanden und funktionsfähig?</p>
+          </div>
+
+          <details class="disc" style="margin-top:var(--space-md)">
+            <summary>Differentialdiagnose · verdeckter Druckwassereintritt</summary>
+            <div class="disc__body">
+              <p>Das Schadensbild kann wie aufsteigende Feuchte wirken, obwohl die Ursache ein
+                verdeckter Druckwassereintritt ist — Wasser tritt an anderer Stelle unter Druck
+                ein und wird erst entfernt sichtbar.</p>
+              <ul>
+                <li>Wasser-Ereignishistorie erfassen, inklusive Abgrenzung zum Kanal-Rückstau</li>
+                <li>Pumpensumpf als Quasi-Pegel auswerten</li>
+                <li>Brunnen auf dem Grundstück: Tiefe und Wasserstand</li>
+                <li>Höhenabgleich EG-Fußboden per Relativmessung</li>
+              </ul>
+            </div>
+          </details>
+
+          <div class="casebar__actions" style="margin-top:var(--space-md);margin-left:0">
+            <button class="btn btn--quiet">Geo-Befund übernehmen (6)</button>
+            <button class="btn btn--quiet">Standortbericht (PDF)</button>
+          </div>
+          <p class="small" style="margin-top:var(--space-sm)">
+            Ausgewertete Lage: Hauptstraße 12, Großenwiehe. Datenlage orientierend —
+            Kontext für die Beratung, fließt nicht in die Punktbewertung ein.</p>
+        </section>
+
+        <!-- ---------------- Schritt: Fragen ---------------- -->
+        <section class="panel" data-panel="fragen" hidden>
+          <div class="panel__head"><h2 class="label">Offene Fragen · 5</h2>
+            <span class="small">Jede geschärfte Antwort hebt die Diagnose-Sicherheit</span></div>
+          <ul class="qlist">
+            <li class="q"><span class="q__code">Q-301</span>
+              <span class="q__text">Wo beginnt die Feuchtigkeit?
+                <span class="q__hint">Unterscheidet aufsteigend von seitlich eindringend</span></span>
+              <span class="chip chip--warning">schärft</span></li>
+            <li class="q"><span class="q__code">Q-302</span>
+              <span class="q__text">Wie hoch reicht der Schaden ungefähr?
+                <span class="q__hint">Höhe über Boden in cm</span></span>
+              <span class="chip chip--warning">schärft</span></li>
+            <li class="q"><span class="q__code">Q-303</span>
+              <span class="q__text">Ist der Schaden gleichmäßig oder punktuell?
+                <span class="q__hint">Punktuell spricht gegen kapillar aufsteigende Feuchte</span></span>
+              <span class="chip chip--warning">schärft</span></li>
+            <li class="q"><span class="q__code">Q-304</span>
+              <span class="q__text">Seit wann besteht der Schaden?
+                <span class="q__hint">Korreliert der Beginn mit Starkregen?</span></span>
+              <span class="chip chip--warning">schärft</span></li>
+            <li class="q"><span class="q__code">Q-602</span>
+              <span class="q__text">Wurde nachträglich eine Horizontalsperre eingebaut?
+                <span class="q__hint">Injektion oder Mauersägeverfahren</span></span>
+              <span class="chip chip--warning">schärft</span></li>
+          </ul>
+          <div class="note note--info" style="margin-top:var(--space-md)">
+            <p><b>Kunden-Selbstauskunft.</b> Der Kunde kann die Fragen über einen geteilten Link
+              selbst beantworten und Fotos hochladen — ohne Login, direkt vom Handy.</p>
+          </div>
+          <div class="casebar__actions" style="margin-top:var(--space-md);margin-left:0">
+            <button class="btn">Link anzeigen &amp; kopieren</button>
+            <button class="btn btn--quiet">Kundenantworten abrufen</button>
+          </div>
+        </section>
+
+        <!-- ---------------- Schritt: Fotos ---------------- -->
+        <section class="panel" data-panel="fotos" hidden>
+          <div class="panel__head"><h2 class="label">Pflichtfotos</h2>
+            <span class="chip chip--warning">0 von 4</span></div>
+          <div class="meter" style="margin-bottom:var(--space-md)">
+            <div class="meter__head"><span class="meter__label">Foto-Vollständigkeit</span>
+              <span class="meter__value">0 %</span></div>
+            <div class="meter__track"><div class="meter__fill" style="width:0"></div></div>
+          </div>
+          <div class="photos">
+            <button class="photo"><svg aria-hidden="true"><use href="#i-camera"/></svg>Raumübersicht</button>
+            <button class="photo"><svg aria-hidden="true"><use href="#i-camera"/></svg>Gesamte betroffene Wand</button>
+            <button class="photo"><svg aria-hidden="true"><use href="#i-camera"/></svg>Nahaufnahme Schaden</button>
+            <button class="photo"><svg aria-hidden="true"><use href="#i-camera"/></svg>Boden-Wand-Anschluss</button>
+          </div>
+          <p class="small" style="margin-top:var(--space-sm)">
+            Ohne vollständige Pflichtfotos ist höchstens Klasse C erreichbar.</p>
+
+          <div class="panel__head" style="margin-top:var(--space-xl)">
+            <h2 class="label">Messwerte · Betroffener Raum, Keller</h2></div>
+          <div class="form">
+            <label class="formfield"><span>Luftfeuchte (% r. F.)</span><input placeholder="—"></label>
+            <label class="formfield"><span>Raumtemperatur (°C)</span><input placeholder="—"></label>
+            <label class="formfield"><span>Oberflächentemp. (°C)</span><input placeholder="—"></label>
+            <label class="formfield"><span>Feuchte Wandfuß (M-%)</span><input placeholder="—"></label>
+          </div>
+          <div class="casebar__actions" style="margin-top:var(--space-md);margin-left:0">
+            <button class="btn btn--quiet">
+              <svg aria-hidden="true" width="15" height="15"><use href="#i-upload-simple"/></svg>
+              Fotos vom Kunden übernehmen</button>
+          </div>
+        </section>
+
+        <!-- ---------------- Schritt: Ergebnis ---------------- -->
+        <section class="panel" data-panel="ergebnis" hidden>
+          <div class="panel__head"><h2 class="label">Ergebnis &amp; Abschluss</h2></div>
+          <div class="note">
+            <p><b>Noch nicht abschließbar.</b> Pflichtfelder Kunde und Objekt sind vollständig,
+              es fehlen 4 Pflichtfotos und 5 Antworten.</p>
+          </div>
+          <div class="panel__head" style="margin-top:var(--space-lg)">
+            <h2 class="label">Empfohlenes Vorgehen · aus der Diagnose</h2></div>
+          <div class="facts">
+            <div class="fact"><span class="fact__key">System</span>
+              <span class="fact__val">Radondichte Abdichtung mit BKM HDS-2K Pro</span></div>
+            <div class="fact"><span class="fact__key">Maßnahme 1</span>
+              <span class="fact__val">Radondichte Flächenabdichtung</span></div>
+            <div class="fact"><span class="fact__key">Grundlage</span>
+              <span class="fact__val">Wassereinwirkung W2.1-E</span></div>
+          </div>
+          <div class="note" style="margin-top:var(--space-md)">
+            <p><b>Salzbefund im Fall.</b> In den Paketen dieses Anwendungsfalls ist kein
+              Sanierputz-Baustein gepflegt. Bei Salz- oder Sulfatbelastung ist Sanierputz
+              Bestandteil der WTA-gerechten Ausführung.</p>
+          </div>
+          <div class="casebar__actions" style="margin-top:var(--space-lg);margin-left:0">
+            <button class="btn">PDF-Bericht erzeugen</button>
+            <button class="btn btn--quiet">Kundenbericht in Klartext</button>
+          </div>
+        </section>
+
+        <!-- ---------------- Schritt: Mengenberechnung ---------------- -->
+        <section class="panel" data-panel="menge" hidden>
+          <div class="panel__head"><h2 class="label">Mengenberechnung</h2></div>
+          <div class="empty">
+            <p class="empty__text">Die Mengenberechnung ist in dieser Golden Reference noch
+              nicht ausgebaut. Sie folgt dem Muster aus „Menge berechnen": Abmessungen
+              eingeben, Verbrauch je System, Gebinde-Rundung.</p>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- ---------------- Bewertung ---------------- -->
+      <aside class="case__rail" aria-label="Ersteinschätzung">
+        <div class="rail">
+          <p class="label">Vorläufige Ersteinschätzung</p>
+
+          <div class="score">
+            <span class="score__grade" aria-hidden="true">C</span>
+            <span>
+              <span class="score__cause">Aufsteigende Feuchtigkeit</span>
+              <span class="score__prob">68 % · Wahrscheinlichkeit <b>hoch</b></span>
+            </span>
+          </div>
+
+          <div class="meter">
+            <div class="meter__head"><span class="meter__label">Diagnose-Sicherheit</span>
+              <span class="meter__value">40 %</span></div>
+            <div class="meter__track"><div class="meter__fill" style="width:40%"></div></div>
+          </div>
+
+          <div class="facts">
+            <div class="fact"><span class="fact__key">Wassereinwirkung</span>
+              <span class="fact__val">W2.1-E anzunehmen</span></div>
+            <div class="fact"><span class="fact__key">Sanierungsziel</span>
+              <span class="fact__val">SZ-2 · trockener Lagerkeller</span></div>
+            <div class="fact"><span class="fact__key">Abdichtungsziel</span>
+              <span class="fact__val">RN2-E</span></div>
+            <div class="fact"><span class="fact__key">Alternative Ursache</span>
+              <span class="fact__val">Seitlich eindringend · 32 %</span></div>
+          </div>
+        </div>
+
+        <!-- Der handlungsfähige Teil steht bewusst weit oben, nicht am Ende -->
+        <div class="rail">
+          <p class="label">Was die Einschätzung jetzt hebt</p>
+          <ul class="todo">
+            <li><b>4 Pflichtfotos</b> — ohne sie höchstens Klasse C</li>
+            <li><b>5 offene Fragen</b> (Q-301 bis Q-304, Q-602)</li>
+            <li><b>Feuchteprofil</b> über die Wandtiefe aufnehmen</li>
+            <li><b>Salzquelle klären</b> und Salzanalyse durchführen</li>
+            <li><b>Dränage prüfen</b> — entscheidet über W1-E oder W2.1-E</li>
+          </ul>
+          <p class="small">Fünf Schritte trennen den Fall von einer belastbaren Einschätzung.</p>
+        </div>
+
+        <div class="rail">
+          <details class="disc" style="border-top:0;padding-top:0">
+            <summary>Spricht dafür</summary>
+            <div class="disc__body"><ul>
+              <li>Salzausblühungen sichtbar — bei ungeklärter Salzquelle nur moderat gewertet</li>
+            </ul></div>
+          </details>
+          <details class="disc">
+            <summary>Spricht dagegen</summary>
+            <div class="disc__body"><ul>
+              <li>Salzquelle ungeklärt — Salze können Feuchte hygroskopisch binden und
+                aufsteigende Feuchte vortäuschen</li>
+            </ul></div>
+          </details>
+          <details class="disc">
+            <summary>Diagnose-Sperren · 3</summary>
+            <div class="disc__body"><ul>
+              <li>Keine Feuchtemessung — D-1000 nicht belastbar bestätigbar</li>
+              <li>Gegenprüfungen unvollständig</li>
+              <li>Salzquelle ungeklärt — vor Bestätigung klären</li>
+            </ul></div>
+          </details>
+          <details class="disc">
+            <summary>Vorbereitete Verknüpfungen</summary>
+            <div class="disc__body"><ul>
+              <li>Radonschutz</li><li>Horizontalsperre</li><li>Sanierputz</li>
+            </ul></div>
+          </details>
+        </div>
+
+        <p class="small">Diese Einschätzung ist kein Gutachten. Sie basiert auf den übermittelten
+          Angaben und Bildern; eine belastbare Sanierungsempfehlung erfordert eine technische
+          Vor-Ort-Prüfung.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
 <!-- ============================ NOCH NICHT GEBAUT ============================ -->
 <section class="view" data-view="soon">
   <div class="page">
@@ -1657,8 +2209,10 @@ svg:not([width]){width:1em;height:1em}
     if (!crumbs.hidden) {
       var label = title;
       if (!label) {
-        var h = document.querySelector('.view[data-view="' + name + '"] h1');
-        label = h ? h.textContent.trim() : name;
+        var v = document.querySelector('.view[data-view="' + name + '"]');
+        var h = v.querySelector('h1');
+        var c = v.querySelector('.casebar__name');
+        label = h ? h.textContent.trim() : (c ? 'Feuchte-Check' : name);
       }
       sectionName.textContent = label;
       sectionItems.forEach(function(it){
@@ -1687,6 +2241,16 @@ svg:not([width]){width:1em;height:1em}
     group.querySelectorAll('.tabs__btn, .filters__btn, .segmented__btn, .cat')
       .forEach(function(x){ x.setAttribute(attr, 'false'); });
     b.setAttribute(attr, 'true');
+  });
+
+  /* --- Schritte im Fall --------------------------------------------------- */
+  var steps = document.querySelectorAll('.step');
+  var panels = document.querySelectorAll('[data-panel]');
+  steps.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      steps.forEach(function(b){ b.setAttribute('aria-selected', String(b === btn)); });
+      panels.forEach(function(p){ p.hidden = (p.dataset.panel !== btn.dataset.step); });
+    });
   });
 
   /* --- Bereichswechsler in der Brotkrume ---------------------------------- */

@@ -155,7 +155,20 @@ Decks (→ `bkm-slides`), technische Datenblätter (→ `docs/print-anwendungen.
     höchstens 2.79 — übernimmt eine Kontur (`--progress-edge`) statt die Farbe
     zu ändern. Vorsicht: die Spur abzudunkeln hilft bei Pure Green **nicht**,
     es liegt luminanznah an einem Mittelgrau und der Kontrast sinkt dadurch.
-18. **Zahlen tabellarisch.** `font-variant-numeric: tabular-nums` für alle Werte,
+18. **Lange Seitenspalten scrollen in sich selbst.** Eine Bewertungs- oder
+    Kontextspalte, die höher ist als der Bildschirm, wird mit bloßem
+    `position:sticky` unbrauchbar: der obere Rand klebt, der untere Teil bleibt
+    unerreichbar. Richtig ist `sticky` **plus** `max-height:calc(100vh − Versatz)`
+    und `overflow-y:auto`. Der Versatz ist die Summe aus Kopfleiste und Brotkrume.
+    Unterhalb der Zweispaltigkeit fällt beides weg — dort steht die Spalte
+    normal unter dem Inhalt.
+19. **Die Bewertung zeigt zuerst, was zu tun ist.** In einem Werkzeug ist die
+    Frage nicht „was weiß das System", sondern „was fehlt mir noch". Deshalb
+    steht direkt unter dem Ergebnis der handlungsfähige Block („Was die
+    Einschätzung jetzt hebt"), und die Belege — Indizien, Sperren, Gegenprüfungen —
+    liegen darunter in `<details>`: verfügbar, aber nicht als Textwand
+    ausgekippt. Fakten laufen als Schlüssel-Wert-Paare, nicht als Fließtext.
+20. **Zahlen tabellarisch.** `font-variant-numeric: tabular-nums` für alle Werte,
     Mengen, Zeitstempel und Prozentangaben, damit Spalten stehen.
 
 ---
@@ -271,8 +284,11 @@ laufende Rampe macht die unteren Werte unsichtbar.
 
 Ehrlich benannt, damit niemand improvisiert:
 
-- **Es gibt bisher eine Vorlage** (Startbildschirm). Noch offen: Fall-/Detailansicht
-  mit Assistent, Datentabelle, Filterleiste, Formularseite, Leerzustände.
+- **Sechs Ansichten sind gebaut**: Startbildschirm, Produkt suchen, Wissens-Hub,
+  Angebots-Center, Produkt-Management, Fallansicht. Im Fall sind fünf der sieben
+  Schritte ausgeführt (Kunde, Objekt, Geodaten, Fragen, Fotos, Ergebnis);
+  die Mengenberechnung fehlt. Noch offen: Datentabelle mit Sortierung,
+  Ladezustände, Meldungen/Toasts, Modal.
 - **`components.html`** (lebende Komponenten-Referenz, wie bei `bkm-slides`) fehlt.
 - **Deterministische Prüfregeln** (`rules.json`) sind konzipiert, aber nicht gebaut.
   Geplant: literale Farbe in Komponente, Pill-Radius, Unbounded < 18 px, Statusfarbe
