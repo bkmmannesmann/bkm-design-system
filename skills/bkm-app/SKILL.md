@@ -56,6 +56,10 @@ Decks (→ `bkm-slides`), technische Datenblätter (→ `docs/print-anwendungen.
 4. **Form: 4 px Bedienelemente, 8 px Eingaben, 12 px Karten. Keine Pillen.**
    `--radius-avatar` ist ausschließlich für Avatare und Statuspunkte.
    (`DESIGN.md`: „Never pill-shaped in the primary brand context.")
+   Ausnahme mit eigenem Token: Umschalter, Filter und Reiter laufen auf
+   `--radius-switch` (10 px) statt 4 px — sie sind Schienen, keine Knöpfe, und
+   wirken bei 4 px hart. 10 px ist bewusst die Obergrenze; alles darüber wird
+   zur Pille und bricht die Regel. Ein Wert, zentral drehbar.
 5. **Unbounded trägt genau eine Zeile pro Screen.** Weight 900, nie unter 18 px.
    Kartentitel, Zeilentitel, Kundennamen und Panel-Köpfe laufen in TT Norms Bold —
    sie sind Inhalt, keine Ankündigung.
@@ -68,16 +72,25 @@ Decks (→ `bkm-slides`), technische Datenblätter (→ `docs/print-anwendungen.
 8. **Zustände sind Pflicht.** Hover, Aktiv, Fokus (`:focus-visible`), Deaktiviert,
    Leer, Ladend. Tastaturfokus ist keine Kür — in einem Werkzeug ist er die
    halbe Bedienung.
-9. **Markenmaterial statt Selbsterfundenem.** Der Grund nutzt die Texturen aus
+9. **Die Kopfleiste wechselt mit dem Theme — und mit ihr der Akzent.**
+   Nacht: Deep Green mit Lime. Tag: Transition Green mit **Weiß**. Lime auf
+   Transition Green liegt bei 3.49 und ist nur für großen Text zulässig; für
+   Bedienelemente ist es ausgeschlossen. Chrome-Farben laufen deshalb über
+   eigene Tokens (`--chrome-*`), nie über die Marken-Konstanten direkt —
+   ein hart geschriebenes `var(--bkm-deep-green)` in einer Chrome-Komponente
+   bricht den Wechsel. Achtung beim gedämpften Ton: auf Transition Green
+   erreicht selbst Weiß nur 5.09, ein echter Sekundärton ist dort kaum
+   möglich (`#eaf4ee` = 4.53 ist das Maximum).
+10. **Markenmaterial statt Selbsterfundenem.** Der Grund nutzt die Texturen aus
    `assets/backgrounds/`, mit dem Flächentoken überdeckt (`--ground`), damit die
    gerechneten Kontraste gültig bleiben. Das Keyvisual aus `assets/keyvisual/`
    gehört genau in ein Hero-Band, bündig rechts, vertikal zentriert, nie
    angeschnitten und nie in Code nachgebaut. Glasmorphismus ist erlaubt,
    maximal ein bis zwei Elemente pro Viewport — im Cockpit die Kopfleiste.
-10. **Icons ausschließlich aus `assets/icons/phosphor/` in Bold oder Fill.**
+11. **Icons ausschließlich aus `assets/icons/phosphor/` in Bold oder Fill.**
    Keine andere Bibliothek, keine Emoji, keine nachgezeichneten Symbole.
    Fehlt ein benötigtes Icon im Manifest, wird es dort ergänzt — nicht ersetzt.
-11. **Ein Icon setzt nie seine eigene Farbe.** Es erbt die Textfarbe seines
+12. **Ein Icon setzt nie seine eigene Farbe.** Es erbt die Textfarbe seines
     Kontextes (`fill: currentColor`), damit die Farbregel automatisch greift:
 
     | Fläche | Icon-/Textfarbe | Kontrast |
@@ -92,7 +105,7 @@ Decks (→ `bkm-slides`), technische Datenblätter (→ `docs/print-anwendungen.
     `DESIGN.md`). Beim Einbetten von SVGs als `<symbol>` darauf achten, dass
     `fill="currentColor"` erhalten bleibt — sonst fallen die Pfade still auf
     Schwarz zurück.
-12. **Auswahl trägt immer die Akzentfarbe.** Ausgewählt, aktiv, aktueller
+13. **Auswahl trägt immer die Akzentfarbe.** Ausgewählt, aktiv, aktueller
     Bereich, gesetzter Filter — alles über `--selected-*`, nie über eine
     eigene Farbe. Die **Größe** des Elements entscheidet nur die *Form*:
 
@@ -104,7 +117,7 @@ Decks (→ `bkm-slides`), technische Datenblätter (→ `docs/print-anwendungen.
     Eine große Fläche vollflächig in Lime zu füllen verstößt gegen `DESIGN.md`
     („never on large surfaces"). Der Ring erreicht dasselbe, ohne die Regel zu
     brechen — und bleibt bei zwanzig Karten auf einem Screen lesbar.
-13. **Überall gleich bedienbar.** Zwei getrennte Achsen, die oft verwechselt
+14. **Überall gleich bedienbar.** Zwei getrennte Achsen, die oft verwechselt
     werden: die **Breite** entscheidet, was sichtbar bleibt und wie umgebrochen
     wird; die **Eingabeart** entscheidet, wie groß Bedienelemente sein müssen.
     Ein Tablet ist breit *und* fingerbedient — beides muss zusammen greifen.
@@ -115,7 +128,7 @@ Decks (→ `bkm-slides`), technische Datenblätter (→ `docs/print-anwendungen.
     Bildschirm nicht sieht. Vor der Übergabe in drei Größen prüfen
     (Desktop 1440, Tablet 834, Handy 390): kein seitliches Scrollen,
     kein Ziel unter 44 px auf Touch.
-14. **In die Kopfleiste gehört nur, was man beim Arbeiten braucht.** Was man
+15. **In die Kopfleiste gehört nur, was man beim Arbeiten braucht.** Was man
     einmal einstellt — Sprache, Darstellung, Konto, Admin — gehört ins
     Kontomenü hinter dem Avatar, nicht dauerhaft in die oberste Zeile.
     Faustregel: höchstens vier Gruppen. Zeigt ein Element eine Zahl, die
@@ -123,7 +136,7 @@ Decks (→ `bkm-slides`), technische Datenblätter (→ `docs/print-anwendungen.
     sie sichtbar dazu; die Uhrzeit gehört nicht dazu, die zeigt das
     Betriebssystem. Tastenkürzel nur einblenden, wo sie wahr sind —
     ein „⌘K" auf einem Tablet ist eine Lüge.
-15. **Zahlen tabellarisch.** `font-variant-numeric: tabular-nums` für alle Werte,
+16. **Zahlen tabellarisch.** `font-variant-numeric: tabular-nums` für alle Werte,
     Mengen, Zeitstempel und Prozentangaben, damit Spalten stehen.
 
 ---
@@ -252,4 +265,4 @@ Ehrlich benannt, damit niemand improvisiert:
   `assets/icons/phosphor/manifest.json` fehlen noch und sind nachzutragen.
   Weitere Kandidaten: `sign-out`, `bell`, `dots-three`, `sort-ascending`,
   `funnel-simple`, `caret-up-down`, `upload-simple`.
-  Regel 10 gilt unverändert — ergänzen statt ersetzen.
+  Regel 11 gilt unverändert — ergänzen statt ersetzen.

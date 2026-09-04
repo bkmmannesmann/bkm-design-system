@@ -32,6 +32,10 @@
   --space-lg:24px; --space-xl:32px; --space-2xl:48px;
 
   --radius-control:4px; --radius-input:8px; --radius-card:12px; --radius-avatar:9999px;
+  /* Umschalter und Reiter: eigener Radius, damit sie weicher wirken als
+     Buttons, ohne zur Pille zu werden (DESIGN.md: "never pill-shaped").
+     Ein einziger Wert — hier laesst sich die Weichheit zentral drehen. */
+  --radius-switch:10px; --radius-switch-inner:7px;
 
   --text-page-title:clamp(22px,3.4vw,28px); --text-hero:clamp(26px,5.2vw,44px); --text-section:16px;
   --text-body:15px; --text-sm:13px; --text-label:12px;
@@ -80,7 +84,13 @@
   --elevation-overlay:inset 0 1px 0 rgba(255,255,255,.10),
                    0 24px 60px -20px rgba(0,0,0,.70);
 
+  --chrome-surface:#1c4b42;
   --chrome-glass:rgba(28,75,66,.66);
+  --chrome-text:#fff;               /* 9.84 auf Deep Green */
+  --chrome-muted:#a8c2ba;           /* 5.20 */
+  --chrome-accent:#b4e717;          /* 6.74 */
+  --chrome-on-accent:#1c4b42;       /* 6.74 auf Lime */
+  --chrome-glow:0 0 18px -6px rgba(180,231,23,.55);
   /* Brillanz auf Dunkel: eine helle Kante oben, ein voller Haarlinien-Ring,
      ein enger Schimmer um Akzentflächen. Alles CSS, kein Filter, keine
      Bibliothek — und in jedem Browser identisch. */
@@ -133,7 +143,13 @@
   --elevation-overlay:rgba(28,75,66,.12) 0 0 0 1px,
                    rgba(28,75,66,.16) 0 24px 48px -16px;
 
-  --chrome-glass:rgba(28,75,66,.82);
+  --chrome-surface:#287d4b;
+  --chrome-glass:rgba(40,125,75,.86);
+  --chrome-text:#fff;               /* 5.09 auf Transition Green */
+  --chrome-muted:#eaf4ee;           /* 4.53 — naeher geht nicht, Weiss selbst ist 5.09 */
+  --chrome-accent:#ffffff;          /* 5.09 — Lime waere hier 3.49 */
+  --chrome-on-accent:#287d4b;       /* 5.09 auf Weiss */
+  --chrome-glow:none;               /* auf heller Flaeche wirkt Leuchten schmutzig */
   /* Auf Hell entsteht Brillanz nicht durch Leuchten, sondern durch eine
      saubere Kante. Kein Schimmer — der wirkt auf hellem Grund schmutzig. */
   --rim:inset 0 1px 0 #fff, inset 0 0 0 1px rgba(28,75,66,.06);
@@ -150,11 +166,14 @@
   color-scheme:light;
 }
 
-/* --- Chrome: in beiden Themes Deep Green (docs/digitale-medien.md) ---------- */
-:root{
-  --chrome-text:#fff; --chrome-muted:#a8c2ba;
-  --chrome-line:rgba(255,255,255,.14); --chrome-accent:#b4e717;
-}
+/* --- Chrome: die Leiste wechselt mit dem Theme ------------------------------
+   Nacht: Deep Green, Akzent Lime (6.74).
+   Tag:   Transition Green, Akzent WEISS — Lime auf Transition Green liegt bei
+          3.49 und ist damit nur fuer grossen Text zulaessig, fuer Bedien-
+          elemente also ausgeschlossen (Kontrastmatrix, DESIGN.md).
+   Der gedaempfte Ton muss auf Transition Green sehr nah an Weiss liegen:
+   die Flaeche ist hell, Weiss selbst erreicht nur 5.09. */
+:root{ --chrome-line:rgba(255,255,255,.14); }
 
 /* ===========================================================================
    BASIS
@@ -232,46 +251,46 @@ svg:not([width]){width:1em;height:1em}
 .segmented{
   display:inline-flex; background:rgba(0,0,0,.18);
   border:1px solid var(--chrome-line);
-  border-radius:var(--radius-control); padding:2px; gap:2px;
+  border-radius:var(--radius-switch); padding:3px; gap:2px;
   box-shadow:inset 0 1px 2px rgba(0,0,0,.25);
 }
 .segmented__btn{
   appearance:none;border:0;background:transparent;cursor:pointer;
-  padding:5px 11px; border-radius:2px;
+  padding:5px 12px; border-radius:var(--radius-switch-inner);
   font-size:var(--text-label); font-weight:700; letter-spacing:.04em;
   color:var(--chrome-muted); transition:color var(--motion-fast), background var(--motion-fast);
 }
 .segmented__btn:hover{color:var(--chrome-text)}
 .segmented__btn[aria-pressed="true"]{
-  background:var(--chrome-accent);color:var(--bkm-deep-green);
-  box-shadow:0 1px 3px rgba(0,0,0,.3), 0 0 18px -6px rgba(180,231,23,.55);
+  background:var(--chrome-accent);color:var(--chrome-on-accent);
+  box-shadow:0 1px 3px rgba(0,0,0,.3), var(--chrome-glow);
 }
 
 /* --- Theme-Umschalter: nur Sonne und Mond, mit gleitender Markierung -------- */
 .theme-toggle{
   position:relative; display:inline-flex; gap:0;
   background:rgba(0,0,0,.18); border:1px solid var(--chrome-line);
-  border-radius:var(--radius-control); padding:2px;
+  border-radius:var(--radius-switch); padding:3px;
   box-shadow:inset 0 1px 2px rgba(0,0,0,.25);
 }
 .theme-toggle::after{     /* die Markierung, die mitwandert */
-  content:""; position:absolute; top:2px; left:2px;
-  width:32px; height:calc(100% - 4px); border-radius:2px;
+  content:""; position:absolute; top:3px; left:3px;
+  width:32px; height:calc(100% - 6px); border-radius:var(--radius-switch-inner);
   background:var(--chrome-accent);
-  box-shadow:0 1px 3px rgba(0,0,0,.35), 0 0 18px -6px rgba(180,231,23,.55);
+  box-shadow:0 1px 3px rgba(0,0,0,.35), var(--chrome-glow);
   transition:transform var(--motion-base);
 }
 [data-bkm-theme="day"] .theme-toggle::after{transform:translateX(0)}
 [data-bkm-theme="night"] .theme-toggle::after{transform:translateX(32px)}
 .theme-toggle__btn{
-  position:relative; z-index:1;
+  position:relative; z-index:1; border-radius:var(--radius-switch-inner);
   appearance:none;border:0;background:transparent;cursor:pointer;
   width:32px; height:26px; display:grid; place-items:center;
   color:var(--chrome-muted);
   transition:color var(--motion-fast);
 }
 .theme-toggle__btn:hover{color:var(--chrome-text)}
-.theme-toggle__btn[aria-pressed="true"]{color:var(--bkm-deep-green)}
+.theme-toggle__btn[aria-pressed="true"]{color:var(--chrome-on-accent)}
 .theme-toggle__btn svg{width:15px;height:15px}
 
 .search{
@@ -310,7 +329,7 @@ svg:not([width]){width:1em;height:1em}
 
 .avatar{
   width:30px;height:30px;border-radius:var(--radius-avatar);
-  background:var(--chrome-accent);color:var(--bkm-deep-green);
+  background:var(--chrome-accent);color:var(--chrome-on-accent);
   display:grid;place-items:center;font-size:var(--text-sm);font-weight:700;flex-shrink:0;
   box-shadow:inset 0 -1px 2px rgba(0,0,0,.18);
 }
@@ -372,13 +391,6 @@ svg:not([width]){width:1em;height:1em}
 .menu .theme-toggle::after{background:var(--selected-fill)}
 .menu .theme-toggle__btn[aria-pressed="true"]{color:var(--selected-on-fill)}
 
-/* Zaehler an der Materialliste — der einzige Wert, der beim Arbeiten zaehlt */
-.count{
-  min-width:19px;height:19px;padding:0 5px;border-radius:var(--radius-control);
-  display:inline-grid;place-items:center;
-  background:var(--chrome-accent);color:var(--bkm-deep-green);
-  font-size:11px;font-weight:700;font-variant-numeric:tabular-nums;
-}
 
 /* ===========================================================================
    HERO-BAND — mit Keyvisual, bündig am rechten Rand
@@ -566,12 +578,12 @@ svg:not([width]){width:1em;height:1em}
 .chip--danger {background:var(--status-danger-bg); color:var(--status-danger)}
 .chip--info   {background:var(--status-info-bg);   color:var(--status-info)}
 
-.filters{display:inline-flex;gap:var(--space-2xs);padding:2px;
-  background:var(--surface-inset);border-radius:var(--radius-control);
+.filters{display:inline-flex;gap:var(--space-2xs);padding:3px;
+  background:var(--surface-inset);border-radius:var(--radius-switch);
   box-shadow:inset 0 1px 2px rgba(0,0,0,.18)}
 .filters__btn{
   appearance:none;border:0;background:transparent;cursor:pointer;
-  padding:5px 11px;border-radius:2px;
+  padding:5px 12px;border-radius:var(--radius-switch-inner);
   font-size:var(--text-label);font-weight:700;letter-spacing:.04em;
   color:var(--text-secondary);
   transition:color var(--motion-fast), background var(--motion-fast);
@@ -627,14 +639,14 @@ svg:not([width]){width:1em;height:1em}
 /* Reiter — kleines Bedienelement, Auswahl also gefuellt */
 .tabs{
   display:flex;flex-wrap:wrap;gap:var(--space-2xs);padding:3px;
-  background:var(--surface-inset);border-radius:var(--radius-control);
+  background:var(--surface-inset);border-radius:var(--radius-switch);
   box-shadow:inset 0 1px 2px rgba(0,0,0,.18);
   margin-bottom:var(--space-lg);
 }
 .tabs__btn{
   appearance:none;border:0;background:transparent;cursor:pointer;
   display:inline-flex;align-items:center;gap:7px;
-  padding:9px 14px;border-radius:2px;
+  padding:9px 15px;border-radius:var(--radius-switch-inner);
   font-size:var(--text-sm);font-weight:700;color:var(--text-secondary);
   transition:color var(--motion-fast),background var(--motion-fast);
 }
@@ -847,29 +859,26 @@ svg:not([width]){width:1em;height:1em}
 
 /* --- Smartphone: Kopfleiste zweizeilig, Marke und Konto zuerst ------------ */
 @media (max-width:720px){
-  /* Drei klare Zeilen statt einer gedraengten:
-     1 Marke + Konto · 2 Suche ueber die volle Breite · 3 Werkzeuge */
-  .app-bar{flex-wrap:wrap;row-gap:var(--space-xs);padding-block:var(--space-sm)}
+  /* Eine Zeile genuegt: Marke, Suche, Konto. Sprache, Darstellung und Admin
+     liegen im Kontomenue, deshalb bleibt hier Platz fuer das, was zaehlt. */
+  .app-bar{padding-block:var(--space-xs);gap:var(--space-xs)}
   .app-bar__spacer{display:none}
-  .brand{order:1;flex:1 1 auto}
-  .menu{order:2;margin-left:auto}
-  .search{order:3;flex:1 0 100%;width:auto;min-width:0;
+  .brand{order:1;flex:0 0 auto}
+  .search{order:2;flex:1 1 auto;width:auto;min-width:0;
     padding:0 var(--space-sm);justify-content:flex-start}
-  .search input{display:block}
-  .search .kbd,.hero__search .kbd{display:none}   /* ohne Tastatur ohne Sinn */
-  .segmented[aria-label="Sprache"]{order:4}
-  .chrome-btn{order:5}
-  .theme-toggle{order:6;margin-left:auto}
+  .search input{display:block;min-width:0}
+  .menu{order:3;flex:0 0 auto}
+  .menu__panel{width:min(288px,calc(100vw - var(--space-lg)))}
 
-  .products,.cats{grid-template-columns:repeat(2,1fr)}
-  .filterbar{grid-template-columns:1fr}
-  .docs,.rules{grid-template-columns:1fr}
   .hero{padding-top:var(--space-xl)}
   .hero__kv{display:none}   /* kein Platz — lieber weglassen als anschneiden */
   .hero__inner{padding-inline:var(--space-md)}
   .hero__search{height:48px}
   .page{padding-inline:var(--space-md)}
 
+  .products,.cats{grid-template-columns:repeat(2,1fr)}
+  .filterbar{grid-template-columns:1fr}
+  .docs,.rules{grid-template-columns:1fr}
   .panel__head{flex-wrap:wrap;row-gap:var(--space-xs)}
   .row{flex-wrap:wrap;row-gap:2px}
   .row__meta{width:100%;text-align:left}
@@ -878,6 +887,7 @@ svg:not([width]){width:1em;height:1em}
 
 /* --- Sehr schmal: Kachelinhalt bleibt lesbar ------------------------------ */
 @media (max-width:400px){
+  .brand__logo{height:22px}
   .products,.cats,.kpis{grid-template-columns:1fr}
   .tile{padding:var(--space-md)}
   .bar__head{flex-wrap:wrap;row-gap:2px}
@@ -964,7 +974,6 @@ svg:not([width]){width:1em;height:1em}
 <symbol id="i-globe" viewBox="0 0 256 256" fill="currentColor"><path d="M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20ZM107.07,172h41.86A115.75,115.75,0,0,1,128,209.85,115.75,115.75,0,0,1,107.07,172Zm-5.66-24a142.55,142.55,0,0,1,0-40h53.18a142.55,142.55,0,0,1,0,40ZM44,128a83.49,83.49,0,0,1,2.43-20H77.22a164.54,164.54,0,0,0,0,40H46.43A83.49,83.49,0,0,1,44,128ZM148.93,84H107.07A115.75,115.75,0,0,1,128,46.15,115.75,115.75,0,0,1,148.93,84Zm29.85,24h30.79a83.52,83.52,0,0,1,0,40H178.78a164.54,164.54,0,0,0,0-40Zm20.74-24H174a148.59,148.59,0,0,0-13.95-33.63A84.5,84.5,0,0,1,199.52,84ZM96,50.37A148.59,148.59,0,0,0,82,84H56.48A84.5,84.5,0,0,1,96,50.37ZM56.48,172H82a148.59,148.59,0,0,0,14,33.63A84.5,84.5,0,0,1,56.48,172Zm103.57,33.63A148.59,148.59,0,0,0,174,172h25.52A84.5,84.5,0,0,1,160.05,205.63Z"/></symbol>
 <symbol id="i-handshake" viewBox="0 0 256 256" fill="currentColor"><path d="M123.64,218.91A12,12,0,0,1,112,228a12.28,12.28,0,0,1-2.92-.36l-32-8A11.79,11.79,0,0,1,73.34,218l-24-16a12,12,0,0,1,13.32-20l22.27,14.85,30,7.5A12,12,0,0,1,123.64,218.91ZM255,122.75a19.88,19.88,0,0,1-10,11.56l-22.87,11.44-53.58,54.73a12,12,0,0,1-11.4,3.16l-64-16a12.16,12.16,0,0,1-4.17-1.95L35,146.28l-23.94-12a20,20,0,0,1-9-26.83L27,57.79h0a20,20,0,0,1,26.83-8.94L74.42,59.16l50.21-14.68a12.07,12.07,0,0,1,6.74,0l50.21,14.68,20.63-10.32A20,20,0,0,1,229,57.79l24.85,49.69A19.86,19.86,0,0,1,255,122.75ZM200.3,134l-25-50H148.86l-38.2,37.05c15.76,7.26,31.16.19,40.82-9.55a12,12,0,0,1,16-.91l31.26,25ZM25.37,114.63,35.9,119.9,57.17,77.37,46.63,72.1ZM182,153,160.3,135.57c-20.49,15.29-45.85,16.79-67,3.25a20,20,0,0,1-3.4-31l.12-.12L129.82,69,128,68.5,81.66,82.05,56.54,132.29l44.65,32.64,55.13,13.78Zm48.59-38.36L209.37,72.1l-10.54,5.27L220.1,119.9Z"/></symbol>
 <symbol id="i-image" viewBox="0 0 256 256" fill="currentColor"><path d="M144,96a16,16,0,1,1,16,16A16,16,0,0,1,144,96Zm92-40V200a20,20,0,0,1-20,20H40a20,20,0,0,1-20-20V56A20,20,0,0,1,40,36H216A20,20,0,0,1,236,56ZM44,60v79.72l33.86-33.86a20,20,0,0,1,28.28,0L147.31,147l17.18-17.17a20,20,0,0,1,28.28,0L212,149.09V60Zm0,136H162.34L92,125.66l-48,48Zm168,0V183l-33.37-33.37L164.28,164l32,32Z"/></symbol>
-<symbol id="i-list-bullets" viewBox="0 0 256 256" fill="currentColor"><path d="M76,64A12,12,0,0,1,88,52H216a12,12,0,0,1,0,24H88A12,12,0,0,1,76,64Zm140,52H88a12,12,0,0,0,0,24H216a12,12,0,0,0,0-24Zm0,64H88a12,12,0,0,0,0,24H216a12,12,0,0,0,0-24ZM44,112a16,16,0,1,0,16,16A16,16,0,0,0,44,112Zm0-64A16,16,0,1,0,60,64,16,16,0,0,0,44,48Zm0,128a16,16,0,1,0,16,16A16,16,0,0,0,44,176Z"/></symbol>
 <symbol id="i-magnifying-glass" viewBox="0 0 256 256" fill="currentColor"><path d="M232.49,215.51,185,168a92.12,92.12,0,1,0-17,17l47.53,47.54a12,12,0,0,0,17-17ZM44,112a68,68,0,1,1,68,68A68.07,68.07,0,0,1,44,112Z"/></symbol>
 <symbol id="i-megaphone" viewBox="0 0 256 256" fill="currentColor"><path d="M244,120a52.06,52.06,0,0,0-52-52H152.32c-3.44-.21-52.6-4-99.46-43.3A20,20,0,0,0,20,40V200a19.8,19.8,0,0,0,11.54,18.12,19.86,19.86,0,0,0,21.32-2.81A192.92,192.92,0,0,1,136,174.47v26.2a20,20,0,0,0,8.9,16.64,11.35,11.35,0,0,0,1.39.8l14.44,7.06A20,20,0,0,0,190.37,213l11.09-41.82A52.07,52.07,0,0,0,244,120ZM44,191.63V48.4c36.17,28.07,72.17,38.1,92,41.66V150C116.17,153.52,80.17,163.55,44,191.63ZM168.39,202.2,160,198.1V172h16.4ZM192,148H160V92h32a28,28,0,1,1,0,56Z"/></symbol>
 <symbol id="i-moon" viewBox="0 0 256 256" fill="currentColor"><path d="M236.37,139.4a12,12,0,0,0-12-3A84.07,84.07,0,0,1,119.6,31.59a12,12,0,0,0-15-15A108.86,108.86,0,0,0,49.69,55.07,108,108,0,0,0,136,228a107.09,107.09,0,0,0,64.93-21.69,108.86,108.86,0,0,0,38.44-54.94A12,12,0,0,0,236.37,139.4Zm-49.88,47.74A84,84,0,0,1,68.86,69.51,84.93,84.93,0,0,1,92.27,48.29Q92,52.13,92,56A108.12,108.12,0,0,0,200,164q3.87,0,7.71-.27A84.79,84.79,0,0,1,186.49,187.14Z"/></symbol>
@@ -990,11 +999,6 @@ svg:not([width]){width:1em;height:1em}
     <svg aria-hidden="true"><use href="#i-magnifying-glass"/></svg>
     <input type="search" placeholder="Suchen …" aria-label="Suchen">
   </label>
-
-  <button class="chrome-btn">
-    <svg aria-hidden="true"><use href="#i-list-bullets"/></svg>
-    Materialliste <span class="count">3</span>
-  </button>
 
   <div class="menu">
     <button class="menu__trigger" id="menu-trigger" aria-expanded="false" aria-controls="menu-panel">

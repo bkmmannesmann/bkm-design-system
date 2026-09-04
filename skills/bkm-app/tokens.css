@@ -49,6 +49,11 @@
   --radius-input:   8px;
   --radius-card:    12px;
   --radius-avatar:  9999px;   /* ausschließlich Avatare + Status-Punkte */
+  /* Umschalter, Filter und Reiter: eigener Radius, damit sie weicher wirken
+     als Buttons, ohne zur Pille zu werden (DESIGN.md: "never pill-shaped").
+     Ein Wert — hier lässt sich die Weichheit zentral drehen. */
+  --radius-switch:       10px;
+  --radius-switch-inner:  7px;
 
   /* Typo-Skala Anwendung — deutlich kleiner als die Marketing-Skala.
      Ein Werkzeug wird 50x am Tag benutzt; Höhe ist teuer. */
@@ -253,9 +258,32 @@
    Markenwiedererkennung konstant und macht den Umschalter ruhiger.
    --------------------------------------------------------------------------- */
 :root {
-  --chrome-bg:     #1c4b42;   /* deckend; die Leiste selbst nutzt --chrome-glass */
-  --chrome-text:   #ffffff;
-  --chrome-muted:  #a8c2ba;
-  --chrome-line:   rgba(255,255,255,.12);
-  --chrome-accent: #b4e717;   /* auf Deep Green: 6.74 AA — hier ist Lime korrekt */
+  --chrome-line: rgba(255,255,255,.14);
+}
+
+/* Nacht: Deep Green, Akzent Lime */
+:root,
+[data-bkm-theme="night"] {
+  --chrome-surface:  #1c4b42;
+  --chrome-glass:    rgba(28,75,66,.66);
+  --chrome-text:     #ffffff;   /* 9.84 */
+  --chrome-muted:    #a8c2ba;   /* 5.20 */
+  --chrome-accent:   #b4e717;   /* 6.74 */
+  --chrome-on-accent:#1c4b42;   /* 6.74 auf Lime */
+  --chrome-glow:     0 0 18px -6px rgba(180,231,23,.55);
+}
+
+/* Tag: Transition Green, Akzent WEISS.
+   Lime auf Transition Green liegt bei 3.49 und ist damit nur für großen Text
+   zulässig — für Bedienelemente ausgeschlossen (Kontrastmatrix, DESIGN.md).
+   Der gedämpfte Ton muss hier sehr nah an Weiß liegen: die Fläche ist hell,
+   Weiß selbst erreicht nur 5.09, mehr ist nicht zu holen. */
+[data-bkm-theme="day"] {
+  --chrome-surface:  #287d4b;
+  --chrome-glass:    rgba(40,125,75,.86);
+  --chrome-text:     #ffffff;   /* 5.09 */
+  --chrome-muted:    #eaf4ee;   /* 4.53 */
+  --chrome-accent:   #ffffff;   /* 5.09 */
+  --chrome-on-accent:#287d4b;   /* 5.09 auf Weiß */
+  --chrome-glow:     none;      /* auf heller Fläche wirkt Leuchten schmutzig */
 }
