@@ -7,7 +7,8 @@
 | Skill | Beschreibung | Output |
 |-------|-------------|--------|
 | [bkm-slides](bkm-slides/SKILL.md) | Visuell ansprechende HTML-Präsentationen (v5: 4 Stil-Familien, Fixed-Stage, Auswahl-Workflow) | Einzelne HTML-Dateien |
-| [bkm-website](bkm-website/SKILL.md) | React-Websites und Web-Apps | React + Tailwind Projekte |
+| [bkm-website](bkm-website/SKILL.md) | Marketing-Websites und Landingpages | React + Tailwind Projekte |
+| [bkm-app](bkm-app/QUICKSTART.md) | Anwendungsoberflächen — Cockpits, Portale, interne Werkzeuge (Day/Night, Statussystem, Golden Reference) | Eigenständige HTML-Vorlage + Token-Ebene |
 | [bkm-social](bkm-social/SKILL.md) | Social-Media-Grafiken und Vorlagen | PNG/JPG oder HTML-Vorlagen |
 
 ## Architektur
