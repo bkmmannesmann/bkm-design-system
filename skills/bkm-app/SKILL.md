@@ -262,6 +262,9 @@ Ist-Stand der laufenden Fassung, jede Abweichung einzeln, die Reihenfolge in vie
 Stufen und die Abgrenzung, die am häufigsten falsch gelesen wird: **Gestaltung
 und Verhalten werden übernommen, Inhalte nicht.**
 
+**Fertige Prompts zum Kopieren** — inklusive Branch-Hinweis, Abgrenzung und
+Abnahmekriterien: `QUICKSTART.md`.
+
 **Vor der Übergabe prüfen:** In beiden Themes rendern. In drei Breiten prüfen
 (1440 / 834 / 390) — kein seitliches Scrollen, auf Touch kein Ziel unter 44 px.
 Kein Text unter AA. Keine literale Farbe außerhalb der Token-Blöcke.
@@ -279,6 +282,7 @@ Tastaturfokus auf jedem Bedienelement sichtbar. Genau eine Unbounded-Zeile.
 | `tokens.css` | **Kanonische App-Tokens** — beide Themes, gerechnete Kontraste |
 | `templates/bkm-cockpit/demo.html` | **Golden Reference** — acht Ansichten, eigenständig |
 | `MIGRATION.md` | **Bestehende Anwendung umstellen** — Ist-Stand, Deltas, Reihenfolge |
+| `QUICKSTART.md` | **Anweisungen zum Kopieren** — drei Wege, Abnahme, Stolpersteine |
 
 ---
 
