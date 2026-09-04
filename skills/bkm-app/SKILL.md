@@ -277,11 +277,12 @@ Ehrlich benannt, damit niemand improvisiert:
 - **Deterministische Prüfregeln** (`rules.json`) sind konzipiert, aber nicht gebaut.
   Geplant: literale Farbe in Komponente, Pill-Radius, Unbounded < 18 px, Statusfarbe
   ohne Token, Kartenverschachtelung > 2, Kontrast unter AA, mehr als ein Primary-CTA.
-- **Das Icon-Manifest deckt den App-Bedarf nicht.** Beim Bau fehlten `sun` und
-  `moon` (Theme-Umschalter) sowie `sign-out` (Abmelden). `sun` und `moon` liegen
-  jetzt als Dateien in `assets/icons/phosphor/bold/`, aus derselben gepinnten
-  Phosphor-Version 2.0.8 — die zugehörigen Einträge in
-  `assets/icons/phosphor/manifest.json` fehlen noch und sind nachzutragen.
-  Weitere Kandidaten: `sign-out`, `bell`, `dots-three`, `sort-ascending`,
-  `funnel-simple`, `caret-up-down`, `upload-simple`.
+- **Das Icon-Manifest deckt den App-Bedarf nur teilweise.** `sun` und `moon`
+  (Theme-Umschalter) sind ergänzt — Dateien aus der gepinnten Phosphor-Version
+  2.0.8, Einträge in `assets/icons/phosphor/manifest.json`. Noch offen:
+  `sign-out` (Abmelden läuft deshalb als Text), dazu als Kandidaten für die
+  weiteren Ansichten `bell`, `dots-three`, `sort-ascending`, `funnel-simple`,
+  `caret-up-down`, `upload-simple` und ein Video-/Play-Symbol — für
+  „Anwendungsvideos" und „Youtube Videos" musste im Wissens-Hub auf
+  `presentation` und `eye` ausgewichen werden.
   Regel 11 gilt unverändert — ergänzen statt ersetzen.

@@ -424,6 +424,18 @@
       "weight": "bold",
       "path": "bold/check-circle.svg",
       "purpose": "Bestätigung und positive Statusmarkierung"
+    },
+    {
+      "name": "sun",
+      "weight": "bold",
+      "path": "bold/sun.svg",
+      "purpose": "Tagansicht im Darstellungs-Umschalter"
+    },
+    {
+      "name": "moon",
+      "weight": "bold",
+      "path": "bold/moon.svg",
+      "purpose": "Nachtansicht im Darstellungs-Umschalter"
     }
   ]
 }
