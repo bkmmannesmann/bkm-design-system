@@ -69,16 +69,25 @@
   /* Material: eine Lichtkante oben, ein enger Schatten unten. Grosse weiche
      Schatten tragen auf Dunkel nicht — die Lichtkante trägt sehr wohl. */
   --card-sheen:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,0) 62%);
-  --elevation-card:inset 0 1px 0 rgba(255,255,255,.09),
+  --elevation-card:inset 0 1px 0 rgba(255,255,255,.14),
+                   inset 0 0 0 1px rgba(255,255,255,.05),
                    0 1px 2px rgba(0,0,0,.30),
                    0 14px 32px -18px rgba(0,0,0,.60);
-  --elevation-card-hover:inset 0 1px 0 rgba(255,255,255,.14),
+  --elevation-card-hover:inset 0 1px 0 rgba(255,255,255,.20),
+                   inset 0 0 0 1px rgba(255,255,255,.09),
                    0 2px 4px rgba(0,0,0,.34),
                    0 20px 40px -20px rgba(0,0,0,.70);
   --elevation-overlay:inset 0 1px 0 rgba(255,255,255,.10),
                    0 24px 60px -20px rgba(0,0,0,.70);
 
   --chrome-glass:rgba(28,75,66,.78);
+  /* Brillanz auf Dunkel: eine helle Kante oben, ein voller Haarlinien-Ring,
+     ein enger Schimmer um Akzentflächen. Alles CSS, kein Filter, keine
+     Bibliothek — und in jedem Browser identisch. */
+  --rim:inset 0 1px 0 rgba(255,255,255,.14), inset 0 0 0 1px rgba(255,255,255,.05);
+  --specular:linear-gradient(104deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,0) 24%,
+                                    rgba(255,255,255,0) 68%,rgba(255,255,255,.07) 100%);
+  --accent-glow:0 0 26px -6px rgba(180,231,23,.50);
   --kv:var(--kv-dark);
   --kv-opacity:.16;
   color-scheme:dark;
@@ -114,6 +123,12 @@
                    rgba(28,75,66,.16) 0 24px 48px -16px;
 
   --chrome-glass:rgba(28,75,66,.90);
+  /* Auf Hell entsteht Brillanz nicht durch Leuchten, sondern durch eine
+     saubere Kante. Kein Schimmer — der wirkt auf hellem Grund schmutzig. */
+  --rim:inset 0 1px 0 #fff, inset 0 0 0 1px rgba(28,75,66,.06);
+  --specular:linear-gradient(104deg,rgba(255,255,255,.14) 0%,rgba(255,255,255,0) 26%,
+                                    rgba(255,255,255,0) 70%,rgba(255,255,255,.10) 100%);
+  --accent-glow:none;
   --kv:var(--kv-light);
   --kv-opacity:.22;
   color-scheme:light;
@@ -176,8 +191,14 @@ svg,use{fill:currentColor}
   backdrop-filter:blur(18px) saturate(140%);
   -webkit-backdrop-filter:blur(18px) saturate(140%);
   border-bottom:1px solid var(--chrome-line);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.07), 0 10px 30px -18px rgba(0,0,0,.8);
+  box-shadow:var(--rim), 0 10px 30px -18px rgba(0,0,0,.8);
   position:sticky; top:0; z-index:20;
+}
+/* Glanzkante: ein streifendes Licht über die Leiste. Ersetzt den
+   Displacement-Filter — sichtbar in jedem Browser statt nur in Chromium. */
+.app-bar::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:var(--specular);
 }
 .brand{display:flex;align-items:center;gap:var(--space-md);flex-shrink:0}
 .brand__logo{height:26px;width:auto;display:block}
@@ -203,7 +224,7 @@ svg,use{fill:currentColor}
 .segmented__btn:hover{color:var(--chrome-text)}
 .segmented__btn[aria-pressed="true"]{
   background:var(--chrome-accent);color:var(--bkm-deep-green);
-  box-shadow:0 1px 3px rgba(0,0,0,.3);
+  box-shadow:0 1px 3px rgba(0,0,0,.3), 0 0 18px -6px rgba(180,231,23,.55);
 }
 
 /* --- Theme-Umschalter: nur Sonne und Mond, mit gleitender Markierung -------- */
@@ -216,7 +237,8 @@ svg,use{fill:currentColor}
 .theme-toggle::after{     /* die Markierung, die mitwandert */
   content:""; position:absolute; top:2px; left:2px;
   width:32px; height:calc(100% - 4px); border-radius:2px;
-  background:var(--chrome-accent); box-shadow:0 1px 3px rgba(0,0,0,.35);
+  background:var(--chrome-accent);
+  box-shadow:0 1px 3px rgba(0,0,0,.35), 0 0 18px -6px rgba(180,231,23,.55);
   transition:transform var(--motion-base);
 }
 [data-bkm-theme="day"] .theme-toggle::after{transform:translateX(0)}
@@ -305,9 +327,17 @@ svg,use{fill:currentColor}
   border:1px solid var(--line-strong); border-radius:var(--radius-input);
   color:var(--text-muted);
   box-shadow:var(--elevation-card);
+  position:relative; overflow:hidden;
   transition:border-color var(--motion-fast), box-shadow var(--motion-fast);
 }
-.hero__search:focus-within{border-color:var(--accent);box-shadow:var(--elevation-card-hover)}
+.hero__search::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:var(--specular);
+}
+.hero__search:focus-within{
+  border-color:var(--accent);
+  box-shadow:var(--elevation-card-hover), var(--accent-glow);
+}
 .hero__search input{
   flex:1;min-width:0;appearance:none;border:0;background:transparent;outline:0;
   color:var(--text-primary);font-size:var(--text-body);font-family:inherit;
@@ -354,7 +384,7 @@ svg,use{fill:currentColor}
 }
 .tile:hover .tile__icon{
   background:var(--accent); color:var(--text-on-accent);
-  box-shadow:inset 0 -1px 2px rgba(0,0,0,.18);
+  box-shadow:inset 0 -1px 2px rgba(0,0,0,.18), var(--accent-glow);
 }
 .tile__icon svg{width:20px;height:20px}
 .tile__title{
@@ -452,7 +482,8 @@ svg,use{fill:currentColor}
   background:var(--accent);color:var(--text-on-accent);
   border:0;border-radius:var(--radius-control);cursor:pointer;
   font-size:var(--text-sm);font-weight:700;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.3), 0 8px 24px -8px rgba(0,0,0,.6);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.3), 0 8px 24px -8px rgba(0,0,0,.6),
+             var(--accent-glow);
 }
 .delta-toggle:hover{background:var(--accent-hover)}
 .delta{
