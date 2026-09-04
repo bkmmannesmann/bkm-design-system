@@ -257,6 +257,11 @@ Schriften, Logo, Icons und den Theme-Umschalter unverändert.
 Verwende ausschließlich die semantischen Tokens, nie eine feste Farbe.
 ```
 
+**C — Eine bestehende Anwendung umstellen:** → `MIGRATION.md`. Dort steht der
+Ist-Stand der laufenden Fassung, jede Abweichung einzeln, die Reihenfolge in vier
+Stufen und die Abgrenzung, die am häufigsten falsch gelesen wird: **Gestaltung
+und Verhalten werden übernommen, Inhalte nicht.**
+
 **Vor der Übergabe prüfen:** In beiden Themes rendern. In drei Breiten prüfen
 (1440 / 834 / 390) — kein seitliches Scrollen, auf Touch kein Ziel unter 44 px.
 Kein Text unter AA. Keine literale Farbe außerhalb der Token-Blöcke.
@@ -272,7 +277,8 @@ Tastaturfokus auf jedem Bedienelement sichtbar. Genau eine Unbounded-Zeile.
 | `../../docs/digitale-medien.md` | Web-App-Vorgaben (Header Deep Green, Fläche Sand White) |
 | `../../docs/icon-system.md`, `../../assets/icons/phosphor/manifest.json` | Iconstandard |
 | `tokens.css` | **Kanonische App-Tokens** — beide Themes, gerechnete Kontraste |
-| `templates/bkm-cockpit/demo.html` | **Golden Reference** — Startbildschirm, eigenständig |
+| `templates/bkm-cockpit/demo.html` | **Golden Reference** — acht Ansichten, eigenständig |
+| `MIGRATION.md` | **Bestehende Anwendung umstellen** — Ist-Stand, Deltas, Reihenfolge |
 
 ---
 
