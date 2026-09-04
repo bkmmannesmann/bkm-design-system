@@ -64,6 +64,13 @@
   --density-pad:  20px;   /* Innenabstand Karten */
 
   --focus-ring-width: 2px;
+
+  /* Marken-Assets als Material. Pfade relativ zu dieser Datei; in
+     eigenstaendigen Vorlagen stattdessen als data:-URI einbetten. */
+  --tex-green: url("../../assets/backgrounds/bg-green-texture-1.jpg");
+  --tex-sand:  url("../../assets/backgrounds/bg-sand-texture-1.jpg");
+  --kv-dark:   url("../../assets/keyvisual/keyvisual-on-dark.png");
+  --kv-light:  url("../../assets/keyvisual/keyvisual-on-light.png");
   --motion-fast: 120ms cubic-bezier(.4,0,.2,1);
   --motion-base: 200ms cubic-bezier(.4,0,.2,1);
 }
@@ -112,10 +119,27 @@
   --data-1: #cfe8dd;  --data-2: #a9d2c3;  --data-3: #84bca9;  --data-4: #63a690;
   --data-track: rgba(255,255,255,.10);
 
-  /* Auf dunklen Flächen trägt kein Schatten. Tiefe entsteht über die
-     Flächenleiter; Schatten dienen nur echten Overlays. */
-  --elevation-card:    none;
-  --elevation-overlay: 0 12px 32px -8px rgba(0,0,0,.55);
+  /* Grund: Markentextur, mit dem Flächentoken überdeckt — die Textur
+     moduliert nur, die gerechneten Kontraste bleiben gültig. */
+  --ground: linear-gradient(rgba(19,50,44,.90),rgba(19,50,44,.95)), var(--tex-green);
+
+  /* Material. Ein grosser weicher Schatten trägt auf dunklem Grund nicht —
+     eine Lichtkante oben und ein enger Schatten unten sehr wohl. Die
+     Lichtkante ist derselbe "inset highlight", den DESIGN.md für die
+     Stufe "Featured" vorsieht. */
+  --card-sheen: linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,0) 62%);
+  --elevation-card:       inset 0 1px 0 rgba(255,255,255,.09),
+                          0 1px 2px rgba(0,0,0,.30),
+                          0 14px 32px -18px rgba(0,0,0,.60);
+  --elevation-card-hover: inset 0 1px 0 rgba(255,255,255,.14),
+                          0 2px 4px rgba(0,0,0,.34),
+                          0 20px 40px -20px rgba(0,0,0,.70);
+  --elevation-overlay:    inset 0 1px 0 rgba(255,255,255,.10),
+                          0 24px 60px -20px rgba(0,0,0,.70);
+
+  --chrome-glass: rgba(28,75,66,.78);
+  --kv: var(--kv-dark);
+  --kv-opacity: .16;
 
   color-scheme: dark;
 }
@@ -163,9 +187,24 @@
   --data-1: #287d4b;  --data-2: #4a9268;  --data-3: #6ba885;  --data-4: #8ebda3;
   --data-track: rgba(28,75,66,.10);
 
-  /* Shadow-as-Border (DESIGN.md) — Ring statt CSS-border */
-  --elevation-card:    rgba(0,0,0,.08) 0 0 0 1px, rgba(0,0,0,.04) 0 2px 4px;
-  --elevation-overlay: rgba(0,0,0,.08) 0 0 0 1px, rgba(0,0,0,.10) 0 12px 24px -8px;
+  --ground: linear-gradient(rgba(246,245,242,.84),rgba(246,245,242,.92)), var(--tex-sand);
+
+  /* Auf Hell trägt Schatten: Shadow-as-Border (DESIGN.md) plus Lichtkante. */
+  --card-sheen: linear-gradient(180deg,rgba(255,255,255,.9),rgba(255,255,255,0) 40%);
+  --elevation-card:       inset 0 1px 0 #fff,
+                          rgba(28,75,66,.10) 0 0 0 1px,
+                          rgba(28,75,66,.05) 0 2px 4px,
+                          rgba(28,75,66,.06) 0 14px 28px -16px;
+  --elevation-card-hover: inset 0 1px 0 #fff,
+                          rgba(28,75,66,.14) 0 0 0 1px,
+                          rgba(28,75,66,.07) 0 4px 8px,
+                          rgba(28,75,66,.10) 0 20px 36px -18px;
+  --elevation-overlay:    rgba(28,75,66,.12) 0 0 0 1px,
+                          rgba(28,75,66,.16) 0 24px 48px -16px;
+
+  --chrome-glass: rgba(28,75,66,.90);
+  --kv: var(--kv-light);
+  --kv-opacity: .22;
 
   color-scheme: light;
 }
@@ -184,7 +223,7 @@
    Markenwiedererkennung konstant und macht den Umschalter ruhiger.
    --------------------------------------------------------------------------- */
 :root {
-  --chrome-bg:     #1c4b42;
+  --chrome-bg:     #1c4b42;   /* deckend; die Leiste selbst nutzt --chrome-glass */
   --chrome-text:   #ffffff;
   --chrome-muted:  #a8c2ba;
   --chrome-line:   rgba(255,255,255,.12);

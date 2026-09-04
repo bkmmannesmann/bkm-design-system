@@ -45,10 +45,14 @@ Decks (→ `bkm-slides`), technische Datenblätter (→ `docs/print-anwendungen.
    Fokusringe. Nicht für Sektionslabels, nicht für Diagrammbalken, nicht für Icons
    im Ruhezustand, nicht als Fläche. (`DESIGN.md`: „never decorative, never on
    large surfaces".)
-3. **Tiefe über die Flächenleiter, nicht über Schatten.** Auf dunklem Grund trägt
-   kein Schatten. Vier Stufen: `--surface-0` Arbeitsfläche, `--surface-1` Karte,
-   `--surface-2` angehoben/Hover, `--surface-3` Overlay. Im Day-Theme greift
-   stattdessen Shadow-as-Border (`--elevation-card`), wie in `DESIGN.md`.
+3. **Tiefe aus Flächenleiter *und* Material.** Vier Stufen tragen die Hierarchie:
+   `--surface-0` Arbeitsfläche, `--surface-1` Karte, `--surface-2` angehoben/Hover,
+   `--surface-3` Overlay. Dazu Material über `--card-sheen` und `--elevation-card`:
+   auf dunklem Grund eine Lichtkante oben plus enger Schatten unten (ein großer
+   weicher Schatten trägt dort nicht), auf hellem Grund Shadow-as-Border wie in
+   `DESIGN.md`. Die Lichtkante ist derselbe „inset highlight", den `DESIGN.md`
+   für die Stufe *Featured* vorsieht — kein neuer Effekt.
+   Ohne Material wirkt eine Oberfläche flach, auch wenn alle Tokens stimmen.
 4. **Form: 4 px Bedienelemente, 8 px Eingaben, 12 px Karten. Keine Pillen.**
    `--radius-avatar` ist ausschließlich für Avatare und Statuspunkte.
    (`DESIGN.md`: „Never pill-shaped in the primary brand context.")
@@ -64,10 +68,16 @@ Decks (→ `bkm-slides`), technische Datenblätter (→ `docs/print-anwendungen.
 8. **Zustände sind Pflicht.** Hover, Aktiv, Fokus (`:focus-visible`), Deaktiviert,
    Leer, Ladend. Tastaturfokus ist keine Kür — in einem Werkzeug ist er die
    halbe Bedienung.
-9. **Icons ausschließlich aus `assets/icons/phosphor/` in Bold oder Fill.**
+9. **Markenmaterial statt Selbsterfundenem.** Der Grund nutzt die Texturen aus
+   `assets/backgrounds/`, mit dem Flächentoken überdeckt (`--ground`), damit die
+   gerechneten Kontraste gültig bleiben. Das Keyvisual aus `assets/keyvisual/`
+   gehört genau in ein Hero-Band, bündig rechts, vertikal zentriert, nie
+   angeschnitten und nie in Code nachgebaut. Glasmorphismus ist erlaubt,
+   maximal ein bis zwei Elemente pro Viewport — im Cockpit die Kopfleiste.
+10. **Icons ausschließlich aus `assets/icons/phosphor/` in Bold oder Fill.**
    Keine andere Bibliothek, keine Emoji, keine nachgezeichneten Symbole.
    Fehlt ein benötigtes Icon im Manifest, wird es dort ergänzt — nicht ersetzt.
-10. **Ein Icon setzt nie seine eigene Farbe.** Es erbt die Textfarbe seines
+11. **Ein Icon setzt nie seine eigene Farbe.** Es erbt die Textfarbe seines
     Kontextes (`fill: currentColor`), damit die Farbregel automatisch greift:
 
     | Fläche | Icon-/Textfarbe | Kontrast |
@@ -82,7 +92,7 @@ Decks (→ `bkm-slides`), technische Datenblätter (→ `docs/print-anwendungen.
     `DESIGN.md`). Beim Einbetten von SVGs als `<symbol>` darauf achten, dass
     `fill="currentColor"` erhalten bleibt — sonst fallen die Pfade still auf
     Schwarz zurück.
-11. **Zahlen tabellarisch.** `font-variant-numeric: tabular-nums` für alle Werte,
+12. **Zahlen tabellarisch.** `font-variant-numeric: tabular-nums` für alle Werte,
     Mengen, Zeitstempel und Prozentangaben, damit Spalten stehen.
 
 ---
@@ -203,8 +213,11 @@ Ehrlich benannt, damit niemand improvisiert:
 - **Deterministische Prüfregeln** (`rules.json`) sind konzipiert, aber nicht gebaut.
   Geplant: literale Farbe in Komponente, Pill-Radius, Unbounded < 18 px, Statusfarbe
   ohne Token, Kartenverschachtelung > 2, Kontrast unter AA, mehr als ein Primary-CTA.
-- **Das Icon-Manifest deckt den App-Bedarf nicht.** Beim Bau der Vorlage fehlte
-  bereits `sign-out` (Abmelden). Der Abmelde-Knopf läuft deshalb als Text. Weitere
-  Kandidaten für `assets/icons/phosphor/manifest.json`: `sign-out`, `bell`,
-  `dots-three`, `sort-ascending`, `funnel-simple`, `caret-up-down`, `upload-simple`.
-  Regel 9 gilt unverändert — ergänzen statt ersetzen.
+- **Das Icon-Manifest deckt den App-Bedarf nicht.** Beim Bau fehlten `sun` und
+  `moon` (Theme-Umschalter) sowie `sign-out` (Abmelden). `sun` und `moon` liegen
+  jetzt als Dateien in `assets/icons/phosphor/bold/`, aus derselben gepinnten
+  Phosphor-Version 2.0.8 — die zugehörigen Einträge in
+  `assets/icons/phosphor/manifest.json` fehlen noch und sind nachzutragen.
+  Weitere Kandidaten: `sign-out`, `bell`, `dots-three`, `sort-ascending`,
+  `funnel-simple`, `caret-up-down`, `upload-simple`.
+  Regel 10 gilt unverändert — ergänzen statt ersetzen.
