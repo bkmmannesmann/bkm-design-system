@@ -136,7 +136,17 @@ Decks (→ `bkm-slides`), technische Datenblätter (→ `docs/print-anwendungen.
     sie sichtbar dazu; die Uhrzeit gehört nicht dazu, die zeigt das
     Betriebssystem. Tastenkürzel nur einblenden, wo sie wahr sind —
     ein „⌘K" auf einem Tablet ist eine Lüge.
-16. **Zahlen tabellarisch.** `font-variant-numeric: tabular-nums` für alle Werte,
+16. **Der Rückweg gehört ins Chrome, nicht in die Seite.** Ein
+    „Zurück zur Übersicht" am Kopf des Inhalts scrollt weg und ist damit
+    genau dann verschwunden, wenn man ihn braucht. Stattdessen eine
+    **Brotkrume, die mit der Kopfleiste zusammen klebt** (`.topbar` als
+    gemeinsamer Sticky-Container — kein gerechneter `top`-Versatz, der
+    bricht, sobald die Leiste umbricht).
+    Der Bereichsname darin ist zugleich ein **Wechsler**: er listet alle
+    Bereiche und markiert den aktuellen. Damit wird aus Hub-and-Spoke ein
+    Netz — man springt direkt weiter, statt jedes Mal über die Startseite
+    zu gehen. Auf der Startseite selbst ist die Brotkrume verborgen.
+17. **Zahlen tabellarisch.** `font-variant-numeric: tabular-nums` für alle Werte,
     Mengen, Zeitstempel und Prozentangaben, damit Spalten stehen.
 
 ---
