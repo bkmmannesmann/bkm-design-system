@@ -115,7 +115,15 @@ Decks (→ `bkm-slides`), technische Datenblätter (→ `docs/print-anwendungen.
     Bildschirm nicht sieht. Vor der Übergabe in drei Größen prüfen
     (Desktop 1440, Tablet 834, Handy 390): kein seitliches Scrollen,
     kein Ziel unter 44 px auf Touch.
-14. **Zahlen tabellarisch.** `font-variant-numeric: tabular-nums` für alle Werte,
+14. **In die Kopfleiste gehört nur, was man beim Arbeiten braucht.** Was man
+    einmal einstellt — Sprache, Darstellung, Konto, Admin — gehört ins
+    Kontomenü hinter dem Avatar, nicht dauerhaft in die oberste Zeile.
+    Faustregel: höchstens vier Gruppen. Zeigt ein Element eine Zahl, die
+    beim Arbeiten zählt (offene Positionen, ungelesene Meldungen), gehört
+    sie sichtbar dazu; die Uhrzeit gehört nicht dazu, die zeigt das
+    Betriebssystem. Tastenkürzel nur einblenden, wo sie wahr sind —
+    ein „⌘K" auf einem Tablet ist eine Lüge.
+15. **Zahlen tabellarisch.** `font-variant-numeric: tabular-nums` für alle Werte,
     Mengen, Zeitstempel und Prozentangaben, damit Spalten stehen.
 
 ---

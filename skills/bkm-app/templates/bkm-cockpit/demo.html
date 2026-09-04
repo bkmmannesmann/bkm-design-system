@@ -80,7 +80,7 @@
   --elevation-overlay:inset 0 1px 0 rgba(255,255,255,.10),
                    0 24px 60px -20px rgba(0,0,0,.70);
 
-  --chrome-glass:rgba(28,75,66,.78);
+  --chrome-glass:rgba(28,75,66,.66);
   /* Brillanz auf Dunkel: eine helle Kante oben, ein voller Haarlinien-Ring,
      ein enger Schimmer um Akzentflächen. Alles CSS, kein Filter, keine
      Bibliothek — und in jedem Browser identisch. */
@@ -133,7 +133,7 @@
   --elevation-overlay:rgba(28,75,66,.12) 0 0 0 1px,
                    rgba(28,75,66,.16) 0 24px 48px -16px;
 
-  --chrome-glass:rgba(28,75,66,.90);
+  --chrome-glass:rgba(28,75,66,.82);
   /* Auf Hell entsteht Brillanz nicht durch Leuchten, sondern durch eine
      saubere Kante. Kein Schimmer — der wirkt auf hellem Grund schmutzig. */
   --rim:inset 0 1px 0 #fff, inset 0 0 0 1px rgba(28,75,66,.06);
@@ -177,6 +177,9 @@ button{font:inherit;color:inherit}
    damit die Regel aus DESIGN.md automatisch greift: auf Deep Green Lime,
    auf Transition Green Weiß. Ein Icon setzt nie eine eigene Farbe. */
 svg,use{fill:currentColor}
+/* Sicherheitsnetz: ein <svg> ohne Groessenangabe wuerde auf die
+   Standardgroesse 300x150 aufgehen und die Seite zerlegen. */
+svg:not([width]){width:1em;height:1em}
 
 :where(a,button,input,[tabindex]):focus-visible{
   outline:var(--focus-ring-width) solid var(--accent);
@@ -204,8 +207,8 @@ svg,use{fill:currentColor}
   min-height:62px; padding:var(--space-xs) var(--space-lg);
   color:var(--chrome-text);
   background:var(--chrome-glass);
-  backdrop-filter:blur(18px) saturate(140%);
-  -webkit-backdrop-filter:blur(18px) saturate(140%);
+  backdrop-filter:blur(22px) saturate(165%);
+  -webkit-backdrop-filter:blur(22px) saturate(165%);
   border-bottom:1px solid var(--chrome-line);
   box-shadow:var(--rim), 0 10px 30px -18px rgba(0,0,0,.8);
   position:sticky; top:0; z-index:20;
@@ -216,7 +219,8 @@ svg,use{fill:currentColor}
   content:""; position:absolute; inset:0; pointer-events:none;
   background:var(--specular);
 }
-.brand{display:flex;align-items:center;gap:var(--space-md);flex-shrink:0}
+.brand{display:flex;align-items:center;gap:var(--space-md);flex-shrink:0;
+  background:none;border:0;padding:0;cursor:pointer;color:inherit}
 .brand__logo{height:26px;width:auto;display:block}
 .brand__divider{width:1px;height:22px;background:var(--chrome-line)}
 .brand__app{
@@ -286,6 +290,7 @@ svg,use{fill:currentColor}
   color:var(--chrome-text);font-size:var(--text-sm);font-family:inherit;
 }
 .search input::placeholder{color:var(--chrome-muted);opacity:1}
+.search svg{width:16px;height:16px;flex-shrink:0}
 .kbd{
   font-size:11px;font-weight:700;padding:2px 5px;border-radius:3px;
   background:rgba(255,255,255,.12);color:var(--chrome-muted);
@@ -303,16 +308,77 @@ svg,use{fill:currentColor}
 .chrome-btn:hover{background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.30)}
 .chrome-btn svg{width:15px;height:15px}
 
-.user{display:flex;align-items:center;gap:var(--space-xs);padding-left:var(--space-md);
-  border-left:1px solid var(--chrome-line)}
 .avatar{
-  width:32px;height:32px;border-radius:var(--radius-avatar);
+  width:30px;height:30px;border-radius:var(--radius-avatar);
   background:var(--chrome-accent);color:var(--bkm-deep-green);
   display:grid;place-items:center;font-size:var(--text-sm);font-weight:700;flex-shrink:0;
   box-shadow:inset 0 -1px 2px rgba(0,0,0,.18);
 }
-.user__name{font-size:var(--text-sm);font-weight:700;line-height:1.25;white-space:nowrap}
-.user__role{font-size:11px;color:var(--chrome-muted);line-height:1.25}
+
+/* --- Kontomenü: alles, was man einmal einstellt ---------------------------
+   Die Kopfleiste traegt nur, was man beim Arbeiten braucht. Sprache,
+   Darstellung und Admin sind Einstellungen, keine Werkzeuge — sie wandern
+   hierher. Das nimmt der Leiste vier von sieben Gruppen. */
+.menu{position:relative}
+.menu__trigger{
+  display:inline-flex;align-items:center;gap:var(--space-xs);
+  min-height:40px;padding:4px 8px 4px 4px;
+  background:transparent;border:1px solid transparent;border-radius:var(--radius-control);
+  cursor:pointer;color:var(--chrome-text);
+  transition:background var(--motion-fast),border-color var(--motion-fast);
+}
+.menu__trigger:hover,.menu__trigger[aria-expanded="true"]{
+  background:rgba(255,255,255,.10);border-color:var(--chrome-line);
+}
+.menu__caret{width:11px;height:11px;transform:rotate(90deg);color:var(--chrome-muted);
+  transition:transform var(--motion-fast)}
+.menu__trigger[aria-expanded="true"] .menu__caret{transform:rotate(-90deg)}
+
+.menu__panel{
+  position:absolute;right:0;top:calc(100% + 10px);width:268px;z-index:30;
+  padding:var(--space-xs);
+  background:var(--surface-3);color:var(--text-primary);
+  border-radius:var(--radius-card);box-shadow:var(--elevation-overlay);
+}
+.menu__panel[hidden]{display:none}
+.menu__head{padding:var(--space-sm) var(--space-sm) var(--space-xs)}
+.menu__name{font-size:var(--text-body);font-weight:700}
+.menu__role{font-size:var(--text-sm);color:var(--text-secondary)}
+.menu__row{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--space-sm);
+  padding:var(--space-xs) var(--space-sm);
+}
+.menu__row .label{color:var(--text-secondary)}
+.menu__item{
+  display:flex;align-items:center;gap:10px;width:100%;
+  min-height:40px;padding:0 var(--space-sm);
+  background:none;border:0;border-radius:var(--radius-control);cursor:pointer;
+  font-size:var(--text-sm);font-weight:700;color:var(--text-primary);text-align:left;
+  transition:background var(--motion-fast),box-shadow var(--motion-fast);
+}
+.menu__item:hover{background:var(--surface-2);box-shadow:var(--ring-accent)}
+.menu__item svg{width:15px;height:15px;color:var(--text-secondary)}
+.menu__sep{height:1px;background:var(--line);margin:var(--space-xs) 0}
+
+/* Bedienelemente im Menü liegen auf Seitenflaeche, nicht auf der Chrome-Leiste */
+.menu .segmented,.menu .theme-toggle{
+  background:var(--surface-inset);border-color:var(--line);
+}
+.menu .segmented__btn,.menu .theme-toggle__btn{color:var(--text-secondary)}
+.menu .segmented__btn:hover,.menu .theme-toggle__btn:hover{color:var(--text-primary)}
+.menu .segmented__btn[aria-pressed="true"]{
+  background:var(--selected-fill);color:var(--selected-on-fill);
+}
+.menu .theme-toggle::after{background:var(--selected-fill)}
+.menu .theme-toggle__btn[aria-pressed="true"]{color:var(--selected-on-fill)}
+
+/* Zaehler an der Materialliste — der einzige Wert, der beim Arbeiten zaehlt */
+.count{
+  min-width:19px;height:19px;padding:0 5px;border-radius:var(--radius-control);
+  display:inline-grid;place-items:center;
+  background:var(--chrome-accent);color:var(--bkm-deep-green);
+  font-size:11px;font-weight:700;font-variant-numeric:tabular-nums;
+}
 
 /* ===========================================================================
    HERO-BAND — mit Keyvisual, bündig am rechten Rand
@@ -524,6 +590,232 @@ svg,use{fill:currentColor}
 
 
 /* ===========================================================================
+   SEITEN & NAVIGATION
+   =========================================================================== */
+.view{display:none}
+.view[data-active="true"]{display:block}
+
+.backlink{
+  display:inline-flex;align-items:center;gap:var(--space-xs);
+  background:none;border:0;padding:8px 0;cursor:pointer;
+  font-size:var(--text-sm);font-weight:700;color:var(--text-secondary);
+  transition:color var(--motion-fast),gap var(--motion-fast);
+}
+.backlink:hover{color:var(--accent);gap:12px}
+.backlink svg{width:14px;height:14px;transform:rotate(180deg)}
+
+.page-head{margin:var(--space-xs) 0 var(--space-xl)}
+.page-head__row{display:flex;align-items:center;gap:var(--space-md);flex-wrap:wrap}
+.page-head h1{
+  font-family:var(--font-display);font-weight:900;
+  font-size:var(--text-page-title);line-height:1.1;letter-spacing:-.02em;
+}
+.page-head p{
+  margin:var(--space-sm) 0 0;max-width:70ch;
+  color:var(--text-secondary);font-size:var(--text-body);
+}
+.badge{
+  display:inline-flex;align-items:center;padding:5px 11px;
+  border-radius:var(--radius-control);
+  font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  background:var(--accent-quiet);color:var(--accent);
+  box-shadow:inset 0 0 0 1px var(--accent);
+}
+.badge--muted{background:var(--status-warning-bg);color:var(--status-warning);
+  box-shadow:inset 0 0 0 1px var(--status-warning)}
+
+/* Reiter — kleines Bedienelement, Auswahl also gefuellt */
+.tabs{
+  display:flex;flex-wrap:wrap;gap:var(--space-2xs);padding:3px;
+  background:var(--surface-inset);border-radius:var(--radius-control);
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.18);
+  margin-bottom:var(--space-lg);
+}
+.tabs__btn{
+  appearance:none;border:0;background:transparent;cursor:pointer;
+  display:inline-flex;align-items:center;gap:7px;
+  padding:9px 14px;border-radius:2px;
+  font-size:var(--text-sm);font-weight:700;color:var(--text-secondary);
+  transition:color var(--motion-fast),background var(--motion-fast);
+}
+.tabs__btn:hover{color:var(--text-primary)}
+.tabs__btn[aria-selected="true"]{
+  background:var(--selected-fill);color:var(--selected-on-fill);
+  box-shadow:0 1px 3px rgba(0,0,0,.25),var(--accent-glow);
+}
+.tabs__count{
+  font-size:11px;font-weight:700;padding:1px 6px;border-radius:3px;
+  background:rgba(0,0,0,.18);
+}
+.tabs__btn[aria-selected="true"] .tabs__count{background:rgba(0,0,0,.14)}
+.tabs__btn[disabled]{opacity:.5;cursor:not-allowed}
+
+/* Kennzahl-Kachel */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-md);
+  margin-bottom:var(--space-lg)}
+.kpi{
+  background:var(--card-sheen),var(--surface-1);border-radius:var(--radius-card);
+  box-shadow:var(--elevation-card);padding:var(--density-pad);
+}
+.kpi__value{
+  font-family:var(--font-display);font-weight:900;font-size:30px;line-height:1;
+  color:var(--accent);font-variant-numeric:tabular-nums;
+}
+.kpi__label{margin-top:var(--space-xs);font-size:var(--text-sm);font-weight:700}
+.kpi__hint{margin-top:2px;font-size:var(--text-sm);color:var(--text-secondary)}
+
+/* Filterleiste mit Auswahlfeldern */
+.filterbar{
+  display:grid;grid-template-columns:2fr 1fr 1fr;gap:var(--space-sm);
+  padding:var(--space-md);margin-bottom:var(--space-lg);
+  background:var(--card-sheen),var(--surface-1);
+  border-radius:var(--radius-card);box-shadow:var(--elevation-card);
+}
+.field{
+  display:flex;align-items:center;gap:var(--space-xs);
+  height:46px;padding:0 var(--space-sm);
+  background:var(--surface-inset);border:1px solid var(--line-strong);
+  border-radius:var(--radius-input);color:var(--text-muted);
+  transition:border-color var(--motion-fast);
+}
+.field:focus-within{border-color:var(--accent)}
+.field svg{width:16px;height:16px;flex-shrink:0}
+.field input,.field select{
+  flex:1;min-width:0;appearance:none;border:0;background:transparent;outline:0;
+  color:var(--text-primary);font-size:var(--text-body);font-family:inherit;
+}
+.field select{cursor:pointer}
+.field select option{background:var(--surface-1);color:var(--text-primary)}
+.field__caret{width:10px;height:10px;flex-shrink:0;color:var(--text-muted);
+  transform:rotate(90deg)}
+.resultcount{margin:0 0 var(--space-md);font-size:var(--text-sm);
+  color:var(--text-secondary);font-variant-numeric:tabular-nums}
+
+/* Produktkarte — helle Medienflaeche, weil Produktfotos freigestellt sind */
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-md)}
+.product{
+  display:flex;flex-direction:column;text-align:left;width:100%;height:100%;
+  padding:0;border:0;overflow:hidden;cursor:pointer;
+  background:var(--card-sheen),var(--surface-1);
+  border-radius:var(--radius-card);box-shadow:var(--elevation-card);
+  transition:transform var(--motion-fast),box-shadow var(--motion-fast);
+}
+.product:hover,.product:focus-visible{
+  transform:translateY(-3px);
+  box-shadow:var(--ring-accent),var(--elevation-card-hover);
+}
+.product__media{
+  aspect-ratio:4/3;display:grid;place-items:center;
+  background:var(--bkm-clean-white);color:var(--bkm-outline);
+}
+.product__media svg{width:34px;height:34px}
+.product__body{display:flex;flex-direction:column;gap:6px;padding:var(--space-md);flex:1}
+.product__name{font-size:var(--text-body);font-weight:700;line-height:1.3}
+.product__spec{font-size:var(--text-sm);color:var(--text-secondary)}
+.product__foot{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--space-sm);
+  margin-top:auto;padding-top:var(--space-sm);border-top:1px solid var(--line);
+  font-size:var(--text-sm);
+}
+.product__line{color:var(--text-muted);font-weight:700}
+.product__cta{color:var(--accent);font-weight:700;display:inline-flex;align-items:center;gap:5px}
+.product__cta svg{width:12px;height:12px}
+
+/* Kategorie-Kacheln (Wissens-Hub) */
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-md);
+  margin-bottom:var(--space-xl)}
+.cat{
+  display:flex;flex-direction:column;align-items:flex-start;gap:var(--space-sm);
+  text-align:left;width:100%;height:100%;padding:var(--density-pad);
+  border:0;border-radius:var(--radius-card);cursor:pointer;
+  background:var(--card-sheen),var(--surface-1);box-shadow:var(--elevation-card);
+  transition:transform var(--motion-fast),box-shadow var(--motion-fast);
+}
+.cat:hover,.cat:focus-visible{transform:translateY(-3px);
+  box-shadow:var(--ring-accent),var(--elevation-card-hover)}
+.cat[aria-current="true"]{
+  box-shadow:var(--selected-ring),var(--elevation-card);
+  background:var(--card-sheen),var(--selected-surface),var(--surface-1);
+}
+.cat[aria-current="true"] .tile__icon{
+  background:var(--selected-fill);color:var(--selected-on-fill);
+  box-shadow:inset 0 -1px 2px rgba(0,0,0,.18),var(--accent-glow);
+}
+.cat[aria-current="true"] .cat__title{color:var(--accent)}
+.cat__title{font-size:var(--text-section);font-weight:700;line-height:1.3}
+.cat__desc{font-size:var(--text-sm);color:var(--text-secondary);margin:0}
+
+/* Dokumentzeile */
+.docs{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-sm)}
+.doc{
+  display:flex;align-items:flex-start;gap:var(--space-sm);
+  padding:var(--space-md);width:100%;text-align:left;cursor:pointer;
+  background:var(--surface-inset);border:0;border-radius:var(--radius-input);
+  box-shadow:inset 0 0 0 1px var(--line);
+  transition:box-shadow var(--motion-fast);
+}
+.doc:hover,.doc:focus-visible{box-shadow:var(--ring-accent)}
+.doc__icon{width:34px;height:34px;flex-shrink:0;border-radius:var(--radius-control);
+  display:grid;place-items:center;background:var(--accent-quiet);color:var(--accent)}
+.doc__icon svg{width:17px;height:17px}
+.doc__title{font-size:var(--text-body);font-weight:700}
+.doc__desc{font-size:var(--text-sm);color:var(--text-secondary);margin-top:2px}
+.doc__tag{margin-left:auto;font-size:var(--text-sm);font-weight:700;color:var(--accent);
+  white-space:nowrap}
+
+/* Regelwerk-Karte */
+.rules{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-md)}
+.rule{
+  background:var(--card-sheen),var(--surface-1);border-radius:var(--radius-card);
+  box-shadow:var(--elevation-card);padding:var(--density-pad);
+  display:flex;flex-direction:column;gap:var(--space-sm);
+}
+.rule__head{display:flex;align-items:center;gap:var(--space-sm);flex-wrap:wrap}
+.rule__code{font-family:var(--font-display);font-weight:900;font-size:20px;
+  letter-spacing:-.01em;color:var(--accent)}
+.rule__tags{margin-left:auto;display:flex;gap:6px}
+.rule__title{font-size:var(--text-body);font-weight:700}
+.rule__body{font-size:var(--text-sm);color:var(--text-secondary);margin:0}
+.rule__foot{display:flex;align-items:center;justify-content:space-between;gap:var(--space-sm);
+  margin-top:auto;padding-top:var(--space-sm);border-top:1px solid var(--line);
+  font-size:var(--text-sm);color:var(--text-muted)}
+
+/* Statusliste mit Punkt */
+.statuslist{list-style:none;margin:0;padding:0}
+.statusrow{display:flex;align-items:center;gap:var(--space-sm);
+  min-height:var(--density-row);padding:6px 0;border-bottom:1px solid var(--line);
+  font-size:var(--text-sm)}
+.statusrow:last-child{border-bottom:0}
+.statusrow__dot{width:8px;height:8px;border-radius:var(--radius-avatar);flex-shrink:0}
+.statusrow__name{font-weight:700}
+.statusrow__state{margin-left:auto;color:var(--text-secondary);white-space:nowrap;
+  font-variant-numeric:tabular-nums}
+
+/* Leerzustand */
+.empty{padding:var(--space-xl) var(--space-md);text-align:center}
+.empty__text{color:var(--text-secondary);font-size:var(--text-body);margin:0 auto var(--space-md);
+  max-width:52ch}
+.btn{
+  display:inline-flex;align-items:center;gap:var(--space-xs);
+  min-height:44px;padding:0 var(--space-lg);border:0;cursor:pointer;
+  border-radius:var(--radius-control);
+  background:var(--accent);color:var(--text-on-accent);
+  font-size:var(--text-body);font-weight:700;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.28),var(--accent-glow);
+  transition:background var(--motion-fast);
+}
+.btn:hover{background:var(--accent-hover)}
+.btn--quiet{
+  background:transparent;color:var(--text-primary);
+  box-shadow:inset 0 0 0 1px var(--line-strong);
+}
+.btn--quiet:hover{background:var(--surface-2);box-shadow:var(--ring-accent)}
+
+.split{display:grid;grid-template-columns:1.6fr 1fr;gap:var(--space-md);align-items:start}
+.stack{display:grid;gap:var(--space-md)}
+.hint{font-size:var(--text-sm);color:var(--text-muted);margin:var(--space-lg) 0 0}
+
+/* ===========================================================================
    RESPONSIV — dieselbe Bedienbarkeit auf Desktop, Tablet und Smartphone
 
    Zwei Achsen, die oft verwechselt werden:
@@ -540,6 +832,11 @@ svg,use{fill:currentColor}
 }
 
 /* --- Tablet hoch: Chrome-Knöpfe werden zu Icons --------------------------- */
+@media (max-width:1100px){
+  .products,.cats{grid-template-columns:repeat(3,1fr)}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .split{grid-template-columns:1fr}
+}
 @media (max-width:980px){
   .chrome-btn{width:44px;padding:0;justify-content:center;font-size:0;gap:0}
   .chrome-btn svg{width:18px;height:18px}
@@ -555,8 +852,7 @@ svg,use{fill:currentColor}
   .app-bar{flex-wrap:wrap;row-gap:var(--space-xs);padding-block:var(--space-sm)}
   .app-bar__spacer{display:none}
   .brand{order:1;flex:1 1 auto}
-  .user{order:2;margin-left:auto;padding-left:0;border-left:0}
-  .user__name,.user__role{display:none}
+  .menu{order:2;margin-left:auto}
   .search{order:3;flex:1 0 100%;width:auto;min-width:0;
     padding:0 var(--space-sm);justify-content:flex-start}
   .search input{display:block}
@@ -565,6 +861,9 @@ svg,use{fill:currentColor}
   .chrome-btn{order:5}
   .theme-toggle{order:6;margin-left:auto}
 
+  .products,.cats{grid-template-columns:repeat(2,1fr)}
+  .filterbar{grid-template-columns:1fr}
+  .docs,.rules{grid-template-columns:1fr}
   .hero{padding-top:var(--space-xl)}
   .hero__kv{display:none}   /* kein Platz — lieber weglassen als anschneiden */
   .hero__inner{padding-inline:var(--space-md)}
@@ -579,6 +878,7 @@ svg,use{fill:currentColor}
 
 /* --- Sehr schmal: Kachelinhalt bleibt lesbar ------------------------------ */
 @media (max-width:400px){
+  .products,.cats,.kpis{grid-template-columns:1fr}
   .tile{padding:var(--space-md)}
   .bar__head{flex-wrap:wrap;row-gap:2px}
 }
@@ -632,9 +932,10 @@ svg,use{fill:currentColor}
   .filters__btn{min-height:44px;padding-inline:16px;display:inline-flex;
     align-items:center;justify-content:center}
   .theme-toggle__btn{width:48px;min-height:44px}
+  .menu__item{min-height:48px}
   .theme-toggle::after{width:48px;height:calc(100% - 4px)}
   [data-bkm-theme="night"] .theme-toggle::after{transform:translateX(48px)}
-  .chrome-btn{min-height:44px}
+  .chrome-btn,.brand,.menu__trigger{min-height:44px}
   .search{min-height:44px}
   .row{min-height:56px}
   .link{min-height:44px}
@@ -647,204 +948,542 @@ svg,use{fill:currentColor}
 <body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-<symbol id="i-drop-half" viewBox="0 0 256 256" fill="currentColor"><path d="M134.88,6.17a12,12,0,0,0-13.76,0,259,259,0,0,0-42.18,39C50.85,77.43,36,111.63,36,144a92,92,0,0,0,184,0C220,66.64,138.36,8.6,134.88,6.17ZM194.08,160H140V144h56A68,68,0,0,1,194.08,160ZM140,120V104h47a115,115,0,0,1,5.68,16Zm19.3-58.71A197.29,197.29,0,0,1,173.68,80H140V41.46A243.5,243.5,0,0,1,159.3,61.29ZM60,144c0-33.31,20-63.37,36.7-82.71A243.5,243.5,0,0,1,116,41.46V210.92A68.1,68.1,0,0,1,60,144Zm80,66.92V184h42.94A68,68,0,0,1,140,210.92Z"/></symbol>
-<symbol id="i-shield-check" viewBox="0 0 256 256" fill="currentColor"><path d="M208,36H48A20,20,0,0,0,28,56V114.8c0,92.36,78.1,123,93.76,128.18a19.6,19.6,0,0,0,12.48,0C149.9,237.78,228,207.16,228,114.8V56A20,20,0,0,0,208,36Zm-4,78.8c0,73.56-60.53,99.53-76,105-15.47-5.42-76-31.39-76-104.95V60H204ZM79.51,144.49a12,12,0,1,1,17-17L112,143l47.51-47.51a12,12,0,0,1,17,17l-56,56a12,12,0,0,1-17,0Z"/></symbol>
-<symbol id="i-package" viewBox="0 0 256 256" fill="currentColor"><path d="M225.6,62.64l-88-48.17a19.91,19.91,0,0,0-19.2,0l-88,48.17A20,20,0,0,0,20,80.19v95.62a20,20,0,0,0,10.4,17.55l88,48.17a19.89,19.89,0,0,0,19.2,0l88-48.17A20,20,0,0,0,236,175.81V80.19A20,20,0,0,0,225.6,62.64ZM128,36.57,200,76,178.57,87.73l-72-39.42Zm0,78.83L56,76,81.56,62l72,39.41ZM44,96.79l72,39.4v76.67L44,173.44Zm96,116.07V136.19l24-13.13V152a12,12,0,0,0,24,0V109.92l24-13.13v76.65Z"/></symbol>
-<symbol id="i-scales" viewBox="0 0 256 256" fill="currentColor"><path d="M243.14,131.54l-32-80h0a12,12,0,0,0-13.73-7.25L140,57V40a12,12,0,0,0-24,0V62.37L53.4,76.29a12,12,0,0,0-8.54,7.25h0l0,0v0l-32,79.92A12,12,0,0,0,12,168c0,12.13,6.2,22.43,17.45,29A55,55,0,0,0,56,204a55,55,0,0,0,26.55-7C93.8,190.43,100,180.13,100,168a12,12,0,0,0-.86-4.46L72.38,96.65,116,87V204H104a12,12,0,0,0,0,24h48a12,12,0,0,0,0-24H140V81.63l40.42-9-23.56,58.9A12,12,0,0,0,156,136c0,12.13,6.2,22.43,17.45,29a53.78,53.78,0,0,0,53.1,0C237.8,158.43,244,148.13,244,136A12,12,0,0,0,243.14,131.54ZM56,180c-3.71,0-18-1.87-19.81-10.18L56,120.31l19.81,49.51C74,178.13,59.71,180,56,180Zm144-32c-3.71,0-18-1.87-19.81-10.18L200,88.31l19.81,49.51C218,146.13,203.71,148,200,148Z"/></symbol>
-<symbol id="i-book-open" viewBox="0 0 256 256" fill="currentColor"><path d="M224,44H160a43.86,43.86,0,0,0-32,13.85A43.86,43.86,0,0,0,96,44H32A20,20,0,0,0,12,64V192a20,20,0,0,0,20,20H96a20,20,0,0,1,20,20,12,12,0,0,0,24,0,20,20,0,0,1,20-20h64a20,20,0,0,0,20-20V64A20,20,0,0,0,224,44ZM96,188H36V68H96a20,20,0,0,1,20,20V192.81A43.79,43.79,0,0,0,96,188Zm124,0H160a43.71,43.71,0,0,0-20,4.83V88a20,20,0,0,1,20-20h60Z"/></symbol>
-<symbol id="i-clipboard-text" viewBox="0 0 256 256" fill="currentColor"><path d="M172,156a12,12,0,0,1-12,12H96a12,12,0,0,1,0-24h64A12,12,0,0,1,172,156Zm-12-52H96a12,12,0,0,0,0,24h64a12,12,0,0,0,0-24Zm60-56V216a20,20,0,0,1-20,20H56a20,20,0,0,1-20-20V48A20,20,0,0,1,56,28H90.53a51.88,51.88,0,0,1,74.94,0H200A20,20,0,0,1,220,48ZM128,36a28,28,0,0,0-27.71,24h55.42A28,28,0,0,0,128,36Zm68,16H178.59A52.13,52.13,0,0,1,180,64v8a12,12,0,0,1-12,12H88A12,12,0,0,1,76,72V64a52.13,52.13,0,0,1,1.41-12H60V212H196Z"/></symbol>
-<symbol id="i-flask" viewBox="0 0 256 256" fill="currentColor"><path d="M225.15,197.71,164,95.81V44h4a12,12,0,0,0,0-24H88a12,12,0,0,0,0,24h4V95.81L30.85,197.71A20,20,0,0,0,48,228H208a20,20,0,0,0,17.15-30.29ZM140,44V99.14a12,12,0,0,0,1.71,6.17l35.13,58.54c-10.79.86-25.15-1.31-43.42-10.56-14-7.08-27.46-11.33-40.27-12.76l21.14-35.22A12,12,0,0,0,116,99.14V44ZM55.06,204,79,164.19c13-1.11,27.62,2.42,43.62,10.52,19.61,9.92,36.25,13.31,49.85,13.31A75.44,75.44,0,0,0,190.11,186l10.83,18Z"/></symbol>
-<symbol id="i-handshake" viewBox="0 0 256 256" fill="currentColor"><path d="M123.64,218.91A12,12,0,0,1,112,228a12.28,12.28,0,0,1-2.92-.36l-32-8A11.79,11.79,0,0,1,73.34,218l-24-16a12,12,0,0,1,13.32-20l22.27,14.85,30,7.5A12,12,0,0,1,123.64,218.91ZM255,122.75a19.88,19.88,0,0,1-10,11.56l-22.87,11.44-53.58,54.73a12,12,0,0,1-11.4,3.16l-64-16a12.16,12.16,0,0,1-4.17-1.95L35,146.28l-23.94-12a20,20,0,0,1-9-26.83L27,57.79h0a20,20,0,0,1,26.83-8.94L74.42,59.16l50.21-14.68a12.07,12.07,0,0,1,6.74,0l50.21,14.68,20.63-10.32A20,20,0,0,1,229,57.79l24.85,49.69A19.86,19.86,0,0,1,255,122.75ZM200.3,134l-25-50H148.86l-38.2,37.05c15.76,7.26,31.16.19,40.82-9.55a12,12,0,0,1,16-.91l31.26,25ZM25.37,114.63,35.9,119.9,57.17,77.37,46.63,72.1ZM182,153,160.3,135.57c-20.49,15.29-45.85,16.79-67,3.25a20,20,0,0,1-3.4-31l.12-.12L129.82,69,128,68.5,81.66,82.05,56.54,132.29l44.65,32.64,55.13,13.78Zm48.59-38.36L209.37,72.1l-10.54,5.27L220.1,119.9Z"/></symbol>
-<symbol id="i-magnifying-glass" viewBox="0 0 256 256" fill="currentColor"><path d="M232.49,215.51,185,168a92.12,92.12,0,1,0-17,17l47.53,47.54a12,12,0,0,0,17-17ZM44,112a68,68,0,1,1,68,68A68.07,68.07,0,0,1,44,112Z"/></symbol>
-<symbol id="i-list-bullets" viewBox="0 0 256 256" fill="currentColor"><path d="M76,64A12,12,0,0,1,88,52H216a12,12,0,0,1,0,24H88A12,12,0,0,1,76,64Zm140,52H88a12,12,0,0,0,0,24H216a12,12,0,0,0,0-24Zm0,64H88a12,12,0,0,0,0,24H216a12,12,0,0,0,0-24ZM44,112a16,16,0,1,0,16,16A16,16,0,0,0,44,112Zm0-64A16,16,0,1,0,60,64,16,16,0,0,0,44,48Zm0,128a16,16,0,1,0,16,16A16,16,0,0,0,44,176Z"/></symbol>
-<symbol id="i-gear-six" viewBox="0 0 256 256" fill="currentColor"><path d="M128,76a52,52,0,1,0,52,52A52.06,52.06,0,0,0,128,76Zm0,80a28,28,0,1,1,28-28A28,28,0,0,1,128,156Zm113.86-49.57A12,12,0,0,0,236,98.34L208.21,82.49l-.11-31.31a12,12,0,0,0-4.25-9.12,116,116,0,0,0-38-21.41,12,12,0,0,0-9.68.89L128,37.27,99.83,21.53a12,12,0,0,0-9.7-.9,116.06,116.06,0,0,0-38,21.47,12,12,0,0,0-4.24,9.1l-.14,31.34L20,98.35a12,12,0,0,0-5.85,8.11,110.7,110.7,0,0,0,0,43.11A12,12,0,0,0,20,157.66l27.82,15.85.11,31.31a12,12,0,0,0,4.25,9.12,116,116,0,0,0,38,21.41,12,12,0,0,0,9.68-.89L128,218.73l28.14,15.74a12,12,0,0,0,9.7.9,116.06,116.06,0,0,0,38-21.47,12,12,0,0,0,4.24-9.1l.14-31.34,27.81-15.81a12,12,0,0,0,5.85-8.11A110.7,110.7,0,0,0,241.86,106.43Zm-22.63,33.18-26.88,15.28a11.94,11.94,0,0,0-4.55,4.59c-.54,1-1.11,1.93-1.7,2.88a12,12,0,0,0-1.83,6.31L184.13,199a91.83,91.83,0,0,1-21.07,11.87l-27.15-15.19a12,12,0,0,0-5.86-1.53h-.29c-1.14,0-2.3,0-3.44,0a12.08,12.08,0,0,0-6.14,1.51L93,210.82A92.27,92.27,0,0,1,71.88,199l-.11-30.24a12,12,0,0,0-1.83-6.32c-.58-.94-1.16-1.91-1.7-2.88A11.92,11.92,0,0,0,63.7,155L36.8,139.63a86.53,86.53,0,0,1,0-23.24l26.88-15.28a12,12,0,0,0,4.55-4.58c.54-1,1.11-1.94,1.7-2.89a12,12,0,0,0,1.83-6.31L71.87,57A91.83,91.83,0,0,1,92.94,45.17l27.15,15.19a11.92,11.92,0,0,0,6.15,1.52c1.14,0,2.3,0,3.44,0a12.08,12.08,0,0,0,6.14-1.51L163,45.18A92.27,92.27,0,0,1,184.12,57l.11,30.24a12,12,0,0,0,1.83,6.32c.58.94,1.16,1.91,1.7,2.88A11.92,11.92,0,0,0,192.3,101l26.9,15.33A86.53,86.53,0,0,1,219.23,139.61Z"/></symbol>
 <symbol id="i-arrow-right" viewBox="0 0 256 256" fill="currentColor"><path d="M224.49,136.49l-72,72a12,12,0,0,1-17-17L187,140H40a12,12,0,0,1,0-24H187L135.51,64.48a12,12,0,0,1,17-17l72,72A12,12,0,0,1,224.49,136.49Z"/></symbol>
-<symbol id="i-sun" viewBox="0 0 256 256" fill="currentColor"><path d="M116,32V16a12,12,0,0,1,24,0V32a12,12,0,0,1-24,0Zm80,96a68,68,0,1,1-68-68A68.07,68.07,0,0,1,196,128Zm-24,0a44,44,0,1,0-44,44A44.05,44.05,0,0,0,172,128ZM51.51,68.49a12,12,0,1,0,17-17l-12-12a12,12,0,0,0-17,17Zm0,119-12,12a12,12,0,0,0,17,17l12-12a12,12,0,1,0-17-17ZM196,72a12,12,0,0,0,8.49-3.51l12-12a12,12,0,0,0-17-17l-12,12A12,12,0,0,0,196,72Zm8.49,115.51a12,12,0,0,0-17,17l12,12a12,12,0,0,0,17-17ZM44,128a12,12,0,0,0-12-12H16a12,12,0,0,0,0,24H32A12,12,0,0,0,44,128Zm84,84a12,12,0,0,0-12,12v16a12,12,0,0,0,24,0V224A12,12,0,0,0,128,212Zm112-96H224a12,12,0,0,0,0,24h16a12,12,0,0,0,0-24Z"/></symbol>
+<symbol id="i-book-open" viewBox="0 0 256 256" fill="currentColor"><path d="M224,44H160a43.86,43.86,0,0,0-32,13.85A43.86,43.86,0,0,0,96,44H32A20,20,0,0,0,12,64V192a20,20,0,0,0,20,20H96a20,20,0,0,1,20,20,12,12,0,0,0,24,0,20,20,0,0,1,20-20h64a20,20,0,0,0,20-20V64A20,20,0,0,0,224,44ZM96,188H36V68H96a20,20,0,0,1,20,20V192.81A43.79,43.79,0,0,0,96,188Zm124,0H160a43.71,43.71,0,0,0-20,4.83V88a20,20,0,0,1,20-20h60Z"/></symbol>
+<symbol id="i-caret-right" viewBox="0 0 256 256" fill="currentColor"><path d="M184.49,136.49l-80,80a12,12,0,0,1-17-17L159,128,87.51,56.49a12,12,0,1,1,17-17l80,80A12,12,0,0,1,184.49,136.49Z"/></symbol>
+<symbol id="i-chalkboard-teacher" viewBox="0 0 256 256" fill="currentColor"><path d="M56,84A12,12,0,0,1,68,72H188a12,12,0,0,1,12,12v88a12,12,0,0,1-24,0V96H68A12,12,0,0,1,56,84ZM236,56V200a20,20,0,0,1-20,20H149.26a12,12,0,0,1-11.4-8.26,36,36,0,0,0-67.74,0A12,12,0,0,1,58.74,220H40a20,20,0,0,1-20-20V56A20,20,0,0,1,40,36H216A20,20,0,0,1,236,56ZM104,164a16,16,0,1,0-16-16A16,16,0,0,0,104,164ZM212,60H44V196h6.92a60.18,60.18,0,0,1,21.76-23.16,40,40,0,1,1,62.64,0A60.18,60.18,0,0,1,157.08,196H212Z"/></symbol>
+<symbol id="i-check-circle" viewBox="0 0 256 256" fill="currentColor"><path d="M176.49,95.51a12,12,0,0,1,0,17l-56,56a12,12,0,0,1-17,0l-24-24a12,12,0,1,1,17-17L112,143l47.51-47.52A12,12,0,0,1,176.49,95.51ZM236,128A108,108,0,1,1,128,20,108.12,108.12,0,0,1,236,128Zm-24,0a84,84,0,1,0-84,84A84.09,84.09,0,0,0,212,128Z"/></symbol>
+<symbol id="i-clipboard-text" viewBox="0 0 256 256" fill="currentColor"><path d="M172,156a12,12,0,0,1-12,12H96a12,12,0,0,1,0-24h64A12,12,0,0,1,172,156Zm-12-52H96a12,12,0,0,0,0,24h64a12,12,0,0,0,0-24Zm60-56V216a20,20,0,0,1-20,20H56a20,20,0,0,1-20-20V48A20,20,0,0,1,56,28H90.53a51.88,51.88,0,0,1,74.94,0H200A20,20,0,0,1,220,48ZM128,36a28,28,0,0,0-27.71,24h55.42A28,28,0,0,0,128,36Zm68,16H178.59A52.13,52.13,0,0,1,180,64v8a12,12,0,0,1-12,12H88A12,12,0,0,1,76,72V64a52.13,52.13,0,0,1,1.41-12H60V212H196Z"/></symbol>
+<symbol id="i-download-simple" viewBox="0 0 256 256" fill="currentColor"><path d="M228,152v56a20,20,0,0,1-20,20H48a20,20,0,0,1-20-20V152a12,12,0,0,1,24,0v52H204V152a12,12,0,0,1,24,0Zm-108.49,8.49a12,12,0,0,0,17,0l40-40a12,12,0,0,0-17-17L140,123V40a12,12,0,0,0-24,0v83L96.49,103.51a12,12,0,0,0-17,17Z"/></symbol>
+<symbol id="i-drop-half" viewBox="0 0 256 256" fill="currentColor"><path d="M134.88,6.17a12,12,0,0,0-13.76,0,259,259,0,0,0-42.18,39C50.85,77.43,36,111.63,36,144a92,92,0,0,0,184,0C220,66.64,138.36,8.6,134.88,6.17ZM194.08,160H140V144h56A68,68,0,0,1,194.08,160ZM140,120V104h47a115,115,0,0,1,5.68,16Zm19.3-58.71A197.29,197.29,0,0,1,173.68,80H140V41.46A243.5,243.5,0,0,1,159.3,61.29ZM60,144c0-33.31,20-63.37,36.7-82.71A243.5,243.5,0,0,1,116,41.46V210.92A68.1,68.1,0,0,1,60,144Zm80,66.92V184h42.94A68,68,0,0,1,140,210.92Z"/></symbol>
+<symbol id="i-eye" viewBox="0 0 256 256" fill="currentColor"><path d="M251,123.13c-.37-.81-9.13-20.26-28.48-39.61C196.63,57.67,164,44,128,44S59.37,57.67,33.51,83.52C14.16,102.87,5.4,122.32,5,123.13a12.08,12.08,0,0,0,0,9.75c.37.82,9.13,20.26,28.49,39.61C59.37,198.34,92,212,128,212s68.63-13.66,94.48-39.51c19.36-19.35,28.12-38.79,28.49-39.61A12.08,12.08,0,0,0,251,123.13Zm-46.06,33C183.47,177.27,157.59,188,128,188s-55.47-10.73-76.91-31.88A130.36,130.36,0,0,1,29.52,128,130.45,130.45,0,0,1,51.09,99.89C72.54,78.73,98.41,68,128,68s55.46,10.73,76.91,31.89A130.36,130.36,0,0,1,226.48,128,130.45,130.45,0,0,1,204.91,156.12ZM128,84a44,44,0,1,0,44,44A44.05,44.05,0,0,0,128,84Zm0,64a20,20,0,1,1,20-20A20,20,0,0,1,128,148Z"/></symbol>
+<symbol id="i-file-pdf" viewBox="0 0 256 256" fill="currentColor"><path d="M200,164v8h12a12,12,0,0,1,0,24H200v12a12,12,0,0,1-24,0V152a12,12,0,0,1,12-12h32a12,12,0,0,1,0,24ZM92,172a32,32,0,0,1-32,32H56v4a12,12,0,0,1-24,0V152a12,12,0,0,1,12-12H60A32,32,0,0,1,92,172Zm-24,0a8,8,0,0,0-8-8H56v16h4A8,8,0,0,0,68,172Zm100,8a40,40,0,0,1-40,40H112a12,12,0,0,1-12-12V152a12,12,0,0,1,12-12h16A40,40,0,0,1,168,180Zm-24,0a16,16,0,0,0-16-16h-4v32h4A16,16,0,0,0,144,180ZM36,108V40A20,20,0,0,1,56,20h96a12,12,0,0,1,8.49,3.52l56,56A12,12,0,0,1,220,88v20a12,12,0,0,1-24,0v-4H148a12,12,0,0,1-12-12V44H60v64a12,12,0,0,1-24,0ZM160,57V80h23Z"/></symbol>
+<symbol id="i-flask" viewBox="0 0 256 256" fill="currentColor"><path d="M225.15,197.71,164,95.81V44h4a12,12,0,0,0,0-24H88a12,12,0,0,0,0,24h4V95.81L30.85,197.71A20,20,0,0,0,48,228H208a20,20,0,0,0,17.15-30.29ZM140,44V99.14a12,12,0,0,0,1.71,6.17l35.13,58.54c-10.79.86-25.15-1.31-43.42-10.56-14-7.08-27.46-11.33-40.27-12.76l21.14-35.22A12,12,0,0,0,116,99.14V44ZM55.06,204,79,164.19c13-1.11,27.62,2.42,43.62,10.52,19.61,9.92,36.25,13.31,49.85,13.31A75.44,75.44,0,0,0,190.11,186l10.83,18Z"/></symbol>
+<symbol id="i-funnel" viewBox="0 0 256 256" fill="currentColor"><path d="M234.29,47.91A20,20,0,0,0,216,36H40A20,20,0,0,0,25.2,69.45l.12.14L92,140.75V216a20,20,0,0,0,31.1,16.64l32-21.33A20,20,0,0,0,164,194.66V140.75l66.67-71.16.12-.14A20,20,0,0,0,234.29,47.91Zm-88.88,77.58A19.93,19.93,0,0,0,140,139.17v53.35l-24,16V139.17a19.93,19.93,0,0,0-5.41-13.68L49.23,60H206.77Z"/></symbol>
+<symbol id="i-gear-six" viewBox="0 0 256 256" fill="currentColor"><path d="M128,76a52,52,0,1,0,52,52A52.06,52.06,0,0,0,128,76Zm0,80a28,28,0,1,1,28-28A28,28,0,0,1,128,156Zm113.86-49.57A12,12,0,0,0,236,98.34L208.21,82.49l-.11-31.31a12,12,0,0,0-4.25-9.12,116,116,0,0,0-38-21.41,12,12,0,0,0-9.68.89L128,37.27,99.83,21.53a12,12,0,0,0-9.7-.9,116.06,116.06,0,0,0-38,21.47,12,12,0,0,0-4.24,9.1l-.14,31.34L20,98.35a12,12,0,0,0-5.85,8.11,110.7,110.7,0,0,0,0,43.11A12,12,0,0,0,20,157.66l27.82,15.85.11,31.31a12,12,0,0,0,4.25,9.12,116,116,0,0,0,38,21.41,12,12,0,0,0,9.68-.89L128,218.73l28.14,15.74a12,12,0,0,0,9.7.9,116.06,116.06,0,0,0,38-21.47,12,12,0,0,0,4.24-9.1l.14-31.34,27.81-15.81a12,12,0,0,0,5.85-8.11A110.7,110.7,0,0,0,241.86,106.43Zm-22.63,33.18-26.88,15.28a11.94,11.94,0,0,0-4.55,4.59c-.54,1-1.11,1.93-1.7,2.88a12,12,0,0,0-1.83,6.31L184.13,199a91.83,91.83,0,0,1-21.07,11.87l-27.15-15.19a12,12,0,0,0-5.86-1.53h-.29c-1.14,0-2.3,0-3.44,0a12.08,12.08,0,0,0-6.14,1.51L93,210.82A92.27,92.27,0,0,1,71.88,199l-.11-30.24a12,12,0,0,0-1.83-6.32c-.58-.94-1.16-1.91-1.7-2.88A11.92,11.92,0,0,0,63.7,155L36.8,139.63a86.53,86.53,0,0,1,0-23.24l26.88-15.28a12,12,0,0,0,4.55-4.58c.54-1,1.11-1.94,1.7-2.89a12,12,0,0,0,1.83-6.31L71.87,57A91.83,91.83,0,0,1,92.94,45.17l27.15,15.19a11.92,11.92,0,0,0,6.15,1.52c1.14,0,2.3,0,3.44,0a12.08,12.08,0,0,0,6.14-1.51L163,45.18A92.27,92.27,0,0,1,184.12,57l.11,30.24a12,12,0,0,0,1.83,6.32c.58.94,1.16,1.91,1.7,2.88A11.92,11.92,0,0,0,192.3,101l26.9,15.33A86.53,86.53,0,0,1,219.23,139.61Z"/></symbol>
+<symbol id="i-globe" viewBox="0 0 256 256" fill="currentColor"><path d="M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20ZM107.07,172h41.86A115.75,115.75,0,0,1,128,209.85,115.75,115.75,0,0,1,107.07,172Zm-5.66-24a142.55,142.55,0,0,1,0-40h53.18a142.55,142.55,0,0,1,0,40ZM44,128a83.49,83.49,0,0,1,2.43-20H77.22a164.54,164.54,0,0,0,0,40H46.43A83.49,83.49,0,0,1,44,128ZM148.93,84H107.07A115.75,115.75,0,0,1,128,46.15,115.75,115.75,0,0,1,148.93,84Zm29.85,24h30.79a83.52,83.52,0,0,1,0,40H178.78a164.54,164.54,0,0,0,0-40Zm20.74-24H174a148.59,148.59,0,0,0-13.95-33.63A84.5,84.5,0,0,1,199.52,84ZM96,50.37A148.59,148.59,0,0,0,82,84H56.48A84.5,84.5,0,0,1,96,50.37ZM56.48,172H82a148.59,148.59,0,0,0,14,33.63A84.5,84.5,0,0,1,56.48,172Zm103.57,33.63A148.59,148.59,0,0,0,174,172h25.52A84.5,84.5,0,0,1,160.05,205.63Z"/></symbol>
+<symbol id="i-handshake" viewBox="0 0 256 256" fill="currentColor"><path d="M123.64,218.91A12,12,0,0,1,112,228a12.28,12.28,0,0,1-2.92-.36l-32-8A11.79,11.79,0,0,1,73.34,218l-24-16a12,12,0,0,1,13.32-20l22.27,14.85,30,7.5A12,12,0,0,1,123.64,218.91ZM255,122.75a19.88,19.88,0,0,1-10,11.56l-22.87,11.44-53.58,54.73a12,12,0,0,1-11.4,3.16l-64-16a12.16,12.16,0,0,1-4.17-1.95L35,146.28l-23.94-12a20,20,0,0,1-9-26.83L27,57.79h0a20,20,0,0,1,26.83-8.94L74.42,59.16l50.21-14.68a12.07,12.07,0,0,1,6.74,0l50.21,14.68,20.63-10.32A20,20,0,0,1,229,57.79l24.85,49.69A19.86,19.86,0,0,1,255,122.75ZM200.3,134l-25-50H148.86l-38.2,37.05c15.76,7.26,31.16.19,40.82-9.55a12,12,0,0,1,16-.91l31.26,25ZM25.37,114.63,35.9,119.9,57.17,77.37,46.63,72.1ZM182,153,160.3,135.57c-20.49,15.29-45.85,16.79-67,3.25a20,20,0,0,1-3.4-31l.12-.12L129.82,69,128,68.5,81.66,82.05,56.54,132.29l44.65,32.64,55.13,13.78Zm48.59-38.36L209.37,72.1l-10.54,5.27L220.1,119.9Z"/></symbol>
+<symbol id="i-image" viewBox="0 0 256 256" fill="currentColor"><path d="M144,96a16,16,0,1,1,16,16A16,16,0,0,1,144,96Zm92-40V200a20,20,0,0,1-20,20H40a20,20,0,0,1-20-20V56A20,20,0,0,1,40,36H216A20,20,0,0,1,236,56ZM44,60v79.72l33.86-33.86a20,20,0,0,1,28.28,0L147.31,147l17.18-17.17a20,20,0,0,1,28.28,0L212,149.09V60Zm0,136H162.34L92,125.66l-48,48Zm168,0V183l-33.37-33.37L164.28,164l32,32Z"/></symbol>
+<symbol id="i-list-bullets" viewBox="0 0 256 256" fill="currentColor"><path d="M76,64A12,12,0,0,1,88,52H216a12,12,0,0,1,0,24H88A12,12,0,0,1,76,64Zm140,52H88a12,12,0,0,0,0,24H216a12,12,0,0,0,0-24Zm0,64H88a12,12,0,0,0,0,24H216a12,12,0,0,0,0-24ZM44,112a16,16,0,1,0,16,16A16,16,0,0,0,44,112Zm0-64A16,16,0,1,0,60,64,16,16,0,0,0,44,48Zm0,128a16,16,0,1,0,16,16A16,16,0,0,0,44,176Z"/></symbol>
+<symbol id="i-magnifying-glass" viewBox="0 0 256 256" fill="currentColor"><path d="M232.49,215.51,185,168a92.12,92.12,0,1,0-17,17l47.53,47.54a12,12,0,0,0,17-17ZM44,112a68,68,0,1,1,68,68A68.07,68.07,0,0,1,44,112Z"/></symbol>
+<symbol id="i-megaphone" viewBox="0 0 256 256" fill="currentColor"><path d="M244,120a52.06,52.06,0,0,0-52-52H152.32c-3.44-.21-52.6-4-99.46-43.3A20,20,0,0,0,20,40V200a19.8,19.8,0,0,0,11.54,18.12,19.86,19.86,0,0,0,21.32-2.81A192.92,192.92,0,0,1,136,174.47v26.2a20,20,0,0,0,8.9,16.64,11.35,11.35,0,0,0,1.39.8l14.44,7.06A20,20,0,0,0,190.37,213l11.09-41.82A52.07,52.07,0,0,0,244,120ZM44,191.63V48.4c36.17,28.07,72.17,38.1,92,41.66V150C116.17,153.52,80.17,163.55,44,191.63ZM168.39,202.2,160,198.1V172h16.4ZM192,148H160V92h32a28,28,0,1,1,0,56Z"/></symbol>
 <symbol id="i-moon" viewBox="0 0 256 256" fill="currentColor"><path d="M236.37,139.4a12,12,0,0,0-12-3A84.07,84.07,0,0,1,119.6,31.59a12,12,0,0,0-15-15A108.86,108.86,0,0,0,49.69,55.07,108,108,0,0,0,136,228a107.09,107.09,0,0,0,64.93-21.69,108.86,108.86,0,0,0,38.44-54.94A12,12,0,0,0,236.37,139.4Zm-49.88,47.74A84,84,0,0,1,68.86,69.51,84.93,84.93,0,0,1,92.27,48.29Q92,52.13,92,56A108.12,108.12,0,0,0,200,164q3.87,0,7.71-.27A84.79,84.79,0,0,1,186.49,187.14Z"/></symbol>
+<symbol id="i-package" viewBox="0 0 256 256" fill="currentColor"><path d="M225.6,62.64l-88-48.17a19.91,19.91,0,0,0-19.2,0l-88,48.17A20,20,0,0,0,20,80.19v95.62a20,20,0,0,0,10.4,17.55l88,48.17a19.89,19.89,0,0,0,19.2,0l88-48.17A20,20,0,0,0,236,175.81V80.19A20,20,0,0,0,225.6,62.64ZM128,36.57,200,76,178.57,87.73l-72-39.42Zm0,78.83L56,76,81.56,62l72,39.41ZM44,96.79l72,39.4v76.67L44,173.44Zm96,116.07V136.19l24-13.13V152a12,12,0,0,0,24,0V109.92l24-13.13v76.65Z"/></symbol>
+<symbol id="i-presentation" viewBox="0 0 256 256" fill="currentColor"><path d="M216,36H140V24a12,12,0,0,0-24,0V36H40A20,20,0,0,0,20,56V176a20,20,0,0,0,20,20H71l-16.4,20.5a12,12,0,0,0,18.74,15l28.4-35.5h52.46l28.4,35.5a12,12,0,0,0,18.74-15L185,196h31a20,20,0,0,0,20-20V56A20,20,0,0,0,216,36Zm-4,136H44V60H212Z"/></symbol>
+<symbol id="i-scales" viewBox="0 0 256 256" fill="currentColor"><path d="M243.14,131.54l-32-80h0a12,12,0,0,0-13.73-7.25L140,57V40a12,12,0,0,0-24,0V62.37L53.4,76.29a12,12,0,0,0-8.54,7.25h0l0,0v0l-32,79.92A12,12,0,0,0,12,168c0,12.13,6.2,22.43,17.45,29A55,55,0,0,0,56,204a55,55,0,0,0,26.55-7C93.8,190.43,100,180.13,100,168a12,12,0,0,0-.86-4.46L72.38,96.65,116,87V204H104a12,12,0,0,0,0,24h48a12,12,0,0,0,0-24H140V81.63l40.42-9-23.56,58.9A12,12,0,0,0,156,136c0,12.13,6.2,22.43,17.45,29a53.78,53.78,0,0,0,53.1,0C237.8,158.43,244,148.13,244,136A12,12,0,0,0,243.14,131.54ZM56,180c-3.71,0-18-1.87-19.81-10.18L56,120.31l19.81,49.51C74,178.13,59.71,180,56,180Zm144-32c-3.71,0-18-1.87-19.81-10.18L200,88.31l19.81,49.51C218,146.13,203.71,148,200,148Z"/></symbol>
+<symbol id="i-shield-check" viewBox="0 0 256 256" fill="currentColor"><path d="M208,36H48A20,20,0,0,0,28,56V114.8c0,92.36,78.1,123,93.76,128.18a19.6,19.6,0,0,0,12.48,0C149.9,237.78,228,207.16,228,114.8V56A20,20,0,0,0,208,36Zm-4,78.8c0,73.56-60.53,99.53-76,105-15.47-5.42-76-31.39-76-104.95V60H204ZM79.51,144.49a12,12,0,1,1,17-17L112,143l47.51-47.51a12,12,0,0,1,17,17l-56,56a12,12,0,0,1-17,0Z"/></symbol>
+<symbol id="i-stack" viewBox="0 0 256 256" fill="currentColor"><path d="M234.36,170A12,12,0,0,1,230,186.37l-96,56a12,12,0,0,1-12.1,0l-96-56a12,12,0,0,1,12.09-20.74l90,52.48L218,165.63A12,12,0,0,1,234.36,170ZM218,117.63,128,170.11,38.05,117.63A12,12,0,0,0,26,138.37l96,56a12,12,0,0,0,12.1,0l96-56A12,12,0,0,0,218,117.63ZM20,80a12,12,0,0,1,6-10.37l96-56a12.06,12.06,0,0,1,12.1,0l96,56a12,12,0,0,1,0,20.74l-96,56a12,12,0,0,1-12.1,0l-96-56A12,12,0,0,1,20,80Zm35.82,0L128,122.11,200.18,80,128,37.89Z"/></symbol>
+<symbol id="i-sun" viewBox="0 0 256 256" fill="currentColor"><path d="M116,32V16a12,12,0,0,1,24,0V32a12,12,0,0,1-24,0Zm80,96a68,68,0,1,1-68-68A68.07,68.07,0,0,1,196,128Zm-24,0a44,44,0,1,0-44,44A44.05,44.05,0,0,0,172,128ZM51.51,68.49a12,12,0,1,0,17-17l-12-12a12,12,0,0,0-17,17Zm0,119-12,12a12,12,0,0,0,17,17l12-12a12,12,0,1,0-17-17ZM196,72a12,12,0,0,0,8.49-3.51l12-12a12,12,0,0,0-17-17l-12,12A12,12,0,0,0,196,72Zm8.49,115.51a12,12,0,0,0-17,17l12,12a12,12,0,0,0,17-17ZM44,128a12,12,0,0,0-12-12H16a12,12,0,0,0,0,24H32A12,12,0,0,0,44,128Zm84,84a12,12,0,0,0-12,12v16a12,12,0,0,0,24,0V224A12,12,0,0,0,128,212Zm112-96H224a12,12,0,0,0,0,24h16a12,12,0,0,0,0-24Z"/></symbol>
+<symbol id="i-user" viewBox="0 0 256 256" fill="currentColor"><path d="M234.38,210a123.36,123.36,0,0,0-60.78-53.23,76,76,0,1,0-91.2,0A123.36,123.36,0,0,0,21.62,210a12,12,0,1,0,20.77,12c18.12-31.32,50.12-50,85.61-50s67.49,18.69,85.61,50a12,12,0,0,0,20.77-12ZM76,96a52,52,0,1,1,52,52A52.06,52.06,0,0,1,76,96Z"/></symbol>
 </defs></svg>
 
 <header class="app-bar">
-  <div class="brand">
+  <button class="brand" data-goto="dashboard" aria-label="Zur Übersicht">
     <img class="brand__logo" alt="BKM Mannesmann" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABB8AAAEACAYAAAD7gN5BAAAKOmlDQ1BzUkdCIElFQzYxOTY2LTIuMQAASImdU2dUU+kWPffe9EJLiICU0HtVIIBICb1Ir6ISkwChhBgSsBdEVHBEEZGmCDIo4ICjIyBjRRQLg2LvAzKIqOPgKDYsb0XXGn2z5r03b/aPb+21v3Pu/c7Z5wDQAkJE4mxUBSBLLJNG+nuz4xMS2cR+QIEMBLAH4PFzJKFRftEAAIG+XHZOpL83fAEC8PKa4gS4bB0QzmbD/wdVvkQqA0DCAWCaQJjDB0AKACAzTyZR6OMAwJyfoeAoTsGl8QmJAKiGgqd+5lafYj5zTwUXZIkFAKjizRJBlkDBewBgXa5cKADAQgCgMFckzAPArgCAUaY8SwSAvVbkZgl5OQA4mkKXCflpADg7AKBJoyO5ALgZACRa6ld8/ldcJlwoUxTFzZYskopS02RsM745297FhcMOEOZlCmUy63AeP4MnFbC52VkSnngRwOeaP0FN0Vt2oC/Xyd7Fycnawcb+q0b918u/CYW3n9nziE+eIay+L9pfxWXXA3AmALBNX7T5lQAdawA0bn3RjHYCKBcAtF/4qh6WYl7SZDKJq61tXl6ejUjIt1E09A/8z4C/ga/+Z6P43B/tYfsIU3jyTBlb0Td+dma2XMrOkfD4Qrb1n4f4Hyf+9TusIoUpQqlQzBeyY0XCPJE4lc3NFgtEMlG2mC0S/ycT/2Han/B5rgGA0fABmPNsQOUCE7Bf+wDHoAKWtEPh+h++hZBjQbF5cXqjn+f+Ez5t878DLVEcOaLUT3ncyGg2Xy7N/XynWEvAAwWUgQmaoAuGYAbW4ADO4Aae4AtBEAbRkABzgQ9pkAVSyIOlsAoKoRg2wVaoglpogCZohf3QAYfhBJyG83ARrsJtGIQReAzj8BImEQQhInSEgWgieogxYok4IBxkJuKLhCCRSAKSjKQiYkSOLEVWI8VIKVKF1CFNyPfIIeQEchYZQG4iQ8gY8jvyFsVQGspEdVAT1BbloF5oMBqNzkFT0QXoYrQA3YhWoPXoXrQdPYGeR6+ig+hjdAIDjIqxMH3MGuNgXCwMS8RSMCm2HCvCyrF6rBXrwnqxy9gg9gR7gyPgGDg2zhrnhgvAxeD4uAW45bgNuCrcHlw7rgd3GTeEG8d9wNPx2nhLvCs+EB+PT8Xn4Qvx5fhG/EH8KfxV/Aj+JYFAYBFMCc6EAEICIZ2whLCBsJ3QRjhOGCAMEyaIRKIm0ZLoTgwj8ogyYiGxkriXeIx4iThCfE2ikvRIDiQ/UiJJTMonlZOaSUdJl0ijpEmyCtmY7EoOIwvIi8gl5AZyF/kCeYQ8SVGlmFLcKdGUdMoqSgWllXKKcofynEqlGlBdqBFUEXUltYK6j3qGOkR9Q1OjWdC4tCSanLaRtpt2nHaT9pxOp5vQPemJdBl9I72JfpJ+j/5aiaFkoxSoJFBaoVSt1K50SempMlnZWNlLea7yYuVy5QPKF5SfqJBVTFS4KjyV5SrVKodUrqtMqDJU7VXDVLNUN6g2q55VfahGVDNR81UTqBWo7VI7qTbMwBiGDC6Dz1jNaGCcYowwCUxTZiAznVnM/I7ZzxxXV1Ofrh6rvlC9Wv2I+iALY5mwAlmZrBLWftY11tspOlO8pginrJ/SOuXSlFcaUzU8NYQaRRptGlc13mqyNX01MzQ3a3Zo3tXCaVloRWjlae3QOqX1ZCpzqttU/tSiqfun3tJGtS20I7WXaO/S7tOe0NHV8deR6FTqnNR5osvS9dRN1y3TPao7psfQm6kn0ivTO6b3iK3O9mJnsivYPexxfW39AH25fp1+v/6kgalBjEG+QZvBXUOKIccwxbDMsNtw3EjPKNRoqVGL0S1jsjHHOM14m3Gv8SsTU5M4k7UmHSYPTTVMA00Xm7aY3jGjm3mYLTCrN7tiTjDnmGeYbze/aIFaOFqkWVRbXLBELZ0sRZbbLQes8FYuVmKreqvr1jRrL+tc6xbrIRuWTYhNvk2HzVNbI9tE2822vbYf7BztMu0a7G7bq9kH2efbd9n/7mDhwHeodrgyjT7Nb9qKaZ3Tnk23nC6cvmP6DUeGY6jjWsdux/dOzk5Sp1anMWcj52TnGufrHCYnnLOBc8YF7+LtssLlsMsbVydXmet+19/crN0y3JrdHs4wnSGc0TBj2N3Anede5z44kz0zeebOmYMe+h48j3qP+56GngLPRs9RL3OvdK+9Xk+97byl3ge9X3Fducu4x30wH3+fIp9+XzXfGN8q33t+Bn6pfi1+4/6O/kv8jwfgA4IDNgdcD9QJ5Ac2BY4HOQctC+oJpgVHBVcF3w+xCJGGdIWioUGhW0LvzDKeJZ7VEQZhgWFbwu6Gm4YvCP8xghARHlEd8SDSPnJpZG8UI2peVHPUy2jv6JLo2zFmMfKY7ljl2KTYpthXcT5xpXGD8bbxy+LPJ2gliBI6E4mJsYmNiROzfWdvnT2S5JhUmHRtjumchXPOztWamzn3yDzlebx5B5LxyXHJzcnveGG8et7E/MD5NfPH+Vz+Nv5jgaegTDAmdBeWCkdT3FNKUx6muqduSR1L80grT3si4oqqRM/SA9Jr019lhGXszviYGZfZlkXKSs46JFYTZ4h7snWzF2YPSCwlhZLBBa4Lti4YlwZLG3OQnDk5nTKmTCLrk5vJ18iHcmfmVue+zovNO7BQdaF4Yd8ii0XrF40u9lv87RLcEv6S7qX6S1ctHVrmtaxuObJ8/vLuFYYrClaMrPRfuWcVZVXGqp/y7fJL81+sjlvdVaBTsLJgeI3/mpZCpUJp4fW1bmtr1+HWidb1r5+2vnL9hyJB0bliu+Ly4ncb+BvOfWP/TcU3HzembOwvcSrZsYmwSbzp2maPzXtKVUsXlw5vCd3SXsYuKyp7sXXe1rPl08trt1G2ybcNVoRUdFYaVW6qfFeVVnW12ru6rUa7Zn3Nq+2C7Zd2eO5ordWpLa59u1O080adf117vUl9+S7CrtxdDxpiG3q/5Xzb1KjVWNz4frd49+CeyD09Tc5NTc3azSUtaIu8ZWxv0t6L3/l819lq3VrXxmor3gf75PsefZ/8/bX9wfu7D3AOtP5g/EPNQcbBonakfVH7eEdax2BnQufAoaBD3V1uXQd/tPlx92H9w9VH1I+UHKUcLTj68djiYxPHJcefnEg9Mdw9r/v2yfiTV3oievpPBZ86c9rv9Mler95jZ9zPHD7revbQOc65jvNO59v7HPsO/uT408F+p/72C84XOi+6XOwamDFw9JLHpROXfS6fvhJ45fzVWVcHrsVcu3E96frgDcGNhzczbz67lXtr8vbKO/g7RXdV7pbf075X/7P5z22DToNHhnyG+u5H3b89zB9+/EvOL+9GCh7QH5SP6o02PXR4eHjMb+zio9mPRh5LHk8+KfxV9deap2ZPf/jN87e+8fjxkWfSZx9/3/Bc8/nuF9NfdE+ET9x7mfVy8lXRa83Xe95w3vS+jXs7Opn3jviu4r35+64PwR/ufMz6+PFfA5jz/DT+dQEAAAAJcEhZcwAACxMAAAsTAQCanBgAAAY8aVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA5LjEtYzAwMyA3OS45NjkwYTg3ZmMsIDIwMjUvMDMvMDYtMjA6NTA6MTYgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIiB4bWxuczpwaG90b3Nob3A9Imh0dHA6Ly9ucy5hZG9iZS5jb20vcGhvdG9zaG9wLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdEV2dD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlRXZlbnQjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCAyNi4xMCAoTWFjaW50b3NoKSIgeG1wOkNyZWF0ZURhdGU9IjIwMjYtMDMtMTJUMTI6NDY6MzkrMDE6MDAiIHhtcDpNb2RpZnlEYXRlPSIyMDI2LTA1LTA3VDEwOjE1OjA1KzAyOjAwIiB4bXA6TWV0YWRhdGFEYXRlPSIyMDI2LTA1LTA3VDEwOjE1OjA1KzAyOjAwIiBkYzpmb3JtYXQ9ImltYWdlL3BuZyIgcGhvdG9zaG9wOkNvbG9yTW9kZT0iMyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo0NDMwZTI0YS02ZjM0LTQxZDItODliYy0xYzk2NWQ2OTgxNGMiIHhtcE1NOkRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDoxN2VhNjg0MC0yZTk2LThiNDgtYjc4NC0yNDk5ZjMyOGI5NzciIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpjNjMzOWJlNi1iODVmLTQzNGUtOWY0ZC1iM2FjYmQ2YWI3NDIiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOmM2MzM5YmU2LWI4NWYtNDM0ZS05ZjRkLWIzYWNiZDZhYjc0MiIgc3RFdnQ6d2hlbj0iMjAyNi0wMy0xMlQxMjo0NjozOSswMTowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIDI2LjEwIChNYWNpbnRvc2gpIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjb252ZXJ0ZWQiIHN0RXZ0OnBhcmFtZXRlcnM9ImZyb20gYXBwbGljYXRpb24vdm5kLmFkb2JlLnBob3Rvc2hvcCB0byBpbWFnZS9wbmciLz4gPHJkZjpsaSBzdEV2dDphY3Rpb249InNhdmVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjQ0MzBlMjRhLTZmMzQtNDFkMi04OWJjLTFjOTY1ZDY5ODE0YyIgc3RFdnQ6d2hlbj0iMjAyNi0wNS0wN1QxMDoxNTowNSswMjowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIDI2LjEwIChNYWNpbnRvc2gpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDwvcmRmOlNlcT4gPC94bXBNTTpIaXN0b3J5PiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PlVnlOoAAF9oSURBVHic7d0JvH5TuQfw32OeI0SSjE3SnKEJqSN04lSkDKGuNOKmTKEkUxHRPEmDIRycREdChmgeVBqEJpQKZUjy3M/jrlfH8Q5r73fvvabf9/M59+p/3vOedaZ37/Ws33qWgIiIsqeqCwL4LICdQ48lUb8AsKWI3BB6IEREREQpElU9DsCeoQdCwdw+4v33ArhrxGPuco8b9XnU/ffdAP7l/vs+AP90/63ucfe4t9vc/78TwN8A/NW9/UVE7H3ZU9XVAVyPfNwuIsuG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">
     <span class="brand__divider" aria-hidden="true"></span>
     <span class="brand__app">Support-Cockpit</span>
-  </div>
+  </button>
 
   <div class="app-bar__spacer"></div>
 
-  <div class="segmented" role="group" aria-label="Sprache">
-    <button class="segmented__btn" aria-pressed="true">DE</button>
-    <button class="segmented__btn" aria-pressed="false">ES</button>
-  </div>
-
   <label class="search">
-    <svg aria-hidden="true" width="15" height="15"><use href="#i-magnifying-glass"/></svg>
+    <svg aria-hidden="true"><use href="#i-magnifying-glass"/></svg>
     <input type="search" placeholder="Suchen …" aria-label="Suchen">
-    <span class="kbd" aria-hidden="true">⌘K</span>
   </label>
 
   <button class="chrome-btn">
     <svg aria-hidden="true"><use href="#i-list-bullets"/></svg>
-    Materialliste
-  </button>
-  <button class="chrome-btn">
-    <svg aria-hidden="true"><use href="#i-gear-six"/></svg>
-    Admin
+    Materialliste <span class="count">3</span>
   </button>
 
-  <div class="theme-toggle" role="group" aria-label="Darstellung">
-    <button class="theme-toggle__btn" id="btn-day" aria-pressed="false"
-            aria-label="Tagansicht" title="Tagansicht">
-      <svg aria-hidden="true"><use href="#i-sun"/></svg>
+  <div class="menu">
+    <button class="menu__trigger" id="menu-trigger" aria-expanded="false" aria-controls="menu-panel">
+      <span class="avatar" aria-hidden="true">RS</span>
+      <span class="sr-only">Konto und Einstellungen, Robin Selhorst</span>
+      <svg class="menu__caret" aria-hidden="true"><use href="#i-caret-right"/></svg>
     </button>
-    <button class="theme-toggle__btn" id="btn-night" aria-pressed="true"
-            aria-label="Nachtansicht" title="Nachtansicht">
-      <svg aria-hidden="true"><use href="#i-moon"/></svg>
-    </button>
-  </div>
 
-  <div class="user">
-    <span class="avatar" aria-hidden="true">RS</span>
-    <span>
-      <span class="user__name">Robin Selhorst</span><br>
-      <span class="user__role">Administration</span>
-    </span>
+    <div class="menu__panel" id="menu-panel" role="menu" hidden>
+      <div class="menu__head">
+        <div class="menu__name">Robin Selhorst</div>
+        <div class="menu__role">Administration</div>
+      </div>
+      <div class="menu__sep"></div>
+
+      <div class="menu__row">
+        <span class="label">Sprache</span>
+        <div class="segmented" role="group" aria-label="Sprache">
+          <button class="segmented__btn" aria-pressed="true">DE</button>
+          <button class="segmented__btn" aria-pressed="false">ES</button>
+        </div>
+      </div>
+
+      <div class="menu__row">
+        <span class="label">Darstellung</span>
+        <div class="theme-toggle" role="group" aria-label="Darstellung">
+          <button class="theme-toggle__btn" id="btn-day" aria-pressed="false"
+                  aria-label="Tagansicht" title="Tagansicht"><svg aria-hidden="true"><use href="#i-sun"/></svg></button>
+          <button class="theme-toggle__btn" id="btn-night" aria-pressed="true"
+                  aria-label="Nachtansicht" title="Nachtansicht"><svg aria-hidden="true"><use href="#i-moon"/></svg></button>
+        </div>
+      </div>
+
+      <div class="menu__sep"></div>
+      <button class="menu__item" role="menuitem">
+        <svg aria-hidden="true"><use href="#i-gear-six"/></svg>Admin</button>
+      <button class="menu__item" role="menuitem">
+        <svg aria-hidden="true"><use href="#i-user"/></svg>Abmelden</button>
+    </div>
   </div>
 </header>
 
-<section class="hero">
-  <div class="hero__kv" aria-hidden="true"></div>
-  <div class="hero__inner">
-    <p class="label">Technischer Support · Cockpit</p>
-    <h1>Womit kann ich helfen?</h1>
-    <label class="hero__search">
-      <svg aria-hidden="true"><use href="#i-magnifying-glass"/></svg>
-      <input type="search" placeholder="Produkt, Anwendungsfall, Regelwerk oder Video suchen …"
-             aria-label="Produkt, Anwendungsfall, Regelwerk oder Video suchen">
-      <span class="kbd" aria-hidden="true">⌘K</span>
-    </label>
+<main id="app">
+
+<!-- ============================ ÜBERSICHT ============================ -->
+<section class="view" data-view="dashboard" data-active="true">
+  <div class="hero">
+    <div class="hero__kv" aria-hidden="true"></div>
+    <div class="hero__inner">
+      <p class="label">Technischer Support · Cockpit</p>
+      <h1>Womit kann ich helfen?</h1>
+      <label class="hero__search">
+        <svg aria-hidden="true"><use href="#i-magnifying-glass"/></svg>
+        <input type="search" placeholder="Produkt, Anwendungsfall, Regelwerk oder Video suchen …"
+               aria-label="Produkt, Anwendungsfall, Regelwerk oder Video suchen">
+      </label>
+    </div>
+  </div>
+
+  <div class="page">
+    <ul class="tiles">
+      <li><button class="tile" data-goto="soon" data-title="Feuchte-Check">
+        <span class="tile__icon"><svg aria-hidden="true"><use href="#i-drop-half"/></svg></span>
+        <span class="tile__title">Feuchte-Check</span>
+        <span class="tile__meta">8 offene Analysen</span></button></li>
+      <li><button class="tile" data-goto="soon" data-title="Sanierungssysteme">
+        <span class="tile__icon"><svg aria-hidden="true"><use href="#i-shield-check"/></svg></span>
+        <span class="tile__title">Sanierungssysteme</span>
+        <span class="tile__meta">12 Anwendungsfälle</span></button></li>
+      <li><button class="tile" data-goto="produkte">
+        <span class="tile__icon"><svg aria-hidden="true"><use href="#i-package"/></svg></span>
+        <span class="tile__title">Produkt suchen</span>
+        <span class="tile__meta">85 Produkte</span></button></li>
+      <li><button class="tile" data-goto="soon" data-title="Menge berechnen">
+        <span class="tile__icon"><svg aria-hidden="true"><use href="#i-scales"/></svg></span>
+        <span class="tile__title">Menge berechnen</span>
+        <span class="tile__meta">Verbrauch &amp; Gebinde</span></button></li>
+      <li><button class="tile" data-goto="wissen">
+        <span class="tile__icon"><svg aria-hidden="true"><use href="#i-book-open"/></svg></span>
+        <span class="tile__title">Wissens-Hub</span>
+        <span class="tile__meta">44 Regelwerke</span></button></li>
+      <li><button class="tile" data-goto="angebote">
+        <span class="tile__icon"><svg aria-hidden="true"><use href="#i-clipboard-text"/></svg></span>
+        <span class="tile__title">Angebots-Center</span>
+        <span class="tile__meta">3 in Bearbeitung</span></button></li>
+      <li><button class="tile" data-goto="pm">
+        <span class="tile__icon"><svg aria-hidden="true"><use href="#i-flask"/></svg></span>
+        <span class="tile__title">Produkt-Management</span>
+        <span class="tile__meta">2 aktive Tests</span></button></li>
+      <li><button class="tile" data-goto="soon" data-title="Vertriebs-Center">
+        <span class="tile__icon"><svg aria-hidden="true"><use href="#i-handshake"/></svg></span>
+        <span class="tile__title">Vertriebs-Center</span>
+        <span class="tile__meta">Gebiete &amp; Partner</span></button></li>
+    </ul>
+
+    <div class="panels">
+      <section class="panel">
+        <div class="panel__head"><h2 class="label">Zuletzt geöffnet</h2></div>
+        <ul class="rows">
+          <li class="row"><span><span class="row__title">BKM FA plus Primer</span><br>
+            <span class="row__sub">Farben &amp; Beschichtungen</span></span>
+            <span class="row__meta">03.09.26, 18:24</span></li>
+          <li class="row"><span><span class="row__title">BKM Anti-Kondensationsbeschichtung</span><br>
+            <span class="row__sub">Farben &amp; Beschichtungen</span></span>
+            <span class="row__meta">01.09.26, 15:57</span></li>
+          <li class="row"><span><span class="row__title">BKM RSH-2K Set — RissSanierungsHarz</span><br>
+            <span class="row__sub">Boden- &amp; Balkonabdichtungssysteme</span></span>
+            <span class="row__meta">01.09.26, 14:36</span></li>
+          <li class="row"><span><span class="row__title">BKM HZ 250 Pro</span><br>
+            <span class="row__sub">Injektionsprodukte</span></span>
+            <span class="row__meta">01.09.26, 14:34</span></li>
+        </ul>
+      </section>
+
+      <section class="panel">
+        <div class="panel__head">
+          <h2 class="label">Top-Produkte</h2>
+          <div class="filters" role="group" aria-label="Zeitraum">
+            <button class="filters__btn" aria-pressed="true">30 Tage</button>
+            <button class="filters__btn" aria-pressed="false">12 Monate</button>
+          </div>
+        </div>
+        <ul class="bars">
+          <li><div class="bar__head"><span class="bar__label">BKM HZ 250 Pro</span><span class="bar__value">17</span></div>
+            <div class="bar__track"><div class="bar__fill" style="width:100%"></div></div></li>
+          <li><div class="bar__head"><span class="bar__label">BKM HS Hohlkehlen- und Sperrmörtel</span><span class="bar__value">8</span></div>
+            <div class="bar__track"><div class="bar__fill" style="width:47%"></div></div></li>
+          <li><div class="bar__head"><span class="bar__label">BKM SEF-2K</span><span class="bar__value">7</span></div>
+            <div class="bar__track"><div class="bar__fill" style="width:41%"></div></div></li>
+          <li><div class="bar__head"><span class="bar__label">BKM VM Vorspritzmörtel</span><span class="bar__value">6</span></div>
+            <div class="bar__track"><div class="bar__fill" style="width:35%"></div></div></li>
+        </ul>
+        <div class="legend">
+          <span class="chip chip--success">Abgeschlossen</span>
+          <span class="chip chip--warning">Offen</span>
+          <span class="chip chip--danger">Prüfen</span>
+          <span class="chip chip--info">Hinweis</span>
+        </div>
+      </section>
+    </div>
   </div>
 </section>
 
-<main class="page">
+<!-- ============================ PRODUKT SUCHEN ============================ -->
+<section class="view" data-view="produkte">
+  <div class="page">
+    <button class="backlink" data-goto="dashboard">
+      <svg aria-hidden="true"><use href="#i-arrow-right"/></svg>Zurück zur Übersicht</button>
+    <div class="page-head">
+      <div class="page-head__row"><h1>Produkt suchen</h1></div>
+      <p>Nach Produktname, Einsatzbereich oder Kategorie suchen.</p>
+    </div>
 
-  <ul class="tiles">
-    <li><button class="tile">
-      <span class="tile__icon"><svg aria-hidden="true"><use href="#i-drop-half"/></svg></span>
-      <span class="tile__title">Feuchte-Check</span>
-      <span class="tile__meta">8 offene Analysen</span>
-    </button></li>
-    <li><button class="tile">
-      <span class="tile__icon"><svg aria-hidden="true"><use href="#i-shield-check"/></svg></span>
-      <span class="tile__title">Sanierungssysteme</span>
-      <span class="tile__meta">12 Anwendungsfälle</span>
-    </button></li>
-    <li><button class="tile">
-      <span class="tile__icon"><svg aria-hidden="true"><use href="#i-package"/></svg></span>
-      <span class="tile__title">Produkt suchen</span>
-      <span class="tile__meta">81 Produkte</span>
-    </button></li>
-    <li><button class="tile">
-      <span class="tile__icon"><svg aria-hidden="true"><use href="#i-scales"/></svg></span>
-      <span class="tile__title">Menge berechnen</span>
-      <span class="tile__meta">Verbrauch &amp; Gebinde</span>
-    </button></li>
-    <li><button class="tile" aria-current="true">
-      <span class="tile__icon"><svg aria-hidden="true"><use href="#i-book-open"/></svg></span>
-      <span class="tile__title">Wissens-Hub</span>
-      <span class="tile__meta">44 Regelwerke</span>
-    </button></li>
-    <li><button class="tile">
-      <span class="tile__icon"><svg aria-hidden="true"><use href="#i-clipboard-text"/></svg></span>
-      <span class="tile__title">Angebots-Center</span>
-      <span class="tile__meta">3 in Bearbeitung</span>
-    </button></li>
-    <li><button class="tile">
-      <span class="tile__icon"><svg aria-hidden="true"><use href="#i-flask"/></svg></span>
-      <span class="tile__title">Produkt-Management</span>
-      <span class="tile__meta">2 aktive Tests</span>
-    </button></li>
-    <li><button class="tile">
-      <span class="tile__icon"><svg aria-hidden="true"><use href="#i-handshake"/></svg></span>
-      <span class="tile__title">Vertriebs-Center</span>
-      <span class="tile__meta">Gebiete &amp; Partner</span>
-    </button></li>
-  </ul>
+    <div class="filterbar">
+      <label class="field">
+        <svg aria-hidden="true"><use href="#i-magnifying-glass"/></svg>
+        <input type="search" placeholder="Produkt, Einsatz, Verarbeitung …" aria-label="Produkt suchen">
+      </label>
+      <label class="field">
+        <svg aria-hidden="true"><use href="#i-funnel"/></svg>
+        <select aria-label="Kategorie"><option>Alle Kategorien</option><option>Injektionsprodukte</option>
+          <option>Farben &amp; Beschichtungen</option><option>Boden- &amp; Balkonabdichtung</option></select>
+        <svg class="field__caret" aria-hidden="true"><use href="#i-caret-right"/></svg>
+      </label>
+      <label class="field">
+        <svg aria-hidden="true"><use href="#i-stack"/></svg>
+        <select aria-label="Linie"><option>Alle Linien</option><option>Pro Line</option><option>Home Line</option></select>
+        <svg class="field__caret" aria-hidden="true"><use href="#i-caret-right"/></svg>
+      </label>
+    </div>
 
-  <div class="panels">
+    <p class="resultcount">85 von 85 Produkten</p>
+
+    <div class="products">
+      <button class="product"><span class="product__media"><svg aria-hidden="true"><use href="#i-image"/></svg></span>
+        <span class="product__body"><span class="product__name">BKM BB-2K Farbe</span>
+        <span class="product__spec">2-Komponenten Farbversiegelung · 1 × 5 kg</span>
+        <span class="product__foot"><span class="product__line">Pro Line</span>
+        <span class="product__cta">Details <svg aria-hidden="true"><use href="#i-arrow-right"/></svg></span></span></span></button>
+
+      <button class="product"><span class="product__media"><svg aria-hidden="true"><use href="#i-image"/></svg></span>
+        <span class="product__body"><span class="product__name">BKM KS-K Kleber</span>
+        <span class="product__spec">für Kalziumsilikatplatte · 15-kg-Eimer</span>
+        <span class="product__foot"><span class="product__line">Pro Line</span>
+        <span class="product__cta">Details <svg aria-hidden="true"><use href="#i-arrow-right"/></svg></span></span></span></button>
+
+      <button class="product"><span class="product__media"><svg aria-hidden="true"><use href="#i-image"/></svg></span>
+        <span class="product__body"><span class="product__name">NovuProtect Vorreiniger</span>
+        <span class="product__spec">Inhalt: 250 ml / 1 l / 5 l</span>
+        <span class="product__foot"><span class="product__line">Home Line</span>
+        <span class="product__cta">Details <svg aria-hidden="true"><use href="#i-arrow-right"/></svg></span></span></span></button>
+
+      <button class="product"><span class="product__media"><svg aria-hidden="true"><use href="#i-image"/></svg></span>
+        <span class="product__body"><span class="product__name">BKM KS-G Gewebe</span>
+        <span class="product__spec">für Kalziumsilikatplatte</span>
+        <span class="product__foot"><span class="product__line">Pro Line</span>
+        <span class="product__cta">Details <svg aria-hidden="true"><use href="#i-arrow-right"/></svg></span></span></span></button>
+
+      <button class="product"><span class="product__media"><svg aria-hidden="true"><use href="#i-image"/></svg></span>
+        <span class="product__body"><span class="product__name">NovuSticks Horizontalsperre</span>
+        <span class="product__spec">für Mauerwerksfugen</span>
+        <span class="product__foot"><span class="product__line">Home Line</span>
+        <span class="product__cta">Details <svg aria-hidden="true"><use href="#i-arrow-right"/></svg></span></span></span></button>
+
+      <button class="product"><span class="product__media"><svg aria-hidden="true"><use href="#i-image"/></svg></span>
+        <span class="product__body"><span class="product__name">BKM PMBC-2K Bitumendickbeschichtung</span>
+        <span class="product__spec">30-l-Hobbock (Komp. A 17,6 kg + Komp. B 4,4 kg)</span>
+        <span class="product__foot"><span class="product__line">Pro Line</span>
+        <span class="product__cta">Details <svg aria-hidden="true"><use href="#i-arrow-right"/></svg></span></span></span></button>
+
+      <button class="product"><span class="product__media"><svg aria-hidden="true"><use href="#i-image"/></svg></span>
+        <span class="product__body"><span class="product__name">BKM RSH-2K Set</span>
+        <span class="product__spec">RissSanierungsHarz im Set · 1 × 0,6 l</span>
+        <span class="product__foot"><span class="product__line">Pro Line</span>
+        <span class="product__cta">Details <svg aria-hidden="true"><use href="#i-arrow-right"/></svg></span></span></span></button>
+
+      <button class="product"><span class="product__media"><svg aria-hidden="true"><use href="#i-image"/></svg></span>
+        <span class="product__body"><span class="product__name">BKM PMBC-2K Außenabdichtung</span>
+        <span class="product__spec">Bitumendickbeschichtung, erdberührt</span>
+        <span class="product__foot"><span class="product__line">Pro Line</span>
+        <span class="product__cta">Details <svg aria-hidden="true"><use href="#i-arrow-right"/></svg></span></span></span></button>
+    </div>
+    <p class="hint">Produktfotos sind in dieser Vorlage durch Platzhalter ersetzt.
+      Die helle Medienfläche ist Absicht — freigestellte Produktbilder brauchen Weiß,
+      auch im Nacht-Theme.</p>
+  </div>
+</section>
+
+<!-- ============================ WISSENS-HUB ============================ -->
+<section class="view" data-view="wissen">
+  <div class="page">
+    <button class="backlink" data-goto="dashboard">
+      <svg aria-hidden="true"><use href="#i-arrow-right"/></svg>Zurück zur Übersicht</button>
+    <div class="page-head">
+      <div class="page-head__row"><h1>Wissens-Hub</h1></div>
+      <p>Technisches Wissen, Schulungen und Regelwerke griffbereit.</p>
+    </div>
+
+    <div class="cats">
+      <button class="cat" aria-current="true">
+        <span class="tile__icon"><svg aria-hidden="true"><use href="#i-book-open"/></svg></span>
+        <span class="cat__title">Regelwerke</span>
+        <p class="cat__desc">Normen, Richtlinien und technische Regelwerke griffbereit.</p></button>
+      <button class="cat">
+        <span class="tile__icon"><svg aria-hidden="true"><use href="#i-chalkboard-teacher"/></svg></span>
+        <span class="cat__title">Digitale Schulungen</span>
+        <p class="cat__desc">Online-Schulungen und Webinare zu BKM-Systemen und deren Verarbeitung.</p></button>
+      <button class="cat">
+        <span class="tile__icon"><svg aria-hidden="true"><use href="#i-presentation"/></svg></span>
+        <span class="cat__title">Anwendungsvideos</span>
+        <p class="cat__desc">Videoanleitungen zur fachgerechten Anwendung der BKM-Produkte.</p></button>
+      <button class="cat">
+        <span class="tile__icon"><svg aria-hidden="true"><use href="#i-eye"/></svg></span>
+        <span class="cat__title">Youtube Videos</span>
+        <p class="cat__desc">BKM-Videos direkt von YouTube.</p></button>
+      <button class="cat">
+        <span class="tile__icon"><svg aria-hidden="true"><use href="#i-stack"/></svg></span>
+        <span class="cat__title">Systemwissen</span>
+        <p class="cat__desc">Systemaufbauten, Materialkombinationen und technische Hintergründe.</p></button>
+      <button class="cat">
+        <span class="tile__icon"><svg aria-hidden="true"><use href="#i-megaphone"/></svg></span>
+        <span class="cat__title">Marketing Center</span>
+        <p class="cat__desc">Kampagnen, KI-Marketingtexte, Referenzen und BKM-Downloads für Fachbetriebe.</p></button>
+      <button class="cat">
+        <span class="tile__icon"><svg aria-hidden="true"><use href="#i-check-circle"/></svg></span>
+        <span class="cat__title">BauCheck WTA</span>
+        <p class="cat__desc">Bauwerksdiagnostik nach WTA — z. B. Wassereinwirkungsklasse bestimmen.</p></button>
+    </div>
+
+    <section class="panel" style="margin-bottom:var(--space-xl)">
+      <div class="panel__head"><h2 class="label">Handbücher</h2></div>
+      <div class="docs">
+        <button class="doc"><span class="doc__icon"><svg aria-hidden="true"><use href="#i-file-pdf"/></svg></span>
+          <span><span class="doc__title">Handbuch für Fachbetriebe</span>
+          <span class="doc__desc">Wie das System arbeitet, was die Bewertungen bedeuten und wie Sie die Standortanalyse lesen.</span></span>
+          <span class="doc__tag">PDF</span></button>
+        <button class="doc"><span class="doc__icon"><svg aria-hidden="true"><use href="#i-file-pdf"/></svg></span>
+          <span><span class="doc__title">Manual para empresas especializadas</span>
+          <span class="doc__desc">Funcionamiento del sistema, significado de las valoraciones y lectura del análisis del emplazamiento.</span></span>
+          <span class="doc__tag">PDF</span></button>
+      </div>
+      <p class="hint">Vertraulich — zur Verwendung im eigenen Betrieb. Der Download-Link ist eine Stunde gültig.</p>
+    </section>
+
+    <div class="filterbar">
+      <label class="field">
+        <svg aria-hidden="true"><use href="#i-magnifying-glass"/></svg>
+        <input type="search" placeholder="Regelwerk, Code oder Thema …" aria-label="Regelwerk suchen">
+      </label>
+      <label class="field">
+        <svg aria-hidden="true"><use href="#i-funnel"/></svg>
+        <select aria-label="Kategorie"><option>Alle Kategorien</option><option>Abdichtung</option><option>Injektion</option></select>
+        <svg class="field__caret" aria-hidden="true"><use href="#i-caret-right"/></svg>
+      </label>
+      <label class="field">
+        <svg aria-hidden="true"><use href="#i-globe"/></svg>
+        <select aria-label="Geltungsbereich"><option>Alle Geltungsbereiche</option><option>Deutschland</option><option>international</option></select>
+        <svg class="field__caret" aria-hidden="true"><use href="#i-caret-right"/></svg>
+      </label>
+    </div>
+
+    <p class="resultcount">44 von 44 Regelwerken</p>
+
+    <div class="rules">
+      <article class="rule">
+        <div class="rule__head"><span class="rule__code">DIN 18195</span>
+          <span class="rule__tags"><span class="chip chip--info">Deutschland</span>
+          <span class="chip chip--success">Gültig</span></span></div>
+        <p class="rule__title">Abdichtung von Bauwerken — Begriffe</p>
+        <p class="rule__body">Reine Begriffsnorm; sie definiert Begriffe, Abkürzungen und Benennungen für die
+          Abdichtungsnormen DIN 18531 bis 18535. Kein Bemessungs- oder Ausführungsteil, sondern einheitliche
+          Terminologie, u. a. zu Wassereinwirkungsklassen und Verbundabdichtung. Neuausgabe 2025-12 ersetzt 2017-07.</p>
+        <div class="rule__foot"><span>Abdichtung · Stand 2025-12</span>
+          <span class="product__cta">Dokument öffnen <svg aria-hidden="true"><use href="#i-download-simple"/></svg></span></div>
+      </article>
+      <article class="rule">
+        <div class="rule__head"><span class="rule__code">WTA 4-7</span>
+          <span class="rule__tags"><span class="chip chip--info">international</span>
+          <span class="chip chip--success">Gültig</span></span></div>
+        <p class="rule__title">Nachträgliche mechanische Horizontalsperre</p>
+        <p class="rule__body">Aktuelle Ausgabe 4-7-24/D (04.2024). Behandelt die nachträgliche mechanische
+          Horizontalsperre gegen kapillar aufsteigende Feuchte in bestehendem Mauerwerk. Voraussetzung sind
+          Voruntersuchungen mit belastbarer Feuchte- und Schadensanalyse und Fachplanung.</p>
+        <div class="rule__foot"><span>Injektion · Stand 2024-04</span>
+          <span class="product__cta">Dokument öffnen <svg aria-hidden="true"><use href="#i-download-simple"/></svg></span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ ANGEBOTS-CENTER ============================ -->
+<section class="view" data-view="angebote">
+  <div class="page">
+    <button class="backlink" data-goto="dashboard">
+      <svg aria-hidden="true"><use href="#i-arrow-right"/></svg>Zurück zur Übersicht</button>
+    <div class="page-head">
+      <div class="page-head__row"><h1>Angebots-Center</h1>
+        <span class="badge badge--muted">Interner Testmodus · Betrieb „Zentrale"</span></div>
+      <p>Angebots-Entwürfe mit 3 Varianten direkt aus dem Feuchte-Check — Preise aus dem
+         BKM-Leistungsverzeichnis und deiner Betriebs-Kalkulation. Kein automatischer Versand.</p>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="Bereich">
+      <button class="tabs__btn" role="tab" aria-selected="true">Übersicht</button>
+      <button class="tabs__btn" role="tab" aria-selected="false">Angebot erstellen</button>
+      <button class="tabs__btn" role="tab" aria-selected="false">Kalkulation</button>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi"><div class="kpi__value">0</div><div class="kpi__label">In Arbeit</div>
+        <div class="kpi__hint">Entwurf + geprüft</div></div>
+      <div class="kpi"><div class="kpi__value">0</div><div class="kpi__label">Versendet</div>
+        <div class="kpi__hint">warten auf Entscheidung</div></div>
+      <div class="kpi"><div class="kpi__value">0</div><div class="kpi__label">Gewonnen</div>
+        <div class="kpi__hint">beauftragte Angebote</div></div>
+      <div class="kpi"><div class="kpi__value">0,00 €</div><div class="kpi__label">Offenes Volumen</div>
+        <div class="kpi__hint">netto, noch nicht entschieden</div></div>
+    </div>
+
+    <div class="split">
+      <section class="panel">
+        <div class="panel__head"><h2 class="label">Angebote</h2>
+          <button class="btn">+ Angebot erstellen</button></div>
+        <div class="empty">
+          <p class="empty__text">Noch keine Angebote. Erstelle den ersten Entwurf aus einem
+            abgeschlossenen Feuchte-Check mit Systemlösung.</p>
+          <button class="btn btn--quiet" data-goto="soon" data-title="Feuchte-Check">Zum Feuchte-Check</button>
+        </div>
+        <p class="hint">Jedes Angebot ist deterministisch aus seinem Feuchte-Check abgeleitet
+          und friert beim Speichern seinen Preisstand ein.</p>
+      </section>
+
+      <section class="panel">
+        <div class="panel__head"><h2 class="label">Preisstand je Sanierungssystem</h2></div>
+        <ul class="statuslist">
+          <li class="statusrow"><span class="statusrow__dot" style="background:var(--status-warning)"></span>
+            <span class="statusrow__name">Opferputz</span><span class="statusrow__state">8 ohne Preis</span></li>
+          <li class="statusrow"><span class="statusrow__dot" style="background:var(--status-warning)"></span>
+            <span class="statusrow__name">Flachdachabdichtung</span><span class="statusrow__state">6 ohne Preis</span></li>
+          <li class="statusrow"><span class="statusrow__dot" style="background:var(--status-warning)"></span>
+            <span class="statusrow__name">Feuchtraumabdichtung</span><span class="statusrow__state">8 ohne Preis</span></li>
+          <li class="statusrow"><span class="statusrow__dot" style="background:var(--status-success)"></span>
+            <span class="statusrow__name">Boden-Wandanschluss</span><span class="statusrow__state">vollständig</span></li>
+          <li class="statusrow"><span class="statusrow__dot" style="background:var(--status-success)"></span>
+            <span class="statusrow__name">Anti-Kondensationsbeschichtung</span><span class="statusrow__state">vollständig</span></li>
+          <li class="statusrow"><span class="statusrow__dot" style="background:var(--status-warning)"></span>
+            <span class="statusrow__name">Außenabdichtung</span><span class="statusrow__state">12 ohne Preis</span></li>
+          <li class="statusrow"><span class="statusrow__dot" style="background:var(--status-success)"></span>
+            <span class="statusrow__name">Flächensperre</span><span class="statusrow__state">vollständig</span></li>
+          <li class="statusrow"><span class="statusrow__dot" style="background:var(--status-warning)"></span>
+            <span class="statusrow__name">Rohrdurchführung</span><span class="statusrow__state">6 ohne Preis</span></li>
+          <li class="statusrow"><span class="statusrow__dot" style="background:var(--status-warning)"></span>
+            <span class="statusrow__name">Radonschutz</span><span class="statusrow__state">1 ohne Preis</span></li>
+          <li class="statusrow"><span class="statusrow__dot" style="background:var(--status-warning)"></span>
+            <span class="statusrow__name">Innendämmung</span><span class="statusrow__state">8 ohne Preis</span></li>
+          <li class="statusrow"><span class="statusrow__dot" style="background:var(--status-success)"></span>
+            <span class="statusrow__name">Rissverpressung</span><span class="statusrow__state">vollständig</span></li>
+          <li class="statusrow"><span class="statusrow__dot" style="background:var(--status-success)"></span>
+            <span class="statusrow__name">Horizontalsperre</span><span class="statusrow__state">vollständig</span></li>
+          <li class="statusrow"><span class="statusrow__dot" style="background:var(--status-success)"></span>
+            <span class="statusrow__name">Sanierputz nach WTA</span><span class="statusrow__state">vollständig</span></li>
+          <li class="statusrow"><span class="statusrow__dot" style="background:var(--status-success)"></span>
+            <span class="statusrow__name">Bodenabdichtung</span><span class="statusrow__state">vollständig</span></li>
+        </ul>
+        <p class="hint">BKM-Standardpreise pflegt die Zentrale im Admin. Eigene Preise setzt du
+          unter „Kalkulation" — fehlt beides, weist das Angebot die Position sichtbar aus.</p>
+      </section>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PRODUKT-MANAGEMENT ============================ -->
+<section class="view" data-view="pm">
+  <div class="page">
+    <button class="backlink" data-goto="dashboard">
+      <svg aria-hidden="true"><use href="#i-arrow-right"/></svg>Zurück zur Übersicht</button>
+    <div class="page-head">
+      <div class="page-head__row"><h1>Produkt-Management</h1>
+        <span class="badge">Produkttest-Plattform</span></div>
+      <p>Produkttests vom Anlegen bis zur Entscheidung — mit durchgehender Zuordnung:
+         Vorlieferant → Produkt → Rezeptur/Version → Charge/Muster → BKM-Produkt oder Arbeitstitel.</p>
+    </div>
+
+    <div class="tabs" role="group" aria-label="Modus" style="margin-bottom:var(--space-md)">
+      <button class="tabs__btn" aria-selected="true">Produkt-Test</button>
+      <button class="tabs__btn" aria-selected="false" disabled>Produkt-Launch
+        <span class="tabs__count">in Vorbereitung</span></button>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="Bereich">
+      <button class="tabs__btn" role="tab" aria-selected="true">Dashboard</button>
+      <button class="tabs__btn" role="tab" aria-selected="false">Produkttests
+        <span class="tabs__count">2</span></button>
+      <button class="tabs__btn" role="tab" aria-selected="false">Produkte
+        <span class="tabs__count">2</span></button>
+      <button class="tabs__btn" role="tab" aria-selected="false">Ressourcen
+        <span class="tabs__count">7</span></button>
+      <button class="tabs__btn" role="tab" aria-selected="false">Auswertungen</button>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi"><div class="kpi__value">1</div><div class="kpi__label">aktive Tests</div></div>
+      <div class="kpi"><div class="kpi__value">1</div><div class="kpi__label">in Planung</div></div>
+      <div class="kpi"><div class="kpi__value">0</div><div class="kpi__label">Bedarfe offen</div>
+        <div class="kpi__hint">startkritisch</div></div>
+      <div class="kpi"><div class="kpi__value">0</div><div class="kpi__label">Kontrollen fällig</div></div>
+    </div>
 
     <section class="panel">
-      <div class="panel__head">
-        <h2 class="label">Zuletzt geöffnet</h2>
-      </div>
+      <div class="panel__head"><h2 class="label">Neueste Tests</h2>
+        <button class="btn">+ Neuer Test</button></div>
       <ul class="rows">
         <li class="row">
-          <span>
-            <span class="row__title">BKM FA plus Primer</span><br>
-            <span class="row__sub">Farben &amp; Beschichtungen</span>
-          </span>
-          <span class="row__meta">03.09.26, 18:24</span>
-        </li>
+          <span><span class="row__title">PT-0002 · Massehydrophobierung / Betonzusatz</span><br>
+          <span class="row__sub">Neue Produktidee / Sortimentserweiterung</span></span>
+          <span class="chip chip--success">Durchführung</span></li>
         <li class="row">
-          <span>
-            <span class="row__title">BKM Anti-Kondensationsbeschichtung</span><br>
-            <span class="row__sub">Farben &amp; Beschichtungen</span>
-          </span>
-          <span class="row__meta">01.09.26, 15:57</span>
-        </li>
-        <li class="row">
-          <span>
-            <span class="row__title">BKM RSH-2K Set — RissSanierungsHarz</span><br>
-            <span class="row__sub">Boden- &amp; Balkonabdichtungssysteme</span>
-          </span>
-          <span class="row__meta">01.09.26, 14:36</span>
-        </li>
-        <li class="row">
-          <span>
-            <span class="row__title">BKM HZ 250 Pro</span><br>
-            <span class="row__sub">Injektionsprodukte</span>
-          </span>
-          <span class="row__meta">01.09.26, 14:34</span>
-        </li>
+          <span><span class="row__title">PT-0001 · Flachdach Grundierung Test1</span><br>
+          <span class="row__sub">Rohstoff- oder Lieferantenwechsel</span></span>
+          <span class="chip chip--warning">Anlegen</span></li>
       </ul>
+      <p class="hint">Angemeldet als Robin Selhorst. Offene Bedarfe und fällige Nachkontrollen
+        erscheinen hier, sobald die Pakete „Planung &amp; Bedarf" und „Durchführung &amp; Messungen"
+        ausgebaut sind.</p>
     </section>
-
-    <section class="panel">
-      <div class="panel__head">
-        <h2 class="label">Top-Produkte</h2>
-        <div class="filters" role="group" aria-label="Zeitraum">
-          <button class="filters__btn" aria-pressed="true">30 Tage</button>
-          <button class="filters__btn" aria-pressed="false">12 Monate</button>
-        </div>
-      </div>
-      <ul class="bars">
-        <li>
-          <div class="bar__head"><span class="bar__label">BKM HZ 250 Pro</span><span class="bar__value">17</span></div>
-          <div class="bar__track"><div class="bar__fill" style="width:100%"></div></div>
-        </li>
-        <li>
-          <div class="bar__head"><span class="bar__label">BKM HS Hohlkehlen- und Sperrmörtel</span><span class="bar__value">8</span></div>
-          <div class="bar__track"><div class="bar__fill" style="width:47%"></div></div>
-        </li>
-        <li>
-          <div class="bar__head"><span class="bar__label">BKM SEF-2K</span><span class="bar__value">7</span></div>
-          <div class="bar__track"><div class="bar__fill" style="width:41%"></div></div>
-        </li>
-        <li>
-          <div class="bar__head"><span class="bar__label">BKM VM Vorspritzmörtel</span><span class="bar__value">6</span></div>
-          <div class="bar__track"><div class="bar__fill" style="width:35%"></div></div>
-        </li>
-      </ul>
-
-      <div class="legend">
-        <span class="chip chip--success">Abgeschlossen</span>
-        <span class="chip chip--warning">Offen</span>
-        <span class="chip chip--danger">Prüfen</span>
-        <span class="chip chip--info">Hinweis</span>
-      </div>
-    </section>
-
   </div>
+</section>
+
+<!-- ============================ NOCH NICHT GEBAUT ============================ -->
+<section class="view" data-view="soon">
+  <div class="page">
+    <button class="backlink" data-goto="dashboard">
+      <svg aria-hidden="true"><use href="#i-arrow-right"/></svg>Zurück zur Übersicht</button>
+    <div class="page-head">
+      <div class="page-head__row"><h1 id="soon-title">Bereich</h1></div>
+      <p>Dieser Bereich ist in der Golden Reference noch nicht ausgebaut.</p>
+    </div>
+    <section class="panel">
+      <div class="empty">
+        <p class="empty__text">Angelegt sind bisher <b>Produkt suchen</b>, <b>Wissens-Hub</b>,
+          <b>Angebots-Center</b> und <b>Produkt-Management</b>. Der Feuchte-Check mit seinem
+          siebenstufigen Assistenten folgt als nächste Vorlage — dort sitzt die eigentliche
+          Arbeit.</p>
+        <button class="btn" data-goto="dashboard">Zurück zur Übersicht</button>
+      </div>
+    </section>
+  </div>
+</section>
+
 </main>
 
 <button class="delta-toggle" id="delta-open" aria-controls="delta" aria-expanded="false">
@@ -854,39 +1493,32 @@ svg,use{fill:currentColor}
 <aside class="delta" id="delta" data-open="false" aria-label="Änderungen gegenüber der aktuellen Oberfläche">
   <button class="delta__close" id="delta-close" aria-label="Schließen">✕</button>
   <h2>Was ist anders</h2>
-  <p class="delta__intro">Zehn Änderungen gegenüber dem heutigen Startbildschirm —
-     jede geht auf eine Regel oder ein Asset aus dem Design-System zurück,
-     keine auf Geschmack.</p>
+  <p class="delta__intro">Elf Änderungen gegenüber der heutigen Oberfläche — jede geht auf
+     eine Regel oder ein Asset aus dem Design-System zurück, keine auf Geschmack.</p>
   <ol>
-    <li><b>Day/Night-Umschalter.</b> Alle Komponenten lesen semantische Tokens
-        (<code>--surface-1</code>, <code>--accent</code>) statt fester Markenfarben. Deshalb
-        funktioniert der Wechsel überhaupt. Lime schlägt im Tag-Theme auf Transition Green um —
-        Lime auf Weiß hat Kontrast 1.34 und fällt durch (Kontrastmatrix, DESIGN.md).</li>
-    <li><b>Markentextur als Grund.</b> Die Arbeitsfläche liegt auf den offiziellen
-        Hintergrundtexturen aus <code>assets/backgrounds/</code>, mit dem Flächentoken
-        überdeckt — die Textur moduliert nur, die gerechneten Kontraste bleiben gültig.</li>
-    <li><b>Keyvisual im Hero-Band.</b> Vorgerendertes Asset aus <code>assets/keyvisual/</code>,
-        bündig am rechten Rand, vertikal zentriert, zurückhaltend in der Deckkraft.
-        DESIGN.md erlaubt es genau hier — und verbietet, es in Code nachzubauen.</li>
-    <li><b>Material statt Fläche.</b> Karten haben eine Lichtkante oben und einen engen
-        Schatten unten. Auf Dunkel trägt ein großer weicher Schatten nicht, eine Lichtkante
-        sehr wohl; auf Hell greift Shadow-as-Border wie in DESIGN.md.</li>
-    <li><b>Kopfleiste als Glasfläche.</b> Glasmorphismus ist für beide Kontexte
-        freigegeben, maximal ein bis zwei Elemente pro Viewport. Hier genau eines.</li>
-    <li><b>Lime nur noch interaktiv.</b> Sektionslabels, Balken und Icons waren limefarben.
-        Jetzt: Labels in gedämpfter Textfarbe, Balken in einer eigenen Datenrampe, Lime bleibt
-        Buttons, Links und aktiven Zuständen vorbehalten.</li>
-    <li><b>Status-System statt Einzelfarben.</b> Vier semantische Zustände mit Fläche und
-        Textfarbe, alle gegen die Kartenfläche gerechnet — statt drei verschiedener
-        Orangetöne, die über die Screens hinweg driften.</li>
+    <li><b>Day/Night-Umschalter.</b> Alle Komponenten lesen semantische Tokens statt fester
+        Markenfarben. Lime schlägt im Tag-Theme auf Transition Green um — Lime auf Weiß hat
+        Kontrast 1.34 und fällt durch.</li>
+    <li><b>Auswahl trägt immer die Akzentfarbe.</b> Die Größe entscheidet nur die Form: kleine
+        Bedienelemente werden gefüllt, große Flächen bekommen Ring und gedämpfte Fläche.
+        Vollflächiges Lime auf einer Karte verstößt gegen „never on large surfaces".</li>
+    <li><b>Markentextur als Grund</b> aus <code>assets/backgrounds/</code>, mit dem Flächentoken
+        überdeckt — die gerechneten Kontraste bleiben gültig.</li>
+    <li><b>Keyvisual im Hero-Band</b> aus <code>assets/keyvisual/</code>, bündig rechts,
+        vertikal zentriert, nie angeschnitten.</li>
+    <li><b>Material statt Fläche.</b> Lichtkante oben, enger Schatten unten, umlaufender
+        Haarlinien-Ring. Auf Hell greift Shadow-as-Border.</li>
+    <li><b>Kopfleiste als Glasfläche.</b> Scroll eine Unterseite — der Inhalt läuft sichtbar
+        darunter durch. Genau ein Glaselement pro Viewport, so schreibt es DESIGN.md vor.</li>
+    <li><b>Lime nur noch interaktiv.</b> Labels in gedämpfter Textfarbe, Balken in einer
+        eigenen Datenrampe.</li>
+    <li><b>Status-System statt Einzelfarben.</b> Vier semantische Zustände, alle gegen die
+        Kartenfläche gerechnet — statt driftender Orangetöne.</li>
     <li><b>Kontrast belegt.</b> Sekundärtext 6.49:1, gedämpfter Text 5.20:1, Lime 6.74:1 —
-        alle Werte gerechnet, nicht geschätzt. Die alten grauen Metadaten lagen unter AA.</li>
-    <li><b>Form zurückgeholt.</b> Bedienelemente 4 px, Karten 12 px. DESIGN.md:
-        „Never pill-shaped in the primary brand context."</li>
-    <li><b>Raster, Typografie und Zustände.</b> 4×2 statt 6+2 mit zwei verwaisten Kacheln;
-        Unbounded trägt genau eine Zeile, Kartentitel laufen in TT&nbsp;Norms Bold; jede Kachel
-        zeigt ihren Bestand; Hover, Aktiv und Tastaturfokus sind definiert — Letzterer
-        fehlte vorher vollständig.</li>
+        gerechnet, nicht geschätzt.</li>
+    <li><b>Form zurückgeholt.</b> Bedienelemente 4 px, Karten 12 px, keine Pillen.</li>
+    <li><b>Überall bedienbar.</b> Geprüft bei 1440, 834 und 390 Pixeln: kein seitliches
+        Scrollen, auf Touch kein Ziel unter 44 px. Tastaturfokus überall sichtbar.</li>
   </ol>
 </aside>
 
@@ -896,20 +1528,66 @@ svg,use{fill:currentColor}
   var btnDay = document.getElementById('btn-day');
   var btnNight = document.getElementById('btn-night');
 
-  function apply(theme){
+  function applyTheme(theme){
     root.setAttribute('data-bkm-theme', theme);
     btnDay.setAttribute('aria-pressed', String(theme === 'day'));
     btnNight.setAttribute('aria-pressed', String(theme === 'night'));
     try { localStorage.setItem('bkm-theme', theme); } catch (e) {}
   }
-
   var stored = null;
   try { stored = localStorage.getItem('bkm-theme'); } catch (e) {}
-  apply(stored === 'day' || stored === 'night' ? stored : 'night');
+  applyTheme(stored === 'day' || stored === 'night' ? stored : 'night');
+  btnDay.addEventListener('click', function(){ applyTheme('day'); });
+  btnNight.addEventListener('click', function(){ applyTheme('night'); });
 
-  btnDay.addEventListener('click', function(){ apply('day'); });
-  btnNight.addEventListener('click', function(){ apply('night'); });
+  /* --- Seitenwechsel ----------------------------------------------------- */
+  var views = document.querySelectorAll('.view');
+  function show(name, title){
+    views.forEach(function(v){
+      v.setAttribute('data-active', String(v.dataset.view === name));
+    });
+    if (name === 'soon' && title) document.getElementById('soon-title').textContent = title;
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    var h = document.querySelector('.view[data-active="true"] h1');
+    if (h) { h.setAttribute('tabindex','-1'); h.focus({preventScroll:true}); }
+  }
+  document.addEventListener('click', function(e){
+    var t = e.target.closest('[data-goto]');
+    if (!t) return;
+    show(t.dataset.goto, t.dataset.title);
+  });
 
+  /* --- Reiter und Filter: Auswahl umschalten ----------------------------- */
+  document.addEventListener('click', function(e){
+    var b = e.target.closest('.tabs__btn, .filters__btn, .segmented__btn, .cat');
+    if (!b || b.disabled) return;
+    var group = b.closest('.tabs, .filters, .segmented, .cats');
+    if (!group) return;
+    var attr = b.classList.contains('cat') ? 'aria-current'
+             : (b.classList.contains('tabs__btn') ? 'aria-selected' : 'aria-pressed');
+    group.querySelectorAll('.tabs__btn, .filters__btn, .segmented__btn, .cat')
+      .forEach(function(x){ x.setAttribute(attr, 'false'); });
+    b.setAttribute(attr, 'true');
+  });
+
+  /* --- Kontomenü --------------------------------------------------------- */
+  var mTrigger = document.getElementById('menu-trigger');
+  var mPanel = document.getElementById('menu-panel');
+  function menuOpen(v){
+    mPanel.hidden = !v;
+    mTrigger.setAttribute('aria-expanded', String(v));
+  }
+  mTrigger.addEventListener('click', function(e){
+    e.stopPropagation();
+    menuOpen(mPanel.hidden);
+  });
+  mPanel.addEventListener('click', function(e){ e.stopPropagation(); });
+  document.addEventListener('click', function(){ menuOpen(false); });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && !mPanel.hidden) { menuOpen(false); mTrigger.focus(); }
+  });
+
+  /* --- Erklär-Panel ------------------------------------------------------ */
   var delta = document.getElementById('delta');
   var open = document.getElementById('delta-open');
   var close = document.getElementById('delta-close');
