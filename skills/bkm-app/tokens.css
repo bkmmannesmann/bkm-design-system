@@ -146,6 +146,15 @@
   --accent-glow: 0 0 26px -6px rgba(180,231,23,.50);
   --ring-accent: inset 0 0 0 1px var(--accent);   /* Nacht: Lime */
 
+  /* Auswahl. Die GROESSE des Elements entscheidet die Form, nie die Farbe:
+     kleine Bedienelemente werden mit dem Akzent gefuellt, grosse Flaechen
+     bekommen Ring plus geduempfte Akzentflaeche. DESIGN.md: Lime nie auf
+     grossen Flaechen. */
+  --selected-fill:    var(--accent);
+  --selected-on-fill: var(--text-on-accent);
+  --selected-surface: var(--accent-quiet);
+  --selected-ring:    inset 0 0 0 2px var(--accent);
+
   --chrome-glass: rgba(28,75,66,.78);
   --kv: var(--kv-dark);
   --kv-opacity: .16;
@@ -217,6 +226,11 @@
                                      rgba(255,255,255,0) 70%,rgba(255,255,255,.10) 100%);
   --accent-glow: none;
   --ring-accent: inset 0 0 0 1px var(--accent);   /* Tag: Transition Green */
+
+  --selected-fill:    var(--accent);
+  --selected-on-fill: var(--text-on-accent);
+  --selected-surface: var(--accent-quiet);
+  --selected-ring:    inset 0 0 0 2px var(--accent);
 
   --chrome-glass: rgba(28,75,66,.90);
   --kv: var(--kv-light);

@@ -92,7 +92,30 @@ Decks (→ `bkm-slides`), technische Datenblätter (→ `docs/print-anwendungen.
     `DESIGN.md`). Beim Einbetten von SVGs als `<symbol>` darauf achten, dass
     `fill="currentColor"` erhalten bleibt — sonst fallen die Pfade still auf
     Schwarz zurück.
-12. **Zahlen tabellarisch.** `font-variant-numeric: tabular-nums` für alle Werte,
+12. **Auswahl trägt immer die Akzentfarbe.** Ausgewählt, aktiv, aktueller
+    Bereich, gesetzter Filter — alles über `--selected-*`, nie über eine
+    eigene Farbe. Die **Größe** des Elements entscheidet nur die *Form*:
+
+    | | Behandlung |
+    |---|---|
+    | Kleines Bedienelement (Tab, Chip, Umschalter, Filter) | mit `--selected-fill` gefüllt, Text `--selected-on-fill` |
+    | Große Fläche (Karte, Kachel, Panel) | `--selected-ring` plus `--selected-surface`, Titel in `--accent` |
+
+    Eine große Fläche vollflächig in Lime zu füllen verstößt gegen `DESIGN.md`
+    („never on large surfaces"). Der Ring erreicht dasselbe, ohne die Regel zu
+    brechen — und bleibt bei zwanzig Karten auf einem Screen lesbar.
+13. **Überall gleich bedienbar.** Zwei getrennte Achsen, die oft verwechselt
+    werden: die **Breite** entscheidet, was sichtbar bleibt und wie umgebrochen
+    wird; die **Eingabeart** entscheidet, wie groß Bedienelemente sein müssen.
+    Ein Tablet ist breit *und* fingerbedient — beides muss zusammen greifen.
+    Unter `@media (pointer:coarse)` hält jedes Bedienelement mindestens 44 px
+    (WCAG 2.5.5). Dieser Block gehört ans **Ende** des Stylesheets: steht er
+    weiter oben, gewinnen die späteren Komponentenregeln bei gleicher
+    Spezifität und die Ziele bleiben zu klein — ein Fehler, den man am
+    Bildschirm nicht sieht. Vor der Übergabe in drei Größen prüfen
+    (Desktop 1440, Tablet 834, Handy 390): kein seitliches Scrollen,
+    kein Ziel unter 44 px auf Touch.
+14. **Zahlen tabellarisch.** `font-variant-numeric: tabular-nums` für alle Werte,
     Mengen, Zeitstempel und Prozentangaben, damit Spalten stehen.
 
 ---
@@ -160,9 +183,10 @@ Schriften, Logo, Icons und den Theme-Umschalter unverändert.
 Verwende ausschließlich die semantischen Tokens, nie eine feste Farbe.
 ```
 
-**Vor der Übergabe prüfen:** In beiden Themes rendern. Kein Text unter AA. Keine
-literale Farbe außerhalb der Token-Blöcke. Tastaturfokus auf jedem Bedienelement
-sichtbar. Genau eine Unbounded-Zeile.
+**Vor der Übergabe prüfen:** In beiden Themes rendern. In drei Breiten prüfen
+(1440 / 834 / 390) — kein seitliches Scrollen, auf Touch kein Ziel unter 44 px.
+Kein Text unter AA. Keine literale Farbe außerhalb der Token-Blöcke.
+Tastaturfokus auf jedem Bedienelement sichtbar. Genau eine Unbounded-Zeile.
 
 ---
 

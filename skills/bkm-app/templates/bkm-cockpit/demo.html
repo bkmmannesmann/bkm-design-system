@@ -33,7 +33,7 @@
 
   --radius-control:4px; --radius-input:8px; --radius-card:12px; --radius-avatar:9999px;
 
-  --text-page-title:28px; --text-hero:44px; --text-section:16px;
+  --text-page-title:clamp(22px,3.4vw,28px); --text-hero:clamp(26px,5.2vw,44px); --text-section:16px;
   --text-body:15px; --text-sm:13px; --text-label:12px;
 
   --density-row:44px; --density-pad:22px;
@@ -91,6 +91,14 @@
   /* Akzentring beim Hover. --accent traegt den Themeunterschied:
      Nacht Lime, Tag Transition Green. */
   --ring-accent:inset 0 0 0 1px var(--accent);
+  /* Auswahl. Die Groesse des Elements entscheidet die Form, nie die Farbe:
+     kleine Bedienelemente werden mit dem Akzent gefuellt, grosse Flaechen
+     bekommen Ring + geduempfte Akzentflaeche. DESIGN.md: Lime nie auf
+     grossen Flaechen. */
+  --selected-fill:var(--accent);
+  --selected-on-fill:var(--text-on-accent);
+  --selected-surface:var(--accent-quiet);
+  --selected-ring:inset 0 0 0 2px var(--accent);
   --kv:var(--kv-dark);
   --kv-opacity:.16;
   color-scheme:dark;
@@ -133,6 +141,10 @@
                                     rgba(255,255,255,0) 70%,rgba(255,255,255,.10) 100%);
   --accent-glow:none;
   --ring-accent:inset 0 0 0 1px var(--accent);
+  --selected-fill:var(--accent);
+  --selected-on-fill:var(--text-on-accent);
+  --selected-surface:var(--accent-quiet);
+  --selected-ring:inset 0 0 0 2px var(--accent);
   --kv:var(--kv-light);
   --kv-opacity:.22;
   color-scheme:light;
@@ -188,8 +200,8 @@ svg,use{fill:currentColor}
    Inhalt durchläuft.
    =========================================================================== */
 .app-bar{
-  display:flex; align-items:center; gap:var(--space-md);
-  height:62px; padding:0 var(--space-lg);
+  display:flex; align-items:center; gap:var(--space-sm);
+  min-height:62px; padding:var(--space-xs) var(--space-lg);
   color:var(--chrome-text);
   background:var(--chrome-glass);
   backdrop-filter:blur(18px) saturate(140%);
@@ -260,7 +272,7 @@ svg,use{fill:currentColor}
 
 .search{
   display:flex;align-items:center;gap:var(--space-xs);
-  height:36px;min-width:230px;padding:0 var(--space-sm);
+  height:40px;min-width:200px;flex-shrink:1;padding:0 var(--space-sm);
   background:rgba(0,0,0,.16);
   border:1px solid var(--chrome-line); border-radius:var(--radius-input);
   color:var(--chrome-muted); cursor:text;
@@ -280,7 +292,7 @@ svg,use{fill:currentColor}
 }
 
 .chrome-btn{
-  display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 var(--space-sm);
+  display:inline-flex;align-items:center;gap:7px;height:40px;padding:0 var(--space-sm);
   background:rgba(255,255,255,.05);border:1px solid var(--chrome-line);
   border-radius:var(--radius-control); cursor:pointer;
   font-size:var(--text-sm);font-weight:700;color:var(--chrome-text);
@@ -378,6 +390,18 @@ svg,use{fill:currentColor}
   box-shadow:var(--ring-accent), var(--elevation-card-hover);
   background:var(--card-sheen), var(--surface-2);
 }
+/* Ausgewaehlt — grosse Flaeche: Ring plus geduempfte Akzentflaeche.
+   Kein flaechiges Lime, das waere ein Verstoss gegen DESIGN.md. */
+.tile[aria-current="true"]{
+  box-shadow:var(--selected-ring), var(--elevation-card);
+  background:var(--card-sheen), var(--selected-surface), var(--surface-1);
+}
+.tile[aria-current="true"] .tile__icon{
+  background:var(--selected-fill); color:var(--selected-on-fill);
+  box-shadow:inset 0 -1px 2px rgba(0,0,0,.18), var(--accent-glow);
+}
+.tile[aria-current="true"] .tile__title{color:var(--accent)}
+
 /* Tastaturbedienung sieht dasselbe wie die Maus. */
 .tile:focus-visible{
   box-shadow:var(--ring-accent), var(--elevation-card-hover);
@@ -476,9 +500,87 @@ svg,use{fill:currentColor}
 .chip--danger {background:var(--status-danger-bg); color:var(--status-danger)}
 .chip--info   {background:var(--status-info-bg);   color:var(--status-info)}
 
+.filters{display:inline-flex;gap:var(--space-2xs);padding:2px;
+  background:var(--surface-inset);border-radius:var(--radius-control);
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.18)}
+.filters__btn{
+  appearance:none;border:0;background:transparent;cursor:pointer;
+  padding:5px 11px;border-radius:2px;
+  font-size:var(--text-label);font-weight:700;letter-spacing:.04em;
+  color:var(--text-secondary);
+  transition:color var(--motion-fast), background var(--motion-fast);
+}
+.filters__btn:hover{color:var(--text-primary)}
+/* Ausgewaehlt — kleines Bedienelement: mit dem Akzent gefuellt. */
+.filters__btn[aria-pressed="true"]{
+  background:var(--selected-fill);color:var(--selected-on-fill);
+  box-shadow:0 1px 3px rgba(0,0,0,.25), var(--accent-glow);
+}
+
 .legend{
   display:flex;flex-wrap:wrap;gap:var(--space-xs);
   margin-top:var(--space-xl);padding-top:var(--space-md);border-top:1px solid var(--line);
+}
+
+
+/* ===========================================================================
+   RESPONSIV — dieselbe Bedienbarkeit auf Desktop, Tablet und Smartphone
+
+   Zwei Achsen, die oft verwechselt werden:
+   - BREITE entscheidet, was sichtbar bleibt und wie umgebrochen wird
+   - EINGABEART entscheidet, wie gross Bedienelemente sein muessen
+   Ein Tablet ist breit UND fingerbedient — beides muss zusammen greifen.
+   =========================================================================== */
+
+/* --- Tablet quer und kleiner: Suchfeld weicht, Labels bleiben ------------- */
+@media (max-width:1200px){
+  .app-bar{padding-inline:var(--space-md)}
+  .search{min-width:0;width:44px;padding:0;justify-content:center}
+  .search input,.search .kbd{display:none}
+}
+
+/* --- Tablet hoch: Chrome-Knöpfe werden zu Icons --------------------------- */
+@media (max-width:980px){
+  .chrome-btn{width:44px;padding:0;justify-content:center;font-size:0;gap:0}
+  .chrome-btn svg{width:18px;height:18px}
+  .brand__app{display:none}
+  .brand__divider{display:none}
+  .hero__kv{width:34vw;opacity:calc(var(--kv-opacity) * .7)}
+}
+
+/* --- Smartphone: Kopfleiste zweizeilig, Marke und Konto zuerst ------------ */
+@media (max-width:720px){
+  /* Drei klare Zeilen statt einer gedraengten:
+     1 Marke + Konto · 2 Suche ueber die volle Breite · 3 Werkzeuge */
+  .app-bar{flex-wrap:wrap;row-gap:var(--space-xs);padding-block:var(--space-sm)}
+  .app-bar__spacer{display:none}
+  .brand{order:1;flex:1 1 auto}
+  .user{order:2;margin-left:auto;padding-left:0;border-left:0}
+  .user__name,.user__role{display:none}
+  .search{order:3;flex:1 0 100%;width:auto;min-width:0;
+    padding:0 var(--space-sm);justify-content:flex-start}
+  .search input{display:block}
+  .search .kbd,.hero__search .kbd{display:none}   /* ohne Tastatur ohne Sinn */
+  .segmented[aria-label="Sprache"]{order:4}
+  .chrome-btn{order:5}
+  .theme-toggle{order:6;margin-left:auto}
+
+  .hero{padding-top:var(--space-xl)}
+  .hero__kv{display:none}   /* kein Platz — lieber weglassen als anschneiden */
+  .hero__inner{padding-inline:var(--space-md)}
+  .hero__search{height:48px}
+  .page{padding-inline:var(--space-md)}
+
+  .panel__head{flex-wrap:wrap;row-gap:var(--space-xs)}
+  .row{flex-wrap:wrap;row-gap:2px}
+  .row__meta{width:100%;text-align:left}
+  .delta-toggle{right:var(--space-md);bottom:var(--space-md)}
+}
+
+/* --- Sehr schmal: Kachelinhalt bleibt lesbar ------------------------------ */
+@media (max-width:400px){
+  .tile{padding:var(--space-md)}
+  .bar__head{flex-wrap:wrap;row-gap:2px}
 }
 
 /* ===========================================================================
@@ -517,6 +619,29 @@ svg,use{fill:currentColor}
   font-size:16px;line-height:1;
 }
 .delta__close:hover{background:var(--surface-2);color:var(--text-primary)}
+
+/* ===========================================================================
+   FINGERBEDIENUNG — 44 px Mindestziel (WCAG 2.5.5, Apple HIG)
+
+   Bewusst als LETZTER Block im Stylesheet. Steht er weiter oben, gewinnen
+   die spaeteren Komponentenregeln bei gleicher Spezifitaet und die Ziele
+   bleiben zu klein — ein Fehler, den man am Bildschirm nicht sieht.
+   =========================================================================== */
+@media (pointer:coarse){
+  .segmented__btn,
+  .filters__btn{min-height:44px;padding-inline:16px;display:inline-flex;
+    align-items:center;justify-content:center}
+  .theme-toggle__btn{width:48px;min-height:44px}
+  .theme-toggle::after{width:48px;height:calc(100% - 4px)}
+  [data-bkm-theme="night"] .theme-toggle::after{transform:translateX(48px)}
+  .chrome-btn{min-height:44px}
+  .search{min-height:44px}
+  .row{min-height:56px}
+  .link{min-height:44px}
+  .delta__close{width:44px;height:44px}
+  .delta-toggle{min-height:48px}
+  .tile{padding:var(--space-lg)}
+}
 </style>
 </head>
 <body>
@@ -624,7 +749,7 @@ svg,use{fill:currentColor}
       <span class="tile__title">Menge berechnen</span>
       <span class="tile__meta">Verbrauch &amp; Gebinde</span>
     </button></li>
-    <li><button class="tile">
+    <li><button class="tile" aria-current="true">
       <span class="tile__icon"><svg aria-hidden="true"><use href="#i-book-open"/></svg></span>
       <span class="tile__title">Wissens-Hub</span>
       <span class="tile__meta">44 Regelwerke</span>
@@ -687,7 +812,10 @@ svg,use{fill:currentColor}
     <section class="panel">
       <div class="panel__head">
         <h2 class="label">Top-Produkte</h2>
-        <button class="link">Alle <svg aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
+        <div class="filters" role="group" aria-label="Zeitraum">
+          <button class="filters__btn" aria-pressed="true">30 Tage</button>
+          <button class="filters__btn" aria-pressed="false">12 Monate</button>
+        </div>
       </div>
       <ul class="bars">
         <li>
