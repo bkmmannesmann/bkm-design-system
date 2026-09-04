@@ -168,7 +168,28 @@ Decks (→ `bkm-slides`), technische Datenblätter (→ `docs/print-anwendungen.
     Einschätzung jetzt hebt"), und die Belege — Indizien, Sperren, Gegenprüfungen —
     liegen darunter in `<details>`: verfügbar, aber nicht als Textwand
     ausgekippt. Fakten laufen als Schlüssel-Wert-Paare, nicht als Fließtext.
-20. **Zahlen tabellarisch.** `font-variant-numeric: tabular-nums` für alle Werte,
+20. **Zerstörende Aktionen brauchen eine Rückfrage, die den Schaden benennt.**
+    Nicht „Wirklich löschen?", sondern *was* verloren geht und *was daran hängt*
+    („21-mal aufgerufen, in 3 Angeboten referenziert"). Die bestätigende Taste
+    trägt `--status-danger`, nicht den Akzent — der Akzent führt sonst zum
+    Löschen. Escape und Klick daneben brechen ab, der Fokus springt in den
+    Dialog und beim Schließen zurück auf den Auslöser.
+21. **Ein langes Formular braucht Orientierung und eine feste Sicherung.**
+    Ab etwa sechs Abschnitten eine Abschnittsnavigation, die zeigt, wo man ist.
+    Dazu eine Sicherungsleiste am unteren Rand, die den Änderungsstand nennt.
+    `position:sticky` allein genügt dafür **nicht** — es wirkt nur innerhalb der
+    Elternbox, und die ist bei kurzen Abschnitten kürzer als der Bildschirm;
+    dann sitzt die Leiste am Inhaltsende statt unten. Die Spalte braucht
+    `min-height:calc(100vh − Versatz)` und `margin-top:auto` auf der Leiste.
+22. **Mehr als etwa zwölf gleichrangige Bereiche sind keine Reiter.**
+    Eine umbrechende Pillenwand ist keine Navigation, sondern eine Liste.
+    Ab dieser Größe eine gruppierte Seitenleiste mit Zählern — die Gruppen
+    tragen die Orientierung, die Zähler den Zustand.
+23. **Verschachtelung endet bei zwei Flächen.** Ab der dritten Ebene trägt die
+    Flächenleiter nicht mehr: Karte in Karte in Karte wird zu Brei. Tiefere
+    Strukturen bekommen eine Akzentschiene links und eine eigene Kopfzeile
+    (`.block`), nicht eine weitere Fläche.
+24. **Zahlen tabellarisch.** `font-variant-numeric: tabular-nums` für alle Werte,
     Mengen, Zeitstempel und Prozentangaben, damit Spalten stehen.
 
 ---
@@ -287,8 +308,10 @@ Ehrlich benannt, damit niemand improvisiert:
 - **Sechs Ansichten sind gebaut**: Startbildschirm, Produkt suchen, Wissens-Hub,
   Angebots-Center, Produkt-Management, Fallansicht. Im Fall sind fünf der sieben
   Schritte ausgeführt (Kunde, Objekt, Geodaten, Fragen, Fotos, Ergebnis);
-  die Mengenberechnung fehlt. Noch offen: Datentabelle mit Sortierung,
-  Ladezustände, Meldungen/Toasts, Modal.
+  die Mengenberechnung fehlt. Dazu der Admin-Bereich mit gruppierter
+  Bereichsnavigation, Master-Detail, langem Formular und Auswertung.
+  Noch offen: Ladezustände, Meldungen/Toasts, Paginierung, Mehrfachauswahl
+  in Tabellen.
 - **`components.html`** (lebende Komponenten-Referenz, wie bei `bkm-slides`) fehlt.
 - **Deterministische Prüfregeln** (`rules.json`) sind konzipiert, aber nicht gebaut.
   Geplant: literale Farbe in Komponente, Pill-Radius, Unbounded < 18 px, Statusfarbe
