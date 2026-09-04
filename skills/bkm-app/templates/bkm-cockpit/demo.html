@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de" data-theme="night">
+<html lang="de" data-bkm-theme="night">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -48,7 +48,7 @@
 }
 
 /* --- EBENE 2a: NIGHT (Standard) --------------------------------------------- */
-:root,[data-theme="night"]{
+:root,[data-bkm-theme="night"]{
   --surface-0:#13322c; --surface-1:#1c4b42; --surface-2:#235d52; --surface-3:#286c5f;
   --surface-inset:#13322c;
   --text-primary:#fff; --text-secondary:#c3d6d0; --text-muted:#a8c2ba;
@@ -66,7 +66,7 @@
 }
 
 /* --- EBENE 2b: DAY ---------------------------------------------------------- */
-[data-theme="day"]{
+[data-bkm-theme="day"]{
   --surface-0:#f6f5f2; --surface-1:#fff; --surface-2:#fff; --surface-3:#fff;
   --surface-inset:#f6f5f2;
   --text-primary:#1c4b42; --text-secondary:#494949; --text-muted:#5f6b64;
@@ -126,8 +126,8 @@ button{font:inherit;color:inherit}
 }
 .brand{display:flex;align-items:center;gap:var(--space-md);flex-shrink:0}
 .brand__logo{height:26px;width:auto;display:block}
-[data-theme="day"] .brand__logo--dark-bg,
-[data-theme="night"] .brand__logo--dark-bg{display:block}
+[data-bkm-theme="day"] .brand__logo--dark-bg,
+[data-bkm-theme="night"] .brand__logo--dark-bg{display:block}
 .brand__logo--light-bg{display:none}   /* Chrome ist immer dunkel → immer die helle Logovariante */
 .brand__divider{width:1px;height:22px;background:var(--chrome-line)}
 .brand__app{
@@ -236,7 +236,7 @@ button{font:inherit;color:inherit}
              box-shadow var(--motion-fast);
 }
 .tile:hover{background:var(--surface-2);transform:translateY(-2px)}
-[data-theme="day"] .tile:hover{
+[data-bkm-theme="day"] .tile:hover{
   box-shadow:rgba(0,0,0,.08) 0 0 0 1px, rgba(0,0,0,.06) 0 8px 16px -4px;
 }
 .tile__icon{
@@ -595,7 +595,7 @@ button{font:inherit;color:inherit}
   var btnNight = document.getElementById('btn-night');
 
   function apply(theme){
-    root.setAttribute('data-theme', theme);
+    root.setAttribute('data-bkm-theme', theme);
     btnDay.setAttribute('aria-pressed', String(theme === 'day'));
     btnNight.setAttribute('aria-pressed', String(theme === 'night'));
     try { localStorage.setItem('bkm-theme', theme); } catch (e) {}

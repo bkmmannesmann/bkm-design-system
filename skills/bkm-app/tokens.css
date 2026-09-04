@@ -77,7 +77,7 @@
    Gleicher Hue (168.5°) und gleiche Sättigung (45.6%) über alle vier Stufen.
    --------------------------------------------------------------------------- */
 :root,
-[data-theme="night"] {
+[data-bkm-theme="night"] {
   --surface-0: #13322c;   /* Arbeitsfläche / Seitenhintergrund      L 13.5% */
   --surface-1: #1c4b42;   /* Karte, Panel — Deep Green, der Anker   L 20.2% */
   --surface-2: #235d52;   /* angehoben: Hover, aktive Zeile         L 25.0% */
@@ -132,7 +132,7 @@
    helle Flächen ohnehin vorschreibt ("Tertiary: links, secondary actions and
    hover states on light surfaces"). Kein Kompromiss, sondern die Regel.
    --------------------------------------------------------------------------- */
-[data-theme="day"] {
+[data-bkm-theme="day"] {
   --surface-0: #f6f5f2;
   --surface-1: #ffffff;
   --surface-2: #ffffff;
@@ -171,7 +171,9 @@
 }
 
 /* Ohne gesetztes data-theme gilt Night — die Tokens stehen bereits auf :root.
-   Der Umschalter setzt data-theme="day" | "night" auf <html>. */
+   Der Umschalter setzt data-bkm-theme="day" | "night" auf <html>.
+   Eigener Attributname, damit er nicht mit dem data-theme kollidiert, das
+   Host-Umgebungen (z. B. eingebettete Vorschauen) selbst setzen. */
 
 /* ---------------------------------------------------------------------------
    CHROME — Kopfleiste / Navigation
