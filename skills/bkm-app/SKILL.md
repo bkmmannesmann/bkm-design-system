@@ -146,7 +146,16 @@ Decks (→ `bkm-slides`), technische Datenblätter (→ `docs/print-anwendungen.
     Bereiche und markiert den aktuellen. Damit wird aus Hub-and-Spoke ein
     Netz — man springt direkt weiter, statt jedes Mal über die Startseite
     zu gehen. Auf der Startseite selbst ist die Brotkrume verborgen.
-17. **Zahlen tabellarisch.** `font-variant-numeric: tabular-nums` für alle Werte,
+17. **Fortschritt und Balken über `--progress-fill`.** Nacht: Lime → Weiß.
+    Tag: Transition Green → Pure Green. Kein Farbunterschied je Balken — die
+    Länge trägt den Wert, Farbe würde ihn doppelt kodieren; die `--data-*`-Rampe
+    bleibt für Diagramme, in denen Farbe tatsächlich eine Kategorie unterscheidet.
+    Grafische Elemente brauchen 3:1 gegen ihre Umgebung (WCAG 1.4.11). Wo eine
+    Markenfarbe das nicht schafft — Pure Green auf hellem Grund erreicht
+    höchstens 2.79 — übernimmt eine Kontur (`--progress-edge`) statt die Farbe
+    zu ändern. Vorsicht: die Spur abzudunkeln hilft bei Pure Green **nicht**,
+    es liegt luminanznah an einem Mittelgrau und der Kontrast sinkt dadurch.
+18. **Zahlen tabellarisch.** `font-variant-numeric: tabular-nums` für alle Werte,
     Mengen, Zeitstempel und Prozentangaben, damit Spalten stehen.
 
 ---

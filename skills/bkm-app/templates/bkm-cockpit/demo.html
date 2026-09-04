@@ -65,6 +65,10 @@
   --status-danger-bg:rgba(255,169,156,.14);  --status-info-bg:rgba(154,216,232,.14);
   --data-1:#cfe8dd; --data-2:#a9d2c3; --data-3:#84bca9; --data-4:#63a690;
   --data-track:rgba(255,255,255,.10);
+  /* Fortschritt/Balken: Lime -> Weiss. Beide Enden halten gegen die Spur
+     (5.07 bzw. 7.40), eine Kontur ist hier nicht noetig. */
+  --progress-fill:linear-gradient(90deg,#b4e717 0%,#ffffff 100%);
+  --progress-edge:none;
 
   /* Grund: Markentextur, mit dem Flächentoken überdeckt, damit die gerechneten
      Kontraste unangetastet bleiben — die Textur moduliert nur. */
@@ -127,6 +131,14 @@
   --status-danger-bg:rgba(185,28,28,.09);  --status-info-bg:rgba(31,107,122,.10);
   --data-1:#287d4b; --data-2:#4a9268; --data-3:#6ba885; --data-4:#8ebda3;
   --data-track:rgba(28,75,66,.10);
+  /* Fortschritt/Balken: Transition -> Pure Green. Pure Green erreicht auf
+     hellem Grund hoechstens 2.79 (Kontrastmatrix, DESIGN.md) und bleibt damit
+     unter den 3:1, die WCAG 1.4.11 fuer grafische Elemente verlangt —
+     Abdunkeln der Spur macht es schlechter, weil Pure Green luminanznah an
+     einem Mittelgrau liegt. Die Kante uebernimmt deshalb eine Kontur:
+     3.53 gegen die Spur, damit ist die Balkenlaenge eindeutig ablesbar. */
+  --progress-fill:linear-gradient(90deg,#287d4b 0%,#4daf46 100%);
+  --progress-edge:inset 0 0 0 1px rgba(28,75,66,.35);
 
   --ground:linear-gradient(rgba(246,245,242,.84),rgba(246,245,242,.92)), var(--tex-sand);
 
@@ -610,10 +622,14 @@ svg:not([width]){width:1em;height:1em}
   height:7px;border-radius:4px;background:var(--data-track);overflow:hidden;
   box-shadow:inset 0 1px 2px rgba(0,0,0,.18);
 }
-.bar__fill{height:100%;border-radius:4px;background:var(--data-1)}
-.bars li:nth-child(2) .bar__fill{background:var(--data-2)}
-.bars li:nth-child(3) .bar__fill{background:var(--data-3)}
-.bars li:nth-child(4) .bar__fill{background:var(--data-4)}
+.bar__fill{
+  height:100%;border-radius:4px;
+  background:var(--progress-fill);
+  box-shadow:var(--progress-edge);
+}
+/* Kein Farbunterschied je Balken mehr: die Laenge traegt den Wert, Farbe
+   wuerde ihn doppelt kodieren. Die --data-*-Rampe bleibt fuer Diagramme, in
+   denen Farbe tatsaechlich eine Kategorie unterscheidet. */
 
 /* --- Status-Chips ----------------------------------------------------------- */
 .chip{
