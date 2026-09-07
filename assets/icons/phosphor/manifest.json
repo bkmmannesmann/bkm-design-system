@@ -496,6 +496,252 @@
       "weight": "bold",
       "path": "bold/youtube-logo.svg",
       "purpose": "Verweis auf den BKM-YouTube-Kanal"
+    },
+    {
+      "name": "arrow-up",
+      "weight": "bold",
+      "path": "bold/arrow-up.svg",
+      "purpose": "Reihenfolge nach oben und Aufwärtsbewegung"
+    },
+    {
+      "name": "arrow-down",
+      "weight": "bold",
+      "path": "bold/arrow-down.svg",
+      "purpose": "Reihenfolge nach unten und Abwärtsbewegung"
+    },
+    {
+      "name": "arrow-left",
+      "weight": "bold",
+      "path": "bold/arrow-left.svg",
+      "purpose": "Rückweg innerhalb eines Bereichs"
+    },
+    {
+      "name": "caret-up",
+      "weight": "bold",
+      "path": "bold/caret-up.svg",
+      "purpose": "Einklappen"
+    },
+    {
+      "name": "caret-down",
+      "weight": "bold",
+      "path": "bold/caret-down.svg",
+      "purpose": "Ausklappen und Auswahlfeld"
+    },
+    {
+      "name": "arrow-counter-clockwise",
+      "weight": "bold",
+      "path": "bold/arrow-counter-clockwise.svg",
+      "purpose": "Zurücksetzen auf den vorherigen Stand"
+    },
+    {
+      "name": "arrow-u-up-left",
+      "weight": "bold",
+      "path": "bold/arrow-u-up-left.svg",
+      "purpose": "Rückgängig und Zurückholen"
+    },
+    {
+      "name": "arrow-elbow-down-right",
+      "weight": "bold",
+      "path": "bold/arrow-elbow-down-right.svg",
+      "purpose": "Abgeleiteter Untereintrag"
+    },
+    {
+      "name": "arrows-left-right",
+      "weight": "bold",
+      "path": "bold/arrows-left-right.svg",
+      "purpose": "Format oder Richtung wechseln"
+    },
+    {
+      "name": "arrows-in",
+      "weight": "bold",
+      "path": "bold/arrows-in.svg",
+      "purpose": "Verkleinern (Gegenstück zu arrows-out)"
+    },
+    {
+      "name": "arrow-line-up",
+      "weight": "bold",
+      "path": "bold/arrow-line-up.svg",
+      "purpose": "Aufsteigende Feuchte und Horizontalsperre"
+    },
+    {
+      "name": "pencil-simple",
+      "weight": "bold",
+      "path": "bold/pencil-simple.svg",
+      "purpose": "Bearbeiten und Zeichenstift"
+    },
+    {
+      "name": "pen",
+      "weight": "bold",
+      "path": "bold/pen.svg",
+      "purpose": "Stift-Modus (nur Stifteingabe)"
+    },
+    {
+      "name": "eraser",
+      "weight": "bold",
+      "path": "bold/eraser.svg",
+      "purpose": "Radierer"
+    },
+    {
+      "name": "lightbulb",
+      "weight": "bold",
+      "path": "bold/lightbulb.svg",
+      "purpose": "Erklärung und Hintergrund"
+    },
+    {
+      "name": "star",
+      "weight": "bold",
+      "path": "bold/star.svg",
+      "purpose": "Bewertung und Rezension"
+    },
+    {
+      "name": "play",
+      "weight": "bold",
+      "path": "bold/play.svg",
+      "purpose": "Abspielen und Lauf starten"
+    },
+    {
+      "name": "prohibit",
+      "weight": "bold",
+      "path": "bold/prohibit.svg",
+      "purpose": "Bewusster Ausschluss"
+    },
+    {
+      "name": "sparkle",
+      "weight": "bold",
+      "path": "bold/sparkle.svg",
+      "purpose": "KI-Assistenz und Vorschlag"
+    },
+    {
+      "name": "key-return",
+      "weight": "bold",
+      "path": "bold/key-return.svg",
+      "purpose": "Tastenhinweis Eingabe"
+    },
+    {
+      "name": "calculator",
+      "weight": "bold",
+      "path": "bold/calculator.svg",
+      "purpose": "Mengenberechnung"
+    },
+    {
+      "name": "chart-bar",
+      "weight": "bold",
+      "path": "bold/chart-bar.svg",
+      "purpose": "Statistik und Auswertung"
+    },
+    {
+      "name": "gauge",
+      "weight": "bold",
+      "path": "bold/gauge.svg",
+      "purpose": "Cockpit und Kennzahlen"
+    },
+    {
+      "name": "buildings",
+      "weight": "bold",
+      "path": "bold/buildings.svg",
+      "purpose": "Betrieb und Fachbetrieb"
+    },
+    {
+      "name": "file-text",
+      "weight": "bold",
+      "path": "bold/file-text.svg",
+      "purpose": "Dokument, Angebot und Textdatei"
+    },
+    {
+      "name": "folder",
+      "weight": "bold",
+      "path": "bold/folder.svg",
+      "purpose": "Eigene Inhalte und Ablage"
+    },
+    {
+      "name": "map-trifold",
+      "weight": "bold",
+      "path": "bold/map-trifold.svg",
+      "purpose": "Gebietsplanung und Karte"
+    },
+    {
+      "name": "puzzle-piece",
+      "weight": "bold",
+      "path": "bold/puzzle-piece.svg",
+      "purpose": "Assistent und Baustein"
+    },
+    {
+      "name": "house-line",
+      "weight": "bold",
+      "path": "bold/house-line.svg",
+      "purpose": "Außenabdichtung und Gebäudehülle"
+    },
+    {
+      "name": "bathtub",
+      "weight": "bold",
+      "path": "bold/bathtub.svg",
+      "purpose": "Feuchtraum"
+    },
+    {
+      "name": "wall",
+      "weight": "bold",
+      "path": "bold/wall.svg",
+      "purpose": "Wand und Innenabdichtung"
+    },
+    {
+      "name": "syringe",
+      "weight": "bold",
+      "path": "bold/syringe.svg",
+      "purpose": "Injektion und Flächensperre"
+    },
+    {
+      "name": "wave-sawtooth",
+      "weight": "bold",
+      "path": "bold/wave-sawtooth.svg",
+      "purpose": "Riss und Rissverpressung"
+    },
+    {
+      "name": "waves",
+      "weight": "bold",
+      "path": "bold/waves.svg",
+      "purpose": "Grund- und Sickerwasser"
+    },
+    {
+      "name": "cloud-rain",
+      "weight": "bold",
+      "path": "bold/cloud-rain.svg",
+      "purpose": "Starkregen und Niederschlag"
+    },
+    {
+      "name": "wind",
+      "weight": "bold",
+      "path": "bold/wind.svg",
+      "purpose": "Schlagregen und Wind"
+    },
+    {
+      "name": "radioactive",
+      "weight": "bold",
+      "path": "bold/radioactive.svg",
+      "purpose": "Radon"
+    },
+    {
+      "name": "circle",
+      "weight": "bold",
+      "path": "bold/circle.svg",
+      "purpose": "Statuspunkt offen"
+    },
+    {
+      "name": "circle",
+      "weight": "fill",
+      "path": "fill/circle.svg",
+      "purpose": "Statuspunkt aktiv oder erledigt"
+    },
+    {
+      "name": "circle-half",
+      "weight": "fill",
+      "path": "fill/circle-half.svg",
+      "purpose": "Statuspunkt in Arbeit"
+    },
+    {
+      "name": "diamond",
+      "weight": "fill",
+      "path": "fill/diamond.svg",
+      "purpose": "Statuspunkt wichtig"
     }
   ]
 }
