@@ -305,6 +305,19 @@ in Klammern gegen `--surface-2` (#235d52).
 ¹ Auf `--surface-2` nur AA-large (≥3:1). Diese Tokens nicht für Fließtext auf
 angehobenen Flächen verwenden — dort `--text-secondary` nehmen.
 
+**Pure Green (#4daf46) auf dunklem Grund**, weil der Fachbetrieb-Kontext danach
+fragt und `DESIGN.md` nur den Wert gegen Weiß führt (2.79):
+
+| Fläche | Wert | Reicht für |
+|---|---|---|
+| `--surface-0` (#13322c) | 4.96 | Text ab 14 px, grafische Objekte |
+| `--surface-1` (#1c4b42) | 3.53 | nur Großtext ab 18 px, grafische Objekte |
+| `--surface-2` (#235d52) | 2.73 | nichts — weder Text noch Kontur |
+
+Pure Green trägt auf der Karte also keinen Fließtext und auf der angehobenen
+Fläche gar nichts. Wer es im Nacht-Theme als Akzent einsetzen will, braucht
+einen aufgehellten Ton — der bestehende reicht nicht.
+
 Datenrampe Night: #cfe8dd · #a9d2c3 · #84bca9 · #63a690 — jede Stufe ≥3.46:1
 gegen die Karte. Auf dunklem Grund läuft die Rampe **aufwärts**; eine ins Dunkle
 laufende Rampe macht die unteren Werte unsichtbar.
