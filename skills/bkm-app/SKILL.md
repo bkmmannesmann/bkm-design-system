@@ -346,3 +346,18 @@ Ehrlich benannt, damit niemand improvisiert:
   Vorlage bricht seitdem ab, wenn ein verwendetes Icon nicht im Manifest
   freigegeben ist — Regel 11 kann damit nicht mehr unbemerkt verletzt werden.
   Offen bleibt nur, was künftige Ansichten zusätzlich brauchen.
+- **Manifest um 41 Icons für das Support-Cockpit erweitert (Design Stufe 3,
+  Paket 2).** Alle aus der gepinnten Phosphor-Version 2.0.8, byteidentisch
+  mit `@phosphor-icons/core@2.0.8`, jedes mit Einsatzzweck: Richtungen und
+  Reihenfolge (`arrow-up`, `arrow-down`, `arrow-left`, `arrow-line-up`,
+  `arrow-u-up-left`, `arrow-elbow-down-right`, `arrows-left-right`,
+  `arrows-in`, `caret-up`, `caret-down`, `arrow-counter-clockwise`),
+  Werkzeuge (`pencil-simple`, `pen`, `eraser`, `play`, `prohibit`, `sparkle`,
+  `key-return`, `lightbulb`, `star`), Bereiche (`calculator`, `chart-bar`,
+  `gauge`, `buildings`, `file-text`, `folder`, `map-trifold`,
+  `puzzle-piece`), Fachbilder der Anwendungsfälle (`house-line`, `bathtub`,
+  `wall`, `syringe`, `wave-sawtooth`, `waves`, `cloud-rain`, `wind`,
+  `radioactive`) und die Statuspunkte `circle` (bold = offen, fill = aktiv),
+  `circle-half` (fill), `diamond` (fill). Anlass: das Cockpit ersetzt rund
+  60 Schriftzeichen-Icons (→ ✓ ✕ ⚠ ↗ ↑ ↓ ‹ › ▸ ▾ 📷 🗑 …) und 17
+  handgezeichnete Icon-Sätze durch Phosphor — ergänzt, nicht ersetzt.
