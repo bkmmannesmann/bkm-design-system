@@ -124,6 +124,12 @@
   --data-1: #cfe8dd;  --data-2: #a9d2c3;  --data-3: #84bca9;  --data-4: #63a690;
   --data-track: rgba(255,255,255,.10);
 
+  /* Fortschritt (Regel 17). Kein Farbunterschied je Balken — die Laenge traegt
+     den Wert. Auf dunklem Grund traegt der Verlauf selbst; die Kontur bleibt
+     leer, weil Lime auf --surface-1 bereits 6.74 erreicht. */
+  --progress-fill: linear-gradient(90deg, #b4e717 0%, #ffffff 100%);
+  --progress-edge: none;
+
   /* Grund: Markentextur, mit dem Flächentoken überdeckt — die Textur
      moduliert nur, die gerechneten Kontraste bleiben gültig. */
   --ground: linear-gradient(rgba(19,50,44,.90),rgba(19,50,44,.95)), var(--tex-green);
@@ -209,6 +215,13 @@
 
   --data-1: #287d4b;  --data-2: #4a9268;  --data-3: #6ba885;  --data-4: #8ebda3;
   --data-track: rgba(28,75,66,.10);
+
+  /* Fortschritt (Regel 17). Pure Green erreicht auf hellem Grund hoechstens
+     2.79 und verfehlt damit die 3:1 fuer grafische Objekte (WCAG 1.4.11).
+     Die Kontur holt das nach (3.53); die Spur abzudunkeln wuerde es
+     verschlechtern, Pure Green liegt luminanznah an einem Mittelgrau. */
+  --progress-fill: linear-gradient(90deg, #287d4b 0%, #4daf46 100%);
+  --progress-edge: inset 0 0 0 1px rgba(28,75,66,.35);
 
   --ground: linear-gradient(rgba(246,245,242,.84),rgba(246,245,242,.92)), var(--tex-sand);
 
