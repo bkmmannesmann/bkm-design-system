@@ -742,6 +742,12 @@
       "weight": "fill",
       "path": "fill/diamond.svg",
       "purpose": "Statuspunkt wichtig"
+    },
+    {
+      "name": "sort-descending",
+      "weight": "bold",
+      "path": "bold/sort-descending.svg",
+      "purpose": "Sortierbare Tabellenkopfzeile, absteigend (Datentabellen, Stufe 4 Paket 3)"
     }
   ]
 }
