@@ -83,6 +83,32 @@ größten Teil des Unterschieds, ohne ein einziges Layout anzufassen.
 
 ---
 
+## Stand der Umsetzung im Support-Cockpit
+
+Alle vier Stufen sind im Cockpit umgesetzt (Michael-BKM/BKM-Support-Cockpit,
+07.–08.09.2026). Jedes Paket hat einen Wächter-Test (`designStufe1.test.ts`),
+der die Regel im Quelltext festhält.
+
+| Stufe | Paket | PR | Inhalt |
+|---|---|---|---|
+| 1 | — | #843, #844 | Tokens, Statussystem, Kontraste, Form; F3 Fachskala, F5 Portal hell |
+| 2 | — | #845 | Kopfleiste, Kontomenü, Brotkrume mit Bereichswechsler, Theme, Fingerbedienung |
+| 3 | 1 | #846 | Startbildschirm 4 × 2 mit Bestand, Fallansicht mit Schrittzustand und geordneter Bewertung |
+| 3 | 2 | #847, Design #46 | Icons nur aus dem Manifest (Phosphor 2.0.8) |
+| 3 | 3 | #848 | Ansichten-Bausteine: Produkt suchen, Wissens-Hub, Angebots-Center, Produkt-Management |
+| 3 | 4 | #849 | Admin: Seitenleiste mit Zählern, Sicherungsleiste, Bestätigungsdialog, Kennzahlen |
+| 4 | 1 | #850 | 4.1 Bestätigung überall (55 `window.confirm`) |
+| 4 | 2 | #851 | 4.2 Sicherungsleiste + Abschnittsnavigation in den tiefen Formularen |
+| 4 | 3 | #853, Design #47 | 4.4 Datentabellen: eine Primitive, sortierbare Kopfzeile, tabellarische Zahlen |
+| 4 | 4 | folgt | Regel 23: Systemaufbau → Baustein → Option → Produktzeile als Block statt vier Flächen |
+
+4.3 (lange Seitenspalten scrollen in sich selbst) kam mit Stufe 3 · Paket 1
+(Bewertungsspalte). Offen aus der Admin-Tabelle: Hilfetexte als `.help` unter
+der Beschriftung — die Klasse existiert, die langen Prosa-Hinweise sind noch
+nicht umgezogen.
+
+---
+
 ## Stufe 1 — Tokens, Status, Kontrast, Form
 
 Ohne Layoutänderung. Danach sieht die Anwendung anders aus, ohne dass sich etwas
