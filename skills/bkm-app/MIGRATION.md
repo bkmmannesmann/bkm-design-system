@@ -100,12 +100,12 @@ der die Regel im Quelltext festhält.
 | 4 | 1 | #850 | 4.1 Bestätigung überall (55 `window.confirm`) |
 | 4 | 2 | #851 | 4.2 Sicherungsleiste + Abschnittsnavigation in den tiefen Formularen |
 | 4 | 3 | #853, Design #47 | 4.4 Datentabellen: eine Primitive, sortierbare Kopfzeile, tabellarische Zahlen |
-| 4 | 4 | folgt | Regel 23: Systemaufbau → Baustein → Option → Produktzeile als Block statt vier Flächen |
+| 4 | 4 | #854 | Regel 23: Systemaufbau → Baustein → Option → Produktzeile als Block statt vier Flächen |
+| — | Nachzügler | #855 | Hilfetexte als `.help` unter der Beschriftung (Admin `FieldLabel`/`SectionHeading`, Produkt-Management) |
 
 4.3 (lange Seitenspalten scrollen in sich selbst) kam mit Stufe 3 · Paket 1
-(Bewertungsspalte). Offen aus der Admin-Tabelle: Hilfetexte als `.help` unter
-der Beschriftung — die Klasse existiert, die langen Prosa-Hinweise sind noch
-nicht umgezogen.
+(Bewertungsspalte). Offen: die Tag-Rampe `--data-3/4` auf Sand White
+(Kontrast unter 3:1) — hier im Design-Repo nachzurechnen.
 
 ---
 
