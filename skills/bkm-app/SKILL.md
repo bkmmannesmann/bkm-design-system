@@ -322,6 +322,17 @@ Datenrampe Night: #cfe8dd · #a9d2c3 · #84bca9 · #63a690 — jede Stufe ≥3.4
 gegen die Karte. Auf dunklem Grund läuft die Rampe **aufwärts**; eine ins Dunkle
 laufende Rampe macht die unteren Werte unsichtbar.
 
+Datenrampe Day: #17492c · #1f613a · #267848 · #2e8f56 — 9.51 · 6.81 · 4.99 ·
+3.72 auf Sand White (auf Weiß 10.37 · 7.42 · 5.44 · 4.05), Nachbarstufen im
+Abstand ≥1.34. Die frühere Tag-Rampe (#287d4b … #8ebda3) lief nach oben aus:
+Stufe 3 erreichte 2.55, Stufe 4 nur 1.93 — unsichtbar als grafisches Objekt
+(WCAG 1.4.11 verlangt 3:1). Auf hellem Grund läuft die Rampe deshalb
+**abwärts** in dieselbe Hue-Familie wie der Akzent, ohne den Akzent selbst zu
+treffen (Stufe 1 war vorher identisch mit `--accent` — Daten sahen aus wie
+Bedienelemente, Regel 2). Weißer Text auf jeder Stufe ≥4.05; für Fließtext
+auf einer Rampenfläche reichen nur die Stufen 1–3 (≥4.5), Stufe 4 trägt
+Großtext oder besser die Wortmarke daneben.
+
 ---
 
 ## Bekannte Lücken (v1)

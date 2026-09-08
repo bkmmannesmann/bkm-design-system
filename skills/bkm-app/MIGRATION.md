@@ -102,10 +102,10 @@ der die Regel im Quelltext festhält.
 | 4 | 3 | #853, Design #47 | 4.4 Datentabellen: eine Primitive, sortierbare Kopfzeile, tabellarische Zahlen |
 | 4 | 4 | #854 | Regel 23: Systemaufbau → Baustein → Option → Produktzeile als Block statt vier Flächen |
 | — | Nachzügler | #855 | Hilfetexte als `.help` unter der Beschriftung (Admin `FieldLabel`/`SectionHeading`, Produkt-Management) |
+| — | Nachzügler | Design #50, Cockpit #860 | Tag-Rampe `--data-1..4` neu gerechnet: 9.51 · 6.81 · 4.99 · 3.72 auf Sand White (vorher 4.67 · 3.44 · 2.55 · 1.93); Kontrast-Wächter im Cockpit |
 
 4.3 (lange Seitenspalten scrollen in sich selbst) kam mit Stufe 3 · Paket 1
-(Bewertungsspalte). Offen: die Tag-Rampe `--data-3/4` auf Sand White
-(Kontrast unter 3:1) — hier im Design-Repo nachzurechnen.
+(Bewertungsspalte). Aus der Migrations-Tabelle ist damit nichts mehr offen.
 
 ---
 
