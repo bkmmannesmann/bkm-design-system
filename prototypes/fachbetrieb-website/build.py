@@ -105,7 +105,7 @@ def render_body(body):
         if s.startswith('Verwandte Leistungen:'):
             names=re.findall(r'→ ([^·]+)', s)
             links=''.join(f'<a href="{SLUG_BY_NAME[n.strip()]}.html">{n.strip()} →</a>' for n in names)
-            out.append(f'<div class="related"><span style="align-self:center;color:var(--muted)">Verwandte Leistungen:</span>{links}</div>'); continue
+            out.append(f'<div class="related"><span class="label">Verwandte Leistungen:</span>{links}</div>'); continue
         if s.startswith('**H1:**') or s.startswith('**Button:**'): continue
         if s.startswith('**Text:**'): out.append(f'<p class="lead">{inline(s[9:].strip())}</p>'); continue
         if s.startswith('Das sind Hinweise') or s.startswith('Hinweise, keine Diagnose'):
@@ -115,27 +115,39 @@ def render_body(body):
     return '\n'.join(out)
 
 # ---------- shared chrome ----------
-FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap">'
+# Unbounded und TT Norms Pro werden selbst gehostet (siehe assets/fonts/README.md
+# im Designsystem: Unbounded ausdruecklich nicht mehr per CDN laden).
+FONTS = ('<link rel="preload" href="fonts/TT_Norms_Pro_Compact_Regular.woff2" as="font" type="font/woff2" crossorigin>'
+         '<link rel="preload" href="fonts/Unbounded.woff2" as="font" type="font/woff2" crossorigin>')
 
 def header(active=''):
     menu=''.join(f'<a href="{s}.html">{n}</a>' for s,n,_ in PAGES)
+    mmenu=''.join(f'<a class="sub" href="{s}.html">{n}</a>' for s,n,_ in PAGES)
     return f'''<div class="proto"><b>Prototyp</b> · bkm-duesseldorf.de · Texte Baukasten v1.1 · Bilder sind Platzhalter · Vorlage für den Aufbau in Astra + Elementor</div>
+<a class="skip" href="#inhalt">Zum Inhalt springen</a>
 <header class="hdr"><div class="wrap">
  <a class="brand" href="index.html"><span class="mark">BKM</span><span><span class="t1">BKM Abdichtungstechnik</span><br><span class="t2">Zertifizierter BKM-Fachbetrieb · Düsseldorf</span></span></a>
  <nav class="nav" aria-label="Hauptmenü">
-  <div class="dd"><a href="leistungen.html">Leistungen</a><div class="menu">{menu}</div></div>
+  <div class="dd"><a href="leistungen.html">Leistungen</a><div class="menu"><div class="menu-inner">{menu}</div></div></div>
   <a href="index.html#ablauf">Ablauf</a><a href="index.html#faq">Häufige Fragen</a><a href="diagnose.html">Kontakt</a>
  </nav>
  <a class="phone" href="tel:{V['TELEFON_LINK']}">{V['TELEFON']}</a>
  <a class="btn btn-primary" href="diagnose.html">Kostenlose Diagnose</a>
+ <details class="mnav"><summary aria-label="Menü öffnen"><span class="ico" aria-hidden="true"></span>Menü</summary>
+  <nav class="panel" aria-label="Hauptmenü (mobil)">
+   <a href="leistungen.html">Leistungen</a>{mmenu}
+   <a href="index.html#ablauf">Ablauf</a><a href="index.html#faq">Häufige Fragen</a><a href="diagnose.html">Kontakt</a>
+   <a class="btn btn-primary" href="diagnose.html">Kostenlose Diagnose</a>
+  </nav>
+ </details>
 </div></header>'''
 
 def footer():
     links=''.join(f'<li><a href="{s}.html">{n}</a></li>' for s,n,_ in PAGES)
     return f'''<footer class="ftr"><div class="wrap">
- <div><h4>{V['BETRIEB']}</h4><p>{V['ADRESSE']}<br>{V['PLZ']} {V['SITZ_ORT']}</p><p style="margin-top:10px"><a href="tel:{V['TELEFON_LINK']}">{V['TELEFON']}</a><br><a href="mailto:{V['EMAIL']}">{V['EMAIL']}</a></p></div>
+ <div><h4>{V['BETRIEB']}</h4><p>{V['ADRESSE']}<br>{V['PLZ']} {V['SITZ_ORT']}</p><p class="mt-2"><a href="tel:{V['TELEFON_LINK']}">{V['TELEFON']}</a><br><a href="mailto:{V['EMAIL']}">{V['EMAIL']}</a></p></div>
  <div><h4>Leistungen</h4><ul>{links}</ul></div>
- <div><h4>Einsatzgebiet</h4><p>{V['EINSATZGEBIET']}</p><p style="margin-top:12px"><a href="https://www.bkm-mannesmann.de/">Zertifizierter BKM-Fachbetrieb – mehr über das System →</a></p></div>
+ <div><h4>Einsatzgebiet</h4><p>{V['EINSATZGEBIET']}</p><p class="mt-2"><a href="https://www.bkm-mannesmann.de/">Zertifizierter BKM-Fachbetrieb – mehr über das System →</a></p></div>
  <div class="bottom"><span class="seal"><b>BKM</b> Systempartner</span><a href="#">Impressum</a><a href="#">Datenschutz</a><span>Abgestimmte Sanierungssysteme von BKM Mannesmann AG</span></div>
 </div></footer>'''
 
@@ -160,7 +172,7 @@ for slug, name, label in PAGES:
     h1 = sub(re.search(r'\*\*H1:\*\* (.+)', bl[0][2]).group(1))
     lead = sub(re.search(r'\*\*Text:\*\* (.+)', bl[0][2]).group(1))
     body = header() + f'''<div class="wrap crumb"><a href="index.html">Start</a> › <a href="leistungen.html">Leistungen</a> › {name}</div>
-<section class="svc-hero sec-paper" style="padding-block:24px 56px"><div class="wrap">
+<section class="svc-hero sec-paper" id="inhalt"><div class="wrap">
  <div class="stack">{icon(slug)}<span class="eyebrow">{name} · {V['EINSATZGEBIET_KURZ'][0].upper()+V['EINSATZGEBIET_KURZ'][1:]}</span><h1>{html.escape(h1)}</h1><p class="lead">{inline(lead)}</p>
  <div><a class="btn btn-primary" href="diagnose.html">Kostenlose Diagnose in {V['ORT']}</a></div></div>
  <div class="ph"><span>Bild: Schadensbild {name}</span></div>
@@ -173,11 +185,11 @@ for slug, name, label in PAGES:
 
 # ---------- overview ----------
 cards=''.join(f'<a href="{s}.html">{icon(s)}<div><span class="sym">{SYMPTOM[s]}</span><b>{n}</b><span>{TEASER[s]}</span></div></a>' for s in ORDER_HOME for (ss,n,_) in PAGES if ss==s)
-ov = header() + f'''<section class="sec-paper sec"><div class="wrap sec-head"><span class="eyebrow">Leistungen</span><h1>Leistungen gegen Feuchtigkeit in {V['ORT']} und {V['REGION']}</h1>
+ov = header() + f'''<section class="sec-paper sec" id="inhalt"><div class="wrap sec-head"><span class="eyebrow">Leistungen</span><h1>Leistungen gegen Feuchtigkeit in {V['ORT']} und {V['REGION']}</h1>
 <p class="lead">Feuchtigkeit hat mehr als einen Weg ins Haus: von unten, von der Seite, mit Druck, durch Schwachstellen oder aus der Raumluft. Jede Leistung auf dieser Seite unterbricht einen dieser Wege. Welche zu Deinem Haus passt, zeigt der Befund vor Ort – nicht die Ferndiagnose. Wenn Du Dein Schadensbild wiedererkennst, findest Du hier den Einstieg.</p></div>
 <div class="wrap"><div class="ov">{cards}</div>
-<p class="note" style="margin-top:26px;background:var(--clay-soft);border-left:4px solid var(--clay);padding:12px 16px;max-width:var(--measure)"><strong>Was Du wissen solltest:</strong> In vielen Häusern kommen mehrere Wege zusammen – eine Wand, in der Feuchtigkeit aufsteigt, kann zugleich seitlich Erdfeuchte aufnehmen. Deshalb kombinieren wir Leistungen, wenn der Befund es verlangt, und lassen weg, was nicht nötig ist. Beides steht im Angebot.</p>
-<p style="margin-top:18px;color:var(--ink-2);max-width:var(--measure)">Weitere Themen rund um Feuchtigkeitsschutz erklärt BKM Mannesmann zentral im <a href="https://www.bkm-mannesmann.de/">Ratgeber</a>.</p></div></section>
+<p class="note mt-4"><strong>Was Du wissen solltest:</strong> In vielen Häusern kommen mehrere Wege zusammen – eine Wand, in der Feuchtigkeit aufsteigt, kann zugleich seitlich Erdfeuchte aufnehmen. Deshalb kombinieren wir Leistungen, wenn der Befund es verlangt, und lassen weg, was nicht nötig ist. Beides steht im Angebot.</p>
+<p class="measure mt-2">Weitere Themen rund um Feuchtigkeitsschutz erklärt BKM Mannesmann zentral im <a href="https://www.bkm-mannesmann.de/">Ratgeber</a>.</p></div></section>
 ''' + closing() + footer()
 (OUT/'leistungen.html').write_text(page(f'Leistungen gegen Feuchtigkeit in {V["ORT"]} – {V["BETRIEB_KURZ"]}','Horizontalsperre, Innenabdichtung, Rissverpressung, Sanierputz und mehr – welche Lösung zu welchem Schaden passt. Fachbetrieb in Düsseldorf.', ov), encoding='utf-8')
 
@@ -189,16 +201,16 @@ def form(idp):
  <label>Was hast Du beobachtet? (optional)<textarea id="{idp}-msg" placeholder="Seit wann, wo, bei welchem Wetter …"></textarea></label>
  <label class="consent"><input id="{idp}-consent" type="checkbox" required><span>Ich habe die Datenschutzerklärung gelesen und bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage gespeichert werden.*</span></label>
  <button class="btn btn-primary" type="submit">Termin anfragen</button>
- <p class="done" hidden style="color:var(--ok);font-weight:600">Danke – wir melden uns innerhalb von 24 Stunden bei Dir. (Prototyp: es wurde nichts gesendet.)</p>
+ <p class="done" hidden>Danke – wir melden uns innerhalb von 24 Stunden bei Dir. (Prototyp: es wurde nichts gesendet.)</p>
  <div class="promise"><span>✓ Unverbindlich</span><span>✓ Antwort in 24 Stunden</span><span>✓ Fachbetrieb vor Ort</span><span>✓ Kein Kaufzwang</span></div>
 </form>'''
 
 # ---------- diagnose ----------
-dg = header() + f'''<section class="diag sec-paper sec"><div class="wrap">
- <div class="stack" style="gap:18px"><span class="eyebrow">Diagnose vor Ort</span><h1>Kostenlose Feuchtigkeitsdiagnose in {V['ORT']} und {V['REGION']}</h1>
+dg = header() + f'''<section class="diag sec-paper sec" id="inhalt"><div class="wrap">
+ <div class="stack stack-lg"><span class="eyebrow">Diagnose vor Ort</span><h1>Kostenlose Feuchtigkeitsdiagnose in {V['ORT']} und {V['REGION']}</h1>
  <p class="lead">Du hast eine feuchte Wand, einen nassen Keller oder einen Fleck, den Du nicht einordnen kannst? Hinterlasse hier Deine Kontaktdaten und, wenn Du möchtest, ein oder zwei Fotos. Wir melden uns innerhalb von 24 Stunden bei Dir, um einen Termin zu vereinbaren. Der Termin ist eine Schadensaufnahme, kein Verkaufsgespräch.</p>
- <div class="contact" style="margin-top:8px"><b>{V['BETRIEB']}</b><span>{V['ADRESSE']}, {V['PLZ']} {V['SITZ_ORT']}</span><a href="tel:{V['TELEFON_LINK']}">{V['TELEFON']}</a><a href="mailto:{V['EMAIL']}">{V['EMAIL']}</a></div>
- <p class="note" style="background:var(--clay-soft);border-left:4px solid var(--clay);padding:12px 16px;border-radius:0 4px 4px 0"><strong>Muss ich etwas vorbereiten?</strong> Nein. Hilfreich ist, wenn die betroffene Wand zugänglich ist und Du sagen kannst, seit wann es feucht ist, bei welchem Wetter es schlimmer wird und was schon versucht wurde. Wenn Du schon Angebote hast: Bring sie mit. Wir erklären Dir, von welcher Ursache jedes ausgeht.</p></div>
+ <div class="contact mt-1"><b>{V['BETRIEB']}</b><span>{V['ADRESSE']}, {V['PLZ']} {V['SITZ_ORT']}</span><a href="tel:{V['TELEFON_LINK']}">{V['TELEFON']}</a><a href="mailto:{V['EMAIL']}">{V['EMAIL']}</a></div>
+ <p class="note"><strong>Muss ich etwas vorbereiten?</strong> Nein. Hilfreich ist, wenn die betroffene Wand zugänglich ist und Du sagen kannst, seit wann es feucht ist, bei welchem Wetter es schlimmer wird und was schon versucht wurde. Wenn Du schon Angebote hast: Bring sie mit. Wir erklären Dir, von welcher Ursache jedes ausgeht.</p></div>
  {form('dg')}
 </div></section>
 <section class="sec"><div class="wrap"><div class="sec-head"><h2>Was beim Termin passiert</h2></div><div class="cards3">
@@ -220,7 +232,7 @@ faq_home = [
 ]
 faq_html=''.join(f'<details><summary>{html.escape(q)}</summary><p>{html.escape(a)}</p></details>' for q,a in faq_home)
 home = header() + f'''
-<section class="hero"><div class="wrap">
+<section class="hero" id="inhalt"><div class="wrap">
  <div class="stack"><span class="eyebrow">Zertifizierter BKM-Fachbetrieb · {V['ORT']} und Kreis Mettmann</span>
   <h1>Feuchte Wände {V['REGION']}? Dein BKM-Fachbetrieb für Mauertrockenlegung und Kellersanierung in {V['ORT']}</h1>
   <p class="sub">Feuchtigkeit hat Hausverbot.</p>
@@ -257,25 +269,25 @@ home = header() + f'''
  <div class="person">
   <div class="card"><div class="ph portrait"><span>Foto: {V['ANSPRECHPARTNER']} bei einer Schadensaufnahme</span></div><span class="name">{V['ANSPRECHPARTNER']}</span><span class="role">{V['FUNKTION']}</span>
    <dl class="kv"><dt>Telefon</dt><dd><a href="tel:{V['TELEFON_LINK']}">{V['TELEFON']}</a></dd><dt>E-Mail</dt><dd><a href="mailto:{V['EMAIL']}">{V['EMAIL']}</a></dd></dl></div>
-  <div class="stack" style="gap:18px"><p class="lead">{V['VORSTELLUNG']}</p>
-   <div><span class="eyebrow" style="color:var(--petrol)">Unser Einsatzgebiet</span><p style="margin-top:6px">{V['EINSATZGEBIET']}</p></div>
+  <div class="stack stack-lg"><p class="lead">{V['VORSTELLUNG']}</p>
+   <div><span class="eyebrow">Unser Einsatzgebiet</span><p class="mt-1">{V['EINSATZGEBIET']}</p></div>
    <div class="ph wide"><span>Grafik: Einsatzgebiet Düsseldorf und Kreis Mettmann</span></div></div>
  </div></div></section>
 
 <section class="sec sec-paper"><div class="wrap">
  <div class="sec-head"><span class="eyebrow">Leistungen</span><h2>Es gibt nicht die eine Lösung. Es gibt die passende.</h2><p class="lead">Jede Sanierung unterbricht einen bestimmten Weg des Wassers. Welche zu Deinem Haus passt, entscheidet der Befund. Das sind die sechs Leistungen, mit denen wir {V['REGION']} am häufigsten arbeiten:</p></div>
  <div class="svc">{svc_cards}</div>
- <p style="margin-top:22px"><a href="leistungen.html" style="font-weight:700">Alle Leistungen im Überblick →</a></p></div></section>
+ <p class="mt-3"><a class="more-link" href="leistungen.html">Alle Leistungen im Überblick →</a></p></div></section>
 
-<section class="sec sec-petrol result"><div class="wrap">
- <div class="stack" style="gap:18px"><span class="eyebrow">Das Ergebnis</span><h2>Ein Keller, der wieder Platz bieten kann</h2>
+<section class="sec sec-accent result"><div class="wrap">
+ <div class="stack stack-lg"><span class="eyebrow">Das Ergebnis</span><h2>Ein Keller, der wieder Platz bieten kann</h2>
   <ul class="checks"><li>Trockener, nutzbarer Raum</li><li>Schimmelprävention durch behobene Ursache</li><li>Weniger Wärmeverlust über feuchte Wände</li><li>Dokumentation, die auch beim Verkauf zählt</li></ul>
   <div><a class="btn btn-primary" href="diagnose.html">Jetzt sanieren lassen</a></div></div>
- <div class="ph" style="border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.08)"><span>Bild: Sanierter Keller nach der Trocknung</span></div>
+ <div class="ph"><span>Bild: Sanierter Keller nach der Trocknung</span></div>
 </div></section>
 
 <section class="sec diag" id="diagnose"><div class="wrap">
- <div class="stack" style="gap:16px"><span class="eyebrow">Dein erster Schritt</span><h2>Dein erster Schritt: Befund vor Ort</h2>
+ <div class="stack stack-lg"><span class="eyebrow">Dein erster Schritt</span><h2>Dein erster Schritt: Befund vor Ort</h2>
   <p class="lead">Ein geschulter Fachberater besucht Dich in {V['ORT']} und {V['REGION']}, misst die Feuchtigkeit und erklärt Dir, was er sieht. Das ist eine Untersuchung, kein Verkaufsgespräch.</p>
   <ul class="checks"><li>Feuchtemessung mit kalibrierter Messtechnik</li><li>Dokumentierter Befund mit Ursachenanalyse</li><li>Festpreisangebot, wenn eine Sanierung sinnvoll ist</li><li>Kein Kaufzwang</li></ul></div>
  {form('hm')}
@@ -288,8 +300,8 @@ home = header() + f'''
   <div><b>Persönlich</b><span>Regional. Klar. Erreichbar.</span></div>
   <div><b>Nachvollziehbar</b><span>Dokumentation mit Messwerten und Fotos</span></div>
  </div>
- <a class="rating" href="#"><span class="stars">★★★★★</span><b>4,9</b><span style="color:var(--muted)">· 47 Google-Rezensionen</span></a>
- <div class="contact" style="margin-top:26px"><b>{V['BETRIEB']}</b><span>{V['ADRESSE']}, {V['PLZ']} {V['SITZ_ORT']}</span><a href="tel:{V['TELEFON_LINK']}">{V['TELEFON']}</a><a href="mailto:{V['EMAIL']}">{V['EMAIL']}</a></div>
+ <a class="rating" href="#"><span class="stars">★★★★★</span><b>4,9</b><span class="count">· 47 Google-Rezensionen</span></a>
+ <div class="contact mt-4"><b>{V['BETRIEB']}</b><span>{V['ADRESSE']}, {V['PLZ']} {V['SITZ_ORT']}</span><a href="tel:{V['TELEFON_LINK']}">{V['TELEFON']}</a><a href="mailto:{V['EMAIL']}">{V['EMAIL']}</a></div>
 </div></section>
 
 <section class="sec" id="faq"><div class="wrap">
