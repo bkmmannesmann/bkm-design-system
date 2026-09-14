@@ -10,6 +10,7 @@ gestalterische Vorlage, aus der die Astra-Customizer-Vorgaben abgeleitet werden.
 |-------|-------|
 | `style.css` | Das gesamte Design. Ganz oben der `:root`-Block mit allen Tokens. |
 | `fonts/` | Unbounded (Variable Font) und TT Norms Pro, selbst gehostet. |
+| `assets/` | Keyvisual, BKM-Logo und Phosphor-Icons aus dem Designsystem. |
 | `index.html` | Startseite. Ohne eigenen `<head>` — den ergänzt die Artifact-Plattform. |
 | `leistungen.html`, `diagnose.html`, sechs Leistungsseiten | Vollständige HTML-Dateien. |
 | `build.py` | Erzeugt alle Seiten neu. `python3 build.py`, keine Abhängigkeiten. |
@@ -17,6 +18,34 @@ gestalterische Vorlage, aus der die Astra-Customizer-Vorgaben abgeleitet werden.
 
 Nur am Design arbeiten: `style.css` ändern, Seite neu laden. Texte oder Struktur ändern:
 `build.py` bzw. den Baukasten anfassen und neu bauen.
+
+## Bildsprache
+
+Die Gestaltung folgt dem BKM Feuchte-Check und dem Support-Cockpit: dunkle
+Bänder mit Noise-Textur, Verlaufswäsche und angeschnittenem Keyvisual am
+rechten Rand; Karten mit Schatten-als-Rahmen, die beim Hover anheben; Buttons
+mit mitwanderndem Pfeil; der Ablauf als bebilderte Schrittfolge mit
+Nummernplakette und Verbindungslinie; FAQ als Karten, deren Plus zum Kreuz
+dreht; Einblenden beim Scrollen.
+
+Beide Vorlagen stehen in Deep Green, weil sie die BKM Mannesmann AG betreffen.
+Hier ist der Fachbetrieb der Absender, deshalb Transition Green. Drei Stellen
+ließen sich dabei **nicht** eins zu eins übernehmen — Transition Green ist
+heller als Deep Green:
+
+| Vorlage (Deep Green) | Hier (Transition Green) | Grund |
+|---|---|---|
+| Fließtext `rgba(255,255,255,.72)` | `#edf5f0` | .72 Weiß ergibt auf Transition Green nur 3.47:1 |
+| Eyebrow und Zwischentitel in Lime | Weiß | Lime auf Transition Green sind 3.49:1 — als Text zu wenig |
+| Glas-Karten auf dem dunklen Band | massive helle Karten | Weiß auf Glas über Transition Green sind 4.39:1 |
+
+Lime bleibt, wo es trägt: als CTA-Fläche mit Deep-Green-Beschriftung (6.74:1),
+als Häkchen auf dem dunklen Band und als Fokusring auf Grün. Als Textfarbe
+funktioniert es nur auf Deep Green (6.74:1) — also im Footer.
+
+Die animierten Aurora-Blobs der Vorlage sind dort ausdrücklich als „nur BKM AG"
+gekennzeichnet. Hier steht stattdessen dieselbe Lichtführung als ruhende
+Verlaufswäsche (`.wash`): gleiche Wirkung, kein Dauerlauf auf der GPU.
 
 ## Farbkontext: Fachbetrieb
 
@@ -72,8 +101,24 @@ nehmen. Das ist eine Textentscheidung und steht in Teil B.4 des Baukastens an.
 ## Geprüft
 
 - Kontrast: alle Text-Hintergrund-Paare auf allen neun Seiten erfüllen WCAG AA
-  (4.5:1, große Schrift 3:1) — automatisch gegen den gerenderten DOM gemessen.
-- Kein horizontaler Überlauf: neun Seiten × neun Breiten von 320 bis 1600 px.
-  Ohne `overflow-x:hidden` — die Ursachen sind behoben, nicht verdeckt.
+  (4.5:1, große Schrift 3:1) — automatisch gegen den gerenderten DOM gemessen,
+  bei 1280 px und bei 390 px.
+- Kein horizontaler Überlauf: 99 Kombinationen aus neun Seiten und elf Breiten
+  von 320 bis 1600 px. Ohne `overflow-x:hidden` — die Ursachen sind behoben,
+  nicht verdeckt.
+- Ohne JavaScript bleibt nichts unsichtbar: das Einblenden beim Scrollen greift
+  erst, wenn das Skript die Klasse `js` gesetzt hat. Fällt es aus, steht alles
+  da. Dasselbe gilt bei `prefers-reduced-motion` und im Druck.
 - Mobile Navigation: `<details>`-Menü ohne JavaScript, ab 1080 px abwärts.
   In der Produktion übernimmt das der Astra-Header.
+- Der Build ist reproduzierbar: `python3 build.py` erzeugt neunmal dieselben
+  Dateien.
+
+## Assets
+
+Keyvisual, Logo und Icons kommen aus dem Designsystem. Die vier SVG aus
+`assets/keyvisual/` und `assets/logos/` tragen dort je rund eine halbe
+Megabyte Illustrator-Rohdaten in einem `<metadata>`-Block mit sich (ein
+base64-CDATA für `i:aipgf`). Für die Website sind sie entfernt: 1,8 MB werden
+zu 36 KB, das Rendering ist identisch. Das lohnt sich auch im Designsystem
+selbst.
