@@ -14,10 +14,32 @@ gestalterische Vorlage, aus der die Astra-Customizer-Vorgaben abgeleitet werden.
 | `index.html` | Startseite. Ohne eigenen `<head>` — den ergänzt die Artifact-Plattform. |
 | `leistungen.html`, `diagnose.html`, sechs Leistungsseiten | Vollständige HTML-Dateien. |
 | `build.py` | Erzeugt alle Seiten neu. `python3 build.py`, keine Abhängigkeiten. |
+| `bundle.py` | Erzeugt daraus `standalone/` — eigenständige Einzeldateien. |
+| `standalone/` | Jede Seite als **eine** Datei mit eingebettetem CSS, Schriften und Grafiken. |
 | `Fachbetriebs-Websites_Baukasten_v1.md` | Textquelle für die Leistungsseiten (Teil F.1–F.6). |
 
 Nur am Design arbeiten: `style.css` ändern, Seite neu laden. Texte oder Struktur ändern:
 `build.py` bzw. den Baukasten anfassen und neu bauen.
+
+## Zwei Fassungen
+
+Die Seiten im Hauptordner verweisen relativ auf `style.css`, `fonts/` und `assets/`.
+Das ist die Arbeitsfassung: eine Datei je Belang, schnelle Änderungen, kleine Diffs.
+Wer eine einzelne Datei daraus herunterlädt oder verschickt, sieht allerdings nur
+den nackten Text — die Nachbardateien fehlen dann.
+
+`standalone/` enthält dieselben neun Seiten als jeweils **eine** Datei: Stylesheet,
+Schriften und Grafiken sind eingebettet, es gibt keine einzige externe Anfrage.
+Diese Dateien laufen per Doppelklick, per E-Mail-Anhang und auf jedem Rechner ohne
+Internet. Rund 200 KB pro Seite; die Schriften sind dafür auf die tatsächlich
+vorkommenden Zeichen reduziert (246 KB → 99 KB).
+
+```
+python3 build.py     # Seiten aus dem Baukasten erzeugen
+python3 bundle.py    # daraus die eigenständigen Dateien bauen
+```
+
+`bundle.py` braucht `fonttools` mit Brotli: `pip install "fonttools[woff]"`.
 
 ## Bildsprache
 
@@ -81,11 +103,11 @@ Zwei Punkte, die vor dem Rollout zu klären sind:
 
 ### Beim Veröffentlichen als Artifact beachten
 
-`index.html` referenziert die Schriften relativ (`fonts/*.woff2`). Lokal und in WordPress
-funktioniert das. Auf der Artifact-Plattform werden nur mitveröffentlichte Dateien
-ausgeliefert — die drei woff2 aus `fonts/` müssen also als Begleitdateien mitgegeben
-werden, sonst fällt die Seite dort auf Systemschriften zurück und sieht nicht aus wie
-dieser Prototyp.
+`index.html` im Hauptordner referenziert Schriften und Grafiken relativ. Auf der
+Artifact-Plattform werden nur mitveröffentlichte Dateien ausgeliefert — `style.css`,
+die drei woff2 aus `fonts/` und die Grafiken aus `assets/` müssten als Begleitdateien
+mitgegeben werden. Einfacher ist `standalone/index.html`: die Datei trägt alles in
+sich und braucht keine Begleitung.
 
 ## H1 und lange SEO-Headlines
 
