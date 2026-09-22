@@ -748,6 +748,12 @@
       "weight": "bold",
       "path": "bold/sort-descending.svg",
       "purpose": "Sortierbare Tabellenkopfzeile, absteigend (Datentabellen, Stufe 4 Paket 3)"
+    },
+    {
+      "name": "line-segment",
+      "weight": "bold",
+      "path": "bold/line-segment.svg",
+      "purpose": "Zeichenwerkzeug „Gerade Linie“ in Skizzen-Editor und Raumplan-Notizebene (Support-Cockpit)"
     }
   ]
 }
